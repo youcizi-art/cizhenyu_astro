@@ -1,0 +1,36 @@
+{
+  "siteKey": "demo",
+  "displayName": "Demo B2B Site",
+  "theme": "default",
+  "defaultLocale": "en",
+  "locales": ["en", "zh-CN"],
+  "modules": {
+    "products": true,
+    "articles": true,
+    "caseStudies": true,
+    "solutions": true,
+    "faq": true,
+    "resources": false,
+    "about": true,
+    "contact": true
+  },
+  "cms": {
+    "apiBase": "https://api.example.com",
+    "apiPrefix": "/api/p",
+    "collectionNamespace": "b2b"
+  },
+  "cache": {
+    "revalidateSeconds": 120,
+    "revalidateSecretEnv": "REVALIDATE_SECRET"
+  },
+  "hooks": {
+    "revalidateUrl": "https://www.example.com/api/revalidate"
+  },
+  "brand": {
+    "tagline": "B2B site powered by cizhenyu_payload",
+    "primaryColor": "#0B3D91"
+  },
+  "domains": {
+    "www": "www.example.com"
+  }
+}

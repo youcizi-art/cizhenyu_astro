@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import SiteHeader from '@/ui/layout/SiteHeader.astro';
+import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import { loadAboutPage } from '@/workflows/pages/load-static-pages';
+import { loadSiteManifest } from '@/modules/site';
+import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+
+export const prerender = false;
+
+const site = loadSiteManifest();
+const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
+const data = await loadAboutPage({ locale });
+applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
+if (!data.enabled) return new Response('Not Found', { status: 404 });
+---
+<BaseLayout title={`${data.page?.title || 'About'} · ${data.siteName}`} description={data.page?.summary || data.company.summary}>
+  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+  <main class="wrap">
+    <h1>{data.page?.title || 'About'}</h1>
+    {data.company.summary ? <p>{data.company.summary}</p> : null}
+    {data.page?.content ? <div class="prose" set:html={data.page.content} /> : null}
+    {!data.page && !data.company.summary ? <p class="muted">请在 CMS 创建 slug 为 about 的独立页面，或完善公司信息。</p> : null}
+  </main>
+  <SiteFooter company={data.company} />
+</BaseLayout>

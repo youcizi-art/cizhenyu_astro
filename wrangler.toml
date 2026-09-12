@@ -1,0 +1,5 @@
+name = "cizhenyu-astro"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Pages / Workers 部署时按需补充绑定；本地 astro dev 可不依赖 SESSION。

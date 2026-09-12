@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import SiteHeader from '@/ui/layout/SiteHeader.astro';
+import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import CardSection from '@/ui/blocks/CardSection.astro';
+import { loadHomePage } from '@/workflows/home/load-home';
+import { loadSiteManifest } from '@/modules/site';
+import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+
+export const prerender = false;
+
+const site = loadSiteManifest();
+const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
+if (Astro.params.locale && Astro.params.locale !== locale) {
+  return Astro.redirect(`/${locale}`, 302);
+}
+const data = await loadHomePage(locale);
+applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
+---
+<BaseLayout title={data.siteName} description={data.tagline}>
+  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+  <main class="wrap">
+    {data.hero ? (
+      <section class="hero">
+        {data.hero.eyebrow ? <p class="eyebrow">{data.hero.eyebrow}</p> : null}
+        <h1>{data.hero.title || data.siteName}</h1>
+        {data.hero.subtitle || data.tagline ? <p class="muted">{data.hero.subtitle || data.tagline}</p> : null}
+        {data.hero.summary ? <p>{data.hero.summary}</p> : null}
+      </section>
+    ) : (
+      <section>
+        <h1>{data.siteName}</h1>
+        {data.tagline ? <p class="muted">{data.tagline}</p> : null}
+      </section>
+    )}
+    {data.error ? <p class="error">{data.error}</p> : null}
+    {data.site.modules.products ? (
+      <CardSection title="Products" items={data.products.map((i) => ({ href: i.href, title: i.title, summary: i.summary, meta: i.sku ? `SKU: ${i.sku}` : '' }))} />
+    ) : null}
+    {data.site.modules.solutions ? (
+      <CardSection title="Solutions" items={data.solutions.map((i) => ({ href: i.href, title: i.title, summary: i.summary }))} />
+    ) : null}
+    {data.site.modules.caseStudies ? (
+      <CardSection title="Case Studies" items={data.caseStudies.map((i) => ({ href: i.href, title: i.title, summary: i.summary, meta: i.clientName }))} />
+    ) : null}
+    {data.site.modules.articles ? (
+      <CardSection title="Articles" items={data.articles.map((i) => ({ href: i.href, title: i.title, summary: i.summary, meta: i.author }))} />
+    ) : null}
+  </main>
+  <SiteFooter company={data.company} />
+</BaseLayout>

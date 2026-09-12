@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import SiteHeader from '@/ui/layout/SiteHeader.astro';
+import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import { loadProductListPage } from '@/workflows/products/load-product-list';
+import { loadSiteManifest } from '@/modules/site';
+import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+
+export const prerender = false;
+
+const site = loadSiteManifest();
+const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
+const page = Number(Astro.url.searchParams.get('page') || 1) || 1;
+const data = await loadProductListPage({ locale, page });
+applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
+if (!data.enabled) return new Response('Not Found', { status: 404 });
+---
+<BaseLayout title={`Products · ${data.siteName}`}>
+  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+  <main class="wrap">
+    <h1>Products</h1>
+    <p class="muted">Page {data.pages.page} / {Math.max(1, data.pages.totalPages)} · Total {data.pages.total}</p>
+    <div class="card-list">
+      {data.items.map((item) => (
+        <article class="card">
+          <h2><a href={item.href}>{item.title}</a></h2>
+          {item.sku ? <p class="muted">SKU: {item.sku}</p> : null}
+          {item.summary ? <p>{item.summary}</p> : null}
+        </article>
+      ))}
+    </div>
+    {!data.items.length ? <p class="muted">暂无产品。</p> : null}
+  </main>
+  <SiteFooter company={data.company} />
+</BaseLayout>

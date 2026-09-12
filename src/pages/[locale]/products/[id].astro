@@ -1,0 +1,30 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import SiteHeader from '@/ui/layout/SiteHeader.astro';
+import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import { getProduct } from '@/modules/product';
+import { loadPageChrome } from '@/workflows/chrome/load-chrome';
+import { loadSiteManifest } from '@/modules/site';
+import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+
+export const prerender = false;
+
+const site = loadSiteManifest();
+if (!site.modules.products) return new Response('Not Found', { status: 404 });
+const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
+const chrome = await loadPageChrome(locale);
+const id = String(Astro.params.id || '').trim();
+const product = id ? await getProduct(id, { locale }) : null;
+applyCacheHeaders(Astro.response.headers, chrome.revalidateSeconds);
+if (!product) return new Response('Product not found', { status: 404 });
+---
+<BaseLayout title={`${product.title} · ${chrome.siteName}`} description={product.summary}>
+  <SiteHeader siteName={chrome.siteName} links={chrome.navLinks} />
+  <main class="wrap">
+    <p><a href={`/${locale}/products`}>← Products</a></p>
+    <h1>{product.title}</h1>
+    {product.sku ? <p class="muted">SKU: {product.sku}</p> : null}
+    {product.summary ? <p>{product.summary}</p> : null}
+  </main>
+  <SiteFooter company={chrome.company} />
+</BaseLayout>

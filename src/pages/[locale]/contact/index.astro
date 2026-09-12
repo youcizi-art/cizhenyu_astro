@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import SiteHeader from '@/ui/layout/SiteHeader.astro';
+import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import { loadContactPage } from '@/workflows/pages/load-static-pages';
+import { loadSiteManifest } from '@/modules/site';
+import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+
+export const prerender = false;
+
+const site = loadSiteManifest();
+const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
+const data = await loadContactPage({ locale });
+applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
+if (!data.enabled) return new Response('Not Found', { status: 404 });
+---
+<BaseLayout title={`${data.page?.title || 'Contact'} · ${data.siteName}`} description={data.page?.summary || ''}>
+  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+  <main class="wrap">
+    <h1>{data.page?.title || 'Contact'}</h1>
+    {data.page?.content ? <div class="prose" set:html={data.page.content} /> : null}
+    <section class="section card">
+      <h2>Company contacts</h2>
+      {data.company.address ? <p>{data.company.address}</p> : null}
+      {data.company.phone ? <p>{data.company.phone}</p> : null}
+      {data.company.email ? <p><a href={`mailto:${data.company.email}`}>{data.company.email}</a></p> : null}
+      {data.company.website ? <p><a href={data.company.website}>{data.company.website}</a></p> : null}
+      {!data.company.address && !data.company.phone && !data.company.email ? (
+        <p class="muted">联系方式来自 CMS 公司信息；询盘/留言表单稍后接入。</p>
+      ) : null}
+    </section>
+  </main>
+  <SiteFooter company={data.company} />
+</BaseLayout>

@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import SiteHeader from '@/ui/layout/SiteHeader.astro';
+import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import { loadArticleDetailPage } from '@/workflows/articles/load-article-detail';
+import { loadSiteManifest } from '@/modules/site';
+import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+
+export const prerender = false;
+
+const site = loadSiteManifest();
+const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
+const id = String(Astro.params.id || '').trim();
+const data = await loadArticleDetailPage({ locale, id });
+applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
+if (!data.enabled || !data.article) return new Response('Not Found', { status: 404 });
+const article = data.article;
+---
+<BaseLayout title={`${article.title} · ${data.siteName}`} description={article.summary}>
+  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+  <main class="wrap">
+    <p><a href={`/${locale}/articles`}>← Articles</a></p>
+    <h1>{article.title}</h1>
+    {article.author ? <p class="muted">{article.author}</p> : null}
+    {article.summary ? <p>{article.summary}</p> : null}
+    {article.content ? <div class="prose" set:html={article.content} /> : null}
+  </main>
+  <SiteFooter company={data.company} />
+</BaseLayout>

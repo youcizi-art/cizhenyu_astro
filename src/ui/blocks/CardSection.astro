@@ -1,0 +1,30 @@
+---
+interface Item {
+  href: string;
+  title: string;
+  summary?: string;
+  meta?: string;
+}
+interface Props {
+  title: string;
+  items: Item[];
+  emptyText?: string;
+}
+const { title, items, emptyText = '暂无内容。' } = Astro.props;
+---
+<section class="section">
+  <h2>{title}</h2>
+  {items.length ? (
+    <div class="card-list">
+      {items.map((item) => (
+        <article class="card">
+          <h3><a href={item.href}>{item.title}</a></h3>
+          {item.meta ? <p class="muted">{item.meta}</p> : null}
+          {item.summary ? <p>{item.summary}</p> : null}
+        </article>
+      ))}
+    </div>
+  ) : (
+    <p class="muted">{emptyText}</p>
+  )}
+</section>

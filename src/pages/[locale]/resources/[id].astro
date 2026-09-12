@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import SiteHeader from '@/ui/layout/SiteHeader.astro';
+import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import { loadResourceDetailPage } from '@/workflows/resources/load-resource-detail';
+import { loadSiteManifest } from '@/modules/site';
+import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+
+export const prerender = false;
+
+const site = loadSiteManifest();
+const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
+const id = String(Astro.params.id || '').trim();
+const data = await loadResourceDetailPage({ locale, id });
+applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
+if (!data.enabled || !data.item) return new Response('Not Found', { status: 404 });
+const item = data.item;
+---
+<BaseLayout title={`${item.title} · ${data.siteName}`} description={item.summary}>
+  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+  <main class="wrap">
+    <p><a href={`/${locale}/resources`}>← Resources</a></p>
+    <h1>{item.title}</h1>
+    {item.resourceType ? <p class="muted">{item.resourceType}</p> : null}
+    {item.summary ? <p>{item.summary}</p> : null}
+    {item.content ? <div class="prose" set:html={item.content} /> : null}
+  </main>
+  <SiteFooter company={data.company} />
+</BaseLayout>

@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import SiteHeader from '@/ui/layout/SiteHeader.astro';
+import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import { loadResourceListPage } from '@/workflows/resources/load-resource-list';
+import { loadSiteManifest } from '@/modules/site';
+import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+
+export const prerender = false;
+
+const site = loadSiteManifest();
+const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
+const page = Number(Astro.url.searchParams.get('page') || 1) || 1;
+const data = await loadResourceListPage({ locale, page });
+applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
+if (!data.enabled) return new Response('Not Found', { status: 404 });
+---
+<BaseLayout title={`Resources · ${data.siteName}`}>
+  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+  <main class="wrap">
+    <h1>Resources</h1>
+    <div class="card-list">
+      {data.items.map((item) => (
+        <article class="card">
+          <h2><a href={item.href}>{item.title}</a></h2>
+          {item.resourceType ? <p class="muted">{item.resourceType}</p> : null}
+          {item.summary ? <p>{item.summary}</p> : null}
+        </article>
+      ))}
+    </div>
+    {!data.items.length ? <p class="muted">暂无资料。</p> : null}
+  </main>
+  <SiteFooter company={data.company} />
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+import type { NavLink } from '@/modules/nav';
+
+interface Props {
+  siteName: string;
+  links: NavLink[];
+}
+const { siteName, links } = Astro.props;
+---
+<header class="site">
+  <div class="wrap">
+    <strong><a href={links[0]?.href || '/'}>{siteName}</a></strong>
+    <nav>
+      {links.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
