@@ -104,8 +104,28 @@
 
 ---
 
-## 7. 与文档的关系
+## 7. 当前实现状态（阶段 D）
+
+已落地（本仓库）：
+
+1. **Middleware HTML cache**：公开 GET HTML 写入进程内 Map（本地）/ `caches.default`（Workers）  
+2. **`POST /api/revalidate`**：按 collections/paths **真实删除**缓存条目；返回 `purged.deleted` / `mode`  
+3. **`GET /api/revalidate`**：返回 `lastPurge` 供观测  
+4. **可选 CF Zone Purge**：配置 `CF_ZONE_ID` + `CF_API_TOKEN` 后对 `PUBLIC_SITE_URL` 绝对路径 purge  
+5. 响应头：`Cache-Control: s-maxage=…` + `Cache-Tag` + `X-HTML-Cache: HIT|MISS`
+
+验收：`npm run accept:cd`（需先 `mock:cms` + `dev`）。
+
+尚未完成：
+
+- payload 侧 webhook → `hooks.revalidateUrl` 联调  
+- 生产 CDN purge 凭证与压测观测  
+
+---
+
+## 8. 与文档的关系
 
 - 平台总方案：`FRONTEND_PLATFORM.md`  
 - API 细节：`BACKEND_INTEGRATION.md`  
 - 集合路径：`CMS_MAPPING.md`
+- 进度准绳：`BUILD_PLAN.md`

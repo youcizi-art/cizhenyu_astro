@@ -2,29 +2,39 @@
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
 import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import { loadFaqPage } from '@/workflows/faq/load-faq';
-import { loadSiteManifest } from '@/modules/site';
-import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
-
+import { applyCacheHeaders } from '@/workflows/chrome/http';
+import { buildAlternateLinks } from '@/workflows/chrome/urls';
+import { t } from '@/modules/i18n';
 export const prerender = false;
 
-const site = loadSiteManifest();
-const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
-const data = await loadFaqPage({ locale });
+const data = await loadFaqPage({
+  locale: Astro.params.locale,
+  pathname: Astro.url.pathname,
+});
+if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/faq`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return new Response('Not Found', { status: 404 });
 ---
-<BaseLayout title={`FAQ · ${data.siteName}`}>
-  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+<BaseLayout
+  title={`${t(data.locale, 'faq')} · ${data.siteName}`}
+  description={data.company.summary}
+  lang={data.locale}
+  alternates={buildAlternateLinks(data.localeOptions)}
+>
+  <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel} />
   <main class="wrap">
-    <h1>FAQ</h1>
+    <h1>{t(data.locale, 'faq')}</h1>
+    <AlertBanner messages={data.error ? [data.error] : []} />
+    <AlertBanner messages={data.warnings} tone="warn" />
     {data.items.map((item) => (
       <details class="faq-item card">
         <summary>{item.question}</summary>
         <div class="prose" set:html={item.answer} />
       </details>
     ))}
-    {!data.items.length ? <p class="muted">暂无 FAQ。</p> : null}
+    {!data.error && !data.items.length ? <p class="muted">暂无 FAQ。</p> : null}
   </main>
   <SiteFooter company={data.company} />
 </BaseLayout>

@@ -2,29 +2,83 @@
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
 import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
-import { getProduct } from '@/modules/product';
-import { loadPageChrome } from '@/workflows/chrome/load-chrome';
-import { loadSiteManifest } from '@/modules/site';
-import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+import AlertBanner from '@/ui/blocks/AlertBanner.astro';
+import { loadProductDetailPage } from '@/workflows/products/load-product-detail';
+import { applyCacheHeaders } from '@/workflows/chrome/http';
+import { buildAlternateLinks } from '@/workflows/chrome/urls';
 
 export const prerender = false;
 
-const site = loadSiteManifest();
-if (!site.modules.products) return new Response('Not Found', { status: 404 });
-const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
-const chrome = await loadPageChrome(locale);
 const id = String(Astro.params.id || '').trim();
-const product = id ? await getProduct(id, { locale }) : null;
-applyCacheHeaders(Astro.response.headers, chrome.revalidateSeconds);
-if (!product) return new Response('Product not found', { status: 404 });
+const data = await loadProductDetailPage({
+  locale: Astro.params.locale,
+  pathname: Astro.url.pathname,
+  id,
+});
+if (!data.localeValid) {
+  return Astro.redirect(`/${data.site.defaultLocale}/products`, 302);
+}
+applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
+if (!data.enabled) return new Response('Not Found', { status: 404 });
+if (!data.error && !data.product) return new Response('Product not found', { status: 404 });
+const product = data.product;
 ---
-<BaseLayout title={`${product.title} · ${chrome.siteName}`} description={product.summary}>
-  <SiteHeader siteName={chrome.siteName} links={chrome.navLinks} />
+<BaseLayout
+  title={product ? `${product.seoTitle} · ${data.siteName}` : `Product · ${data.siteName}`}
+  description={product?.seoDescription || ''}
+  lang={data.locale}
+  alternates={buildAlternateLinks(data.localeOptions)}
+>
+  <SiteHeader
+    siteName={data.siteName}
+    links={data.navLinks}
+    localeOptions={data.localeOptions}
+    languageLabel={data.languageLabel}
+  />
   <main class="wrap">
-    <p><a href={`/${locale}/products`}>← Products</a></p>
-    <h1>{product.title}</h1>
-    {product.sku ? <p class="muted">SKU: {product.sku}</p> : null}
-    {product.summary ? <p>{product.summary}</p> : null}
+    <p><a href={`/${data.locale}/products`}>← Products</a></p>
+    <AlertBanner messages={data.error ? [data.error] : []} />
+    <AlertBanner messages={data.warnings} tone="warn" />
+    {product ? (
+      <>
+        <h1>{product.title}</h1>
+        {product.sku ? <p class="muted">SKU: {product.sku}</p> : null}
+        {product.brand ? <p class="muted">Brand: {product.brand}</p> : null}
+        {(product.price || product.availability) ? (
+          <p class="muted">
+            {product.price ? `${product.currency} ${product.price}` : ''}
+            {product.price && product.availability ? ' · ' : ''}
+            {product.availability}
+          </p>
+        ) : null}
+        {product.summary ? <p>{product.summary}</p> : null}
+        {product.imageUrls.length ? (
+          <div class="gallery">
+            {product.imageUrls.map((src) => (
+              <img src={src} alt={product.title} loading="lazy" />
+            ))}
+          </div>
+        ) : null}
+        {product.descriptionHtml ? (
+          <section class="section prose" set:html={product.descriptionHtml} />
+        ) : null}
+        {product.specs.length ? (
+          <section class="section">
+            <h2>Specifications</h2>
+            <table class="specs">
+              <tbody>
+                {product.specs.map((row) => (
+                  <tr>
+                    <th>{row.key}</th>
+                    <td>{row.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        ) : null}
+      </>
+    ) : null}
   </main>
-  <SiteFooter company={chrome.company} />
+  <SiteFooter company={data.company} />
 </BaseLayout>

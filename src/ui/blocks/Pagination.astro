@@ -1,0 +1,28 @@
+---
+import type { PublicPages } from '@/modules/cms';
+
+interface Props {
+  pages: PublicPages;
+  basePath: string;
+}
+const { pages, basePath } = Astro.props;
+const totalPages = Math.max(1, pages.totalPages || 1);
+const page = Math.max(1, pages.page || 1);
+const prevHref = page > 1 ? `${basePath}?page=${page - 1}` : '';
+const nextHref = page < totalPages ? `${basePath}?page=${page + 1}` : '';
+---
+{(totalPages > 1 || pages.total > 0) ? (
+  <div class="pager">
+    <p class="muted">
+      Page {page} / {totalPages}
+      {pages.total ? ` · Total ${pages.total}` : ''}
+    </p>
+    {(prevHref || nextHref) && totalPages > 1 ? (
+      <p>
+        {prevHref ? <a href={prevHref}>← Prev</a> : <span class="muted">← Prev</span>}
+        {' · '}
+        {nextHref ? <a href={nextHref}>Next →</a> : <span class="muted">Next →</span>}
+      </p>
+    ) : null}
+  </div>
+) : null}

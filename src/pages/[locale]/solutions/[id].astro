@@ -2,29 +2,47 @@
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
 import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import { loadSolutionDetailPage } from '@/workflows/solutions/load-solution-detail';
-import { loadSiteManifest } from '@/modules/site';
-import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+import { applyCacheHeaders } from '@/workflows/chrome/http';
+import { buildAlternateLinks } from '@/workflows/chrome/urls';
+import { t } from '@/modules/i18n';
 
 export const prerender = false;
 
-const site = loadSiteManifest();
-const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
 const id = String(Astro.params.id || '').trim();
-const data = await loadSolutionDetailPage({ locale, id });
+const data = await loadSolutionDetailPage({
+  locale: Astro.params.locale,
+  pathname: Astro.url.pathname,
+  id,
+});
+if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/solutions`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
-if (!data.enabled || !data.item) return new Response('Not Found', { status: 404 });
+if (!data.enabled) return new Response('Not Found', { status: 404 });
+if (!data.error && !data.item) return new Response('Not Found', { status: 404 });
 const item = data.item;
 ---
-<BaseLayout title={`${item.title} · ${data.siteName}`} description={item.summary}>
-  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+<BaseLayout
+  title={`${item?.seoTitle || item?.title || t(data.locale, 'solutions')} · ${data.siteName}`}
+  description={item?.seoDescription || item?.summary || ''}
+  lang={data.locale}
+  alternates={buildAlternateLinks(data.localeOptions)}
+>
+  <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel} />
   <main class="wrap">
-    <p><a href={`/${locale}/solutions`}>← Solutions</a></p>
-    <h1>{item.title}</h1>
-    {item.summary ? <p>{item.summary}</p> : null}
-    {item.painPoints ? <section class="section"><h2>Pain Points</h2><div class="prose" set:html={item.painPoints} /></section> : null}
-    {item.solutions ? <section class="section"><h2>Solutions</h2><div class="prose" set:html={item.solutions} /></section> : null}
-    {item.content ? <section class="section"><div class="prose" set:html={item.content} /></section> : null}
+    <p><a href={`/${data.locale}/solutions`}>← {t(data.locale, 'solutions')}</a></p>
+    <AlertBanner messages={data.error ? [data.error] : []} />
+    <AlertBanner messages={data.warnings} tone="warn" />
+    {item ? (
+      <>
+        <h1>{item.title}</h1>
+        {item.coverUrl ? <p><img class="card-media" src={item.coverUrl} alt={item.title} /></p> : null}
+        {item.summary ? <p>{item.summary}</p> : null}
+        {item.painPoints ? <section class="section"><h2>Pain Points</h2><div class="prose" set:html={item.painPoints} /></section> : null}
+        {item.solutions ? <section class="section"><h2>Solutions</h2><div class="prose" set:html={item.solutions} /></section> : null}
+        {item.content ? <section class="section"><div class="prose" set:html={item.content} /></section> : null}
+      </>
+    ) : null}
   </main>
   <SiteFooter company={data.company} />
 </BaseLayout>

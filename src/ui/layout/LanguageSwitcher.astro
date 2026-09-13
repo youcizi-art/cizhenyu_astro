@@ -1,0 +1,18 @@
+---
+interface Props {
+  options: Array<{ code: string; name: string; href: string; active: boolean }>;
+  label?: string;
+}
+const { options, label = 'Language' } = Astro.props;
+---
+{options.length > 1 ? (
+  <div class="lang-switch" aria-label={label}>
+    {options.map((item) => (
+      item.active ? (
+        <span class="lang-active" aria-current="true">{item.name}</span>
+      ) : (
+        <a href={item.href} hreflang={item.code}>{item.name}</a>
+      )
+    ))}
+  </div>
+) : null}

@@ -1,11 +1,20 @@
 import { loadPageChrome } from '../chrome/load-chrome';
 import { getResource } from '../../modules/resource';
+import { toErrorMessage } from '../../modules/cms';
 
-export async function loadResourceDetailPage(options: { locale?: string; id: string }) {
-  const chrome = await loadPageChrome(options.locale);
-  if (!chrome.site.modules.resources) {
-    return { ...chrome, enabled: false as const, item: null };
+export async function loadResourceDetailPage(options: {
+  locale?: string;
+  pathname: string;
+  id: string;
+}) {
+  const chrome = await loadPageChrome({ locale: options.locale, pathname: options.pathname });
+  if (!chrome.localeValid || !chrome.site.modules.resources) {
+    return { ...chrome, enabled: false as const, item: null, error: undefined as string | undefined };
   }
-  const item = await getResource(options.id, { locale: chrome.locale });
-  return { ...chrome, enabled: true as const, item };
+  try {
+    const item = await getResource(options.id, { locale: chrome.locale });
+    return { ...chrome, enabled: true as const, item, error: undefined as string | undefined };
+  } catch (error) {
+    return { ...chrome, enabled: true as const, item: null, error: toErrorMessage(error) };
+  }
 }

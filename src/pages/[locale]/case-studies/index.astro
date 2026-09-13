@@ -2,26 +2,40 @@
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
 import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import AlertBanner from '@/ui/blocks/AlertBanner.astro';
+import Pagination from '@/ui/blocks/Pagination.astro';
 import { loadCaseStudyListPage } from '@/workflows/case-studies/load-case-study-list';
-import { loadSiteManifest } from '@/modules/site';
-import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+import { applyCacheHeaders } from '@/workflows/chrome/http';
+import { buildAlternateLinks } from '@/workflows/chrome/urls';
+import { t } from '@/modules/i18n';
 
 export const prerender = false;
 
-const site = loadSiteManifest();
-const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
 const page = Number(Astro.url.searchParams.get('page') || 1) || 1;
-const data = await loadCaseStudyListPage({ locale, page });
+const data = await loadCaseStudyListPage({
+  locale: Astro.params.locale,
+  pathname: Astro.url.pathname,
+  page,
+});
+if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/case-studies`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return new Response('Not Found', { status: 404 });
 ---
-<BaseLayout title={`Case Studies · ${data.siteName}`}>
-  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+<BaseLayout
+  title={`${t(data.locale, 'caseStudies')} · ${data.siteName}`}
+  description={data.company.summary}
+  lang={data.locale}
+  alternates={buildAlternateLinks(data.localeOptions)}
+>
+  <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel} />
   <main class="wrap">
-    <h1>Case Studies</h1>
+    <h1>{t(data.locale, 'caseStudies')}</h1>
+    <AlertBanner messages={data.error ? [data.error] : []} />
+    <AlertBanner messages={data.warnings} tone="warn" />
     <div class="card-list">
       {data.items.map((item) => (
         <article class="card">
+          {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
           <h2><a href={item.href}>{item.title}</a></h2>
           {(item.clientName || item.industry) ? (
             <p class="muted">{[item.clientName, item.industry].filter(Boolean).join(' · ')}</p>
@@ -30,7 +44,8 @@ if (!data.enabled) return new Response('Not Found', { status: 404 });
         </article>
       ))}
     </div>
-    {!data.items.length ? <p class="muted">暂无案例。</p> : null}
+    {!data.error && !data.items.length ? <p class="muted">暂无案例。</p> : null}
+    {!data.error ? <Pagination pages={data.pages} basePath={`/${data.locale}/case-studies`} /> : null}
   </main>
   <SiteFooter company={data.company} />
 </BaseLayout>

@@ -1,5 +1,6 @@
 import {
   entityData,
+  isPublishedEntity,
   listEntities,
   type CmsEntity,
   type CmsQuery,
@@ -24,7 +25,13 @@ function toItem(row: CmsEntity): FaqItem {
 }
 
 export async function listFaqs(query?: CmsQuery): Promise<{ items: FaqItem[]; pages: PublicPages }> {
-  const result = await listEntities('faq', query);
-  const items = result.list.map(toItem).sort((a, b) => a.sortOrder - b.sortOrder);
+  const result = await listEntities('faq', {
+    ...query,
+    status: query?.status ?? 'published',
+  });
+  const items = result.list
+    .filter(isPublishedEntity)
+    .map(toItem)
+    .sort((a, b) => a.sortOrder - b.sortOrder);
   return { items, pages: result.pages };
 }

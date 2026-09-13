@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { pathsForCollections } from '@/modules/cache';
+import { getLastPurge, purgeHtmlPaths } from '@/modules/cache/html-cache';
 import { getSiteKey, loadSiteManifest } from '@/modules/site';
 
 export const prerender = false;
@@ -39,10 +40,34 @@ export const POST: APIRoute = async ({ request }) => {
     ? ['/*']
     : [...new Set([...mapped, ...explicitPaths])];
 
+  const siteOrigin = String(import.meta.env.PUBLIC_SITE_URL || '').replace(/\/$/, '');
+  const purge = await purgeHtmlPaths({
+    paths,
+    locales: site.locales,
+    siteOrigin,
+  });
+
   return Response.json({
     ok: true,
     siteKey: getSiteKey(),
-    paths,
-    msg: 'revalidate accepted',
+    paths: purge.paths,
+    purged: {
+      deleted: purge.deleted,
+      mode: purge.mode,
+      cloudflare: purge.cloudflare,
+      at: purge.at,
+    },
+    msg: purge.deleted > 0 || purge.cloudflare?.ok
+      ? 'revalidate purged'
+      : 'revalidate accepted (no matching local entries; CDN purge depends on CF credentials)',
+  });
+};
+
+/** 观测最近一次 purge（验收用） */
+export const GET: APIRoute = async () => {
+  const last = getLastPurge();
+  return Response.json({
+    ok: true,
+    lastPurge: last,
   });
 };

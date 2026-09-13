@@ -2,25 +2,42 @@
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
 import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import { loadContactPage } from '@/workflows/pages/load-static-pages';
-import { loadSiteManifest } from '@/modules/site';
-import { applyCacheHeaders, resolveLocaleParam } from '@/workflows/chrome/http';
+import { applyCacheHeaders } from '@/workflows/chrome/http';
+import { buildAlternateLinks } from '@/workflows/chrome/urls';
 
 export const prerender = false;
 
-const site = loadSiteManifest();
-const locale = resolveLocaleParam(site.locales, site.defaultLocale, Astro.params.locale);
-const data = await loadContactPage({ locale });
+const data = await loadContactPage({
+  locale: Astro.params.locale,
+  pathname: Astro.url.pathname,
+});
+if (!data.localeValid) {
+  return Astro.redirect(`/${data.site.defaultLocale}/contact`, 302);
+}
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return new Response('Not Found', { status: 404 });
 ---
-<BaseLayout title={`${data.page?.title || 'Contact'} · ${data.siteName}`} description={data.page?.summary || ''}>
-  <SiteHeader siteName={data.siteName} links={data.navLinks} />
+<BaseLayout
+  title={`${data.page?.seoTitle || data.page?.title || data.labels.contact} · ${data.siteName}`}
+  description={data.page?.seoDescription || data.page?.summary || data.company.summary}
+  lang={data.locale}
+  alternates={buildAlternateLinks(data.localeOptions)}
+>
+  <SiteHeader
+    siteName={data.siteName}
+    links={data.navLinks}
+    localeOptions={data.localeOptions}
+    languageLabel={data.languageLabel}
+  />
   <main class="wrap">
-    <h1>{data.page?.title || 'Contact'}</h1>
+    <AlertBanner messages={data.error ? [data.error] : []} />
+    <AlertBanner messages={data.warnings} tone="warn" />
+    <h1>{data.page?.title || data.labels.contact}</h1>
     {data.page?.content ? <div class="prose" set:html={data.page.content} /> : null}
     <section class="section card">
-      <h2>Company contacts</h2>
+      <h2>{data.siteName}</h2>
       {data.company.address ? <p>{data.company.address}</p> : null}
       {data.company.phone ? <p>{data.company.phone}</p> : null}
       {data.company.email ? <p><a href={`mailto:${data.company.email}`}>{data.company.email}</a></p> : null}

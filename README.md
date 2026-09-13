@@ -1,39 +1,37 @@
 # cizhenyu_astro · B2B 站群前端（对接 cizhenyu_payload）
 
-本仓库是 **`cizhenyu_payload` 的 B2B 类站点对接项目**：新建通用 Astro 平台，可实例化多个 B2B 站，并支持后续 AI 一键建站。
+本仓库是 **`cizhenyu_payload` 的 B2B 类站点对接模板**：独立新建，可实例化多个 B2B 站。
 
 | 角色 | 路径 |
 | --- | --- |
 | CMS 后端 | `D:\ycz_me\cizhenyu_payload` |
 | B2B 模型真源 | `D:\ycz_me\cizhenyu_payload\sites\b2b\*.json` |
 | 本前端 | `D:\ycz_me\models\cizhenyu_astro` |
-| 设计参考（非依赖、非迁移源） | `D:\ycz_me\models\czy_model`（旧 `cizhenyu` 前端，仅可参考交互/信息架构） |
+| 能力参考（非迁移源） | `D:\ycz_me\models\czy_model` |
 
-**不是** `czy_model` 的迁移或 fork。后端与公开 API 均以 `cizhenyu_payload` 为准。编码遵循根目录 [AGENTS.md](./AGENTS.md)。
+编码遵循 [AGENTS.md](./AGENTS.md)。
+
+---
+
+## 当前真实状态（请先读）
+
+**本仓库目前是半成品脚手架，不能当作可用 B2B 模板。**
+
+- 阶段 A/B：**Mock 出口已勾选**（`accept:ab`）  
+- 阶段 C/D：**实现已落地**，以 `accept:cd` 勾选（页面深度 + 可观测 HTML purge）  
+- 阶段 E（SEO/导航）与真实 payload / CF CDN purge 仍待完成  
+- 详细审查与排期见：**[docs/BUILD_PLAN.md](./docs/BUILD_PLAN.md)**  
+
+成熟度（生产模板）：约 **5/10**（Mock 可演示核心页与缓存失效；SEO/主题/真实 CDN 仍差）。
 
 ---
 
 ## 目标
 
-1. 多站点：`sites/<siteKey>/site.manifest.json` 实例化  
-2. 对接 payload 公开 API（分组路径 + 信封）  
-3. 免费档约 1 万日 UV：页面缓存在 Pages，CMS 发变更通知  
-4. 后续 AI 一键建站（manifest + 种子，不生成乱结构）
-
----
-
-## 代码结构（对齐 AGENTS.md）
-
-```text
-src/
-├── modules/          # 业务模块（cms / product / site …）
-├── workflows/        # 跨模块页面组装
-├── ui/               # 布局与展示组件
-└── pages/            # Astro 路由薄壳（框架要求）
-sites/                # 站点清单实例
-docs/                 # 对接与缓存说明
-scripts/              # catalog 同步等
-```
+1. 多站点：`sites/<siteKey>/site.manifest.json`  
+2. 对接 payload 公开 API  
+3. 免费档约 1 万日 UV（Pages HTML 缓存为主）  
+4. 后续 AI 一键建站  
 
 ---
 
@@ -41,14 +39,12 @@ scripts/              # catalog 同步等
 
 | 文档 | 内容 |
 | --- | --- |
-| [docs/FRONTEND_PLATFORM.md](./docs/FRONTEND_PLATFORM.md) | 总方案 |
-| [docs/SITE_MANIFEST.md](./docs/SITE_MANIFEST.md) | 站点清单 |
-| [docs/CMS_MAPPING.md](./docs/CMS_MAPPING.md) | 集合 ↔ 路径 |
-| [docs/CACHE_STRATEGY.md](./docs/CACHE_STRATEGY.md) | 缓存与 UV |
-| [docs/REVALIDATE_MAP.md](./docs/REVALIDATE_MAP.md) | 失效映射 |
+| **[docs/BUILD_PLAN.md](./docs/BUILD_PLAN.md)** | **审查结论 + 分阶段构建计划（必读）** |
+| [docs/FRONTEND_PLATFORM.md](./docs/FRONTEND_PLATFORM.md) | 总方案（实现以 BUILD_PLAN 为准） |
+| [docs/CACHE_STRATEGY.md](./docs/CACHE_STRATEGY.md) | 缓存目标（实现未完成） |
+| [docs/CMS_MAPPING.md](./docs/CMS_MAPPING.md) | 集合路径 |
 | [docs/BACKEND_INTEGRATION.md](./docs/BACKEND_INTEGRATION.md) | API 契约 |
-| [docs/AI_ONE_CLICK.md](./docs/AI_ONE_CLICK.md) | AI 建站 |
-| [docs/REFERENCE_NOTES.md](./docs/REFERENCE_NOTES.md) | 参考项目说明（非迁移） |
+| [docs/REFERENCE_NOTES.md](./docs/REFERENCE_NOTES.md) | 参考项目说明 |
 
 ---
 
@@ -59,11 +55,18 @@ cp .env.example .env
 npm install
 npm run sync:catalog
 npm run test
+
+# 终端 1：Mock CMS（契约对齐 /api/p，数据对齐 sites/b2b）
+npm run mock:cms
+
+# 终端 2：前端（.env 默认指向 http://127.0.0.1:8787）
 npm run dev
+
+# 终端 3：出口验收
+npm run accept:ab
+npm run accept:cd
 ```
 
-- 默认 `SITE_KEY=demo`（`sites/demo/site.manifest.json`）
-- 路由（均在 `/[locale]/...`）：products、articles、case-studies、solutions、faq、resources、about、contact
-- 询盘/留言表单暂未接入（Contact 仅展示公司联系方式）
-- 失效：`POST /api/revalidate`
-- `PUBLIC_CMS_API_BASE` 指向可访问的 `cizhenyu_payload` API 域名
+对接真实 `cizhenyu_payload`：只改 `.env` 的 `PUBLIC_CMS_API_BASE`，再跑验收脚本。  
+生产 CDN purge：配置 `CF_ZONE_ID` + `CF_API_TOKEN`（见 `docs/CACHE_STRATEGY.md`）。  
+注意真实后端语种可能是 `en-US`（非 `en`），需与 `sites/<site>/site.manifest.json` 的 `locales` 对齐。

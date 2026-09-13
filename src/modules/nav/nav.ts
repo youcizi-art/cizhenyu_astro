@@ -1,30 +1,31 @@
 import type { SiteManifest, SiteModules } from '../site';
 import { localePath } from '../cms';
+import { t } from '../i18n';
 
 export type NavLink = {
   label: string;
   href: string;
 };
 
-const MODULE_LINKS: Array<{ module: keyof SiteModules; label: string; path: string }> = [
-  { module: 'products', label: 'Products', path: '/products' },
-  { module: 'solutions', label: 'Solutions', path: '/solutions' },
-  { module: 'caseStudies', label: 'Case Studies', path: '/case-studies' },
-  { module: 'articles', label: 'Articles', path: '/articles' },
-  { module: 'resources', label: 'Resources', path: '/resources' },
-  { module: 'faq', label: 'FAQ', path: '/faq' },
-  { module: 'about', label: 'About', path: '/about' },
-  { module: 'contact', label: 'Contact', path: '/contact' },
+const MODULE_LINKS: Array<{ module: keyof SiteModules; labelKey: Parameters<typeof t>[1]; path: string }> = [
+  { module: 'products', labelKey: 'products', path: '/products' },
+  { module: 'solutions', labelKey: 'solutions', path: '/solutions' },
+  { module: 'caseStudies', labelKey: 'caseStudies', path: '/case-studies' },
+  { module: 'articles', labelKey: 'articles', path: '/articles' },
+  { module: 'resources', labelKey: 'resources', path: '/resources' },
+  { module: 'faq', labelKey: 'faq', path: '/faq' },
+  { module: 'about', labelKey: 'about', path: '/about' },
+  { module: 'contact', labelKey: 'contact', path: '/contact' },
 ];
 
 export function buildNavLinks(site: SiteManifest, locale: string): NavLink[] {
   const links: NavLink[] = [
-    { label: 'Home', href: localePath(locale, '/') },
+    { label: t(locale, 'home'), href: localePath(locale, '/') },
   ];
   for (const item of MODULE_LINKS) {
     if (!site.modules[item.module]) continue;
     links.push({
-      label: item.label,
+      label: t(locale, item.labelKey),
       href: localePath(locale, item.path),
     });
   }

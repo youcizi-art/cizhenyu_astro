@@ -1,7 +1,9 @@
 import {
   entityData,
   getEntityByIdOrSlug,
+  isPublishedEntity,
   listEntities,
+  readSeoFields,
   type CmsEntity,
   type CmsQuery,
 } from '../cms';
@@ -12,25 +14,36 @@ export type SitePage = {
   slug: string;
   summary: string;
   content: string;
+  seoTitle: string;
+  seoDescription: string;
 };
 
 function toPage(row: CmsEntity): SitePage {
   const data = entityData(row);
+  const title = String(data.title || 'Untitled');
+  const summary = String(data.summary || '');
+  const seo = readSeoFields(data, title, summary);
   return {
     id: String(row.id),
-    title: String(data.title || 'Untitled'),
+    title,
     slug: String(data.slug || row.id),
-    summary: String(data.summary || ''),
+    summary,
     content: String(data.content || ''),
+    seoTitle: seo.seoTitle || title,
+    seoDescription: seo.seoDescription || summary,
   };
 }
 
 export async function getPageBySlug(slug: string, query?: CmsQuery): Promise<SitePage | null> {
   const row = await getEntityByIdOrSlug('page', slug, query, 'slug');
-  return row ? toPage(row) : null;
+  if (!row || !isPublishedEntity(row)) return null;
+  return toPage(row);
 }
 
 export async function listPages(query?: CmsQuery): Promise<SitePage[]> {
-  const result = await listEntities('page', query);
-  return result.list.map(toPage);
+  const result = await listEntities('page', {
+    ...query,
+    status: query?.status ?? 'published',
+  });
+  return result.list.filter(isPublishedEntity).map(toPage);
 }

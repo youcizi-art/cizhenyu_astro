@@ -3,16 +3,19 @@ import {
   getEntityByIdOrSlug,
   listEntities,
   localePath,
+  readSeoFields,
   type CmsEntity,
   type CmsQuery,
   type PublicPages,
 } from '../cms';
+import { resolveMediaUrl } from '../media';
 
 export type SolutionCard = {
   id: string;
   title: string;
   slug: string;
   summary: string;
+  coverUrl: string;
   href: string;
 };
 
@@ -20,6 +23,8 @@ export type SolutionDetail = SolutionCard & {
   content: string;
   painPoints: string;
   solutions: string;
+  seoTitle: string;
+  seoDescription: string;
 };
 
 function toCard(row: CmsEntity, locale?: string): SolutionCard {
@@ -30,6 +35,7 @@ function toCard(row: CmsEntity, locale?: string): SolutionCard {
     title: String(data.name || data.title || 'Untitled'),
     slug,
     summary: String(data.summary || ''),
+    coverUrl: resolveMediaUrl(data.cover),
     href: localePath(locale, `/solutions/${encodeURIComponent(slug || row.id)}`),
   };
 }
@@ -46,10 +52,13 @@ export async function getSolution(idOrSlug: string, query?: CmsQuery): Promise<S
   if (!row) return null;
   const card = toCard(row, locale);
   const data = entityData(row);
+  const seo = readSeoFields(data, card.title, card.summary);
   return {
     ...card,
     content: String(data.content || ''),
     painPoints: String(data.pain_points || ''),
     solutions: String(data.solutions || ''),
+    seoTitle: seo.seoTitle || card.title,
+    seoDescription: seo.seoDescription || card.summary,
   };
 }

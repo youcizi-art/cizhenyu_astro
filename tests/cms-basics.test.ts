@@ -3,6 +3,11 @@ import { unwrapEnvelope } from '../src/modules/cms/envelope';
 import { pathsForCollections } from '../src/modules/cache/revalidate-map';
 import { normalizeManifest } from '../src/modules/site/manifest';
 import { catalog } from '../src/modules/cms/catalog';
+import { CmsError, isCmsError } from '../src/modules/cms/errors';
+import { localePath } from '../src/modules/cms/entity';
+import { resolveMediaUrl, resolveMediaUrls } from '../src/modules/media';
+import { toProductDetail } from '../src/modules/product/types';
+import { resolveLocaleFromPath, switchLocalePath, t } from '../src/modules/i18n';
 
 describe('cms envelope', () => {
   it('unwraps ok payload', () => {
@@ -43,9 +48,72 @@ describe('site manifest', () => {
 });
 
 describe('localePath', () => {
-  it('prefixes locale without trailing slash on home', async () => {
-    const { localePath } = await import('../src/modules/cms/entity');
+  it('prefixes locale without trailing slash on home', () => {
     expect(localePath('en', '/')).toBe('/en');
     expect(localePath('en', '/articles')).toBe('/en/articles');
+  });
+});
+
+describe('cms errors', () => {
+  it('marks cms errors', () => {
+    const err = new CmsError('boom', { status: 503, code: 'network' });
+    expect(isCmsError(err)).toBe(true);
+    expect(err.status).toBe(503);
+  });
+});
+
+describe('media resolve', () => {
+  it('resolves absolute and object urls', () => {
+    expect(resolveMediaUrl('https://cdn.example.com/a.jpg')).toBe('https://cdn.example.com/a.jpg');
+    expect(resolveMediaUrl({ url: 'https://cdn.example.com/b.jpg' })).toBe('https://cdn.example.com/b.jpg');
+    expect(resolveMediaUrls([{ src: 'https://cdn.example.com/1.jpg' }, { src: 'https://cdn.example.com/2.jpg' }])).toEqual([
+      'https://cdn.example.com/1.jpg',
+      'https://cdn.example.com/2.jpg',
+    ]);
+  });
+});
+
+describe('i18n path + labels', () => {
+  it('switches locale prefix and keeps rest of path', () => {
+    const langs = [
+      { code: 'en', name: 'English', isDefault: true, status: 'active' },
+      { code: 'zh-CN', name: '简体中文', isDefault: false, status: 'active' },
+    ];
+    expect(switchLocalePath('/en/products/press', 'zh-CN', langs)).toBe('/zh-CN/products/press');
+    expect(switchLocalePath('/zh-CN/about', 'en', langs)).toBe('/en/about');
+    expect(resolveLocaleFromPath('/zh-CN/products', langs, 'en')).toMatchObject({
+      locale: 'zh-CN',
+      hasPrefix: true,
+      isActive: true,
+    });
+  });
+
+  it('translates nav labels by locale', () => {
+    expect(t('zh-CN', 'products')).toBe('产品');
+    expect(t('en', 'language')).toBe('Language');
+  });
+});
+
+describe('product mapping', () => {
+  it('maps images and description from entity data', () => {
+    const detail = toProductDetail({
+      id: '11111111-1111-4111-8111-111111111111',
+      data: {
+        title: 'Press',
+        slug: 'press',
+        sku: 'P-1',
+        summary: 'S',
+        description: '<p>Body</p>',
+        images: [{ url: 'https://cdn.example.com/p.jpg' }],
+        status: 'published',
+        seo_title: 'SEO Press',
+        spec_data: { tonnage: '200 ton' },
+      },
+    }, 'en');
+    expect(detail.href).toBe('/en/products/press');
+    expect(detail.coverUrl).toBe('https://cdn.example.com/p.jpg');
+    expect(detail.descriptionHtml).toBe('<p>Body</p>');
+    expect(detail.seoTitle).toBe('SEO Press');
+    expect(detail.specs).toEqual([{ key: 'tonnage', value: '200 ton' }]);
   });
 });

@@ -12,7 +12,11 @@
     "build": "npm run sync:catalog && astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "vitest run"
+    "test": "vitest run",
+    "mock:cms": "node mock-cms/server.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "accept:ab": "node scripts/accept-ab.mjs",
+    "accept:cd": "node scripts/accept-cd.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",

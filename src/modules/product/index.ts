@@ -1,2 +1,9 @@
 export { listProducts, getProduct } from './product';
-export { toProductCard, type ProductCard, type ProductRecord } from './types';
+export {
+  isPublishedProduct,
+  toProductCard,
+  toProductDetail,
+  type ProductCard,
+  type ProductDetail,
+  type ProductRecord,
+} from './types';

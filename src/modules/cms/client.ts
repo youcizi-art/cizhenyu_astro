@@ -1,5 +1,7 @@
+import { CmsError } from './errors';
 import { unwrapEnvelope, type PublicEnvelope, type PublicListData } from './envelope';
 import { collectionDataPath, type CatalogKey } from './catalog';
+import { buildRequestCacheKey, withRequestCache } from './request-cache';
 
 export type CmsQuery = Record<string, string | number | undefined | null>;
 
@@ -12,10 +14,10 @@ function apiPrefix() {
   return raw.startsWith('/') ? raw.replace(/\/$/, '') : `/${raw.replace(/\/$/, '')}`;
 }
 
-function buildUrl(resourcePath: string, query?: CmsQuery) {
+export function buildCmsUrl(resourcePath: string, query?: CmsQuery) {
   const base = apiBase();
   if (!base) {
-    throw new Error('未配置 PUBLIC_CMS_API_BASE');
+    throw new CmsError('未配置 PUBLIC_CMS_API_BASE', { status: 500, code: 'config' });
   }
   const url = new URL(`${apiPrefix()}/${resourcePath.replace(/^\//, '')}`, `${base}/`);
   if (query) {
@@ -28,19 +30,44 @@ function buildUrl(resourcePath: string, query?: CmsQuery) {
 }
 
 async function cmsGetJson<T>(resourcePath: string, query?: CmsQuery): Promise<T> {
-  const url = buildUrl(resourcePath, query);
-  const res = await fetch(url, {
-    headers: { Accept: 'application/json' },
-    signal: AbortSignal.timeout(15_000),
+  const url = buildCmsUrl(resourcePath, query);
+  const cacheKey = buildRequestCacheKey(url.toString(), 'GET');
+
+  return withRequestCache(cacheKey, async () => {
+    let res: Response;
+    try {
+      res = await fetch(url, {
+        headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(15_000),
+      });
+    } catch (cause) {
+      throw new CmsError('无法连接 CMS，请检查 PUBLIC_CMS_API_BASE', {
+        status: 503,
+        code: 'network',
+        cause,
+      });
+    }
+
+    const body = (await res.json().catch(() => null)) as PublicEnvelope<T> | null;
+    if (!body || typeof body !== 'object') {
+      throw new CmsError(`CMS 无效响应 (${res.status})`, { status: res.status, code: 'invalid' });
+    }
+    if (!res.ok || body.status >= 400) {
+      throw new CmsError(body.msg || `CMS HTTP ${res.status}`, {
+        status: body.status || res.status,
+        code: 'http',
+      });
+    }
+    try {
+      return unwrapEnvelope(body);
+    } catch (cause) {
+      throw new CmsError(cause instanceof Error ? cause.message : 'CMS 数据为空', {
+        status: body.status || res.status,
+        code: 'invalid',
+        cause,
+      });
+    }
   });
-  const body = (await res.json().catch(() => null)) as PublicEnvelope<T> | null;
-  if (!body) {
-    throw new Error(`CMS 无效响应: ${res.status}`);
-  }
-  if (!res.ok) {
-    throw new Error(body.msg || `CMS HTTP ${res.status}`);
-  }
-  return unwrapEnvelope(body);
 }
 
 export async function fetchCollectionList<T>(
@@ -73,19 +100,29 @@ export async function submitCollection(
   payload: Record<string, unknown>
 ): Promise<unknown> {
   const dataPath = collectionDataPath(key);
-  const url = buildUrl(`submit/${dataPath}`);
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-    signal: AbortSignal.timeout(15_000),
-  });
+  const url = buildCmsUrl(`submit/${dataPath}`);
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(15_000),
+    });
+  } catch (cause) {
+    throw new CmsError('无法连接 CMS（提交失败）', { status: 503, code: 'network', cause });
+  }
   const body = (await res.json().catch(() => null)) as PublicEnvelope<unknown> | null;
-  if (!body) throw new Error(`CMS 提交无效响应: ${res.status}`);
-  if (!res.ok) throw new Error(body.msg || `CMS HTTP ${res.status}`);
+  if (!body) throw new CmsError(`CMS 提交无效响应: ${res.status}`, { status: res.status, code: 'invalid' });
+  if (!res.ok || body.status >= 400) {
+    throw new CmsError(body.msg || `CMS HTTP ${res.status}`, {
+      status: body.status || res.status,
+      code: 'http',
+    });
+  }
   return unwrapEnvelope(body, body.msg || '提交失败');
 }
 

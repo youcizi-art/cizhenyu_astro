@@ -1,13 +1,21 @@
 import { fetchCollectionById, fetchCollectionList, type CmsQuery } from './client';
 import type { CatalogKey } from './catalog';
 import type { PublicPages } from './envelope';
+import { CmsError, isCmsError } from './errors';
 
 export type CmsEntity = {
   id: string;
   locale?: string | null;
+  language_group_key?: string | null;
   data?: Record<string, unknown>;
   [key: string]: unknown;
 };
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+export function isEntityUuid(value: string) {
+  return UUID_RE.test(String(value || '').trim());
+}
 
 export function entityData(row: CmsEntity | null | undefined) {
   return (row?.data || {}) as Record<string, unknown>;
@@ -38,14 +46,31 @@ export async function getEntityByIdOrSlug<T extends CmsEntity = CmsEntity>(
 ): Promise<T | null> {
   const value = String(idOrSlug || '').trim();
   if (!value) return null;
+
+  if (isEntityUuid(value)) {
+    try {
+      return await fetchCollectionById<T>(key, value, query);
+    } catch (error) {
+      if (isCmsError(error) && error.status === 404) return null;
+      throw error;
+    }
+  }
+
   try {
-    return await fetchCollectionById<T>(key, value, query);
-  } catch {
     const listed = await fetchCollectionList<T>(key, {
       ...query,
       [slugField]: value,
-      pageSize: 1,
+      pageSize: 5,
     });
-    return listed.list?.[0] || null;
+    const hit = (listed.list || []).find((row) => {
+      const data = entityData(row);
+      return String(data[slugField] || '').trim() === value || String(row.id) === value;
+    });
+    return hit || listed.list?.[0] || null;
+  } catch (error) {
+    if (isCmsError(error) && error.status === 404) return null;
+    throw error;
   }
 }
+
+export { CmsError, isCmsError };

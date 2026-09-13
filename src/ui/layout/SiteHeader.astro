@@ -1,19 +1,25 @@
 ---
 import type { NavLink } from '@/modules/nav';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 
 interface Props {
   siteName: string;
   links: NavLink[];
+  localeOptions?: Array<{ code: string; name: string; href: string; active: boolean }>;
+  languageLabel?: string;
 }
-const { siteName, links } = Astro.props;
+const { siteName, links, localeOptions = [], languageLabel = 'Language' } = Astro.props;
 ---
 <header class="site">
   <div class="wrap">
     <strong><a href={links[0]?.href || '/'}>{siteName}</a></strong>
-    <nav>
-      {links.map((link) => (
-        <a href={link.href}>{link.label}</a>
-      ))}
-    </nav>
+    <div class="header-right">
+      <nav>
+        {links.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </nav>
+      <LanguageSwitcher options={localeOptions} label={languageLabel} />
+    </div>
   </div>
 </header>

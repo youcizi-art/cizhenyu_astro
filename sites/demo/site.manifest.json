@@ -2,20 +2,20 @@
   "siteKey": "demo",
   "displayName": "Demo B2B Site",
   "theme": "default",
-  "defaultLocale": "en",
-  "locales": ["en", "zh-CN"],
+  "defaultLocale": "zh-CN",
+  "locales": ["zh-CN", "zh-TW", "ja", "en-US"],
   "modules": {
     "products": true,
     "articles": true,
     "caseStudies": true,
     "solutions": true,
     "faq": true,
-    "resources": false,
+    "resources": true,
     "about": true,
     "contact": true
   },
   "cms": {
-    "apiBase": "https://api.example.com",
+    "apiBase": "http://127.0.0.1:5173",
     "apiPrefix": "/api/p",
     "collectionNamespace": "b2b"
   },

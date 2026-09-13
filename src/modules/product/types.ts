@@ -1,36 +1,76 @@
-export type ProductRecord = {
-  id: string;
-  locale?: string | null;
-  data?: {
-    title?: string;
-    slug?: string;
-    sku?: string;
-    summary?: string;
-    cover?: unknown;
-    [key: string]: unknown;
-  };
-  [key: string]: unknown;
-};
+import { entityData, type CmsEntity } from '../cms';
+import { isPublishedEntity, readSeoFields, readSpecEntries } from '../cms';
+import { resolveMediaUrl, resolveMediaUrls } from '../media';
+import { localePath } from '../cms';
+
+export type ProductRecord = CmsEntity;
 
 export type ProductCard = {
   id: string;
   title: string;
   slug: string;
   sku: string;
+  brand: string;
   summary: string;
+  coverUrl: string;
   href: string;
+  status: string;
 };
 
-export function toProductCard(row: ProductRecord, locale?: string): ProductCard {
-  const data = row.data || {};
-  const slug = String(data.slug || row.id || '').trim();
-  const localePrefix = locale ? `/${locale}` : '';
+export type ProductDetail = ProductCard & {
+  descriptionHtml: string;
+  imageUrls: string[];
+  price: string;
+  currency: string;
+  availability: string;
+  seoTitle: string;
+  seoDescription: string;
+  specs: Array<{ key: string; value: string }>;
+};
+
+function readStatus(data: Record<string, unknown>) {
+  return String(data.status || 'published').trim().toLowerCase();
+}
+
+export function isPublishedProduct(row: CmsEntity) {
+  return isPublishedEntity(row);
+}
+
+export function toProductCard(row: CmsEntity, locale?: string): ProductCard {
+  const data = entityData(row);
+  const slug = String(data.slug || data.url_slug || row.id || '').trim();
+  const images = resolveMediaUrls(data.images);
   return {
     id: String(row.id),
     title: String(data.title || 'Untitled'),
     slug,
     sku: String(data.sku || ''),
-    summary: String(data.summary || data.excerpt || ''),
-    href: `${localePrefix}/products/${encodeURIComponent(slug || row.id)}`,
+    brand: String(data.brand || ''),
+    summary: String(data.summary || ''),
+    coverUrl: images[0] || resolveMediaUrl(data.cover),
+    href: localePath(locale, `/products/${encodeURIComponent(slug || row.id)}`),
+    status: readStatus(data),
+  };
+}
+
+export function toProductDetail(row: CmsEntity, locale?: string): ProductDetail {
+  const card = toProductCard(row, locale);
+  const data = entityData(row);
+  const imageUrls = resolveMediaUrls(data.images);
+  if (card.coverUrl && !imageUrls.includes(card.coverUrl)) {
+    imageUrls.unshift(card.coverUrl);
+  }
+  const priceRaw = data.price;
+  const seo = readSeoFields(data, card.title, card.summary);
+  return {
+    ...card,
+    descriptionHtml: String(data.description || ''),
+    imageUrls,
+    price: priceRaw == null || priceRaw === '' ? '' : String(priceRaw),
+    currency: String(data.price_currency || 'USD'),
+    availability: String(data.availability || ''),
+    seoTitle: seo.seoTitle || card.title,
+    seoDescription: seo.seoDescription || card.summary,
+    specs: readSpecEntries(data.spec_data),
   };
 }

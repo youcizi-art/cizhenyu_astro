@@ -1,2 +1,8 @@
-export { getCompanyInfo, companyDisplayName, type CompanyInfo } from './company';
-export { toCompanyView, type CompanyView } from './view';
+export {
+  companyDisplayName,
+  loadCompanyView,
+  toCompanyView,
+  type CompanyInfo,
+  type CompanyLoadResult,
+  type CompanyView,
+} from './company';
