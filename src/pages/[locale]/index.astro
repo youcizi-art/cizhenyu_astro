@@ -51,6 +51,17 @@ const alternates = buildAlternateLinks(data.localeOptions);
         {data.tagline ? <p class="muted">{data.tagline}</p> : null}
       </section>
     )}
+    {data.featuredRefs?.length ? (
+      <CardSection
+        title={data.labels.featured || '推荐'}
+        items={data.featuredRefs.map((i) => ({
+          href: i.href,
+          title: i.title,
+          summary: i.description || i.subtitle,
+          coverUrl: i.coverUrl,
+        }))}
+      />
+    ) : null}
     {data.companyIntro ? (
       <section class="section card">
         <h2>{data.labels.about || 'About'}</h2>

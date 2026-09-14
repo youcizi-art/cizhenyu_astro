@@ -1,19 +1,23 @@
 /**
- * 阶段 A/B 出口验收（对 Mock CMS 或真实 payload）。
+ * 阶段 A/B 出口验收（真实 payload 或 Mock CMS）。
  *
  * 用法：
- *   1) npm run mock:cms
- *   2) 另开终端：PUBLIC_CMS_API_BASE=http://127.0.0.1:8787 npm run dev
+ *   1) cizhenyu_payload: npm run dev（已 seed）
+ *   2) cizhenyu_astro: npm run dev
  *   3) npm run accept:ab
  *
  * 环境变量：
- *   CMS_BASE   默认 http://127.0.0.1:8787
+ *   CMS_BASE   默认 http://127.0.0.1:5173
  *   SITE_BASE  默认 http://127.0.0.1:4321
  *   CMS_PREFIX 默认 /api/p
+ *   LOCALE_EN  默认 en-US
+ *   LOCALE_ZH  默认 zh-CN
  */
-const cmsBase = String(process.env.CMS_BASE || 'http://127.0.0.1:8787').replace(/\/$/, '');
+const cmsBase = String(process.env.CMS_BASE || 'http://127.0.0.1:5173').replace(/\/$/, '');
 const siteBase = String(process.env.SITE_BASE || 'http://127.0.0.1:4321').replace(/\/$/, '');
 const prefix = String(process.env.CMS_PREFIX || '/api/p').replace(/\/$/, '');
+const localeEn = String(process.env.LOCALE_EN || 'en-US').trim();
+const localeZh = String(process.env.LOCALE_ZH || 'zh-CN').trim();
 
 let failed = 0;
 
@@ -32,18 +36,17 @@ async function getJson(url) {
   return { res, body };
 }
 
-async function getHtml(path, opts = {}) {
+async function getHtml(path) {
   const res = await fetch(`${siteBase}${path}`, {
-    redirect: opts.redirect || 'manual',
+    redirect: 'manual',
     headers: { Accept: 'text/html' },
   });
-  const text = res.status < 400 || opts.readErrorBody ? await res.text().catch(() => '') : '';
+  const text = res.status < 400 ? await res.text().catch(() => '') : '';
   return { res, text, location: res.headers.get('location') || '' };
 }
 
-console.log(`accept:ab CMS=${cmsBase}${prefix} SITE=${siteBase}`);
+console.log(`accept:ab CMS=${cmsBase}${prefix} SITE=${siteBase} locales=${localeEn},${localeZh}`);
 
-// --- CMS contract ---
 {
   const { res, body } = await getJson(`${cmsBase}${prefix}/languages`);
   const list = body?.data?.list || [];
@@ -56,33 +59,33 @@ console.log(`accept:ab CMS=${cmsBase}${prefix} SITE=${siteBase}`);
 
 {
   const { res, body } = await getJson(
-    `${cmsBase}${prefix}/data/b2b/products/b2b_product?locale=en&pageSize=12`
+    `${cmsBase}${prefix}/data/b2b/products/b2b_product?locale=${encodeURIComponent(localeEn)}&pageSize=12`
   );
   const list = body?.data?.list || [];
   const draftHit = list.some((row) => String(row?.data?.status || '') === 'draft');
   if (res.ok && list.length >= 1 && !draftHit) {
-    pass(`CMS product list en count=${list.length} (drafts hidden)`);
+    pass(`CMS product list ${localeEn} count=${list.length} (drafts hidden)`);
   } else {
-    fail(`CMS product list en status=${res.status} count=${list.length} draftHit=${draftHit}`);
+    fail(`CMS product list ${localeEn} status=${res.status} count=${list.length} draftHit=${draftHit}`);
   }
 }
 
 {
   const { res, body } = await getJson(
-    `${cmsBase}${prefix}/data/b2b/products/b2b_product?locale=zh-CN&pageSize=12`
+    `${cmsBase}${prefix}/data/b2b/products/b2b_product?locale=${encodeURIComponent(localeZh)}&pageSize=12`
   );
   const list = body?.data?.list || [];
   const title = String(list[0]?.data?.title || '');
   if (res.ok && list.length >= 1 && /[\u4e00-\u9fff]/.test(title)) {
-    pass(`CMS product list zh-CN sample="${title}"`);
+    pass(`CMS product list ${localeZh} sample="${title}"`);
   } else {
-    fail(`CMS product list zh-CN status=${res.status} title=${title}`);
+    fail(`CMS product list ${localeZh} status=${res.status} title=${title}`);
   }
 }
 
 {
   const { res, body } = await getJson(
-    `${cmsBase}${prefix}/data/b2b/products/b2b_product?locale=en&slug=hydraulic-press-hp-200`
+    `${cmsBase}${prefix}/data/b2b/products/b2b_product?locale=${encodeURIComponent(localeEn)}&slug=hydraulic-press-hp-200`
   );
   const row = body?.data?.list?.[0];
   const hasImg = Boolean(row?.data?.images?.[0]?.url || row?.data?.images?.[0]);
@@ -96,7 +99,7 @@ console.log(`accept:ab CMS=${cmsBase}${prefix} SITE=${siteBase}`);
 
 {
   const { res, body } = await getJson(
-    `${cmsBase}${prefix}/data/b2b/settings/b2b_company_info/single?locale=en`
+    `${cmsBase}${prefix}/data/b2b/settings/b2b_company_info/single?locale=${encodeURIComponent(localeEn)}`
   );
   if (res.ok && body?.data?.data?.company_name) {
     pass(`CMS company single "${body.data.data.company_name}"`);
@@ -105,42 +108,42 @@ console.log(`accept:ab CMS=${cmsBase}${prefix} SITE=${siteBase}`);
   }
 }
 
-// --- Frontend A/B exit ---
 {
-  const home = await getHtml('/en');
-  if (home.res.status === 200 && /lang=["']en["']/i.test(home.text) && /lang-switch|hreflang/i.test(home.text)) {
-    pass('A/B home /en has lang + switcher/hreflang');
+  const home = await getHtml(`/${localeEn}`);
+  const langOk = new RegExp(`lang=["']${localeEn}["']`, 'i').test(home.text);
+  if (home.res.status === 200 && langOk && /lang-switch|hreflang/i.test(home.text)) {
+    pass(`A/B home /${localeEn} has lang + switcher/hreflang`);
   } else {
-    fail(`home /en status=${home.res.status}`);
+    fail(`home /${localeEn} status=${home.res.status}`);
   }
 }
 
 {
-  const page = await getHtml('/en/products');
+  const page = await getHtml(`/${localeEn}/products`);
   const hasProduct = /Hydraulic Press HP-200|HP-200/i.test(page.text);
   const hasSwitcher = /zh-CN|简体中文/i.test(page.text);
   if (page.res.status === 200 && hasProduct && hasSwitcher) {
-    pass('A exit: /en/products shows real product + locale switcher');
+    pass(`A exit: /${localeEn}/products shows real product + locale switcher`);
   } else {
-    fail(`/en/products status=${page.res.status} product=${hasProduct} switcher=${hasSwitcher}`);
+    fail(`/${localeEn}/products status=${page.res.status} product=${hasProduct} switcher=${hasSwitcher}`);
   }
 }
 
 {
-  const page = await getHtml('/zh-CN/products');
-  const hasZh = /液压机|离心泵/.test(page.text);
-  const htmlLang = /lang=["']zh-CN["']/i.test(page.text);
+  const page = await getHtml(`/${localeZh}/products`);
+  const hasZh = /液压机|离心泵|液壓|離心/.test(page.text);
+  const htmlLang = new RegExp(`lang=["']${localeZh}["']`, 'i').test(page.text);
   if (page.res.status === 200 && hasZh && htmlLang) {
-    pass('B exit: /zh-CN/products locale + Chinese content');
+    pass(`B exit: /${localeZh}/products locale + Chinese content`);
   } else {
-    fail(`/zh-CN/products status=${page.res.status} zh=${hasZh} lang=${htmlLang}`);
+    fail(`/${localeZh}/products status=${page.res.status} zh=${hasZh} lang=${htmlLang}`);
   }
 }
 
 {
-  const page = await getHtml('/en/products/hydraulic-press-hp-200');
+  const page = await getHtml(`/${localeEn}/products/hydraulic-press-hp-200`);
   const hasImg = /<img[^>]+src=/i.test(page.text);
-  const hasBody = /HP-200|tonnage|footprint/i.test(page.text);
+  const hasBody = /HP-200|tonnage|footprint|changeovers|Power|kW/i.test(page.text);
   if (page.res.status === 200 && hasImg && hasBody) {
     pass('A exit: product detail has image + body');
   } else {
@@ -153,7 +156,7 @@ console.log(`accept:ab CMS=${cmsBase}${prefix} SITE=${siteBase}`);
   const redirected =
     page.res.status >= 300
     && page.res.status < 400
-    && /\/(en|zh-CN)\/products/.test(page.location);
+    && /\/(zh-CN|zh-TW|ja|en-US|en)\/products/.test(page.location);
   if (redirected) {
     pass(`B5 invalid locale → ${page.location}`);
   } else {
@@ -162,7 +165,7 @@ console.log(`accept:ab CMS=${cmsBase}${prefix} SITE=${siteBase}`);
 }
 
 {
-  const page = await getHtml('/en/about');
+  const page = await getHtml(`/${localeEn}/about`);
   if (page.res.status === 200 && /Demo Industrial|About/i.test(page.text)) {
     pass('about page renders company/content');
   } else {

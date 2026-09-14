@@ -17,12 +17,11 @@
 
 **本仓库目前是半成品脚手架，不能当作可用 B2B 模板。**
 
-- 阶段 A/B：**Mock 出口已勾选**（`accept:ab`）  
-- 阶段 C/D：**实现已落地**，以 `accept:cd` 勾选（页面深度 + 可观测 HTML purge）  
-- 阶段 E（SEO/导航）与真实 payload / CF CDN purge 仍待完成  
+- 阶段 A/B/C/D：**已对接真实 payload 种子数据并验收通过**（`accept:ab` / `accept:cd`）  
+- 阶段 E（SEO/导航）与生产 CF CDN purge / webhook 仍待完成  
 - 详细审查与排期见：**[docs/BUILD_PLAN.md](./docs/BUILD_PLAN.md)**  
 
-成熟度（生产模板）：约 **5/10**（Mock 可演示核心页与缓存失效；SEO/主题/真实 CDN 仍差）。
+成熟度（生产模板）：约 **6/10**（真实 CMS 可演示；SEO/主题/生产 CDN 仍差）。
 
 ---
 
@@ -56,10 +55,10 @@ npm install
 npm run sync:catalog
 npm run test
 
-# 终端 1：Mock CMS（契约对齐 /api/p，数据对齐 sites/b2b）
-npm run mock:cms
+# 终端 1：真实 CMS（cizhenyu_payload，已 seed）
+# cd D:\ycz_me\cizhenyu_payload && npm run dev
 
-# 终端 2：前端（.env 默认指向 http://127.0.0.1:8787）
+# 终端 2：前端（.env 默认指向 http://127.0.0.1:5173）
 npm run dev
 
 # 终端 3：出口验收
@@ -67,6 +66,8 @@ npm run accept:ab
 npm run accept:cd
 ```
 
-对接真实 `cizhenyu_payload`：只改 `.env` 的 `PUBLIC_CMS_API_BASE`，再跑验收脚本。  
-生产 CDN purge：配置 `CF_ZONE_ID` + `CF_API_TOKEN`（见 `docs/CACHE_STRATEGY.md`）。  
-注意真实后端语种可能是 `en-US`（非 `en`），需与 `sites/<site>/site.manifest.json` 的 `locales` 对齐。
+对接说明：
+
+- 默认对接本地 `cizhenyu_payload`（`:5173`）；语种与 CMS 一致：`zh-CN` / `zh-TW` / `ja` / `en-US`
+- 回退 Mock：`PUBLIC_CMS_API_BASE=http://127.0.0.1:8787` + `npm run mock:cms`
+- 生产 CDN purge：配置 `CF_ZONE_ID` + `CF_API_TOKEN`（见 `docs/CACHE_STRATEGY.md`）

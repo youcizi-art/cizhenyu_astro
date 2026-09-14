@@ -1,5 +1,5 @@
 import { loadSiteManifest, resolveRevalidateSeconds, type SiteManifest } from '../../modules/site';
-import { buildNavLinks, type NavLink } from '../../modules/nav';
+import { loadNavLinks, type NavLink } from '../../modules/nav';
 import { loadCompanyView, type CompanyView } from '../../modules/company';
 import {
   bootstrapI18n,
@@ -56,12 +56,15 @@ export async function loadPageChrome(options: {
     active: lang.code === currentLocale,
   }));
 
+  const nav = await loadNavLinks(site, currentLocale);
+  if (nav.warning) warnings.push(nav.warning);
+
   return {
     site,
     locale: currentLocale,
     siteName: companyResult.company.name,
     revalidateSeconds: resolveRevalidateSeconds(site),
-    navLinks: buildNavLinks(site, currentLocale),
+    navLinks: nav.links,
     company: companyResult.company,
     languages: i18n.languages,
     localeOptions,

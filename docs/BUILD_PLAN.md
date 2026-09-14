@@ -272,10 +272,10 @@ Sprint 4：阶段 D（缓存可验收）+ 阶段 E 基础 SEO
 
 | 阶段 | 状态 |
 | --- | --- |
-| A 止血联调 | **Mock 出口已勾选**（`accept:ab`）；真实 payload 待换地址复跑 |
-| B 多语言 | **Mock 出口已勾选**（双 locale 切换）；真实 CMS 需语种 code 对齐 |
-| C 页面深度 | **Mock 出口已勾选**（`accept:cd`）；分类路由延后 |
-| D 缓存可验收 | **本地 HTML purge 已勾选**（`accept:cd`）；生产 CF Zone Purge / CMS webhook 待配 |
+| A 止血联调 | **真实 CMS 联调**：`PUBLIC_CMS_API_BASE` → payload `:5173`；Mock 仍可回退 |
+| B 多语言 | **真实 CMS 语种对齐**：`zh-CN` / `zh-TW` / `ja` / `en-US` |
+| C 页面深度 | **Mock + 真实种子均可演示**；`accept:cd` |
+| D 缓存可验收 | **本地 HTML purge 已勾选**；生产 CF Zone Purge / CMS webhook 待配 |
 | E SEO/导航 | **未完成**（仅有基础 hreflang + meta description；无 canonical/OG/sitemap/CMS nav） |
 | F 主题多站 | **未完成** |
 | G 询盘/AI | 后置 |
@@ -285,7 +285,7 @@ Sprint 4：阶段 D（缓存可验收）+ 阶段 E 基础 SEO
 - [x] A1–A6 代码落地（错误策略 / 字段媒体 / 去重 / 路由 / smoke）
 - [x] Mock CMS 种子数据（`mock-cms/`，契约对齐 `/api/p` + `sites/b2b` 字段）
 - [x] `npm run accept:ab` 出口验收（产品列表有数据、详情有图+正文）
-- [ ] 真实 `cizhenyu_payload` 地址替换后复跑 `accept:ab`（仅改 `PUBLIC_CMS_API_BASE`）
+- [x] 真实 `cizhenyu_payload` 地址联调（`PUBLIC_CMS_API_BASE=http://127.0.0.1:5173`）
 
 ### 阶段 B checklist（实现侧）
 
@@ -295,7 +295,7 @@ Sprint 4：阶段 D（缓存可验收）+ 阶段 E 基础 SEO
 - [x] B4 导航与基础 UI 文案字典（`t()`）  
 - [x] B5 非法 locale → 302 默认语种路径  
 - [x] 出口验收（Mock）：两个语种来回切换无报错，URL 与内容 locale 一致（`npm run accept:ab`）  
-- [ ] 出口验收（真实 CMS）：语种 code 与 `site.manifest.locales` 对齐后复跑  
+- [x] 出口验收（真实 CMS）：语种 `zh-CN`/`zh-TW`/`ja`/`en-US` 对齐后 `accept:ab` 通过  
 
 ### 阶段 C checklist（实现侧）
 

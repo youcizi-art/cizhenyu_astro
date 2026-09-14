@@ -1,4 +1,5 @@
 import { entityData, listEntities, type CmsEntity, type CmsQuery } from '../cms';
+import { resolveReferenceCards, type ResolvedReferenceCard } from '../reference';
 
 export type ContentBlock = {
   id: string;
@@ -13,10 +14,18 @@ export type ContentBlock = {
   body: string;
   ctaLabel: string;
   ctaUrl: string;
+  /** 原始 target_reference */
+  targetReference: unknown;
+  /** 解析后的引用卡片 */
+  references: ResolvedReferenceCard[];
 };
 
-function toBlock(row: CmsEntity): ContentBlock {
+async function toBlock(row: CmsEntity, locale?: string): Promise<ContentBlock> {
   const data = entityData(row);
+  const targetReference = data.target_reference ?? null;
+  const references = locale
+    ? await resolveReferenceCards(targetReference, locale)
+    : [];
   return {
     id: String(row.id),
     name: String(data.name || ''),
@@ -30,12 +39,15 @@ function toBlock(row: CmsEntity): ContentBlock {
     body: String(data.content || data.body || ''),
     ctaLabel: String(data.link_label || data.cta_label || data.button_text || ''),
     ctaUrl: String(data.link_url || data.cta_url || data.button_url || data.link || ''),
+    targetReference,
+    references,
   };
 }
 
 export async function listContentBlocks(query?: CmsQuery): Promise<ContentBlock[]> {
+  const locale = query?.locale ? String(query.locale) : undefined;
   const result = await listEntities('contentBlock', query);
-  return result.list.map(toBlock);
+  return Promise.all(result.list.map((row) => toBlock(row, locale)));
 }
 
 export async function listBlocksByPlacement(placement: string, query?: CmsQuery): Promise<ContentBlock[]> {

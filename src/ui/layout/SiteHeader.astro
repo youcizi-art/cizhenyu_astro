@@ -14,9 +14,30 @@ const { siteName, links, localeOptions = [], languageLabel = 'Language' } = Astr
   <div class="wrap">
     <strong><a href={links[0]?.href || '/'}>{siteName}</a></strong>
     <div class="header-right">
-      <nav>
+      <nav class="site-nav">
         {links.map((link) => (
-          <a href={link.href}>{link.label}</a>
+          link.children?.length ? (
+            <div class="nav-item has-dropdown">
+              <a href={link.href} target={link.openInNewTab ? '_blank' : undefined} rel={link.openInNewTab ? 'noopener noreferrer' : undefined}>
+                {link.label}
+              </a>
+              <div class="nav-dropdown" role="menu">
+                {link.children.map((child) => (
+                  <a class="nav-dropdown-item" href={child.href} role="menuitem">
+                    {child.coverUrl ? <img src={child.coverUrl} alt="" loading="lazy" /> : null}
+                    <span>
+                      <strong>{child.label}</strong>
+                      {child.summary ? <small>{child.summary}</small> : null}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a href={link.href} target={link.openInNewTab ? '_blank' : undefined} rel={link.openInNewTab ? 'noopener noreferrer' : undefined}>
+              {link.label}
+            </a>
+          )
         ))}
       </nav>
       <LanguageSwitcher options={localeOptions} label={languageLabel} />
