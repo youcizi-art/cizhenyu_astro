@@ -1,5 +1,8 @@
 ---
 import type { NavLink } from '@/modules/nav';
+import type { CompanyView } from '@/modules/company';
+import { localePath } from '@/modules/cms';
+import { t } from '@/modules/i18n';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 
 interface Props {
@@ -7,12 +10,40 @@ interface Props {
   links: NavLink[];
   localeOptions?: Array<{ code: string; name: string; href: string; active: boolean }>;
   languageLabel?: string;
+  company?: CompanyView;
+  locale?: string;
+  showContactCta?: boolean;
 }
-const { siteName, links, localeOptions = [], languageLabel = 'Language' } = Astro.props;
+const {
+  siteName,
+  links,
+  localeOptions = [],
+  languageLabel = 'Language',
+  company,
+  locale = '',
+  showContactCta = true,
+} = Astro.props;
+
+const homeHref = links[0]?.href || (locale ? localePath(locale, '/') : '/');
+const contactHref = locale ? localePath(locale, '/contact') : '/contact';
+const contactLabel = t(locale || 'en', 'contact');
+const email = String(company?.email || '').trim();
+const phone = String(company?.phone || '').trim();
+const showTopbar = Boolean(email || phone);
 ---
+{showTopbar ? (
+  <div class="site-topbar">
+    <div class="wrap">
+      <div class="topbar-contacts">
+        {email ? <a href={`mailto:${email}`}>{email}</a> : null}
+        {phone ? <a href={`tel:${phone.replace(/\s+/g, '')}`}>{phone}</a> : null}
+      </div>
+    </div>
+  </div>
+) : null}
 <header class="site">
   <div class="wrap">
-    <strong><a href={links[0]?.href || '/'}>{siteName}</a></strong>
+    <strong class="brand-mark"><a href={homeHref}>{siteName}</a></strong>
     <div class="header-right">
       <nav class="site-nav">
         {links.map((link) => (
@@ -41,6 +72,9 @@ const { siteName, links, localeOptions = [], languageLabel = 'Language' } = Astr
         ))}
       </nav>
       <LanguageSwitcher options={localeOptions} label={languageLabel} />
+      {showContactCta ? (
+        <a class="header-cta" href={contactHref}>{contactLabel}</a>
+      ) : null}
     </div>
   </div>
 </header>

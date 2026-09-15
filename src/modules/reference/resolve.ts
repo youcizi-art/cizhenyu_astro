@@ -40,13 +40,13 @@ function entitySlug(data: Record<string, unknown>, fallbackId: string) {
 }
 
 const COLLECTION_ROOT_LABEL: Record<string, string> = {
-  b2b_product: '全部产品',
-  b2b_article: '全部文章',
-  b2b_case_study: '全部案例',
-  b2b_industry: '全部方案',
-  b2b_resource: '全部资料',
-  b2b_faq: '全部问答',
-  b2b_page: '全部页面',
+  b2b_product: 'All products',
+  b2b_article: 'All articles',
+  b2b_case_study: 'All case studies',
+  b2b_industry: 'All solutions',
+  b2b_resource: 'All resources',
+  b2b_faq: 'All FAQs',
+  b2b_page: 'All pages',
 };
 
 function collectionRootTitle(item: ReferenceItem, collectionSlug: string, fallback?: string) {

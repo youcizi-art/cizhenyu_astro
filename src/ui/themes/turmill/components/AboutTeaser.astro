@@ -1,0 +1,42 @@
+---
+interface Props {
+  companyName?: string;
+  slogan?: string;
+  summary?: string;
+  logoUrl?: string;
+  aboutHref?: string;
+  aboutLabel?: string;
+}
+const {
+  companyName = '',
+  slogan = '',
+  summary = '',
+  logoUrl = '',
+  aboutHref = '',
+  aboutLabel = 'About us',
+} = Astro.props;
+const hasContent = Boolean(companyName || summary || slogan);
+---
+{hasContent ? (
+  <section class="tm-section tm-section-white" id="about">
+    <div class="tm-title-wrap">
+      <h2 class="tm-title-main">{companyName || aboutLabel}</h2>
+      {slogan ? <p class="tm-title-desc">{slogan}</p> : null}
+    </div>
+    <div class="tm-container tm-about-grid">
+      <div class="tm-about-copy">
+        {summary ? <p style="margin:0">{summary}</p> : null}
+        {aboutHref ? (
+          <p style="margin-top:1.5rem">
+            <a class="tm-btn tm-btn-md tm-btn-primary" href={aboutHref}>{aboutLabel}</a>
+          </p>
+        ) : null}
+      </div>
+      <aside class="tm-about-panel">
+        {logoUrl ? <img src={logoUrl} alt={companyName} /> : null}
+        <strong style="display:block;font-family:var(--font-display);font-size:1.25rem;color:#1f2b23">{companyName}</strong>
+        {slogan ? <p style="margin:0.5rem 0 0;color:#55665b;font-size:0.95rem">{slogan}</p> : null}
+      </aside>
+    </div>
+  </section>
+) : null}

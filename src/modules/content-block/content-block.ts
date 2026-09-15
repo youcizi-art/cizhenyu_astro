@@ -1,4 +1,5 @@
 import { entityData, listEntities, type CmsEntity, type CmsQuery } from '../cms';
+import { resolveMediaUrl } from '../media';
 import { resolveReferenceCards, type ResolvedReferenceCard } from '../reference';
 
 export type ContentBlock = {
@@ -14,6 +15,8 @@ export type ContentBlock = {
   body: string;
   ctaLabel: string;
   ctaUrl: string;
+  imageUrl: string;
+  backgroundImageUrl: string;
   /** 原始 target_reference */
   targetReference: unknown;
   /** 解析后的引用卡片 */
@@ -39,6 +42,8 @@ async function toBlock(row: CmsEntity, locale?: string): Promise<ContentBlock> {
     body: String(data.content || data.body || ''),
     ctaLabel: String(data.link_label || data.cta_label || data.button_text || ''),
     ctaUrl: String(data.link_url || data.cta_url || data.button_url || data.link || ''),
+    imageUrl: resolveMediaUrl(data.image || data.cover),
+    backgroundImageUrl: resolveMediaUrl(data.background_image),
     targetReference,
     references,
   };

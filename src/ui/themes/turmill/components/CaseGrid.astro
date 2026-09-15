@@ -1,0 +1,37 @@
+---
+interface CaseItem {
+  title: string;
+  href: string;
+  summary?: string;
+  coverUrl?: string;
+  industry?: string;
+}
+interface Props {
+  title?: string;
+  cases?: CaseItem[];
+}
+const { title = 'Case Studies', cases = [] } = Astro.props;
+---
+{cases.length > 0 ? (
+  <section class="tm-section tm-section-mint">
+    {title ? (
+      <div class="tm-title-wrap">
+        <h2 class="tm-title-main">{title}</h2>
+      </div>
+    ) : null}
+    <div class="tm-container tm-grid-3">
+      {cases.map((item) => (
+        <a class="tm-case-card tm-card-hover" href={item.href}>
+          <div class="tm-case-media">
+            {item.coverUrl ? <div class="tm-case-media-bg" style={`background-image:url(${item.coverUrl})`} /> : null}
+            {item.industry ? <span class="tm-case-tag">{item.industry}</span> : null}
+          </div>
+          <div class="tm-case-body">
+            <h3>{item.title}</h3>
+            {item.summary ? <p style="margin:0;color:#55665b;font-size:0.95rem">{item.summary}</p> : null}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+) : null}

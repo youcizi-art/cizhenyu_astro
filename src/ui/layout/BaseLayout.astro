@@ -1,5 +1,11 @@
 ---
 import SeoHead from './SeoHead.astro';
+import { loadSiteManifest } from '@/modules/site';
+import { resolveTheme } from '@/ui/themes';
+import '@/ui/themes/default/tokens.css';
+import '@/ui/themes/turmill/tokens.css';
+import '@/ui/themes/turmill/theme.css';
+import '@/ui/layout/chrome.css';
 
 interface Props {
   title: string;
@@ -13,6 +19,7 @@ interface Props {
   ogUrl?: string;
   jsonLd?: Record<string, unknown> | null;
 }
+
 const {
   title,
   description = '',
@@ -25,13 +32,32 @@ const {
   ogUrl = '',
   jsonLd = null,
 } = Astro.props;
+
+const site = loadSiteManifest();
+const { themeId, primaryColor } = resolveTheme({
+  theme: site.theme,
+  primaryColor: site.brand?.primaryColor,
+});
+
+const rootStyle = primaryColor ? `--accent: ${primaryColor}` : undefined;
+const loadBrandFonts = themeId === 'turmill';
 ---
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-theme={themeId} data-site={site.siteKey} style={rootStyle}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    {loadBrandFonts ? (
+      <>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Yeseva+One&display=swap"
+          rel="stylesheet"
+        />
+      </>
+    ) : null}
     <SeoHead
       title={title}
       description={description}
@@ -43,170 +69,6 @@ const {
       alternates={alternates}
       jsonLd={jsonLd}
     />
-    <style is:global>
-      :root {
-        color-scheme: light;
-        --ink: #14213d;
-        --muted: #5c6b7a;
-        --line: #d9e2ec;
-        --bg: #f7f9fc;
-        --accent: #0b3d91;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-        color: var(--ink);
-        background: var(--bg);
-        line-height: 1.5;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-      a { color: var(--accent); text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      .wrap { max-width: 960px; margin: 0 auto; padding: 1.5rem; width: 100%; }
-      main.wrap { flex: 1; }
-      header.site {
-        border-bottom: 1px solid var(--line);
-        background: #fff;
-      }
-      header.site .wrap {
-        display: flex;
-        gap: 1.25rem;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-      .header-right {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      nav.site-nav { display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center; }
-      .nav-item { position: relative; }
-      .nav-item > a { display: inline-block; padding: 0.25rem 0; }
-      .nav-dropdown {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 240px;
-        max-width: 360px;
-        max-height: 70vh;
-        overflow: auto;
-        background: #fff;
-        border: 1px solid var(--line);
-        box-shadow: 0 8px 24px rgba(20, 33, 61, 0.08);
-        padding: 0.35rem;
-        z-index: 40;
-      }
-      .nav-item.has-dropdown:hover > .nav-dropdown,
-      .nav-item.has-dropdown:focus-within > .nav-dropdown {
-        display: block;
-      }
-      .nav-dropdown-item {
-        display: flex;
-        gap: 0.65rem;
-        align-items: flex-start;
-        padding: 0.55rem 0.65rem;
-        color: var(--ink);
-        border-radius: 4px;
-      }
-      .nav-dropdown-item:hover { background: #f0f4fa; text-decoration: none; }
-      .nav-dropdown-item img {
-        width: 44px;
-        height: 44px;
-        object-fit: cover;
-        border-radius: 4px;
-        background: #eef2f7;
-        flex: 0 0 auto;
-      }
-      .nav-dropdown-item span { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
-      .nav-dropdown-item strong { font-size: 0.92rem; font-weight: 600; }
-      .nav-dropdown-item small {
-        color: var(--muted);
-        font-size: 0.78rem;
-        line-height: 1.35;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-      .lang-switch { display: flex; gap: 0.5rem; align-items: center; font-size: 0.9rem; }
-      .lang-active { font-weight: 700; color: var(--ink); }
-      .site-footer {
-        border-top: 1px solid var(--line);
-        background: #fff;
-        margin-top: 2rem;
-      }
-      .footer-meta { margin-top: 0.75rem; }
-      .muted { color: var(--muted); }
-      .card-list { display: grid; gap: 1rem; margin-top: 1.25rem; }
-      .card {
-        background: #fff;
-        border: 1px solid var(--line);
-        padding: 1rem 1.25rem;
-      }
-      .card-media {
-        width: 100%;
-        max-height: 220px;
-        object-fit: cover;
-        border-radius: 4px;
-        margin-bottom: 0.75rem;
-        background: #eef2f7;
-      }
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 0.75rem;
-        margin: 1rem 0;
-      }
-      .gallery img {
-        width: 100%;
-        height: 120px;
-        object-fit: cover;
-        border: 1px solid var(--line);
-        background: #fff;
-      }
-      .hero {
-        background: #fff;
-        border: 1px solid var(--line);
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-      }
-      .hero .eyebrow {
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        font-size: 0.85rem;
-      }
-      .section { margin-top: 2rem; }
-      .pager { display: flex; gap: 1rem; margin-top: 1.25rem; align-items: center; }
-      .alert { margin: 1rem 0; padding: 0.75rem 1rem; border: 1px solid; }
-      .alert p { margin: 0.25rem 0; }
-      .alert-error { background: #fff4f4; border-color: #f5c2c2; color: #8a1f1f; }
-      .alert-warn { background: #fff8e8; border-color: #f0d48a; color: #7a5b00; }
-      .prose :global(p) { margin: 0.75rem 0; }
-      .prose :global(img) { max-width: 100%; height: auto; }
-      .faq-item { margin-bottom: 1rem; }
-      .faq-item summary { cursor: pointer; font-weight: 600; }
-      table.specs {
-        width: 100%;
-        border-collapse: collapse;
-        background: #fff;
-        border: 1px solid var(--line);
-      }
-      table.specs th,
-      table.specs td {
-        text-align: left;
-        padding: 0.6rem 0.75rem;
-        border-bottom: 1px solid var(--line);
-        vertical-align: top;
-      }
-      table.specs th { width: 32%; color: var(--muted); font-weight: 600; }
-    </style>
   </head>
   <body>
     <slot />

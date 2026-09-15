@@ -1,0 +1,38 @@
+---
+import type { CompanyView } from '@/modules/company';
+import type { NavLink } from '@/modules/nav';
+
+interface Props {
+  company: CompanyView;
+  links?: NavLink[];
+  quickLinksLabel?: string;
+}
+const { company, links = [], quickLinksLabel = 'Quick Links' } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="tm-footer">
+  <div class="tm-container tm-footer-grid">
+    <div class="tm-footer-brand">
+      <div class="tm-brand">{company.name}</div>
+      {company.slogan ? <p>{company.slogan}</p> : null}
+      <div class="tm-footer-meta">
+        {company.email ? <a href={`mailto:${company.email}`}>{company.email}</a> : null}
+        {company.phone ? <a href={`tel:${company.phone.replace(/\s+/g, '')}`}>{company.phone}</a> : null}
+        {company.address ? <span>{company.address}</span> : null}
+      </div>
+    </div>
+    {links.length ? (
+      <div class="tm-footer-links">
+        <h4>{quickLinksLabel}</h4>
+        <ul>
+          {links.slice(0, 8).map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    ) : null}
+  </div>
+  <div class="tm-footer-copy">
+    <div class="tm-container">© {year} {company.name || 'Turmill'}. All rights reserved.</div>
+  </div>
+</footer>

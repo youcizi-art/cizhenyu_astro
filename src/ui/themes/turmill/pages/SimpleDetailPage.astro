@@ -1,0 +1,55 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+
+interface Props {
+  title: string;
+  summary?: string;
+  content?: string;
+  coverUrl?: string;
+  backHref: string;
+  backLabel?: string;
+  homeHref: string;
+  homeLabel?: string;
+  listLabel?: string;
+  error?: string;
+  warnings?: string[];
+}
+const {
+  title,
+  summary = '',
+  content = '',
+  coverUrl = '',
+  backHref,
+  backLabel = '← Back',
+  homeHref,
+  homeLabel = 'Home',
+  listLabel = 'List',
+  error,
+  warnings = [],
+} = Astro.props;
+---
+<PageBanner
+  title={title}
+  summary={summary}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: listLabel, href: backHref },
+    { label: title },
+  ]}
+/>
+<section class="tm-section tm-section-white">
+  <div class="tm-container" style="max-width:52rem">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {coverUrl ? (
+      <div class="tm-case-hero-img" style="margin-bottom:2rem">
+        <img src={coverUrl} alt={title} />
+      </div>
+    ) : null}
+    {content ? <div class="tm-prose" set:html={content} /> : null}
+    <p style="margin-top:2rem">
+      <a class="tm-btn tm-btn-md tm-btn-primary-line" href={backHref}>{backLabel}</a>
+    </p>
+  </div>
+</section>

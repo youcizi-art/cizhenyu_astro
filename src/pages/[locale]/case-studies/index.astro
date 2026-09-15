@@ -4,10 +4,14 @@ import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import Pagination from '@/ui/blocks/Pagination.astro';
+import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
+import TurmillCaseStudyListPage from '@/ui/themes/turmill/pages/CaseStudyListPage.astro';
 import { loadCaseStudyListPage } from '@/workflows/case-studies/load-case-study-list';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { t } from '@/modules/i18n';
+import { localePath } from '@/modules/cms';
+import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -20,9 +24,13 @@ const data = await loadCaseStudyListPage({
 if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/case-studies`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
+const turmill = useTurmillShell(data.site.theme);
+const shell = buildTurmillShellProps(data);
+const title = t(data.locale, 'caseStudies');
+const basePath = `/${data.locale}/case-studies`;
 ---
 <BaseLayout
-  title={`${t(data.locale, 'caseStudies')} · ${data.siteName}`}
+  title={`${title} · ${data.siteName}`}
   description={data.company.summary}
   lang={data.locale}
   alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
@@ -30,25 +38,46 @@ if (!data.enabled) return Astro.rewrite('/404');
   robots="index,follow"
   ogUrl={Astro.url.pathname}
 >
-  <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel} />
-  <main class="wrap">
-    <h1>{t(data.locale, 'caseStudies')}</h1>
-    <AlertBanner messages={data.error ? [data.error] : []} />
-    <AlertBanner messages={data.warnings} tone="warn" />
-    <div class="card-list">
-      {data.items.map((item) => (
-        <article class="card">
-          {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
-          <h2><a href={item.href}>{item.title}</a></h2>
-          {(item.clientName || item.industry) ? (
-            <p class="muted">{[item.clientName, item.industry].filter(Boolean).join(' · ')}</p>
-          ) : null}
-          {item.summary ? <p>{item.summary}</p> : null}
-        </article>
-      ))}
-    </div>
-    {!data.error && !data.items.length ? <p class="muted">暂无案例。</p> : null}
-    {!data.error ? <Pagination pages={data.pages} basePath={`/${data.locale}/case-studies`} /> : null}
-  </main>
-  <SiteFooter company={data.company} />
+  {turmill ? (
+    <TurmillPageShell {...shell}>
+      <TurmillCaseStudyListPage
+        title={title}
+        items={data.items}
+        pages={data.pages}
+        basePath={basePath}
+        homeHref={localePath(data.locale, '/')}
+        homeLabel={t(data.locale, 'home')}
+        emptyText={data.locale.startsWith('zh') ? '暂无案例。' : 'No case studies yet.'}
+        error={data.error}
+        warnings={data.warnings}
+      />
+    </TurmillPageShell>
+  ) : (
+    <>
+      <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel}
+        company={data.company}
+        locale={data.locale}
+      />
+      <main class="wrap">
+        <h1>{title}</h1>
+        <AlertBanner messages={data.error ? [data.error] : []} />
+        <AlertBanner messages={data.warnings} tone="warn" />
+        <div class="card-list">
+          {data.items.map((item) => (
+            <article class="card">
+              {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
+              <h2><a href={item.href}>{item.title}</a></h2>
+              {(item.clientName || item.industry) ? (
+                <p class="muted">{[item.clientName, item.industry].filter(Boolean).join(' · ')}</p>
+              ) : null}
+              {item.summary ? <p>{item.summary}</p> : null}
+            </article>
+          ))}
+        </div>
+        {!data.error && !data.items.length ? <p class="muted">暂无案例。</p> : null}
+        {!data.error ? <Pagination pages={data.pages} basePath={basePath} /> : null}
+      </main>
+      <SiteFooter company={data.company} />
+    </>
+  )}
 </BaseLayout>

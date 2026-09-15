@@ -1,0 +1,21 @@
+---
+interface Props {
+  title?: string;
+  actionLabel?: string;
+  actionHref?: string;
+  backgroundImage?: string;
+}
+const {
+  title = 'Ready to make pet care easier?',
+  actionLabel = 'Get Appointment',
+  actionHref = '/contact',
+  backgroundImage = 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1600&h=600&q=80',
+} = Astro.props;
+---
+<section class="tm-cta" style={`background-image:url('${backgroundImage}')`}>
+  <div class="tm-cta-overlay" />
+  <div class="tm-container tm-cta-inner">
+    <h2>{title}</h2>
+    <a class="tm-btn tm-btn-lg tm-btn-primary" href={actionHref}>{actionLabel}</a>
+  </div>
+</section>

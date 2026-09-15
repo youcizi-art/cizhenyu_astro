@@ -3,11 +3,15 @@ import BaseLayout from '@/ui/layout/BaseLayout.astro';
 import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
+import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
+import TurmillSimpleDetailPage from '@/ui/themes/turmill/pages/SimpleDetailPage.astro';
 import { loadResourceDetailPage } from '@/workflows/resources/load-resource-detail';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { t } from '@/modules/i18n';
+import { localePath } from '@/modules/cms';
 import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
+import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -29,32 +33,61 @@ const jsonLd = item
       company: data.company,
     })
   : null;
+const turmill = useTurmillShell(data.site.theme);
+const shell = buildTurmillShellProps(data);
+const listHref = localePath(data.locale, '/resources');
+const listLabel = t(data.locale, 'resources');
+const downloadHtml = item?.downloadUrl
+  ? `<p><a class="tm-btn tm-btn-md tm-btn-primary" href="${item.downloadUrl}" download target="_blank" rel="noopener">Download${item.fileFormat ? ` (${item.fileFormat})` : ''}</a></p>`
+  : '';
+const content = [item?.summary ? `<p>${item.summary}</p>` : '', downloadHtml, item?.content || ''].filter(Boolean).join('');
 ---
 <BaseLayout
-  title={`${item?.seoTitle || item?.title || t(data.locale, 'resources')} · ${data.siteName}`}
+  title={`${item?.seoTitle || item?.title || listLabel} · ${data.siteName}`}
   description={item?.seoDescription || item?.summary || ''}
   lang={data.locale}
   alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
   {...seoProps}
   jsonLd={jsonLd}
 >
-  <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel} />
-  <main class="wrap">
-    <p><a href={`/${data.locale}/resources`}>← {t(data.locale, 'resources')}</a></p>
-    <AlertBanner messages={data.error ? [data.error] : []} />
-    <AlertBanner messages={data.warnings} tone="warn" />
-    {item ? (
-      <>
-        <h1>{item.title}</h1>
-        <p class="muted">{[item.resourceType, item.fileFormat].filter(Boolean).join(' · ')}</p>
-        {item.coverUrl ? <p><img class="card-media" src={item.coverUrl} alt={item.title} /></p> : null}
-        {item.summary ? <p>{item.summary}</p> : null}
-        {item.downloadUrl ? (
-          <p><a href={item.downloadUrl} download target="_blank" rel="noopener">Download{item.fileFormat ? ` (${item.fileFormat})` : ''}</a></p>
+  {turmill ? (
+    <TurmillPageShell {...shell}>
+      <TurmillSimpleDetailPage
+        title={item?.title || listLabel}
+        summary={[item?.resourceType, item?.fileFormat].filter(Boolean).join(' · ')}
+        content={content}
+        coverUrl={item?.coverUrl}
+        backHref={listHref}
+        backLabel={`← ${listLabel}`}
+        homeHref={localePath(data.locale, '/')}
+        homeLabel={t(data.locale, 'home')}
+        listLabel={listLabel}
+        error={data.error}
+        warnings={data.warnings}
+      />
+    </TurmillPageShell>
+  ) : (
+    <>
+      <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel}
+        company={data.company} locale={data.locale} />
+      <main class="wrap">
+        <p><a href={listHref}>← {listLabel}</a></p>
+        <AlertBanner messages={data.error ? [data.error] : []} />
+        <AlertBanner messages={data.warnings} tone="warn" />
+        {item ? (
+          <>
+            <h1>{item.title}</h1>
+            <p class="muted">{[item.resourceType, item.fileFormat].filter(Boolean).join(' · ')}</p>
+            {item.coverUrl ? <p><img class="card-media" src={item.coverUrl} alt={item.title} /></p> : null}
+            {item.summary ? <p>{item.summary}</p> : null}
+            {item.downloadUrl ? (
+              <p><a href={item.downloadUrl} download target="_blank" rel="noopener">Download{item.fileFormat ? ` (${item.fileFormat})` : ''}</a></p>
+            ) : null}
+            {item.content ? <div class="prose" set:html={item.content} /> : null}
+          </>
         ) : null}
-        {item.content ? <div class="prose" set:html={item.content} /> : null}
-      </>
-    ) : null}
-  </main>
-  <SiteFooter company={data.company} />
+      </main>
+      <SiteFooter company={data.company} />
+    </>
+  )}
 </BaseLayout>

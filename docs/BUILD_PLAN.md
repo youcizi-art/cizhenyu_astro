@@ -275,7 +275,7 @@ Sprint 4：阶段 D（缓存可验收）+ 阶段 E 基础 SEO
 | C 页面深度 | **Mock + 真实种子均可演示**；`accept:cd` |
 | D 缓存可验收 | **本地 HTML purge + TTL 已勾选**；DEV 默认 BYPASS；生产 CF Zone Purge 待配；payload → revalidate webhook 已接 env |
 | E SEO/导航 | **站内 SEO 已接**（SeoHead / canonical / OG / hreflang+x-default / JSON-LD / sitemap / robots）；IndexNow/GSC/外链等运维项后置 |
-| F 主题多站 | **未完成** |
+| F 主题多站 | **token 主题已接**：`default` + `turmill`；`sites/turmill` 可 `SITE_KEY` 切换；自动发现/校验脚本仍后置 |
 | G 询盘/AI | 后置 |
 
 ### 阶段 A checklist（实现侧）
@@ -325,12 +325,22 @@ Sprint 4：阶段 D（缓存可验收）+ 阶段 E 基础 SEO
 - [x] 404 页（独立路由体验；`noindex`）  
 - [ ] IndexNow / GSC / 外链 / 询盘漏斗（运维与后置，本阶段不做）  
 
+### 阶段 F checklist（实现侧）
+
+- [x] `ui/themes/default` + `ui/themes/turmill` token 皮肤  
+- [x] `manifest.theme` → `data-theme`；`brand.primaryColor` → `--accent`  
+- [x] 客户站 `sites/turmill` 注册；`SITE_KEY` 切换  
+- [x] Header 顶栏 / CTA、Footer、Home hero 气质对齐 Turmill  
+- [ ] `sites/*` 自动发现 + 校验脚本  
+- [ ] 完整第二套营销页壳（Stage G）  
+
 ---
 
 ## 10. 下一步
 
-1. 生产 `PUBLIC_SITE_URL` + `SITE_REVALIDATE_URL` 对齐后验收 revalidate  
+1. 生产 Pages：`SITE_KEY=turmill` + `PUBLIC_SITE_URL=https://www.turmill.com`，CMS `SITE_REVALIDATE_*` 对齐  
 2. 可选：生产配置 `CF_ZONE_ID`/`CF_API_TOKEN` 后验证 CDN purge  
-3. 分类路由按需再开  
+3. 替换 CMS 测试数据为 Turmill 真实产品/文章（仅 seed/运营，不改 Worker 架构）  
+4. 分类路由按需再开  
 
 不接受「又加了一批路由文件」作为进度。

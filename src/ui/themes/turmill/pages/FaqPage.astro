@@ -1,0 +1,49 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+interface Props {
+  title: string;
+  items: FaqItem[];
+  homeHref: string;
+  homeLabel?: string;
+  emptyText?: string;
+  error?: string;
+  warnings?: string[];
+}
+const {
+  title,
+  items,
+  homeHref,
+  homeLabel = 'Home',
+  emptyText = 'No FAQs yet.',
+  error,
+  warnings = [],
+} = Astro.props;
+---
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+<section class="tm-section tm-section-white">
+  <div class="tm-container" style="max-width:48rem">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {!error && !items.length ? <p class="tm-prose">{emptyText}</p> : null}
+    <div class="tm-faq-list">
+      {items.map((item) => (
+        <details class="tm-faq-item">
+          <summary>{item.question}</summary>
+          <div class="tm-prose" set:html={item.answer} />
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

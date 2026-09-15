@@ -1,0 +1,26 @@
+/* Turmill — forest green / oat mint, aligned with turmill.com */
+[data-theme='turmill'] {
+  color-scheme: light;
+  --ink: #1f2b23;
+  --muted: #55665b;
+  --line: #e2ebe5;
+  --bg: #fafcfa;
+  --bg-subtle: #ebf5ef;
+  --surface: #ffffff;
+  --accent: #4d8f65;
+  --accent-hover: #3f7853;
+  --accent-ink: #ffffff;
+  --header-bg: #ffffff;
+  --topbar-bg: #1f2b23;
+  --topbar-fg: #d7e4db;
+  --footer-bg: #1f2b23;
+  --footer-fg: #f4faf6;
+  --footer-muted: #a8b9af;
+  --hero-bg: linear-gradient(145deg, #ebf5ef 0%, #fafcfa 48%, #e7fbec 100%);
+  --hero-border: transparent;
+  --radius: 12px;
+  --font-sans: 'Outfit', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-display: 'Yeseva One', 'Outfit', Georgia, serif;
+  --wrap-max: 1120px;
+  --shadow-nav: 0 12px 28px rgba(31, 43, 35, 0.1);
+}

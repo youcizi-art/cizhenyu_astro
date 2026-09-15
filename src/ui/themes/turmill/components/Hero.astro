@@ -1,0 +1,38 @@
+---
+interface Props {
+  title?: string;
+  summary?: string;
+  image?: string;
+  eyebrow?: string;
+  actionUrl?: string;
+  actionLabel?: string;
+}
+const {
+  title = '',
+  summary = '',
+  image = '',
+  eyebrow = '',
+  actionUrl = '',
+  actionLabel = 'Learn More',
+} = Astro.props;
+const hasContent = Boolean(title || summary || image);
+---
+{hasContent ? (
+  <section class="tm-hero">
+    <div class="tm-container tm-hero-inner">
+      {image ? (
+        <div class="tm-hero-media">
+          <img src={image} alt={title || 'Hero'} width="720" height="540" fetchpriority="high" decoding="async" />
+        </div>
+      ) : null}
+      <div class="tm-hero-copy">
+        {eyebrow ? <div class="tm-hero-eyebrow">{eyebrow}</div> : null}
+        {title ? <h1>{title}</h1> : null}
+        {summary ? <p class="tm-hero-summary">{summary}</p> : null}
+        {actionUrl ? (
+          <a class="tm-btn tm-btn-lg tm-btn-primary" href={actionUrl}>{actionLabel}</a>
+        ) : null}
+      </div>
+    </div>
+  </section>
+) : null}

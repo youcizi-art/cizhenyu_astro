@@ -3,10 +3,13 @@ import BaseLayout from '@/ui/layout/BaseLayout.astro';
 import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
+import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
+import TurmillAboutPage from '@/ui/themes/turmill/pages/AboutPage.astro';
 import { loadAboutPage } from '@/workflows/pages/load-static-pages';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
+import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -35,55 +38,84 @@ const jsonLd = pageJsonLd(data.page?.seo || {
   siteName: data.siteName,
   company: data.company,
 });
+const turmill = useTurmillShell(data.site.theme);
+const shell = buildTurmillShellProps(data);
+const pageTitle = data.page?.title || data.labels.about;
+const relatedTitle = data.locale.startsWith('zh') ? '相关内容' : 'Related';
+const emptyHint = data.locale.startsWith('zh')
+  ? '请在 CMS 创建 slug 为 about 的独立页面，或完善公司信息。'
+  : 'Create an about page in CMS or fill company profile.';
 ---
 <BaseLayout
-  title={`${data.page?.seoTitle || data.page?.title || data.labels.about} · ${data.siteName}`}
+  title={`${data.page?.seoTitle || pageTitle} · ${data.siteName}`}
   description={data.page?.seoDescription || data.page?.summary || data.company.summary}
   lang={data.locale}
   alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
   {...seoProps}
   jsonLd={jsonLd}
 >
-  <SiteHeader
-    siteName={data.siteName}
-    links={data.navLinks}
-    localeOptions={data.localeOptions}
-    languageLabel={data.languageLabel}
-  />
-  <main class="wrap">
-    <AlertBanner messages={data.error ? [data.error] : []} />
-    <AlertBanner messages={data.warnings} tone="warn" />
-    <h1>{data.page?.title || data.labels.about}</h1>
-    {data.company.logoUrl ? (
-      <p><img src={data.company.logoUrl} alt={data.siteName} style="max-height:72px" /></p>
-    ) : null}
-    {data.company.slogan ? <p class="muted">{data.company.slogan}</p> : null}
-    {data.company.summary ? <p>{data.company.summary}</p> : null}
-    <section class="section card">
-      {data.company.address ? <p>{data.company.address}</p> : null}
-      {data.company.phone ? <p>{data.company.phone}</p> : null}
-      {data.company.email ? <p><a href={`mailto:${data.company.email}`}>{data.company.email}</a></p> : null}
-      {data.company.website ? <p><a href={data.company.website}>{data.company.website}</a></p> : null}
-    </section>
-    {data.page?.content ? <div class="section prose" set:html={data.page.content} /> : null}
-    {data.page?.references?.length ? (
-      <section class="section">
-        <h2>相关内容</h2>
-        <div class="card-list">
-          {data.page.references.map((item) => (
-            <article class="card">
-              {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
-              <h3><a href={item.href}>{item.title}</a></h3>
-              {item.subtitle ? <p class="muted">{item.subtitle}</p> : null}
-              {item.description ? <p>{item.description}</p> : null}
-            </article>
-          ))}
-        </div>
-      </section>
-    ) : null}
-    {!data.page && !data.company.summary && !data.error ? (
-      <p class="muted">请在 CMS 创建 slug 为 about 的独立页面，或完善公司信息。</p>
-    ) : null}
-  </main>
-  <SiteFooter company={data.company} />
+  {turmill ? (
+    <TurmillPageShell {...shell}>
+      <TurmillAboutPage
+        title={pageTitle}
+        summary={data.page?.summary}
+        content={data.page?.content}
+        company={data.company}
+        references={data.page?.references}
+        relatedTitle={relatedTitle}
+        homeHref={`/${data.locale}`}
+        homeLabel={data.locale.startsWith('zh') ? '首页' : 'Home'}
+        error={data.error}
+        warnings={data.warnings}
+        emptyHint={emptyHint}
+      />
+    </TurmillPageShell>
+  ) : (
+    <>
+      <SiteHeader
+        siteName={data.siteName}
+        links={data.navLinks}
+        localeOptions={data.localeOptions}
+        languageLabel={data.languageLabel}
+        company={data.company}
+        locale={data.locale}
+      />
+      <main class="wrap">
+        <AlertBanner messages={data.error ? [data.error] : []} />
+        <AlertBanner messages={data.warnings} tone="warn" />
+        <h1>{pageTitle}</h1>
+        {data.company.logoUrl ? (
+          <p><img src={data.company.logoUrl} alt={data.siteName} style="max-height:72px" /></p>
+        ) : null}
+        {data.company.slogan ? <p class="muted">{data.company.slogan}</p> : null}
+        {data.company.summary ? <p>{data.company.summary}</p> : null}
+        <section class="section card">
+          {data.company.address ? <p>{data.company.address}</p> : null}
+          {data.company.phone ? <p>{data.company.phone}</p> : null}
+          {data.company.email ? <p><a href={`mailto:${data.company.email}`}>{data.company.email}</a></p> : null}
+          {data.company.website ? <p><a href={data.company.website}>{data.company.website}</a></p> : null}
+        </section>
+        {data.page?.content ? <div class="section prose" set:html={data.page.content} /> : null}
+        {data.page?.references?.length ? (
+          <section class="section">
+            <h2>{relatedTitle}</h2>
+            <div class="card-list">
+              {data.page.references.map((item) => (
+                <article class="card">
+                  {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
+                  <h3><a href={item.href}>{item.title}</a></h3>
+                  {item.subtitle ? <p class="muted">{item.subtitle}</p> : null}
+                  {item.description ? <p>{item.description}</p> : null}
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+        {!data.page && !data.company.summary && !data.error ? (
+          <p class="muted">{emptyHint}</p>
+        ) : null}
+      </main>
+      <SiteFooter company={data.company} />
+    </>
+  )}
 </BaseLayout>

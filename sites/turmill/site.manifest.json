@@ -1,0 +1,36 @@
+{
+  "siteKey": "turmill",
+  "displayName": "Turmill",
+  "theme": "turmill",
+  "defaultLocale": "en-US",
+  "locales": ["zh-CN", "zh-TW", "ja", "en-US"],
+  "modules": {
+    "products": true,
+    "articles": true,
+    "caseStudies": true,
+    "solutions": true,
+    "faq": true,
+    "resources": true,
+    "about": true,
+    "contact": true
+  },
+  "cms": {
+    "apiBase": "http://127.0.0.1:5173",
+    "apiPrefix": "/api/p",
+    "collectionNamespace": "b2b"
+  },
+  "cache": {
+    "revalidateSeconds": 120,
+    "revalidateSecretEnv": "REVALIDATE_SECRET"
+  },
+  "hooks": {
+    "revalidateUrl": "https://www.turmill.com/api/revalidate"
+  },
+  "brand": {
+    "tagline": "Where innovation meets love, and quality meets care",
+    "primaryColor": "#4d8f65"
+  },
+  "domains": {
+    "www": "www.turmill.com"
+  }
+}

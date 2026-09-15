@@ -1,0 +1,40 @@
+---
+interface Item {
+  title: string;
+  href: string;
+  summary?: string;
+  coverUrl?: string;
+}
+interface Props {
+  title?: string;
+  items?: Item[];
+  readMoreText?: string;
+}
+const { title = 'Products', items = [], readMoreText = 'Learn More' } = Astro.props;
+---
+{items.length > 0 ? (
+  <section class="tm-section tm-section-white" id="products">
+    {title ? (
+      <div class="tm-title-wrap">
+        <h2 class="tm-title-main">{title}</h2>
+      </div>
+    ) : null}
+    <div class="tm-container tm-grid-3">
+      {items.map((item) => (
+        <article class="tm-product-card tm-card-hover">
+          <a
+            class="tm-product-cover tm-img-cover"
+            href={item.href}
+            style={item.coverUrl ? `background-image:url(${item.coverUrl})` : undefined}
+            aria-label={item.title}
+          />
+          <div class="tm-product-body">
+            <h3><a href={item.href}>{item.title}</a></h3>
+            {item.summary ? <p>{item.summary}</p> : null}
+            <a class="tm-link-more" href={item.href}>{readMoreText} <span>→</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+) : null}

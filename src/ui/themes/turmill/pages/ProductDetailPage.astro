@@ -1,0 +1,104 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import type { ProductDetail } from '@/modules/product';
+
+interface Props {
+  product: ProductDetail | null;
+  backHref: string;
+  backLabel?: string;
+  homeHref: string;
+  homeLabel?: string;
+  listLabel?: string;
+  specsTitle?: string;
+  inquiryTitle?: string;
+  inquiryBody?: string;
+  contactHref?: string;
+  contactLabel?: string;
+  error?: string;
+  warnings?: string[];
+}
+const {
+  product,
+  backHref,
+  backLabel = '← Products',
+  homeHref,
+  homeLabel = 'Home',
+  listLabel = 'Products',
+  specsTitle = 'Specifications',
+  inquiryTitle = 'Product Inquiry',
+  inquiryBody = 'Ask about wholesale pricing, MOQ, and OEM options.',
+  contactHref = '',
+  contactLabel = 'Contact Sales',
+  error,
+  warnings = [],
+} = Astro.props;
+
+const images = product?.imageUrls?.length ? product.imageUrls : product?.coverUrl ? [product.coverUrl] : [];
+const mainImage = images[0] || '';
+const thumbs = images.slice(1);
+---
+<PageBanner
+  title={product?.title || listLabel}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: listLabel, href: backHref },
+    { label: product?.title || listLabel },
+  ]}
+/>
+<section class="tm-section tm-section-white">
+  <div class="tm-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {product ? (
+      <div class="tm-detail-grid">
+        <div class="tm-gallery">
+          {mainImage ? <img class="tm-gallery-main" src={mainImage} alt={product.title} /> : null}
+          {thumbs.length ? (
+            <div class="tm-gallery-thumbs">
+              {thumbs.map((src) => <img src={src} alt={product.title} loading="lazy" />)}
+            </div>
+          ) : null}
+        </div>
+        <div class="tm-product-info">
+          {product.sku ? <span class="tm-sku">SKU: {product.sku}</span> : null}
+          <h2 class="tm-display tm-product-title">{product.title}</h2>
+          {product.brand ? <p class="tm-prose" style="margin:0 0 1rem">{product.brand}</p> : null}
+          {product.summary ? <p class="tm-prose tm-product-summary">{product.summary}</p> : null}
+          {(product.price || product.availability) ? (
+            <p class="tm-product-price">
+              {product.price ? `${product.currency} ${product.price}` : ''}
+              {product.availability ? ` · ${product.availability}` : ''}
+            </p>
+          ) : null}
+          {product.descriptionHtml ? <div class="tm-prose" set:html={product.descriptionHtml} /> : null}
+          {product.specs?.length ? (
+            <section style="margin-top:2rem">
+              <h3 class="tm-display" style="font-size:1.35rem;margin-bottom:0.75rem">{specsTitle}</h3>
+              <table class="tm-specs">
+                <tbody>
+                  {product.specs.map((row) => (
+                    <tr>
+                      <th>{row.key}</th>
+                      <td>{row.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          ) : null}
+          <div class="tm-panel tm-inquiry-box">
+            <h3 class="tm-display">{inquiryTitle}</h3>
+            <p>{inquiryBody}</p>
+            <div class="tm-inquiry-actions">
+              {contactHref ? (
+                <a class="tm-btn tm-btn-md tm-btn-primary" href={contactHref}>{contactLabel}</a>
+              ) : null}
+              <a class="tm-btn tm-btn-md tm-btn-primary-line" href={backHref}>{backLabel}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : null}
+  </div>
+</section>

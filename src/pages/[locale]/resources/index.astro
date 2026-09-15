@@ -4,10 +4,14 @@ import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import Pagination from '@/ui/blocks/Pagination.astro';
+import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
+import TurmillSimpleCardListPage from '@/ui/themes/turmill/pages/SimpleCardListPage.astro';
 import { loadResourceListPage } from '@/workflows/resources/load-resource-list';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { t } from '@/modules/i18n';
+import { localePath } from '@/modules/cms';
+import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -20,9 +24,12 @@ const data = await loadResourceListPage({
 if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/resources`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
+const turmill = useTurmillShell(data.site.theme);
+const shell = buildTurmillShellProps(data);
+const title = t(data.locale, 'resources');
 ---
 <BaseLayout
-  title={`${t(data.locale, 'resources')} · ${data.siteName}`}
+  title={`${title} · ${data.siteName}`}
   description={data.company.summary}
   lang={data.locale}
   alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
@@ -30,25 +37,48 @@ if (!data.enabled) return Astro.rewrite('/404');
   robots="index,follow"
   ogUrl={Astro.url.pathname}
 >
-  <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel} />
-  <main class="wrap">
-    <h1>{t(data.locale, 'resources')}</h1>
-    <AlertBanner messages={data.error ? [data.error] : []} />
-    <AlertBanner messages={data.warnings} tone="warn" />
-    <div class="card-list">
-      {data.items.map((item) => (
-        <article class="card">
-          {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
-          <h2><a href={item.href}>{item.title}</a></h2>
-          <p class="muted">
-            {[item.resourceType, item.fileFormat].filter(Boolean).join(' · ')}
-          </p>
-          {item.summary ? <p>{item.summary}</p> : null}
-        </article>
-      ))}
-    </div>
-    {!data.error && !data.items.length ? <p class="muted">暂无资料。</p> : null}
-    {!data.error ? <Pagination pages={data.pages} basePath={`/${data.locale}/resources`} /> : null}
-  </main>
-  <SiteFooter company={data.company} />
+  {turmill ? (
+    <TurmillPageShell {...shell}>
+      <TurmillSimpleCardListPage
+        title={title}
+        items={data.items.map((item) => ({
+          title: item.title,
+          href: item.href,
+          summary: item.summary,
+          coverUrl: item.coverUrl,
+          meta: [item.resourceType, item.fileFormat].filter(Boolean).join(' · '),
+        }))}
+        pages={data.pages}
+        basePath={`/${data.locale}/resources`}
+        homeHref={localePath(data.locale, '/')}
+        homeLabel={t(data.locale, 'home')}
+        emptyText={data.locale.startsWith('zh') ? '暂无资料。' : 'No resources yet.'}
+        error={data.error}
+        warnings={data.warnings}
+      />
+    </TurmillPageShell>
+  ) : (
+    <>
+      <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel}
+        company={data.company} locale={data.locale} />
+      <main class="wrap">
+        <h1>{title}</h1>
+        <AlertBanner messages={data.error ? [data.error] : []} />
+        <AlertBanner messages={data.warnings} tone="warn" />
+        <div class="card-list">
+          {data.items.map((item) => (
+            <article class="card">
+              {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
+              <h2><a href={item.href}>{item.title}</a></h2>
+              <p class="muted">{[item.resourceType, item.fileFormat].filter(Boolean).join(' · ')}</p>
+              {item.summary ? <p>{item.summary}</p> : null}
+            </article>
+          ))}
+        </div>
+        {!data.error && !data.items.length ? <p class="muted">暂无资料。</p> : null}
+        {!data.error ? <Pagination pages={data.pages} basePath={`/${data.locale}/resources`} /> : null}
+      </main>
+      <SiteFooter company={data.company} />
+    </>
+  )}
 </BaseLayout>

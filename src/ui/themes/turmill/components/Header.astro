@@ -1,0 +1,113 @@
+---
+import type { NavLink } from '@/modules/nav';
+import type { CompanyView } from '@/modules/company';
+
+interface Props {
+  siteName: string;
+  links: NavLink[];
+  localeOptions?: Array<{ code: string; name: string; href: string; active: boolean }>;
+  company?: CompanyView;
+  contactHref?: string;
+  contactLabel?: string;
+  homeHref?: string;
+  showContactCta?: boolean;
+}
+const {
+  siteName,
+  links,
+  localeOptions = [],
+  company,
+  contactHref = '/contact',
+  contactLabel = 'Contact',
+  homeHref = '/',
+  showContactCta = true,
+} = Astro.props;
+
+const email = String(company?.email || '').trim();
+const phone = String(company?.phone || '').trim();
+const logoUrl = String(company?.logoUrl || '').trim();
+const pathname = Astro.url.pathname;
+const activeLocale = localeOptions.find((l) => l.active);
+---
+{(email || phone || localeOptions.length > 0) ? (
+  <div class="tm-topbar">
+    <div class="tm-container tm-topbar-inner">
+      <div class="tm-topbar-contacts">
+        {email ? <a href={`mailto:${email}`}>{email}</a> : null}
+        {phone ? <a href={`tel:${phone.replace(/\s+/g, '')}`}>{phone}</a> : null}
+      </div>
+      {localeOptions.length > 0 ? (
+        <div class="tm-lang">
+          <span class="tm-lang-cur">{activeLocale?.code || 'LANG'}</span>
+          <div class="tm-lang-menu">
+            {localeOptions.map((opt) => (
+              <a href={opt.href} class={opt.active ? 'is-active' : undefined}>{opt.name}</a>
+            ))}
+          </div>
+        </div>
+      ) : null}
+    </div>
+  </div>
+) : null}
+
+<header class="tm-header">
+  <div class="tm-container tm-header-inner">
+    <a class="tm-brand" href={homeHref} aria-label={siteName}>
+      {logoUrl ? <img src={logoUrl} alt={siteName} width="160" height="44" /> : siteName}
+    </a>
+
+    <nav class="tm-nav" aria-label="Primary">
+      {links.map((link) => {
+        const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
+        return (
+          <div class="tm-nav-item">
+            <a
+              href={link.href}
+              class={active ? 'is-active' : undefined}
+              target={link.openInNewTab ? '_blank' : undefined}
+              rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+            >
+              {link.label}
+              {link.children?.length ? <span aria-hidden="true">▾</span> : null}
+            </a>
+            {link.children?.length ? (
+              <div class="tm-nav-drop">
+                <ul>
+                  {link.children.map((child) => (
+                    <li><a href={child.href}>{child.label}</a></li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+        );
+      })}
+    </nav>
+
+    {showContactCta ? (
+      <a class="tm-btn tm-btn-md tm-btn-primary tm-header-cta" href={contactHref}>{contactLabel}</a>
+    ) : null}
+    <button type="button" class="tm-menu-toggle" id="tm-menu-toggle" aria-label="Menu">☰</button>
+  </div>
+  <div class="tm-drawer" id="tm-drawer">
+    {links.map((link) => (
+      <div>
+        <a href={link.href}>{link.label}</a>
+        {link.children?.map((child) => (
+          <a href={child.href} style="padding-left:1rem;font-size:0.95rem;color:#55665b">{child.label}</a>
+        ))}
+      </div>
+    ))}
+    {showContactCta ? (
+      <p style="margin-top:1rem">
+        <a class="tm-btn tm-btn-md tm-btn-primary" href={contactHref} style="width:100%">{contactLabel}</a>
+      </p>
+    ) : null}
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('tm-menu-toggle');
+  const drawer = document.getElementById('tm-drawer');
+  toggle?.addEventListener('click', () => drawer?.classList.toggle('is-open'));
+</script>

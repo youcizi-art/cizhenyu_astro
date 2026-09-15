@@ -1,0 +1,44 @@
+---
+import Header from './components/Header.astro';
+import Footer from './components/Footer.astro';
+import type { NavLink } from '@/modules/nav';
+import type { CompanyView } from '@/modules/company';
+
+interface Props {
+  siteName: string;
+  links: NavLink[];
+  localeOptions?: Array<{ code: string; name: string; href: string; active: boolean }>;
+  company: CompanyView;
+  locale: string;
+  homeHref: string;
+  contactHref: string;
+  contactLabel: string;
+  showContactCta?: boolean;
+  quickLinksLabel?: string;
+}
+const {
+  siteName,
+  links,
+  localeOptions = [],
+  company,
+  homeHref,
+  contactHref,
+  contactLabel,
+  showContactCta = true,
+  quickLinksLabel = 'Quick Links',
+} = Astro.props;
+---
+<Header
+  siteName={siteName}
+  links={links}
+  localeOptions={localeOptions}
+  company={company}
+  homeHref={homeHref}
+  contactHref={contactHref}
+  contactLabel={contactLabel}
+  showContactCta={showContactCta}
+/>
+<main class="tm-main">
+  <slot />
+</main>
+<Footer company={company} links={links} quickLinksLabel={quickLinksLabel} />

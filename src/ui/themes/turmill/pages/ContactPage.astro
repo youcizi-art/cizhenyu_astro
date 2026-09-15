@@ -1,0 +1,62 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import type { CompanyView } from '@/modules/company';
+
+interface Props {
+  title: string;
+  content?: string;
+  company: CompanyView;
+  homeHref?: string;
+  homeLabel?: string;
+  error?: string;
+  warnings?: string[];
+  emptyHint?: string;
+}
+const {
+  title,
+  content = '',
+  company,
+  homeHref = '/',
+  homeLabel = 'Home',
+  error,
+  warnings = [],
+  emptyHint = '',
+} = Astro.props;
+---
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+<section class="tm-section tm-section-white">
+  <div class="tm-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {content ? <div class="tm-prose" set:html={content} /> : null}
+    <div class="tm-panel" style="margin-top:2rem">
+      <h2 style="font-family:var(--font-display);font-size:1.35rem;margin:0 0 1rem">{company.name}</h2>
+      {company.address ? <p class="tm-prose" style="margin:0.35rem 0">{company.address}</p> : null}
+      {company.phone ? (
+        <p class="tm-prose" style="margin:0.35rem 0">
+          <a href={`tel:${company.phone.replace(/\s+/g, '')}`}>{company.phone}</a>
+        </p>
+      ) : null}
+      {company.email ? (
+        <p class="tm-prose" style="margin:0.35rem 0">
+          <a href={`mailto:${company.email}`}>{company.email}</a>
+        </p>
+      ) : null}
+      {company.website ? (
+        <p class="tm-prose" style="margin:0.35rem 0">
+          <a href={company.website}>{company.website}</a>
+        </p>
+      ) : null}
+      {!company.address && !company.phone && !company.email && emptyHint ? (
+        <p class="tm-prose">{emptyHint}</p>
+      ) : null}
+    </div>
+  </div>
+</section>

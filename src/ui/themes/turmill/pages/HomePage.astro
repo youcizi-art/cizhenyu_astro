@@ -1,0 +1,111 @@
+---
+import Hero from '../components/Hero.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import CaseGrid from '../components/CaseGrid.astro';
+import AboutTeaser from '../components/AboutTeaser.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import ArticleGrid from '../components/ArticleGrid.astro';
+import Alerts from '../components/Alerts.astro';
+import type { ContentBlock } from '@/modules/content-block';
+import type { ProductCard } from '@/modules/product';
+import type { ArticleCard } from '@/modules/article';
+import type { CaseStudyCard } from '@/modules/case-study';
+import type { CompanyView } from '@/modules/company';
+
+interface Props {
+  siteName: string;
+  hero: ContentBlock | null;
+  heroImageUrl?: string;
+  tagline?: string;
+  products: ProductCard[];
+  caseStudies: CaseStudyCard[];
+  articles: ArticleCard[];
+  company: CompanyView;
+  companyIntro?: string;
+  ctaBanner: ContentBlock | null;
+  labels: {
+    products: string;
+    articles: string;
+    about: string;
+    cases: string;
+    readMore: string;
+    aboutCta: string;
+  };
+  paths: {
+    about: string;
+    contact: string;
+  };
+  error?: string;
+  warnings?: string[];
+  showProducts?: boolean;
+  showArticles?: boolean;
+}
+const {
+  siteName,
+  hero,
+  heroImageUrl = '',
+  tagline = '',
+  products,
+  caseStudies,
+  articles,
+  company,
+  companyIntro = '',
+  ctaBanner,
+  labels,
+  paths,
+  error,
+  warnings = [],
+  showProducts = true,
+  showArticles = true,
+} = Astro.props;
+
+const heroTitle = hero?.title || siteName;
+const heroSummary = hero?.summary || hero?.subtitle || tagline;
+const heroImage = hero?.imageUrl || heroImageUrl;
+const heroCta = hero?.ctaUrl || paths.contact;
+const heroCtaLabel = hero?.ctaLabel || labels.aboutCta;
+const ctaBg = ctaBanner?.backgroundImageUrl
+  || 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1600&h=600&q=80';
+---
+<div class="tm-container" style="padding-top:1rem">
+  <Alerts messages={error ? [error] : []} />
+  <Alerts messages={warnings} tone="warn" />
+</div>
+<Hero
+  title={heroTitle}
+  summary={heroSummary}
+  image={heroImage}
+  eyebrow={hero?.eyebrow}
+  actionUrl={heroCta}
+  actionLabel={heroCtaLabel}
+/>
+{showProducts ? (
+  <ProductGrid title={labels.products} items={products} readMoreText={labels.readMore} />
+) : null}
+<CaseGrid
+  title={labels.cases}
+  cases={caseStudies.map((item) => ({
+    title: item.title,
+    href: item.href,
+    summary: item.summary,
+    coverUrl: item.coverUrl,
+    industry: item.industry,
+  }))}
+/>
+<AboutTeaser
+  companyName={company.name || siteName}
+  slogan={company.slogan}
+  summary={companyIntro || company.summary}
+  logoUrl={company.logoUrl}
+  aboutHref={paths.about}
+  aboutLabel={labels.about}
+/>
+<CtaBanner
+  title={ctaBanner?.title || (ctaBanner?.summary ? ctaBanner.summary : 'Ready to partner with us?')}
+  actionLabel={ctaBanner?.ctaLabel || labels.aboutCta}
+  actionHref={ctaBanner?.ctaUrl || paths.contact}
+  backgroundImage={ctaBg}
+/>
+{showArticles ? (
+  <ArticleGrid title={labels.articles} items={articles} readMoreText={labels.readMore} />
+) : null}

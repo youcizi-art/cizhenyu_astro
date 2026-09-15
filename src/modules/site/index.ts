@@ -1,4 +1,4 @@
-export { loadSiteManifest, getSiteKey } from './load-site';
+export { loadSiteManifest, getSiteKey, listRegisteredSiteKeys } from './load-site';
 export {
   normalizeManifest,
   resolveRevalidateSeconds,

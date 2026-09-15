@@ -1,0 +1,83 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import type { PublicPages } from '@/modules/cms';
+
+interface CardItem {
+  title: string;
+  href: string;
+  summary?: string;
+  coverUrl?: string;
+  meta?: string;
+}
+interface Props {
+  title: string;
+  items: CardItem[];
+  pages?: PublicPages;
+  basePath?: string;
+  emptyText?: string;
+  homeHref: string;
+  homeLabel?: string;
+  readMoreText?: string;
+  error?: string;
+  warnings?: string[];
+}
+const {
+  title,
+  items,
+  pages,
+  basePath = '',
+  emptyText = 'No items yet.',
+  homeHref,
+  homeLabel = 'Home',
+  readMoreText = 'Learn More',
+  error,
+  warnings = [],
+} = Astro.props;
+
+const totalPages = Math.max(1, pages?.totalPages || 1);
+const page = Math.max(1, pages?.page || 1);
+const prevHref = pages && page > 1 ? `${basePath}?page=${page - 1}` : '';
+const nextHref = pages && page < totalPages ? `${basePath}?page=${page + 1}` : '';
+---
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+<section class="tm-section tm-section-white">
+  <div class="tm-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {!error && !items.length ? <p class="tm-prose">{emptyText}</p> : null}
+    {items.length ? (
+      <div class="tm-grid-3">
+        {items.map((item) => (
+          <article class="tm-product-card tm-card-hover">
+            <a
+              class="tm-product-cover tm-img-cover"
+              href={item.href}
+              style={item.coverUrl ? `background-image:url(${item.coverUrl})` : undefined}
+              aria-label={item.title}
+            />
+            <div class="tm-product-body">
+              <h3><a href={item.href}>{item.title}</a></h3>
+              {item.meta ? <p style="color:var(--color-primary);font-size:0.85rem;font-weight:600;margin:0">{item.meta}</p> : null}
+              {item.summary ? <p>{item.summary}</p> : null}
+              <a class="tm-link-more" href={item.href}>{readMoreText} <span>→</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : null}
+    {pages && totalPages > 1 ? (
+      <div class="tm-pager">
+        {prevHref ? <a class="tm-link-more" href={prevHref}>← Prev</a> : null}
+        <span class="tm-prose" style="margin:0">Page {page} / {totalPages}</span>
+        {nextHref ? <a class="tm-link-more" href={nextHref}>Next →</a> : null}
+      </div>
+    ) : null}
+  </div>
+</section>

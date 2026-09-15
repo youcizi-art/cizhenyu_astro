@@ -8,11 +8,11 @@ const { company } = Astro.props;
 ---
 <footer class="site-footer">
   <div class="wrap">
-    <strong>{company.name}</strong>
+    <strong class="brand-mark">{company.name}</strong>
     {company.slogan ? <p class="muted">{company.slogan}</p> : null}
     <div class="footer-meta muted">
       {company.address ? <p>{company.address}</p> : null}
-      {company.phone ? <p>{company.phone}</p> : null}
+      {company.phone ? <p><a href={`tel:${company.phone.replace(/\s+/g, '')}`}>{company.phone}</a></p> : null}
       {company.email ? <p><a href={`mailto:${company.email}`}>{company.email}</a></p> : null}
       {company.website ? <p><a href={company.website} rel="noopener noreferrer">{company.website}</a></p> : null}
     </div>

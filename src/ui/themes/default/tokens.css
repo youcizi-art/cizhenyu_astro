@@ -1,0 +1,26 @@
+/* Default B2B corporate blue skin */
+[data-theme='default'] {
+  color-scheme: light;
+  --ink: #14213d;
+  --muted: #5c6b7a;
+  --line: #d9e2ec;
+  --bg: #f7f9fc;
+  --bg-subtle: #eef2f7;
+  --surface: #ffffff;
+  --accent: #0b3d91;
+  --accent-hover: #083074;
+  --accent-ink: #ffffff;
+  --header-bg: #ffffff;
+  --topbar-bg: #14213d;
+  --topbar-fg: #e8eef6;
+  --footer-bg: #ffffff;
+  --footer-fg: var(--ink);
+  --footer-muted: var(--muted);
+  --hero-bg: #ffffff;
+  --hero-border: var(--line);
+  --radius: 4px;
+  --font-sans: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-display: var(--font-sans);
+  --wrap-max: 960px;
+  --shadow-nav: 0 8px 24px rgba(20, 33, 61, 0.08);
+}

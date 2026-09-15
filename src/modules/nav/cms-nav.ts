@@ -24,8 +24,10 @@ function resolveHref(locale: string, raw: string) {
   if (!url) return localePath(locale, '/');
   if (/^https?:\/\//i.test(url) || url.startsWith('//')) return url;
   if (url.startsWith(`/${locale}/`) || url === `/${locale}`) return url;
-  if (url.startsWith('/')) return localePath(locale, url);
-  return localePath(locale, `/${url}`);
+  // 去掉任意 locale 前缀后按当前 locale 重建，避免 seed 写死 /zh-CN/... 在其他语种串链
+  const stripped = url.replace(/^\/[a-z]{2}(?:-[A-Za-z]{2})?(?=\/|$)/i, '') || '/';
+  if (stripped.startsWith('/')) return localePath(locale, stripped);
+  return localePath(locale, `/${stripped}`);
 }
 
 function sortItems(rows: CmsEntity[]) {
@@ -36,6 +38,33 @@ function sortItems(rows: CmsEntity[]) {
   });
 }
 
+/**
+ * seed 常把 nav_menu_ids 解析成某一语种（如 zh-CN）的菜单 UUID。
+ * 其他语种的 header.id 不同，但 language_group_key 相同 —— 需按语组匹配。
+ */
+async function headerRelationIdSet(header: CmsEntity): Promise<Set<string>> {
+  const ids = new Set<string>([String(header.id)]);
+  const group = String(header.language_group_key || '').trim();
+  if (!group) return ids;
+  try {
+    const all = await listEntities('navMenu', { pageSize: 50 });
+    for (const row of all.list || []) {
+      if (String(row.language_group_key || '') === group) {
+        ids.add(String(row.id));
+      }
+    }
+  } catch {
+    // 仅保留当前 locale 的 header.id
+  }
+  return ids;
+}
+
+/** parent_id 也可能指向其他语种实体，按 language_group_key 归并 */
+function parentKey(row: CmsEntity) {
+  const parent = String(entityData(row).parent_id || '').trim();
+  return parent;
+}
+
 async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
   const menus = await listEntities('navMenu', { locale, pageSize: 20 });
   const header = (menus.list || []).find((row) => {
@@ -44,26 +73,40 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
   });
   if (!header) return null;
 
+  const menuIds = await headerRelationIdSet(header);
   const itemsResult = await listEntities('navMenuItem', { locale, pageSize: 100 });
   const owned = sortItems(
     (itemsResult.list || []).filter((row) => {
       const data = entityData(row);
-      return relationIds(data.nav_menu_ids).includes(String(header.id));
+      return relationIds(data.nav_menu_ids).some((id) => menuIds.has(id));
     })
   );
   if (!owned.length) return null;
 
+  // 构建 parent 索引：同时支持「当前语种 id」与「跨语种同组 id」
+  const idToGroup = new Map<string, string>();
+  const groupToLocalId = new Map<string, string>();
+  for (const row of owned) {
+    const gid = String(row.language_group_key || '').trim();
+    idToGroup.set(String(row.id), gid || String(row.id));
+    if (gid) groupToLocalId.set(gid, String(row.id));
+  }
+
   const byParent = new Map<string, CmsEntity[]>();
   const roots: CmsEntity[] = [];
   for (const row of owned) {
-    const parent = String(entityData(row).parent_id || '').trim();
+    const parent = parentKey(row);
     if (!parent) {
       roots.push(row);
       continue;
     }
-    const list = byParent.get(parent) || [];
+    const parentLocal =
+      groupToLocalId.get(idToGroup.get(parent) || '') ||
+      groupToLocalId.get(parent) ||
+      parent;
+    const list = byParent.get(parentLocal) || [];
     list.push(row);
-    byParent.set(parent, list);
+    byParent.set(parentLocal, list);
   }
 
   const links: NavLink[] = [];

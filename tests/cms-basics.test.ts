@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { unwrapEnvelope } from '../src/modules/cms/envelope';
 import { pathsForCollections } from '../src/modules/cache/revalidate-map';
 import { normalizeManifest } from '../src/modules/site/manifest';
+import { loadSiteManifest, listRegisteredSiteKeys } from '../src/modules/site/load-site';
 import { catalog } from '../src/modules/cms/catalog';
 import { CmsError, isCmsError } from '../src/modules/cms/errors';
 import { localePath, entityData } from '../src/modules/cms/entity';
@@ -10,6 +11,7 @@ import { toProductDetail } from '../src/modules/product/types';
 import { resolveLocaleFromPath, switchLocalePath, t } from '../src/modules/i18n';
 import { buildAlternateLinks } from '../src/modules/seo/urls';
 import { readSeoFields, toPageSeo } from '../src/modules/seo/types';
+import { resolveTheme } from '../src/ui/themes/load-theme';
 describe('cms envelope', () => {
   it('unwraps ok payload', () => {
     expect(unwrapEnvelope({ status: 200, msg: 'ok', data: { a: 1 } })).toEqual({ a: 1 });
@@ -45,6 +47,24 @@ describe('site manifest', () => {
     });
     expect(m.cms.apiBase).toBe('https://api.example.com');
     expect(m.locales).toContain(m.defaultLocale);
+  });
+});
+
+describe('theme resolve', () => {
+  it('falls back unknown theme to default', () => {
+    expect(resolveTheme({ theme: 'nope' }).themeId).toBe('default');
+    expect(resolveTheme({ theme: 'turmill', primaryColor: '#4d8f65' })).toEqual({
+      themeId: 'turmill',
+      primaryColor: '#4d8f65',
+    });
+  });
+});
+
+describe('site registry', () => {
+  it('registers demo and turmill', () => {
+    expect(listRegisteredSiteKeys()).toEqual(expect.arrayContaining(['demo', 'turmill']));
+    expect(loadSiteManifest('turmill').theme).toBe('turmill');
+    expect(loadSiteManifest('demo').theme).toBe('default');
   });
 });
 

@@ -1,8 +1,10 @@
 import { normalizeManifest, type SiteManifest } from './manifest';
 import demoManifest from '../../../sites/demo/site.manifest.json';
+import turmillManifest from '../../../sites/turmill/site.manifest.json';
 
 const registry: Record<string, unknown> = {
   demo: demoManifest,
+  turmill: turmillManifest,
 };
 
 export function getSiteKey() {
@@ -24,4 +26,9 @@ export function loadSiteManifest(siteKey = getSiteKey()): SiteManifest {
     normalized.cms.apiPrefix = envPrefix;
   }
   return normalized;
+}
+
+/** 已注册站点（测试/文档用） */
+export function listRegisteredSiteKeys() {
+  return Object.keys(registry);
 }

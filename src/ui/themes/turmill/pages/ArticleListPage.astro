@@ -1,0 +1,59 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import ArticleGrid from '../components/ArticleGrid.astro';
+import Alerts from '../components/Alerts.astro';
+import type { ArticleCard } from '@/modules/article';
+import type { PublicPages } from '@/modules/cms';
+
+interface Props {
+  title: string;
+  items: ArticleCard[];
+  pages: PublicPages;
+  basePath: string;
+  emptyText?: string;
+  readMoreText?: string;
+  homeHref: string;
+  homeLabel?: string;
+  error?: string;
+  warnings?: string[];
+}
+const {
+  title,
+  items,
+  pages,
+  basePath,
+  emptyText = 'No articles yet.',
+  readMoreText = 'Read More',
+  homeHref,
+  homeLabel = 'Home',
+  error,
+  warnings = [],
+} = Astro.props;
+
+const totalPages = Math.max(1, pages.totalPages || 1);
+const page = Math.max(1, pages.page || 1);
+const prevHref = page > 1 ? `${basePath}?page=${page - 1}` : '';
+const nextHref = page < totalPages ? `${basePath}?page=${page + 1}` : '';
+---
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+<section class="tm-section tm-section-white">
+  <div class="tm-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {!error && !items.length ? <p class="tm-prose">{emptyText}</p> : null}
+  </div>
+  <ArticleGrid title="" items={items} readMoreText={readMoreText} />
+  {!error && totalPages > 1 ? (
+    <div class="tm-container tm-pager">
+      {prevHref ? <a class="tm-link-more" href={prevHref}>← Prev</a> : null}
+      <span class="tm-prose" style="margin:0">Page {page} / {totalPages}</span>
+      {nextHref ? <a class="tm-link-more" href={nextHref}>Next →</a> : null}
+    </div>
+  ) : null}
+</section>
