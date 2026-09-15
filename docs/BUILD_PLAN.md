@@ -322,16 +322,15 @@ Sprint 4：阶段 D（缓存可验收）+ 阶段 E 基础 SEO
 - [x] `SeoHead`：canonical、robots、OG、Twitter、hreflang（含 `x-default`）、JSON-LD  
 - [x] 详情/静态页传入 CMS SEO；列表页基础 canonical + alternates  
 - [x] `/sitemap.xml`、`/robots.txt`  
-- [ ] 404 页（独立路由体验）  
+- [x] 404 页（独立路由体验；`noindex`）  
 - [ ] IndexNow / GSC / 外链 / 询盘漏斗（运维与后置，本阶段不做）  
 
 ---
 
 ## 10. 下一步
 
-1. 可选：补 404 页体验；生产 `PUBLIC_SITE_URL` + `SITE_REVALIDATE_URL` 对齐  
-2. 真实 payload 重跑 `seed:b2b:generate` + `seed:b2b` 后验产品详情 head / sitemap  
-3. 生产配置 `CF_ZONE_ID`/`CF_API_TOKEN` 后验证 CDN purge  
-4. 分类路由按需再开  
+1. 生产 `PUBLIC_SITE_URL` + `SITE_REVALIDATE_URL` 对齐后验收 revalidate  
+2. 可选：生产配置 `CF_ZONE_ID`/`CF_API_TOKEN` 后验证 CDN purge  
+3. 分类路由按需再开  
 
 不接受「又加了一批路由文件」作为进度。

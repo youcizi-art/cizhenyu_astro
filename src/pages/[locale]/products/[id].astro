@@ -20,8 +20,8 @@ if (!data.localeValid) {
   return Astro.redirect(`/${data.site.defaultLocale}/products`, 302);
 }
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
-if (!data.enabled) return new Response('Not Found', { status: 404 });
-if (!data.error && !data.product) return new Response('Product not found', { status: 404 });
+if (!data.enabled) return Astro.rewrite('/404');
+if (!data.error && !data.product) return Astro.rewrite('/404');
 const product = data.product;
 const title = product ? `${product.seoTitle} · ${data.siteName}` : `Product · ${data.siteName}`;
 const seoProps = layoutSeoProps(product?.seo, Astro.url.pathname);

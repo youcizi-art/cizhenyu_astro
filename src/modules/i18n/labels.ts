@@ -10,7 +10,9 @@ export type UiLabelKey =
   | 'contact'
   | 'language'
   | 'emptyProducts'
-  | 'loadFailed';
+  | 'loadFailed'
+  | 'notFound'
+  | 'backHome';
 
 const EN: Record<UiLabelKey, string> = {
   home: 'Home',
@@ -25,6 +27,8 @@ const EN: Record<UiLabelKey, string> = {
   language: 'Language',
   emptyProducts: 'No products yet.',
   loadFailed: 'Failed to load.',
+  notFound: 'Page not found',
+  backHome: 'Back to home',
 };
 
 const ZH_CN: Record<UiLabelKey, string> = {
@@ -40,6 +44,8 @@ const ZH_CN: Record<UiLabelKey, string> = {
   language: '语言',
   emptyProducts: '暂无产品。',
   loadFailed: '加载失败。',
+  notFound: '页面不存在',
+  backHome: '返回首页',
 };
 
 const ZH_TW: Record<UiLabelKey, string> = {
@@ -55,6 +61,8 @@ const ZH_TW: Record<UiLabelKey, string> = {
   language: '語言',
   emptyProducts: '暫無產品。',
   loadFailed: '載入失敗。',
+  notFound: '頁面不存在',
+  backHome: '返回首頁',
 };
 
 const JA: Record<UiLabelKey, string> = {
@@ -70,6 +78,8 @@ const JA: Record<UiLabelKey, string> = {
   language: '言語',
   emptyProducts: '製品がまだありません。',
   loadFailed: '読み込みに失敗しました。',
+  notFound: 'ページが見つかりません',
+  backHome: 'ホームへ戻る',
 };
 
 const DICTS: Record<string, Record<UiLabelKey, string>> = {

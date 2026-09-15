@@ -18,7 +18,7 @@ if (!data.localeValid) {
   return Astro.redirect(`/${data.site.defaultLocale}/contact`, 302);
 }
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
-if (!data.enabled) return new Response('Not Found', { status: 404 });
+if (!data.enabled) return Astro.rewrite('/404');
 const seoProps = layoutSeoProps(data.page?.seo, Astro.url.pathname);
 const jsonLd = pageJsonLd(data.page?.seo || {
   title: data.page?.title || data.labels.contact,

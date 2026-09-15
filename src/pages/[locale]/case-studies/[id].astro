@@ -19,8 +19,8 @@ const data = await loadCaseStudyDetailPage({
 });
 if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/case-studies`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
-if (!data.enabled) return new Response('Not Found', { status: 404 });
-if (!data.error && !data.item) return new Response('Not Found', { status: 404 });
+if (!data.enabled) return Astro.rewrite('/404');
+if (!data.error && !data.item) return Astro.rewrite('/404');
 const item = data.item;
 const seoProps = layoutSeoProps(item?.seo, Astro.url.pathname);
 const jsonLd = item

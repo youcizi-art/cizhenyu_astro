@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import { loadSiteManifest } from '@/modules/site';
+import { t } from '@/modules/i18n';
+
+export const prerender = false;
+
+Astro.response.status = 404;
+Astro.response.statusText = 'Not Found';
+const site = loadSiteManifest();
+const locale = site.defaultLocale || 'zh-CN';
+const homeHref = `/${locale}`;
+const title = `${t(locale, 'notFound')} · ${site.displayName || 'Site'}`;
+---
+<BaseLayout
+  title={title}
+  description={t(locale, 'notFound')}
+  lang={locale}
+  robots="noindex,follow"
+  canonicalUrl={Astro.url.pathname}
+>
+  <main class="wrap not-found">
+    <p class="code">404</p>
+    <h1>{t(locale, 'notFound')}</h1>
+    <p><a href={homeHref}>{t(locale, 'backHome')}</a></p>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found {
+    text-align: center;
+    padding: 4rem 1.5rem;
+  }
+  .not-found .code {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .not-found h1 {
+    margin: 0.5rem 0 1.25rem;
+    font-size: 1.5rem;
+  }
+</style>

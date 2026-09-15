@@ -16,7 +16,7 @@ const data = await loadFaqPage({
 });
 if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/faq`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
-if (!data.enabled) return new Response('Not Found', { status: 404 });
+if (!data.enabled) return Astro.rewrite('/404');
 const seoProps = layoutSeoProps(undefined, Astro.url.pathname);
 const jsonLd = pageJsonLd({
   title: t(data.locale, 'faq'),

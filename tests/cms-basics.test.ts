@@ -4,11 +4,12 @@ import { pathsForCollections } from '../src/modules/cache/revalidate-map';
 import { normalizeManifest } from '../src/modules/site/manifest';
 import { catalog } from '../src/modules/cms/catalog';
 import { CmsError, isCmsError } from '../src/modules/cms/errors';
-import { localePath } from '../src/modules/cms/entity';
+import { localePath, entityData } from '../src/modules/cms/entity';
 import { resolveMediaUrl, resolveMediaUrls } from '../src/modules/media';
 import { toProductDetail } from '../src/modules/product/types';
 import { resolveLocaleFromPath, switchLocalePath, t } from '../src/modules/i18n';
-
+import { buildAlternateLinks } from '../src/modules/seo/urls';
+import { readSeoFields, toPageSeo } from '../src/modules/seo/types';
 describe('cms envelope', () => {
   it('unwraps ok payload', () => {
     expect(unwrapEnvelope({ status: 200, msg: 'ok', data: { a: 1 } })).toEqual({ a: 1 });
@@ -115,5 +116,69 @@ describe('product mapping', () => {
     expect(detail.descriptionHtml).toBe('<p>Body</p>');
     expect(detail.seoTitle).toBe('SEO Press');
     expect(detail.specs).toEqual([{ key: 'tonnage', value: '200 ton' }]);
+  });
+
+  it('reads SEO from public API extension regions', () => {
+    const detail = toProductDetail({
+      id: '22222222-2222-4222-8222-222222222222',
+      data: {
+        title: 'Pump',
+        slug: 'pump',
+        summary: 'Flow',
+        images: [{ url: 'https://cdn.example.com/pump.jpg' }],
+        status: 'published',
+      },
+      _seo: {
+        seo_title: 'Pump SEO',
+        seo_description: 'Pump desc',
+        robots_directive: 'index,follow',
+        og_image: { url: 'https://cdn.example.com/og-pump.jpg' },
+      },
+      _schema: {
+        schema_type: 'Product',
+      },
+    }, 'zh-CN');
+    expect(detail.seoTitle).toBe('Pump SEO');
+    expect(detail.seo.description).toBe('Pump desc');
+    expect(detail.seo.schemaType).toBe('Product');
+    expect(detail.seo.ogImage).toBe('https://cdn.example.com/og-pump.jpg');
+    expect(detail.seo.robots).toBe('index,follow');
+  });
+});
+
+describe('entityData extension regions', () => {
+  it('flattens _seo/_schema/_geo onto business data', () => {
+    const data = entityData({
+      id: '1',
+      data: { title: 'T', slug: 't' },
+      _seo: { seo_title: 'SEO T', robots_directive: 'noindex,follow' },
+      _schema: { schema_type: 'WebPage' },
+      _geo: { geo_latitude: '29.8', geo_longitude: '121.5' },
+    });
+    expect(data.title).toBe('T');
+    expect(data.seo_title).toBe('SEO T');
+    expect(data.schema_type).toBe('WebPage');
+    expect(data.geo_latitude).toBe('29.8');
+    const fields = readSeoFields(data, 'T', '');
+    expect(toPageSeo(fields).robots).toBe('noindex,follow');
+  });
+});
+
+describe('hreflang alternates', () => {
+  it('adds x-default when defaultLocale is provided', () => {
+    const links = buildAlternateLinks(
+      [
+        { code: 'zh-CN', href: '/zh-CN/products' },
+        { code: 'en-US', href: '/en-US/products' },
+      ],
+      { defaultLocale: 'zh-CN' }
+    );
+    expect(links).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ hreflang: 'zh-CN' }),
+        expect.objectContaining({ hreflang: 'en-US' }),
+        expect.objectContaining({ hreflang: 'x-default', href: expect.stringContaining('/zh-CN/products') }),
+      ])
+    );
   });
 });

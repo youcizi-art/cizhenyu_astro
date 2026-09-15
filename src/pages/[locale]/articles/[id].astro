@@ -19,8 +19,8 @@ const data = await loadArticleDetailPage({
 });
 if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/articles`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
-if (!data.enabled) return new Response('Not Found', { status: 404 });
-if (!data.error && !data.article) return new Response('Not Found', { status: 404 });
+if (!data.enabled) return Astro.rewrite('/404');
+if (!data.error && !data.article) return Astro.rewrite('/404');
 const article = data.article;
 const seoProps = layoutSeoProps(article?.seo, Astro.url.pathname);
 const jsonLd = article
