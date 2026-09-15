@@ -71,3 +71,17 @@ npm run accept:cd
 - 默认对接本地 `cizhenyu_payload`（`:5173`）；语种与 CMS 一致：`zh-CN` / `zh-TW` / `ja` / `en-US`
 - 回退 Mock：`PUBLIC_CMS_API_BASE=http://127.0.0.1:8787` + `npm run mock:cms`
 - 生产 CDN purge：配置 `CF_ZONE_ID` + `CF_API_TOKEN`（见 `docs/CACHE_STRATEGY.md`）
+
+### 生产 HTML 缓存失效（revalidate）
+
+CMS 保存内容后会通知前端清 HTML 缓存。本地已在 payload `wrangler.toml` 指向 `http://127.0.0.1:4321/api/revalidate`。
+
+生产必须两侧对齐：
+
+| Astro Pages | Payload Worker |
+| --- | --- |
+| `REVALIDATE_SECRET` | `SITE_REVALIDATE_SECRET`（相同） |
+| `SITE_KEY` | `SITE_REVALIDATE_SITE_KEY` |
+| `PUBLIC_SITE_URL=https://你的站` | `SITE_REVALIDATE_URL=https://你的站/api/revalidate` |
+
+详见 [docs/CACHE_STRATEGY.md](./docs/CACHE_STRATEGY.md) 与 `.env.example`。

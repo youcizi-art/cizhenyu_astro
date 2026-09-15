@@ -7,6 +7,7 @@ import CardSection from '@/ui/blocks/CardSection.astro';
 import { loadHomePage } from '@/workflows/home/load-home';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
+import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
 
 export const prerender = false;
 
@@ -18,13 +19,32 @@ if (!data.localeValid) {
   return Astro.redirect(`/${data.site.defaultLocale}`, 302);
 }
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
-const alternates = buildAlternateLinks(data.localeOptions);
+const alternates = buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale });
+const seoProps = layoutSeoProps(undefined, Astro.url.pathname);
+const jsonLd = pageJsonLd(
+  {
+    title: data.siteName,
+    description: data.tagline || data.companyIntro || '',
+    canonicalUrl: Astro.url.pathname,
+    robots: 'index,follow',
+    ogImage: data.company.logoUrl || '',
+    ogType: 'website',
+    schemaType: 'WebSite',
+    schemaMapping: '',
+    geoLat: '',
+    geoLng: '',
+  },
+  Astro.url.pathname,
+  { siteName: data.siteName, company: data.company }
+);
 ---
 <BaseLayout
   title={data.siteName}
   description={data.tagline || data.companyIntro}
   lang={data.locale}
   alternates={alternates}
+  {...seoProps}
+  jsonLd={jsonLd}
 >
   <SiteHeader
     siteName={data.siteName}

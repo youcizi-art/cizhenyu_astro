@@ -25,4 +25,5 @@ export {
 } from './entity';
 export { CmsError, isCmsError, toErrorMessage } from './errors';
 export { buildRequestCacheKey, withRequestCache } from './request-cache';
-export { isPublishedEntity, readSeoFields, readSpecEntries } from './content-helpers';
+export { isPublishedEntity, readSpecEntries } from './content-helpers';
+export { readSeoFields, toPageSeo, type CmsSeoFields, type PageSeo } from '../seo/types';

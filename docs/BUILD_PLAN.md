@@ -55,10 +55,8 @@
 | 2 | **默认语种路由混乱**：`/` 与 `/{locale}` 双首页且内容不一致；非默认语种规则未定义清楚 | SEO/切换/缓存键混乱 |
 | 3 | **API 对接脆弱**：公司/区块失败被吞成空；列表页无统一错误边界 → 易 500；无 request 去重；产品字段与模型错位（如 cover vs images） | 「除首页外几乎不可用 / 对接失效」 |
 | 4 | **详情深度不够**：产品详情几乎只有标题摘要；无图库、规格、分类、关联；资源无下载文件字段 | 不像 B2B 站 |
-| 5 | **缓存策略未落地**：`output: 'server'` + 仅写 `Cache-Control`；`/api/revalidate` **只返回 paths，不失效任何缓存** | 无法兑现 1 万 UV 方案 |
-| 6 | **无 Page Contract / Theme**：页面直接拼 UI；无主题体系；brand/token 未用 | 与参考项目能力差一个数量级 |
-| 7 | **无 SEO 体系**：无 hreflang/canonical/OG/JSON-LD/sitemap/robots | 不能上线 |
-| 8 | **无 CMS 导航**：硬编码英文 nav；catalog 里的 nav 集合未用 | 站群不可配置 |
+| 5 | **缓存策略未落地**（历史）：现已落地 HTML cache + TTL + revalidate；生产 CF purge 仍待配 | 本地可验收 |
+| 8 | **无 CMS 导航**（历史）：现已读 `b2b_nav_menu(_item)`，支持 link/reference 下拉 | 站群可配置导航 |
 | 9 | **无媒体管线**：图片/富文本 URL 不解析 | 内容区大量空白或坏链 |
 | 10 | **无统一联调验收**：未对真实 payload 跑通冒烟；测试几乎只测纯函数 | 「看起来有代码」≠「能打开」 |
 
@@ -275,8 +273,8 @@ Sprint 4：阶段 D（缓存可验收）+ 阶段 E 基础 SEO
 | A 止血联调 | **真实 CMS 联调**：`PUBLIC_CMS_API_BASE` → payload `:5173`；Mock 仍可回退 |
 | B 多语言 | **真实 CMS 语种对齐**：`zh-CN` / `zh-TW` / `ja` / `en-US` |
 | C 页面深度 | **Mock + 真实种子均可演示**；`accept:cd` |
-| D 缓存可验收 | **本地 HTML purge 已勾选**；生产 CF Zone Purge / CMS webhook 待配 |
-| E SEO/导航 | **未完成**（仅有基础 hreflang + meta description；无 canonical/OG/sitemap/CMS nav） |
+| D 缓存可验收 | **本地 HTML purge + TTL 已勾选**；DEV 默认 BYPASS；生产 CF Zone Purge 待配；payload → revalidate webhook 已接 env |
+| E SEO/导航 | **站内 SEO 已接**（SeoHead / canonical / OG / hreflang+x-default / JSON-LD / sitemap / robots）；IndexNow/GSC/外链等运维项后置 |
 | F 主题多站 | **未完成** |
 | G 询盘/AI | 后置 |
 
@@ -311,20 +309,29 @@ Sprint 4：阶段 D（缓存可验收）+ 阶段 E 基础 SEO
 ### 阶段 D checklist（实现侧）
 
 - [x] 选型：**D-opt3 本地/边缘 HTML cache** + **D-opt2 可选 CF Zone Purge**  
-- [x] Middleware 缓存公开 HTML GET（`X-HTML-Cache: HIT|MISS`）  
+- [x] Middleware 缓存公开 HTML GET（`X-HTML-Cache: HIT|MISS|BYPASS`）；DEV 默认 BYPASS；条目带 TTL  
 - [x] `/api/revalidate` **真实删除**本地/Cache API 条目；有凭证时调 CF purge  
 - [x] `GET /api/revalidate` 返回 `lastPurge` 供观测  
 - [x] 容量估算已在 `CACHE_STRATEGY.md`  
-- [ ] CMS webhook → revalidateUrl 联调（payload 侧）  
+- [x] CMS 保存后通知前端 revalidate（payload `SITE_REVALIDATE_*`）  
 - [ ] 生产环境配置 `CF_ZONE_ID` + `CF_API_TOKEN` 后验证 CDN purge  
+
+### 阶段 E checklist（实现侧）
+
+- [x] CMS `nav_menu` / `nav_menu_item` 驱动 Header（失败回退 manifest）  
+- [x] `SeoHead`：canonical、robots、OG、Twitter、hreflang（含 `x-default`）、JSON-LD  
+- [x] 详情/静态页传入 CMS SEO；列表页基础 canonical + alternates  
+- [x] `/sitemap.xml`、`/robots.txt`  
+- [ ] 404 页（独立路由体验）  
+- [ ] IndexNow / GSC / 外链 / 询盘漏斗（运维与后置，本阶段不做）  
 
 ---
 
 ## 10. 下一步
 
-1. **阶段 E**：SEOHead / sitemap / CMS nav / 404  
-2. 真实 payload +（可选）`CF_ZONE_ID`/`CF_API_TOKEN` 后复跑验收  
-3. CMS webhook → `hooks.revalidateUrl`（payload 侧）  
+1. 可选：补 404 页体验；生产 `PUBLIC_SITE_URL` + `SITE_REVALIDATE_URL` 对齐  
+2. 真实 payload 重跑 `seed:b2b:generate` + `seed:b2b` 后验产品详情 head / sitemap  
+3. 生产配置 `CF_ZONE_ID`/`CF_API_TOKEN` 后验证 CDN purge  
 4. 分类路由按需再开  
 
 不接受「又加了一批路由文件」作为进度。

@@ -10,6 +10,7 @@ import {
   type PublicPages,
 } from '../cms';
 import { resolveMediaUrl } from '../media';
+import { toPageSeo, type PageSeo } from '../seo';
 
 export type ArticleCard = {
   id: string;
@@ -25,6 +26,7 @@ export type ArticleDetail = ArticleCard & {
   content: string;
   seoTitle: string;
   seoDescription: string;
+  seo: PageSeo;
 };
 
 function toCard(row: CmsEntity, locale?: string): ArticleCard {
@@ -59,11 +61,18 @@ export async function getArticle(idOrSlug: string, query?: CmsQuery): Promise<Ar
   if (!row || !isPublishedEntity(row)) return null;
   const card = toCard(row, locale);
   const data = entityData(row);
-  const seo = readSeoFields(data, card.title, card.summary);
+  const fields = readSeoFields(data, card.title, card.summary);
+  const seo = toPageSeo(fields, {
+    pathname: card.href,
+    ogImageFallback: card.coverUrl,
+    schemaTypeDefault: 'Article',
+    ogType: 'article',
+  });
   return {
     ...card,
     content: String(data.content || ''),
-    seoTitle: seo.seoTitle || card.title,
-    seoDescription: seo.seoDescription || card.summary,
+    seoTitle: seo.title || card.title,
+    seoDescription: seo.description || card.summary,
+    seo,
   };
 }

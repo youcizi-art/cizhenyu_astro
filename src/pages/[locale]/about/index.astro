@@ -6,6 +6,7 @@ import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import { loadAboutPage } from '@/workflows/pages/load-static-pages';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
+import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
 
 export const prerender = false;
 
@@ -18,12 +19,30 @@ if (!data.localeValid) {
 }
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return new Response('Not Found', { status: 404 });
+const seoProps = layoutSeoProps(data.page?.seo, Astro.url.pathname);
+const jsonLd = pageJsonLd(data.page?.seo || {
+  title: data.page?.title || data.labels.about,
+  description: data.page?.summary || data.company.summary || '',
+  canonicalUrl: Astro.url.pathname,
+  robots: 'index,follow',
+  ogImage: data.company.logoUrl || '',
+  ogType: 'website',
+  schemaType: 'Organization',
+  schemaMapping: '',
+  geoLat: '',
+  geoLng: '',
+}, Astro.url.pathname, {
+  siteName: data.siteName,
+  company: data.company,
+});
 ---
 <BaseLayout
   title={`${data.page?.seoTitle || data.page?.title || data.labels.about} · ${data.siteName}`}
   description={data.page?.seoDescription || data.page?.summary || data.company.summary}
   lang={data.locale}
-  alternates={buildAlternateLinks(data.localeOptions)}
+  alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
+  {...seoProps}
+  jsonLd={jsonLd}
 >
   <SiteHeader
     siteName={data.siteName}

@@ -2,6 +2,7 @@ import { entityData, type CmsEntity } from '../cms';
 import { isPublishedEntity, readSeoFields, readSpecEntries } from '../cms';
 import { resolveMediaUrl, resolveMediaUrls } from '../media';
 import { localePath } from '../cms';
+import { toPageSeo, type PageSeo } from '../seo';
 
 export type ProductRecord = CmsEntity;
 
@@ -25,6 +26,7 @@ export type ProductDetail = ProductCard & {
   availability: string;
   seoTitle: string;
   seoDescription: string;
+  seo: PageSeo;
   specs: Array<{ key: string; value: string }>;
 };
 
@@ -61,7 +63,13 @@ export function toProductDetail(row: CmsEntity, locale?: string): ProductDetail 
     imageUrls.unshift(card.coverUrl);
   }
   const priceRaw = data.price;
-  const seo = readSeoFields(data, card.title, card.summary);
+  const fields = readSeoFields(data, card.title, card.summary);
+  const seo = toPageSeo(fields, {
+    pathname: card.href,
+    ogImageFallback: card.coverUrl,
+    schemaTypeDefault: 'Product',
+    ogType: 'product',
+  });
   return {
     ...card,
     descriptionHtml: String(data.description || ''),
@@ -69,8 +77,9 @@ export function toProductDetail(row: CmsEntity, locale?: string): ProductDetail 
     price: priceRaw == null || priceRaw === '' ? '' : String(priceRaw),
     currency: String(data.price_currency || 'USD'),
     availability: String(data.availability || ''),
-    seoTitle: seo.seoTitle || card.title,
-    seoDescription: seo.seoDescription || card.summary,
+    seoTitle: seo.title || card.title,
+    seoDescription: seo.description || card.summary,
+    seo,
     specs: readSpecEntries(data.spec_data),
   };
 }

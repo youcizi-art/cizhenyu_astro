@@ -39,20 +39,39 @@ function entitySlug(data: Record<string, unknown>, fallbackId: string) {
   return String(data.slug || fallbackId).trim();
 }
 
+const COLLECTION_ROOT_LABEL: Record<string, string> = {
+  b2b_product: '全部产品',
+  b2b_article: '全部文章',
+  b2b_case_study: '全部案例',
+  b2b_industry: '全部方案',
+  b2b_resource: '全部资料',
+  b2b_faq: '全部问答',
+  b2b_page: '全部页面',
+};
+
+function collectionRootTitle(item: ReferenceItem, collectionSlug: string, fallback?: string) {
+  return (
+    String(item.title || '').trim()
+    || String(fallback || '').trim()
+    || COLLECTION_ROOT_LABEL[collectionSlug]
+    || '查看全部'
+  );
+}
+
 function overlayCard(
   item: ReferenceItem,
   locale: string,
   collectionSlug: string,
-  entity?: CmsEntity | null
+  entity?: CmsEntity | null,
+  options?: { collectionRootFallback?: string }
 ): ResolvedReferenceCard {
   const data = entity ? entityData(entity) : {};
   const id = entity ? String(entity.id) : String(item.refId || '');
   const slug = entity ? entitySlug(data, id) : '';
   const isCollectionRoot = Boolean(item.refType) && !String(item.refId || '').trim();
-  const title =
-    String(item.title || '').trim() ||
-    (entity ? entityTitle(data) : '') ||
-    (isCollectionRoot ? collectionSlug : 'Untitled');
+  const title = isCollectionRoot
+    ? collectionRootTitle(item, collectionSlug, options?.collectionRootFallback)
+    : String(item.title || '').trim() || (entity ? entityTitle(data) : '') || 'Untitled';
   const subtitle = String(item.subtitle || '').trim() || (entity ? entitySubtitle(data) : '');
   const description =
     String(item.description || '').trim() || (entity ? entityDescription(data) : '');
@@ -120,7 +139,11 @@ async function listCollectionPreview(
 export async function resolveReferenceCards(
   value: unknown,
   locale: string,
-  options?: { expandCollection?: boolean; collectionPreviewSize?: number }
+  options?: {
+    expandCollection?: boolean;
+    collectionPreviewSize?: number;
+    collectionRootFallback?: string;
+  }
 ): Promise<ResolvedReferenceCard[]> {
   const { items } = parseReferenceField(value);
   const expandCollection = options?.expandCollection === true;
@@ -133,7 +156,9 @@ export async function resolveReferenceCards(
     const refId = String(item.refId || '').trim();
 
     if (!refId) {
-      cards.push(overlayCard(item, locale, collectionSlug, null));
+      cards.push(overlayCard(item, locale, collectionSlug, null, {
+        collectionRootFallback: options?.collectionRootFallback,
+      }));
       if (expandCollection) {
         const preview = await listCollectionPreview(collectionSlug, locale, previewSize);
         cards.push(...preview);
@@ -152,14 +177,14 @@ export async function resolveReferenceCards(
 export async function resolveReferenceNavChildren(
   value: unknown,
   locale: string,
-  options?: { previewSize?: number }
+  options?: { previewSize?: number; collectionRootFallback?: string }
 ): Promise<NavChildLink[]> {
   const cards = await resolveReferenceCards(value, locale, {
     expandCollection: true,
     collectionPreviewSize: options?.previewSize ?? 8,
+    collectionRootFallback: options?.collectionRootFallback,
   });
 
-  // 去重：集合根 + 同一实体只保留一次
   const seen = new Set<string>();
   const children: NavChildLink[] = [];
   for (const card of cards) {

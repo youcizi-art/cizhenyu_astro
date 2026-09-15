@@ -103,6 +103,7 @@
 ## 5. 字段与契约
 
 - 字段名以 `b2b-models.json` 为准（如 product: `title`、`slug`、`sku`、`cover`…；SEO 区 `_seo` 等扩展区按 CMS 输出）。
+- 前端 `entityData()` 会把 `_seo` / `_schema` / `_geo` 扁平合并进业务字段，供 `readSeoFields` 读取。
 - 组件 `data.ts`：CMS 行 → Contract props（图片 URL 解析、relation 展开）。
 - relation / reference：优先用列表 `include`（若后端支持）或二次请求；逻辑放 SDK，不放 Theme。
 

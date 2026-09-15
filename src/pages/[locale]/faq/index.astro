@@ -7,6 +7,7 @@ import { loadFaqPage } from '@/workflows/faq/load-faq';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { t } from '@/modules/i18n';
+import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
 export const prerender = false;
 
 const data = await loadFaqPage({
@@ -16,12 +17,31 @@ const data = await loadFaqPage({
 if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/faq`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return new Response('Not Found', { status: 404 });
+const seoProps = layoutSeoProps(undefined, Astro.url.pathname);
+const jsonLd = pageJsonLd({
+  title: t(data.locale, 'faq'),
+  description: data.company.summary || '',
+  canonicalUrl: Astro.url.pathname,
+  robots: 'index,follow',
+  ogImage: '',
+  ogType: 'website',
+  schemaType: 'FAQPage',
+  schemaMapping: '',
+  geoLat: '',
+  geoLng: '',
+}, Astro.url.pathname, {
+  siteName: data.siteName,
+  company: data.company,
+  faqs: data.items.map((item) => ({ question: item.question, answer: item.answer })),
+});
 ---
 <BaseLayout
   title={`${t(data.locale, 'faq')} · ${data.siteName}`}
   description={data.company.summary}
   lang={data.locale}
-  alternates={buildAlternateLinks(data.localeOptions)}
+  alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
+  {...seoProps}
+  jsonLd={jsonLd}
 >
   <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel} />
   <main class="wrap">

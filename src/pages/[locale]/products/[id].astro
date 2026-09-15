@@ -6,6 +6,7 @@ import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import { loadProductDetailPage } from '@/workflows/products/load-product-detail';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
+import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
 
 export const prerender = false;
 
@@ -22,12 +23,29 @@ applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return new Response('Not Found', { status: 404 });
 if (!data.error && !data.product) return new Response('Product not found', { status: 404 });
 const product = data.product;
+const title = product ? `${product.seoTitle} · ${data.siteName}` : `Product · ${data.siteName}`;
+const seoProps = layoutSeoProps(product?.seo, Astro.url.pathname);
+const jsonLd = product
+  ? pageJsonLd(product.seo, Astro.url.pathname, {
+      siteName: data.siteName,
+      company: data.company,
+      product: {
+        name: product.title,
+        description: product.summary || product.seoDescription,
+        sku: product.sku,
+        brand: product.brand,
+        imageUrls: product.imageUrls,
+      },
+    })
+  : null;
 ---
 <BaseLayout
-  title={product ? `${product.seoTitle} · ${data.siteName}` : `Product · ${data.siteName}`}
+  title={title}
   description={product?.seoDescription || ''}
   lang={data.locale}
-  alternates={buildAlternateLinks(data.localeOptions)}
+  alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
+  {...seoProps}
+  jsonLd={jsonLd}
 >
   <SiteHeader
     siteName={data.siteName}
@@ -40,31 +58,25 @@ const product = data.product;
     <AlertBanner messages={data.error ? [data.error] : []} />
     <AlertBanner messages={data.warnings} tone="warn" />
     {product ? (
-      <>
+      <article>
         <h1>{product.title}</h1>
         {product.sku ? <p class="muted">SKU: {product.sku}</p> : null}
-        {product.brand ? <p class="muted">Brand: {product.brand}</p> : null}
-        {(product.price || product.availability) ? (
-          <p class="muted">
-            {product.price ? `${product.currency} ${product.price}` : ''}
-            {product.price && product.availability ? ' · ' : ''}
-            {product.availability}
-          </p>
+        {product.brand ? <p class="muted">{product.brand}</p> : null}
+        {product.coverUrl ? (
+          <p><img class="card-media" src={product.coverUrl} alt={product.title} /></p>
         ) : null}
-        {product.summary ? <p>{product.summary}</p> : null}
-        {product.imageUrls.length ? (
+        {product.imageUrls?.length > 1 ? (
           <div class="gallery">
             {product.imageUrls.map((src) => (
               <img src={src} alt={product.title} loading="lazy" />
             ))}
           </div>
         ) : null}
-        {product.descriptionHtml ? (
-          <section class="section prose" set:html={product.descriptionHtml} />
-        ) : null}
-        {product.specs.length ? (
+        {product.summary ? <p>{product.summary}</p> : null}
+        {product.descriptionHtml ? <div class="prose" set:html={product.descriptionHtml} /> : null}
+        {product.specs?.length ? (
           <section class="section">
-            <h2>Specifications</h2>
+            <h2>规格</h2>
             <table class="specs">
               <tbody>
                 {product.specs.map((row) => (
@@ -77,7 +89,13 @@ const product = data.product;
             </table>
           </section>
         ) : null}
-      </>
+        {(product.price || product.availability) ? (
+          <p class="muted">
+            {product.price ? `${product.currency} ${product.price}` : ''}
+            {product.availability ? ` · ${product.availability}` : ''}
+          </p>
+        ) : null}
+      </article>
     ) : null}
   </main>
   <SiteFooter company={data.company} />

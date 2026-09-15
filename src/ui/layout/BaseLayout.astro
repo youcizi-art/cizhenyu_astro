@@ -1,22 +1,48 @@
 ---
+import SeoHead from './SeoHead.astro';
+
 interface Props {
   title: string;
   description?: string;
   lang?: string;
   alternates?: Array<{ href: string; hreflang: string }>;
+  canonicalUrl?: string;
+  robots?: string;
+  ogImage?: string;
+  ogType?: string;
+  ogUrl?: string;
+  jsonLd?: Record<string, unknown> | null;
 }
-const { title, description = '', lang = 'en', alternates = [] } = Astro.props;
+const {
+  title,
+  description = '',
+  lang = 'en',
+  alternates = [],
+  canonicalUrl = '',
+  robots = '',
+  ogImage = '',
+  ogType = 'website',
+  ogUrl = '',
+  jsonLd = null,
+} = Astro.props;
 ---
 <!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
     <title>{title}</title>
-    {alternates.map((item) => (
-      <link rel="alternate" hreflang={item.hreflang} href={item.href} />
-    ))}
+    <SeoHead
+      title={title}
+      description={description}
+      canonicalUrl={canonicalUrl}
+      robots={robots}
+      ogImage={ogImage}
+      ogType={ogType}
+      ogUrl={ogUrl}
+      alternates={alternates}
+      jsonLd={jsonLd}
+    />
     <style is:global>
       :root {
         color-scheme: light;

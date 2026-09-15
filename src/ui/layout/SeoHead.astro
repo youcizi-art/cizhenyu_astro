@@ -1,0 +1,47 @@
+---
+import { toAbsoluteUrl } from '@/modules/seo';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  robots?: string;
+  ogImage?: string;
+  ogType?: string;
+  ogUrl?: string;
+  alternates?: Array<{ href: string; hreflang: string }>;
+  jsonLd?: Record<string, unknown> | null;
+}
+const {
+  title,
+  description = '',
+  canonicalUrl = '',
+  robots = '',
+  ogImage = '',
+  ogType = 'website',
+  ogUrl = '',
+  alternates = [],
+  jsonLd = null,
+} = Astro.props;
+
+const canonical = canonicalUrl ? toAbsoluteUrl(canonicalUrl) : '';
+const image = ogImage ? toAbsoluteUrl(ogImage) : '';
+const shareUrl = ogUrl ? toAbsoluteUrl(ogUrl) : canonical;
+const jsonLdText = jsonLd ? JSON.stringify(jsonLd) : '';
+---
+{description ? <meta name="description" content={description} /> : null}
+{robots ? <meta name="robots" content={robots} /> : null}
+{canonical ? <link rel="canonical" href={canonical} /> : null}
+{alternates.map((item) => (
+  <link rel="alternate" hreflang={item.hreflang} href={item.href} />
+))}
+<meta property="og:title" content={title} />
+{description ? <meta property="og:description" content={description} /> : null}
+<meta property="og:type" content={ogType || 'website'} />
+{shareUrl ? <meta property="og:url" content={shareUrl} /> : null}
+{image ? <meta property="og:image" content={image} /> : null}
+<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+{description ? <meta name="twitter:description" content={description} /> : null}
+{image ? <meta name="twitter:image" content={image} /> : null}
+{jsonLdText ? <script type="application/ld+json" set:html={jsonLdText} /> : null}

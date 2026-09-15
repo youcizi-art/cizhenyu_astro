@@ -78,7 +78,10 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
     const nested = sortItems(byParent.get(String(row.id)) || []);
 
     if (linkMode === 'reference') {
-      const children = await resolveReferenceNavChildren(data.target_reference, locale);
+      const children = await resolveReferenceNavChildren(data.target_reference, locale, {
+        collectionRootFallback: title,
+        previewSize: 8,
+      });
       const parsed = parseReferenceField(data.target_reference);
       const first = parsed.items[0];
       const href = first?.refType
@@ -100,7 +103,10 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
       const childTitle = String(cd.title || '').trim();
       if (!childTitle) continue;
       if (String(cd.link_mode || 'link') === 'reference') {
-        const refChildren = await resolveReferenceNavChildren(cd.target_reference, locale);
+        const refChildren = await resolveReferenceNavChildren(cd.target_reference, locale, {
+          collectionRootFallback: childTitle,
+          previewSize: 8,
+        });
         children.push(...refChildren);
       } else {
         children.push({
@@ -121,18 +127,23 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
   return links.length ? links : null;
 }
 
-/** 优先 CMS 导航；失败或不完整时回退 manifest 模块链接 */
+/** 优先 CMS 导航；失败或不完整时回退 manifest 模块链接（会带 warning） */
 export async function loadNavLinks(
   site: SiteManifest,
   locale: string
-): Promise<{ links: NavLink[]; warning?: string }> {
+): Promise<{ links: NavLink[]; warning?: string; source: 'cms' | 'manifest' }> {
   try {
     const cms = await buildCmsNavLinks(locale);
-    if (cms?.length) return { links: cms };
-    return { links: buildNavLinks(site, locale) };
+    if (cms?.length) return { links: cms, source: 'cms' };
+    return {
+      links: buildNavLinks(site, locale),
+      source: 'manifest',
+      warning: 'CMS 导航为空，已使用站点模块默认菜单',
+    };
   } catch (error) {
     return {
       links: buildNavLinks(site, locale),
+      source: 'manifest',
       warning: toErrorMessage(error, '导航加载失败，已使用本地菜单'),
     };
   }

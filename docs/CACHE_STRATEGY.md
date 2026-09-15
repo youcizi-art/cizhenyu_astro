@@ -109,17 +109,43 @@
 已落地（本仓库）：
 
 1. **Middleware HTML cache**：公开 GET HTML 写入进程内 Map（本地）/ `caches.default`（Workers）  
-2. **`POST /api/revalidate`**：按 collections/paths **真实删除**缓存条目；返回 `purged.deleted` / `mode`  
-3. **`GET /api/revalidate`**：返回 `lastPurge` 供观测  
-4. **可选 CF Zone Purge**：配置 `CF_ZONE_ID` + `CF_API_TOKEN` 后对 `PUBLIC_SITE_URL` 绝对路径 purge  
-5. 响应头：`Cache-Control: s-maxage=…` + `Cache-Tag` + `X-HTML-Cache: HIT|MISS`
+2. **TTL**：按响应 `s-maxage`（默认 120s）过期；避免无 webhook 时永久陈旧  
+3. **DEV 默认 BYPASS**（`X-HTML-Cache: BYPASS`）；需要验收缓存时设 `HTML_CACHE_IN_DEV=1`  
+4. **`POST /api/revalidate`**：按 collections/paths **真实删除**缓存条目；返回 `purged.deleted` / `mode`  
+5. **`GET /api/revalidate`**：返回 `lastPurge` 供观测  
+6. **可选 CF Zone Purge**：配置 `CF_ZONE_ID` + `CF_API_TOKEN` 后对 `PUBLIC_SITE_URL` 绝对路径 purge  
+7. 响应头：`Cache-Control: s-maxage=…` + `Cache-Tag` + `X-HTML-Cache: HIT|MISS|BYPASS`
 
-验收：`npm run accept:cd`（需先 `mock:cms` + `dev`）。
+后端（payload）已接：
+
+- 实体增删改后 `waitUntil(notifySiteRevalidate)` → `SITE_REVALIDATE_URL`  
+- 本地 wrangler vars：`SITE_REVALIDATE_URL=http://127.0.0.1:4321/api/revalidate`
+
+验收：`npm run accept:cd`（需先 `mock:cms` 或真实 CMS + `dev`）。
 
 尚未完成：
 
-- payload 侧 webhook → `hooks.revalidateUrl` 联调  
 - 生产 CDN purge 凭证与压测观测  
+
+### 生产 revalidate 配置（必做）
+
+本地 `wrangler.toml` 已含：
+
+```toml
+SITE_REVALIDATE_URL = "http://127.0.0.1:4321/api/revalidate"
+SITE_REVALIDATE_SECRET = "dev-revalidate-secret"
+SITE_REVALIDATE_SITE_KEY = "demo"
+```
+
+上线时改为正式 Pages 域名，并与前端环境变量对齐：
+
+| Payload | Astro Pages |
+| --- | --- |
+| `SITE_REVALIDATE_URL=https://www.example.com/api/revalidate` | （接收端） |
+| `SITE_REVALIDATE_SECRET` | `REVALIDATE_SECRET`（相同） |
+| `SITE_REVALIDATE_SITE_KEY` | `SITE_KEY` |
+
+未配置时保存内容仍成功，仅跳过通知；页面依赖 `revalidateSeconds`（默认 120s）自然过期。
 
 ---
 

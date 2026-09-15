@@ -7,6 +7,7 @@ import { loadCaseStudyDetailPage } from '@/workflows/case-studies/load-case-stud
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { t } from '@/modules/i18n';
+import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
 
 export const prerender = false;
 
@@ -21,12 +22,26 @@ applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return new Response('Not Found', { status: 404 });
 if (!data.error && !data.item) return new Response('Not Found', { status: 404 });
 const item = data.item;
+const seoProps = layoutSeoProps(item?.seo, Astro.url.pathname);
+const jsonLd = item
+  ? pageJsonLd(item.seo, Astro.url.pathname, {
+      siteName: data.siteName,
+      company: data.company,
+      article: {
+        headline: item.title,
+        description: item.summary || item.seoDescription,
+        imageUrl: item.coverUrl,
+      },
+    })
+  : null;
 ---
 <BaseLayout
   title={`${item?.seoTitle || item?.title || t(data.locale, 'caseStudies')} · ${data.siteName}`}
   description={item?.seoDescription || item?.summary || ''}
   lang={data.locale}
-  alternates={buildAlternateLinks(data.localeOptions)}
+  alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
+  {...seoProps}
+  jsonLd={jsonLd}
 >
   <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel} />
   <main class="wrap">

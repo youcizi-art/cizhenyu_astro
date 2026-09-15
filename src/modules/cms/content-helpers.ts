@@ -1,17 +1,12 @@
 import type { CmsEntity } from './entity';
 import { entityData } from './entity';
 
+export { readSeoFields, toPageSeo, type CmsSeoFields, type PageSeo } from '../seo/types';
+
 /** 无 status 字段视为已发布（与公开 API 行为一致） */
 export function isPublishedEntity(row: CmsEntity) {
   const status = String(entityData(row).status || '').trim().toLowerCase();
   return !status || status === 'published';
-}
-
-export function readSeoFields(data: Record<string, unknown>, fallbackTitle = '', fallbackDescription = '') {
-  return {
-    seoTitle: String(data.seo_title || fallbackTitle || '').trim(),
-    seoDescription: String(data.seo_description || fallbackDescription || '').trim(),
-  };
 }
 
 /** 将 spec_data（object / array）规范为展示行 */

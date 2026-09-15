@@ -1,7 +1,8 @@
 /**
  * HTML 页面缓存（阶段 D）：
  * - 优先 Cloudflare `caches.default`（Pages/Workers 运行时）
- * - 本地 Node / astro dev 回退到进程内 Map（可验收 HIT/MISS/purge）
+ * - 本地 Node / astro dev 回退到进程内 Map
+ * - 条目带 TTL（默认对齐 s-maxage / 120s），避免无 webhook 时永久陈旧
  * - 可选 CF Zone Purge API（生产 CDN）
  */
 
@@ -9,6 +10,7 @@ export type HtmlCacheEntry = {
   status: number;
   headers: Array<[string, string]>;
   body: string;
+  expiresAt: number;
 };
 
 export type PurgeResult = {
@@ -21,6 +23,7 @@ export type PurgeResult = {
 
 const MEMORY = new Map<string, HtmlCacheEntry>();
 let lastPurge: PurgeResult | null = null;
+const DEFAULT_TTL_SECONDS = 120;
 
 function cacheKey(url: URL) {
   return `${url.pathname}${url.search}`;
@@ -37,35 +40,73 @@ export function getLastPurge() {
   return lastPurge;
 }
 
+/** 本地开发默认关闭 HTML 缓存，避免改 CMS 后页面看起来「不是真实数据」 */
+export function shouldUseHtmlCache() {
+  const force = String(import.meta.env.HTML_CACHE_IN_DEV || '').trim() === '1';
+  if (import.meta.env.DEV && !force) return false;
+  if (String(import.meta.env.DISABLE_HTML_CACHE || '').trim() === '1') return false;
+  return true;
+}
+
+function readTtlSeconds(headers?: Headers | Array<[string, string]>) {
+  const raw = headers instanceof Headers
+    ? headers.get('cache-control') || ''
+    : (headers || []).find(([k]) => k.toLowerCase() === 'cache-control')?.[1] || '';
+  const match = /s-maxage=(\d+)/i.exec(raw) || /max-age=(\d+)/i.exec(raw);
+  const ttl = match ? Number(match[1]) : DEFAULT_TTL_SECONDS;
+  return Number.isFinite(ttl) && ttl > 0 ? ttl : DEFAULT_TTL_SECONDS;
+}
+
 export async function getCachedHtml(url: URL): Promise<HtmlCacheEntry | null> {
   const key = cacheKey(url);
+  const now = Date.now();
+
   const cachesApi = getGlobalCaches();
   if (cachesApi?.default) {
     try {
       const hit = await cachesApi.default.match(new Request(`https://html-cache.local${key}`));
       if (hit) {
-        return {
+        const entry: HtmlCacheEntry = {
           status: hit.status,
           headers: [...hit.headers.entries()],
           body: await hit.text(),
+          expiresAt: now + readTtlSeconds(hit.headers) * 1000,
         };
+        // Cache API 若未按 max-age 自动失效，这里再兜一层
+        const storedExp = hit.headers.get('x-html-cache-expires');
+        if (storedExp && Number(storedExp) <= now) {
+          await cachesApi.default.delete(new Request(`https://html-cache.local${key}`)).catch(() => undefined);
+        } else {
+          return entry;
+        }
       }
     } catch {
       // fall through to memory
     }
   }
-  return MEMORY.get(key) || null;
+
+  const mem = MEMORY.get(key);
+  if (!mem) return null;
+  if (mem.expiresAt <= now) {
+    MEMORY.delete(key);
+    return null;
+  }
+  return mem;
 }
 
 export async function putCachedHtml(url: URL, response: Response) {
   const key = cacheKey(url);
   const body = await response.text();
+  const ttl = readTtlSeconds(response.headers);
+  const expiresAt = Date.now() + ttl * 1000;
   const headers = [...response.headers.entries()].filter(([name]) => {
     const n = name.toLowerCase();
     return n !== 'set-cookie' && n !== 'transfer-encoding';
   });
-  const entry: HtmlCacheEntry = { status: response.status, headers, body };
+  headers.push(['x-html-cache-expires', String(expiresAt)]);
+  headers.push(['Cache-Control', `public, max-age=${ttl}`]);
 
+  const entry: HtmlCacheEntry = { status: response.status, headers, body, expiresAt };
   MEMORY.set(key, entry);
 
   const cachesApi = getGlobalCaches();
@@ -91,7 +132,6 @@ function expandPaths(paths: string[], locales: string[]) {
       continue;
     }
     out.add(path.startsWith('/') ? path : `/${path}`);
-    // 集合映射常给无 locale 前缀路径，展开到各 locale
     if (!locales.some((locale) => path === `/${locale}` || path.startsWith(`/${locale}/`))) {
       for (const locale of locales) {
         out.add(`/${locale}${path === '/' ? '' : path}`);
@@ -174,7 +214,6 @@ export async function purgeHtmlPaths(options: {
   const cachesApi = getGlobalCaches();
   if (cachesApi?.default) {
     usedCacheApi = true;
-    // Cache API 无 list：对明确路径逐条 delete；/* 时只能依赖 TTL / CF API
     for (const pattern of patterns) {
       if (pattern === '/*') continue;
       const pathOnly = pattern.split('?')[0] || pattern;

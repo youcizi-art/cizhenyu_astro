@@ -4,5 +4,6 @@ export {
   getLastPurge,
   purgeHtmlPaths,
   putCachedHtml,
+  shouldUseHtmlCache,
   type PurgeResult,
 } from './html-cache';

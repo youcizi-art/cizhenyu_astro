@@ -8,17 +8,38 @@ export type CmsEntity = {
   locale?: string | null;
   language_group_key?: string | null;
   data?: Record<string, unknown>;
+  /** 公开 API 扩展区（payload 按 ui.group 嵌套输出） */
+  _seo?: Record<string, unknown>;
+  _schema?: Record<string, unknown>;
+  _geo?: Record<string, unknown>;
   [key: string]: unknown;
 };
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
+/** 公开 API 扩展区分区；合并进业务 data 便于字段读取 */
+const EXTENSION_REGION_KEYS = ['_seo', '_schema', '_geo'] as const;
+
 export function isEntityUuid(value: string) {
   return UUID_RE.test(String(value || '').trim());
 }
 
+/**
+ * 读实体业务字段；若存在 `_seo` / `_schema` / `_geo` 分区则扁平合并
+ *（兼容 Mock 把 seo_* 直接放在 data 内的形态）。
+ */
 export function entityData(row: CmsEntity | null | undefined) {
-  return (row?.data || {}) as Record<string, unknown>;
+  if (!row) return {};
+  const base =
+    row.data && typeof row.data === 'object' && !Array.isArray(row.data)
+      ? ({ ...row.data } as Record<string, unknown>)
+      : {};
+  for (const key of EXTENSION_REGION_KEYS) {
+    const region = row[key];
+    if (!region || typeof region !== 'object' || Array.isArray(region)) continue;
+    Object.assign(base, region as Record<string, unknown>);
+  }
+  return base;
 }
 
 export function localePath(locale: string | undefined, path: string) {
