@@ -1,16 +1,12 @@
 ---
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
-import SiteHeader from '@/ui/layout/SiteHeader.astro';
-import SiteFooter from '@/ui/layout/SiteFooter.astro';
-import AlertBanner from '@/ui/blocks/AlertBanner.astro';
-import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
-import TurmillProductDetailPage from '@/ui/themes/turmill/pages/ProductDetailPage.astro';
+import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
+import ActiveProductDetail from '@/ui/themes/ActiveProductDetail.astro';
 import { loadProductDetailPage } from '@/workflows/products/load-product-detail';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
 import { t } from '@/modules/i18n';
-import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -29,111 +25,56 @@ if (!data.error && !data.product) return Astro.rewrite('/404');
 const product = data.product;
 const title = product ? `${product.seoTitle} · ${data.siteName}` : `Product · ${data.siteName}`;
 const seoProps = layoutSeoProps(product?.seo, Astro.url.pathname);
+const company = {
+  name: data.company.name,
+  address: data.company.address,
+  country: data.company.country,
+  phone: data.company.phone,
+  email: data.company.email,
+  website: data.company.website,
+  logoUrl: data.company.logoUrl,
+  foundingDate: data.company.foundingDate,
+  sameAs: data.company.sameAs,
+};
 const jsonLd = product
-  ? pageJsonLd(product.seo, Astro.url.pathname, {
-      siteName: data.siteName,
-      company: data.company,
-      product: {
-        name: product.title,
-        description: product.summary || product.seoDescription,
-        sku: product.sku,
-        brand: product.brand,
-        imageUrls: product.imageUrls,
+  ? pageJsonLd(
+      {
+        ...product.seo,
+        geoLat: product.seo.geoLat || data.company.geoLat,
+        geoLng: product.seo.geoLng || data.company.geoLng,
       },
-    })
+      Astro.url.pathname,
+      {
+        siteName: data.siteName,
+        company,
+        breadcrumbs: [
+          { name: t(data.locale, 'home'), href: `/${data.locale}` },
+          { name: t(data.locale, 'products'), href: `/${data.locale}/products` },
+          { name: product.title },
+        ],
+        product: {
+          name: product.title,
+          description: product.summary || product.seoDescription,
+          sku: product.sku,
+          brand: product.brand,
+          imageUrls: product.imageUrls,
+          specs: product.specs,
+        },
+        faqs: product.faqs.map((item) => ({ question: item.question, answer: item.answer })),
+      }
+    )
   : null;
-const turmill = useTurmillShell(data.site.theme);
-const shell = buildTurmillShellProps(data);
-const backHref = `/${data.locale}/products`;
-const homeHref = `/${data.locale}`;
-const specsTitle = data.locale.startsWith('zh') ? '规格参数' : 'Specifications';
-const inquiryTitle = data.locale.startsWith('zh') ? '产品询盘' : 'Product Inquiry';
-const inquiryBody = data.locale.startsWith('zh')
-  ? '咨询批发价、起订量与 OEM 定制方案。'
-  : 'Ask about wholesale pricing, MOQ, and OEM options.';
 ---
 <BaseLayout
   title={title}
   description={product?.seoDescription || ''}
   lang={data.locale}
+  siteName={data.siteName}
   alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
   {...seoProps}
   jsonLd={jsonLd}
 >
-  {turmill ? (
-    <TurmillPageShell {...shell}>
-      <TurmillProductDetailPage
-        product={product}
-        backHref={backHref}
-        backLabel={`← ${t(data.locale, 'products')}`}
-        homeHref={homeHref}
-        homeLabel={t(data.locale, 'home')}
-        listLabel={t(data.locale, 'products')}
-        specsTitle={specsTitle}
-        inquiryTitle={inquiryTitle}
-        inquiryBody={inquiryBody}
-        contactHref={`/${data.locale}/contact`}
-        contactLabel={t(data.locale, 'contact')}
-        error={data.error}
-        warnings={data.warnings}
-      />
-    </TurmillPageShell>
-  ) : (
-    <>
-      <SiteHeader
-        siteName={data.siteName}
-        links={data.navLinks}
-        localeOptions={data.localeOptions}
-        languageLabel={data.languageLabel}
-        company={data.company}
-        locale={data.locale}
-      />
-      <main class="wrap">
-        <p><a href={backHref}>← Products</a></p>
-        <AlertBanner messages={data.error ? [data.error] : []} />
-        <AlertBanner messages={data.warnings} tone="warn" />
-        {product ? (
-          <article>
-            <h1>{product.title}</h1>
-            {product.sku ? <p class="muted">SKU: {product.sku}</p> : null}
-            {product.brand ? <p class="muted">{product.brand}</p> : null}
-            {product.coverUrl ? (
-              <p><img class="card-media" src={product.coverUrl} alt={product.title} /></p>
-            ) : null}
-            {product.imageUrls?.length > 1 ? (
-              <div class="gallery">
-                {product.imageUrls.map((src) => (
-                  <img src={src} alt={product.title} loading="lazy" />
-                ))}
-              </div>
-            ) : null}
-            {product.summary ? <p>{product.summary}</p> : null}
-            {product.descriptionHtml ? <div class="prose" set:html={product.descriptionHtml} /> : null}
-            {product.specs?.length ? (
-              <section class="section">
-                <h2>{specsTitle}</h2>
-                <table class="specs">
-                  <tbody>
-                    {product.specs.map((row) => (
-                      <tr>
-                        <th>{row.key}</th>
-                        <td>{row.value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </section>
-            ) : null}
-            {(product.price || product.availability) ? (
-              <p class="muted">
-                {product.price ? `${product.currency} ${product.price}` : ''}
-                {product.availability ? ` · ${product.availability}` : ''}
-              </p>
-            ) : null}
-          </article>
-        ) : null}
-      </main>
-      <SiteFooter company={data.company} />
-    </>
-  )}
+  <ThemeFrame chrome={data}>
+    <ActiveProductDetail chrome={data} product={product} error={data.error} />
+  </ThemeFrame>
 </BaseLayout>

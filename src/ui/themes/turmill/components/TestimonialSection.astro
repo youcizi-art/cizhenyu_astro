@@ -1,0 +1,49 @@
+---
+interface Item {
+  name: string;
+  role?: string;
+  quote: string;
+  avatarUrl?: string;
+  meta?: string;
+  rating?: number;
+}
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  items?: Item[];
+}
+const {
+  eyebrow = 'Authentic, Positive, Inspiring',
+  title = 'Voices of Satisfied Pet Owners',
+  subtitle = 'Hear from customers who love our products.',
+  items = [],
+} = Astro.props;
+---
+{items.length > 0 ? (
+  <section class="tm-testimonials">
+    <div class="tm-title-wrap">
+      {eyebrow ? <div class="tm-title-eyebrow">{eyebrow}</div> : null}
+      <h2 class="tm-title-main">{title}</h2>
+      {subtitle ? <p class="tm-title-desc">{subtitle}</p> : null}
+    </div>
+    <div class="tm-container tm-grid-3">
+      {items.map((item) => (
+        <article class="tm-testimonial-card">
+          <div class="tm-stars" aria-label={`${item.rating || 5} stars`}>
+            {'★★★★★'.slice(0, item.rating || 5)}
+          </div>
+          <p class="tm-testimonial-quote">“{item.quote}”</p>
+          <div class="tm-testimonial-author">
+            {item.avatarUrl ? <img src={item.avatarUrl} alt={item.name} width="48" height="48" /> : null}
+            <div>
+              <strong class="tm-display">{item.name}</strong>
+              {item.role ? <div class="tm-testimonial-role">{item.role}</div> : null}
+              {item.meta ? <div class="tm-testimonial-meta">{item.meta}</div> : null}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+) : null}

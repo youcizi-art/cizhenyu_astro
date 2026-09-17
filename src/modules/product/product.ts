@@ -1,39 +1,143 @@
 import {
+  entityData,
   getEntityByIdOrSlug,
   listEntities,
+  localePath,
+  type CmsEntity,
   type CmsQuery,
-  type PublicPages,
 } from '../cms';
 import {
   isPublishedProduct,
   toProductCard,
   toProductDetail,
-  type ProductCard,
   type ProductDetail,
+  type ProductLinkCard,
 } from './types';
 
-export async function listProducts(query?: CmsQuery): Promise<{
-  items: ProductCard[];
-  pages: PublicPages;
-}> {
+export async function listProducts(query?: CmsQuery) {
   const locale = query?.locale ? String(query.locale) : undefined;
   const result = await listEntities('product', {
     ...query,
-    // 列表侧优先只要已发布；若后端未按 status 过滤，前端再筛
     status: query?.status ?? 'published',
   });
-  const items = result.list
-    .filter(isPublishedProduct)
-    .map((row) => toProductCard(row, locale));
+  const items = result.list.filter(isPublishedProduct).map((row) => toProductCard(row, locale));
   return { items, pages: result.pages };
 }
 
-export async function getProduct(
-  idOrSlug: string,
-  query?: CmsQuery
-): Promise<ProductDetail | null> {
+export async function getProduct(idOrSlug: string, query?: CmsQuery): Promise<ProductDetail | null> {
   const locale = query?.locale ? String(query.locale) : undefined;
   const row = await getEntityByIdOrSlug('product', idOrSlug, query);
   if (!row || !isPublishedProduct(row)) return null;
   return toProductDetail(row, locale);
+}
+
+async function resolveLinkCards(
+  key: 'product' | 'industry' | 'caseStudy',
+  ids: string[],
+  locale: string | undefined,
+  mapRow: (row: CmsEntity) => ProductLinkCard | null
+): Promise<ProductLinkCard[]> {
+  if (!ids.length) return [];
+  const unique = [...new Set(ids)];
+  const rows = await Promise.all(
+    unique.map((id) => getEntityByIdOrSlug(key, id, { locale }).catch(() => null))
+  );
+  return rows
+    .filter(Boolean)
+    .map((row) => mapRow(row as CmsEntity))
+    .filter(Boolean) as ProductLinkCard[];
+}
+
+function industryCard(row: CmsEntity, locale?: string): ProductLinkCard | null {
+  const data = entityData(row);
+  const slug = String(data.slug || row.id).trim();
+  if (!slug) return null;
+  return {
+    id: String(row.id),
+    title: String(data.name || data.title || 'Untitled'),
+    href: localePath(locale, `/solutions/${encodeURIComponent(slug)}`),
+    summary: String(data.summary || ''),
+    coverUrl: String((data.cover as { url?: string } | undefined)?.url || ''),
+  };
+}
+
+function caseCard(row: CmsEntity, locale?: string): ProductLinkCard | null {
+  const data = entityData(row);
+  const slug = String(data.slug || row.id).trim();
+  if (!slug) return null;
+  return {
+    id: String(row.id),
+    title: String(data.title || 'Untitled'),
+    href: localePath(locale, `/case-studies/${encodeURIComponent(slug)}`),
+    summary: String(data.summary || ''),
+  };
+}
+
+/** 解析产品关联（行业/相关产品/案例/FAQ），失败时返回空数组 */
+export async function enrichProductDetail(
+  product: ProductDetail,
+  locale: string | undefined
+): Promise<ProductDetail> {
+  const [industries, relatedProducts, relatedCases, faqByIds] = await Promise.all([
+    resolveLinkCards('industry', product.industryIds, locale, (row) => industryCard(row, locale)),
+    resolveLinkCards('product', product.relatedProductIds, locale, (row) => {
+      if (!isPublishedProduct(row)) return null;
+      const card = toProductCard(row, locale);
+      if (card.id === product.id) return null;
+      return {
+        id: card.id,
+        title: card.title,
+        href: card.href,
+        summary: card.summary,
+        coverUrl: card.coverUrl,
+      };
+    }),
+    resolveLinkCards('caseStudy', product.relatedCaseIds, locale, (row) => caseCard(row, locale)),
+    product.faqIds.length
+      ? Promise.all(
+          product.faqIds.map((id) => getEntityByIdOrSlug('faq', id, { locale }).catch(() => null))
+        )
+      : Promise.resolve([] as Array<CmsEntity | null>),
+  ]);
+
+  const faqsFromIds = (faqByIds || [])
+    .filter(Boolean)
+    .map((row) => {
+      const data = entityData(row as CmsEntity);
+      return {
+        id: String((row as CmsEntity).id),
+        question: String(data.question || ''),
+        answer: String(data.answer || ''),
+      };
+    })
+    .filter((item) => item.question);
+
+  let faqs = faqsFromIds;
+  if (!faqs.length) {
+    try {
+      const raw = await listEntities('faq', { locale, pageSize: 100, status: 'published' });
+      faqs = raw.list
+        .map((row) => {
+          const data = entityData(row);
+          const related = String(data.related_product || '').trim();
+          if (related !== product.id) return null;
+          return {
+            id: String(row.id),
+            question: String(data.question || ''),
+            answer: String(data.answer || ''),
+          };
+        })
+        .filter(Boolean) as ProductDetail['faqs'];
+    } catch {
+      faqs = [];
+    }
+  }
+
+  return {
+    ...product,
+    industries,
+    relatedProducts,
+    relatedCases,
+    faqs,
+  };
 }

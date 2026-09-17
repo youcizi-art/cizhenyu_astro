@@ -53,9 +53,9 @@ describe('site manifest', () => {
 describe('theme resolve', () => {
   it('falls back unknown theme to default', () => {
     expect(resolveTheme({ theme: 'nope' }).themeId).toBe('default');
-    expect(resolveTheme({ theme: 'turmill', primaryColor: '#4d8f65' })).toEqual({
+    expect(resolveTheme({ theme: 'turmill', primaryColor: '#22c55e' })).toEqual({
       themeId: 'turmill',
-      primaryColor: '#4d8f65',
+      primaryColor: '#22c55e',
     });
   });
 });

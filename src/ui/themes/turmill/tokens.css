@@ -1,26 +1,76 @@
-/* Turmill — forest green / oat mint, aligned with turmill.com */
+/**
+ * Turmill tokens — aligned with live www.turmill.com :root
+ * Source: --maincolor:#22c55e; --darkbg:#1f2b23; --bg-default:#fafcfa
+ * Note: #4d8f65 is text-main-desc on the live site, NOT the primary button color.
+ */
 [data-theme='turmill'] {
   color-scheme: light;
-  --ink: #1f2b23;
-  --muted: #55665b;
-  --line: #e2ebe5;
-  --bg: #fafcfa;
-  --bg-subtle: #ebf5ef;
-  --surface: #ffffff;
-  --accent: #4d8f65;
-  --accent-hover: #3f7853;
-  --accent-ink: #ffffff;
-  --header-bg: #ffffff;
-  --topbar-bg: #1f2b23;
+
+  --maincolor: #22c55e;
+  --assistantcolor: #ffbe26;
+  --darkbg: #1f2b23;
+  --text-white: #ffffff;
+  --text-color: #333333;
+  --text-p-color: #888888;
+  --text-content-color: #666666;
+  --text-main-desc: #4d8f65;
+  --text-link-color: #22c55e;
+  --bg-white: #ffffff;
+  --bg-default: #fafcfa;
+  --bg-main-light: #e7fbec;
+  --bg-light: #ebf5ef;
+  --brd-gray: #eeeeee;
+  --brd-gray-2: #dddddd;
+  --brd-mint: #e2ebe5;
+  --brd-strong: #cbdcd0;
+
+  /* Aliases used by theme.css / chrome */
+  --color-primary: var(--maincolor);
+  --color-primary-light: #4ade80;
+  --color-primary-dark: var(--darkbg);
+  --color-primary-hover: #16a34a;
+  --color-accent-gold: var(--assistantcolor);
+  --color-bg-main: var(--bg-default);
+  --color-bg-subtle: var(--bg-light);
+  --color-bg-muted: var(--bg-main-light);
+  --color-text-main: var(--darkbg);
+  --color-text-muted: #55665b;
+  --color-text-subtle: #88998e;
+  --color-text-inverse: var(--text-white);
+  --color-border: var(--brd-mint);
+  --color-border-strong: var(--brd-strong);
+
+  --ink: var(--color-text-main);
+  --muted: var(--color-text-muted);
+  --line: var(--color-border);
+  --bg: var(--color-bg-main);
+  --bg-subtle: var(--color-bg-subtle);
+  --surface: var(--bg-white);
+  --accent: var(--maincolor);
+  --accent-hover: var(--color-primary-hover);
+  --accent-ink: var(--text-white);
+  --header-bg: var(--bg-white);
+  --topbar-bg: var(--darkbg);
   --topbar-fg: #d7e4db;
-  --footer-bg: #1f2b23;
+  --footer-bg: var(--darkbg);
   --footer-fg: #f4faf6;
   --footer-muted: #a8b9af;
-  --hero-bg: linear-gradient(145deg, #ebf5ef 0%, #fafcfa 48%, #e7fbec 100%);
+  --hero-bg: var(--bg-main-light);
   --hero-border: transparent;
-  --radius: 12px;
-  --font-sans: 'Outfit', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --font-display: 'Yeseva One', 'Outfit', Georgia, serif;
-  --wrap-max: 1120px;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-box: 20px;
+  --radius-pill: 9999px;
+  --radius: var(--radius-md);
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-sans: 'Plus Jakarta Sans', 'Outfit', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-display: 'Yeseva One', Georgia, serif;
+  --wrap-max: 1200px;
   --shadow-nav: 0 12px 28px rgba(31, 43, 35, 0.1);
 }

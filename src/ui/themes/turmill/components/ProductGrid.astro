@@ -7,33 +7,59 @@ interface Item {
 }
 interface Props {
   title?: string;
+  eyebrow?: string;
+  subtitle?: string;
   items?: Item[];
   readMoreText?: string;
+  /** home: overlay title like live site; list: classic card body */
+  variant?: 'home' | 'list';
 }
-const { title = 'Products', items = [], readMoreText = 'Learn More' } = Astro.props;
+const {
+  title = 'Products',
+  eyebrow = '',
+  subtitle = '',
+  items = [],
+  readMoreText = 'Learn More',
+  variant = 'home',
+} = Astro.props;
 ---
 {items.length > 0 ? (
-  <section class="tm-section tm-section-white" id="products">
-    {title ? (
+  <section class={`tm-section tm-section-white tm-products-${variant}`} id="products">
+    {title || subtitle || eyebrow ? (
       <div class="tm-title-wrap">
-        <h2 class="tm-title-main">{title}</h2>
+        {eyebrow ? <div class="tm-title-eyebrow">{eyebrow}</div> : null}
+        {title ? <h2 class="tm-title-main">{title}</h2> : null}
+        {subtitle ? <p class="tm-title-desc">{subtitle}</p> : null}
       </div>
     ) : null}
     <div class="tm-container tm-grid-3">
       {items.map((item) => (
-        <article class="tm-product-card tm-card-hover">
-          <a
-            class="tm-product-cover tm-img-cover"
-            href={item.href}
-            style={item.coverUrl ? `background-image:url(${item.coverUrl})` : undefined}
-            aria-label={item.title}
-          />
-          <div class="tm-product-body">
-            <h3><a href={item.href}>{item.title}</a></h3>
-            {item.summary ? <p>{item.summary}</p> : null}
-            <a class="tm-link-more" href={item.href}>{readMoreText} <span>→</span></a>
-          </div>
-        </article>
+        variant === 'home' ? (
+          <article class="tm-product-tile">
+            <a
+              class="tm-product-tile-media tm-img-cover"
+              href={item.href}
+              style={item.coverUrl ? `background-image:url(${item.coverUrl})` : undefined}
+              aria-label={item.title}
+            >
+              <span class="tm-product-tile-title">{item.title}</span>
+            </a>
+          </article>
+        ) : (
+          <article class="tm-product-card tm-card-hover">
+            <a
+              class="tm-product-cover tm-img-cover"
+              href={item.href}
+              style={item.coverUrl ? `background-image:url(${item.coverUrl})` : undefined}
+              aria-label={item.title}
+            />
+            <div class="tm-product-body">
+              <h3><a href={item.href}>{item.title}</a></h3>
+              {item.summary ? <p>{item.summary}</p> : null}
+              <a class="tm-link-more" href={item.href}>{readMoreText} <span>→</span></a>
+            </div>
+          </article>
+        )
       ))}
     </div>
   </section>

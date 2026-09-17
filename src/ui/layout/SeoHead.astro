@@ -1,5 +1,5 @@
 ---
-import { toAbsoluteUrl } from '@/modules/seo';
+import { toAbsoluteUrl, toOgLocale } from '@/modules/seo';
 
 interface Props {
   title: string;
@@ -9,6 +9,9 @@ interface Props {
   ogImage?: string;
   ogType?: string;
   ogUrl?: string;
+  siteName?: string;
+  locale?: string;
+  alternateLocales?: string[];
   alternates?: Array<{ href: string; hreflang: string }>;
   jsonLd?: Record<string, unknown> | null;
 }
@@ -20,6 +23,9 @@ const {
   ogImage = '',
   ogType = 'website',
   ogUrl = '',
+  siteName = '',
+  locale = '',
+  alternateLocales = [],
   alternates = [],
   jsonLd = null,
 } = Astro.props;
@@ -28,6 +34,11 @@ const canonical = canonicalUrl ? toAbsoluteUrl(canonicalUrl) : '';
 const image = ogImage ? toAbsoluteUrl(ogImage) : '';
 const shareUrl = ogUrl ? toAbsoluteUrl(ogUrl) : canonical;
 const jsonLdText = jsonLd ? JSON.stringify(jsonLd) : '';
+const ogLocale = locale ? toOgLocale(locale) : '';
+const ogLocaleAlts = (alternateLocales.length ? alternateLocales : alternates.map((a) => a.hreflang))
+  .filter((code) => code && code !== 'x-default')
+  .map((code) => toOgLocale(code))
+  .filter((code) => code && code !== ogLocale);
 ---
 {description ? <meta name="description" content={description} /> : null}
 {robots ? <meta name="robots" content={robots} /> : null}
@@ -40,6 +51,11 @@ const jsonLdText = jsonLd ? JSON.stringify(jsonLd) : '';
 <meta property="og:type" content={ogType || 'website'} />
 {shareUrl ? <meta property="og:url" content={shareUrl} /> : null}
 {image ? <meta property="og:image" content={image} /> : null}
+{siteName ? <meta property="og:site_name" content={siteName} /> : null}
+{ogLocale ? <meta property="og:locale" content={ogLocale} /> : null}
+{ogLocaleAlts.map((code) => (
+  <meta property="og:locale:alternate" content={code} />
+))}
 <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
 <meta name="twitter:title" content={title} />
 {description ? <meta name="twitter:description" content={description} /> : null}

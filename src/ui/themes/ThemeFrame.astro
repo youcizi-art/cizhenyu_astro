@@ -1,0 +1,41 @@
+---
+/**
+ * 通用页壳切换：page-shell 主题走各自 PageShell；否则走默认 SiteHeader/Footer。
+ * 新增 page-shell 主题时在此登记组件，勿散落到 pages。
+ */
+import SiteHeader from '@/ui/layout/SiteHeader.astro';
+import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import TurmillPageShell from './turmill/PageShell.astro';
+import { buildPageShellProps, getThemeMeta, hasPageShell } from './theme-ui';
+import type { PageChrome } from '@/workflows/chrome/load-chrome';
+
+interface Props {
+  chrome: PageChrome;
+  showContactCta?: boolean;
+}
+const { chrome, showContactCta = true } = Astro.props;
+const meta = getThemeMeta(chrome.site.theme);
+const shell = buildPageShellProps(chrome);
+const useShell = hasPageShell(chrome.site.theme);
+---
+{useShell && meta.id === 'turmill' ? (
+  <TurmillPageShell {...shell} showContactCta={showContactCta}>
+    <slot />
+  </TurmillPageShell>
+) : (
+  <>
+    <SiteHeader
+      siteName={chrome.siteName}
+      links={chrome.navLinks}
+      localeOptions={chrome.localeOptions}
+      languageLabel={chrome.languageLabel}
+      company={chrome.company}
+      locale={chrome.locale}
+      showContactCta={showContactCta}
+    />
+    <main class="wrap">
+      <slot />
+    </main>
+    <SiteFooter company={chrome.company} />
+  </>
+)}

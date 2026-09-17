@@ -1,7 +1,7 @@
 ---
 import PageBanner from '../components/PageBanner.astro';
 import Alerts from '../components/Alerts.astro';
-import type { ArticleDetail } from '@/modules/article';
+import { articleContentTypeLabel, type ArticleDetail } from '@/modules/article';
 
 interface Props {
   article: ArticleDetail | null;
@@ -14,23 +14,30 @@ interface Props {
   sidebarBody?: string;
   contactHref?: string;
   contactLabel?: string;
+  relatedTitle?: string;
+  related?: Array<{ title: string; href: string; date?: string }>;
+  locale?: string;
   error?: string;
   warnings?: string[];
 }
 const {
   article,
   backHref,
-  backLabel = '← Back to list',
+  backLabel = '← Back to Blog List',
   homeHref,
   homeLabel = 'Home',
-  listLabel = 'Articles',
+  listLabel = 'Blog',
   sidebarTitle = 'Need a Solution?',
-  sidebarBody = 'We supply premium products globally. Talk to our team for specs, MOQ, and lead times.',
+  sidebarBody = 'We are a certified manufacturer supplying premium products globally.',
   contactHref = '',
-  contactLabel = 'Contact Us',
+  contactLabel = 'Contact Us Now',
+  relatedTitle = 'Recommended Insights',
+  related = [],
+  locale = 'en',
   error,
   warnings = [],
 } = Astro.props;
+const typeLabel = article ? articleContentTypeLabel(article.contentType, locale) : '';
 ---
 <PageBanner
   title={article?.title || listLabel}
@@ -48,6 +55,7 @@ const {
       <div class="tm-article-layout">
         <article class="tm-article-main">
           <div class="tm-article-meta">
+            {typeLabel ? <span class="tm-article-type">{typeLabel}</span> : null}
             {article.author ? <span>{article.author}</span> : null}
           </div>
           <h2 class="tm-display tm-article-headline">{article.title}</h2>
@@ -63,7 +71,20 @@ const {
           </p>
         </article>
         <aside class="tm-article-side">
-          <div class="tm-panel tm-side-cta">
+          {related.length ? (
+            <div class="tm-panel tm-related-box">
+              <h3 class="tm-display">{relatedTitle}</h3>
+              <ul class="tm-related-list">
+                {related.map((item) => (
+                  <li>
+                    <a href={item.href}>{item.title}</a>
+                    {item.date ? <span>{item.date}</span> : null}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          <div class="tm-panel tm-side-cta tm-side-cta-dark">
             <h3 class="tm-display">{sidebarTitle}</h3>
             <p>{sidebarBody}</p>
             {contactHref ? (

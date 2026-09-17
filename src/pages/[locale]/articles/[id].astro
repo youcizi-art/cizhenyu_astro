@@ -1,17 +1,13 @@
 ---
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
-import SiteHeader from '@/ui/layout/SiteHeader.astro';
-import SiteFooter from '@/ui/layout/SiteFooter.astro';
-import AlertBanner from '@/ui/blocks/AlertBanner.astro';
-import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
-import TurmillArticleDetailPage from '@/ui/themes/turmill/pages/ArticleDetailPage.astro';
+import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
+import ActiveDetail from '@/ui/themes/ActiveDetail.astro';
 import { loadArticleDetailPage } from '@/workflows/articles/load-article-detail';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { t } from '@/modules/i18n';
 import { localePath } from '@/modules/cms';
 import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
-import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -39,9 +35,6 @@ const jsonLd = article
       },
     })
   : null;
-const turmill = useTurmillShell(data.site.theme);
-const shell = buildTurmillShellProps(data);
-const listHref = localePath(data.locale, '/articles');
 const listLabel = t(data.locale, 'articles');
 ---
 <BaseLayout
@@ -52,46 +45,18 @@ const listLabel = t(data.locale, 'articles');
   {...seoProps}
   jsonLd={jsonLd}
 >
-  {turmill ? (
-    <TurmillPageShell {...shell}>
-      <TurmillArticleDetailPage
-        article={article}
-        backHref={listHref}
-        backLabel={`← ${listLabel}`}
-        homeHref={localePath(data.locale, '/')}
-        homeLabel={t(data.locale, 'home')}
-        listLabel={listLabel}
-        contactHref={localePath(data.locale, '/contact')}
-        contactLabel={t(data.locale, 'contact')}
-        sidebarTitle={data.locale.startsWith('zh') ? '需要方案？' : 'Need a Solution?'}
-        sidebarBody={data.company.summary || (data.locale.startsWith('zh')
-          ? '联系我们获取规格、交期与定制方案。'
-          : 'Talk to our team for specs, MOQ, and lead times.')}
-        error={data.error}
-        warnings={data.warnings}
-      />
-    </TurmillPageShell>
-  ) : (
-    <>
-      <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel}
-        company={data.company}
-        locale={data.locale}
-      />
-      <main class="wrap">
-        <p><a href={listHref}>← {listLabel}</a></p>
-        <AlertBanner messages={data.error ? [data.error] : []} />
-        <AlertBanner messages={data.warnings} tone="warn" />
-        {article ? (
-          <>
-            <h1>{article.title}</h1>
-            {article.author ? <p class="muted">{article.author}</p> : null}
-            {article.coverUrl ? <p><img class="card-media" src={article.coverUrl} alt={article.title} /></p> : null}
-            {article.summary ? <p>{article.summary}</p> : null}
-            {article.content ? <div class="prose" set:html={article.content} /> : null}
-          </>
-        ) : null}
-      </main>
-      <SiteFooter company={data.company} />
-    </>
-  )}
+  <ThemeFrame chrome={data}>
+    <ActiveDetail
+      chrome={data}
+      kind="article"
+      title={article?.title || listLabel}
+      summary={article?.summary || ''}
+      content={article?.content || ''}
+      coverUrl={article?.coverUrl || ''}
+      backHref={localePath(data.locale, '/articles')}
+      listLabel={listLabel}
+      article={article}
+      error={data.error}
+    />
+  </ThemeFrame>
 </BaseLayout>

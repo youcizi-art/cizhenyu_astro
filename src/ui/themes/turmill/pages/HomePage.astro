@@ -1,8 +1,12 @@
 ---
 import Hero from '../components/Hero.astro';
 import ProductGrid from '../components/ProductGrid.astro';
+import CategoryStrip from '../components/CategoryStrip.astro';
+import AdvantageSection from '../components/AdvantageSection.astro';
 import CaseGrid from '../components/CaseGrid.astro';
 import AboutTeaser from '../components/AboutTeaser.astro';
+import FactoryGallery from '../components/FactoryGallery.astro';
+import TestimonialSection from '../components/TestimonialSection.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import ArticleGrid from '../components/ArticleGrid.astro';
 import Alerts from '../components/Alerts.astro';
@@ -10,6 +14,7 @@ import type { ContentBlock } from '@/modules/content-block';
 import type { ProductCard } from '@/modules/product';
 import type { ArticleCard } from '@/modules/article';
 import type { CaseStudyCard } from '@/modules/case-study';
+import type { SolutionCard } from '@/modules/industry';
 import type { CompanyView } from '@/modules/company';
 
 interface Props {
@@ -20,20 +25,28 @@ interface Props {
   products: ProductCard[];
   caseStudies: CaseStudyCard[];
   articles: ArticleCard[];
+  solutions?: SolutionCard[];
   company: CompanyView;
   companyIntro?: string;
+  companyStats?: Array<{ label: string; value: string }>;
   ctaBanner: ContentBlock | null;
-  labels: {
-    products: string;
-    articles: string;
-    about: string;
-    cases: string;
-    readMore: string;
-    aboutCta: string;
-  };
+  advantages?: Array<{ title: string; description: string }>;
+  testimonials?: Array<{
+    name: string;
+    role?: string;
+    quote: string;
+    avatarUrl?: string;
+    meta?: string;
+    rating?: number;
+  }>;
+  factoryItems?: Array<{ title: string; imageUrl: string }>;
+  heroThumbs?: Array<{ src: string; free?: boolean; alt?: string }>;
+  labels: Record<string, string>;
   paths: {
     about: string;
     contact: string;
+    products?: string;
+    solutions?: string;
   };
   error?: string;
   warnings?: string[];
@@ -48,9 +61,15 @@ const {
   products,
   caseStudies,
   articles,
+  solutions = [],
   company,
   companyIntro = '',
+  companyStats = [],
   ctaBanner,
+  advantages = [],
+  testimonials = [],
+  factoryItems = [],
+  heroThumbs = [],
   labels,
   paths,
   error,
@@ -63,27 +82,67 @@ const heroTitle = hero?.title || siteName;
 const heroSummary = hero?.summary || hero?.subtitle || tagline;
 const heroImage = hero?.imageUrl || heroImageUrl;
 const heroCta = hero?.ctaUrl || paths.contact;
-const heroCtaLabel = hero?.ctaLabel || labels.aboutCta;
-const ctaBg = ctaBanner?.backgroundImageUrl
-  || 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1600&h=600&q=80';
+const heroCtaLabel = hero?.ctaLabel || labels.aboutCta || 'Learn More';
+const heroTips = labels.heroTips || hero?.eyebrow || '';
+const ctaBg =
+  ctaBanner?.backgroundImageUrl ||
+  'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1600&h=600&q=80';
 ---
-<div class="tm-container" style="padding-top:1rem">
-  <Alerts messages={error ? [error] : []} />
-  <Alerts messages={warnings} tone="warn" />
-</div>
+{(error || warnings.length) ? (
+  <div class="tm-container" style="padding-top:1rem">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+  </div>
+) : null}
+
+<!-- 1. Hero -->
 <Hero
   title={heroTitle}
   summary={heroSummary}
   image={heroImage}
-  eyebrow={hero?.eyebrow}
+  eyebrow={heroTips}
   actionUrl={heroCta}
   actionLabel={heroCtaLabel}
+  thumbs={heroThumbs}
 />
+
+<!-- 2. Products -->
 {showProducts ? (
-  <ProductGrid title={labels.products} items={products} readMoreText={labels.readMore} />
+  <ProductGrid
+    title={labels.products}
+    eyebrow={labels.productsEyebrow}
+    subtitle={labels.productsSub}
+    items={products}
+    readMoreText={labels.readMore}
+    variant="home"
+  />
 ) : null}
+
+<!-- 3. Category / solutions strip -->
+<CategoryStrip
+  title={labels.category}
+  subtitle={labels.categorySub}
+  items={solutions.map((s) => ({
+    title: s.title,
+    href: s.href,
+    summary: s.summary,
+    coverUrl: s.coverUrl,
+  }))}
+  ctaHref={paths.solutions || paths.products}
+  ctaLabel={labels.exploreAll}
+/>
+
+<!-- 4. Advantages (dark) -->
+<AdvantageSection
+  title={labels.advantages}
+  subtitle={labels.advantagesSub}
+  items={advantages}
+/>
+
+<!-- 5. Case studies / real stories -->
 <CaseGrid
   title={labels.cases}
+  subtitle={labels.casesSub}
   cases={caseStudies.map((item) => ({
     title: item.title,
     href: item.href,
@@ -92,20 +151,44 @@ const ctaBg = ctaBanner?.backgroundImageUrl
     industry: item.industry,
   }))}
 />
+
+<!-- 6. About -->
 <AboutTeaser
-  companyName={company.name || siteName}
+  companyName={labels.aboutTitle || company.name || siteName}
   slogan={company.slogan}
   summary={companyIntro || company.summary}
   logoUrl={company.logoUrl}
   aboutHref={paths.about}
   aboutLabel={labels.about}
+  stats={companyStats}
 />
+
+<!-- 7. Factory -->
+<FactoryGallery
+  eyebrow={labels.factoryEyebrow}
+  title={labels.factory}
+  description={company.summary}
+  factoryArea={labels.factoryArea}
+  items={factoryItems}
+/>
+
+<!-- 8. CTA -->
 <CtaBanner
-  title={ctaBanner?.title || (ctaBanner?.summary ? ctaBanner.summary : 'Ready to partner with us?')}
+  title={ctaBanner?.title || 'Ready to make pet care easier?'}
   actionLabel={ctaBanner?.ctaLabel || labels.aboutCta}
   actionHref={ctaBanner?.ctaUrl || paths.contact}
   backgroundImage={ctaBg}
 />
+
+<!-- 9. Testimonials -->
+<TestimonialSection
+  eyebrow={labels.testimonialsEyebrow}
+  title={labels.testimonials}
+  subtitle={labels.testimonialsSub}
+  items={testimonials}
+/>
+
+<!-- 10. Articles -->
 {showArticles ? (
   <ArticleGrid title={labels.articles} items={articles} readMoreText={labels.readMore} />
 ) : null}

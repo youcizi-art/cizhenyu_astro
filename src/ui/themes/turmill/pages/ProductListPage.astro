@@ -48,7 +48,7 @@ const nextHref = page < totalPages ? `${basePath}?page=${page + 1}` : '';
     <Alerts messages={warnings} tone="warn" />
     {!error && !items.length ? <p class="tm-prose">{emptyText}</p> : null}
   </div>
-  <ProductGrid title="" items={items} readMoreText={readMoreText} />
+  <ProductGrid title="" items={items} readMoreText={readMoreText} variant="list" />
   {!error && totalPages > 1 ? (
     <div class="tm-container tm-pager">
       {prevHref ? <a class="tm-link-more" href={prevHref}>← Prev</a> : null}

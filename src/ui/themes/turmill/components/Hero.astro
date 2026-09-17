@@ -1,4 +1,8 @@
 ---
+/**
+ * Turmill home hero — mirrors www.turmill.com banner layout:
+ * left decorative image + discount disc; right copy + product thumbs.
+ */
 interface Props {
   title?: string;
   summary?: string;
@@ -6,6 +10,9 @@ interface Props {
   eyebrow?: string;
   actionUrl?: string;
   actionLabel?: string;
+  discountLabel?: string;
+  discountValue?: string;
+  thumbs?: Array<{ src: string; free?: boolean; alt?: string }>;
 }
 const {
   title = '',
@@ -14,23 +21,52 @@ const {
   eyebrow = '',
   actionUrl = '',
   actionLabel = 'Learn More',
+  discountLabel = 'up to',
+  discountValue = '50%',
+  thumbs = [],
 } = Astro.props;
 const hasContent = Boolean(title || summary || image);
 ---
 {hasContent ? (
   <section class="tm-hero">
-    <div class="tm-container tm-hero-inner">
+    <div class="tm-container tm-hero-row">
       {image ? (
-        <div class="tm-hero-media">
-          <img src={image} alt={title || 'Hero'} width="720" height="540" fetchpriority="high" decoding="async" />
+        <div class="tm-hero-side">
+          <div class="tm-hero-discount" aria-hidden="true">
+            <span class="tm-hero-discount-text">
+              {discountLabel}
+              <strong>{discountValue}</strong>
+              <em>off</em>
+            </span>
+          </div>
+          <img src={image} alt="" width="560" height="640" fetchpriority="high" decoding="async" />
         </div>
       ) : null}
-      <div class="tm-hero-copy">
-        {eyebrow ? <div class="tm-hero-eyebrow">{eyebrow}</div> : null}
-        {title ? <h1>{title}</h1> : null}
-        {summary ? <p class="tm-hero-summary">{summary}</p> : null}
-        {actionUrl ? (
-          <a class="tm-btn tm-btn-lg tm-btn-primary" href={actionUrl}>{actionLabel}</a>
+
+      <div class="tm-hero-main">
+        <div class="tm-hero-copy">
+          {eyebrow ? (
+            <div class="tm-hero-tips">
+              <i class="tm-hero-tips-dot" aria-hidden="true" />
+              {eyebrow}
+            </div>
+          ) : null}
+          {title ? <h1 class="tm-display">{title}</h1> : null}
+          {summary ? <p class="tm-hero-summary">{summary}</p> : null}
+          {actionUrl ? (
+            <a class="tm-btn tm-btn-md tm-btn-outline" href={actionUrl}>{actionLabel}</a>
+          ) : null}
+        </div>
+
+        {thumbs.length ? (
+          <div class="tm-hero-thumbs">
+            {thumbs.map((thumb) => (
+              <div class="tm-hero-thumb">
+                {thumb.free ? <span class="tm-hero-free">Free</span> : null}
+                <img src={thumb.src} alt={thumb.alt || ''} width="160" height="160" loading="lazy" />
+              </div>
+            ))}
+          </div>
         ) : null}
       </div>
     </div>

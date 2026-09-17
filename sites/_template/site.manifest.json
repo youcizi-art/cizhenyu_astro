@@ -1,7 +1,7 @@
 {
   "siteKey": "demo",
   "displayName": "Demo B2B Site",
-  "theme": "turmill",
+  "theme": "default",
   "defaultLocale": "en",
   "locales": ["en", "zh-CN"],
   "modules": {

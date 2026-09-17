@@ -8,15 +8,17 @@ interface CaseItem {
 }
 interface Props {
   title?: string;
+  subtitle?: string;
   cases?: CaseItem[];
 }
-const { title = 'Case Studies', cases = [] } = Astro.props;
+const { title = 'Case Studies', subtitle = '', cases = [] } = Astro.props;
 ---
 {cases.length > 0 ? (
-  <section class="tm-section tm-section-mint">
-    {title ? (
+  <section class="tm-section tm-section-cases">
+    {title || subtitle ? (
       <div class="tm-title-wrap">
-        <h2 class="tm-title-main">{title}</h2>
+        {title ? <h2 class="tm-title-main">{title}</h2> : null}
+        {subtitle ? <p class="tm-title-desc">{subtitle}</p> : null}
       </div>
     ) : null}
     <div class="tm-container tm-grid-3">

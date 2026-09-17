@@ -12,6 +12,13 @@ import {
 import { resolveMediaUrl } from '../media';
 import { toPageSeo, type PageSeo } from '../seo';
 
+export type ArticleContentType =
+  | 'news'
+  | 'buying_guide'
+  | 'comparison'
+  | 'technical'
+  | 'application_guide';
+
 export type ArticleCard = {
   id: string;
   title: string;
@@ -20,7 +27,35 @@ export type ArticleCard = {
   author: string;
   coverUrl: string;
   href: string;
+  contentType: ArticleContentType;
 };
+
+const CONTENT_TYPES = new Set<ArticleContentType>([
+  'news',
+  'buying_guide',
+  'comparison',
+  'technical',
+  'application_guide',
+]);
+
+function toContentType(raw: unknown): ArticleContentType {
+  const value = String(raw || 'news').trim() as ArticleContentType;
+  return CONTENT_TYPES.has(value) ? value : 'news';
+}
+
+/** Human-readable eyebrow for article content_type */
+export function articleContentTypeLabel(type: ArticleContentType, locale?: string): string {
+  const zh = Boolean(locale?.startsWith('zh'));
+  const labels: Record<ArticleContentType, { en: string; zh: string }> = {
+    news: { en: 'News', zh: '新闻' },
+    buying_guide: { en: 'Buying Guide', zh: '采购指南' },
+    comparison: { en: 'Comparison', zh: '对比' },
+    technical: { en: 'Technical', zh: '技术' },
+    application_guide: { en: 'Application Guide', zh: '应用指南' },
+  };
+  return zh ? labels[type].zh : labels[type].en;
+}
+
 
 export type ArticleDetail = ArticleCard & {
   content: string;
@@ -40,6 +75,7 @@ function toCard(row: CmsEntity, locale?: string): ArticleCard {
     author: String(data.author || ''),
     coverUrl: resolveMediaUrl(data.cover),
     href: localePath(locale, `/articles/${encodeURIComponent(slug || row.id)}`),
+    contentType: toContentType(data.content_type),
   };
 }
 

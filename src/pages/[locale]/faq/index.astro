@@ -1,17 +1,12 @@
 ---
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
-import SiteHeader from '@/ui/layout/SiteHeader.astro';
-import SiteFooter from '@/ui/layout/SiteFooter.astro';
-import AlertBanner from '@/ui/blocks/AlertBanner.astro';
-import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
-import TurmillFaqPage from '@/ui/themes/turmill/pages/FaqPage.astro';
+import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
+import ActiveStatic from '@/ui/themes/ActiveStatic.astro';
 import { loadFaqPage } from '@/workflows/faq/load-faq';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { t } from '@/modules/i18n';
-import { localePath } from '@/modules/cms';
 import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
-import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -23,8 +18,9 @@ if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/faq`, 
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
 const seoProps = layoutSeoProps(undefined, Astro.url.pathname);
+const title = t(data.locale, 'faq');
 const jsonLd = pageJsonLd({
-  title: t(data.locale, 'faq'),
+  title,
   description: data.company.summary || '',
   canonicalUrl: Astro.url.pathname,
   robots: 'index,follow',
@@ -39,9 +35,6 @@ const jsonLd = pageJsonLd({
   company: data.company,
   faqs: data.items.map((item) => ({ question: item.question, answer: item.answer })),
 });
-const turmill = useTurmillShell(data.site.theme);
-const shell = buildTurmillShellProps(data);
-const title = t(data.locale, 'faq');
 ---
 <BaseLayout
   title={`${title} · ${data.siteName}`}
@@ -51,35 +44,14 @@ const title = t(data.locale, 'faq');
   {...seoProps}
   jsonLd={jsonLd}
 >
-  {turmill ? (
-    <TurmillPageShell {...shell}>
-      <TurmillFaqPage
-        title={title}
-        items={data.items}
-        homeHref={localePath(data.locale, '/')}
-        homeLabel={t(data.locale, 'home')}
-        emptyText={data.locale.startsWith('zh') ? '暂无 FAQ。' : 'No FAQs yet.'}
-        error={data.error}
-        warnings={data.warnings}
-      />
-    </TurmillPageShell>
-  ) : (
-    <>
-      <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel}
-        company={data.company} locale={data.locale} />
-      <main class="wrap">
-        <h1>{title}</h1>
-        <AlertBanner messages={data.error ? [data.error] : []} />
-        <AlertBanner messages={data.warnings} tone="warn" />
-        {data.items.map((item) => (
-          <details class="faq-item card">
-            <summary>{item.question}</summary>
-            <div class="prose" set:html={item.answer} />
-          </details>
-        ))}
-        {!data.error && !data.items.length ? <p class="muted">暂无 FAQ。</p> : null}
-      </main>
-      <SiteFooter company={data.company} />
-    </>
-  )}
+  <ThemeFrame chrome={data}>
+    <ActiveStatic
+      chrome={data}
+      kind="faq"
+      title={title}
+      faqItems={data.items}
+      emptyHint={data.locale.startsWith('zh') ? '暂无 FAQ。' : 'No FAQs yet.'}
+      error={data.error}
+    />
+  </ThemeFrame>
 </BaseLayout>

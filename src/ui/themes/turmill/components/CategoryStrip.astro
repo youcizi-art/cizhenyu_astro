@@ -1,0 +1,48 @@
+---
+interface Item {
+  title: string;
+  href: string;
+  summary?: string;
+  coverUrl?: string;
+}
+interface Props {
+  title?: string;
+  subtitle?: string;
+  items?: Item[];
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+const {
+  title = 'Smart Pet Litter Solutions',
+  subtitle = '',
+  items = [],
+  ctaHref = '',
+  ctaLabel = 'Explore All',
+} = Astro.props;
+---
+{items.length > 0 ? (
+  <section class="tm-category-strip">
+    <div class="tm-container tm-category-inner">
+      <div class="tm-category-copy">
+        <h2 class="tm-display">{title}</h2>
+        {subtitle ? <p>{subtitle}</p> : null}
+        {ctaHref ? <a class="tm-btn tm-btn-md tm-btn-primary" href={ctaHref}>{ctaLabel}</a> : null}
+      </div>
+      <div class="tm-category-cards">
+        {items.slice(0, 3).map((item) => (
+          <a class="tm-category-card" href={item.href}>
+            {item.coverUrl ? (
+              <span class="tm-category-thumb" style={`background-image:url(${item.coverUrl})`} />
+            ) : (
+              <span class="tm-category-thumb tm-category-thumb-empty" />
+            )}
+            <span class="tm-category-card-body">
+              <strong>{item.title}</strong>
+              {item.summary ? <span>{item.summary}</span> : null}
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+) : null}

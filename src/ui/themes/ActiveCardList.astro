@@ -1,0 +1,100 @@
+---
+/**
+ * 通用列表页主题切换（文章/案例/方案/资料）
+ */
+import AlertBanner from '@/ui/blocks/AlertBanner.astro';
+import Pagination from '@/ui/blocks/Pagination.astro';
+import TurmillArticleListPage from './turmill/pages/ArticleListPage.astro';
+import TurmillCaseStudyListPage from './turmill/pages/CaseStudyListPage.astro';
+import TurmillSimpleCardListPage from './turmill/pages/SimpleCardListPage.astro';
+import { getThemeMeta } from './theme-ui';
+import { t } from '@/modules/i18n';
+import type { PublicPages } from '@/modules/cms';
+import type { PageChrome } from '@/workflows/chrome/load-chrome';
+
+type CardItem = {
+  title: string;
+  href: string;
+  summary?: string;
+  coverUrl?: string;
+  meta?: string;
+  author?: string;
+  industry?: string;
+  clientName?: string;
+};
+
+interface Props {
+  chrome: PageChrome;
+  kind: 'articles' | 'caseStudies' | 'solutions' | 'resources';
+  title: string;
+  items: CardItem[];
+  pages: PublicPages;
+  basePath: string;
+  emptyText: string;
+  error?: string;
+}
+const { chrome, kind, title, items, pages, basePath, emptyText, error } = Astro.props;
+const meta = getThemeMeta(chrome.site.theme);
+const homeHref = `/${chrome.locale}`;
+const homeLabel = t(chrome.locale, 'home');
+const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
+---
+{meta.id === 'turmill' && kind === 'articles' ? (
+  <TurmillArticleListPage
+    title={title}
+    items={items as any}
+    pages={pages}
+    basePath={basePath}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    emptyText={emptyText}
+    readMoreText={chrome.locale.startsWith('zh') ? '阅读更多' : 'Read More'}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : meta.id === 'turmill' && kind === 'caseStudies' ? (
+  <TurmillCaseStudyListPage
+    title={title}
+    items={items as any}
+    pages={pages}
+    basePath={basePath}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    emptyText={emptyText}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : meta.id === 'turmill' ? (
+  <TurmillSimpleCardListPage
+    title={title}
+    items={items}
+    pages={pages}
+    basePath={basePath}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    emptyText={emptyText}
+    readMoreText={readMore}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : (
+  <>
+    <h1>{title}</h1>
+    <AlertBanner messages={error ? [error] : []} />
+    <AlertBanner messages={chrome.warnings} tone="warn" />
+    <div class="card-list">
+      {items.map((item) => (
+        <article class="card">
+          {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
+          <h2><a href={item.href}>{item.title}</a></h2>
+          {item.meta || item.author || item.industry || item.clientName ? (
+            <p class="muted">{item.meta || item.author || [item.clientName, item.industry].filter(Boolean).join(' · ')}</p>
+          ) : null}
+          {item.summary ? <p>{item.summary}</p> : null}
+        </article>
+      ))}
+    </div>
+    {!error && !items.length ? <p class="muted">{emptyText}</p> : null}
+    {!error ? <Pagination pages={pages} basePath={basePath} /> : null}
+  </>
+)}

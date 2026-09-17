@@ -6,6 +6,7 @@ interface Props {
   logoUrl?: string;
   aboutHref?: string;
   aboutLabel?: string;
+  stats?: Array<{ label: string; value: string }>;
 }
 const {
   companyName = '',
@@ -14,6 +15,7 @@ const {
   logoUrl = '',
   aboutHref = '',
   aboutLabel = 'About us',
+  stats = [],
 } = Astro.props;
 const hasContent = Boolean(companyName || summary || slogan);
 ---
@@ -25,7 +27,17 @@ const hasContent = Boolean(companyName || summary || slogan);
     </div>
     <div class="tm-container tm-about-grid">
       <div class="tm-about-copy">
-        {summary ? <p style="margin:0">{summary}</p> : null}
+        {summary ? <p class="tm-about-lead">{summary}</p> : null}
+        {stats.length ? (
+          <div class="tm-about-stats">
+            {stats.slice(0, 4).map((stat) => (
+              <div class="tm-about-stat">
+                <div class="tm-about-stat-label">{stat.label}</div>
+                <div class="tm-about-stat-value">{stat.value}</div>
+              </div>
+            ))}
+          </div>
+        ) : null}
         {aboutHref ? (
           <p style="margin-top:1.5rem">
             <a class="tm-btn tm-btn-md tm-btn-primary" href={aboutHref}>{aboutLabel}</a>
@@ -34,8 +46,8 @@ const hasContent = Boolean(companyName || summary || slogan);
       </div>
       <aside class="tm-about-panel">
         {logoUrl ? <img src={logoUrl} alt={companyName} /> : null}
-        <strong style="display:block;font-family:var(--font-display);font-size:1.25rem;color:#1f2b23">{companyName}</strong>
-        {slogan ? <p style="margin:0.5rem 0 0;color:#55665b;font-size:0.95rem">{slogan}</p> : null}
+        <strong class="tm-display" style="display:block;font-size:1.35rem;color:var(--color-text-main)">{companyName}</strong>
+        {slogan ? <p style="margin:0.5rem 0 0;color:var(--color-text-muted);font-size:0.95rem">{slogan}</p> : null}
       </aside>
     </div>
   </section>

@@ -1,1 +1,8 @@
-export { listArticles, getArticle, type ArticleCard, type ArticleDetail } from './article';
+export {
+  listArticles,
+  getArticle,
+  articleContentTypeLabel,
+  type ArticleCard,
+  type ArticleDetail,
+  type ArticleContentType,
+} from './article';

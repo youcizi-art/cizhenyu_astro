@@ -1,19 +1,48 @@
 import type { ThemeId } from './load-theme';
+import { resolveTheme } from './load-theme';
 import { localePath } from '@/modules/cms';
 import { t } from '@/modules/i18n';
 import type { PageChrome } from '@/workflows/chrome/load-chrome';
 
-/** Turmill 使用完整营销页壳（非仅 token 换色） */
-export function useTurmillShell(themeId: string): themeId is 'turmill' {
-  return themeId === 'turmill';
+/** 主题能力：default = 通用 chrome；page-shell = 主题自带 Header/Footer 页壳 */
+export type ThemeShellKind = 'default' | 'page-shell';
+
+export type ThemeMeta = {
+  id: ThemeId;
+  shell: ThemeShellKind;
+  /** Google Fonts CSS2 family query；空则不加载品牌字体 */
+  fontHref: string;
+};
+
+/**
+ * 新主题在此登记即可，勿在 pages / workflows 里写死主题名。
+ * CSS 仍按 data-theme 作用域引入（见 styles.ts）。
+ */
+export const THEME_META: Record<ThemeId, ThemeMeta> = {
+  default: {
+    id: 'default',
+    shell: 'default',
+    fontHref: '',
+  },
+  turmill: {
+    id: 'turmill',
+    shell: 'page-shell',
+    fontHref:
+      'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Yeseva+One&display=swap',
+  },
+};
+
+export function getThemeMeta(theme?: string | null): ThemeMeta {
+  const { themeId } = resolveTheme({ theme });
+  return THEME_META[themeId];
 }
 
-export function shellThemeId(theme?: string | null): ThemeId {
-  const raw = String(theme || 'default').trim().toLowerCase();
-  return raw === 'turmill' ? 'turmill' : 'default';
+export function hasPageShell(theme?: string | null): boolean {
+  return getThemeMeta(theme).shell === 'page-shell';
 }
 
-export function buildTurmillShellProps(chrome: PageChrome) {
+/** 页壳公共 props（各 page-shell 主题共用同一形状） */
+export function buildPageShellProps(chrome: PageChrome) {
   const { locale, navLinks, company, localeOptions, siteName } = chrome;
   return {
     siteName,
@@ -26,4 +55,8 @@ export function buildTurmillShellProps(chrome: PageChrome) {
     contactLabel: t(locale, 'contact'),
     quickLinksLabel: locale.startsWith('zh') ? '快速链接' : 'Quick Links',
   };
+}
+
+export function shellThemeId(theme?: string | null): ThemeId {
+  return resolveTheme({ theme }).themeId;
 }

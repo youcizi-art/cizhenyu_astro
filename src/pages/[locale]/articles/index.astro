@@ -1,17 +1,13 @@
 ---
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
-import SiteHeader from '@/ui/layout/SiteHeader.astro';
-import SiteFooter from '@/ui/layout/SiteFooter.astro';
-import AlertBanner from '@/ui/blocks/AlertBanner.astro';
-import Pagination from '@/ui/blocks/Pagination.astro';
-import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
-import TurmillArticleListPage from '@/ui/themes/turmill/pages/ArticleListPage.astro';
+import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
+import ActiveCardList from '@/ui/themes/ActiveCardList.astro';
 import { loadArticleListPage } from '@/workflows/articles/load-article-list';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
+import { articleContentTypeLabel } from '@/modules/article';
+import { resolveListPageSeo } from '@/modules/seo';
 import { t } from '@/modules/i18n';
-import { localePath } from '@/modules/cms';
-import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -24,59 +20,53 @@ const data = await loadArticleListPage({
 if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/articles`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
-const turmill = useTurmillShell(data.site.theme);
-const shell = buildTurmillShellProps(data);
-const title = t(data.locale, 'articles');
-const basePath = `/${data.locale}/articles`;
+const fallbackTitle = t(data.locale, 'articles');
+const listSeo = await resolveListPageSeo({
+  slug: 'articles',
+  locale: data.locale,
+  pathname: Astro.url.pathname,
+  fallbackTitle,
+  fallbackDescription: data.company.summary,
+  siteName: data.siteName,
+  company: {
+    name: data.company.name,
+    address: data.company.address,
+    country: data.company.country,
+    phone: data.company.phone,
+    email: data.company.email,
+    website: data.company.website,
+    logoUrl: data.company.logoUrl,
+    foundingDate: data.company.foundingDate,
+    sameAs: data.company.sameAs,
+  },
+  breadcrumbs: [
+    { name: t(data.locale, 'home'), href: `/${data.locale}` },
+    { name: fallbackTitle },
+  ],
+});
 ---
 <BaseLayout
-  title={`${title} · ${data.siteName}`}
-  description={data.company.summary}
+  title={`${listSeo.title} · ${data.siteName}`}
+  description={listSeo.description}
   lang={data.locale}
+  siteName={data.siteName}
   alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
-  canonicalUrl={Astro.url.pathname}
-  robots="index,follow"
-  ogUrl={Astro.url.pathname}
+  {...listSeo.seoProps}
+  jsonLd={listSeo.jsonLd}
 >
-  {turmill ? (
-    <TurmillPageShell {...shell}>
-      <TurmillArticleListPage
-        title={title}
-        items={data.items}
-        pages={data.pages}
-        basePath={basePath}
-        homeHref={localePath(data.locale, '/')}
-        homeLabel={t(data.locale, 'home')}
-        emptyText={data.locale.startsWith('zh') ? '暂无文章。' : 'No articles yet.'}
-        readMoreText={data.locale.startsWith('zh') ? '阅读更多' : 'Read More'}
-        error={data.error}
-        warnings={data.warnings}
-      />
-    </TurmillPageShell>
-  ) : (
-    <>
-      <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel}
-        company={data.company}
-        locale={data.locale}
-      />
-      <main class="wrap">
-        <h1>{title}</h1>
-        <AlertBanner messages={data.error ? [data.error] : []} />
-        <AlertBanner messages={data.warnings} tone="warn" />
-        <div class="card-list">
-          {data.items.map((item) => (
-            <article class="card">
-              {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
-              <h2><a href={item.href}>{item.title}</a></h2>
-              {item.author ? <p class="muted">{item.author}</p> : null}
-              {item.summary ? <p>{item.summary}</p> : null}
-            </article>
-          ))}
-        </div>
-        {!data.error && !data.items.length ? <p class="muted">暂无文章。</p> : null}
-        {!data.error ? <Pagination pages={data.pages} basePath={basePath} /> : null}
-      </main>
-      <SiteFooter company={data.company} />
-    </>
-  )}
+  <ThemeFrame chrome={data}>
+    <ActiveCardList
+      chrome={data}
+      kind="articles"
+      title={fallbackTitle}
+      items={data.items.map((item) => ({
+        ...item,
+        meta: articleContentTypeLabel(item.contentType, data.locale),
+      }))}
+      pages={data.pages}
+      basePath={`/${data.locale}/articles`}
+      emptyText={data.locale.startsWith('zh') ? '暂无文章。' : 'No articles yet.'}
+      error={data.error}
+    />
+  </ThemeFrame>
 </BaseLayout>

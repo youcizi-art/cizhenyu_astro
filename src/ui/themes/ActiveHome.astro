@@ -1,0 +1,137 @@
+---
+/**
+ * 首页主题内容切换。新主题在此增加分支；pages 只调 ActiveHome。
+ */
+import AlertBanner from '@/ui/blocks/AlertBanner.astro';
+import CardSection from '@/ui/blocks/CardSection.astro';
+import TurmillHomePage from './turmill/pages/HomePage.astro';
+import { getThemeMeta } from './theme-ui';
+import {
+  turmillAdvantageFallback,
+  turmillCategoryFallback,
+  turmillCompanyStats,
+  turmillFactoryFallback,
+  turmillHeroFallbackImage,
+  turmillHeroThumbs,
+  turmillHomeLabels,
+  turmillTestimonialFallback,
+} from './turmill/home-copy';
+
+interface Props {
+  data: Awaited<ReturnType<typeof import('@/workflows/home/load-home').loadHomePage>>;
+}
+const { data } = Astro.props;
+const meta = getThemeMeta(data.site.theme);
+const turmillLabels = meta.id === 'turmill' ? turmillHomeLabels(data.locale) : null;
+const turmillSolutions =
+  meta.id === 'turmill' && !data.solutions.length
+    ? turmillCategoryFallback(data.locale, data.paths.products)
+    : data.solutions;
+
+function resolveTurmillHeroImage(url?: string) {
+  const u = String(url || '').trim();
+  if (!u || u.includes('picsum.photos')) return turmillHeroFallbackImage;
+  return u;
+}
+const turmillHero =
+  meta.id === 'turmill' && data.hero
+    ? { ...data.hero, imageUrl: resolveTurmillHeroImage(data.hero.imageUrl) }
+    : data.hero;
+---
+{meta.id === 'turmill' && turmillLabels ? (
+  <TurmillHomePage
+    siteName={data.siteName}
+    hero={turmillHero}
+    heroImageUrl={resolveTurmillHeroImage(data.heroImageUrl)}
+    tagline={data.tagline}
+    products={data.products}
+    caseStudies={data.caseStudies}
+    articles={data.articles}
+    solutions={turmillSolutions as typeof data.solutions}
+    company={data.company}
+    companyIntro={data.companyIntro}
+    companyStats={data.companyStats.length ? data.companyStats : turmillCompanyStats(data.locale)}
+    ctaBanner={data.ctaBanner}
+    advantages={data.advantages.length ? data.advantages : turmillAdvantageFallback()}
+    testimonials={data.testimonials.length ? data.testimonials : turmillTestimonialFallback()}
+    factoryItems={data.factoryItems.length ? data.factoryItems : turmillFactoryFallback()}
+    heroThumbs={turmillHeroThumbs}
+    labels={{ ...data.labels, ...turmillLabels }}
+    paths={{
+      about: data.paths.about,
+      contact: data.paths.contact,
+      products: data.paths.products,
+      solutions: data.paths.solutions,
+    }}
+    error={data.error}
+    warnings={data.warnings}
+    showProducts={data.site.modules.products}
+    showArticles={data.site.modules.articles}
+  />
+) : (
+  <>
+    <AlertBanner messages={data.error ? [data.error] : []} />
+    <AlertBanner messages={data.warnings} tone="warn" />
+    {data.hero ? (
+      <section class="hero">
+        {data.hero.eyebrow ? <p class="eyebrow">{data.hero.eyebrow}</p> : null}
+        <h1>{data.hero.title || data.siteName}</h1>
+        {data.hero.subtitle || data.tagline ? <p class="muted">{data.hero.subtitle || data.tagline}</p> : null}
+        {data.hero.summary ? <p>{data.hero.summary}</p> : null}
+        {data.hero.ctaLabel && data.hero.ctaUrl ? (
+          <p><a class="hero-cta" href={data.hero.ctaUrl}>{data.hero.ctaLabel}</a></p>
+        ) : null}
+      </section>
+    ) : (
+      <section>
+        <h1>{data.siteName}</h1>
+        {data.tagline ? <p class="muted">{data.tagline}</p> : null}
+      </section>
+    )}
+    {data.featuredRefs?.length ? (
+      <CardSection
+        title={data.labels.featured || '推荐'}
+        items={data.featuredRefs.map((i) => ({
+          href: i.href,
+          title: i.title,
+          summary: i.description || i.subtitle,
+          coverUrl: i.coverUrl,
+        }))}
+      />
+    ) : null}
+    {data.companyIntro ? (
+      <section class="section card">
+        <h2>{data.labels.about || 'About'}</h2>
+        {data.company.logoUrl ? (
+          <p><img src={data.company.logoUrl} alt={data.siteName} style="max-height:64px" /></p>
+        ) : null}
+        <p>{data.companyIntro}</p>
+      </section>
+    ) : null}
+    {data.site.modules.products ? (
+      <CardSection
+        title={data.labels.products}
+        items={data.products.map((i) => ({
+          href: i.href,
+          title: i.title,
+          summary: i.summary,
+          meta: i.sku ? `SKU: ${i.sku}` : '',
+          coverUrl: i.coverUrl,
+        }))}
+        emptyText={data.labels.emptyProducts}
+      />
+    ) : null}
+    {data.site.modules.articles ? (
+      <CardSection
+        title={data.labels.articles}
+        items={data.articles.map((i) => ({
+          href: i.href,
+          title: i.title,
+          summary: i.summary,
+          meta: i.author,
+          coverUrl: i.coverUrl,
+        }))}
+      />
+    ) : null}
+  </>
+)}

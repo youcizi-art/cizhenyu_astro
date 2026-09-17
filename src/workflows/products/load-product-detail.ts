@@ -1,6 +1,6 @@
 import { loadPageChrome } from '../chrome/load-chrome';
-import { getProduct } from '../../modules/product';
-import { toErrorMessage } from '../../modules/cms';
+import { enrichProductDetail, getProduct } from '../../modules/product';
+import { localePath, toErrorMessage } from '../../modules/cms';
 import { t } from '../../modules/i18n';
 
 export async function loadProductDetailPage(options: {
@@ -22,7 +22,15 @@ export async function loadProductDetailPage(options: {
   }
 
   try {
-    const product = await getProduct(options.id, { locale: chrome.locale });
+    let product = await getProduct(options.id, { locale: chrome.locale });
+    if (product) {
+      product = await enrichProductDetail(product, chrome.locale);
+      product = {
+        ...product,
+        inquiryHref: localePath(chrome.locale, '/contact'),
+        inquiryLabel: t(chrome.locale, 'contact'),
+      };
+    }
     return {
       ...chrome,
       enabled: true as const,

@@ -4,20 +4,44 @@ import { toAbsoluteUrl } from './urls';
 
 export type SitemapEntry = {
   loc: string;
+  lastmod?: string;
   changefreq?: string;
   priority?: string;
 };
 
+function entityLastmod(row: { updatedAt?: string; updated_at?: string; data?: Record<string, unknown> }) {
+  const raw =
+    row.updatedAt ||
+    row.updated_at ||
+    String(row.data?.updated_at || row.data?.updatedAt || '').trim();
+  if (!raw) return '';
+  const d = new Date(raw);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toISOString().slice(0, 10);
+}
+
 async function slugList(key: Parameters<typeof listEntities>[0], locale: string, slugField = 'slug') {
-  try {
-    const result = await listEntities(key, { locale, pageSize: 100, status: 'published' });
-    return (result.list || [])
-      .filter(isPublishedEntity)
-      .map((row) => String(entityData(row)[slugField] || row.id).trim())
-      .filter(Boolean);
-  } catch {
-    return [] as string[];
+  const out: Array<{ slug: string; lastmod?: string }> = [];
+  let page = 1;
+  const pageSize = 100;
+  for (;;) {
+    try {
+      const result = await listEntities(key, { locale, pageSize, page, status: 'published' });
+      const list = (result.list || []).filter(isPublishedEntity);
+      for (const row of list) {
+        const slug = String(entityData(row)[slugField] || row.id).trim();
+        if (!slug) continue;
+        out.push({ slug, lastmod: entityLastmod(row as any) || undefined });
+      }
+      const totalPages = Number(result.pages?.totalPages || 1) || 1;
+      if (page >= totalPages || list.length === 0) break;
+      page += 1;
+      if (page > 50) break;
+    } catch {
+      break;
+    }
   }
+  return out;
 }
 
 /** 汇总站内公开 URL（多语种），供 /sitemap.xml 使用 */
@@ -39,11 +63,16 @@ export async function collectSitemapEntries(): Promise<SitemapEntry[]> {
   const entries: SitemapEntry[] = [];
   const seen = new Set<string>();
 
-  const push = (path: string, priority = '0.7') => {
+  const push = (path: string, priority = '0.7', lastmod?: string) => {
     const loc = toAbsoluteUrl(path);
     if (!loc || seen.has(loc)) return;
     seen.add(loc);
-    entries.push({ loc, changefreq: 'weekly', priority });
+    entries.push({
+      loc,
+      changefreq: 'weekly',
+      priority,
+      ...(lastmod ? { lastmod } : {}),
+    });
   };
 
   for (const locale of locales) {
@@ -59,11 +88,21 @@ export async function collectSitemapEntries(): Promise<SitemapEntry[]> {
       slugList('resource', locale),
     ]);
 
-    for (const slug of products) push(localePath(locale, `/products/${encodeURIComponent(slug)}`));
-    for (const slug of articles) push(localePath(locale, `/articles/${encodeURIComponent(slug)}`));
-    for (const slug of cases) push(localePath(locale, `/case-studies/${encodeURIComponent(slug)}`));
-    for (const slug of industries) push(localePath(locale, `/solutions/${encodeURIComponent(slug)}`));
-    for (const slug of resources) push(localePath(locale, `/resources/${encodeURIComponent(slug)}`));
+    for (const item of products) {
+      push(localePath(locale, `/products/${encodeURIComponent(item.slug)}`), '0.7', item.lastmod);
+    }
+    for (const item of articles) {
+      push(localePath(locale, `/articles/${encodeURIComponent(item.slug)}`), '0.7', item.lastmod);
+    }
+    for (const item of cases) {
+      push(localePath(locale, `/case-studies/${encodeURIComponent(item.slug)}`), '0.7', item.lastmod);
+    }
+    for (const item of industries) {
+      push(localePath(locale, `/solutions/${encodeURIComponent(item.slug)}`), '0.7', item.lastmod);
+    }
+    for (const item of resources) {
+      push(localePath(locale, `/resources/${encodeURIComponent(item.slug)}`), '0.6', item.lastmod);
+    }
   }
 
   return entries;
@@ -73,6 +112,7 @@ export function renderSitemapXml(entries: SitemapEntry[]) {
   const body = entries
     .map((item) => {
       const bits = [`<loc>${escapeXml(item.loc)}</loc>`];
+      if (item.lastmod) bits.push(`<lastmod>${escapeXml(item.lastmod)}</lastmod>`);
       if (item.changefreq) bits.push(`<changefreq>${item.changefreq}</changefreq>`);
       if (item.priority) bits.push(`<priority>${item.priority}</priority>`);
       return `<url>${bits.join('')}</url>`;

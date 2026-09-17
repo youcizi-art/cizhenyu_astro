@@ -1,0 +1,148 @@
+---
+/**
+ * Theme-agnostic product SEO sections (advantages, video, OEM, QC, certs, FAQ, related, inquiry CTA).
+ * Themes wrap/style; do not put SEO meta here.
+ */
+import type { ProductDetail } from '@/modules/product';
+
+interface Labels {
+  advantages?: string;
+  video?: string;
+  oem?: string;
+  quality?: string;
+  certifications?: string;
+  faqs?: string;
+  industries?: string;
+  relatedProducts?: string;
+  relatedCases?: string;
+  inquiryTitle?: string;
+  inquiryBody?: string;
+  inquiryCta?: string;
+}
+
+interface Props {
+  product: ProductDetail;
+  labels?: Labels;
+  classPrefix?: string;
+}
+const { product, labels = {}, classPrefix = 'product-seo' } = Astro.props;
+const p = classPrefix;
+const L = {
+  advantages: labels.advantages || 'Key Advantages',
+  video: labels.video || 'Product Video',
+  oem: labels.oem || 'OEM / ODM',
+  quality: labels.quality || 'Quality Control',
+  certifications: labels.certifications || 'Certifications',
+  faqs: labels.faqs || 'FAQ',
+  industries: labels.industries || 'Industries',
+  relatedProducts: labels.relatedProducts || 'Related Products',
+  relatedCases: labels.relatedCases || 'Related Cases',
+  inquiryTitle: labels.inquiryTitle || 'Product Inquiry',
+  inquiryBody: labels.inquiryBody || 'Ask about pricing, MOQ, and OEM options.',
+  inquiryCta: labels.inquiryCta || product.inquiryLabel || 'Contact',
+};
+---
+{product.tagline ? <p class={`${p}-tagline`}>{product.tagline}</p> : null}
+
+{product.advantages?.length ? (
+  <section class={`${p}-section ${p}-advantages`}>
+    <h2>{L.advantages}</h2>
+    <ul>
+      {product.advantages.map((item) => (
+        <li>
+          <strong>{item.title}</strong>
+          {item.description ? <p>{item.description}</p> : null}
+        </li>
+      ))}
+    </ul>
+  </section>
+) : null}
+
+{product.videoUrl ? (
+  <section class={`${p}-section ${p}-video`}>
+    <h2>{L.video}</h2>
+    <p><a href={product.videoUrl} target="_blank" rel="noopener noreferrer">{product.videoUrl}</a></p>
+  </section>
+) : null}
+
+{product.oemHtml ? (
+  <section class={`${p}-section ${p}-oem`}>
+    <h2>{L.oem}</h2>
+    <div class="prose" set:html={product.oemHtml} />
+  </section>
+) : null}
+
+{product.qualityHtml ? (
+  <section class={`${p}-section ${p}-quality`}>
+    <h2>{L.quality}</h2>
+    <div class="prose" set:html={product.qualityHtml} />
+  </section>
+) : null}
+
+{product.certifications?.length ? (
+  <section class={`${p}-section ${p}-certs`}>
+    <h2>{L.certifications}</h2>
+    <ul>
+      {product.certifications.map((item) => (
+        <li>
+          {item.url ? <a href={item.url} target="_blank" rel="noopener noreferrer">{item.name}</a> : item.name}
+        </li>
+      ))}
+    </ul>
+  </section>
+) : null}
+
+{product.faqs?.length ? (
+  <section class={`${p}-section ${p}-faqs`}>
+    <h2>{L.faqs}</h2>
+    {product.faqs.map((item) => (
+      <details>
+        <summary>{item.question}</summary>
+        <div class="prose" set:html={item.answer} />
+      </details>
+    ))}
+  </section>
+) : null}
+
+{product.industries?.length ? (
+  <section class={`${p}-section ${p}-links`}>
+    <h2>{L.industries}</h2>
+    <ul>
+      {product.industries.map((item) => (
+        <li><a href={item.href}>{item.title}</a></li>
+      ))}
+    </ul>
+  </section>
+) : null}
+
+{product.relatedProducts?.length ? (
+  <section class={`${p}-section ${p}-links`}>
+    <h2>{L.relatedProducts}</h2>
+    <ul>
+      {product.relatedProducts.map((item) => (
+        <li><a href={item.href}>{item.title}</a></li>
+      ))}
+    </ul>
+  </section>
+) : null}
+
+{product.relatedCases?.length ? (
+  <section class={`${p}-section ${p}-links`}>
+    <h2>{L.relatedCases}</h2>
+    <ul>
+      {product.relatedCases.map((item) => (
+        <li><a href={item.href}>{item.title}</a></li>
+      ))}
+    </ul>
+  </section>
+) : null}
+
+{(product.inquiryHref && L.inquiryCta) ? (
+  <section class={`${p}-section ${p}-inquiry`}>
+    <h2>{L.inquiryTitle}</h2>
+    {L.inquiryBody ? <p>{L.inquiryBody}</p> : null}
+    <p>
+      <a class="hero-cta" href={product.inquiryHref}>{L.inquiryCta}</a>
+    </p>
+  </section>
+) : null}

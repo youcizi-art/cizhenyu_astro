@@ -1,16 +1,11 @@
 ---
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
-import SiteHeader from '@/ui/layout/SiteHeader.astro';
-import SiteFooter from '@/ui/layout/SiteFooter.astro';
-import AlertBanner from '@/ui/blocks/AlertBanner.astro';
-import CardSection from '@/ui/blocks/CardSection.astro';
-import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
-import TurmillHomePage from '@/ui/themes/turmill/pages/HomePage.astro';
+import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
+import ActiveHome from '@/ui/themes/ActiveHome.astro';
 import { loadHomePage } from '@/workflows/home/load-home';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
-import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -40,8 +35,6 @@ const jsonLd = pageJsonLd(
   Astro.url.pathname,
   { siteName: data.siteName, company: data.company }
 );
-const turmill = useTurmillShell(data.site.theme);
-const shell = buildTurmillShellProps(data);
 ---
 <BaseLayout
   title={data.siteName}
@@ -51,103 +44,7 @@ const shell = buildTurmillShellProps(data);
   {...seoProps}
   jsonLd={jsonLd}
 >
-  {turmill ? (
-    <TurmillPageShell {...shell}>
-      <TurmillHomePage
-        siteName={data.siteName}
-        hero={data.hero}
-        heroImageUrl={data.heroImageUrl}
-        tagline={data.tagline}
-        products={data.products}
-        caseStudies={data.caseStudies}
-        articles={data.articles}
-        company={data.company}
-        companyIntro={data.companyIntro}
-        ctaBanner={data.ctaBanner}
-        labels={data.labels}
-        paths={{ about: data.paths.about, contact: data.paths.contact }}
-        error={data.error}
-        warnings={data.warnings}
-        showProducts={data.site.modules.products}
-        showArticles={data.site.modules.articles}
-      />
-    </TurmillPageShell>
-  ) : (
-    <>
-      <SiteHeader
-        siteName={data.siteName}
-        links={data.navLinks}
-        localeOptions={data.localeOptions}
-        languageLabel={data.languageLabel}
-        company={data.company}
-        locale={data.locale}
-      />
-      <main class="wrap">
-        <AlertBanner messages={data.error ? [data.error] : []} />
-        <AlertBanner messages={data.warnings} tone="warn" />
-        {data.hero ? (
-          <section class="hero">
-            {data.hero.eyebrow ? <p class="eyebrow">{data.hero.eyebrow}</p> : null}
-            <h1>{data.hero.title || data.siteName}</h1>
-            {data.hero.subtitle || data.tagline ? <p class="muted">{data.hero.subtitle || data.tagline}</p> : null}
-            {data.hero.summary ? <p>{data.hero.summary}</p> : null}
-            {data.hero.ctaLabel && data.hero.ctaUrl ? (
-              <p><a class="hero-cta" href={data.hero.ctaUrl}>{data.hero.ctaLabel}</a></p>
-            ) : null}
-          </section>
-        ) : (
-          <section>
-            <h1>{data.siteName}</h1>
-            {data.tagline ? <p class="muted">{data.tagline}</p> : null}
-          </section>
-        )}
-        {data.featuredRefs?.length ? (
-          <CardSection
-            title={data.labels.featured || '推荐'}
-            items={data.featuredRefs.map((i) => ({
-              href: i.href,
-              title: i.title,
-              summary: i.description || i.subtitle,
-              coverUrl: i.coverUrl,
-            }))}
-          />
-        ) : null}
-        {data.companyIntro ? (
-          <section class="section card">
-            <h2>{data.labels.about || 'About'}</h2>
-            {data.company.logoUrl ? (
-              <p><img src={data.company.logoUrl} alt={data.siteName} style="max-height:64px" /></p>
-            ) : null}
-            <p>{data.companyIntro}</p>
-          </section>
-        ) : null}
-        {data.site.modules.products ? (
-          <CardSection
-            title={data.labels.products}
-            items={data.products.map((i) => ({
-              href: i.href,
-              title: i.title,
-              summary: i.summary,
-              meta: i.sku ? `SKU: ${i.sku}` : '',
-              coverUrl: i.coverUrl,
-            }))}
-            emptyText={data.error ? data.labels.emptyProducts : data.labels.emptyProducts}
-          />
-        ) : null}
-        {data.site.modules.articles ? (
-          <CardSection
-            title={data.labels.articles}
-            items={data.articles.map((i) => ({
-              href: i.href,
-              title: i.title,
-              summary: i.summary,
-              meta: i.author,
-              coverUrl: i.coverUrl,
-            }))}
-          />
-        ) : null}
-      </main>
-      <SiteFooter company={data.company} />
-    </>
-  )}
+  <ThemeFrame chrome={data}>
+    <ActiveHome data={data} />
+  </ThemeFrame>
 </BaseLayout>

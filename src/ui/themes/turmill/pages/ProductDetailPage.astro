@@ -1,6 +1,7 @@
 ---
 import PageBanner from '../components/PageBanner.astro';
 import Alerts from '../components/Alerts.astro';
+import ProductSeoSections from '@/ui/blocks/ProductSeoSections.astro';
 import type { ProductDetail } from '@/modules/product';
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
   inquiryBody?: string;
   contactHref?: string;
   contactLabel?: string;
+  sectionLabels?: Record<string, string>;
   error?: string;
   warnings?: string[];
 }
@@ -25,18 +27,24 @@ const {
   homeHref,
   homeLabel = 'Home',
   listLabel = 'Products',
-  specsTitle = 'Specifications',
+  specsTitle = 'Technical Specifications',
   inquiryTitle = 'Product Inquiry',
   inquiryBody = 'Ask about wholesale pricing, MOQ, and OEM options.',
   contactHref = '',
-  contactLabel = 'Contact Sales',
+  contactLabel = 'Contact',
+  sectionLabels = {},
   error,
   warnings = [],
 } = Astro.props;
 
-const images = product?.imageUrls?.length ? product.imageUrls : product?.coverUrl ? [product.coverUrl] : [];
+const images = product?.imageUrls?.length
+  ? product.imageUrls
+  : product?.coverUrl
+    ? [product.coverUrl]
+    : [];
 const mainImage = images[0] || '';
-const thumbs = images.slice(1);
+const thumbs = images;
+const inquiryHref = product?.inquiryHref || contactHref || backHref;
 ---
 <PageBanner
   title={product?.title || listLabel}
@@ -46,24 +54,40 @@ const thumbs = images.slice(1);
     { label: product?.title || listLabel },
   ]}
 />
-<section class="tm-section tm-section-white">
+<section class="tm-section tm-section-white tm-product-detail">
   <div class="tm-container">
     <Alerts messages={error ? [error] : []} />
     <Alerts messages={warnings} tone="warn" />
     {product ? (
       <div class="tm-detail-grid">
-        <div class="tm-gallery">
-          {mainImage ? <img class="tm-gallery-main" src={mainImage} alt={product.title} /> : null}
-          {thumbs.length ? (
+        <div class="tm-gallery" data-tm-gallery>
+          {mainImage ? (
+            <img class="tm-gallery-main" data-tm-gallery-main src={mainImage} alt={product.title} />
+          ) : (
+            <div class="tm-gallery-main tm-gallery-empty">No image</div>
+          )}
+          {thumbs.length > 1 ? (
             <div class="tm-gallery-thumbs">
-              {thumbs.map((src) => <img src={src} alt={product.title} loading="lazy" />)}
+              {thumbs.map((src, idx) => (
+                <button
+                  type="button"
+                  class={`tm-gallery-thumb${idx === 0 ? ' is-active' : ''}`}
+                  data-tm-gallery-thumb
+                  data-src={src}
+                  aria-label={`Image ${idx + 1}`}
+                >
+                  <img src={src} alt="" loading="lazy" />
+                </button>
+              ))}
             </div>
           ) : null}
         </div>
+
         <div class="tm-product-info">
-          {product.sku ? <span class="tm-sku">SKU: {product.sku}</span> : null}
-          <h2 class="tm-display tm-product-title">{product.title}</h2>
-          {product.brand ? <p class="tm-prose" style="margin:0 0 1rem">{product.brand}</p> : null}
+          <h1 class="tm-display tm-product-title">{product.title}</h1>
+          {product.tagline ? <p class="tm-prose tm-product-summary">{product.tagline}</p> : null}
+          {product.sku ? <span class="tm-sku">Model: {product.sku}</span> : null}
+          {product.brand ? <p class="tm-prose" style="margin:0.75rem 0 0">{product.brand}</p> : null}
           {product.summary ? <p class="tm-prose tm-product-summary">{product.summary}</p> : null}
           {(product.price || product.availability) ? (
             <p class="tm-product-price">
@@ -71,11 +95,17 @@ const thumbs = images.slice(1);
               {product.availability ? ` · ${product.availability}` : ''}
             </p>
           ) : null}
-          {product.descriptionHtml ? <div class="tm-prose" set:html={product.descriptionHtml} /> : null}
+
           {product.specs?.length ? (
-            <section style="margin-top:2rem">
-              <h3 class="tm-display" style="font-size:1.35rem;margin-bottom:0.75rem">{specsTitle}</h3>
+            <section class="tm-specs-wrap">
+              <h2 class="tm-display">{specsTitle}</h2>
               <table class="tm-specs">
+                <thead>
+                  <tr>
+                    <th>Spec</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
                 <tbody>
                   {product.specs.map((row) => (
                     <tr>
@@ -87,18 +117,49 @@ const thumbs = images.slice(1);
               </table>
             </section>
           ) : null}
+
+          {product.descriptionHtml ? (
+            <div class="tm-prose tm-product-desc" set:html={product.descriptionHtml} />
+          ) : null}
+
+          <div class="tm-product-seo-wrap">
+            <ProductSeoSections
+              product={{ ...product, inquiryHref: '', inquiryLabel: '' }}
+              labels={{
+                ...sectionLabels,
+                inquiryTitle: '',
+                inquiryBody: '',
+                inquiryCta: '',
+              }}
+              classPrefix="tm-product-seo"
+            />
+          </div>
+
           <div class="tm-panel tm-inquiry-box">
-            <h3 class="tm-display">{inquiryTitle}</h3>
+            <h2 class="tm-display">{inquiryTitle}</h2>
             <p>{inquiryBody}</p>
-            <div class="tm-inquiry-actions">
-              {contactHref ? (
-                <a class="tm-btn tm-btn-md tm-btn-primary" href={contactHref}>{contactLabel}</a>
-              ) : null}
-              <a class="tm-btn tm-btn-md tm-btn-primary-line" href={backHref}>{backLabel}</a>
-            </div>
+            <p style="margin-top:1rem">
+              <a class="tm-btn tm-btn-md tm-btn-primary" href={inquiryHref}>{contactLabel}</a>
+              <a class="tm-btn tm-btn-md tm-btn-outline" href={backHref} style="margin-left:0.75rem">{backLabel}</a>
+            </p>
           </div>
         </div>
       </div>
     ) : null}
   </div>
 </section>
+
+<script>
+  const root = document.querySelector('[data-tm-gallery]');
+  const main = root?.querySelector('[data-tm-gallery-main]');
+  const thumbs = root?.querySelectorAll('[data-tm-gallery-thumb]');
+  thumbs?.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const src = btn.getAttribute('data-src');
+      if (!src || !(main instanceof HTMLImageElement)) return;
+      main.src = src;
+      thumbs.forEach((t) => t.classList.remove('is-active'));
+      btn.classList.add('is-active');
+    });
+  });
+</script>

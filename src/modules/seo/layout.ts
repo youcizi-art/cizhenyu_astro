@@ -35,3 +35,33 @@ export function pageJsonLd(
     ...rest,
   });
 }
+
+/** 列表页默认 WebPage JSON-LD */
+export function listPageJsonLd(options: {
+  title: string;
+  description?: string;
+  pathname: string;
+  siteName?: string;
+  company?: JsonLdInput['company'];
+  breadcrumbs?: JsonLdInput['breadcrumbs'];
+}) {
+  const seo: PageSeo = {
+    title: options.title,
+    description: options.description || '',
+    canonicalUrl: options.pathname,
+    robots: 'index,follow',
+    ogImage: '',
+    ogType: 'website',
+    schemaType: 'WebPage',
+    schemaMapping: '',
+    geoLat: '',
+    geoLng: '',
+  };
+  return buildJsonLd({
+    seo,
+    pageUrl: options.pathname,
+    siteName: options.siteName,
+    company: options.company,
+    breadcrumbs: options.breadcrumbs,
+  });
+}

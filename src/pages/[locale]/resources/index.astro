@@ -1,17 +1,12 @@
 ---
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
-import SiteHeader from '@/ui/layout/SiteHeader.astro';
-import SiteFooter from '@/ui/layout/SiteFooter.astro';
-import AlertBanner from '@/ui/blocks/AlertBanner.astro';
-import Pagination from '@/ui/blocks/Pagination.astro';
-import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
-import TurmillSimpleCardListPage from '@/ui/themes/turmill/pages/SimpleCardListPage.astro';
+import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
+import ActiveCardList from '@/ui/themes/ActiveCardList.astro';
 import { loadResourceListPage } from '@/workflows/resources/load-resource-list';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
+import { resolveListPageSeo } from '@/modules/seo';
 import { t } from '@/modules/i18n';
-import { localePath } from '@/modules/cms';
-import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -24,61 +19,56 @@ const data = await loadResourceListPage({
 if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/resources`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
-const turmill = useTurmillShell(data.site.theme);
-const shell = buildTurmillShellProps(data);
-const title = t(data.locale, 'resources');
+const fallbackTitle = t(data.locale, 'resources');
+const listSeo = await resolveListPageSeo({
+  slug: 'resources',
+  locale: data.locale,
+  pathname: Astro.url.pathname,
+  fallbackTitle,
+  fallbackDescription: data.company.summary,
+  siteName: data.siteName,
+  company: {
+    name: data.company.name,
+    address: data.company.address,
+    country: data.company.country,
+    phone: data.company.phone,
+    email: data.company.email,
+    website: data.company.website,
+    logoUrl: data.company.logoUrl,
+    foundingDate: data.company.foundingDate,
+    sameAs: data.company.sameAs,
+  },
+  breadcrumbs: [
+    { name: t(data.locale, 'home'), href: `/${data.locale}` },
+    { name: fallbackTitle },
+  ],
+});
 ---
 <BaseLayout
-  title={`${title} · ${data.siteName}`}
-  description={data.company.summary}
+  title={`${listSeo.title} · ${data.siteName}`}
+  description={listSeo.description}
   lang={data.locale}
+  siteName={data.siteName}
   alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
-  canonicalUrl={Astro.url.pathname}
-  robots="index,follow"
-  ogUrl={Astro.url.pathname}
+  {...listSeo.seoProps}
+  jsonLd={listSeo.jsonLd}
 >
-  {turmill ? (
-    <TurmillPageShell {...shell}>
-      <TurmillSimpleCardListPage
-        title={title}
-        items={data.items.map((item) => ({
-          title: item.title,
-          href: item.href,
-          summary: item.summary,
-          coverUrl: item.coverUrl,
-          meta: [item.resourceType, item.fileFormat].filter(Boolean).join(' · '),
-        }))}
-        pages={data.pages}
-        basePath={`/${data.locale}/resources`}
-        homeHref={localePath(data.locale, '/')}
-        homeLabel={t(data.locale, 'home')}
-        emptyText={data.locale.startsWith('zh') ? '暂无资料。' : 'No resources yet.'}
-        error={data.error}
-        warnings={data.warnings}
-      />
-    </TurmillPageShell>
-  ) : (
-    <>
-      <SiteHeader siteName={data.siteName} links={data.navLinks} localeOptions={data.localeOptions} languageLabel={data.languageLabel}
-        company={data.company} locale={data.locale} />
-      <main class="wrap">
-        <h1>{title}</h1>
-        <AlertBanner messages={data.error ? [data.error] : []} />
-        <AlertBanner messages={data.warnings} tone="warn" />
-        <div class="card-list">
-          {data.items.map((item) => (
-            <article class="card">
-              {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
-              <h2><a href={item.href}>{item.title}</a></h2>
-              <p class="muted">{[item.resourceType, item.fileFormat].filter(Boolean).join(' · ')}</p>
-              {item.summary ? <p>{item.summary}</p> : null}
-            </article>
-          ))}
-        </div>
-        {!data.error && !data.items.length ? <p class="muted">暂无资料。</p> : null}
-        {!data.error ? <Pagination pages={data.pages} basePath={`/${data.locale}/resources`} /> : null}
-      </main>
-      <SiteFooter company={data.company} />
-    </>
-  )}
+  <ThemeFrame chrome={data}>
+    <ActiveCardList
+      chrome={data}
+      kind="resources"
+      title={fallbackTitle}
+      items={data.items.map((item) => ({
+        title: item.title,
+        href: item.href,
+        summary: item.summary,
+        coverUrl: item.coverUrl,
+        meta: [item.resourceType, item.fileFormat].filter(Boolean).join(' · '),
+      }))}
+      pages={data.pages}
+      basePath={`/${data.locale}/resources`}
+      emptyText={data.locale.startsWith('zh') ? '暂无资料。' : 'No resources yet.'}
+      error={data.error}
+    />
+  </ThemeFrame>
 </BaseLayout>

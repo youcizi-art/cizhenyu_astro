@@ -1,0 +1,49 @@
+---
+interface Item {
+  title: string;
+  imageUrl: string;
+}
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  factoryArea?: string;
+  factoryLabel?: string;
+  items?: Item[];
+}
+const {
+  eyebrow = 'Manufacturing Power',
+  title = 'High-Tech R&D & Manufacturing Center',
+  description = '',
+  factoryArea = '',
+  factoryLabel = 'Production Area',
+  items = [],
+} = Astro.props;
+---
+{items.length > 0 ? (
+  <section class="tm-factory">
+    <div class="tm-container">
+      <div class="tm-factory-head">
+        <div>
+          {eyebrow ? <div class="tm-title-eyebrow tm-title-eyebrow-light">{eyebrow}</div> : null}
+          <h2 class="tm-display tm-factory-title">{title}</h2>
+          {description ? <p>{description}</p> : null}
+        </div>
+        {factoryArea ? (
+          <div class="tm-factory-stat">
+            <strong class="tm-display">{factoryArea}</strong>
+            <span>{factoryLabel}</span>
+          </div>
+        ) : null}
+      </div>
+      <div class="tm-factory-grid">
+        {items.map((item) => (
+          <figure class="tm-factory-card">
+            <img src={item.imageUrl} alt={item.title} loading="lazy" />
+            <figcaption>{item.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+) : null}

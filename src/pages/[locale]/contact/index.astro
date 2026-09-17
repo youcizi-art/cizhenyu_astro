@@ -1,15 +1,11 @@
 ---
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
-import SiteHeader from '@/ui/layout/SiteHeader.astro';
-import SiteFooter from '@/ui/layout/SiteFooter.astro';
-import AlertBanner from '@/ui/blocks/AlertBanner.astro';
-import TurmillPageShell from '@/ui/themes/turmill/PageShell.astro';
-import TurmillContactPage from '@/ui/themes/turmill/pages/ContactPage.astro';
+import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
+import ActiveStatic from '@/ui/themes/ActiveStatic.astro';
 import { loadContactPage } from '@/workflows/pages/load-static-pages';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
-import { buildTurmillShellProps, useTurmillShell } from '@/ui/themes';
 
 export const prerender = false;
 
@@ -38,8 +34,6 @@ const jsonLd = pageJsonLd(data.page?.seo || {
   siteName: data.siteName,
   company: data.company,
 });
-const turmill = useTurmillShell(data.site.theme);
-const shell = buildTurmillShellProps(data);
 const pageTitle = data.page?.title || data.labels.contact;
 const emptyHint = data.locale.startsWith('zh')
   ? '联系方式来自 CMS 公司信息；询盘/留言表单稍后接入。'
@@ -53,47 +47,14 @@ const emptyHint = data.locale.startsWith('zh')
   {...seoProps}
   jsonLd={jsonLd}
 >
-  {turmill ? (
-    <TurmillPageShell {...shell} showContactCta={false}>
-      <TurmillContactPage
-        title={pageTitle}
-        content={data.page?.content}
-        company={data.company}
-        homeHref={`/${data.locale}`}
-        homeLabel={data.locale.startsWith('zh') ? '首页' : 'Home'}
-        error={data.error}
-        warnings={data.warnings}
-        emptyHint={emptyHint}
-      />
-    </TurmillPageShell>
-  ) : (
-    <>
-      <SiteHeader
-        siteName={data.siteName}
-        links={data.navLinks}
-        localeOptions={data.localeOptions}
-        languageLabel={data.languageLabel}
-        company={data.company}
-        locale={data.locale}
-        showContactCta={false}
-      />
-      <main class="wrap">
-        <AlertBanner messages={data.error ? [data.error] : []} />
-        <AlertBanner messages={data.warnings} tone="warn" />
-        <h1>{pageTitle}</h1>
-        {data.page?.content ? <div class="prose" set:html={data.page.content} /> : null}
-        <section class="section card">
-          <h2>{data.siteName}</h2>
-          {data.company.address ? <p>{data.company.address}</p> : null}
-          {data.company.phone ? <p>{data.company.phone}</p> : null}
-          {data.company.email ? <p><a href={`mailto:${data.company.email}`}>{data.company.email}</a></p> : null}
-          {data.company.website ? <p><a href={data.company.website}>{data.company.website}</a></p> : null}
-          {!data.company.address && !data.company.phone && !data.company.email ? (
-            <p class="muted">{emptyHint}</p>
-          ) : null}
-        </section>
-      </main>
-      <SiteFooter company={data.company} />
-    </>
-  )}
+  <ThemeFrame chrome={data} showContactCta={false}>
+    <ActiveStatic
+      chrome={data}
+      kind="contact"
+      title={pageTitle}
+      content={data.page?.content || ''}
+      emptyHint={emptyHint}
+      error={data.error}
+    />
+  </ThemeFrame>
 </BaseLayout>

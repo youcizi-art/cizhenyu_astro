@@ -1,4 +1,4 @@
-import { fetchCollectionSingle, toErrorMessage, type CmsEntity } from '../cms';
+import { fetchCollectionSingle, toErrorMessage, entityData, type CmsEntity } from '../cms';
 import { resolveMediaUrl } from '../media';
 
 export type CompanyInfo = CmsEntity;
@@ -8,10 +8,15 @@ export type CompanyView = {
   slogan: string;
   summary: string;
   address: string;
+  country: string;
   phone: string;
   email: string;
   website: string;
   logoUrl: string;
+  foundingDate: string;
+  sameAs: string[];
+  geoLat: string;
+  geoLng: string;
 };
 
 export type CompanyLoadResult =
@@ -19,16 +24,35 @@ export type CompanyLoadResult =
   | { ok: false; company: CompanyView; warning: string };
 
 export function toCompanyView(info: CompanyInfo | null, fallbackName: string): CompanyView {
-  const data = info?.data || {};
+  const data = info ? entityData(info) : {};
+  const socialRaw = data.social_profiles;
+  const sameAs: string[] = [];
+  if (Array.isArray(socialRaw)) {
+    for (const item of socialRaw) {
+      if (typeof item === 'string' && item.trim()) sameAs.push(item.trim());
+      else if (item && typeof item === 'object') {
+        const url = String((item as { url?: unknown }).url || '').trim();
+        if (url) sameAs.push(url);
+      }
+    }
+  }
+  const website = String(data.website || '').trim();
+  if (website && !sameAs.includes(website)) sameAs.unshift(website);
+
   return {
     name: String(data.company_name || data.name || data.title || fallbackName),
     slogan: String(data.slogan || ''),
     summary: String(data.summary || ''),
     address: String(data.address || ''),
+    country: String(data.country || ''),
     phone: String(data.phone || ''),
     email: String(data.email || ''),
-    website: String(data.website || ''),
+    website,
     logoUrl: resolveMediaUrl(data.logo || data.footer_logo),
+    foundingDate: String(data.founding_date || '').trim(),
+    sameAs,
+    geoLat: String(data.geo_latitude || '').trim(),
+    geoLng: String(data.geo_longitude || '').trim(),
   };
 }
 

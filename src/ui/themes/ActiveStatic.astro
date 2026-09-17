@@ -1,0 +1,136 @@
+---
+import AlertBanner from '@/ui/blocks/AlertBanner.astro';
+import TurmillAboutPage from './turmill/pages/AboutPage.astro';
+import TurmillContactPage from './turmill/pages/ContactPage.astro';
+import TurmillFaqPage from './turmill/pages/FaqPage.astro';
+import { getThemeMeta } from './theme-ui';
+import { t } from '@/modules/i18n';
+import type { PageChrome } from '@/workflows/chrome/load-chrome';
+
+interface Props {
+  chrome: PageChrome;
+  kind: 'about' | 'contact' | 'faq';
+  title: string;
+  summary?: string;
+  content?: string;
+  references?: any[];
+  faqItems?: Array<{ question: string; answer: string }>;
+  emptyHint?: string;
+  error?: string;
+}
+const {
+  chrome,
+  kind,
+  title,
+  summary = '',
+  content = '',
+  references = [],
+  faqItems = [],
+  emptyHint = '',
+  error,
+} = Astro.props;
+const meta = getThemeMeta(chrome.site.theme);
+const homeHref = `/${chrome.locale}`;
+const homeLabel = t(chrome.locale, 'home');
+const relatedTitle = chrome.locale.startsWith('zh') ? '相关内容' : 'Related';
+---
+{meta.id === 'turmill' && kind === 'about' ? (
+  <TurmillAboutPage
+    title={title}
+    summary={summary}
+    content={content}
+    company={chrome.company}
+    references={references}
+    relatedTitle={relatedTitle}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    error={error}
+    warnings={chrome.warnings}
+    emptyHint={emptyHint}
+  />
+) : meta.id === 'turmill' && kind === 'contact' ? (
+  <TurmillContactPage
+    title={title}
+    content={content}
+    company={chrome.company}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    error={error}
+    warnings={chrome.warnings}
+    emptyHint={emptyHint}
+  />
+) : meta.id === 'turmill' && kind === 'faq' ? (
+  <TurmillFaqPage
+    title={title}
+    items={faqItems}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    emptyText={emptyHint || (chrome.locale.startsWith('zh') ? '暂无 FAQ。' : 'No FAQs yet.')}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : kind === 'faq' ? (
+  <>
+    <h1>{title}</h1>
+    <AlertBanner messages={error ? [error] : []} />
+    <AlertBanner messages={chrome.warnings} tone="warn" />
+    {faqItems.map((item) => (
+      <details class="faq-item card">
+        <summary>{item.question}</summary>
+        <div class="prose" set:html={item.answer} />
+      </details>
+    ))}
+    {!error && !faqItems.length ? <p class="muted">{emptyHint || '暂无 FAQ。'}</p> : null}
+  </>
+) : kind === 'contact' ? (
+  <>
+    <AlertBanner messages={error ? [error] : []} />
+    <AlertBanner messages={chrome.warnings} tone="warn" />
+    <h1>{title}</h1>
+    {content ? <div class="prose" set:html={content} /> : null}
+    <section class="section card">
+      <h2>{chrome.siteName}</h2>
+      {chrome.company.address ? <p>{chrome.company.address}</p> : null}
+      {chrome.company.phone ? <p>{chrome.company.phone}</p> : null}
+      {chrome.company.email ? <p><a href={`mailto:${chrome.company.email}`}>{chrome.company.email}</a></p> : null}
+      {chrome.company.website ? <p><a href={chrome.company.website}>{chrome.company.website}</a></p> : null}
+      {!chrome.company.address && !chrome.company.phone && !chrome.company.email && emptyHint ? (
+        <p class="muted">{emptyHint}</p>
+      ) : null}
+    </section>
+  </>
+) : (
+  <>
+    <AlertBanner messages={error ? [error] : []} />
+    <AlertBanner messages={chrome.warnings} tone="warn" />
+    <h1>{title}</h1>
+    {chrome.company.logoUrl ? (
+      <p><img src={chrome.company.logoUrl} alt={chrome.siteName} style="max-height:72px" /></p>
+    ) : null}
+    {chrome.company.slogan ? <p class="muted">{chrome.company.slogan}</p> : null}
+    {chrome.company.summary ? <p>{chrome.company.summary}</p> : null}
+    <section class="section card">
+      {chrome.company.address ? <p>{chrome.company.address}</p> : null}
+      {chrome.company.phone ? <p>{chrome.company.phone}</p> : null}
+      {chrome.company.email ? <p><a href={`mailto:${chrome.company.email}`}>{chrome.company.email}</a></p> : null}
+      {chrome.company.website ? <p><a href={chrome.company.website}>{chrome.company.website}</a></p> : null}
+    </section>
+    {content ? <div class="section prose" set:html={content} /> : null}
+    {references.length ? (
+      <section class="section">
+        <h2>{relatedTitle}</h2>
+        <div class="card-list">
+          {references.map((item) => (
+            <article class="card">
+              {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
+              <h3><a href={item.href}>{item.title}</a></h3>
+              {item.subtitle ? <p class="muted">{item.subtitle}</p> : null}
+              {item.description ? <p>{item.description}</p> : null}
+            </article>
+          ))}
+        </div>
+      </section>
+    ) : null}
+    {!content && !chrome.company.summary && !error && emptyHint ? <p class="muted">{emptyHint}</p> : null}
+  </>
+)}

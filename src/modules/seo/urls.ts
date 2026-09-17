@@ -9,6 +9,18 @@ export function toAbsoluteUrl(path: string) {
   return `${origin}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
+/** BCP47 / site locale → Open Graph locale (underscore) */
+export function toOgLocale(locale: string) {
+  const raw = String(locale || '').trim();
+  if (!raw) return 'en_US';
+  const normalized = raw.replace(/-/g, '_');
+  if (normalized.includes('_')) return normalized;
+  if (normalized.toLowerCase() === 'en') return 'en_US';
+  if (normalized.toLowerCase() === 'ja') return 'ja_JP';
+  if (normalized.toLowerCase() === 'zh') return 'zh_CN';
+  return normalized;
+}
+
 export function buildAlternateLinks(
   localeOptions: Array<{ code: string; href: string }>,
   options?: { defaultLocale?: string }

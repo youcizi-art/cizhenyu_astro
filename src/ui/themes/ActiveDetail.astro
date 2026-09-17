@@ -1,0 +1,95 @@
+---
+import AlertBanner from '@/ui/blocks/AlertBanner.astro';
+import TurmillArticleDetailPage from './turmill/pages/ArticleDetailPage.astro';
+import TurmillCaseStudyDetailPage from './turmill/pages/CaseStudyDetailPage.astro';
+import TurmillSimpleDetailPage from './turmill/pages/SimpleDetailPage.astro';
+import { getThemeMeta } from './theme-ui';
+import { t } from '@/modules/i18n';
+import type { PageChrome } from '@/workflows/chrome/load-chrome';
+
+interface Props {
+  chrome: PageChrome;
+  kind: 'article' | 'caseStudy' | 'solution' | 'resource';
+  title: string;
+  summary?: string;
+  content?: string;
+  coverUrl?: string;
+  backHref: string;
+  listLabel: string;
+  article?: any;
+  caseItem?: any;
+  error?: string;
+}
+const { chrome, kind, title, summary = '', content = '', coverUrl = '', backHref, listLabel, article, caseItem, error } = Astro.props;
+const meta = getThemeMeta(chrome.site.theme);
+const homeHref = `/${chrome.locale}`;
+const homeLabel = t(chrome.locale, 'home');
+---
+{meta.id === 'turmill' && kind === 'article' ? (
+  <TurmillArticleDetailPage
+    article={article}
+    backHref={backHref}
+    backLabel={`← ${listLabel}`}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    listLabel={listLabel}
+    locale={chrome.locale}
+    contactHref={`/${chrome.locale}/contact`}
+    contactLabel={t(chrome.locale, 'contact')}
+    sidebarTitle={chrome.locale.startsWith('zh') ? '需要方案？' : 'Need a Solution?'}
+    sidebarBody={chrome.company.summary || (chrome.locale.startsWith('zh')
+      ? '联系我们获取规格、交期与定制方案。'
+      : 'Talk to our team for specs, MOQ, and lead times.')}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : meta.id === 'turmill' && kind === 'caseStudy' ? (
+  <TurmillCaseStudyDetailPage
+    item={caseItem}
+    backHref={backHref}
+    backLabel={`← ${listLabel}`}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    listLabel={listLabel}
+    labels={{
+      challenge: chrome.locale.startsWith('zh') ? '挑战' : 'Challenge',
+      solution: chrome.locale.startsWith('zh') ? '方案' : 'Solution',
+      results: chrome.locale.startsWith('zh') ? '成果' : 'Results',
+    }}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : meta.id === 'turmill' ? (
+  <TurmillSimpleDetailPage
+    title={title}
+    summary={summary}
+    content={content}
+    coverUrl={coverUrl}
+    backHref={backHref}
+    backLabel={`← ${listLabel}`}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    listLabel={listLabel}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : (
+  <>
+    <p><a href={backHref}>← {listLabel}</a></p>
+    <AlertBanner messages={error ? [error] : []} />
+    <AlertBanner messages={chrome.warnings} tone="warn" />
+    <h1>{title}</h1>
+    {coverUrl ? <p><img class="card-media" src={coverUrl} alt={title} /></p> : null}
+    {summary ? <p>{summary}</p> : null}
+    {content ? <div class="prose" set:html={content} /> : null}
+    {article?.content ? <div class="prose" set:html={article.content} /> : null}
+    {caseItem ? (
+      <>
+        {caseItem.challenge ? <section class="section"><h2>Challenge</h2><div class="prose" set:html={caseItem.challenge} /></section> : null}
+        {caseItem.solution ? <section class="section"><h2>Solution</h2><div class="prose" set:html={caseItem.solution} /></section> : null}
+        {caseItem.results ? <section class="section"><h2>Results</h2><div class="prose" set:html={caseItem.results} /></section> : null}
+        {caseItem.content ? <section class="section"><div class="prose" set:html={caseItem.content} /></section> : null}
+      </>
+    ) : null}
+  </>
+)}
