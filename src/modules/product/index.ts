@@ -1,5 +1,6 @@
 export {
   listProducts,
+  listProductsByCategoryId,
   getProduct,
   enrichProductDetail,
 } from './product';

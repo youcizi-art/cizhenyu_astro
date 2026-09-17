@@ -1,5 +1,7 @@
 ---
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
+import GeoAnswer from '@/ui/blocks/GeoAnswer.astro';
+import RelatedLinks from '@/ui/blocks/RelatedLinks.astro';
 import TurmillArticleDetailPage from './turmill/pages/ArticleDetailPage.astro';
 import TurmillCaseStudyDetailPage from './turmill/pages/CaseStudyDetailPage.astro';
 import TurmillSimpleDetailPage from './turmill/pages/SimpleDetailPage.astro';
@@ -24,7 +26,21 @@ const { chrome, kind, title, summary = '', content = '', coverUrl = '', backHref
 const meta = getThemeMeta(chrome.site.theme);
 const homeHref = `/${chrome.locale}`;
 const homeLabel = t(chrome.locale, 'home');
+const zh = chrome.locale.startsWith('zh');
+const shortAnswerLabel = zh ? '简答' : chrome.locale === 'ja' ? '簡潔な回答' : 'Short answer';
+const relatedArticlesTitle = zh ? '相关文章' : chrome.locale === 'ja' ? '関連記事' : 'Related Articles';
+const relatedIndustriesTitle = zh ? '相关行业' : chrome.locale === 'ja' ? '関連業界' : 'Related Industries';
+const relatedProductsTitle = zh ? '相关产品' : chrome.locale === 'ja' ? '関連製品' : 'Related Products';
+const articleShortAnswer = kind === 'article' ? String(article?.shortAnswer || '').trim() : '';
+const relatedArticles = Array.isArray(article?.relatedArticles) ? article.relatedArticles : [];
+const articleProducts = Array.isArray(article?.relatedProducts) ? article.relatedProducts : [];
+const articleIndustries = Array.isArray(article?.relatedIndustries) ? article.relatedIndustries : [];
+const caseIndustries = Array.isArray(caseItem?.industries) ? caseItem.industries : [];
+const caseProducts = Array.isArray(caseItem?.relatedProducts) ? caseItem.relatedProducts : [];
 ---
+{articleShortAnswer ? (
+  <GeoAnswer title={shortAnswerLabel} shortAnswer={articleShortAnswer} />
+) : null}
 {meta.id === 'turmill' && kind === 'article' ? (
   <TurmillArticleDetailPage
     article={article}
@@ -36,8 +52,13 @@ const homeLabel = t(chrome.locale, 'home');
     locale={chrome.locale}
     contactHref={`/${chrome.locale}/contact`}
     contactLabel={t(chrome.locale, 'contact')}
-    sidebarTitle={chrome.locale.startsWith('zh') ? '需要方案？' : 'Need a Solution?'}
-    sidebarBody={chrome.company.summary || (chrome.locale.startsWith('zh')
+    relatedTitle={relatedArticlesTitle}
+    related={relatedArticles.map((item: { title: string; href: string }) => ({
+      title: item.title,
+      href: item.href,
+    }))}
+    sidebarTitle={zh ? '需要方案？' : 'Need a Solution?'}
+    sidebarBody={chrome.company.summary || (zh
       ? '联系我们获取规格、交期与定制方案。'
       : 'Talk to our team for specs, MOQ, and lead times.')}
     error={error}
@@ -52,9 +73,9 @@ const homeLabel = t(chrome.locale, 'home');
     homeLabel={homeLabel}
     listLabel={listLabel}
     labels={{
-      challenge: chrome.locale.startsWith('zh') ? '挑战' : 'Challenge',
-      solution: chrome.locale.startsWith('zh') ? '方案' : 'Solution',
-      results: chrome.locale.startsWith('zh') ? '成果' : 'Results',
+      challenge: zh ? '挑战' : 'Challenge',
+      solution: zh ? '方案' : 'Solution',
+      results: zh ? '成果' : 'Results',
     }}
     error={error}
     warnings={chrome.warnings}
@@ -93,3 +114,18 @@ const homeLabel = t(chrome.locale, 'home');
     ) : null}
   </>
 )}
+{kind === 'article' && meta.id !== 'turmill' ? (
+  <RelatedLinks title={relatedArticlesTitle} items={relatedArticles} />
+) : null}
+{kind === 'article' ? (
+  <>
+    <RelatedLinks title={relatedProductsTitle} items={articleProducts} />
+    <RelatedLinks title={relatedIndustriesTitle} items={articleIndustries} />
+  </>
+) : null}
+{kind === 'caseStudy' ? (
+  <>
+    <RelatedLinks title={relatedIndustriesTitle} items={caseIndustries} />
+    <RelatedLinks title={relatedProductsTitle} items={caseProducts} />
+  </>
+) : null}

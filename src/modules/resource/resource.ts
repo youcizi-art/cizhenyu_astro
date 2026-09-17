@@ -60,6 +60,8 @@ export type ResourceDetail = ResourceCard & {
 
   seo: PageSeo;
 
+  languageGroupKey: string;
+
 };
 
 
@@ -157,6 +159,8 @@ export async function getResource(idOrSlug: string, query?: CmsQuery): Promise<R
     seoDescription: seo.description || card.summary,
 
     seo,
+
+    languageGroupKey: String(row.language_group_key || '').trim(),
 
   };
 

@@ -1,6 +1,11 @@
 export type { CmsSeoFields, PageSeo } from './types';
 export { readSeoFields, toPageSeo } from './types';
 export { siteOrigin, toAbsoluteUrl, buildAlternateLinks, toOgLocale } from './urls';
+export {
+  resolveEntityLocaleAlternates,
+  entityGroupKey,
+  withAbsoluteAlternates,
+} from './locale-alternates';
 export { buildJsonLd, type JsonLdInput, type JsonLdBreadcrumb } from './json-ld';
 export {
   collectSitemapEntries,

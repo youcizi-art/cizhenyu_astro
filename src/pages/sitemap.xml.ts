@@ -1,10 +1,11 @@
 import type { APIRoute } from 'astro';
-import { collectSitemapEntries, renderSitemapXml } from '@/modules/seo';
+import { collectSitemapEntries, renderSitemapXml, siteOrigin } from '@/modules/seo';
 
 export const prerender = false;
 
-export const GET: APIRoute = async () => {
-  const entries = await collectSitemapEntries();
+export const GET: APIRoute = async ({ url }) => {
+  const origin = siteOrigin() || url.origin;
+  const entries = await collectSitemapEntries({ origin });
   return new Response(renderSitemapXml(entries), {
     status: 200,
     headers: {

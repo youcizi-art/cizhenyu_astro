@@ -11,6 +11,7 @@ export type FaqItem = {
   id: string;
   question: string;
   answer: string;
+  shortAnswer: string;
   sortOrder: number;
 };
 
@@ -20,6 +21,7 @@ function toItem(row: CmsEntity): FaqItem {
     id: String(row.id),
     question: String(data.question || ''),
     answer: String(data.answer || ''),
+    shortAnswer: String(data.short_answer || '').trim(),
     sortOrder: Number(data.sort_order || 0) || 0,
   };
 }

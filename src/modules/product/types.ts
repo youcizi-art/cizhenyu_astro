@@ -57,18 +57,25 @@ export type ProductDetail = ProductCard & {
   videoUrl: string;
   oemHtml: string;
   qualityHtml: string;
+  applicationHtml: string;
+  howItWorksHtml: string;
+  capacityHtml: string;
   certifications: ProductCertification[];
   industries: ProductLinkCard[];
   relatedProducts: ProductLinkCard[];
   relatedCases: ProductLinkCard[];
   faqs: ProductFaqCard[];
+  relatedArticles: ProductLinkCard[];
   /** raw relation ids for enrichment */
   industryIds: string[];
   relatedProductIds: string[];
   relatedCaseIds: string[];
   faqIds: string[];
+  relatedArticleIds: string[];
+  categoryIds: string[];
   inquiryHref: string;
   inquiryLabel: string;
+  languageGroupKey: string;
 };
 
 function readStatus(data: Record<string, unknown>) {
@@ -176,16 +183,23 @@ export function toProductDetail(row: CmsEntity, locale?: string): ProductDetail 
     videoUrl: String(data.video_url || '').trim(),
     oemHtml: String(data.oem_content || ''),
     qualityHtml: String(data.quality_content || ''),
+    applicationHtml: String(data.application_scenes || ''),
+    howItWorksHtml: String(data.how_it_works || ''),
+    capacityHtml: String(data.capacity_content || ''),
     certifications: asCertifications(data.certifications),
     industries: [],
     relatedProducts: [],
     relatedCases: [],
     faqs: [],
+    relatedArticles: [],
     industryIds: asRelationIds(data.industry_ids),
     relatedProductIds: asRelationIds(data.related_product_ids),
     relatedCaseIds: asRelationIds(data.related_case_ids),
     faqIds: asRelationIds(data.faq_ids),
+    relatedArticleIds: asRelationIds(data.related_article_ids),
+    categoryIds: asRelationIds(data.taxonomy_ids),
     inquiryHref: '',
     inquiryLabel: '',
+    languageGroupKey: String(row.language_group_key || '').trim(),
   };
 }

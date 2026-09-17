@@ -4,8 +4,8 @@ import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
 import ActiveProductDetail from '@/ui/themes/ActiveProductDetail.astro';
 import { loadProductDetailPage } from '@/workflows/products/load-product-detail';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
-import { buildAlternateLinks } from '@/workflows/chrome/urls';
-import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
+import { layoutSeoProps, pageJsonLd, resolveEntityLocaleAlternates, siteOrigin } from '@/modules/seo';
+import { localePath } from '@/modules/cms';
 import { t } from '@/modules/i18n';
 
 export const prerender = false;
@@ -23,6 +23,7 @@ applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
 if (!data.error && !data.product) return Astro.rewrite('/404');
 const product = data.product;
+const origin = siteOrigin() || Astro.url.origin;
 const title = product ? `${product.seoTitle} · ${data.siteName}` : `Product · ${data.siteName}`;
 const seoProps = layoutSeoProps(product?.seo, Astro.url.pathname);
 const company = {
@@ -36,6 +37,18 @@ const company = {
   foundingDate: data.company.foundingDate,
   sameAs: data.company.sameAs,
 };
+const alternates = product
+  ? await resolveEntityLocaleAlternates({
+      catalogKey: 'product',
+      languageGroupKey: product.languageGroupKey,
+      locales: data.languages.map((item) => item.code),
+      defaultLocale: data.site.defaultLocale,
+      currentLocale: data.locale,
+      currentPath: Astro.url.pathname,
+      pathForSlug: (locale, slug) => localePath(locale, `/products/${encodeURIComponent(slug)}`),
+      origin,
+    })
+  : [];
 const jsonLd = product
   ? pageJsonLd(
       {
@@ -59,6 +72,9 @@ const jsonLd = product
           brand: product.brand,
           imageUrls: product.imageUrls,
           specs: product.specs,
+          price: product.price,
+          currency: product.currency,
+          availability: product.availability,
         },
         faqs: product.faqs.map((item) => ({ question: item.question, answer: item.answer })),
       }
@@ -70,7 +86,7 @@ const jsonLd = product
   description={product?.seoDescription || ''}
   lang={data.locale}
   siteName={data.siteName}
-  alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
+  alternates={alternates}
   {...seoProps}
   jsonLd={jsonLd}
 >

@@ -3,9 +3,9 @@ import { siteOrigin, toAbsoluteUrl } from '@/modules/seo';
 
 export const prerender = false;
 
-export const GET: APIRoute = async () => {
-  const origin = siteOrigin() || 'http://localhost:4321';
-  const sitemap = toAbsoluteUrl('/sitemap.xml') || `${origin}/sitemap.xml`;
+export const GET: APIRoute = async ({ url }) => {
+  const origin = siteOrigin() || url.origin;
+  const sitemap = toAbsoluteUrl('/sitemap.xml', origin);
   const body = [
     'User-agent: *',
     'Allow: /',

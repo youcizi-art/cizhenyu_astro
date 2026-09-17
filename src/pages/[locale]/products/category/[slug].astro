@@ -1,0 +1,82 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
+import ActiveProductList from '@/ui/themes/ActiveProductList.astro';
+import { loadProductCategoryPage } from '@/workflows/products/load-product-category';
+import { applyCacheHeaders } from '@/workflows/chrome/http';
+import {
+  layoutSeoProps,
+  pageJsonLd,
+  resolveEntityLocaleAlternates,
+  siteOrigin,
+} from '@/modules/seo';
+import { localePath } from '@/modules/cms';
+import { t } from '@/modules/i18n';
+
+export const prerender = false;
+
+const slug = String(Astro.params.slug || '').trim();
+const page = Number(Astro.url.searchParams.get('page') || 1) || 1;
+const data = await loadProductCategoryPage({
+  locale: Astro.params.locale,
+  pathname: Astro.url.pathname,
+  slug,
+  page,
+});
+if (!data.localeValid) {
+  return Astro.redirect(`/${data.site.defaultLocale}/products`, 302);
+}
+applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
+if (!data.enabled) return Astro.rewrite('/404');
+if (!data.error && !data.category) return Astro.rewrite('/404');
+
+const category = data.category;
+const origin = siteOrigin() || Astro.url.origin;
+const listLabel = t(data.locale, 'products');
+const title = category?.seoTitle || category?.name || listLabel;
+const seoProps = layoutSeoProps(category?.seo, Astro.url.pathname);
+const alternates = category
+  ? await resolveEntityLocaleAlternates({
+      catalogKey: 'productCategory',
+      languageGroupKey: category.languageGroupKey,
+      locales: data.languages.map((item) => item.code),
+      defaultLocale: data.site.defaultLocale,
+      currentLocale: data.locale,
+      currentPath: Astro.url.pathname,
+      pathForSlug: (locale, catSlug) =>
+        localePath(locale, `/products/category/${encodeURIComponent(catSlug)}`),
+      origin,
+    })
+  : [];
+const jsonLd = category
+  ? pageJsonLd(category.seo, Astro.url.pathname, {
+      siteName: data.siteName,
+      company: data.company,
+      breadcrumbs: [
+        { name: t(data.locale, 'home'), href: `/${data.locale}` },
+        { name: listLabel, href: `/${data.locale}/products` },
+        { name: category.name },
+      ],
+    })
+  : null;
+---
+<BaseLayout
+  title={`${title} · ${data.siteName}`}
+  description={category?.seoDescription || category?.description || ''}
+  lang={data.locale}
+  siteName={data.siteName}
+  alternates={alternates}
+  {...seoProps}
+  jsonLd={jsonLd}
+>
+  <ThemeFrame chrome={data}>
+    <ActiveProductList
+      chrome={data}
+      items={data.items}
+      pages={data.pages}
+      basePath={category ? `/${data.locale}/products/category/${encodeURIComponent(category.slug)}` : `/${data.locale}/products`}
+      listTitle={category?.name || listLabel}
+      error={data.error}
+    />
+  </ThemeFrame>
+</BaseLayout>

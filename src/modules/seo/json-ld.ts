@@ -26,6 +26,9 @@ export type JsonLdInput = {
     brand?: string;
     imageUrls?: string[];
     specs?: Array<{ key: string; value: string }>;
+    price?: string;
+    currency?: string;
+    availability?: string;
   };
   article?: {
     headline?: string;
@@ -138,6 +141,21 @@ function buildPrimaryEntity(input: JsonLdInput): Record<string, unknown> | null 
         value: row.value,
       }));
     }
+    if (product.price) {
+      const offer: Record<string, unknown> = {
+        '@type': 'Offer',
+        price: product.price,
+        priceCurrency: product.currency || 'USD',
+        url,
+      };
+      if (product.availability) {
+        const avail = product.availability.trim();
+        offer.availability = avail.startsWith('http')
+          ? avail
+          : `https://schema.org/${avail.replace(/\s+/g, '')}`;
+      }
+      node.offers = offer;
+    }
     if (org) node.manufacturer = { '@id': org['@id'] || undefined, '@type': 'Organization', name: org.name };
     return applySchemaMapping(node, input.seo.schemaMapping);
   }
@@ -220,7 +238,7 @@ function buildPrimaryEntity(input: JsonLdInput): Record<string, unknown> | null 
   };
 }
 
-/** 按 schema_type 生成 JSON-LD；优先 @graph（主实体 + Org + Breadcrumb） */
+/** 按 schema_type 生成 JSON-LD；优先 @graph（主实体 + Org + Breadcrumb + 可选 FAQ） */
 export function buildJsonLd(input: JsonLdInput): Record<string, unknown> | null {
   const primary = buildPrimaryEntity(input);
   if (!primary) return null;
@@ -234,6 +252,22 @@ export function buildJsonLd(input: JsonLdInput): Record<string, unknown> | null 
     graph.push(org);
   }
   graph.push(primary);
+
+  // Product (or other) pages may also expose FAQPage in the same graph
+  if (primary['@type'] !== 'FAQPage' && input.faqs?.length) {
+    graph.push({
+      '@type': 'FAQPage',
+      mainEntity: input.faqs.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: String(item.answer || '').replace(/<[^>]+>/g, ' ').trim(),
+        },
+      })),
+    });
+  }
+
   if (crumbs) graph.push(crumbs);
 
   if (graph.length === 1) {

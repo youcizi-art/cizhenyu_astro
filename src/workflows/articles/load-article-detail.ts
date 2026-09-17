@@ -1,5 +1,5 @@
 import { loadPageChrome } from '../chrome/load-chrome';
-import { getArticle } from '../../modules/article';
+import { enrichArticleDetail, getArticle } from '../../modules/article';
 import { toErrorMessage } from '../../modules/cms';
 
 export async function loadArticleDetailPage(options: {
@@ -12,7 +12,8 @@ export async function loadArticleDetailPage(options: {
     return { ...chrome, enabled: false as const, article: null, error: undefined as string | undefined };
   }
   try {
-    const article = await getArticle(options.id, { locale: chrome.locale });
+    let article = await getArticle(options.id, { locale: chrome.locale });
+    if (article) article = await enrichArticleDetail(article, chrome.locale);
     return { ...chrome, enabled: true as const, article, error: undefined as string | undefined };
   } catch (error) {
     return { ...chrome, enabled: true as const, article: null, error: toErrorMessage(error) };

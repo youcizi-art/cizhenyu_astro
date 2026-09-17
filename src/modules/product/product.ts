@@ -7,6 +7,7 @@ import {
   type CmsQuery,
 } from '../cms';
 import {
+  asRelationIds,
   isPublishedProduct,
   toProductCard,
   toProductDetail,
@@ -32,7 +33,7 @@ export async function getProduct(idOrSlug: string, query?: CmsQuery): Promise<Pr
 }
 
 async function resolveLinkCards(
-  key: 'product' | 'industry' | 'caseStudy',
+  key: 'product' | 'industry' | 'caseStudy' | 'article',
   ids: string[],
   locale: string | undefined,
   mapRow: (row: CmsEntity) => ProductLinkCard | null
@@ -73,12 +74,59 @@ function caseCard(row: CmsEntity, locale?: string): ProductLinkCard | null {
   };
 }
 
+function articleCard(row: CmsEntity, locale?: string): ProductLinkCard | null {
+  const data = entityData(row);
+  const slug = String(data.slug || row.id).trim();
+  if (!slug) return null;
+  return {
+    id: String(row.id),
+    title: String(data.title || 'Untitled'),
+    href: localePath(locale, `/articles/${encodeURIComponent(slug)}`),
+    summary: String(data.summary || data.excerpt || ''),
+  };
+}
+
+export async function listProductsByCategoryId(
+  categoryId: string,
+  query?: CmsQuery
+): Promise<{ items: ReturnType<typeof toProductCard>[]; pages: { total: number; page: number; pageSize: number; totalPages: number } }> {
+  const locale = query?.locale ? String(query.locale) : undefined;
+  const page = Math.max(1, Number(query?.page || 1) || 1);
+  const pageSize = Math.max(1, Number(query?.pageSize || 12) || 12);
+  const all: ReturnType<typeof toProductCard>[] = [];
+  let cmsPage = 1;
+  for (;;) {
+    const result = await listEntities('product', {
+      locale,
+      page: cmsPage,
+      pageSize: 100,
+      status: 'published',
+    });
+    for (const row of result.list.filter(isPublishedProduct)) {
+      const ids = asRelationIds(entityData(row).taxonomy_ids);
+      if (!ids.includes(categoryId)) continue;
+      all.push(toProductCard(row, locale));
+    }
+    const totalPages = Number(result.pages?.totalPages || 1) || 1;
+    if (cmsPage >= totalPages || !result.list.length) break;
+    cmsPage += 1;
+    if (cmsPage > 50) break;
+  }
+  const total = all.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize) || 1);
+  const start = (page - 1) * pageSize;
+  return {
+    items: all.slice(start, start + pageSize),
+    pages: { total, page, pageSize, totalPages },
+  };
+}
+
 /** 解析产品关联（行业/相关产品/案例/FAQ），失败时返回空数组 */
 export async function enrichProductDetail(
   product: ProductDetail,
   locale: string | undefined
 ): Promise<ProductDetail> {
-  const [industries, relatedProducts, relatedCases, faqByIds] = await Promise.all([
+  const [industries, relatedProducts, relatedCases, relatedArticles, faqByIds] = await Promise.all([
     resolveLinkCards('industry', product.industryIds, locale, (row) => industryCard(row, locale)),
     resolveLinkCards('product', product.relatedProductIds, locale, (row) => {
       if (!isPublishedProduct(row)) return null;
@@ -93,6 +141,7 @@ export async function enrichProductDetail(
       };
     }),
     resolveLinkCards('caseStudy', product.relatedCaseIds, locale, (row) => caseCard(row, locale)),
+    resolveLinkCards('article', product.relatedArticleIds, locale, (row) => articleCard(row, locale)),
     product.faqIds.length
       ? Promise.all(
           product.faqIds.map((id) => getEntityByIdOrSlug('faq', id, { locale }).catch(() => null))
@@ -138,6 +187,7 @@ export async function enrichProductDetail(
     industries,
     relatedProducts,
     relatedCases,
+    relatedArticles,
     faqs,
   };
 }

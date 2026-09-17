@@ -8,6 +8,9 @@ import type { ProductDetail } from '@/modules/product';
 interface Labels {
   advantages?: string;
   video?: string;
+  application?: string;
+  howItWorks?: string;
+  capacity?: string;
   oem?: string;
   quality?: string;
   certifications?: string;
@@ -15,6 +18,7 @@ interface Labels {
   industries?: string;
   relatedProducts?: string;
   relatedCases?: string;
+  relatedArticles?: string;
   inquiryTitle?: string;
   inquiryBody?: string;
   inquiryCta?: string;
@@ -30,6 +34,9 @@ const p = classPrefix;
 const L = {
   advantages: labels.advantages || 'Key Advantages',
   video: labels.video || 'Product Video',
+  application: labels.application || 'Applications',
+  howItWorks: labels.howItWorks || 'How It Works',
+  capacity: labels.capacity || 'Production Capacity',
   oem: labels.oem || 'OEM / ODM',
   quality: labels.quality || 'Quality Control',
   certifications: labels.certifications || 'Certifications',
@@ -37,6 +44,7 @@ const L = {
   industries: labels.industries || 'Industries',
   relatedProducts: labels.relatedProducts || 'Related Products',
   relatedCases: labels.relatedCases || 'Related Cases',
+  relatedArticles: labels.relatedArticles || 'Guides & Articles',
   inquiryTitle: labels.inquiryTitle || 'Product Inquiry',
   inquiryBody: labels.inquiryBody || 'Ask about pricing, MOQ, and OEM options.',
   inquiryCta: labels.inquiryCta || product.inquiryLabel || 'Contact',
@@ -62,6 +70,27 @@ const L = {
   <section class={`${p}-section ${p}-video`}>
     <h2>{L.video}</h2>
     <p><a href={product.videoUrl} target="_blank" rel="noopener noreferrer">{product.videoUrl}</a></p>
+  </section>
+) : null}
+
+{product.applicationHtml ? (
+  <section class={`${p}-section ${p}-application`}>
+    <h2>{L.application}</h2>
+    <div class="prose" set:html={product.applicationHtml} />
+  </section>
+) : null}
+
+{product.howItWorksHtml ? (
+  <section class={`${p}-section ${p}-how`}>
+    <h2>{L.howItWorks}</h2>
+    <div class="prose" set:html={product.howItWorksHtml} />
+  </section>
+) : null}
+
+{product.capacityHtml ? (
+  <section class={`${p}-section ${p}-capacity`}>
+    <h2>{L.capacity}</h2>
+    <div class="prose" set:html={product.capacityHtml} />
   </section>
 ) : null}
 
@@ -131,6 +160,17 @@ const L = {
     <h2>{L.relatedCases}</h2>
     <ul>
       {product.relatedCases.map((item) => (
+        <li><a href={item.href}>{item.title}</a></li>
+      ))}
+    </ul>
+  </section>
+) : null}
+
+{product.relatedArticles?.length ? (
+  <section class={`${p}-section ${p}-links`}>
+    <h2>{L.relatedArticles}</h2>
+    <ul>
+      {product.relatedArticles.map((item) => (
         <li><a href={item.href}>{item.title}</a></li>
       ))}
     </ul>

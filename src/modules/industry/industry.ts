@@ -4,6 +4,8 @@ import {
 
   getEntityByIdOrSlug,
 
+  isPublishedEntity,
+
   listEntities,
 
   localePath,
@@ -56,6 +58,8 @@ export type SolutionDetail = SolutionCard & {
 
   seo: PageSeo;
 
+  languageGroupKey: string;
+
 };
 
 
@@ -90,9 +94,9 @@ export async function listSolutions(query?: CmsQuery): Promise<{ items: Solution
 
   const locale = query?.locale ? String(query.locale) : undefined;
 
-  const result = await listEntities('industry', query);
+  const result = await listEntities('industry', { ...query, status: query?.status ?? 'published' });
 
-  return { items: result.list.map((row) => toCard(row, locale)), pages: result.pages };
+  return { items: result.list.filter(isPublishedEntity).map((row) => toCard(row, locale)), pages: result.pages };
 
 }
 
@@ -104,7 +108,7 @@ export async function getSolution(idOrSlug: string, query?: CmsQuery): Promise<S
 
   const row = await getEntityByIdOrSlug('industry', idOrSlug, query);
 
-  if (!row) return null;
+  if (!row || !isPublishedEntity(row)) return null;
 
   const card = toCard(row, locale);
 
@@ -139,6 +143,8 @@ export async function getSolution(idOrSlug: string, query?: CmsQuery): Promise<S
     seoDescription: seo.description || card.summary,
 
     seo,
+
+    languageGroupKey: String(row.language_group_key || '').trim(),
 
   };
 

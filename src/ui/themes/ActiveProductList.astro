@@ -13,11 +13,13 @@ interface Props {
   items: ProductCard[];
   pages: PublicPages;
   basePath: string;
+  listTitle?: string;
+  categoryLinks?: Array<{ title: string; href: string }>;
   error?: string;
 }
-const { chrome, items, pages, basePath, error } = Astro.props;
+const { chrome, items, pages, basePath, listTitle, categoryLinks = [], error } = Astro.props;
 const meta = getThemeMeta(chrome.site.theme);
-const title = t(chrome.locale, 'products');
+const title = listTitle || t(chrome.locale, 'products');
 const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
 ---
 {meta.id === 'turmill' ? (
@@ -30,12 +32,23 @@ const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
     homeLabel={t(chrome.locale, 'home')}
     emptyText={t(chrome.locale, 'emptyProducts')}
     readMoreText={readMore}
+    categoryLinks={categoryLinks}
     error={error}
     warnings={chrome.warnings}
   />
 ) : (
   <>
     <h1>{title}</h1>
+    {categoryLinks.length ? (
+      <p class="muted">
+        {categoryLinks.map((item, idx) => (
+          <>
+            {idx > 0 ? ' · ' : null}
+            <a href={item.href}>{item.title}</a>
+          </>
+        ))}
+      </p>
+    ) : null}
     <AlertBanner messages={error ? [error] : []} />
     <AlertBanner messages={chrome.warnings} tone="warn" />
     <div class="card-list">

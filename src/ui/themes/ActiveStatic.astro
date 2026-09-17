@@ -14,7 +14,7 @@ interface Props {
   summary?: string;
   content?: string;
   references?: any[];
-  faqItems?: Array<{ question: string; answer: string }>;
+  faqItems?: Array<{ question: string; answer: string; shortAnswer?: string }>;
   emptyHint?: string;
   error?: string;
 }
@@ -33,6 +33,7 @@ const meta = getThemeMeta(chrome.site.theme);
 const homeHref = `/${chrome.locale}`;
 const homeLabel = t(chrome.locale, 'home');
 const relatedTitle = chrome.locale.startsWith('zh') ? '相关内容' : 'Related';
+const shortAnswerLabel = chrome.locale.startsWith('zh') ? '简答' : chrome.locale === 'ja' ? '簡潔な回答' : 'Short answer';
 ---
 {meta.id === 'turmill' && kind === 'about' ? (
   <TurmillAboutPage
@@ -65,6 +66,7 @@ const relatedTitle = chrome.locale.startsWith('zh') ? '相关内容' : 'Related'
     items={faqItems}
     homeHref={homeHref}
     homeLabel={homeLabel}
+    shortAnswerLabel={shortAnswerLabel}
     emptyText={emptyHint || (chrome.locale.startsWith('zh') ? '暂无 FAQ。' : 'No FAQs yet.')}
     error={error}
     warnings={chrome.warnings}
@@ -77,6 +79,9 @@ const relatedTitle = chrome.locale.startsWith('zh') ? '相关内容' : 'Related'
     {faqItems.map((item) => (
       <details class="faq-item card">
         <summary>{item.question}</summary>
+        {item.shortAnswer ? (
+          <p class="muted"><strong>{shortAnswerLabel}:</strong> {item.shortAnswer}</p>
+        ) : null}
         <div class="prose" set:html={item.answer} />
       </details>
     ))}

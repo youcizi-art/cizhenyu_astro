@@ -1,0 +1,19 @@
+---
+/**
+ * Theme-agnostic GEO short-answer block.
+ * Themes may style via classPrefix; do not put meta tags here.
+ */
+interface Props {
+  title?: string;
+  shortAnswer: string;
+  classPrefix?: string;
+}
+const { title = '', shortAnswer, classPrefix = 'geo-answer' } = Astro.props;
+const p = classPrefix;
+---
+{shortAnswer ? (
+  <aside class={`${p}`} data-geo-answer>
+    {title ? <p class={`${p}-label`}>{title}</p> : null}
+    <p class={`${p}-text`}>{shortAnswer}</p>
+  </aside>
+) : null}

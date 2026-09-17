@@ -3,6 +3,7 @@ import BaseLayout from '@/ui/layout/BaseLayout.astro';
 import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
 import ActiveProductList from '@/ui/themes/ActiveProductList.astro';
 import { loadProductListPage } from '@/workflows/products/load-product-list';
+import { listProductCategories } from '@/modules/product-category';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { resolveListPageSeo } from '@/modules/seo';
@@ -22,6 +23,9 @@ if (!data.localeValid) {
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
 const fallbackTitle = t(data.locale, 'products');
+const categories = await listProductCategories({ locale: data.locale, pageSize: 50 }).catch(() => ({
+  items: [],
+}));
 const listSeo = await resolveListPageSeo({
   slug: 'products',
   locale: data.locale,
@@ -62,6 +66,7 @@ const title = `${listSeo.title} · ${data.siteName}`;
       items={data.items}
       pages={data.pages}
       basePath={`/${data.locale}/products`}
+      categoryLinks={categories.items.map((item) => ({ title: item.name, href: item.href }))}
       error={data.error}
     />
   </ThemeFrame>

@@ -2,76 +2,75 @@
 import BaseLayout from '@/ui/layout/BaseLayout.astro';
 import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
 import ActiveCardList from '@/ui/themes/ActiveCardList.astro';
-import { loadArticleListPage } from '@/workflows/articles/load-article-list';
+import { loadArticleTypePage } from '@/workflows/articles/load-article-type';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import {
   ARTICLE_CONTENT_TYPES,
   articleContentTypeLabel,
 } from '@/modules/article';
-import { resolveListPageSeo } from '@/modules/seo';
+import { layoutSeoProps, listPageJsonLd, siteOrigin } from '@/modules/seo';
 import { t } from '@/modules/i18n';
 
 export const prerender = false;
 
+const type = String(Astro.params.type || '').trim();
 const page = Number(Astro.url.searchParams.get('page') || 1) || 1;
-const data = await loadArticleListPage({
+const data = await loadArticleTypePage({
   locale: Astro.params.locale,
   pathname: Astro.url.pathname,
+  type,
   page,
 });
 if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/articles`, 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
-const fallbackTitle = t(data.locale, 'articles');
-const typeLinks = ARTICLE_CONTENT_TYPES.map((type) => ({
-  title: articleContentTypeLabel(type, data.locale),
-  href: `/${data.locale}/articles/type/${type}`,
+if (!data.error && !data.contentType) return Astro.rewrite('/404');
+
+const origin = siteOrigin() || Astro.url.origin;
+const typeLabel = data.typeLabel || articleContentTypeLabel(data.contentType || 'news', data.locale);
+const typeLinks = ARTICLE_CONTENT_TYPES.map((item) => ({
+  title: articleContentTypeLabel(item, data.locale),
+  href: `/${data.locale}/articles/type/${item}`,
 }));
-const listSeo = await resolveListPageSeo({
-  slug: 'articles',
-  locale: data.locale,
+const listLabel = t(data.locale, 'articles');
+const seoProps = layoutSeoProps(undefined, Astro.url.pathname);
+const jsonLd = listPageJsonLd({
+  title: typeLabel,
+  description: data.company.summary || '',
   pathname: Astro.url.pathname,
-  fallbackTitle,
-  fallbackDescription: data.company.summary,
   siteName: data.siteName,
-  company: {
-    name: data.company.name,
-    address: data.company.address,
-    country: data.company.country,
-    phone: data.company.phone,
-    email: data.company.email,
-    website: data.company.website,
-    logoUrl: data.company.logoUrl,
-    foundingDate: data.company.foundingDate,
-    sameAs: data.company.sameAs,
-  },
+  company: data.company,
   breadcrumbs: [
     { name: t(data.locale, 'home'), href: `/${data.locale}` },
-    { name: fallbackTitle },
+    { name: listLabel, href: `/${data.locale}/articles` },
+    { name: typeLabel },
   ],
 });
 ---
 <BaseLayout
-  title={`${listSeo.title} · ${data.siteName}`}
-  description={listSeo.description}
+  title={`${typeLabel} · ${data.siteName}`}
+  description={data.company.summary || ''}
   lang={data.locale}
   siteName={data.siteName}
-  alternates={buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale })}
-  {...listSeo.seoProps}
-  jsonLd={listSeo.jsonLd}
+  alternates={buildAlternateLinks(data.localeOptions, {
+    defaultLocale: data.site.defaultLocale,
+    origin,
+  })}
+  {...seoProps}
+  jsonLd={jsonLd}
 >
   <ThemeFrame chrome={data}>
     <ActiveCardList
       chrome={data}
       kind="articles"
-      title={fallbackTitle}
+      title={typeLabel}
       items={data.items.map((item) => ({
         ...item,
         meta: articleContentTypeLabel(item.contentType, data.locale),
       }))}
       pages={data.pages}
-      basePath={`/${data.locale}/articles`}
+      basePath={`/${data.locale}/articles/type/${encodeURIComponent(data.contentType || type)}`}
       typeLinks={typeLinks}
       emptyText={data.locale.startsWith('zh') ? '暂无文章。' : 'No articles yet.'}
       error={data.error}

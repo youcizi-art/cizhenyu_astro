@@ -31,9 +31,10 @@ interface Props {
   pages: PublicPages;
   basePath: string;
   emptyText: string;
+  typeLinks?: Array<{ title: string; href: string }>;
   error?: string;
 }
-const { chrome, kind, title, items, pages, basePath, emptyText, error } = Astro.props;
+const { chrome, kind, title, items, pages, basePath, emptyText, typeLinks = [], error } = Astro.props;
 const meta = getThemeMeta(chrome.site.theme);
 const homeHref = `/${chrome.locale}`;
 const homeLabel = t(chrome.locale, 'home');
@@ -49,6 +50,7 @@ const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
     homeLabel={homeLabel}
     emptyText={emptyText}
     readMoreText={chrome.locale.startsWith('zh') ? '阅读更多' : 'Read More'}
+    typeLinks={typeLinks}
     error={error}
     warnings={chrome.warnings}
   />
@@ -80,6 +82,16 @@ const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
 ) : (
   <>
     <h1>{title}</h1>
+    {typeLinks.length ? (
+      <p class="muted">
+        {typeLinks.map((item, idx) => (
+          <>
+            {idx > 0 ? ' · ' : null}
+            <a href={item.href}>{item.title}</a>
+          </>
+        ))}
+      </p>
+    ) : null}
     <AlertBanner messages={error ? [error] : []} />
     <AlertBanner messages={chrome.warnings} tone="warn" />
     <div class="card-list">

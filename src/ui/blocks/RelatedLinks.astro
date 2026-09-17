@@ -1,0 +1,28 @@
+---
+/** Theme-agnostic related link list for internal linking. */
+interface Item {
+  title: string;
+  href: string;
+  summary?: string;
+}
+interface Props {
+  title: string;
+  items: Item[];
+  classPrefix?: string;
+}
+const { title, items, classPrefix = 'related-links' } = Astro.props;
+const p = classPrefix;
+---
+{items?.length ? (
+  <section class={`${p}`}>
+    <h2>{title}</h2>
+    <ul class={`${p}-list`}>
+      {items.map((item) => (
+        <li>
+          <a href={item.href}>{item.title}</a>
+          {item.summary ? <p class="muted">{item.summary}</p> : null}
+        </li>
+      ))}
+    </ul>
+  </section>
+) : null}

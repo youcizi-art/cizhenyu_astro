@@ -14,6 +14,7 @@ interface Props {
   readMoreText?: string;
   homeHref: string;
   homeLabel?: string;
+  typeLinks?: Array<{ title: string; href: string }>;
   error?: string;
   warnings?: string[];
 }
@@ -26,6 +27,7 @@ const {
   readMoreText = 'Read More',
   homeHref,
   homeLabel = 'Home',
+  typeLinks = [],
   error,
   warnings = [],
 } = Astro.props;
@@ -46,6 +48,16 @@ const nextHref = page < totalPages ? `${basePath}?page=${page + 1}` : '';
   <div class="tm-container">
     <Alerts messages={error ? [error] : []} />
     <Alerts messages={warnings} tone="warn" />
+    {typeLinks.length ? (
+      <p class="tm-prose">
+        {typeLinks.map((item, idx) => (
+          <>
+            {idx > 0 ? ' · ' : null}
+            <a class="tm-link-more" href={item.href}>{item.title}</a>
+          </>
+        ))}
+      </p>
+    ) : null}
     {!error && !items.length ? <p class="tm-prose">{emptyText}</p> : null}
   </div>
   <ArticleGrid title="" items={items} readMoreText={readMoreText} />

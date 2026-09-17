@@ -12,12 +12,15 @@ import {
 import { resolveMediaUrl } from '../media';
 import { toPageSeo, type PageSeo } from '../seo';
 
-export type ArticleContentType =
-  | 'news'
-  | 'buying_guide'
-  | 'comparison'
-  | 'technical'
-  | 'application_guide';
+export const ARTICLE_CONTENT_TYPES = [
+  'news',
+  'buying_guide',
+  'comparison',
+  'technical',
+  'application_guide',
+] as const;
+
+export type ArticleContentType = (typeof ARTICLE_CONTENT_TYPES)[number];
 
 export type ArticleCard = {
   id: string;
@@ -30,17 +33,15 @@ export type ArticleCard = {
   contentType: ArticleContentType;
 };
 
-const CONTENT_TYPES = new Set<ArticleContentType>([
-  'news',
-  'buying_guide',
-  'comparison',
-  'technical',
-  'application_guide',
-]);
+const CONTENT_TYPES = new Set<string>(ARTICLE_CONTENT_TYPES);
+
+export function isArticleContentType(value: string): value is ArticleContentType {
+  return CONTENT_TYPES.has(value);
+}
 
 function toContentType(raw: unknown): ArticleContentType {
-  const value = String(raw || 'news').trim() as ArticleContentType;
-  return CONTENT_TYPES.has(value) ? value : 'news';
+  const value = String(raw || 'news').trim();
+  return isArticleContentType(value) ? value : 'news';
 }
 
 /** Human-readable eyebrow for article content_type */
@@ -57,12 +58,38 @@ export function articleContentTypeLabel(type: ArticleContentType, locale?: strin
 }
 
 
+export type ArticleLinkCard = {
+  id: string;
+  title: string;
+  href: string;
+  summary?: string;
+};
+
 export type ArticleDetail = ArticleCard & {
   content: string;
+  shortAnswer: string;
   seoTitle: string;
   seoDescription: string;
   seo: PageSeo;
+  languageGroupKey: string;
+  relatedArticleIds: string[];
+  relatedProductIds: string[];
+  relatedIndustryIds: string[];
+  relatedArticles: ArticleLinkCard[];
+  relatedProducts: ArticleLinkCard[];
+  relatedIndustries: ArticleLinkCard[];
 };
+
+function asRelationIds(raw: unknown): string[] {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .map((item) => {
+      if (typeof item === 'string' || typeof item === 'number') return String(item).trim();
+      if (item && typeof item === 'object' && 'id' in item) return String((item as { id: unknown }).id || '').trim();
+      return '';
+    })
+    .filter(Boolean);
+}
 
 function toCard(row: CmsEntity, locale?: string): ArticleCard {
   const data = entityData(row);
@@ -107,8 +134,78 @@ export async function getArticle(idOrSlug: string, query?: CmsQuery): Promise<Ar
   return {
     ...card,
     content: String(data.content || ''),
+    shortAnswer: String(data.short_answer || '').trim(),
     seoTitle: seo.title || card.title,
     seoDescription: seo.description || card.summary,
     seo,
+    languageGroupKey: String(row.language_group_key || '').trim(),
+    relatedArticleIds: asRelationIds(data.related_article_ids),
+    relatedProductIds: asRelationIds(data.related_product_ids),
+    relatedIndustryIds: asRelationIds(data.related_industry_ids),
+    relatedArticles: [],
+    relatedProducts: [],
+    relatedIndustries: [],
   };
+}
+
+export async function enrichArticleDetail(
+  article: ArticleDetail,
+  locale: string | undefined
+): Promise<ArticleDetail> {
+  const [articleRows, productRows, industryRows] = await Promise.all([
+    Promise.all(
+      [...new Set(article.relatedArticleIds)].map((id) =>
+        getEntityByIdOrSlug('article', id, { locale, status: 'published' }).catch(() => null)
+      )
+    ),
+    Promise.all(
+      [...new Set(article.relatedProductIds)].map((id) =>
+        getEntityByIdOrSlug('product', id, { locale, status: 'published' }).catch(() => null)
+      )
+    ),
+    Promise.all(
+      [...new Set(article.relatedIndustryIds)].map((id) =>
+        getEntityByIdOrSlug('industry', id, { locale, status: 'published' }).catch(() => null)
+      )
+    ),
+  ]);
+
+  const relatedArticles = articleRows
+    .filter((row): row is CmsEntity => Boolean(row && isPublishedEntity(row)))
+    .map((row) => toCard(row, locale))
+    .filter((item) => item.id !== article.id)
+    .map((item) => ({
+      id: item.id,
+      title: item.title,
+      href: item.href,
+      summary: item.summary,
+    }));
+
+  const relatedProducts = productRows
+    .filter((row): row is CmsEntity => Boolean(row && isPublishedEntity(row)))
+    .map((row) => {
+      const data = entityData(row);
+      const slug = String(data.slug || row.id).trim();
+      return {
+        id: String(row.id),
+        title: String(data.title || 'Untitled'),
+        href: localePath(locale, `/products/${encodeURIComponent(slug)}`),
+        summary: String(data.summary || ''),
+      };
+    });
+
+  const relatedIndustries = industryRows
+    .filter((row): row is CmsEntity => Boolean(row && isPublishedEntity(row)))
+    .map((row) => {
+      const data = entityData(row);
+      const slug = String(data.slug || row.id).trim();
+      return {
+        id: String(row.id),
+        title: String(data.name || data.title || 'Untitled'),
+        href: localePath(locale, `/solutions/${encodeURIComponent(slug)}`),
+        summary: String(data.summary || ''),
+      };
+    });
+
+  return { ...article, relatedArticles, relatedProducts, relatedIndustries };
 }

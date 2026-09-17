@@ -5,6 +5,7 @@ import Alerts from '../components/Alerts.astro';
 interface FaqItem {
   question: string;
   answer: string;
+  shortAnswer?: string;
 }
 interface Props {
   title: string;
@@ -12,6 +13,7 @@ interface Props {
   homeHref: string;
   homeLabel?: string;
   emptyText?: string;
+  shortAnswerLabel?: string;
   error?: string;
   warnings?: string[];
 }
@@ -21,6 +23,7 @@ const {
   homeHref,
   homeLabel = 'Home',
   emptyText = 'No FAQs yet.',
+  shortAnswerLabel = 'Short answer',
   error,
   warnings = [],
 } = Astro.props;
@@ -41,6 +44,9 @@ const {
       {items.map((item) => (
         <details class="tm-faq-item">
           <summary>{item.question}</summary>
+          {item.shortAnswer ? (
+            <p class="tm-prose"><strong>{shortAnswerLabel}:</strong> {item.shortAnswer}</p>
+          ) : null}
           <div class="tm-prose" set:html={item.answer} />
         </details>
       ))}
