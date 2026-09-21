@@ -5,8 +5,24 @@ import { buildRequestCacheKey, withRequestCache } from './request-cache';
 
 export type CmsQuery = Record<string, string | number | undefined | null>;
 
+type CmsFetcher = {
+  fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+};
+
+function cmsTransport() {
+  return String(import.meta.env.CMS_TRANSPORT || 'http').trim().toLowerCase() || 'http';
+}
+
+function cmsServiceBindingName() {
+  return String(import.meta.env.CMS_SERVICE_BINDING || 'CMS').trim() || 'CMS';
+}
+
 function apiBase() {
-  return String(import.meta.env.PUBLIC_CMS_API_BASE || '').replace(/\/$/, '');
+  const configured = String(import.meta.env.PUBLIC_CMS_API_BASE || '').replace(/\/$/, '');
+  if (configured) return configured;
+  // Service Binding 无公网 base 时用占位 Origin（仅路径参与路由）
+  if (cmsTransport() === 'service') return 'https://cms.internal';
+  return '';
 }
 
 function apiPrefix() {
@@ -14,10 +30,31 @@ function apiPrefix() {
   return raw.startsWith('/') ? raw.replace(/\/$/, '') : `/${raw.replace(/\/$/, '')}`;
 }
 
+/** 解析 CMS 请求执行器：http 用全局 fetch；service 用 Cloudflare Service Binding */
+async function resolveCmsFetcher(): Promise<CmsFetcher> {
+  if (cmsTransport() !== 'service') {
+    return { fetch: globalThis.fetch.bind(globalThis) };
+  }
+  try {
+    const mod = await import('cloudflare:workers');
+    const env = (mod as { env?: Record<string, CmsFetcher | undefined> }).env;
+    const binding = env?.[cmsServiceBindingName()];
+    if (binding && typeof binding.fetch === 'function') {
+      return binding;
+    }
+  } catch {
+    // 非 CF 运行时（单测 / Node）回退全局 fetch
+  }
+  return { fetch: globalThis.fetch.bind(globalThis) };
+}
+
 export function buildCmsUrl(resourcePath: string, query?: CmsQuery) {
   const base = apiBase();
   if (!base) {
-    throw new CmsError('未配置 PUBLIC_CMS_API_BASE', { status: 500, code: 'config' });
+    throw new CmsError('未配置 PUBLIC_CMS_API_BASE（或 CMS_TRANSPORT=service）', {
+      status: 500,
+      code: 'config',
+    });
   }
   const url = new URL(`${apiPrefix()}/${resourcePath.replace(/^\//, '')}`, `${base}/`);
   if (query) {
@@ -34,14 +71,15 @@ async function cmsGetJson<T>(resourcePath: string, query?: CmsQuery): Promise<T>
   const cacheKey = buildRequestCacheKey(url.toString(), 'GET');
 
   return withRequestCache(cacheKey, async () => {
+    const fetcher = await resolveCmsFetcher();
     let res: Response;
     try {
-      res = await fetch(url, {
+      res = await fetcher.fetch(url, {
         headers: { Accept: 'application/json' },
         signal: AbortSignal.timeout(15_000),
       });
     } catch (cause) {
-      throw new CmsError('无法连接 CMS，请检查 PUBLIC_CMS_API_BASE', {
+      throw new CmsError('无法连接 CMS，请检查 PUBLIC_CMS_API_BASE 或 Service Binding', {
         status: 503,
         code: 'network',
         cause,
@@ -101,9 +139,10 @@ export async function submitCollection(
 ): Promise<unknown> {
   const dataPath = collectionDataPath(key);
   const url = buildCmsUrl(`submit/${dataPath}`);
+  const fetcher = await resolveCmsFetcher();
   let res: Response;
   try {
-    res = await fetch(url, {
+    res = await fetcher.fetch(url, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

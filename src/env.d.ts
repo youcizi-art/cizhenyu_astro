@@ -7,6 +7,10 @@ interface ImportMetaEnv {
   readonly PUBLIC_SITE_URL?: string;
   readonly SITE_KEY?: string;
   readonly REVALIDATE_SECRET?: string;
+  /** http（默认）| service（Cloudflare Service Binding） */
+  readonly CMS_TRANSPORT?: string;
+  /** Service Binding 变量名，默认 CMS */
+  readonly CMS_SERVICE_BINDING?: string;
   /** 开发环境强制开启 HTML 缓存（默认关闭） */
   readonly HTML_CACHE_IN_DEV?: string;
   /** 任意环境关闭 HTML 缓存 */
@@ -17,4 +21,22 @@ interface ImportMetaEnv {
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;
+}
+
+interface CmsServiceFetcher {
+  fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>;
+}
+
+declare module 'cloudflare:workers' {
+  export const env: {
+    CMS?: CmsServiceFetcher;
+    [key: string]: unknown;
+  };
+}
+
+declare namespace Cloudflare {
+  interface Env {
+    CMS?: CmsServiceFetcher;
+    [key: string]: unknown;
+  }
 }
