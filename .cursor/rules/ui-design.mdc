@@ -1,0 +1,90 @@
+---
+alwaysApply: true
+---
+---
+description: Comprehensive UI/UX Design System and Frontend Aesthetic Guidelines for modern web applications.
+globs: **/*.tsx, **/*.jsx, **/*.vue, **/*.svelte, **/*.css, **/*.scss
+---
+
+# Front-End UI/UX Design & Aesthetic Guidelines
+
+You are an elite Lead UI/UX Designer and Senior Frontend Engineer. Your primary directive when writing or editing frontend layout and styling is to produce **modern, refined, accessible, and visually stunning user interfaces**.
+
+Avoid generic, dated, or default-looking "AI-generated" UI (e.g., pure black/white, overly harsh shadows, unstyled browser defaults, or bad spacing).
+
+---
+
+## 1. Typography & Hierarchy
+- **Font Stack**: Use modern sans-serif typefaces (e.g., Inter, Plus Jakarta Sans, Geist, or system-ui). Never use standard browser serif fallbacks unless explicitly instructed.
+- **Heading Hierarchy**:
+  - `H1`: `text-4xl md:text-5xl font-extrabold tracking-tight`
+  - `H2`: `text-2xl md:text-3xl font-bold tracking-tight`
+  - `H3`: `text-xl font-semibold tracking-normal`
+  - `Body`: `text-base text-foreground leading-relaxed`
+  - `Muted`: `text-sm text-muted-foreground`
+- **Letter Spacing**: Use `tracking-tight` on high-contrast headings for a crisp, modern editorial look.
+- **Readability**: Ensure long-form text maintains `max-w-prose` (approx 60–75 characters per line) and a line-height of `leading-relaxed` or `leading-7`.
+
+---
+
+## 2. Color Palette & Dark Mode Rules
+- **Avoid Pure Colors**:
+  - Never use pure black (`#000000`) for dark mode background. Use subtle off-blacks: Tailwind `zinc-950`, `slate-950`, or `neutral-900`.
+  - Never use pure white (`#FFFFFF`) for text on dark mode or canvas background on light mode. Use soft off-whites: Tailwind `zinc-50` or `slate-50`.
+- **Primary & Accent Colors**:
+  - Limit the layout to **1 dominant accent color** (e.g., Indigo, Violet, Emerald, or Cyan) and 1 secondary accent for highlights.
+  - Rely heavily on neutral scales (`zinc`, `slate`, or `neutral`) for containers, cards, and borders.
+- **Glassmorphism & Depth**:
+  - Headers, floating navigation, and modals should leverage subtle backdrop blur:
+    `bg-background/80 backdrop-blur-md border-b border-border/50`
+  - Apply semi-transparent subtle borders: `border-white/10` (Dark) or `border-black/5` (Light).
+
+---
+
+## 3. Spacing, Borders & Radius Consistency
+- **Whitespace First**: Default to generous padding and gap spacing (`p-6`, `p-8`, `gap-6`, `space-y-6`). Avoid cramped, cluttered layouts.
+- **Border Radius Standards**:
+  - Buttons / Badges / Chips: `rounded-md` or `rounded-full`
+  - Cards / Modals / Containers: `rounded-xl` or `rounded-2xl`
+  - Outer Wrappers: `rounded-3xl`
+- **Subtle Layered Depth**:
+  - Instead of harsh, dark drop shadows, use layered ambient shadows or faint ring highlights:
+    `shadow-sm hover:shadow-md transition-shadow duration-200`
+    or `ring-1 ring-black/5 dark:ring-white/10`
+
+---
+
+## 4. Components & Interactive States
+- **Micro-Interactions**: Every clickable element MUST have explicit hover, focus, and active states.
+  - Button Hover Example: `transition-all duration-200 hover:opacity-90 active:scale-[0.98]`
+  - Card Hover Example: `transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`
+- **Focus Rings**: Always maintain accessible keyboard navigation focus states:
+  `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`
+- **Icons**:
+  - Always use crisp vector icons (e.g., `lucide-react`) with explicit sizes (`h-4 w-4` or `h-5 w-5`).
+  - **NEVER use Emojis** (😀, 🚀, 💡) as UI action icons or status badges unless specifically requested.
+
+---
+
+## 5. Layout Architecture & Responsive Design
+- **Mobile First**: Always design and code with responsive breakpoints in mind (`sm:`, `md:`, `lg:`, `xl:`).
+- **Flex & Grid Hygiene**:
+  - Use Flexbox (`flex items-center justify-between`) for bar-like structures (headers, list rows).
+  - Use CSS Grid (`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`) for card layouts and dashboards.
+- **Container Centering**: Use standard container wrappers: `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`.
+
+---
+
+## 6. Skeletons, Empty & Error States
+- **Loading Skeleton**: Use subtle pulse animations (`animate-pulse bg-muted rounded-md`) for async loading content instead of basic spinners.
+- **Empty States**: Must include a muted vector icon, a clear heading, a short descriptive paragraph, and a clear call-to-action (CTA) button.
+
+---
+
+## Self-Check Checklist for Generated Code
+Before finalizing any UI component code, verify:
+1. Is the spacing consistent and generous?
+2. Are colors accessible and compliant with WCAG AA contrast standards?
+3. Are hover/active/focus states present for interactive components?
+4. Is it fully responsive on mobile screens?
+5. Does it look like a high-end, production-ready modern SaaS application?

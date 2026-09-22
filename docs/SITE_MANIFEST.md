@@ -65,10 +65,13 @@
 
 | 形态 | 做法 |
 | --- | --- |
-| 一站一 Pages 项目（推荐） | 每项目固定 `SITE_KEY` + 域名 |
+| 一客一 CMS + 一站一 Pages（推荐） | 客户独立 Worker/D1；每前端域固定 `SITE_KEY` + `collectionNamespace` |
+| 同客户多站 | 同一 `PUBLIC_CMS_API_BASE`，不同 `SITE_KEY` / ns |
 | 单项目多配置 | 不同 preview/branch 打不同 `SITE_KEY`（慎用） |
 
-同一 `apiBase` 可服务多站；内容隔离靠 CMS 内容与导航，不靠改 collection slug。
+开站与部署产物：`D:\ycz_me\objct\cizhenyu_create`（tenant.json → collections / pages.env / manifest）。
+
+同一 `apiBase` 可服务多站；内容隔离靠 **ns（collectionNamespace）** 与 CMS 导航分组，不靠改模型。
 
 ---
 

@@ -4,7 +4,10 @@ compatibility_flags = ["nodejs_compat"]
 
 # Pages / Workers 部署时按需补充绑定；本地 astro dev 可不依赖。
 #
-# 可选：通过 Service Binding 站内调用同账号 CMS Worker（CMS_TRANSPORT=service）
+# 生产（同账号）：Service Binding 调用该客户 CMS Worker
 # [[services]]
 # binding = "CMS"
-# service = "cizhenyu"
+# service = "cizhenyu-<customer>"
+#
+# 变量由部署工具生成 pages.env：SITE_KEY / PUBLIC_CMS_API_BASE / CMS_TRANSPORT=service
+# 工具：D:/ycz_me/objct/cizhenyu_create

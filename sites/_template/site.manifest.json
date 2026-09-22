@@ -2,8 +2,8 @@
   "siteKey": "demo",
   "displayName": "Demo B2B Site",
   "theme": "default",
-  "defaultLocale": "en",
-  "locales": ["en", "zh-CN"],
+  "defaultLocale": "en-US",
+  "locales": ["en-US", "zh-CN"],
   "modules": {
     "products": true,
     "articles": true,
@@ -15,7 +15,7 @@
     "contact": true
   },
   "cms": {
-    "apiBase": "https://api.example.com",
+    "apiBase": "http://127.0.0.1:5173",
     "apiPrefix": "/api/p",
     "collectionNamespace": "b2b"
   },
@@ -24,14 +24,14 @@
     "revalidateSecretEnv": "REVALIDATE_SECRET"
   },
   "hooks": {
-    "revalidateUrl": "https://www.example.com/api/revalidate"
+    "revalidateUrl": ""
   },
   "brand": {
     "tagline": "Replace me",
     "primaryColor": "#0B3D91"
   },
   "domains": {
-    "www": "www.example.com",
-    "note": "部署时绑定 Pages 自定义域；API 使用 cms.apiBase"
+    "www": "localhost:4321",
+    "note": "生产由部署工具写入真实域；本地可空 hooks"
   }
 }

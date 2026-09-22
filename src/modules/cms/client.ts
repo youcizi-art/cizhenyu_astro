@@ -1,7 +1,12 @@
+import { loadSiteManifest } from '../site/load-site';
 import { CmsError } from './errors';
 import { unwrapEnvelope, type PublicEnvelope, type PublicListData } from './envelope';
 import { collectionDataPath, type CatalogKey } from './catalog';
 import { buildRequestCacheKey, withRequestCache } from './request-cache';
+
+function collectionNamespace() {
+  return loadSiteManifest().cms.collectionNamespace || 'b2b';
+}
 
 export type CmsQuery = Record<string, string | number | undefined | null>;
 
@@ -112,7 +117,7 @@ export async function fetchCollectionList<T>(
   key: CatalogKey,
   query?: CmsQuery
 ): Promise<PublicListData<T>> {
-  const dataPath = collectionDataPath(key);
+  const dataPath = collectionDataPath(key, collectionNamespace());
   return cmsGetJson<PublicListData<T>>(`data/${dataPath}`, query);
 }
 
@@ -121,7 +126,7 @@ export async function fetchCollectionById<T>(
   id: string,
   query?: CmsQuery
 ): Promise<T> {
-  const dataPath = collectionDataPath(key);
+  const dataPath = collectionDataPath(key, collectionNamespace());
   return cmsGetJson<T>(`data/${dataPath}/${encodeURIComponent(id)}`, query);
 }
 
@@ -129,7 +134,7 @@ export async function fetchCollectionSingle<T>(
   key: CatalogKey,
   query?: CmsQuery
 ): Promise<T> {
-  const dataPath = collectionDataPath(key);
+  const dataPath = collectionDataPath(key, collectionNamespace());
   return cmsGetJson<T>(`data/${dataPath}/single`, query);
 }
 
@@ -137,7 +142,7 @@ export async function submitCollection(
   key: CatalogKey,
   payload: Record<string, unknown>
 ): Promise<unknown> {
-  const dataPath = collectionDataPath(key);
+  const dataPath = collectionDataPath(key, collectionNamespace());
   const url = buildCmsUrl(`submit/${dataPath}`);
   const fetcher = await resolveCmsFetcher();
   let res: Response;
