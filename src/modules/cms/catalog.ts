@@ -189,15 +189,6 @@ export function getCatalogEntry(key: CatalogKey): CatalogEntry {
   return catalog[key];
 }
 
-/**
- * 按内容命名空间拼公开 API 路径。
- * catalog 以 b2b 模板为真源；运行时把 `b2b` / `b2b_` 换成 `ns`。
- */
-export function collectionDataPath(key: CatalogKey, namespace = 'b2b'): string {
-  const entry = catalog[key];
-  const ns = String(namespace || 'b2b').trim() || 'b2b';
-  if (ns === 'b2b') return entry.dataPath;
-  const groupPath = entry.groupPath.replace(/^b2b(?=\/)/, ns);
-  const slug = entry.collectionSlug.replace(/^b2b_/, `${ns}_`);
-  return `${groupPath}/${slug}`;
+export function collectionDataPath(key: CatalogKey): string {
+  return catalog[key].dataPath;
 }

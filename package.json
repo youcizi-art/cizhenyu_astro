@@ -9,7 +9,8 @@
   "scripts": {
     "sync:catalog": "node scripts/sync-b2b-catalog.mjs",
     "dev": "astro dev",
-    "build": "npm run sync:catalog && astro build",
+    "build": "astro build",
+    "build:with-sync": "npm run sync:catalog && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
