@@ -1,0 +1,527 @@
+{
+  "collectionSlug": "b2b_product",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-prod-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "title": "液压机 HP-200",
+          "slug": "hydraulic-press-hp-200",
+          "sku": "HP-200",
+          "brand": "DemoForce",
+          "summary": "液压机 HP-200，适合 OEM 产线稳定量产。",
+          "description": "<p><strong>液压机 HP-200</strong></p><p>支持快速换型与可追溯质检记录。</p>",
+          "images": [
+            {
+              "url": "https://picsum.photos/seed/b2b-p1a/800/600"
+            },
+            {
+              "url": "https://picsum.photos/seed/b2b-p1b/800/600"
+            }
+          ],
+          "price": 2000,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "power": "5 kW",
+            "weight": "120 kg",
+            "footprint": "1.2m x 0.8m"
+          },
+          "seo_title": "液压机 HP-200",
+          "seo_description": "液压机 HP-200 规格与报价咨询",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-p1a/800/600"
+          },
+          "tagline": "适合 OEM 产线的稳定液压成型单元",
+          "advantages": [
+            {
+              "title": "快速换型",
+              "description": "标准工装接口，减少停机时间。"
+            },
+            {
+              "title": "可追溯质检",
+              "description": "关键工序留痕，支持客户验厂。"
+            },
+            {
+              "title": "备件长期供应",
+              "description": "核心备件可长期供货。"
+            }
+          ],
+          "oem_content": "<p>支持品牌贴牌、铭牌与包装定制，起订量可协商。</p>",
+          "quality_content": "<p>出厂前完成压力与行程抽检，提供质检记录。</p>",
+          "certifications": [
+            {
+              "name": "ISO 9001"
+            },
+            {
+              "name": "CE"
+            }
+          ],
+          "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "application_scenes": "<p>适用于钣金成型、汽车零部件冲压与出口配套产线。</p>",
+          "how_it_works": "<p>液压系统驱动滑块完成压制行程，PLC 控制压力与位置闭环。</p>",
+          "capacity_content": "<p>标准机型月产能可按订单扩展，支持批量交付与备件包。</p>",
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:hydraulics"
+          ]
+        },
+        "zh-TW": {
+          "title": "液壓機 HP-200",
+          "slug": "hydraulic-press-hp-200",
+          "sku": "HP-200",
+          "brand": "DemoForce",
+          "summary": "液壓機 HP-200，適合 OEM 產線穩定量產。",
+          "description": "<p><strong>液壓機 HP-200</strong></p><p>支援快速換型與可追溯質檢記錄。</p>",
+          "images": [
+            {
+              "url": "https://picsum.photos/seed/b2b-p1a/800/600"
+            },
+            {
+              "url": "https://picsum.photos/seed/b2b-p1b/800/600"
+            }
+          ],
+          "price": 2000,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "power": "5 kW",
+            "weight": "120 kg",
+            "footprint": "1.2m x 0.8m"
+          },
+          "seo_title": "液壓機 HP-200",
+          "seo_description": "液壓機 HP-200 規格與報價諮詢",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-p1a/800/600"
+          },
+          "tagline": "適合 OEM 產線的穩定液壓成型單元",
+          "advantages": [
+            {
+              "title": "快速換型",
+              "description": "標準工裝接口，減少停機時間。"
+            },
+            {
+              "title": "可追溯質檢",
+              "description": "關鍵工序留痕，支援客戶驗廠。"
+            },
+            {
+              "title": "備件長期供應",
+              "description": "核心備件可長期供貨。"
+            }
+          ],
+          "oem_content": "<p>支援品牌貼牌、銘牌與包裝定制，起訂量可協商。</p>",
+          "quality_content": "<p>出廠前完成壓力與行程抽檢，提供質檢紀錄。</p>",
+          "certifications": [
+            {
+              "name": "ISO 9001"
+            },
+            {
+              "name": "CE"
+            }
+          ],
+          "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "application_scenes": "<p>适用于钣金成型、汽车零部件冲压与出口配套产线。</p>",
+          "how_it_works": "<p>液压系统驱动滑块完成压制行程，PLC 控制压力与位置闭环。</p>",
+          "capacity_content": "<p>标准机型月产能可按订单扩展，支持批量交付与备件包。</p>",
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:hydraulics"
+          ]
+        },
+        "ja": {
+          "title": "油圧プレス HP-200",
+          "slug": "hydraulic-press-hp-200",
+          "sku": "HP-200",
+          "brand": "DemoForce",
+          "summary": "油圧プレス HP-200。OEM ラインの安定稼働向け。",
+          "description": "<p><strong>油圧プレス HP-200</strong></p><p>段取り替えが速く、トレーサブルな検査記録に対応。</p>",
+          "images": [
+            {
+              "url": "https://picsum.photos/seed/b2b-p1a/800/600"
+            },
+            {
+              "url": "https://picsum.photos/seed/b2b-p1b/800/600"
+            }
+          ],
+          "price": 2000,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "power": "5 kW",
+            "weight": "120 kg",
+            "footprint": "1.2m x 0.8m"
+          },
+          "seo_title": "油圧プレス HP-200",
+          "seo_description": "油圧プレス HP-200 の仕様と見積",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-p1a/800/600"
+          },
+          "tagline": "OEMライン向けの安定した油圧成形ユニット",
+          "advantages": [
+            {
+              "title": "段取り替えが速い",
+              "description": "標準インターフェースで停止時間を短縮。"
+            },
+            {
+              "title": "トレーサブル検査",
+              "description": "重要工程の記録を残し、監査に対応。"
+            },
+            {
+              "title": "補修部品の長期供給",
+              "description": "主要部品を長期供給可能。"
+            }
+          ],
+          "oem_content": "<p>ブランドOEM、銘板・梱包カスタムに対応。</p>",
+          "quality_content": "<p>出荷前に圧力・ストローク検査を実施。</p>",
+          "certifications": [
+            {
+              "name": "ISO 9001"
+            },
+            {
+              "name": "CE"
+            }
+          ],
+          "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "application_scenes": "<p>板金成形、自動車部品プレス、輸出向けラインに適合。</p>",
+          "how_it_works": "<p>油圧駆動でスライドを制御し、PLC で圧力と位置を閉ループ制御します。</p>",
+          "capacity_content": "<p>標準機は受注に応じて月産を拡張可能。量産と補修部品に対応。</p>",
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:hydraulics"
+          ]
+        },
+        "en-US": {
+          "title": "Hydraulic Press HP-200",
+          "slug": "hydraulic-press-hp-200",
+          "sku": "HP-200",
+          "brand": "DemoForce",
+          "summary": "Hydraulic Press HP-200 for stable OEM production lines.",
+          "description": "<p><strong>Hydraulic Press HP-200</strong></p><p>Fast changeovers with traceable inspection records.</p>",
+          "images": [
+            {
+              "url": "https://picsum.photos/seed/b2b-p1a/800/600"
+            },
+            {
+              "url": "https://picsum.photos/seed/b2b-p1b/800/600"
+            }
+          ],
+          "price": 2000,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "power": "5 kW",
+            "weight": "120 kg",
+            "footprint": "1.2m x 0.8m"
+          },
+          "seo_title": "Hydraulic Press HP-200",
+          "seo_description": "Hydraulic Press HP-200 specs and RFQ",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-p1a/800/600"
+          },
+          "tagline": "Stable hydraulic forming unit for OEM lines",
+          "advantages": [
+            {
+              "title": "Fast changeover",
+              "description": "Standard tooling interfaces cut downtime."
+            },
+            {
+              "title": "Traceable QC",
+              "description": "Critical process records for audits."
+            },
+            {
+              "title": "Long-term spares",
+              "description": "Core spare parts available long-term."
+            }
+          ],
+          "oem_content": "<p>OEM branding, nameplate and packaging customization available.</p>",
+          "quality_content": "<p>Pressure and stroke checks before shipment with QC records.</p>",
+          "certifications": [
+            {
+              "name": "ISO 9001"
+            },
+            {
+              "name": "CE"
+            }
+          ],
+          "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "application_scenes": "<p>Suitable for sheet-metal forming, automotive stamping and export OEM lines.</p>",
+          "how_it_works": "<p>A hydraulic system drives the slide; PLC closes the loop on pressure and position.</p>",
+          "capacity_content": "<p>Monthly capacity scales with orders; batch delivery and spare kits supported.</p>",
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:hydraulics"
+          ]
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-prod-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "title": "离心泵 CP-50",
+          "slug": "centrifugal-pump-cp-50",
+          "sku": "CP-50",
+          "brand": "DemoFlow",
+          "summary": "离心泵 CP-50，适合 OEM 产线稳定量产。",
+          "description": "<p><strong>离心泵 CP-50</strong></p><p>支持快速换型与可追溯质检记录。</p>",
+          "images": [
+            {
+              "url": "https://picsum.photos/seed/b2b-p2a/800/600"
+            },
+            {
+              "url": "https://picsum.photos/seed/b2b-p2b/800/600"
+            }
+          ],
+          "price": 3100,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "power": "6 kW",
+            "weight": "135 kg",
+            "footprint": "1.3m x 0.8m"
+          },
+          "seo_title": "离心泵 CP-50",
+          "seo_description": "离心泵 CP-50 规格与报价咨询",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-p2a/800/600"
+          },
+          "tagline": "适合 OEM 产线的稳定液压成型单元",
+          "advantages": [
+            {
+              "title": "快速换型",
+              "description": "标准工装接口，减少停机时间。"
+            },
+            {
+              "title": "可追溯质检",
+              "description": "关键工序留痕，支持客户验厂。"
+            },
+            {
+              "title": "备件长期供应",
+              "description": "核心备件可长期供货。"
+            }
+          ],
+          "oem_content": "<p>支持品牌贴牌、铭牌与包装定制，起订量可协商。</p>",
+          "quality_content": "<p>出厂前完成压力与行程抽检，提供质检记录。</p>",
+          "certifications": [
+            {
+              "name": "ISO 9001"
+            },
+            {
+              "name": "CE"
+            }
+          ],
+          "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "application_scenes": "<p>适用于钣金成型、汽车零部件冲压与出口配套产线。</p>",
+          "how_it_works": "<p>液压系统驱动滑块完成压制行程，PLC 控制压力与位置闭环。</p>",
+          "capacity_content": "<p>标准机型月产能可按订单扩展，支持批量交付与备件包。</p>",
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:pumps"
+          ]
+        },
+        "zh-TW": {
+          "title": "離心泵 CP-50",
+          "slug": "centrifugal-pump-cp-50",
+          "sku": "CP-50",
+          "brand": "DemoFlow",
+          "summary": "離心泵 CP-50，適合 OEM 產線穩定量產。",
+          "description": "<p><strong>離心泵 CP-50</strong></p><p>支援快速換型與可追溯質檢記錄。</p>",
+          "images": [
+            {
+              "url": "https://picsum.photos/seed/b2b-p2a/800/600"
+            },
+            {
+              "url": "https://picsum.photos/seed/b2b-p2b/800/600"
+            }
+          ],
+          "price": 3100,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "power": "6 kW",
+            "weight": "135 kg",
+            "footprint": "1.3m x 0.8m"
+          },
+          "seo_title": "離心泵 CP-50",
+          "seo_description": "離心泵 CP-50 規格與報價諮詢",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-p2a/800/600"
+          },
+          "tagline": "適合 OEM 產線的穩定液壓成型單元",
+          "advantages": [
+            {
+              "title": "快速換型",
+              "description": "標準工裝接口，減少停機時間。"
+            },
+            {
+              "title": "可追溯質檢",
+              "description": "關鍵工序留痕，支援客戶驗廠。"
+            },
+            {
+              "title": "備件長期供應",
+              "description": "核心備件可長期供貨。"
+            }
+          ],
+          "oem_content": "<p>支援品牌貼牌、銘牌與包裝定制，起訂量可協商。</p>",
+          "quality_content": "<p>出廠前完成壓力與行程抽檢，提供質檢紀錄。</p>",
+          "certifications": [
+            {
+              "name": "ISO 9001"
+            },
+            {
+              "name": "CE"
+            }
+          ],
+          "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "application_scenes": "<p>适用于钣金成型、汽车零部件冲压与出口配套产线。</p>",
+          "how_it_works": "<p>液压系统驱动滑块完成压制行程，PLC 控制压力与位置闭环。</p>",
+          "capacity_content": "<p>标准机型月产能可按订单扩展，支持批量交付与备件包。</p>",
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:pumps"
+          ]
+        },
+        "ja": {
+          "title": "遠心ポンプ CP-50",
+          "slug": "centrifugal-pump-cp-50",
+          "sku": "CP-50",
+          "brand": "DemoFlow",
+          "summary": "遠心ポンプ CP-50。OEM ラインの安定稼働向け。",
+          "description": "<p><strong>遠心ポンプ CP-50</strong></p><p>段取り替えが速く、トレーサブルな検査記録に対応。</p>",
+          "images": [
+            {
+              "url": "https://picsum.photos/seed/b2b-p2a/800/600"
+            },
+            {
+              "url": "https://picsum.photos/seed/b2b-p2b/800/600"
+            }
+          ],
+          "price": 3100,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "power": "6 kW",
+            "weight": "135 kg",
+            "footprint": "1.3m x 0.8m"
+          },
+          "seo_title": "遠心ポンプ CP-50",
+          "seo_description": "遠心ポンプ CP-50 の仕様と見積",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-p2a/800/600"
+          },
+          "tagline": "OEMライン向けの安定した油圧成形ユニット",
+          "advantages": [
+            {
+              "title": "段取り替えが速い",
+              "description": "標準インターフェースで停止時間を短縮。"
+            },
+            {
+              "title": "トレーサブル検査",
+              "description": "重要工程の記録を残し、監査に対応。"
+            },
+            {
+              "title": "補修部品の長期供給",
+              "description": "主要部品を長期供給可能。"
+            }
+          ],
+          "oem_content": "<p>ブランドOEM、銘板・梱包カスタムに対応。</p>",
+          "quality_content": "<p>出荷前に圧力・ストローク検査を実施。</p>",
+          "certifications": [
+            {
+              "name": "ISO 9001"
+            },
+            {
+              "name": "CE"
+            }
+          ],
+          "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "application_scenes": "<p>板金成形、自動車部品プレス、輸出向けラインに適合。</p>",
+          "how_it_works": "<p>油圧駆動でスライドを制御し、PLC で圧力と位置を閉ループ制御します。</p>",
+          "capacity_content": "<p>標準機は受注に応じて月産を拡張可能。量産と補修部品に対応。</p>",
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:pumps"
+          ]
+        },
+        "en-US": {
+          "title": "Centrifugal Pump CP-50",
+          "slug": "centrifugal-pump-cp-50",
+          "sku": "CP-50",
+          "brand": "DemoFlow",
+          "summary": "Centrifugal Pump CP-50 for stable OEM production lines.",
+          "description": "<p><strong>Centrifugal Pump CP-50</strong></p><p>Fast changeovers with traceable inspection records.</p>",
+          "images": [
+            {
+              "url": "https://picsum.photos/seed/b2b-p2a/800/600"
+            },
+            {
+              "url": "https://picsum.photos/seed/b2b-p2b/800/600"
+            }
+          ],
+          "price": 3100,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "power": "6 kW",
+            "weight": "135 kg",
+            "footprint": "1.3m x 0.8m"
+          },
+          "seo_title": "Centrifugal Pump CP-50",
+          "seo_description": "Centrifugal Pump CP-50 specs and RFQ",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-p2a/800/600"
+          },
+          "tagline": "Stable hydraulic forming unit for OEM lines",
+          "advantages": [
+            {
+              "title": "Fast changeover",
+              "description": "Standard tooling interfaces cut downtime."
+            },
+            {
+              "title": "Traceable QC",
+              "description": "Critical process records for audits."
+            },
+            {
+              "title": "Long-term spares",
+              "description": "Core spare parts available long-term."
+            }
+          ],
+          "oem_content": "<p>OEM branding, nameplate and packaging customization available.</p>",
+          "quality_content": "<p>Pressure and stroke checks before shipment with QC records.</p>",
+          "certifications": [
+            {
+              "name": "ISO 9001"
+            },
+            {
+              "name": "CE"
+            }
+          ],
+          "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "application_scenes": "<p>Suitable for sheet-metal forming, automotive stamping and export OEM lines.</p>",
+          "how_it_works": "<p>A hydraulic system drives the slide; PLC closes the loop on pressure and position.</p>",
+          "capacity_content": "<p>Monthly capacity scales with orders; batch delivery and spare kits supported.</p>",
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:pumps"
+          ]
+        }
+      }
+    }
+  ]
+}

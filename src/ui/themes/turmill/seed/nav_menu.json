@@ -1,0 +1,55 @@
+{
+  "collectionSlug": "b2b_nav_menu",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-nmen-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "name": "页头导航",
+          "slug": "header",
+          "menu_type": "header"
+        },
+        "zh-TW": {
+          "name": "頁頭導航",
+          "slug": "header",
+          "menu_type": "header"
+        },
+        "ja": {
+          "name": "ヘッダーナビ",
+          "slug": "header",
+          "menu_type": "header"
+        },
+        "en-US": {
+          "name": "Header Nav",
+          "slug": "header",
+          "menu_type": "header"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-nmen-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "name": "页脚导航",
+          "slug": "footer",
+          "menu_type": "footer"
+        },
+        "zh-TW": {
+          "name": "頁腳導航",
+          "slug": "footer",
+          "menu_type": "footer"
+        },
+        "ja": {
+          "name": "フッターナビ",
+          "slug": "footer",
+          "menu_type": "footer"
+        },
+        "en-US": {
+          "name": "Footer Nav",
+          "slug": "footer",
+          "menu_type": "footer"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,561 @@
+{
+  "collectionSlug": "b2b_content_block",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-blok-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "name": "首页首屏",
+          "slug": "home-hero",
+          "block_type": "hero",
+          "placement": "home_hero",
+          "eyebrow": "Turmill Tech",
+          "title": "创新遇见关爱，品质成就呵护",
+          "subtitle": "自动清洁与宽敞设计，让宠物快乐、居家洁净",
+          "summary": "自动清洁与宽敞设计，让宠物快乐、居家洁净。",
+          "content": "",
+          "link_label": "了解更多",
+          "link_url": "/zh-CN/products",
+          "image": {
+            "url": "https://admin.turmill.com/storage/default/20250325/banner-cat0bee60bee6c3f3de7a6c807012bb1c7038d1ba0dddc5e.png"
+          },
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": "__BY_SLUG__:hydraulic-press-hp-200",
+            "title": "热门产品 HP-200",
+            "description": "查看液压机详情"
+          },
+          "status": "published",
+          "sort_order": 1
+        },
+        "zh-TW": {
+          "name": "首頁首屏",
+          "slug": "home-hero",
+          "block_type": "hero",
+          "placement": "home_hero",
+          "eyebrow": "Turmill Tech",
+          "title": "創新遇見關愛，品質成就呵護",
+          "subtitle": "自動清潔與寬敞設計，讓寵物快樂、居家潔淨",
+          "summary": "自動清潔與寬敞設計，讓寵物快樂、居家潔淨。",
+          "content": "",
+          "link_label": "了解更多",
+          "link_url": "/zh-TW/products",
+          "image": {
+            "url": "https://admin.turmill.com/storage/default/20250325/banner-cat0bee60bee6c3f3de7a6c807012bb1c7038d1ba0dddc5e.png"
+          },
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": "__BY_SLUG__:hydraulic-press-hp-200",
+            "title": "熱門產品 HP-200",
+            "description": "查看液壓機詳情"
+          },
+          "status": "published",
+          "sort_order": 1
+        },
+        "ja": {
+          "name": "ホームヒーロー",
+          "slug": "home-hero",
+          "block_type": "hero",
+          "placement": "home_hero",
+          "eyebrow": "Turmill Tech",
+          "title": "イノベーションと愛情が出会う場所",
+          "subtitle": "自動清掃と広々設計でペットも家族も快適に",
+          "summary": "自動清掃と広々設計でペットも家族も快適に。",
+          "content": "",
+          "link_label": "詳しく見る",
+          "link_url": "/ja/products",
+          "image": {
+            "url": "https://admin.turmill.com/storage/default/20250325/banner-cat0bee60bee6c3f3de7a6c807012bb1c7038d1ba0dddc5e.png"
+          },
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": "__BY_SLUG__:hydraulic-press-hp-200",
+            "title": "人気製品 HP-200",
+            "description": "油圧プレス詳細"
+          },
+          "status": "published",
+          "sort_order": 1
+        },
+        "en-US": {
+          "name": "Home Hero",
+          "slug": "home-hero",
+          "block_type": "hero",
+          "placement": "home_hero",
+          "eyebrow": "Turmill Tech",
+          "title": "Where Innovation Meets Love, and Quality Meets Care",
+          "subtitle": "Automated cleaning and spacious design keep your pet happy and your home clean.",
+          "summary": "Automated cleaning and spacious design keep your pet happy and your home clean.",
+          "content": "",
+          "link_label": "Learn More",
+          "link_url": "/en-US/products",
+          "image": {
+            "url": "https://admin.turmill.com/storage/default/20250325/banner-cat0bee60bee6c3f3de7a6c807012bb1c7038d1ba0dddc5e.png"
+          },
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": "__BY_SLUG__:hydraulic-press-hp-200",
+            "title": "Popular HP-200",
+            "description": "View press details"
+          },
+          "status": "published",
+          "sort_order": 1
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-blok-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "name": "页脚 CTA",
+          "slug": "footer-cta",
+          "block_type": "cta",
+          "placement": "footer_cta",
+          "title": "准备好升级宠物护理体验了吗？",
+          "summary": "联系销售获取规格书、交期与定制方案。",
+          "link_label": "立即预约",
+          "link_url": "/zh-CN/contact",
+          "background_image": {
+            "url": "https://picsum.photos/seed/b2b-cta/1600/600"
+          },
+          "status": "published",
+          "sort_order": 2
+        },
+        "zh-TW": {
+          "name": "頁腳 CTA",
+          "slug": "footer-cta",
+          "block_type": "cta",
+          "placement": "footer_cta",
+          "title": "準備好升級寵物護理體驗了嗎？",
+          "summary": "聯繫銷售獲取規格書、交期與定制方案。",
+          "link_label": "立即預約",
+          "link_url": "/zh-TW/contact",
+          "background_image": {
+            "url": "https://picsum.photos/seed/b2b-cta/1600/600"
+          },
+          "status": "published",
+          "sort_order": 2
+        },
+        "ja": {
+          "name": "フッター CTA",
+          "slug": "footer-cta",
+          "block_type": "cta",
+          "placement": "footer_cta",
+          "title": "ペットケアをアップグレードしませんか？",
+          "summary": "営業へ仕様書・納期・カスタムをご確認ください。",
+          "link_label": "予約する",
+          "link_url": "/ja/contact",
+          "background_image": {
+            "url": "https://picsum.photos/seed/b2b-cta/1600/600"
+          },
+          "status": "published",
+          "sort_order": 2
+        },
+        "en-US": {
+          "name": "Footer CTA",
+          "slug": "footer-cta",
+          "block_type": "cta",
+          "placement": "footer_cta",
+          "title": "Ready to make pet care easier?",
+          "summary": "Contact sales for datasheets, lead times, and OEM options.",
+          "link_label": "Get Appointment",
+          "link_url": "/en-US/contact",
+          "background_image": {
+            "url": "https://picsum.photos/seed/b2b-cta/1600/600"
+          },
+          "status": "published",
+          "sort_order": 2
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-blok-4000-8000-000000000003",
+      "locales": {
+        "zh-CN": {
+          "name": "首页推荐引用",
+          "slug": "home-featured",
+          "block_type": "reference_cards",
+          "placement": "home_featured",
+          "title": "精选推荐",
+          "summary": "来自通用引用字段的多条数据",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:press-line-upgrade-eu"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_article",
+              "refId": "__BY_SLUG__:qualify-oem-suppliers",
+              "title": "供应商审核指南"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_resource",
+              "title": "资料中心",
+              "description": "下载规格书与手册"
+            }
+          ],
+          "status": "published",
+          "sort_order": 3
+        },
+        "zh-TW": {
+          "name": "首頁推薦引用",
+          "slug": "home-featured",
+          "block_type": "reference_cards",
+          "placement": "home_featured",
+          "title": "精選推薦",
+          "summary": "來自通用引用欄位的多條資料",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:press-line-upgrade-eu"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_article",
+              "refId": "__BY_SLUG__:qualify-oem-suppliers",
+              "title": "供應商審核指南"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_resource",
+              "title": "資料中心",
+              "description": "下載規格書與手冊"
+            }
+          ],
+          "status": "published",
+          "sort_order": 3
+        },
+        "ja": {
+          "name": "ホームおすすめ",
+          "slug": "home-featured",
+          "block_type": "reference_cards",
+          "placement": "home_featured",
+          "title": "おすすめ",
+          "summary": "共通参照フィールドの複数データ",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:press-line-upgrade-eu"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_article",
+              "refId": "__BY_SLUG__:qualify-oem-suppliers",
+              "title": "サプライヤー審査ガイド"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_resource",
+              "title": "資料センター",
+              "description": "データシートとマニュアル"
+            }
+          ],
+          "status": "published",
+          "sort_order": 3
+        },
+        "en-US": {
+          "name": "Home Featured Refs",
+          "slug": "home-featured",
+          "block_type": "reference_cards",
+          "placement": "home_featured",
+          "title": "Featured picks",
+          "summary": "Multiple items from target_reference",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:press-line-upgrade-eu"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_article",
+              "refId": "__BY_SLUG__:qualify-oem-suppliers",
+              "title": "Supplier audit guide"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_resource",
+              "title": "Resource center",
+              "description": "Datasheets and manuals"
+            }
+          ],
+          "status": "published",
+          "sort_order": 3
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-blok-4000-8000-000000000010",
+      "locales": {
+        "zh-CN": {
+          "name": "设计智能宠物方案",
+          "slug": "adv-1",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "设计智能宠物方案",
+          "summary": "我们打造创新产品，让养宠更轻松、居家更洁净。",
+          "status": "published",
+          "sort_order": 10
+        },
+        "zh-TW": {
+          "name": "設計智能寵物方案",
+          "slug": "adv-1",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "設計智能寵物方案",
+          "summary": "我們打造創新產品，讓養寵更輕鬆、居家更潔淨。",
+          "status": "published",
+          "sort_order": 10
+        },
+        "ja": {
+          "name": "スマートペット製品を設計",
+          "slug": "adv-1",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "スマートペット製品を設計",
+          "summary": "革新的製品でペットケアと清潔な暮らしを。",
+          "status": "published",
+          "sort_order": 10
+        },
+        "en-US": {
+          "name": "Designing Smart Pet Solutions",
+          "slug": "adv-1",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "Designing Smart Pet Solutions",
+          "summary": "We craft innovative products for easy pet care and cleaner homes.",
+          "status": "published",
+          "sort_order": 10
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-blok-4000-8000-000000000011",
+      "locales": {
+        "zh-CN": {
+          "name": "提升养宠便利",
+          "slug": "adv-2",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "提升养宠便利",
+          "summary": "自动化简化清洁流程，忙碌主人也能轻松应对。",
+          "status": "published",
+          "sort_order": 11
+        },
+        "zh-TW": {
+          "name": "提升養寵便利",
+          "slug": "adv-2",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "提升養寵便利",
+          "summary": "自動化簡化清潔流程，忙碌主人也能輕鬆應對。",
+          "status": "published",
+          "sort_order": 11
+        },
+        "ja": {
+          "name": "飼い主の利便性を向上",
+          "slug": "adv-2",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "飼い主の利便性を向上",
+          "summary": "自動化で忙しい飼い主の掃除を簡単に。",
+          "status": "published",
+          "sort_order": 11
+        },
+        "en-US": {
+          "name": "Enhancing Pet Owner Convenience",
+          "slug": "adv-2",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "Enhancing Pet Owner Convenience",
+          "summary": "Automation simplifies cleanup for busy owners without compromising safety.",
+          "status": "published",
+          "sort_order": 11
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-blok-4000-8000-000000000012",
+      "locales": {
+        "zh-CN": {
+          "name": "优先宠物舒适",
+          "slug": "adv-3",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "优先宠物舒适",
+          "summary": "宽敞安静的设计，让宠物每天都感到安心。",
+          "status": "published",
+          "sort_order": 12
+        },
+        "zh-TW": {
+          "name": "優先寵物舒適",
+          "slug": "adv-3",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "優先寵物舒適",
+          "summary": "寬敞安靜的設計，讓寵物每天都感到安心。",
+          "status": "published",
+          "sort_order": 12
+        },
+        "ja": {
+          "name": "ペットの快適さを優先",
+          "slug": "adv-3",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "ペットの快適さを優先",
+          "summary": "広々とした静かな設計でペットが安心。",
+          "status": "published",
+          "sort_order": 12
+        },
+        "en-US": {
+          "name": "Prioritizing Pet Comfort",
+          "slug": "adv-3",
+          "block_type": "feature",
+          "placement": "home_advantage",
+          "title": "Prioritizing Pet Comfort",
+          "summary": "Spacious, quiet designs help pets feel at ease every day.",
+          "status": "published",
+          "sort_order": 12
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-blok-4000-8000-000000000020",
+      "locales": {
+        "zh-CN": {
+          "name": "Sarah Jenkins",
+          "slug": "rev-1",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "title": "Sarah Jenkins",
+          "eyebrow": "Cat Owner & Breeder",
+          "summary": "The smart litter box completely transformed our multi-cat household. Zero odor and cleanup takes minutes a week.",
+          "link_label": "Owner of 3 British Shorthairs",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80"
+          },
+          "status": "published",
+          "sort_order": 20
+        },
+        "zh-TW": {
+          "name": "Sarah Jenkins",
+          "slug": "rev-1",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "title": "Sarah Jenkins",
+          "eyebrow": "Cat Owner & Breeder",
+          "summary": "The smart litter box completely transformed our multi-cat household. Zero odor and cleanup takes minutes a week.",
+          "link_label": "Owner of 3 British Shorthairs",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80"
+          },
+          "status": "published",
+          "sort_order": 20
+        },
+        "ja": {
+          "name": "Sarah Jenkins",
+          "slug": "rev-1",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "title": "Sarah Jenkins",
+          "eyebrow": "Cat Owner & Breeder",
+          "summary": "The smart litter box completely transformed our multi-cat household. Zero odor and cleanup takes minutes a week.",
+          "link_label": "Owner of 3 British Shorthairs",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80"
+          },
+          "status": "published",
+          "sort_order": 20
+        },
+        "en-US": {
+          "name": "Sarah Jenkins",
+          "slug": "rev-1",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "title": "Sarah Jenkins",
+          "eyebrow": "Cat Owner & Breeder",
+          "summary": "The smart litter box completely transformed our multi-cat household. Zero odor and cleanup takes minutes a week.",
+          "link_label": "Owner of 3 British Shorthairs",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80"
+          },
+          "status": "published",
+          "sort_order": 20
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-blok-4000-8000-000000000021",
+      "locales": {
+        "zh-CN": {
+          "name": "David Miller",
+          "slug": "rev-2",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "title": "David Miller",
+          "eyebrow": "Veterinary Technician",
+          "summary": "Safety is my top priority. Infrared anti-pinch sensors give me total peace of mind for my pets.",
+          "link_label": "Owner of 2 Rescue Cats",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
+          },
+          "status": "published",
+          "sort_order": 21
+        },
+        "zh-TW": {
+          "name": "David Miller",
+          "slug": "rev-2",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "title": "David Miller",
+          "eyebrow": "Veterinary Technician",
+          "summary": "Safety is my top priority. Infrared anti-pinch sensors give me total peace of mind for my pets.",
+          "link_label": "Owner of 2 Rescue Cats",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
+          },
+          "status": "published",
+          "sort_order": 21
+        },
+        "ja": {
+          "name": "David Miller",
+          "slug": "rev-2",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "title": "David Miller",
+          "eyebrow": "Veterinary Technician",
+          "summary": "Safety is my top priority. Infrared anti-pinch sensors give me total peace of mind for my pets.",
+          "link_label": "Owner of 2 Rescue Cats",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
+          },
+          "status": "published",
+          "sort_order": 21
+        },
+        "en-US": {
+          "name": "David Miller",
+          "slug": "rev-2",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "title": "David Miller",
+          "eyebrow": "Veterinary Technician",
+          "summary": "Safety is my top priority. Infrared anti-pinch sensors give me total peace of mind for my pets.",
+          "link_label": "Owner of 2 Rescue Cats",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
+          },
+          "status": "published",
+          "sort_order": 21
+        }
+      }
+    }
+  ]
+}

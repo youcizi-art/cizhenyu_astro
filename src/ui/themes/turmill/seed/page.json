@@ -1,0 +1,248 @@
+{
+  "collectionSlug": "b2b_page",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-page-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "title": "关于我们",
+          "slug": "about",
+          "summary": "公司简介与能力概览",
+          "content": "<p>演示工业专注出口型制造，提供液压、流体与自动化装备。</p>",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_industry",
+              "title": "行业方案",
+              "description": "按行业查看方案能力"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_product",
+              "refId": "__BY_SLUG__:hydraulic-press-hp-200",
+              "title": "旗舰液压机",
+              "subtitle": "HP-200"
+            }
+          ],
+          "status": "published",
+          "seo_title": "关于我们",
+          "seo_description": "公司介绍",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        },
+        "zh-TW": {
+          "title": "關於我們",
+          "slug": "about",
+          "summary": "公司簡介與能力概覽",
+          "content": "<p>演示工業專注出口型製造，提供液壓、流體與自動化裝備。</p>",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_industry",
+              "title": "行業方案",
+              "description": "按行業查看方案能力"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_product",
+              "refId": "__BY_SLUG__:hydraulic-press-hp-200",
+              "title": "旗艦液壓機",
+              "subtitle": "HP-200"
+            }
+          ],
+          "status": "published",
+          "seo_title": "關於我們",
+          "seo_description": "公司介紹",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        },
+        "ja": {
+          "title": "会社概要",
+          "slug": "about",
+          "summary": "会社紹介と能力概要",
+          "content": "<p>デモ工業は輸出向け製造に特化し、油圧・流体・自動化装置を提供します。</p>",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_industry",
+              "title": "業界ソリューション",
+              "description": "業界別に能力を見る"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_product",
+              "refId": "__BY_SLUG__:hydraulic-press-hp-200",
+              "title": "主力油圧プレス",
+              "subtitle": "HP-200"
+            }
+          ],
+          "status": "published",
+          "seo_title": "会社概要",
+          "seo_description": "会社紹介",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        },
+        "en-US": {
+          "title": "About Us",
+          "slug": "about",
+          "summary": "Company overview and capabilities",
+          "content": "<p>Demo Industrial focuses on export manufacturing for hydraulics, fluid, and automation.</p>",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_industry",
+              "title": "Industry solutions",
+              "description": "Browse by industry"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_product",
+              "refId": "__BY_SLUG__:hydraulic-press-hp-200",
+              "title": "Flagship press",
+              "subtitle": "HP-200"
+            }
+          ],
+          "status": "published",
+          "seo_title": "About Us",
+          "seo_description": "About the company",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-page-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "title": "联系我们",
+          "slug": "contact",
+          "summary": "销售与技术支持联系方式",
+          "content": "<p>邮箱 sales@demo-industrial.example，工作日 9:00–18:00（UTC+8）。</p>",
+          "status": "published",
+          "seo_title": "联系我们",
+          "seo_description": "联系销售",
+          "robots_directive": "index,follow",
+          "schema_type": "LocalBusiness",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        },
+        "zh-TW": {
+          "title": "聯繫我們",
+          "slug": "contact",
+          "summary": "銷售與技術支持聯繫方式",
+          "content": "<p>郵箱 sales@demo-industrial.example，工作日 9:00–18:00（UTC+8）。</p>",
+          "status": "published",
+          "seo_title": "聯繫我們",
+          "seo_description": "聯繫銷售",
+          "robots_directive": "index,follow",
+          "schema_type": "LocalBusiness",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        },
+        "ja": {
+          "title": "お問い合わせ",
+          "slug": "contact",
+          "summary": "営業・技術サポート窓口",
+          "content": "<p>メール sales@demo-industrial.example、平日 9:00–18:00（UTC+8）。</p>",
+          "status": "published",
+          "seo_title": "お問い合わせ",
+          "seo_description": "営業連絡",
+          "robots_directive": "index,follow",
+          "schema_type": "LocalBusiness",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        },
+        "en-US": {
+          "title": "Contact",
+          "slug": "contact",
+          "summary": "Sales and technical support contacts",
+          "content": "<p>Email sales@demo-industrial.example, weekdays 9:00–18:00 (UTC+8).</p>",
+          "status": "published",
+          "seo_title": "Contact",
+          "seo_description": "Contact sales",
+          "robots_directive": "index,follow",
+          "schema_type": "LocalBusiness",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-page-4000-8000-000000000010",
+      "locales": {
+        "zh-CN": {
+          "title": "首页",
+          "summary": "工业装备制造商官网首页",
+          "seo_title": "工业装备制造商 | OEM 与出口交付",
+          "seo_description": "液压、流体与自动化装备制造商，提供 OEM、规格定制与出口交付。",
+          "slug": "home",
+          "content": "<p>工业装备制造商官网首页</p>",
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebSite",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        },
+        "zh-TW": {
+          "title": "首頁",
+          "summary": "工業裝備製造商官網首頁",
+          "seo_title": "工業裝備製造商 | OEM 與出口交付",
+          "seo_description": "液壓、流體與自動化裝備製造商，提供 OEM、規格定制與出口交付。",
+          "slug": "home",
+          "content": "<p>工業裝備製造商官網首頁</p>",
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebSite",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        },
+        "ja": {
+          "title": "ホーム",
+          "summary": "産業機器メーカー公式サイト",
+          "seo_title": "産業機器メーカー | OEMと輸出対応",
+          "seo_description": "油圧・流体・自動化装置のメーカー。OEMと仕様カスタム、輸出対応。",
+          "slug": "home",
+          "content": "<p>産業機器メーカー公式サイト</p>",
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebSite",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        },
+        "en-US": {
+          "title": "Home",
+          "summary": "Industrial equipment manufacturer homepage",
+          "seo_title": "Industrial Equipment Manufacturer | OEM & Export",
+          "seo_description": "Manufacturer of hydraulic, fluid and automation equipment for OEM and export.",
+          "slug": "home",
+          "content": "<p>Industrial equipment manufacturer homepage</p>",
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebSite",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          }
+        }
+      }
+    }
+  ]
+}

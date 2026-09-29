@@ -1,0 +1,247 @@
+{
+  "collectionSlug": "b2b_article",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-arti-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "title": "如何审核 OEM 供应商",
+          "slug": "qualify-oem-suppliers",
+          "author": "演示编辑部",
+          "summary": "关于「如何审核 OEM 供应商」的实务说明，供采购与工程团队参考。",
+          "excerpt": "如何审核 OEM 供应商",
+          "cover": {
+            "url": "https://picsum.photos/seed/b2b-a1/960/540"
+          },
+          "content": "<p>如何审核 OEM 供应商</p><p>本文覆盖现场检查要点、文件清单与常见坑。</p>",
+          "status": "published",
+          "featured": [
+            "1",
+            "2"
+          ],
+          "reading_time": 5,
+          "seo_title": "如何审核 OEM 供应商",
+          "seo_description": "如何审核 OEM 供应商",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-a1/960/540"
+          },
+          "content_type": "buying_guide",
+          "short_answer": "核心结论：如何审核 OEM 供应商。先明确需求与验收标准，再评估供应商能力与交付风险。",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:hydraulic-press-hp-200"
+          ]
+        },
+        "zh-TW": {
+          "title": "如何審核 OEM 供應商",
+          "slug": "qualify-oem-suppliers",
+          "author": "演示編輯部",
+          "summary": "關於「如何審核 OEM 供應商」的實務說明，供採購與工程團隊參考。",
+          "excerpt": "如何審核 OEM 供應商",
+          "cover": {
+            "url": "https://picsum.photos/seed/b2b-a1/960/540"
+          },
+          "content": "<p>如何審核 OEM 供應商</p><p>本文覆蓋現場檢查要點、文件清單與常見坑。</p>",
+          "status": "published",
+          "featured": [
+            "1",
+            "2"
+          ],
+          "reading_time": 5,
+          "seo_title": "如何審核 OEM 供應商",
+          "seo_description": "如何審核 OEM 供應商",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-a1/960/540"
+          },
+          "content_type": "buying_guide",
+          "short_answer": "核心结论：如何審核 OEM 供應商。先明确需求与验收标准，再评估供应商能力与交付风险。",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:hydraulic-press-hp-200"
+          ]
+        },
+        "ja": {
+          "title": "OEM サプライヤー審査の進め方",
+          "slug": "qualify-oem-suppliers",
+          "author": "デモ編集部",
+          "summary": "「OEM サプライヤー審査の進め方」の実務ガイド。調達と技術チーム向け。",
+          "excerpt": "OEM サプライヤー審査の進め方",
+          "cover": {
+            "url": "https://picsum.photos/seed/b2b-a1/960/540"
+          },
+          "content": "<p>OEM サプライヤー審査の進め方</p><p>現場確認ポイント、書類リスト、よくある落とし穴を整理。</p>",
+          "status": "published",
+          "featured": [
+            "1",
+            "2"
+          ],
+          "reading_time": 5,
+          "seo_title": "OEM サプライヤー審査の進め方",
+          "seo_description": "OEM サプライヤー審査の進め方",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-a1/960/540"
+          },
+          "content_type": "buying_guide",
+          "short_answer": "要点：OEM サプライヤー審査の進め方。要件と受入基準を先に固め、その後で供給能力を評価します。",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:hydraulic-press-hp-200"
+          ]
+        },
+        "en-US": {
+          "title": "How to qualify OEM suppliers",
+          "slug": "qualify-oem-suppliers",
+          "author": "Demo Editorial",
+          "summary": "Practical notes on “How to qualify OEM suppliers” for buyers and engineers.",
+          "excerpt": "How to qualify OEM suppliers",
+          "cover": {
+            "url": "https://picsum.photos/seed/b2b-a1/960/540"
+          },
+          "content": "<p>How to qualify OEM suppliers</p><p>Covers on-site checks, document lists, and common pitfalls.</p>",
+          "status": "published",
+          "featured": [
+            "1",
+            "2"
+          ],
+          "reading_time": 5,
+          "seo_title": "How to qualify OEM suppliers",
+          "seo_description": "How to qualify OEM suppliers",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-a1/960/540"
+          },
+          "content_type": "buying_guide",
+          "short_answer": "Short answer: How to qualify OEM suppliers. Define requirements and acceptance criteria first, then evaluate supplier capability.",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:hydraulic-press-hp-200"
+          ]
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-arti-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "title": "出口包装检查清单",
+          "slug": "export-packaging-checklist",
+          "author": "演示编辑部",
+          "summary": "关于「出口包装检查清单」的实务说明，供采购与工程团队参考。",
+          "excerpt": "出口包装检查清单",
+          "cover": {
+            "url": "https://picsum.photos/seed/b2b-a2/960/540"
+          },
+          "content": "<p>出口包装检查清单</p><p>本文覆盖现场检查要点、文件清单与常见坑。</p>",
+          "status": "published",
+          "featured": [
+            "1",
+            "2"
+          ],
+          "reading_time": 6,
+          "seo_title": "出口包装检查清单",
+          "seo_description": "出口包装检查清单",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-a2/960/540"
+          },
+          "content_type": "technical",
+          "short_answer": "核心结论：出口包装检查清单。先明确需求与验收标准，再评估供应商能力与交付风险。",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:hydraulic-press-hp-200"
+          ]
+        },
+        "zh-TW": {
+          "title": "出口包裝檢查清單",
+          "slug": "export-packaging-checklist",
+          "author": "演示編輯部",
+          "summary": "關於「出口包裝檢查清單」的實務說明，供採購與工程團隊參考。",
+          "excerpt": "出口包裝檢查清單",
+          "cover": {
+            "url": "https://picsum.photos/seed/b2b-a2/960/540"
+          },
+          "content": "<p>出口包裝檢查清單</p><p>本文覆蓋現場檢查要點、文件清單與常見坑。</p>",
+          "status": "published",
+          "featured": [
+            "1",
+            "2"
+          ],
+          "reading_time": 6,
+          "seo_title": "出口包裝檢查清單",
+          "seo_description": "出口包裝檢查清單",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-a2/960/540"
+          },
+          "content_type": "technical",
+          "short_answer": "核心结论：出口包裝檢查清單。先明确需求与验收标准，再评估供应商能力与交付风险。",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:hydraulic-press-hp-200"
+          ]
+        },
+        "ja": {
+          "title": "輸出包装チェックリスト",
+          "slug": "export-packaging-checklist",
+          "author": "デモ編集部",
+          "summary": "「輸出包装チェックリスト」の実務ガイド。調達と技術チーム向け。",
+          "excerpt": "輸出包装チェックリスト",
+          "cover": {
+            "url": "https://picsum.photos/seed/b2b-a2/960/540"
+          },
+          "content": "<p>輸出包装チェックリスト</p><p>現場確認ポイント、書類リスト、よくある落とし穴を整理。</p>",
+          "status": "published",
+          "featured": [
+            "1",
+            "2"
+          ],
+          "reading_time": 6,
+          "seo_title": "輸出包装チェックリスト",
+          "seo_description": "輸出包装チェックリスト",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-a2/960/540"
+          },
+          "content_type": "technical",
+          "short_answer": "要点：輸出包装チェックリスト。要件と受入基準を先に固め、その後で供給能力を評価します。",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:hydraulic-press-hp-200"
+          ]
+        },
+        "en-US": {
+          "title": "Export packaging checklist",
+          "slug": "export-packaging-checklist",
+          "author": "Demo Editorial",
+          "summary": "Practical notes on “Export packaging checklist” for buyers and engineers.",
+          "excerpt": "Export packaging checklist",
+          "cover": {
+            "url": "https://picsum.photos/seed/b2b-a2/960/540"
+          },
+          "content": "<p>Export packaging checklist</p><p>Covers on-site checks, document lists, and common pitfalls.</p>",
+          "status": "published",
+          "featured": [
+            "1",
+            "2"
+          ],
+          "reading_time": 6,
+          "seo_title": "Export packaging checklist",
+          "seo_description": "Export packaging checklist",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-a2/960/540"
+          },
+          "content_type": "technical",
+          "short_answer": "Short answer: Export packaging checklist. Define requirements and acceptance criteria first, then evaluate supplier capability.",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:hydraulic-press-hp-200"
+          ]
+        }
+      }
+    }
+  ]
+}

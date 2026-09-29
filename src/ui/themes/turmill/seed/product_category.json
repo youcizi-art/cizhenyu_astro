@@ -1,0 +1,103 @@
+{
+  "collectionSlug": "b2b_product_category",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-pcat-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "name": "液压设备",
+          "slug": "hydraulics",
+          "description": "液压设备",
+          "sort_order": 10,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "液压设备",
+          "seo_description": "液压设备"
+        },
+        "zh-TW": {
+          "name": "液壓設備",
+          "slug": "hydraulics",
+          "description": "液壓設備",
+          "sort_order": 10,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "液壓設備",
+          "seo_description": "液壓設備"
+        },
+        "ja": {
+          "name": "油圧機器",
+          "slug": "hydraulics",
+          "description": "油圧機器",
+          "sort_order": 10,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "油圧機器",
+          "seo_description": "油圧機器"
+        },
+        "en-US": {
+          "name": "Hydraulics",
+          "slug": "hydraulics",
+          "description": "Hydraulics",
+          "sort_order": 10,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "Hydraulics",
+          "seo_description": "Hydraulics"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-pcat-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "name": "泵阀流体",
+          "slug": "pumps",
+          "description": "泵阀流体",
+          "sort_order": 20,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "泵阀流体",
+          "seo_description": "泵阀流体"
+        },
+        "zh-TW": {
+          "name": "泵閥流體",
+          "slug": "pumps",
+          "description": "泵閥流體",
+          "sort_order": 20,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "泵閥流體",
+          "seo_description": "泵閥流體"
+        },
+        "ja": {
+          "name": "ポンプ流体",
+          "slug": "pumps",
+          "description": "ポンプ流体",
+          "sort_order": 20,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "ポンプ流体",
+          "seo_description": "ポンプ流体"
+        },
+        "en-US": {
+          "name": "Pumps & Fluid",
+          "slug": "pumps",
+          "description": "Pumps & Fluid",
+          "sort_order": 20,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "Pumps & Fluid",
+          "seo_description": "Pumps & Fluid"
+        }
+      }
+    }
+  ]
+}
