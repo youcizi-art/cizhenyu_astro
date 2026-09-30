@@ -1,6 +1,7 @@
 ---
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import Pagination from '@/ui/blocks/Pagination.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
 import TurmillProductListPage from './turmill/pages/ProductListPage.astro';
 import { getThemeMeta } from './theme-ui';
 import { t } from '@/modules/i18n';
@@ -54,7 +55,17 @@ const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
     <div class="card-list">
       {items.map((item) => (
         <article class="card">
-          {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
+          {item.coverUrl ? (
+            <OptimizedImage
+              class="card-media"
+              src={item.coverUrl}
+              alt={item.title}
+              width={640}
+              height={400}
+              widths={[320, 640, 960]}
+              sizes="(max-width: 768px) 100vw, 320px"
+            />
+          ) : null}
           <h2><a href={item.href}>{item.title}</a></h2>
           {item.sku ? <p class="muted">SKU: {item.sku}</p> : null}
           {item.summary ? <p>{item.summary}</p> : null}

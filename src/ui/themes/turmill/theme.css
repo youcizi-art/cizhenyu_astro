@@ -510,6 +510,12 @@
   overflow: hidden;
   transition: transform 0.45s ease;
 }
+[data-theme='turmill'] .tm-product-tile-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 [data-theme='turmill'] .tm-product-tile:hover .tm-product-tile-media {
   transform: scale(1.02);
 }
@@ -586,6 +592,12 @@
   overflow: hidden;
   transition: transform 0.55s ease;
 }
+[data-theme='turmill'] .tm-product-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 [data-theme='turmill'] .tm-product-card:hover .tm-product-cover {
   transform: scale(1.06);
 }
@@ -647,6 +659,12 @@
   background-size: cover;
   background-position: center;
   transition: transform 0.7s ease;
+}
+[data-theme='turmill'] .tm-case-media-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 [data-theme='turmill'] .tm-case-card:hover .tm-case-media-bg {
   transform: scale(1.08);
@@ -718,15 +736,28 @@
   align-items: center;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
+}
+[data-theme='turmill'] .tm-cta-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+[data-theme='turmill'] .tm-cta-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 [data-theme='turmill'] .tm-cta-overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: rgba(31, 43, 35, 0.6);
 }
 [data-theme='turmill'] .tm-cta-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 48rem;
 }
 [data-theme='turmill'] .tm-cta h2 {
@@ -760,6 +791,12 @@
   background-size: cover;
   background-position: center;
   transition: transform 0.5s ease;
+}
+[data-theme='turmill'] .tm-article-media-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 [data-theme='turmill'] .tm-article-card:hover .tm-article-media-bg {
   transform: scale(1.08);
@@ -1284,6 +1321,14 @@
   background-position: center;
   flex-shrink: 0;
   background-color: var(--bg-light);
+  overflow: hidden;
+  display: block;
+}
+[data-theme='turmill'] .tm-category-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 [data-theme='turmill'] .tm-category-card-body {
   display: flex;

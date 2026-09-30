@@ -1,6 +1,7 @@
 ---
 import PageBanner from '../components/PageBanner.astro';
 import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
 
 interface Props {
   title: string;
@@ -44,7 +45,15 @@ const {
     <Alerts messages={warnings} tone="warn" />
     {coverUrl ? (
       <div class="tm-case-hero-img" style="margin-bottom:2rem">
-        <img src={coverUrl} alt={title} />
+        <OptimizedImage
+          src={coverUrl}
+          alt={title}
+          width={1200}
+          height={640}
+          widths={[640, 960, 1200]}
+          sizes="(max-width: 900px) 100vw, 800px"
+          priority
+        />
       </div>
     ) : null}
     {content ? <div class="tm-prose" set:html={content} /> : null}

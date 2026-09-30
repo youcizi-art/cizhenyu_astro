@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
 interface Props {
   title?: string;
   actionLabel?: string;
@@ -12,7 +14,20 @@ const {
   backgroundImage = 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1600&h=600&q=80',
 } = Astro.props;
 ---
-<section class="tm-cta" style={`background-image:url('${backgroundImage}')`}>
+<section class="tm-cta">
+  {backgroundImage ? (
+    <div class="tm-cta-bg" aria-hidden="true">
+      <OptimizedImage
+        src={backgroundImage}
+        alt=""
+        width={1600}
+        height={600}
+        widths={[800, 1200, 1600]}
+        sizes="100vw"
+        fill
+      />
+    </div>
+  ) : null}
   <div class="tm-cta-overlay" />
   <div class="tm-container tm-cta-inner">
     <h2>{title}</h2>

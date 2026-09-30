@@ -1,4 +1,5 @@
 ---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
 import type { NavLink } from '@/modules/nav';
 import type { CompanyView } from '@/modules/company';
 
@@ -53,7 +54,11 @@ const activeLocale = localeOptions.find((l) => l.active);
 <header class="tm-header">
   <div class="tm-container tm-header-inner">
     <a class="tm-brand" href={homeHref} aria-label={siteName}>
-      {logoUrl ? <img src={logoUrl} alt={siteName} width="160" height="44" /> : siteName}
+      {logoUrl ? (
+        <OptimizedImage src={logoUrl} alt={siteName} width={160} height={44} widths={[160, 320]} sizes="160px" priority />
+      ) : (
+        siteName
+      )}
     </a>
 
     <nav class="tm-nav" aria-label="Primary">

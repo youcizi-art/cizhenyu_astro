@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
 interface Props {
   companyName?: string;
   slogan?: string;
@@ -45,7 +47,9 @@ const hasContent = Boolean(companyName || summary || slogan);
         ) : null}
       </div>
       <aside class="tm-about-panel">
-        {logoUrl ? <img src={logoUrl} alt={companyName} /> : null}
+        {logoUrl ? (
+          <OptimizedImage src={logoUrl} alt={companyName} width={240} height={80} widths={[120, 240]} sizes="240px" />
+        ) : null}
         <strong class="tm-display" style="display:block;font-size:1.35rem;color:var(--color-text-main)">{companyName}</strong>
         {slogan ? <p style="margin:0.5rem 0 0;color:var(--color-text-muted);font-size:0.95rem">{slogan}</p> : null}
       </aside>

@@ -27,8 +27,8 @@ export const THEME_META: Record<ThemeId, ThemeMeta> = {
   turmill: {
     id: 'turmill',
     shell: 'page-shell',
-    fontHref:
-      'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Yeseva+One&display=swap',
+    // 站内系统字体栈，避免外链 Google Fonts 拖慢首屏
+    fontHref: '',
   },
 };
 

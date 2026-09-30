@@ -1,0 +1,58 @@
+---
+import { resolveOptimizedImage } from '@/modules/media/optimize';
+
+interface Props {
+  src: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  widths?: number[];
+  sizes?: string;
+  class?: string;
+  priority?: boolean;
+  quality?: number;
+  /** Fill parent (object-fit: cover); skips aspect-ratio / height:auto inline styles */
+  fill?: boolean;
+}
+
+const {
+  src,
+  alt = '',
+  width = 800,
+  height,
+  widths = [400, 800, 1200],
+  sizes = '(max-width: 768px) 100vw, 800px',
+  class: className = '',
+  priority = false,
+  quality = 75,
+  fill = false,
+} = Astro.props;
+
+const optimized = resolveOptimizedImage({
+  src,
+  width,
+  widths,
+  quality,
+  priority,
+});
+const style = fill
+  ? 'width:100%;height:100%;object-fit:cover;display:block'
+  : height
+    ? `aspect-ratio:${width}/${height};max-width:100%;height:auto`
+    : 'max-width:100%;height:auto';
+---
+{optimized.src ? (
+  <img
+    src={optimized.src}
+    srcset={optimized.srcset}
+    sizes={optimized.srcset ? sizes : undefined}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={optimized.loading}
+    decoding={optimized.decoding}
+    fetchpriority={optimized.fetchpriority}
+    class={className}
+    style={style}
+  />
+) : null}

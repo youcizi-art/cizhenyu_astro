@@ -3,6 +3,8 @@
  * Turmill home hero — mirrors www.turmill.com banner layout:
  * left decorative image + discount disc; right copy + product thumbs.
  */
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
 interface Props {
   title?: string;
   summary?: string;
@@ -39,7 +41,7 @@ const hasContent = Boolean(title || summary || image);
               <em>off</em>
             </span>
           </div>
-          <img src={image} alt="" width="560" height="640" fetchpriority="high" decoding="async" />
+          <OptimizedImage src={image} alt="" width={560} height={640} priority sizes="(max-width: 900px) 90vw, 560px" />
         </div>
       ) : null}
 
@@ -63,7 +65,14 @@ const hasContent = Boolean(title || summary || image);
             {thumbs.map((thumb) => (
               <div class="tm-hero-thumb">
                 {thumb.free ? <span class="tm-hero-free">Free</span> : null}
-                <img src={thumb.src} alt={thumb.alt || ''} width="160" height="160" loading="lazy" />
+                <OptimizedImage
+                  src={thumb.src}
+                  alt={thumb.alt || ''}
+                  width={160}
+                  height={160}
+                  widths={[160, 320]}
+                  sizes="160px"
+                />
               </div>
             ))}
           </div>

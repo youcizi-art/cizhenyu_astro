@@ -4,3 +4,8 @@ export {
   resolveMediaUrl,
   resolveMediaUrls,
 } from './resolve';
+export {
+  buildSrcSet,
+  cfResizedUrl,
+  resolveOptimizedImage,
+} from './optimize';

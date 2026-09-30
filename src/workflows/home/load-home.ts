@@ -3,7 +3,7 @@ import { listProducts } from '../../modules/product';
 import { listArticles } from '../../modules/article';
 import { listCaseStudies } from '../../modules/case-study';
 import { listSolutions } from '../../modules/industry';
-import { listBlocksByPlacement, type ContentBlock } from '../../modules/content-block';
+import { listBlocksGroupedByPlacements, type ContentBlock } from '../../modules/content-block';
 import { localePath, toErrorMessage } from '../../modules/cms';
 import { t } from '../../modules/i18n';
 import type { ResolvedReferenceCard } from '../../modules/reference';
@@ -100,27 +100,22 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
   const warnings = [...chrome.warnings];
 
   try {
-    const [
-      heroes,
-      featuredBlocks,
-      ctaBlocks,
-      advantageBlocks,
-      testimonialBlocks,
-      factoryBlocks,
-      products,
-      articles,
-      caseStudies,
-      solutions,
-    ] = await Promise.all([
-      listBlocksByPlacement('home_hero', { locale: currentLocale, pageSize: 5 }).catch((error) => {
+    const homePlacements = [
+      'home_hero',
+      'home_featured',
+      'footer_cta',
+      'home_advantage',
+      'home_testimonial',
+      'home_factory',
+    ] as const;
+    const [blockMap, products, articles, caseStudies, solutions] = await Promise.all([
+      listBlocksGroupedByPlacements([...homePlacements], {
+        locale: currentLocale,
+        pageSize: 50,
+      }).catch((error) => {
         warnings.push(toErrorMessage(error, '首页区块加载失败'));
-        return [];
+        return Object.fromEntries(homePlacements.map((p) => [p, [] as ContentBlock[]]));
       }),
-      listBlocksByPlacement('home_featured', { locale: currentLocale, pageSize: 5 }).catch(() => []),
-      listBlocksByPlacement('footer_cta', { locale: currentLocale, pageSize: 3 }).catch(() => []),
-      listBlocksByPlacement('home_advantage', { locale: currentLocale, pageSize: 6 }).catch(() => []),
-      listBlocksByPlacement('home_testimonial', { locale: currentLocale, pageSize: 6 }).catch(() => []),
-      listBlocksByPlacement('home_factory', { locale: currentLocale, pageSize: 8 }).catch(() => []),
       site.modules.products
         ? listProducts({ locale: currentLocale, page: 1, pageSize: 6 })
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 6, totalPages: 0 } }),
@@ -143,6 +138,13 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
         }))
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } }),
     ]);
+
+    const heroes = blockMap.home_hero || [];
+    const featuredBlocks = blockMap.home_featured || [];
+    const ctaBlocks = blockMap.footer_cta || [];
+    const advantageBlocks = blockMap.home_advantage || [];
+    const testimonialBlocks = blockMap.home_testimonial || [];
+    const factoryBlocks = blockMap.home_factory || [];
 
     const hero = heroes[0] || null;
     const featuredRefs = [

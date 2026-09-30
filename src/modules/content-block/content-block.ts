@@ -63,3 +63,25 @@ export async function listBlocksByPlacement(placement: string, query?: CmsQuery)
   });
   return all.filter((item) => item.placement === placement);
 }
+
+/** 一次拉取后按 placement 分组，避免首页多次打 CMS */
+export async function listBlocksGroupedByPlacements(
+  placements: string[],
+  query?: CmsQuery
+): Promise<Record<string, ContentBlock[]>> {
+  const wanted = [...new Set(placements.map((p) => String(p || '').trim()).filter(Boolean))];
+  const grouped: Record<string, ContentBlock[]> = {};
+  for (const p of wanted) grouped[p] = [];
+  if (!wanted.length) return grouped;
+
+  const all = await listContentBlocks({
+    ...query,
+    pageSize: Math.max(40, wanted.length * 8),
+  });
+  const allow = new Set(wanted);
+  for (const item of all) {
+    if (!allow.has(item.placement)) continue;
+    grouped[item.placement].push(item);
+  }
+  return grouped;
+}

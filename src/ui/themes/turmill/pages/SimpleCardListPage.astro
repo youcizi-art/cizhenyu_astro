@@ -1,6 +1,7 @@
 ---
 import PageBanner from '../components/PageBanner.astro';
 import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
 import type { PublicPages } from '@/modules/cms';
 
 interface CardItem {
@@ -56,12 +57,19 @@ const nextHref = pages && page < totalPages ? `${basePath}?page=${page + 1}` : '
       <div class="tm-grid-3">
         {items.map((item) => (
           <article class="tm-product-card tm-card-hover">
-            <a
-              class="tm-product-cover tm-img-cover"
-              href={item.href}
-              style={item.coverUrl ? `background-image:url(${item.coverUrl})` : undefined}
-              aria-label={item.title}
-            />
+            <a class="tm-product-cover tm-img-cover" href={item.href} aria-label={item.title}>
+              {item.coverUrl ? (
+                <OptimizedImage
+                  src={item.coverUrl}
+                  alt={item.title}
+                  width={640}
+                  height={400}
+                  widths={[320, 640, 960]}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  fill
+                />
+              ) : null}
+            </a>
             <div class="tm-product-body">
               <h3><a href={item.href}>{item.title}</a></h3>
               {item.meta ? <p style="color:var(--color-primary);font-size:0.85rem;font-weight:600;margin:0">{item.meta}</p> : null}

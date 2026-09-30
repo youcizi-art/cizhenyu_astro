@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
 interface Item {
   href: string;
   title: string;
@@ -19,7 +21,17 @@ const { title, items, emptyText = '暂无内容。' } = Astro.props;
     <div class="card-list">
       {items.map((item) => (
         <article class="card">
-          {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
+          {item.coverUrl ? (
+            <OptimizedImage
+              class="card-media"
+              src={item.coverUrl}
+              alt={item.title}
+              width={640}
+              height={400}
+              widths={[320, 640, 960]}
+              sizes="(max-width: 768px) 100vw, 320px"
+            />
+          ) : null}
           <h3><a href={item.href}>{item.title}</a></h3>
           {item.meta ? <p class="muted">{item.meta}</p> : null}
           {item.summary ? <p>{item.summary}</p> : null}

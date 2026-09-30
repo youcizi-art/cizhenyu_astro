@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
 interface Item {
   title: string;
   href: string;
@@ -32,7 +34,17 @@ const {
         {items.slice(0, 3).map((item) => (
           <a class="tm-category-card" href={item.href}>
             {item.coverUrl ? (
-              <span class="tm-category-thumb" style={`background-image:url(${item.coverUrl})`} />
+              <span class="tm-category-thumb">
+                <OptimizedImage
+                  src={item.coverUrl}
+                  alt={item.title}
+                  width={144}
+                  height={144}
+                  widths={[72, 144]}
+                  sizes="72px"
+                  fill
+                />
+              </span>
             ) : (
               <span class="tm-category-thumb tm-category-thumb-empty" />
             )}

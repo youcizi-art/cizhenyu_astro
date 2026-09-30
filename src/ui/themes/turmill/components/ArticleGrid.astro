@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
 interface Item {
   title: string;
   href: string;
@@ -23,7 +25,19 @@ const { title = 'Articles', items = [], readMoreText = 'Read More' } = Astro.pro
       {items.map((item) => (
         <article class="tm-article-card tm-card-hover">
           <div class="tm-article-media">
-            {item.coverUrl ? <div class="tm-article-media-bg" style={`background-image:url(${item.coverUrl})`} /> : null}
+            {item.coverUrl ? (
+              <div class="tm-article-media-bg">
+                <OptimizedImage
+                  src={item.coverUrl}
+                  alt={item.title}
+                  width={640}
+                  height={360}
+                  widths={[320, 640, 960]}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  fill
+                />
+              </div>
+            ) : null}
           </div>
           <div class="tm-article-body">
             <div>

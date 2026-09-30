@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
 interface CaseItem {
   title: string;
   href: string;
@@ -25,7 +27,19 @@ const { title = 'Case Studies', subtitle = '', cases = [] } = Astro.props;
       {cases.map((item) => (
         <a class="tm-case-card tm-card-hover" href={item.href}>
           <div class="tm-case-media">
-            {item.coverUrl ? <div class="tm-case-media-bg" style={`background-image:url(${item.coverUrl})`} /> : null}
+            {item.coverUrl ? (
+              <div class="tm-case-media-bg">
+                <OptimizedImage
+                  src={item.coverUrl}
+                  alt={item.title}
+                  width={640}
+                  height={360}
+                  widths={[320, 640, 960]}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  fill
+                />
+              </div>
+            ) : null}
             {item.industry ? <span class="tm-case-tag">{item.industry}</span> : null}
           </div>
           <div class="tm-case-body">

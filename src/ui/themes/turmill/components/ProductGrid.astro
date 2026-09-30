@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
 interface Item {
   title: string;
   href: string;
@@ -36,23 +38,36 @@ const {
       {items.map((item) => (
         variant === 'home' ? (
           <article class="tm-product-tile">
-            <a
-              class="tm-product-tile-media tm-img-cover"
-              href={item.href}
-              style={item.coverUrl ? `background-image:url(${item.coverUrl})` : undefined}
-              aria-label={item.title}
-            >
+            <a class="tm-product-tile-media tm-img-cover" href={item.href} aria-label={item.title}>
+              {item.coverUrl ? (
+                <OptimizedImage
+                  src={item.coverUrl}
+                  alt={item.title}
+                  width={640}
+                  height={480}
+                  widths={[320, 640, 960]}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  fill
+                />
+              ) : null}
               <span class="tm-product-tile-title">{item.title}</span>
             </a>
           </article>
         ) : (
           <article class="tm-product-card tm-card-hover">
-            <a
-              class="tm-product-cover tm-img-cover"
-              href={item.href}
-              style={item.coverUrl ? `background-image:url(${item.coverUrl})` : undefined}
-              aria-label={item.title}
-            />
+            <a class="tm-product-cover tm-img-cover" href={item.href} aria-label={item.title}>
+              {item.coverUrl ? (
+                <OptimizedImage
+                  src={item.coverUrl}
+                  alt={item.title}
+                  width={640}
+                  height={400}
+                  widths={[320, 640, 960]}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  fill
+                />
+              ) : null}
+            </a>
             <div class="tm-product-body">
               <h3><a href={item.href}>{item.title}</a></h3>
               {item.summary ? <p>{item.summary}</p> : null}

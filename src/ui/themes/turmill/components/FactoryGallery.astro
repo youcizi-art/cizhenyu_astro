@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
 interface Item {
   title: string;
   imageUrl: string;
@@ -39,7 +41,15 @@ const {
       <div class="tm-factory-grid">
         {items.map((item) => (
           <figure class="tm-factory-card">
-            <img src={item.imageUrl} alt={item.title} loading="lazy" />
+            <OptimizedImage
+              src={item.imageUrl}
+              alt={item.title}
+              width={640}
+              height={480}
+              widths={[320, 640]}
+              sizes="(max-width: 768px) 50vw, 33vw"
+              fill
+            />
             <figcaption>{item.title}</figcaption>
           </figure>
         ))}
