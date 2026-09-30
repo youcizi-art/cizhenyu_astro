@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { pathsForCollections } from '@/modules/cache';
 import { getLastPurge, purgeHtmlPaths } from '@/modules/cache/html-cache';
 import { getSiteKey, loadSiteManifest } from '@/modules/site';
+import { envSync, warmRuntimeEnv } from '@/modules/runtime/env';
 
 export const prerender = false;
 
@@ -14,8 +15,9 @@ type Body = {
 };
 
 export const POST: APIRoute = async ({ request }) => {
+  await warmRuntimeEnv();
   const site = loadSiteManifest();
-  const expectedSecret = String(import.meta.env.REVALIDATE_SECRET || '').trim();
+  const expectedSecret = envSync('REVALIDATE_SECRET');
   let body: Body = {};
   try {
     body = (await request.json()) as Body;
@@ -40,7 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
     ? ['/*']
     : [...new Set([...mapped, ...explicitPaths])];
 
-  const siteOrigin = String(import.meta.env.PUBLIC_SITE_URL || '').replace(/\/$/, '');
+  const siteOrigin = envSync('PUBLIC_SITE_URL').replace(/\/$/, '');
   const purge = await purgeHtmlPaths({
     paths,
     locales: site.locales,

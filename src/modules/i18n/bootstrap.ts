@@ -1,11 +1,12 @@
 import type { SiteManifest } from '../site';
 import { loadLanguages } from './languages';
 import { isKnownLocale, resolveLocaleFromPath } from './path';
+import { rememberDefaultLocale } from './remember-default';
 import type { I18nBootstrap } from './types';
 
 /**
  * 页面级 i18n 启动：CMS 语种 + 路径解析。
- * 路由参数 locale 优先；非法则标记 isActive=false 由页面 302/404。
+ * 默认语种以 CMS isDefault 为准；公开 URL 默认语种无 /语种/ 前缀。
  */
 export async function bootstrapI18n(options: {
   pathname: string;
@@ -16,6 +17,7 @@ export async function bootstrapI18n(options: {
   const fallback = languages.find((item) => item.isDefault)?.code
     || options.manifest.defaultLocale
     || 'en';
+  rememberDefaultLocale(fallback);
 
   const param = String(options.paramLocale || '').trim();
   if (param) {

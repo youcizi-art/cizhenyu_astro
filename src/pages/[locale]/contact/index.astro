@@ -7,6 +7,8 @@ import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
 
+import { defaultLocaleHref } from '@/modules/i18n';
+
 export const prerender = false;
 
 const data = await loadContactPage({
@@ -14,7 +16,7 @@ const data = await loadContactPage({
   pathname: Astro.url.pathname,
 });
 if (!data.localeValid) {
-  return Astro.redirect(`/${data.site.defaultLocale}/contact`, 302);
+  return Astro.redirect(defaultLocaleHref("/contact"), 302);
 }
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');

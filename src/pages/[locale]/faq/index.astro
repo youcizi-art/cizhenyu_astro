@@ -5,7 +5,7 @@ import ActiveStatic from '@/ui/themes/ActiveStatic.astro';
 import { loadFaqPage } from '@/workflows/faq/load-faq';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
-import { t } from '@/modules/i18n';
+import { t, defaultLocaleHref } from '@/modules/i18n';
 import { layoutSeoProps, pageJsonLd } from '@/modules/seo';
 
 export const prerender = false;
@@ -14,7 +14,7 @@ const data = await loadFaqPage({
   locale: Astro.params.locale,
   pathname: Astro.url.pathname,
 });
-if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/faq`, 302);
+if (!data.localeValid) return Astro.redirect(defaultLocaleHref("/faq"), 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
 const seoProps = layoutSeoProps(undefined, Astro.url.pathname);

@@ -56,11 +56,18 @@ export async function loadPageChrome(options: {
     active: lang.code === currentLocale,
   }));
 
+  const defaultLocale =
+    i18n.languages.find((item) => item.isDefault)?.code || site.defaultLocale;
+
   const nav = await loadNavLinks(site, currentLocale);
   if (nav.warning) warnings.push(nav.warning);
 
   return {
-    site,
+    site: {
+      ...site,
+      // 页面重定向与 hreflang 跟 CMS 默认语种对齐
+      defaultLocale,
+    },
     locale: currentLocale,
     siteName: companyResult.company.name,
     revalidateSeconds: resolveRevalidateSeconds(site),

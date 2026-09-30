@@ -6,7 +6,7 @@ import { loadProductDetailPage } from '@/workflows/products/load-product-detail'
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { layoutSeoProps, pageJsonLd, resolveEntityLocaleAlternates, siteOrigin } from '@/modules/seo';
 import { localePath } from '@/modules/cms';
-import { t } from '@/modules/i18n';
+import { t, defaultLocaleHref } from '@/modules/i18n';
 
 export const prerender = false;
 
@@ -17,7 +17,7 @@ const data = await loadProductDetailPage({
   id,
 });
 if (!data.localeValid) {
-  return Astro.redirect(`/${data.site.defaultLocale}/products`, 302);
+  return Astro.redirect(defaultLocaleHref("/products"), 302);
 }
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');

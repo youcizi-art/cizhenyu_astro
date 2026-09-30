@@ -2,6 +2,7 @@ import { fetchCollectionById, fetchCollectionList, type CmsQuery } from './clien
 import type { CatalogKey } from './catalog';
 import type { PublicPages } from './envelope';
 import { CmsError, isCmsError } from './errors';
+import { rememberedDefaultLocale } from '../i18n/remember-default';
 
 export type CmsEntity = {
   id: string;
@@ -42,9 +43,14 @@ export function entityData(row: CmsEntity | null | undefined) {
   return base;
 }
 
-export function localePath(locale: string | undefined, path: string) {
+export function localePath(locale: string | undefined, path: string, defaultLocale?: string) {
   const normalized = path === '/' ? '' : path.startsWith('/') ? path : `/${path}`;
   if (!locale) return normalized || '/';
+  const fallbackDefault = defaultLocale || rememberedDefaultLocale();
+  // 默认语种：无 /语种/ 前缀
+  if (fallbackDefault && locale === fallbackDefault) {
+    return normalized || '/';
+  }
   return `/${locale}${normalized}`;
 }
 

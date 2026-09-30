@@ -6,7 +6,7 @@ import { loadSolutionListPage } from '@/workflows/solutions/load-solution-list';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { resolveListPageSeo } from '@/modules/seo';
-import { t } from '@/modules/i18n';
+import { t, defaultLocaleHref } from '@/modules/i18n';
 
 export const prerender = false;
 
@@ -16,7 +16,7 @@ const data = await loadSolutionListPage({
   pathname: Astro.url.pathname,
   page,
 });
-if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/solutions`, 302);
+if (!data.localeValid) return Astro.redirect(defaultLocaleHref("/solutions"), 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
 const fallbackTitle = t(data.locale, 'solutions');

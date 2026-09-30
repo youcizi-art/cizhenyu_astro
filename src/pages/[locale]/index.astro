@@ -7,7 +7,7 @@ import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
 import { getPageBySlug } from '@/modules/page';
 import { layoutSeoProps, pageJsonLd, siteOrigin } from '@/modules/seo';
-import { t } from '@/modules/i18n';
+import { t, defaultLocaleHref } from '@/modules/i18n';
 
 export const prerender = false;
 
@@ -16,7 +16,7 @@ const data = await loadHomePage({
   pathname: Astro.url.pathname,
 });
 if (!data.localeValid) {
-  return Astro.redirect(`/${data.site.defaultLocale}`, 302);
+  return Astro.redirect(defaultLocaleHref("/"), 302);
 }
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 const origin = siteOrigin() || Astro.url.origin;

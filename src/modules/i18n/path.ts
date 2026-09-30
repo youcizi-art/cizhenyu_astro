@@ -35,7 +35,13 @@ export function resolveLocaleFromPath(
   };
 }
 
-/** 本模板路由约定：始终使用 /{locale}/... 前缀 */
+function defaultLocaleCode(languages: SiteLanguage[]) {
+  return languages.find((item) => item.isDefault)?.code || languages[0]?.code || '';
+}
+
+/**
+ * 切换语种路径：默认语种无前缀；非默认为 /{locale}/...
+ */
 export function switchLocalePath(
   currentPath: string,
   targetLocale: string,
@@ -47,9 +53,40 @@ export function switchLocalePath(
     segments.shift();
   }
   const rest = segments.length ? `/${segments.join('/')}` : '';
+  const def = defaultLocaleCode(languages);
+  if (def && targetLocale === def) {
+    return rest || '/';
+  }
   return `/${targetLocale}${rest}`;
+}
+
+/** 非法 locale 时回到默认语种对应「公开」路径（默认无前缀） */
+export function pathForDefaultLocale(path: string, defaultLocale: string, languages?: SiteLanguage[]) {
+  const normalized = path === '/' ? '/' : path.startsWith('/') ? path : `/${path}`;
+  const def =
+    defaultLocale
+    || (languages ? defaultLocaleCode(languages) : '')
+    || '';
+  if (!def) return normalized;
+  // 调用方传入的 path 已是业务路径（无语种前缀）
+  return normalized;
 }
 
 export function isKnownLocale(code: string, languages: SiteLanguage[]) {
   return languages.some((item) => item.code === code);
+}
+
+export function stripLocalePrefix(pathname: string, languages: SiteLanguage[]) {
+  const codes = new Set(languages.map((item) => item.code));
+  const segments = cleanSegments(pathname);
+  if (segments.length && codes.has(segments[0])) {
+    segments.shift();
+  }
+  return segments.length ? `/${segments.join('/')}` : '/';
+}
+
+/** 默认语种公开 URL（永远无 /语种/ 前缀） */
+export function defaultLocaleHref(path = '/') {
+  const normalized = path === '/' ? '' : path.startsWith('/') ? path : `/${path}`;
+  return normalized || '/';
 }

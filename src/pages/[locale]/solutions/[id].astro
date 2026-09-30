@@ -5,7 +5,7 @@ import ActiveDetail from '@/ui/themes/ActiveDetail.astro';
 import { loadSolutionDetailPage } from '@/workflows/solutions/load-solution-detail';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { layoutSeoProps, pageJsonLd, resolveEntityLocaleAlternates, siteOrigin } from '@/modules/seo';
-import { t } from '@/modules/i18n';
+import { t, defaultLocaleHref } from '@/modules/i18n';
 import { localePath } from '@/modules/cms';
 
 export const prerender = false;
@@ -16,7 +16,7 @@ const data = await loadSolutionDetailPage({
   pathname: Astro.url.pathname,
   id,
 });
-if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/solutions`, 302);
+if (!data.localeValid) return Astro.redirect(defaultLocaleHref("/solutions"), 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
 if (!data.error && !data.item) return Astro.rewrite('/404');

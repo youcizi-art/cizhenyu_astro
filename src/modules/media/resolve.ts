@@ -2,10 +2,12 @@
  * 媒体地址解析（最小集）：兼容 string / 数组 / {url|src|path}。
  */
 
+import { envSync } from '../runtime/env';
+
 function mediaBase() {
-  const imageBase = String(import.meta.env.PUBLIC_MEDIA_BASE || '').trim();
+  const imageBase = envSync('PUBLIC_MEDIA_BASE');
   if (imageBase) return imageBase.replace(/\/+$/, '');
-  return String(import.meta.env.PUBLIC_CMS_API_BASE || '').replace(/\/+$/, '');
+  return envSync('PUBLIC_CMS_API_BASE').replace(/\/+$/, '');
 }
 
 export function isAbsoluteMediaUrl(src: string) {

@@ -1,8 +1,15 @@
 ---
 import { loadSiteManifest } from '@/modules/site';
+import { loadLanguages } from '@/modules/i18n/languages';
+import { rememberDefaultLocale } from '@/modules/i18n/remember-default';
 
 export const prerender = false;
 
-/** A5：统一进入 /{defaultLocale}，避免双首页不一致 */
-return Astro.redirect(`/${loadSiteManifest().defaultLocale}`, 302);
+/** 正常由 middleware rewrite；此处作兜底（默认语种无公开前缀） */
+const manifest = loadSiteManifest();
+const { languages } = await loadLanguages(manifest);
+const def =
+  languages.find((item) => item.isDefault)?.code || manifest.defaultLocale || 'zh-CN';
+rememberDefaultLocale(def);
+return Astro.rewrite(`/${def}`);
 ---

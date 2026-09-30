@@ -1,4 +1,5 @@
 import { normalizeManifest, type SiteManifest } from './manifest';
+import { envSync } from '../runtime/env';
 import demoManifest from '../../../sites/demo/site.manifest.json';
 import turmillManifest from '../../../sites/turmill/site.manifest.json';
 import templateManifest from '../../../sites/_template/site.manifest.json';
@@ -11,9 +12,7 @@ const registry: Record<string, unknown> = {
 
 /** 交付包默认回退清单：按 THEME / PUBLIC_THEME 选模板 */
 function deliveryTemplateKey(): string {
-  const theme = String(
-    import.meta.env.PUBLIC_THEME || import.meta.env.THEME || 'turmill'
-  )
+  const theme = String(envSync('PUBLIC_THEME') || envSync('THEME') || 'turmill')
     .trim()
     .toLowerCase();
   if (theme && registry[theme]) return theme;
@@ -22,29 +21,34 @@ function deliveryTemplateKey(): string {
 }
 
 export function getSiteKey() {
-  return String(import.meta.env.SITE_KEY || 'demo').trim() || 'demo';
+  return String(envSync('SITE_KEY') || 'demo').trim() || 'demo';
 }
 
 function applyEnvOverrides(manifest: SiteManifest, siteKey: string): SiteManifest {
-  const next = { ...manifest, cms: { ...manifest.cms }, brand: { ...(manifest.brand || {}) }, domains: { ...(manifest.domains || {}) } };
+  const next = {
+    ...manifest,
+    cms: { ...manifest.cms },
+    brand: { ...(manifest.brand || {}) },
+    domains: { ...(manifest.domains || {}) },
+  };
 
   next.siteKey = siteKey;
   // 交付约定：SITE_KEY ≡ collectionNamespace
   next.cms.collectionNamespace = siteKey;
 
-  const envBase = String(import.meta.env.PUBLIC_CMS_API_BASE || '').trim();
+  const envBase = envSync('PUBLIC_CMS_API_BASE');
   if (envBase) {
     next.cms.apiBase = envBase.replace(/\/$/, '');
   }
-  const envPrefix = String(import.meta.env.PUBLIC_CMS_API_PREFIX || '').trim();
+  const envPrefix = envSync('PUBLIC_CMS_API_PREFIX');
   if (envPrefix) {
     next.cms.apiPrefix = envPrefix;
   }
 
-  const displayName = String(import.meta.env.PUBLIC_SITE_DISPLAY_NAME || '').trim();
+  const displayName = envSync('PUBLIC_SITE_DISPLAY_NAME');
   if (displayName) next.displayName = displayName;
 
-  const siteUrl = String(import.meta.env.PUBLIC_SITE_URL || '').trim();
+  const siteUrl = envSync('PUBLIC_SITE_URL');
   if (siteUrl) {
     try {
       const host = new URL(siteUrl.includes('://') ? siteUrl : `https://${siteUrl}`).host;
@@ -54,16 +58,16 @@ function applyEnvOverrides(manifest: SiteManifest, siteKey: string): SiteManifes
     }
   }
 
-  const tagline = String(import.meta.env.PUBLIC_BRAND_TAGLINE || '').trim();
+  const tagline = envSync('PUBLIC_BRAND_TAGLINE');
   if (tagline) next.brand = { ...next.brand, tagline };
 
-  const primary = String(import.meta.env.PUBLIC_BRAND_PRIMARY_COLOR || '').trim();
+  const primary = envSync('PUBLIC_BRAND_PRIMARY_COLOR');
   if (primary) next.brand = { ...next.brand, primaryColor: primary };
 
-  const themeOverride = String(import.meta.env.PUBLIC_THEME || import.meta.env.THEME || '').trim();
+  const themeOverride = envSync('PUBLIC_THEME') || envSync('THEME');
   if (themeOverride) next.theme = themeOverride;
 
-  const revalidateUrl = String(import.meta.env.PUBLIC_REVALIDATE_URL || '').trim();
+  const revalidateUrl = envSync('PUBLIC_REVALIDATE_URL');
   if (revalidateUrl) {
     next.hooks = { ...(next.hooks || {}), revalidateUrl };
   }
@@ -75,6 +79,7 @@ function applyEnvOverrides(manifest: SiteManifest, siteKey: string): SiteManifes
  * 加载站点清单。
  * - 已注册 siteKey：直接用 registry
  * - 未知 siteKey（交付多站）：回退 theme 模板，再用 env 覆盖 siteKey/ns/品牌/域名
+ * 注意：生产请先 warmRuntimeEnv()，以便读到 Pages 运行时变量。
  */
 export function loadSiteManifest(siteKey = getSiteKey()): SiteManifest {
   const raw = registry[siteKey] ?? registry[deliveryTemplateKey()] ?? registry._template;

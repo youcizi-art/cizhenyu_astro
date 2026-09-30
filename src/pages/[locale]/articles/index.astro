@@ -10,7 +10,7 @@ import {
   articleContentTypeLabel,
 } from '@/modules/article';
 import { resolveListPageSeo } from '@/modules/seo';
-import { t } from '@/modules/i18n';
+import { t, defaultLocaleHref } from '@/modules/i18n';
 
 export const prerender = false;
 
@@ -20,7 +20,7 @@ const data = await loadArticleListPage({
   pathname: Astro.url.pathname,
   page,
 });
-if (!data.localeValid) return Astro.redirect(`/${data.site.defaultLocale}/articles`, 302);
+if (!data.localeValid) return Astro.redirect(defaultLocaleHref("/articles"), 302);
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 if (!data.enabled) return Astro.rewrite('/404');
 const fallbackTitle = t(data.locale, 'articles');

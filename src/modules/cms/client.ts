@@ -1,3 +1,10 @@
+import {
+  getCmsApiBase,
+  getCmsApiPrefix,
+  getCmsServiceBindingName,
+  getCmsTransport,
+  getCloudflareEnv,
+} from '../runtime/env';
 import { loadSiteManifest } from '../site/load-site';
 import { CmsError } from './errors';
 import { unwrapEnvelope, type PublicEnvelope, type PublicListData } from './envelope';
@@ -14,54 +21,34 @@ type CmsFetcher = {
   fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 };
 
-function cmsTransport() {
-  return String(import.meta.env.CMS_TRANSPORT || 'http').trim().toLowerCase() || 'http';
-}
-
-function cmsServiceBindingName() {
-  return String(import.meta.env.CMS_SERVICE_BINDING || 'CMS').trim() || 'CMS';
-}
-
-function apiBase() {
-  const configured = String(import.meta.env.PUBLIC_CMS_API_BASE || '').replace(/\/$/, '');
-  if (configured) return configured;
-  // Service Binding 无公网 base 时用占位 Origin（仅路径参与路由）
-  if (cmsTransport() === 'service') return 'https://cms.internal';
-  return '';
-}
-
-function apiPrefix() {
-  const raw = String(import.meta.env.PUBLIC_CMS_API_PREFIX || '/api/p').trim();
-  return raw.startsWith('/') ? raw.replace(/\/$/, '') : `/${raw.replace(/\/$/, '')}`;
-}
-
 /** 解析 CMS 请求执行器：http 用全局 fetch；service 用 Cloudflare Service Binding */
 async function resolveCmsFetcher(): Promise<CmsFetcher> {
-  if (cmsTransport() !== 'service') {
+  if ((await getCmsTransport()) !== 'service') {
     return { fetch: globalThis.fetch.bind(globalThis) };
   }
   try {
-    const mod = await import('cloudflare:workers');
-    const env = (mod as { env?: Record<string, CmsFetcher | undefined> }).env;
-    const binding = env?.[cmsServiceBindingName()];
+    const env = await getCloudflareEnv();
+    const name = await getCmsServiceBindingName();
+    const binding = env?.[name] as CmsFetcher | undefined;
     if (binding && typeof binding.fetch === 'function') {
       return binding;
     }
   } catch {
-    // 非 CF 运行时（单测 / Node）回退全局 fetch
+    // 非 CF 运行时回退
   }
   return { fetch: globalThis.fetch.bind(globalThis) };
 }
 
-export function buildCmsUrl(resourcePath: string, query?: CmsQuery) {
-  const base = apiBase();
+export async function buildCmsUrl(resourcePath: string, query?: CmsQuery) {
+  const base = await getCmsApiBase();
   if (!base) {
     throw new CmsError('未配置 PUBLIC_CMS_API_BASE（或 CMS_TRANSPORT=service）', {
       status: 500,
       code: 'config',
     });
   }
-  const url = new URL(`${apiPrefix()}/${resourcePath.replace(/^\//, '')}`, `${base}/`);
+  const prefix = await getCmsApiPrefix();
+  const url = new URL(`${prefix}/${resourcePath.replace(/^\//, '')}`, `${base}/`);
   if (query) {
     for (const [key, value] of Object.entries(query)) {
       if (value === undefined || value === null || value === '') continue;
@@ -72,7 +59,7 @@ export function buildCmsUrl(resourcePath: string, query?: CmsQuery) {
 }
 
 async function cmsGetJson<T>(resourcePath: string, query?: CmsQuery): Promise<T> {
-  const url = buildCmsUrl(resourcePath, query);
+  const url = await buildCmsUrl(resourcePath, query);
   const cacheKey = buildRequestCacheKey(url.toString(), 'GET');
 
   return withRequestCache(cacheKey, async () => {
@@ -143,7 +130,7 @@ export async function submitCollection(
   payload: Record<string, unknown>
 ): Promise<unknown> {
   const dataPath = collectionDataPath(key, collectionNamespace());
-  const url = buildCmsUrl(`submit/${dataPath}`);
+  const url = await buildCmsUrl(`submit/${dataPath}`);
   const fetcher = await resolveCmsFetcher();
   let res: Response;
   try {
