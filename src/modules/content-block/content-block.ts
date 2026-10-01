@@ -23,11 +23,16 @@ export type ContentBlock = {
   references: ResolvedReferenceCard[];
 };
 
-async function toBlock(row: CmsEntity, locale?: string): Promise<ContentBlock> {
+async function toBlock(
+  row: CmsEntity,
+  locale?: string,
+  options?: { resolveReferences?: boolean }
+): Promise<ContentBlock> {
   const data = entityData(row);
   const targetReference = data.target_reference ?? null;
-  const references = locale
-    ? await resolveReferenceCards(targetReference, locale)
+  const shouldResolve = options?.resolveReferences !== false && Boolean(locale);
+  const references = shouldResolve
+    ? await resolveReferenceCards(targetReference, locale as string)
     : [];
   return {
     id: String(row.id),
@@ -49,10 +54,13 @@ async function toBlock(row: CmsEntity, locale?: string): Promise<ContentBlock> {
   };
 }
 
-export async function listContentBlocks(query?: CmsQuery): Promise<ContentBlock[]> {
+export async function listContentBlocks(
+  query?: CmsQuery,
+  options?: { resolveReferences?: boolean }
+): Promise<ContentBlock[]> {
   const locale = query?.locale ? String(query.locale) : undefined;
   const result = await listEntities('contentBlock', query);
-  return Promise.all(result.list.map((row) => toBlock(row, locale)));
+  return Promise.all(result.list.map((row) => toBlock(row, locale, options)));
 }
 
 export async function listBlocksByPlacement(placement: string, query?: CmsQuery): Promise<ContentBlock[]> {
@@ -67,21 +75,40 @@ export async function listBlocksByPlacement(placement: string, query?: CmsQuery)
 /** 一次拉取后按 placement 分组，避免首页多次打 CMS */
 export async function listBlocksGroupedByPlacements(
   placements: string[],
-  query?: CmsQuery
+  query?: CmsQuery,
+  options?: { resolveReferencesFor?: string[] }
 ): Promise<Record<string, ContentBlock[]>> {
   const wanted = [...new Set(placements.map((p) => String(p || '').trim()).filter(Boolean))];
   const grouped: Record<string, ContentBlock[]> = {};
   for (const p of wanted) grouped[p] = [];
   if (!wanted.length) return grouped;
 
-  const all = await listContentBlocks({
-    ...query,
-    pageSize: Math.max(40, wanted.length * 8),
-  });
+  const resolveFor = new Set(
+    (options?.resolveReferencesFor || wanted).map((p) => String(p || '').trim()).filter(Boolean)
+  );
+
+  const all = await listContentBlocks(
+    {
+      ...query,
+      pageSize: Math.max(40, wanted.length * 8),
+    },
+    { resolveReferences: false }
+  );
   const allow = new Set(wanted);
+  const needResolve = all.filter((item) => allow.has(item.placement) && resolveFor.has(item.placement));
+  const resolved = await Promise.all(
+    needResolve.map(async (item) => {
+      const locale = query?.locale ? String(query.locale) : undefined;
+      if (!locale) return item;
+      const references = await resolveReferenceCards(item.targetReference, locale);
+      return { ...item, references };
+    })
+  );
+  const byId = new Map(resolved.map((item) => [item.id, item]));
+
   for (const item of all) {
     if (!allow.has(item.placement)) continue;
-    grouped[item.placement].push(item);
+    grouped[item.placement].push(byId.get(item.id) || item);
   }
   return grouped;
 }

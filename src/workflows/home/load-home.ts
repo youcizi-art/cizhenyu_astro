@@ -109,15 +109,22 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       'home_factory',
     ] as const;
     const [blockMap, products, articles, caseStudies, solutions] = await Promise.all([
-      listBlocksGroupedByPlacements([...homePlacements], {
-        locale: currentLocale,
-        pageSize: 50,
-      }).catch((error) => {
+      listBlocksGroupedByPlacements(
+        [...homePlacements],
+        {
+          locale: currentLocale,
+          pageSize: 50,
+        },
+        { resolveReferencesFor: ['home_hero', 'home_featured'] }
+      ).catch((error) => {
         warnings.push(toErrorMessage(error, '首页区块加载失败'));
         return Object.fromEntries(homePlacements.map((p) => [p, [] as ContentBlock[]]));
       }),
       site.modules.products
-        ? listProducts({ locale: currentLocale, page: 1, pageSize: 6 })
+        ? listProducts({ locale: currentLocale, page: 1, pageSize: 6 }).catch((error) => {
+          warnings.push(toErrorMessage(error, '产品加载失败'));
+          return { items: [], pages: { total: 0, page: 1, pageSize: 6, totalPages: 0 } };
+        })
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 6, totalPages: 0 } }),
       site.modules.articles
         ? listArticles({ locale: currentLocale, page: 1, pageSize: 3 }).catch((error) => {

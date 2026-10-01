@@ -148,29 +148,29 @@ export async function resolveReferenceCards(
   const { items } = parseReferenceField(value);
   const expandCollection = options?.expandCollection === true;
   const previewSize = options?.collectionPreviewSize ?? 8;
-  const cards: ResolvedReferenceCard[] = [];
 
-  for (const item of items) {
-    const collectionSlug = String(item.refType || '').trim();
-    if (!collectionSlug) continue;
-    const refId = String(item.refId || '').trim();
+  // 并行解析，避免首页/导航串行打 CMS（原先 N 条引用 = N 次往返）
+  const batches = await Promise.all(
+    items.map(async (item) => {
+      const collectionSlug = String(item.refType || '').trim();
+      if (!collectionSlug) return [] as ResolvedReferenceCard[];
+      const refId = String(item.refId || '').trim();
 
-    if (!refId) {
-      cards.push(overlayCard(item, locale, collectionSlug, null, {
-        collectionRootFallback: options?.collectionRootFallback,
-      }));
-      if (expandCollection) {
+      if (!refId) {
+        const root = overlayCard(item, locale, collectionSlug, null, {
+          collectionRootFallback: options?.collectionRootFallback,
+        });
+        if (!expandCollection) return [root];
         const preview = await listCollectionPreview(collectionSlug, locale, previewSize);
-        cards.push(...preview);
+        return [root, ...preview];
       }
-      continue;
-    }
 
-    const entity = await loadEntity(collectionSlug, refId, locale);
-    cards.push(overlayCard(item, locale, collectionSlug, entity));
-  }
+      const entity = await loadEntity(collectionSlug, refId, locale);
+      return [overlayCard(item, locale, collectionSlug, entity)];
+    })
+  );
 
-  return cards;
+  return batches.flat();
 }
 
 /** 导航下拉：把引用解析成子链接（含集合列表预览） */
@@ -181,7 +181,7 @@ export async function resolveReferenceNavChildren(
 ): Promise<NavChildLink[]> {
   const cards = await resolveReferenceCards(value, locale, {
     expandCollection: true,
-    collectionPreviewSize: options?.previewSize ?? 8,
+    collectionPreviewSize: options?.previewSize ?? 4,
     collectionRootFallback: options?.collectionRootFallback,
   });
 
