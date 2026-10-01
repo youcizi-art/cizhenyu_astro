@@ -23,6 +23,13 @@ interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 
+declare namespace App {
+  interface Locals {
+    /** middleware 语种路由已处理（防止 rewrite 二次进入形成 302 死循环） */
+    localeRoutingDone?: boolean;
+  }
+}
+
 interface CmsServiceFetcher {
   fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>;
 }

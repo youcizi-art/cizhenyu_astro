@@ -3,33 +3,35 @@ import { getCachedHtml, putCachedHtml, shouldUseHtmlCache } from '@/modules/cach
 import { warmRuntimeEnv } from '@/modules/runtime/env';
 import { applyLocaleRouting } from '@/modules/i18n/locale-routing';
 
-/** 运行时 env 预热 + 默认语种无前缀路由 + HTML 缓存 */
+/**
+ * 运行时 env 预热 + 默认语种无前缀 rewrite + HTML 缓存。
+ * rewrite 会再次进入本 middleware，必须用 locals 跳过第二次语种处理。
+ */
 export const onRequest = defineMiddleware(async (context, next) => {
   await warmRuntimeEnv();
 
   const { request } = context;
   const url = new URL(request.url);
 
-  if (request.method === 'GET' && !url.pathname.startsWith('/api/')) {
+  if (request.method !== 'GET') return next();
+  if (url.pathname.startsWith('/api/')) return next();
+
+  if (!context.locals.localeRoutingDone) {
+    context.locals.localeRoutingDone = true;
     const routed = await applyLocaleRouting(url);
-    if (routed.action === 'redirect') {
-      return context.redirect(routed.location, 302);
-    }
     if (routed.action === 'rewrite') {
       const target = new URL(url.href);
       target.pathname = routed.pathname;
-      // 继续走缓存逻辑时用「浏览器 URL」做 cache key，避免与 rewrite 路径混淆
+      // 缓存 key 用浏览器公开 URL；rewrite 仅用于匹配 [locale] 路由
       return runWithHtmlCache(context, url, () => context.rewrite(target));
     }
   }
 
-  if (request.method !== 'GET') return next();
-  if (url.pathname.startsWith('/api/')) return next();
   return runWithHtmlCache(context, url, next);
 });
 
 async function runWithHtmlCache(
-  context: { request: Request },
+  _context: { request: Request },
   url: URL,
   next: () => Promise<Response> | Response
 ) {

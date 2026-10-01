@@ -1,15 +1,8 @@
 ---
-import { loadSiteManifest } from '@/modules/site';
-import { loadLanguages } from '@/modules/i18n/languages';
-import { rememberDefaultLocale } from '@/modules/i18n/remember-default';
-
+/**
+ * 根路径由 middleware rewrite 到 /{defaultLocale}（浏览器仍显示 /）。
+ * 此处不再 Astro.rewrite，避免与 middleware strip 叠加成 302 死循环。
+ */
 export const prerender = false;
-
-/** 正常由 middleware rewrite；此处作兜底（默认语种无公开前缀） */
-const manifest = loadSiteManifest();
-const { languages } = await loadLanguages(manifest);
-const def =
-  languages.find((item) => item.isDefault)?.code || manifest.defaultLocale || 'zh-CN';
-rememberDefaultLocale(def);
-return Astro.rewrite(`/${def}`);
+return new Response('Not Found', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 ---

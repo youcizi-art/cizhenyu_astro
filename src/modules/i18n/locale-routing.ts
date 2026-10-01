@@ -12,6 +12,14 @@ type LocaleCache = {
 let cache: LocaleCache | null = null;
 const TTL_MS = 60_000;
 
+/** 这些路径不做语种 rewrite */
+const PASSTHROUGH_EXACT = new Set([
+  '/sitemap.xml',
+  '/robots.txt',
+  '/favicon.ico',
+  '/favicon.svg',
+]);
+
 async function resolveLocales(): Promise<LocaleCache> {
   const now = Date.now();
   if (cache && now - cache.at < TTL_MS) return cache;
@@ -33,29 +41,36 @@ function cleanSegments(pathname: string) {
     .filter(Boolean);
 }
 
+function shouldPassthrough(pathname: string) {
+  if (PASSTHROUGH_EXACT.has(pathname)) return true;
+  if (/\.[a-z0-9]{1,8}$/i.test(pathname)) return true;
+  return false;
+}
+
 /**
- * 默认语种无前缀：无前缀 → rewrite 到 /{default}/...；带默认前缀 → 302 去掉前缀。
+ * 默认语种无前缀（公开 URL 由 localePath 生成）：
+ * - 无前缀 → rewrite 到 /{default}/...（浏览器 URL 不变）
+ * - 已有语种前缀（含默认）→ 直接放行，不做 302 strip
+ *   （若 strip + rewrite 叠加，Astro rewrite 会重进 middleware，形成死循环）
  */
 export async function applyLocaleRouting(requestUrl: URL): Promise<
   | { action: 'next' }
-  | { action: 'redirect'; location: string }
   | { action: 'rewrite'; pathname: string }
 > {
-  const { languages, defaultLocale } = await resolveLocales();
-  const codes = new Set(languages.map((l) => l.code));
-  const segments = cleanSegments(requestUrl.pathname);
-  const first = segments[0] || '';
-
-  if (first && codes.has(first)) {
-    if (first === defaultLocale) {
-      const rest = segments.slice(1);
-      const location = rest.length ? `/${rest.join('/')}` : '/';
-      return { action: 'redirect', location };
-    }
+  const pathname = requestUrl.pathname || '/';
+  if (shouldPassthrough(pathname)) {
     return { action: 'next' };
   }
 
-  // 无语种前缀 → 内部 rewrite 到默认语种路由（浏览器 URL 不变）
+  const { languages, defaultLocale } = await resolveLocales();
+  const codes = new Set(languages.map((l) => l.code));
+  const segments = cleanSegments(pathname);
+  const first = segments[0] || '';
+
+  if (first && codes.has(first)) {
+    return { action: 'next' };
+  }
+
   const suffix = segments.length ? `/${segments.join('/')}` : '';
   return { action: 'rewrite', pathname: `/${defaultLocale}${suffix}` };
 }
