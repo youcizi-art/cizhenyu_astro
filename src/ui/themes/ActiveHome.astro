@@ -1,21 +1,13 @@
 ---
 /**
  * 首页主题内容切换。新主题在此增加分支；pages 只调 ActiveHome。
+ * 展示数据一律来自 CMS（load-home）；禁止 theme 内假数据兜底。
  */
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import CardSection from '@/ui/blocks/CardSection.astro';
 import TurmillHomePage from './turmill/pages/HomePage.astro';
 import { getThemeMeta } from './theme-ui';
-import {
-  turmillAdvantageFallback,
-  turmillCategoryFallback,
-  turmillCompanyStats,
-  turmillFactoryFallback,
-  turmillHeroFallbackImage,
-  turmillHeroThumbs,
-  turmillHomeLabels,
-  turmillTestimonialFallback,
-} from './turmill/home-copy';
+import { turmillHomeLabels } from './turmill/home-copy';
 
 interface Props {
   data: Awaited<ReturnType<typeof import('@/workflows/home/load-home').loadHomePage>>;
@@ -23,39 +15,25 @@ interface Props {
 const { data } = Astro.props;
 const meta = getThemeMeta(data.site.theme);
 const turmillLabels = meta.id === 'turmill' ? turmillHomeLabels(data.locale) : null;
-const turmillSolutions =
-  meta.id === 'turmill' && !data.solutions.length
-    ? turmillCategoryFallback(data.locale, data.paths.products)
-    : data.solutions;
-
-function resolveTurmillHeroImage(url?: string) {
-  const u = String(url || '').trim();
-  if (!u || u.includes('picsum.photos')) return turmillHeroFallbackImage;
-  return u;
-}
-const turmillHero =
-  meta.id === 'turmill' && data.hero
-    ? { ...data.hero, imageUrl: resolveTurmillHeroImage(data.hero.imageUrl) }
-    : data.hero;
 ---
 {meta.id === 'turmill' && turmillLabels ? (
   <TurmillHomePage
     siteName={data.siteName}
-    hero={turmillHero}
-    heroImageUrl={resolveTurmillHeroImage(data.heroImageUrl)}
+    hero={data.hero}
+    heroImageUrl={data.heroImageUrl || data.hero?.imageUrl || ''}
     tagline={data.tagline}
     products={data.products}
     caseStudies={data.caseStudies}
     articles={data.articles}
-    solutions={turmillSolutions as typeof data.solutions}
+    solutions={data.solutions}
     company={data.company}
     companyIntro={data.companyIntro}
-    companyStats={data.companyStats.length ? data.companyStats : turmillCompanyStats(data.locale)}
+    companyStats={data.companyStats}
     ctaBanner={data.ctaBanner}
-    advantages={data.advantages.length ? data.advantages : turmillAdvantageFallback()}
-    testimonials={data.testimonials.length ? data.testimonials : turmillTestimonialFallback()}
-    factoryItems={data.factoryItems.length ? data.factoryItems : turmillFactoryFallback()}
-    heroThumbs={turmillHeroThumbs}
+    advantages={data.advantages}
+    testimonials={data.testimonials}
+    factoryItems={data.factoryItems}
+    heroThumbs={[]}
     labels={{ ...data.labels, ...turmillLabels }}
     paths={{
       about: data.paths.about,

@@ -189,6 +189,17 @@ export function getCatalogEntry(key: CatalogKey): CatalogEntry {
   return catalog[key];
 }
 
-export function collectionDataPath(key: CatalogKey): string {
-  return catalog[key].dataPath;
+/**
+ * 将模板路径 `b2b/.../b2b_*` 改写为站点 ns（SITE_KEY ≡ collectionNamespace）。
+ * 交付站集合在 CMS 中为 `{ns}_article`，分组为 `{ns}/content`，不能写死 b2b。
+ */
+export function rewriteCatalogPath(dataPath: string, namespace: string): string {
+  const ns = String(namespace || 'b2b').trim() || 'b2b';
+  const path = String(dataPath || '').trim();
+  if (!path || ns === 'b2b') return path;
+  return path.replace(/(^|\/)b2b\//g, `$1${ns}/`).replace(/(^|\/)b2b_/g, `$1${ns}_`);
+}
+
+export function collectionDataPath(key: CatalogKey, namespace = 'b2b'): string {
+  return rewriteCatalogPath(catalog[key].dataPath, namespace);
 }

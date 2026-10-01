@@ -1,5 +1,5 @@
 export type { CatalogEntry, CatalogKey } from './catalog';
-export { catalog, collectionDataPath, getCatalogEntry } from './catalog';
+export { catalog, collectionDataPath, getCatalogEntry, rewriteCatalogPath } from './catalog';
 export {
   buildCmsUrl,
   fetchCollectionById,
