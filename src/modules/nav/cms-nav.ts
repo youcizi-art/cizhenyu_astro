@@ -41,20 +41,16 @@ function sortItems(rows: CmsEntity[]) {
 /**
  * seed 常把 nav_menu_ids 解析成某一语种（如 zh-CN）的菜单 UUID。
  * 其他语种的 header.id 不同，但 language_group_key 相同 —— 需按语组匹配。
+ * 复用已拉取的 menus 列表，避免再打一次全量 navMenu。
  */
-async function headerRelationIdSet(header: CmsEntity): Promise<Set<string>> {
+function headerRelationIdSetFromMenus(header: CmsEntity, menus: CmsEntity[]): Set<string> {
   const ids = new Set<string>([String(header.id)]);
   const group = String(header.language_group_key || '').trim();
   if (!group) return ids;
-  try {
-    const all = await listEntities('navMenu', { pageSize: 50 });
-    for (const row of all.list || []) {
-      if (String(row.language_group_key || '') === group) {
-        ids.add(String(row.id));
-      }
+  for (const row of menus) {
+    if (String(row.language_group_key || '') === group) {
+      ids.add(String(row.id));
     }
-  } catch {
-    // 仅保留当前 locale 的 header.id
   }
   return ids;
 }
@@ -66,15 +62,21 @@ function parentKey(row: CmsEntity) {
 }
 
 async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
-  const menus = await listEntities('navMenu', { locale, pageSize: 20 });
-  const header = (menus.list || []).find((row) => {
+  // 当前语种菜单/菜单项 + 全量菜单（语组 id 匹配）并行拉取，禁止串行叠延迟
+  const [menusResult, itemsResult, allMenusResult] = await Promise.all([
+    listEntities('navMenu', { locale, pageSize: 20 }),
+    listEntities('navMenuItem', { locale, pageSize: 100 }),
+    listEntities('navMenu', { pageSize: 50 }).catch(() => ({ list: [] as CmsEntity[], pages: { total: 0, page: 1, pageSize: 50, totalPages: 0 } })),
+  ]);
+
+  const menus = menusResult.list || [];
+  const header = menus.find((row) => {
     const data = entityData(row);
     return String(data.menu_type || '') === 'header' || String(data.slug || '') === 'header';
   });
   if (!header) return null;
 
-  const menuIds = await headerRelationIdSet(header);
-  const itemsResult = await listEntities('navMenuItem', { locale, pageSize: 100 });
+  const menuIds = headerRelationIdSetFromMenus(header, allMenusResult.list?.length ? allMenusResult.list : menus);
   const owned = sortItems(
     (itemsResult.list || []).filter((row) => {
       const data = entityData(row);
@@ -83,7 +85,6 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
   );
   if (!owned.length) return null;
 
-  // 构建 parent 索引：同时支持「当前语种 id」与「跨语种同组 id」
   const idToGroup = new Map<string, string>();
   const groupToLocalId = new Map<string, string>();
   for (const row of owned) {
@@ -109,63 +110,70 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
     byParent.set(parentLocal, list);
   }
 
-  const links: NavLink[] = [];
-  for (const row of roots) {
-    const data = entityData(row);
-    const title = String(data.title || '').trim();
-    if (!title) continue;
-    const openInNewTab = Array.isArray(data.open_in_new_tab)
-      ? data.open_in_new_tab.includes('yes')
-      : Boolean(data.open_in_new_tab);
-    const linkMode = String(data.link_mode || 'link');
-    const nested = sortItems(byParent.get(String(row.id)) || []);
+  // 根菜单全部并行解析（禁止 for-await 串行叠延迟）
+  // expandCollection=false：导航只保留集合入口/具体引用，不展开列表预览（避免 N 次 list）
+  const links = (
+    await Promise.all(
+      roots.map(async (row) => {
+        const data = entityData(row);
+        const title = String(data.title || '').trim();
+        if (!title) return null;
+        const openInNewTab = Array.isArray(data.open_in_new_tab)
+          ? data.open_in_new_tab.includes('yes')
+          : Boolean(data.open_in_new_tab);
+        const linkMode = String(data.link_mode || 'link');
+        const nested = sortItems(byParent.get(String(row.id)) || []);
 
-    if (linkMode === 'reference') {
-      const children = await resolveReferenceNavChildren(data.target_reference, locale, {
-        collectionRootFallback: title,
-        previewSize: 8,
-      });
-      const parsed = parseReferenceField(data.target_reference);
-      const first = parsed.items[0];
-      const href = first?.refType
-        ? collectionListHref(locale, first.refType)
-        : resolveHref(locale, String(data.link_url || '/'));
-      links.push({
-        label: title,
-        href,
-        openInNewTab,
-        children: children.length ? children : undefined,
-      });
-      continue;
-    }
+        if (linkMode === 'reference') {
+          const children = await resolveReferenceNavChildren(data.target_reference, locale, {
+            collectionRootFallback: title,
+            expandCollection: false,
+          });
+          const parsed = parseReferenceField(data.target_reference);
+          const first = parsed.items[0];
+          const href = first?.refType
+            ? collectionListHref(locale, first.refType)
+            : resolveHref(locale, String(data.link_url || '/'));
+          return {
+            label: title,
+            href,
+            openInNewTab,
+            children: children.length ? children : undefined,
+          } satisfies NavLink;
+        }
 
-    const href = resolveHref(locale, String(data.link_url || `/${String(data.slug || '')}`));
-    const children: NavLink['children'] = [];
-    for (const child of nested) {
-      const cd = entityData(child);
-      const childTitle = String(cd.title || '').trim();
-      if (!childTitle) continue;
-      if (String(cd.link_mode || 'link') === 'reference') {
-        const refChildren = await resolveReferenceNavChildren(cd.target_reference, locale, {
-          collectionRootFallback: childTitle,
-          previewSize: 8,
-        });
-        children.push(...refChildren);
-      } else {
-        children.push({
-          label: childTitle,
-          href: resolveHref(locale, String(cd.link_url || '')),
-        });
-      }
-    }
+        const href = resolveHref(locale, String(data.link_url || `/${String(data.slug || '')}`));
+        const childLinks = (
+          await Promise.all(
+            nested.map(async (child) => {
+              const cd = entityData(child);
+              const childTitle = String(cd.title || '').trim();
+              if (!childTitle) return [] as NonNullable<NavLink['children']>;
+              if (String(cd.link_mode || 'link') === 'reference') {
+                return resolveReferenceNavChildren(cd.target_reference, locale, {
+                  collectionRootFallback: childTitle,
+                  expandCollection: false,
+                });
+              }
+              return [
+                {
+                  label: childTitle,
+                  href: resolveHref(locale, String(cd.link_url || '')),
+                },
+              ];
+            })
+          )
+        ).flat();
 
-    links.push({
-      label: title,
-      href,
-      openInNewTab,
-      children: children.length ? children : undefined,
-    });
-  }
+        return {
+          label: title,
+          href,
+          openInNewTab,
+          children: childLinks.length ? childLinks : undefined,
+        } satisfies NavLink;
+      })
+    )
+  ).filter((item): item is NavLink => Boolean(item));
 
   return links.length ? links : null;
 }

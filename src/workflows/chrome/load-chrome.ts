@@ -43,10 +43,17 @@ export async function loadPageChrome(options: {
   });
 
   const currentLocale = i18n.currentLocale;
-  const companyResult = await loadCompanyView(currentLocale, site.displayName);
+
+  // company / nav 无相互依赖：并行，避免串行叠延迟
+  const [companyResult, nav] = await Promise.all([
+    loadCompanyView(currentLocale, site.displayName),
+    loadNavLinks(site, currentLocale),
+  ]);
+
   const warnings = [
     ...(i18n.warning ? [i18n.warning] : []),
     ...(companyResult.ok ? [] : [companyResult.warning]),
+    ...(nav.warning ? [nav.warning] : []),
   ];
 
   const localeOptions: LocaleOption[] = i18n.languages.map((lang) => ({
@@ -58,9 +65,6 @@ export async function loadPageChrome(options: {
 
   const defaultLocale =
     i18n.languages.find((item) => item.isDefault)?.code || site.defaultLocale;
-
-  const nav = await loadNavLinks(site, currentLocale);
-  if (nav.warning) warnings.push(nav.warning);
 
   return {
     site: {

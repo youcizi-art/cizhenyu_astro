@@ -4,6 +4,7 @@ import { listArticles } from '../../modules/article';
 import { listCaseStudies } from '../../modules/case-study';
 import { listSolutions } from '../../modules/industry';
 import { listBlocksGroupedByPlacements, type ContentBlock } from '../../modules/content-block';
+import { getPageBySlug, type SitePage } from '../../modules/page';
 import { localePath, toErrorMessage } from '../../modules/cms';
 import { t } from '../../modules/i18n';
 import type { ResolvedReferenceCard } from '../../modules/reference';
@@ -90,6 +91,7 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       factoryItems: [] as ReturnType<typeof mapFactory>,
       companyIntro: chrome.company.summary,
       companyStats: [] as Array<{ label: string; value: string }>,
+      cmsPage: null as SitePage | null,
       paths,
       labels,
       error: undefined as string | undefined,
@@ -108,7 +110,8 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       'home_testimonial',
       'home_factory',
     ] as const;
-    const [blockMap, products, articles, caseStudies, solutions] = await Promise.all([
+    // 区块 / 列表 / SEO page 全部并行（无依赖不串行）
+    const [blockMap, products, articles, caseStudies, solutions, cmsPage] = await Promise.all([
       listBlocksGroupedByPlacements(
         [...homePlacements],
         {
@@ -122,28 +125,29 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       }),
       site.modules.products
         ? listProducts({ locale: currentLocale, page: 1, pageSize: 6 }).catch((error) => {
-          warnings.push(toErrorMessage(error, '产品加载失败'));
-          return { items: [], pages: { total: 0, page: 1, pageSize: 6, totalPages: 0 } };
-        })
+            warnings.push(toErrorMessage(error, '产品加载失败'));
+            return { items: [], pages: { total: 0, page: 1, pageSize: 6, totalPages: 0 } };
+          })
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 6, totalPages: 0 } }),
       site.modules.articles
         ? listArticles({ locale: currentLocale, page: 1, pageSize: 3 }).catch((error) => {
-          warnings.push(toErrorMessage(error, '文章加载失败'));
-          return { items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } };
-        })
+            warnings.push(toErrorMessage(error, '文章加载失败'));
+            return { items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } };
+          })
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } }),
       site.modules.caseStudies
         ? listCaseStudies({ locale: currentLocale, page: 1, pageSize: 3 }).catch(() => ({
-          items: [],
-          pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 },
-        }))
+            items: [],
+            pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 },
+          }))
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } }),
       site.modules.solutions
         ? listSolutions({ locale: currentLocale, page: 1, pageSize: 3 }).catch(() => ({
-          items: [],
-          pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 },
-        }))
+            items: [],
+            pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 },
+          }))
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } }),
+      getPageBySlug('home', { locale: currentLocale }).catch(() => null),
     ]);
 
     const heroes = blockMap.home_hero || [];
@@ -176,6 +180,7 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       factoryItems: mapFactory(factoryBlocks),
       companyIntro: chrome.company.summary,
       companyStats: [] as Array<{ label: string; value: string }>,
+      cmsPage,
       paths,
       labels,
       error: undefined as string | undefined,
@@ -198,6 +203,7 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       factoryItems: [],
       companyIntro: chrome.company.summary,
       companyStats: [],
+      cmsPage: null as SitePage | null,
       paths,
       labels,
       error: toErrorMessage(error, t(currentLocale, 'loadFailed')),

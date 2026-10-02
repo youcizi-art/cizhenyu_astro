@@ -22,6 +22,10 @@ export type SiteManifest = {
     collectionNamespace?: string;
   };
   cache?: {
+    /**
+     * 公开 HTML 常态缓存秒数（长缓存）。
+     * 默认 48h；最低 24h。内容新鲜度靠 CMS webhook purge，不靠短 TTL。
+     */
     revalidateSeconds?: number;
     revalidateSecretEnv?: string;
   };
@@ -34,6 +38,11 @@ export type SiteManifest = {
   };
   domains?: Record<string, string>;
 };
+
+/** 常态 HTML 缓存：建议 48h */
+export const DEFAULT_HTML_CACHE_TTL_SECONDS = 172_800;
+/** 常态 HTML 缓存：最低 24h */
+export const MIN_HTML_CACHE_TTL_SECONDS = 86_400;
 
 const DEFAULT_MODULES: SiteModules = {
   products: true,
@@ -53,6 +62,12 @@ export function normalizeManifest(input: Partial<SiteManifest> & Pick<SiteManife
     : [defaultLocale];
   if (!locales.includes(defaultLocale)) locales.unshift(defaultLocale);
 
+  const ttlRaw = Number(input.cache?.revalidateSeconds);
+  const ttl =
+    Number.isFinite(ttlRaw) && ttlRaw > 0
+      ? ttlRaw
+      : DEFAULT_HTML_CACHE_TTL_SECONDS;
+
   return {
     siteKey: String(input.siteKey).trim(),
     displayName: String(input.displayName || input.siteKey).trim(),
@@ -66,7 +81,7 @@ export function normalizeManifest(input: Partial<SiteManifest> & Pick<SiteManife
       collectionNamespace: input.cms?.collectionNamespace || 'b2b',
     },
     cache: {
-      revalidateSeconds: Number(input.cache?.revalidateSeconds || 120) || 120,
+      revalidateSeconds: ttl,
       revalidateSecretEnv: input.cache?.revalidateSecretEnv || 'REVALIDATE_SECRET',
     },
     hooks: input.hooks || {},
@@ -75,7 +90,10 @@ export function normalizeManifest(input: Partial<SiteManifest> & Pick<SiteManife
   };
 }
 
+/** 公开 HTML 常态 TTL：最低 24h，默认 48h（变更靠 purge，不靠短过期） */
 export function resolveRevalidateSeconds(manifest: SiteManifest) {
-  const value = Number(manifest.cache?.revalidateSeconds || 120) || 120;
-  return Math.min(300, Math.max(60, value));
+  const value = Number(manifest.cache?.revalidateSeconds);
+  const raw =
+    Number.isFinite(value) && value > 0 ? value : DEFAULT_HTML_CACHE_TTL_SECONDS;
+  return Math.max(MIN_HTML_CACHE_TTL_SECONDS, Math.floor(raw));
 }

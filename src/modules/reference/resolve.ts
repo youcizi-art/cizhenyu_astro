@@ -173,14 +173,19 @@ export async function resolveReferenceCards(
   return batches.flat();
 }
 
-/** 导航下拉：把引用解析成子链接（含集合列表预览） */
+/** 导航下拉：把引用解析成子链接（默认不展开集合预览，避免 N 次 list） */
 export async function resolveReferenceNavChildren(
   value: unknown,
   locale: string,
-  options?: { previewSize?: number; collectionRootFallback?: string }
+  options?: {
+    previewSize?: number;
+    collectionRootFallback?: string;
+    /** 默认 false：只保留集合入口/实体链接；true 时再拉列表预览 */
+    expandCollection?: boolean;
+  }
 ): Promise<NavChildLink[]> {
   const cards = await resolveReferenceCards(value, locale, {
-    expandCollection: true,
+    expandCollection: options?.expandCollection === true,
     collectionPreviewSize: options?.previewSize ?? 4,
     collectionRootFallback: options?.collectionRootFallback,
   });

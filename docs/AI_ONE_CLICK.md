@@ -13,7 +13,7 @@
 | 写/改 `site.manifest.json` | 发明不存在的 CMS 字段 |
 | 选已有 `theme` | 绕过 Page/Component Contract |
 | 生成种子 JSON（公司、导航、首页区块、样例产品） | 把每页改成直接 `fetch` 杂乱字段 |
-| 建议 `modules` 开关 | 把 revalidate 设为数小时以上 |
+| 建议 `modules` 开关 | 把常态 HTML TTL 设低于 24h |
 | 输出主题 token（主色、圆角） | Fork 出第二套 API SDK |
 
 模型与集合 schema **只读**自：
@@ -124,8 +124,9 @@ Brief
 
 AI 写出的 manifest 必须：
 
-- `cache.revalidateSeconds` ∈ 60～300（默认 120）  
-- 部署后 `hooks.revalidateUrl` = `https://{站点域}/api/revalidate`  
+- `cache.revalidateSeconds` ≥ 86400（默认/建议 `172800` = 48h）——这是**常态长缓存**  
+- 内容新鲜度靠部署后的 `hooks.revalidateUrl` = `https://{站点域}/api/revalidate`（CMS 增删改时 purge）  
+- **禁止**用 60～300 秒短 TTL 冒充更新策略  
 
 与 [CACHE_STRATEGY.md](./CACHE_STRATEGY.md) 一致。
 

@@ -5,7 +5,6 @@ import ActiveHome from '@/ui/themes/ActiveHome.astro';
 import { loadHomePage } from '@/workflows/home/load-home';
 import { applyCacheHeaders } from '@/workflows/chrome/http';
 import { buildAlternateLinks } from '@/workflows/chrome/urls';
-import { getPageBySlug } from '@/modules/page';
 import { layoutSeoProps, pageJsonLd, siteOrigin } from '@/modules/seo';
 import { t, defaultLocaleHref } from '@/modules/i18n';
 
@@ -20,7 +19,7 @@ if (!data.localeValid) {
 }
 applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
 const origin = siteOrigin() || Astro.url.origin;
-const cmsPage = await getPageBySlug('home', { locale: data.locale }).catch(() => null);
+const cmsPage = data.cmsPage;
 const fallbackDescription = data.tagline || data.companyIntro || data.company.summary || '';
 const title = cmsPage?.seoTitle || cmsPage?.title || data.siteName;
 const description = cmsPage?.seoDescription || cmsPage?.summary || fallbackDescription;

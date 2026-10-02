@@ -1,7 +1,7 @@
 # 双项目缓存与容量策略
 
 > 目标：免费 Cloudflare 架构下，B2B 站群约 **1 万日 UV**。  
-> 原则：**页面缓存在前端；后端发变更信号；不把 UV 压力堆在 Workers。**
+> 原则：**公开页长缓存；CMS 变更时精准失效；MISS 时并行回源，不把 UV 压力堆在 Workers。**
 
 相关项目：
 
@@ -15,34 +15,36 @@
 免费 Workers 日请求量级约 **10 万次**。  
 若 1 万 UV × 数个页面 × 每页多次 API，请求会轻易打满。
 
-`caches.default`（Worker 内 Cache API）**不能**显著节省「请求次数」——请求仍进入 Worker。  
 因此：
 
 | 层 | 承担 | 不承担 |
 | --- | --- | --- |
-| **Astro / Pages HTML（ISR + on-demand）** | 绝大多数访客流量 | — |
+| **Astro / Pages HTML（长缓存 + on-demand purge）** | 绝大多数访客流量 | — |
 | **CMS 公开 API** | miss / 发布后回源、表单 submit | 日常 PV |
-| Zone Tag / API 24h CDN | 可选增强 | 1 万 UV 主方案 |
+| Zone Tag / API CDN | 可选增强 | 不可替代前端 HTML 缓存 |
 
 ---
 
-## 2. 推荐链路
+## 2. 推荐链路（正确模型）
 
 ```text
-【读】
+【读 · 常态】
 访客 → Pages
-         ├─ HTML 命中 → 结束（不打 CMS）
-         └─ miss / 到期 → SSR fetch CMS → 写回页面缓存
+         ├─ HTML HIT（默认 48h，最低 24h）→ 直接返回，不打 CMS
+         └─ MISS / 被 purge → SSR（接口并行）→ 写回长缓存
 
-【写】
+【写 · 数据更新缓存】
 编辑保存 → CMS D1 成功
               → POST 站点 hooks.revalidateUrl
-              → Pages 只失效相关路径
-              → 下一访客得新页
+              → Pages 只失效相关路径（不是缩短全站 TTL）
+              → 下一访客对该路径 MISS → SSR 拉新数据 → 再写入 48h
 
 【兜底】
-无 webhook 或失败 → 页面 revalidateSeconds（建议 60～300）内自然更新
+无 webhook 或失败 → 管理端可手动刷新；页面仍保持长缓存直至到期或成功 purge
 ```
+
+**禁止**把「变更后尽快可见」实现成「全站每 2～5 分钟自然过期」。  
+短窗口只属于 **增删改后的失效/重建**，不是整体缓存策略。
 
 产品意义上的「主动推送缓存」= **CMS 通知前端清页面缓存**，不是运营去清 Worker/Zone。
 
@@ -50,9 +52,9 @@
 
 ## 3. 前端职责（本仓库）
 
-1. 默认 `revalidate` / ISR：**120 秒**（站点 manifest 可改，上限建议 300 以满足「≤5 分钟」）。  
+1. 常态 HTML TTL：`cache.revalidateSeconds` 默认 **172800（48h）**，最低 **86400（24h）**。  
 2. 实现 `POST /api/revalidate`：校验 `secret`，按 `collections` / `paths` 失效。  
-3. 同一页面渲染合并 SDK 请求；可保留请求内短缓存防并发放大（参考 `czy_model` requestCache）。  
+3. 同一页面渲染：**无依赖接口全部并行**；可保留请求内短缓存防并发放大。  
 4. 会员页、带 Cookie 的响应用 `private, no-store`。  
 5. 询盘/留言：量小，可浏览器直打 `api_domain` 的 `/submit/...`。
 
@@ -78,80 +80,50 @@
 1. 实体创建/更新/删除成功后，读取站点登记的 `revalidateUrl`，异步 POST。  
 2. 管理端提供「刷新站点缓存」= 重发 webhook。  
 3. API 层可选短缓存仅防击穿；**不以** Cache API / Zone Tag 作为 UV 方案。  
-4. 历史文档中「免费无 Tag 权限」已过时（2025-04 起全套餐可 Tag purge）；即便可用，也 **不替代** 前端页面缓存。
 
 ---
 
 ## 5. 容量粗算（验收口径）
 
-假设：1 万 UV，人均 4 个页面，ISR 命中率 90%：
+假设：1 万 UV，人均 4 个页面，长缓存命中率 ≥90%：
 
 - 页面请求 ≈ 4 万（Pages）  
-- SSR 回源页 ≈ 4 千  
-- 每页平均 3 次 API → Worker ≈ **1.2 万**（远低于 10 万）
+- SSR 回源页 ≈ 4 千（主要来自首次、purge 后、冷边缘）  
+- 每页平均数次并行 API → Worker 远低于日限额  
 
-若无页面缓存、每页都 SSR+API：Worker 易到 **数万～十万+**，不安全。
+若无页面缓存、每页都 SSR+串行 API：Worker 与 TTFB 都会失控。
 
-验收：生产观察 **Worker 日请求 ≪ 页面 PV**。
+验收：生产观察 **Worker 日请求 ≪ 页面 PV**，且 `X-HTML-Cache` 以 **HIT** 为主。
 
 ---
 
-## 6. 明确不做（本阶段）
+## 6. 明确不做
 
 - 指望后端 Cache API 扛 1 万 UV  
-- 无 webhook、又把 revalidate 设成数小时（违反 5 分钟可见）  
+- 用 60～300 秒短 TTL 冒充「内容新鲜度」  
 - 把多站点 HTML 缓存在 CMS Worker 上  
+- MISS 时把无依赖接口串行 await（延迟叠加）
 
 ---
 
-## 7. 当前实现状态（阶段 D）
+## 7. 当前实现状态
 
 已落地（本仓库）：
 
-1. **Middleware HTML cache**：公开 GET HTML 写入进程内 Map（本地）/ `caches.default`（Workers）  
-2. **TTL**：按响应 `s-maxage`（默认 120s）过期；避免无 webhook 时永久陈旧  
-3. **DEV 默认 BYPASS**（`X-HTML-Cache: BYPASS`）；需要验收缓存时设 `HTML_CACHE_IN_DEV=1`  
-4. **`POST /api/revalidate`**：按 collections/paths **真实删除**缓存条目；返回 `purged.deleted` / `mode`  
-5. **`GET /api/revalidate`**：返回 `lastPurge` 供观测  
-6. **可选 CF Zone Purge**：配置 `CF_ZONE_ID` + `CF_API_TOKEN` 后对 `PUBLIC_SITE_URL` 绝对路径 purge  
-7. 响应头：`Cache-Control: s-maxage=…` + `Cache-Tag` + `X-HTML-Cache: HIT|MISS|BYPASS`
+1. **Middleware HTML cache**：公开 GET HTML → 内存（本地）/ `caches.default`（Workers，按站点真实 origin 建键）  
+2. **常态 TTL**：响应 `s-maxage` 默认 48h（最低 24h）  
+3. **数据更新**：`POST /api/revalidate` 按 collections/paths **删除**缓存；可选 CF Zone Purge  
+4. **DEV 默认 BYPASS**（`X-HTML-Cache: BYPASS`）；验收缓存时设 `HTML_CACHE_IN_DEV=1`  
+5. **并行回源**：chrome（company∥nav）、导航 reference、首页区块/列表/SEO page 同批 `Promise.all`  
+6. 响应头：`Cache-Control: s-maxage=…` + `Cache-Tag` + `X-HTML-Cache: HIT|MISS|BYPASS`
 
 后端（payload）已接：
 
-- 实体增删改后 `waitUntil(notifySiteRevalidate)` → `SITE_REVALIDATE_URL`  
-- 本地 wrangler vars：`SITE_REVALIDATE_URL=http://127.0.0.1:4321/api/revalidate`
+- 实体增删改后 `waitUntil(notifySiteRevalidate)` → `SITE_REVALIDATE_URL`
 
 验收：`npm run accept:cd`（需先 `mock:cms` 或真实 CMS + `dev`）。
 
-尚未完成：
-
-- 生产 CDN purge 凭证与压测观测  
-
 ### 生产 revalidate 配置（必做）
 
-本地 `wrangler.toml` 已含：
-
-```toml
-SITE_REVALIDATE_URL = "http://127.0.0.1:4321/api/revalidate"
-SITE_REVALIDATE_SECRET = "dev-revalidate-secret"
-SITE_REVALIDATE_SITE_KEY = "demo"
-```
-
-上线时改为正式 Pages 域名，并与前端环境变量对齐：
-
-| Payload | Astro Pages |
-| --- | --- |
-| `SITE_REVALIDATE_URL=https://www.example.com/api/revalidate` | （接收端） |
-| `SITE_REVALIDATE_SECRET` | `REVALIDATE_SECRET`（相同） |
-| `SITE_REVALIDATE_SITE_KEY` | `SITE_KEY` |
-
-未配置时保存内容仍成功，仅跳过通知；页面依赖 `revalidateSeconds`（默认 120s）自然过期。
-
----
-
-## 8. 与文档的关系
-
-- 平台总方案：`FRONTEND_PLATFORM.md`  
-- API 细节：`BACKEND_INTEGRATION.md`  
-- 集合路径：`CMS_MAPPING.md`
-- 进度准绳：`BUILD_PLAN.md`
+部署前端时写入 Pages 变量：`REVALIDATE_SECRET`；CMS 侧配置对应站点的 `revalidateUrl`。  
+未配置时保存内容仍成功，仅跳过通知；页面保持长缓存直至手动 purge 或 TTL 到期。

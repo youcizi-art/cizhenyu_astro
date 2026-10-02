@@ -194,7 +194,7 @@ pages（薄路由）
 | --- | --- | --- |
 | D-opt1 | 升级 Cloudflare adapter，使用官方 **缓存/失效 API**（若版本支持且可 purge） | 优先调研 |
 | D-opt2 | CDN Cache-Control + **Cache-Tag**，revalidate 调 CF purge API（需 token/zone） | 与 payload 站点配置协同 |
-| D-opt3 | 混合：高频页预渲染/ISR；动态页短 TTL；chrome 短 TTL 内存缓存降 API 次数 | 兜底 |
+| D-opt3 | 混合：公开页 **长 TTL（≥24h）** + CMS 变更 **on-demand purge**；MISS 时并行回源 | 与 CACHE_STRATEGY 一致（推荐） |
 
 强制交付：
 

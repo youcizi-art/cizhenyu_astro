@@ -20,7 +20,7 @@
 | `cms.apiBase` | string | 是 | 含协议，无尾斜杠 |
 | `cms.apiPrefix` | string | 否 | 默认 `/api/p` |
 | `cms.collectionNamespace` | string | 否 | 默认 `b2b`（与 collections 前缀一致） |
-| `cache.revalidateSeconds` | number | 否 | 默认 `120`；建议 `60`～`300` |
+| `cache.revalidateSeconds` | number | 否 | **常态 HTML 长缓存秒数**；默认 `172800`（48h），最低 `86400`（24h）。内容新鲜度靠 CMS webhook purge，不靠短 TTL |
 | `cache.revalidateSecretEnv` | string | 否 | 读环境变量名，默认 `REVALIDATE_SECRET` |
 | `hooks.revalidateUrl` | string | 否 | 完整 URL；供 CMS webhook；本地可空 |
 | `brand` | object | 否 | 色板/口号等，供主题 token，不替代 CMS 公司信息 |
@@ -80,7 +80,7 @@
 - `siteKey` ∈ `^[a-z][a-z0-9_-]{0,31}$`
 - `theme` 目录存在
 - `locales` 含 `defaultLocale`
-- `revalidateSeconds` ∈ `[60, 300]`（超出仅警告或钳制）
+- `revalidateSeconds` ≥ `86400`（24h；默认/建议 `172800`）。低于下限时实现侧会抬到 24h
 - `modules` 未知 key 报错（防 AI 乱造）
 
 ---

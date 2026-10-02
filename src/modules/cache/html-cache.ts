@@ -1,10 +1,15 @@
 /**
- * HTML 页面缓存（阶段 D）：
- * - 优先 Cloudflare `caches.default`（Pages/Workers 运行时）
+ * HTML 页面缓存：
+ * - 优先 Cloudflare `caches.default`（按站点真实 origin 建键）
  * - 本地 Node / astro dev 回退到进程内 Map
- * - 条目带 TTL（默认对齐 s-maxage / 120s），避免无 webhook 时永久陈旧
+ * - 常态 TTL 默认 48h（对齐 s-maxage）；内容新鲜度靠 CMS webhook purge，不靠短过期
  * - 可选 CF Zone Purge API（生产 CDN）
  */
+
+import {
+  DEFAULT_HTML_CACHE_TTL_SECONDS,
+  MIN_HTML_CACHE_TTL_SECONDS,
+} from '../site/manifest';
 
 export type HtmlCacheEntry = {
   status: number;
@@ -23,10 +28,17 @@ export type PurgeResult = {
 
 const MEMORY = new Map<string, HtmlCacheEntry>();
 let lastPurge: PurgeResult | null = null;
-const DEFAULT_TTL_SECONDS = 120;
+const DEFAULT_TTL_SECONDS = DEFAULT_HTML_CACHE_TTL_SECONDS;
 
 function cacheKey(url: URL) {
   return `${url.pathname}${url.search}`;
+}
+
+/** Cache API 请求键：使用页面真实 origin，避免 html-cache.local 碎片化 */
+function cacheApiRequest(url: URL) {
+  const path = `${url.pathname}${url.search}` || '/';
+  const origin = url.origin && url.origin !== 'null' ? url.origin : 'https://html-cache.local';
+  return new Request(new URL(path, origin).href, { method: 'GET' });
 }
 
 type CfCacheStorage = CacheStorage & { default?: Cache };
@@ -49,12 +61,14 @@ export function shouldUseHtmlCache() {
 }
 
 function readTtlSeconds(headers?: Headers | Array<[string, string]>) {
-  const raw = headers instanceof Headers
-    ? headers.get('cache-control') || ''
-    : (headers || []).find(([k]) => k.toLowerCase() === 'cache-control')?.[1] || '';
+  const raw =
+    headers instanceof Headers
+      ? headers.get('cache-control') || ''
+      : (headers || []).find(([k]) => k.toLowerCase() === 'cache-control')?.[1] || '';
   const match = /s-maxage=(\d+)/i.exec(raw) || /max-age=(\d+)/i.exec(raw);
   const ttl = match ? Number(match[1]) : DEFAULT_TTL_SECONDS;
-  return Number.isFinite(ttl) && ttl > 0 ? ttl : DEFAULT_TTL_SECONDS;
+  if (!Number.isFinite(ttl) || ttl <= 0) return DEFAULT_TTL_SECONDS;
+  return Math.max(MIN_HTML_CACHE_TTL_SECONDS, Math.floor(ttl));
 }
 
 export async function getCachedHtml(url: URL): Promise<HtmlCacheEntry | null> {
@@ -64,20 +78,20 @@ export async function getCachedHtml(url: URL): Promise<HtmlCacheEntry | null> {
   const cachesApi = getGlobalCaches();
   if (cachesApi?.default) {
     try {
-      const hit = await cachesApi.default.match(new Request(`https://html-cache.local${key}`));
+      const hit = await cachesApi.default.match(cacheApiRequest(url));
       if (hit) {
-        const entry: HtmlCacheEntry = {
-          status: hit.status,
-          headers: [...hit.headers.entries()],
-          body: await hit.text(),
-          expiresAt: now + readTtlSeconds(hit.headers) * 1000,
-        };
-        // Cache API 若未按 max-age 自动失效，这里再兜一层
         const storedExp = hit.headers.get('x-html-cache-expires');
         if (storedExp && Number(storedExp) <= now) {
-          await cachesApi.default.delete(new Request(`https://html-cache.local${key}`)).catch(() => undefined);
+          await cachesApi.default.delete(cacheApiRequest(url)).catch(() => undefined);
         } else {
-          return entry;
+          return {
+            status: hit.status,
+            headers: [...hit.headers.entries()],
+            body: await hit.text(),
+            expiresAt: storedExp
+              ? Number(storedExp)
+              : now + readTtlSeconds(hit.headers) * 1000,
+          };
         }
       }
     } catch {
@@ -104,7 +118,11 @@ export async function putCachedHtml(url: URL, response: Response) {
     return n !== 'set-cookie' && n !== 'transfer-encoding';
   });
   headers.push(['x-html-cache-expires', String(expiresAt)]);
-  headers.push(['Cache-Control', `public, max-age=${ttl}`]);
+  // 确保存储条目带长 max-age，供 Cache API 与兜底读取
+  const hasCc = headers.some(([n]) => n.toLowerCase() === 'cache-control');
+  if (!hasCc) {
+    headers.push(['Cache-Control', `public, max-age=${ttl}`]);
+  }
 
   const entry: HtmlCacheEntry = { status: response.status, headers, body, expiresAt };
   MEMORY.set(key, entry);
@@ -113,11 +131,11 @@ export async function putCachedHtml(url: URL, response: Response) {
   if (cachesApi?.default) {
     try {
       await cachesApi.default.put(
-        new Request(`https://html-cache.local${key}`),
+        cacheApiRequest(url),
         new Response(body, { status: entry.status, headers: entry.headers })
       );
-    } catch {
-      // ignore Cache API write failures in unsupported runtimes
+    } catch (err) {
+      console.warn('[html-cache] Cache API put failed', key, err);
     }
   }
 }
@@ -176,7 +194,9 @@ async function purgeCloudflareFiles(files: string[]) {
     },
     body: JSON.stringify(payload),
   });
-  const body = await res.json().catch(() => null) as { success?: boolean; errors?: Array<{ message?: string }> } | null;
+  const body = (await res.json().catch(() => null)) as
+    | { success?: boolean; errors?: Array<{ message?: string }> }
+    | null;
   if (!res.ok || !body?.success) {
     return {
       ok: false,
@@ -196,6 +216,7 @@ export async function purgeHtmlPaths(options: {
   let deleted = 0;
   let usedCacheApi = false;
   let usedMemory = false;
+  const origin = String(options.siteOrigin || '').replace(/\/$/, '');
 
   if (patterns.includes('/*')) {
     deleted += MEMORY.size;
@@ -218,7 +239,10 @@ export async function purgeHtmlPaths(options: {
       if (pattern === '/*') continue;
       const pathOnly = pattern.split('?')[0] || pattern;
       try {
-        const ok = await cachesApi.default.delete(new Request(`https://html-cache.local${pathOnly}`));
+        const reqUrl = origin
+          ? new URL(pathOnly, origin)
+          : new URL(pathOnly, 'https://html-cache.local');
+        const ok = await cachesApi.default.delete(cacheApiRequest(reqUrl));
         if (ok) deleted += 1;
       } catch {
         // ignore
@@ -226,12 +250,11 @@ export async function purgeHtmlPaths(options: {
     }
   }
 
-  const origin = String(options.siteOrigin || '').replace(/\/$/, '');
   const cfFiles = patterns.includes('/*')
     ? ['/*']
     : patterns
-      .filter((item) => item !== '/*')
-      .map((item) => (origin ? `${origin}${item}` : item));
+        .filter((item) => item !== '/*')
+        .map((item) => (origin ? `${origin}${item}` : item));
 
   const cloudflare = await purgeCloudflareFiles(cfFiles);
 

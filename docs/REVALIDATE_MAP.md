@@ -56,4 +56,4 @@ Content-Type: application/json
 
 - Cloudflare Pages / Astro 适配器的 on-demand API 以实际适配器文档为准；本表只定**业务映射**。  
 - 宁可多清（列表+首页）也不要只清详情导致列表仍旧。  
-- 免费档不要求秒级全局一致；目标是 **有 hook 则尽快、无 hook 则 ≤ revalidateSeconds**。
+- 免费档不要求秒级全局一致；目标是 **有 hook 则尽快失效相关路径；无 hook 则保持长缓存直至 TTL（默认 48h）或手动刷新**。

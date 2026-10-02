@@ -20,7 +20,7 @@
     "collectionNamespace": "b2b"
   },
   "cache": {
-    "revalidateSeconds": 120,
+    "revalidateSeconds": 172800,
     "revalidateSecretEnv": "REVALIDATE_SECRET"
   },
   "hooks": {
