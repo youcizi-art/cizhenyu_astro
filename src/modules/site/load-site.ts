@@ -12,10 +12,13 @@ const registry: Record<string, unknown> = {
 
 /** 交付包默认回退清单：按 THEME / PUBLIC_THEME 选模板 */
 function deliveryTemplateKey(): string {
-  const theme = String(envSync('PUBLIC_THEME') || envSync('THEME') || 'turmill')
+  const theme = String(envSync('PUBLIC_THEME') || envSync('THEME') || 'default')
     .trim()
     .toLowerCase();
+  // default 主题交付站使用 demo 清单作模板，再由 SITE_KEY/env 覆盖
+  if (theme === 'default' && registry.demo) return 'demo';
   if (theme && registry[theme]) return theme;
+  if (registry.demo) return 'demo';
   if (registry.turmill) return 'turmill';
   return '_template';
 }

@@ -17,7 +17,10 @@
     "mock:cms": "node mock-cms/server.mjs",
     "smoke": "node scripts/smoke.mjs",
     "accept:ab": "node scripts/accept-ab.mjs",
-    "accept:cd": "node scripts/accept-cd.mjs"
+    "accept:cd": "node scripts/accept-cd.mjs",
+    "pack:theme": "node scripts/pack-theme.mjs",
+    "pack:default": "node scripts/pack-theme.mjs --id=default",
+    "pack:turmill": "node scripts/pack-theme.mjs --id=turmill"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",
