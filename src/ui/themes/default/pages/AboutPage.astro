@@ -1,0 +1,97 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import type { CompanyView } from '@/modules/company';
+import type { ResolvedReferenceCard } from '@/modules/reference';
+
+interface Props {
+  title: string;
+  summary?: string;
+  content?: string;
+  company: CompanyView;
+  references?: ResolvedReferenceCard[];
+  relatedTitle?: string;
+  homeHref?: string;
+  homeLabel?: string;
+  error?: string;
+  warnings?: string[];
+  emptyHint?: string;
+}
+const {
+  title,
+  summary = '',
+  content = '',
+  company,
+  references = [],
+  relatedTitle = '相关内容',
+  homeHref = '/',
+  homeLabel = '首页',
+  error,
+  warnings = [],
+  emptyHint = '',
+} = Astro.props;
+---
+<PageBanner
+  title={title}
+  summary={summary || company.slogan}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+<section class="cz-page-section">
+  <div class="cz-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    <div class="cz-about-grid">
+      <div>
+        {company.summary ? <p class="cz-prose">{company.summary}</p> : null}
+        {content ? <div class="cz-prose" set:html={content} /> : null}
+        {!content && !company.summary && emptyHint ? <p style="color:var(--muted)">{emptyHint}</p> : null}
+      </div>
+      <aside class="cz-about-panel">
+        {company.logoUrl ? (
+          <OptimizedImage src={company.logoUrl} alt={company.name} width={240} height={80} widths={[120, 240]} sizes="240px" />
+        ) : null}
+        <strong>{company.name}</strong>
+        {company.slogan ? <p style="margin:0.5rem 0 0;color:var(--muted);font-size:0.95rem">{company.slogan}</p> : null}
+        <div class="cz-about-meta">
+          {company.address ? <span>{company.address}</span> : null}
+          {company.phone ? <a href={`tel:${company.phone.replace(/\s+/g, '')}`}>{company.phone}</a> : null}
+          {company.email ? <a href={`mailto:${company.email}`}>{company.email}</a> : null}
+          {company.website ? <a href={company.website}>{company.website}</a> : null}
+        </div>
+      </aside>
+    </div>
+    {references.length ? (
+      <section style="margin-top:2.5rem">
+        <h2 style="margin:0 0 1rem;font-size:1.35rem;letter-spacing:-0.02em">{relatedTitle}</h2>
+        <div class="cz-grid-cards">
+          {references.map((item) => (
+            <article class="cz-card cz-product-card">
+              <a href={item.href}>
+                <div class="cz-product-cover">
+                  {item.coverUrl ? (
+                    <OptimizedImage
+                      src={item.coverUrl}
+                      alt={item.title}
+                      width={640}
+                      height={400}
+                      widths={[320, 640]}
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  ) : null}
+                </div>
+                <div class="cz-product-body">
+                  <h3>{item.title}</h3>
+                  {item.description || item.subtitle ? <p>{item.description || item.subtitle}</p> : null}
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+    ) : null}
+  </div>
+</section>

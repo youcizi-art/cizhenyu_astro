@@ -1,0 +1,28 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  title: string;
+  summary?: string;
+  crumbs?: Crumb[];
+}
+const { title, summary = '', crumbs = [] } = Astro.props;
+---
+<section class="cz-page-banner">
+  <div class="cz-container">
+    {crumbs.length ? (
+      <nav class="cz-breadcrumb" aria-label="Breadcrumb">
+        {crumbs.map((c, i) => (
+          <>
+            {i > 0 ? <span class="cz-breadcrumb-sep">/</span> : null}
+            {c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}
+          </>
+        ))}
+      </nav>
+    ) : null}
+    <h1>{title}</h1>
+    {summary ? <p>{summary}</p> : null}
+  </div>
+</section>

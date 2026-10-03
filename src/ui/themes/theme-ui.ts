@@ -21,7 +21,7 @@ export type ThemeMeta = {
 export const THEME_META: Record<ThemeId, ThemeMeta> = {
   default: {
     id: 'default',
-    shell: 'default',
+    shell: 'page-shell',
     fontHref: '',
   },
   turmill: {

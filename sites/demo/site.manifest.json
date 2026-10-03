@@ -1,6 +1,6 @@
 {
   "siteKey": "demo",
-  "displayName": "Demo B2B Site",
+  "displayName": "磁帧鱼",
   "theme": "default",
   "defaultLocale": "zh-CN",
   "locales": ["zh-CN", "zh-TW", "ja", "en-US"],
@@ -27,8 +27,8 @@
     "revalidateUrl": "https://www.example.com/api/revalidate"
   },
   "brand": {
-    "tagline": "B2B site powered by cizhenyu_payload",
-    "primaryColor": "#0B3D91"
+    "tagline": "外贸 B2B 增长流水线：建站、部署、询盘、自动化运营",
+    "primaryColor": "#0d9488"
   },
   "domains": {
     "www": "www.example.com"

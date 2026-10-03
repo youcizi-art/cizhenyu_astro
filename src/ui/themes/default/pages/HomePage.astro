@@ -1,0 +1,275 @@
+---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import type { ContentBlock } from '@/modules/content-block';
+import type { ProductCard } from '@/modules/product';
+import type { ArticleCard } from '@/modules/article';
+import type { CompanyView } from '@/modules/company';
+
+interface Props {
+  siteName: string;
+  hero: ContentBlock | null;
+  heroImageUrl?: string;
+  tagline?: string;
+  products: ProductCard[];
+  articles: ArticleCard[];
+  company: CompanyView;
+  companyIntro?: string;
+  ctaBanner: ContentBlock | null;
+  advantages?: Array<{ title: string; description: string }>;
+  labels: Record<string, string>;
+  paths: {
+    about: string;
+    contact: string;
+    products?: string;
+    solutions?: string;
+  };
+  error?: string;
+  warnings?: string[];
+  showProducts?: boolean;
+}
+const {
+  siteName,
+  hero,
+  heroImageUrl = '',
+  tagline = '',
+  products,
+  company,
+  ctaBanner,
+  advantages = [],
+  labels,
+  paths,
+  error,
+  warnings = [],
+  showProducts = true,
+} = Astro.props;
+
+const contactHref = paths.contact;
+const productsHref = paths.products || contactHref;
+const heroTitle = hero?.title || siteName;
+const heroLead = hero?.subtitle || hero?.summary || tagline || company.slogan || '';
+const heroCtaLabel = hero?.ctaLabel || labels.ctaBtn || '提交询盘';
+const heroCtaUrl = hero?.ctaUrl || contactHref;
+const mediaUrl = heroImageUrl || hero?.imageUrl || '';
+
+const compareRows = [
+  {
+    dim: labels.compareDim1 || '建站与改内容',
+    old: labels.compareOld1 || '外包改一版排一期',
+    neu: labels.compareNew1 || '后台自行更新，站点自动刷新',
+  },
+  {
+    dim: labels.compareDim2 || '上线与运维',
+    old: labels.compareOld2 || '要懂 Cloudflare 才能部署',
+    neu: labels.compareNew2 || '部署向导点选交付，资产在自有账户',
+  },
+  {
+    dim: labels.compareDim3 || '询盘跟进',
+    old: labels.compareOld3 || '散落微信/邮件，夜间空窗',
+    neu: labels.compareNew3 || 'CRM + 知识库 AI 客服可转人工',
+  },
+  {
+    dim: labels.compareDim4 || 'SEO/GEO 与社媒',
+    old: labels.compareOld4 || '靠加班堆人力，难坚持',
+    neu: labels.compareNew4 || '本地 Agent 成熟流程，低 Token 日常运营',
+  },
+];
+
+const steps = [
+  { n: '1', title: labels.step1Title || '描述业务与瓶颈', body: labels.step1Body || '行业、目标市场、有无网站与询盘渠道。' },
+  { n: '2', title: labels.step2Title || '组合模块方案', body: labels.step2Body || '按阶段配置后台、展示站、部署、询盘与 Agent。' },
+  { n: '3', title: labels.step3Title || '上线并持续获客', body: labels.step3Body || '一键部署到自有 Cloudflare，再跑自动化运营节奏。' },
+];
+
+const roles = [
+  { title: labels.role1 || '个人外贸业务员', body: labels.role1Body || '先有可索引的独立站资产，再谈放大。' },
+  { title: labels.role2 || '中小外贸企业 / 工厂外贸部', body: labels.role2Body || '从「有网站」升级到「有持续获客节奏」。' },
+  { title: labels.role3 || '外贸服务商', body: labels.role3Body || '标准化交付，缩短每次从零配置的时间。' },
+];
+
+const ctaTitle = ctaBanner?.title || labels.ctaTitle;
+const ctaSub = ctaBanner?.summary || ctaBanner?.subtitle || labels.ctaSub;
+const ctaLabel = ctaBanner?.ctaLabel || labels.ctaBtn;
+const ctaUrl = ctaBanner?.ctaUrl || contactHref;
+---
+{(error || warnings.length) ? (
+  <div class="cz-container" style="padding-top:1rem">
+    {error ? <p class="cz-card" style="border-color:#fecaca;color:#b91c1c">{error}</p> : null}
+    {warnings.map((w) => (
+      <p class="cz-card" style="border-color:#fde68a;color:#92400e;margin-top:0.5rem">{w}</p>
+    ))}
+  </div>
+) : null}
+
+<section class="cz-hero">
+  <div class="cz-container cz-hero-grid">
+    <div>
+      {hero?.eyebrow ? <p class="cz-eyebrow">{hero.eyebrow}</p> : <p class="cz-eyebrow">Cizhenyu</p>}
+      <h1>{heroTitle}</h1>
+      {heroLead ? <p class="cz-hero-lead">{heroLead}</p> : null}
+      <div class="cz-hero-actions">
+        <a class="cz-btn cz-btn-primary" href={heroCtaUrl}>{heroCtaLabel}</a>
+        {showProducts ? (
+          <a class="cz-btn cz-btn-ghost" href={productsHref}>{labels.exploreAll}</a>
+        ) : null}
+      </div>
+      <ul class="cz-trust">
+        <li>{labels.trust1 || '部署到您自己的 Cloudflare 账户'}</li>
+        <li>{labels.trust2 || '数据自有，按模块阶段投入'}</li>
+        <li>{labels.trust3 || '价格询盘获取，不在线恐吓报价'}</li>
+      </ul>
+    </div>
+    <div class="cz-hero-media" aria-hidden={!mediaUrl}>
+      {mediaUrl ? (
+        <OptimizedImage
+          src={mediaUrl}
+          alt={heroTitle}
+          width={960}
+          height={600}
+          widths={[480, 720, 960]}
+          sizes="(max-width: 900px) 100vw, 480px"
+          priority
+        />
+      ) : (
+        <div style="display:grid;place-items:center;height:100%;color:#94a3b8;font-weight:600">
+          {siteName}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+{advantages.length ? (
+  <section class="cz-section">
+    <div class="cz-container">
+      <div class="cz-section-head">
+        <h2>{labels.painTitle}</h2>
+        <p>{labels.painSub}</p>
+      </div>
+      <div class="cz-pain-grid">
+        {advantages.map((item) => (
+          <article class="cz-card">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <p class="cz-card-solve">
+              <strong>{labels.solveLabel}</strong>
+              {' — '}
+              {labels.solveHint || '纳入磁帧鱼增长流水线统一解决'}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+) : null}
+
+{showProducts && products.length ? (
+  <section class="cz-section cz-section-alt">
+    <div class="cz-container">
+      <div class="cz-section-head">
+        <h2>{labels.productsTitle}</h2>
+        <p>{labels.productsSub}</p>
+      </div>
+      <div class="cz-product-grid">
+        {products.map((p) => (
+          <article class="cz-card cz-product-card">
+            <a href={p.href}>
+              <div class="cz-product-cover">
+                {p.coverUrl ? (
+                  <OptimizedImage
+                    src={p.coverUrl}
+                    alt={p.title}
+                    width={640}
+                    height={400}
+                    widths={[320, 640]}
+                    sizes="(max-width: 720px) 100vw, 360px"
+                  />
+                ) : null}
+              </div>
+              <div class="cz-product-body">
+                <h3>{p.title}</h3>
+                {p.summary ? <p>{p.summary}</p> : null}
+                <span class="cz-more">{labels.readMore} →</span>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+      <p style="margin-top:1.5rem">
+        <a class="cz-btn cz-btn-outline" href={productsHref}>{labels.exploreAll}</a>
+      </p>
+    </div>
+  </section>
+) : null}
+
+<section class="cz-section">
+  <div class="cz-container">
+    <div class="cz-section-head">
+      <h2>{labels.compareTitle}</h2>
+      <p>{labels.compareSub}</p>
+    </div>
+    <div class="cz-table-wrap">
+      <table class="cz-table">
+        <thead>
+          <tr>
+            <th>{labels.compareDim || '维度'}</th>
+            <th>{labels.compareColOld}</th>
+            <th>{labels.compareColNew}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {compareRows.map((row) => (
+            <tr>
+              <td>{row.dim}</td>
+              <td>{row.old}</td>
+              <td>{row.neu}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="cz-section cz-section-alt">
+  <div class="cz-container">
+    <div class="cz-section-head">
+      <h2>{labels.stepsTitle}</h2>
+      <p>{labels.stepsSub}</p>
+    </div>
+    <div class="cz-steps">
+      {steps.map((s) => (
+        <article class="cz-card">
+          <div class="cz-step-num">{s.n}</div>
+          <h3>{s.title}</h3>
+          <p>{s.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="cz-section">
+  <div class="cz-container">
+    <div class="cz-section-head">
+      <h2>{labels.rolesTitle}</h2>
+    </div>
+    <div class="cz-role-grid">
+      {roles.map((r) => (
+        <article class="cz-card">
+          <h3>{r.title}</h3>
+          <p>{r.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="cz-cta">
+  <div class="cz-container cz-cta-inner">
+    <div>
+      <h2>{ctaTitle}</h2>
+      {ctaSub ? <p>{ctaSub}</p> : null}
+    </div>
+    <a class="cz-btn cz-btn-primary" href={ctaUrl}>{ctaLabel}</a>
+  </div>
+</section>

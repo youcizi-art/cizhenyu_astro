@@ -5,8 +5,10 @@
  */
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import CardSection from '@/ui/blocks/CardSection.astro';
+import DefaultHomePage from './default/pages/HomePage.astro';
 import TurmillHomePage from './turmill/pages/HomePage.astro';
 import { getThemeMeta } from './theme-ui';
+import { defaultHomeLabels } from './default/home-copy';
 import { turmillHomeLabels } from './turmill/home-copy';
 
 interface Props {
@@ -14,9 +16,33 @@ interface Props {
 }
 const { data } = Astro.props;
 const meta = getThemeMeta(data.site.theme);
+const defaultLabels = meta.id === 'default' ? defaultHomeLabels(data.locale) : null;
 const turmillLabels = meta.id === 'turmill' ? turmillHomeLabels(data.locale) : null;
 ---
-{meta.id === 'turmill' && turmillLabels ? (
+{meta.id === 'default' && defaultLabels ? (
+  <DefaultHomePage
+    siteName={data.siteName}
+    hero={data.hero}
+    heroImageUrl={data.heroImageUrl || data.hero?.imageUrl || ''}
+    tagline={data.tagline}
+    products={data.products}
+    articles={data.articles}
+    company={data.company}
+    companyIntro={data.companyIntro}
+    ctaBanner={data.ctaBanner}
+    advantages={data.advantages}
+    labels={{ ...data.labels, ...defaultLabels }}
+    paths={{
+      about: data.paths.about,
+      contact: data.paths.contact,
+      products: data.paths.products,
+      solutions: data.paths.solutions,
+    }}
+    error={data.error}
+    warnings={data.warnings}
+    showProducts={data.site.modules.products}
+  />
+) : meta.id === 'turmill' && turmillLabels ? (
   <TurmillHomePage
     siteName={data.siteName}
     hero={data.hero}

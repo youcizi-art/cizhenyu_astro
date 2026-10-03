@@ -1,0 +1,340 @@
+{
+  "collectionSlug": "b2b_article",
+  "items": [
+    {
+      "languageGroupKey": "def00000-arti-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "title": "外贸独立站和 B2B 平台，到底该怎么分工？",
+          "slug": "b2b-site-vs-marketplace",
+          "author": "磁帧鱼",
+          "summary": "【占位文章】关于「外贸独立站和 B2B 平台，到底该怎么分工？」的说明将持续补充。当前用于站点结构与 SEO 占位。",
+          "excerpt": "外贸独立站和 B2B 平台，到底该怎么分工？",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article1"
+          },
+          "content": "<p>【占位】正文待补充。</p><p>主题：外贸独立站和 B2B 平台，到底该怎么分工？</p><p>欢迎通过询盘告诉我们您最关心的行业场景，我们优先完善对应教程。</p>",
+          "status": "published",
+          "featured": [
+            "1"
+          ],
+          "reading_time": 4,
+          "seo_title": "外贸独立站和 B2B 平台，到底该怎么分工？",
+          "seo_description": "占位文章：外贸独立站和 B2B 平台，到底该怎么分工？",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article1"
+          },
+          "content_type": "guide",
+          "short_answer": "核心结论（占位）：外贸独立站和 B2B 平台，到底该怎么分工？——完整正文将陆续发布。",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        },
+        "zh-TW": {
+          "title": "外貿獨立站和 B2B 平台，到底该怎么分工？",
+          "slug": "b2b-site-vs-marketplace",
+          "author": "磁幀魚",
+          "summary": "【佔位文章】關於「外貿獨立站和 B2B 平台，到底该怎么分工？」的說明將持續補充。",
+          "excerpt": "外貿獨立站和 B2B 平台，到底该怎么分工？",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article1"
+          },
+          "content": "<p>【佔位】正文待補充。</p><p>主題：外貿獨立站和 B2B 平台，到底该怎么分工？</p>",
+          "status": "published",
+          "featured": [
+            "1"
+          ],
+          "reading_time": 4,
+          "seo_title": "外貿獨立站和 B2B 平台，到底该怎么分工？",
+          "seo_description": "佔位文章：外貿獨立站和 B2B 平台，到底该怎么分工？",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article1"
+          },
+          "content_type": "guide",
+          "short_answer": "核心結論（佔位）：外貿獨立站和 B2B 平台，到底该怎么分工？",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        },
+        "ja": {
+          "title": "自社サイトと B2B プラットフォームの役割分担",
+          "slug": "b2b-site-vs-marketplace",
+          "author": "磁帧鱼",
+          "summary": "【プレースホルダー】「自社サイトと B2B プラットフォームの役割分担」の本文は今後追記します。",
+          "excerpt": "自社サイトと B2B プラットフォームの役割分担",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article1"
+          },
+          "content": "<p>【プレースホルダー】本文準備中。</p><p>テーマ：自社サイトと B2B プラットフォームの役割分担</p>",
+          "status": "published",
+          "featured": [
+            "1"
+          ],
+          "reading_time": 4,
+          "seo_title": "自社サイトと B2B プラットフォームの役割分担",
+          "seo_description": "プレースホルダー：自社サイトと B2B プラットフォームの役割分担",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article1"
+          },
+          "content_type": "guide",
+          "short_answer": "要約（仮）：自社サイトと B2B プラットフォームの役割分担",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        },
+        "en-US": {
+          "title": "How should export sites and B2B marketplaces split roles?",
+          "slug": "b2b-site-vs-marketplace",
+          "author": "Cizhenyu",
+          "summary": "[Placeholder] Full guide for “How should export sites and B2B marketplaces split roles?” will be expanded. Used for IA/SEO scaffolding.",
+          "excerpt": "How should export sites and B2B marketplaces split roles?",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article1"
+          },
+          "content": "<p>[Placeholder] Body forthcoming.</p><p>Topic: How should export sites and B2B marketplaces split roles?</p><p>Tell us your industry via inquiry and we will prioritize the matching tutorial.</p>",
+          "status": "published",
+          "featured": [
+            "1"
+          ],
+          "reading_time": 4,
+          "seo_title": "How should export sites and B2B marketplaces split roles?",
+          "seo_description": "Placeholder article: How should export sites and B2B marketplaces split roles?",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article1"
+          },
+          "content_type": "guide",
+          "short_answer": "Placeholder takeaway: How should export sites and B2B marketplaces split roles?",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-arti-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "title": "什么是 GEO（生成式引擎优化），外贸站为什么要布局？",
+          "slug": "what-is-geo-for-exporters",
+          "author": "磁帧鱼",
+          "summary": "【占位文章】关于「什么是 GEO（生成式引擎优化），外贸站为什么要布局？」的说明将持续补充。当前用于站点结构与 SEO 占位。",
+          "excerpt": "什么是 GEO（生成式引擎优化），外贸站为什么要布局？",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article2"
+          },
+          "content": "<p>【占位】正文待补充。</p><p>主题：什么是 GEO（生成式引擎优化），外贸站为什么要布局？</p><p>欢迎通过询盘告诉我们您最关心的行业场景，我们优先完善对应教程。</p>",
+          "status": "published",
+          "featured": [],
+          "reading_time": 4,
+          "seo_title": "什么是 GEO（生成式引擎优化），外贸站为什么要布局？",
+          "seo_description": "占位文章：什么是 GEO（生成式引擎优化），外贸站为什么要布局？",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article2"
+          },
+          "content_type": "guide",
+          "short_answer": "核心结论（占位）：什么是 GEO（生成式引擎优化），外贸站为什么要布局？——完整正文将陆续发布。",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        },
+        "zh-TW": {
+          "title": "什么是 GEO（生成式引擎優化），外貿站为什么要布局？",
+          "slug": "what-is-geo-for-exporters",
+          "author": "磁幀魚",
+          "summary": "【佔位文章】關於「什么是 GEO（生成式引擎優化），外貿站为什么要布局？」的說明將持續補充。",
+          "excerpt": "什么是 GEO（生成式引擎優化），外貿站为什么要布局？",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article2"
+          },
+          "content": "<p>【佔位】正文待補充。</p><p>主題：什么是 GEO（生成式引擎優化），外貿站为什么要布局？</p>",
+          "status": "published",
+          "featured": [],
+          "reading_time": 4,
+          "seo_title": "什么是 GEO（生成式引擎優化），外貿站为什么要布局？",
+          "seo_description": "佔位文章：什么是 GEO（生成式引擎優化），外貿站为什么要布局？",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article2"
+          },
+          "content_type": "guide",
+          "short_answer": "核心結論（佔位）：什么是 GEO（生成式引擎優化），外貿站为什么要布局？",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        },
+        "ja": {
+          "title": "輸出サイトのための GEO とは",
+          "slug": "what-is-geo-for-exporters",
+          "author": "磁帧鱼",
+          "summary": "【プレースホルダー】「輸出サイトのための GEO とは」の本文は今後追記します。",
+          "excerpt": "輸出サイトのための GEO とは",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article2"
+          },
+          "content": "<p>【プレースホルダー】本文準備中。</p><p>テーマ：輸出サイトのための GEO とは</p>",
+          "status": "published",
+          "featured": [],
+          "reading_time": 4,
+          "seo_title": "輸出サイトのための GEO とは",
+          "seo_description": "プレースホルダー：輸出サイトのための GEO とは",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article2"
+          },
+          "content_type": "guide",
+          "short_answer": "要約（仮）：輸出サイトのための GEO とは",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        },
+        "en-US": {
+          "title": "What is GEO for exporters, and why it matters",
+          "slug": "what-is-geo-for-exporters",
+          "author": "Cizhenyu",
+          "summary": "[Placeholder] Full guide for “What is GEO for exporters, and why it matters” will be expanded. Used for IA/SEO scaffolding.",
+          "excerpt": "What is GEO for exporters, and why it matters",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article2"
+          },
+          "content": "<p>[Placeholder] Body forthcoming.</p><p>Topic: What is GEO for exporters, and why it matters</p><p>Tell us your industry via inquiry and we will prioritize the matching tutorial.</p>",
+          "status": "published",
+          "featured": [],
+          "reading_time": 4,
+          "seo_title": "What is GEO for exporters, and why it matters",
+          "seo_description": "Placeholder article: What is GEO for exporters, and why it matters",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article2"
+          },
+          "content_type": "guide",
+          "short_answer": "Placeholder takeaway: What is GEO for exporters, and why it matters",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-arti-4000-8000-000000000003",
+      "locales": {
+        "zh-CN": {
+          "title": "低 Token 消耗的自动化运营，靠的是流程还是模型？",
+          "slug": "low-token-seo-ops",
+          "author": "磁帧鱼",
+          "summary": "【占位文章】关于「低 Token 消耗的自动化运营，靠的是流程还是模型？」的说明将持续补充。当前用于站点结构与 SEO 占位。",
+          "excerpt": "低 Token 消耗的自动化运营，靠的是流程还是模型？",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article3"
+          },
+          "content": "<p>【占位】正文待补充。</p><p>主题：低 Token 消耗的自动化运营，靠的是流程还是模型？</p><p>欢迎通过询盘告诉我们您最关心的行业场景，我们优先完善对应教程。</p>",
+          "status": "published",
+          "featured": [],
+          "reading_time": 4,
+          "seo_title": "低 Token 消耗的自动化运营，靠的是流程还是模型？",
+          "seo_description": "占位文章：低 Token 消耗的自动化运营，靠的是流程还是模型？",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article3"
+          },
+          "content_type": "guide",
+          "short_answer": "核心结论（占位）：低 Token 消耗的自动化运营，靠的是流程还是模型？——完整正文将陆续发布。",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        },
+        "zh-TW": {
+          "title": "低 Token 消耗的自動化運營，靠的是流程还是模型？",
+          "slug": "low-token-seo-ops",
+          "author": "磁幀魚",
+          "summary": "【佔位文章】關於「低 Token 消耗的自動化運營，靠的是流程还是模型？」的說明將持續補充。",
+          "excerpt": "低 Token 消耗的自動化運營，靠的是流程还是模型？",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article3"
+          },
+          "content": "<p>【佔位】正文待補充。</p><p>主題：低 Token 消耗的自動化運營，靠的是流程还是模型？</p>",
+          "status": "published",
+          "featured": [],
+          "reading_time": 4,
+          "seo_title": "低 Token 消耗的自動化運營，靠的是流程还是模型？",
+          "seo_description": "佔位文章：低 Token 消耗的自動化運營，靠的是流程还是模型？",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article3"
+          },
+          "content_type": "guide",
+          "short_answer": "核心結論（佔位）：低 Token 消耗的自動化運營，靠的是流程还是模型？",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        },
+        "ja": {
+          "title": "低 Token 運用はモデルより手順",
+          "slug": "low-token-seo-ops",
+          "author": "磁帧鱼",
+          "summary": "【プレースホルダー】「低 Token 運用はモデルより手順」の本文は今後追記します。",
+          "excerpt": "低 Token 運用はモデルより手順",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article3"
+          },
+          "content": "<p>【プレースホルダー】本文準備中。</p><p>テーマ：低 Token 運用はモデルより手順</p>",
+          "status": "published",
+          "featured": [],
+          "reading_time": 4,
+          "seo_title": "低 Token 運用はモデルより手順",
+          "seo_description": "プレースホルダー：低 Token 運用はモデルより手順",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article3"
+          },
+          "content_type": "guide",
+          "short_answer": "要約（仮）：低 Token 運用はモデルより手順",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        },
+        "en-US": {
+          "title": "Low-token SEO ops: playbooks beat prompt theatre",
+          "slug": "low-token-seo-ops",
+          "author": "Cizhenyu",
+          "summary": "[Placeholder] Full guide for “Low-token SEO ops: playbooks beat prompt theatre” will be expanded. Used for IA/SEO scaffolding.",
+          "excerpt": "Low-token SEO ops: playbooks beat prompt theatre",
+          "cover": {
+            "url": "https://placehold.co/960x540/0f172a/5eead4?text=Article3"
+          },
+          "content": "<p>[Placeholder] Body forthcoming.</p><p>Topic: Low-token SEO ops: playbooks beat prompt theatre</p><p>Tell us your industry via inquiry and we will prioritize the matching tutorial.</p>",
+          "status": "published",
+          "featured": [],
+          "reading_time": 4,
+          "seo_title": "Low-token SEO ops: playbooks beat prompt theatre",
+          "seo_description": "Placeholder article: Low-token SEO ops: playbooks beat prompt theatre",
+          "robots_directive": "index,follow",
+          "schema_type": "Article",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Article3"
+          },
+          "content_type": "guide",
+          "short_answer": "Placeholder takeaway: Low-token SEO ops: playbooks beat prompt theatre",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-site"
+          ]
+        }
+      }
+    }
+  ]
+}

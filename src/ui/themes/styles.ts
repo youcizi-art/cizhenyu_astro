@@ -3,5 +3,7 @@
  * 不在此写业务逻辑。
  */
 import './default/tokens.css';
+import './default/theme.css';
+import './default/pages.css';
 import './turmill/tokens.css';
 import './turmill/theme.css';

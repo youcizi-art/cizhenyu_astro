@@ -1,0 +1,67 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import type { CompanyView } from '@/modules/company';
+
+interface Props {
+  title: string;
+  content?: string;
+  company: CompanyView;
+  homeHref?: string;
+  homeLabel?: string;
+  error?: string;
+  warnings?: string[];
+  emptyHint?: string;
+}
+const {
+  title,
+  content = '',
+  company,
+  homeHref = '/',
+  homeLabel = '首页',
+  error,
+  warnings = [],
+  emptyHint = '',
+} = Astro.props;
+---
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+<section class="cz-page-section">
+  <div class="cz-container" style="max-width:48rem">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {content ? <div class="cz-prose" set:html={content} /> : null}
+    <div class="cz-contact-panel">
+      <h2>{company.name}</h2>
+      {company.address ? <p class="cz-prose" style="margin:0.35rem 0">{company.address}</p> : null}
+      {company.phone ? (
+        <p class="cz-prose" style="margin:0.35rem 0">
+          <a href={`tel:${company.phone.replace(/\s+/g, '')}`}>{company.phone}</a>
+        </p>
+      ) : null}
+      {company.email ? (
+        <p class="cz-prose" style="margin:0.35rem 0">
+          <a href={`mailto:${company.email}`}>{company.email}</a>
+        </p>
+      ) : null}
+      {company.website ? (
+        <p class="cz-prose" style="margin:0.35rem 0">
+          <a href={company.website}>{company.website}</a>
+        </p>
+      ) : null}
+      {!company.address && !company.phone && !company.email && emptyHint ? (
+        <p style="color:var(--muted)">{emptyHint}</p>
+      ) : null}
+      {company.email ? (
+        <p style="margin-top:1.25rem">
+          <a class="cz-btn cz-btn-primary" href={`mailto:${company.email}`}>发送询盘邮件</a>
+        </p>
+      ) : null}
+    </div>
+  </div>
+</section>

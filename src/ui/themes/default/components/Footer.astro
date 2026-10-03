@@ -1,0 +1,38 @@
+---
+import type { CompanyView } from '@/modules/company';
+import type { NavLink } from '@/modules/nav';
+
+interface Props {
+  company: CompanyView;
+  links?: NavLink[];
+  quickLinksLabel?: string;
+}
+const { company, links = [], quickLinksLabel = '快速链接' } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="cz-footer">
+  <div class="cz-container cz-footer-grid">
+    <div class="cz-footer-brand">
+      <strong>{company.name}</strong>
+      {company.slogan ? <p>{company.slogan}</p> : null}
+      <div class="cz-footer-meta" style="display:grid;gap:0.35rem;margin-top:0.85rem">
+        {company.email ? <a href={`mailto:${company.email}`}>{company.email}</a> : null}
+        {company.phone ? <a href={`tel:${company.phone.replace(/\s+/g, '')}`}>{company.phone}</a> : null}
+        {company.address ? <span>{company.address}</span> : null}
+      </div>
+    </div>
+    {links.length ? (
+      <div class="cz-footer-links">
+        <h4>{quickLinksLabel}</h4>
+        <ul>
+          {links.slice(0, 8).map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    ) : null}
+  </div>
+  <div class="cz-footer-copy">
+    <div class="cz-container">© {year} {company.name}. All rights reserved.</div>
+  </div>
+</footer>

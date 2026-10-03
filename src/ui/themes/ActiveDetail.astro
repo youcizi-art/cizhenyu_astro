@@ -2,6 +2,9 @@
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import GeoAnswer from '@/ui/blocks/GeoAnswer.astro';
 import RelatedLinks from '@/ui/blocks/RelatedLinks.astro';
+import DefaultArticleDetailPage from './default/pages/ArticleDetailPage.astro';
+import DefaultCaseStudyDetailPage from './default/pages/CaseStudyDetailPage.astro';
+import DefaultSimpleDetailPage from './default/pages/SimpleDetailPage.astro';
 import TurmillArticleDetailPage from './turmill/pages/ArticleDetailPage.astro';
 import TurmillCaseStudyDetailPage from './turmill/pages/CaseStudyDetailPage.astro';
 import TurmillSimpleDetailPage from './turmill/pages/SimpleDetailPage.astro';
@@ -37,11 +40,65 @@ const articleProducts = Array.isArray(article?.relatedProducts) ? article.relate
 const articleIndustries = Array.isArray(article?.relatedIndustries) ? article.relatedIndustries : [];
 const caseIndustries = Array.isArray(caseItem?.industries) ? caseItem.industries : [];
 const caseProducts = Array.isArray(caseItem?.relatedProducts) ? caseItem.relatedProducts : [];
+const isShellTheme = meta.id === 'default' || meta.id === 'turmill';
 ---
 {articleShortAnswer ? (
   <GeoAnswer title={shortAnswerLabel} shortAnswer={articleShortAnswer} />
 ) : null}
-{meta.id === 'turmill' && kind === 'article' ? (
+{meta.id === 'default' && kind === 'article' ? (
+  <DefaultArticleDetailPage
+    article={article}
+    backHref={backHref}
+    backLabel={`← ${listLabel}`}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    listLabel={listLabel}
+    locale={chrome.locale}
+    contactHref={`/${chrome.locale}/contact`}
+    contactLabel={t(chrome.locale, 'contact')}
+    relatedTitle={relatedArticlesTitle}
+    related={relatedArticles.map((item: { title: string; href: string }) => ({
+      title: item.title,
+      href: item.href,
+    }))}
+    sidebarTitle={zh ? '需要方案？' : 'Need a plan?'}
+    sidebarBody={chrome.company.summary || (zh
+      ? '提交询盘，获取适合您阶段的模块组合建议。'
+      : 'Inquire for a module mix that matches your stage.')}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : meta.id === 'default' && kind === 'caseStudy' ? (
+  <DefaultCaseStudyDetailPage
+    item={caseItem}
+    backHref={backHref}
+    backLabel={`← ${listLabel}`}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    listLabel={listLabel}
+    labels={{
+      challenge: zh ? '挑战' : 'Challenge',
+      solution: zh ? '方案' : 'Solution',
+      results: zh ? '成果' : 'Results',
+    }}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : meta.id === 'default' ? (
+  <DefaultSimpleDetailPage
+    title={title}
+    summary={summary}
+    content={content}
+    coverUrl={coverUrl}
+    backHref={backHref}
+    backLabel={`← ${listLabel}`}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    listLabel={listLabel}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : meta.id === 'turmill' && kind === 'article' ? (
   <TurmillArticleDetailPage
     article={article}
     backHref={backHref}
@@ -103,27 +160,18 @@ const caseProducts = Array.isArray(caseItem?.relatedProducts) ? caseItem.related
     {coverUrl ? <p><img class="card-media" src={coverUrl} alt={title} /></p> : null}
     {summary ? <p>{summary}</p> : null}
     {content ? <div class="prose" set:html={content} /> : null}
-    {article?.content ? <div class="prose" set:html={article.content} /> : null}
-    {caseItem ? (
-      <>
-        {caseItem.challenge ? <section class="section"><h2>Challenge</h2><div class="prose" set:html={caseItem.challenge} /></section> : null}
-        {caseItem.solution ? <section class="section"><h2>Solution</h2><div class="prose" set:html={caseItem.solution} /></section> : null}
-        {caseItem.results ? <section class="section"><h2>Results</h2><div class="prose" set:html={caseItem.results} /></section> : null}
-        {caseItem.content ? <section class="section"><div class="prose" set:html={caseItem.content} /></section> : null}
-      </>
-    ) : null}
   </>
 )}
-{kind === 'article' && meta.id !== 'turmill' ? (
+{kind === 'article' && !isShellTheme ? (
   <RelatedLinks title={relatedArticlesTitle} items={relatedArticles} />
 ) : null}
-{kind === 'article' ? (
+{kind === 'article' && !isShellTheme ? (
   <>
     <RelatedLinks title={relatedProductsTitle} items={articleProducts} />
     <RelatedLinks title={relatedIndustriesTitle} items={articleIndustries} />
   </>
 ) : null}
-{kind === 'caseStudy' ? (
+{kind === 'caseStudy' && !isShellTheme ? (
   <>
     <RelatedLinks title={relatedIndustriesTitle} items={caseIndustries} />
     <RelatedLinks title={relatedProductsTitle} items={caseProducts} />

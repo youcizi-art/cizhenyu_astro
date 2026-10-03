@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "themeId": "default",
+  "locales": [
+    "zh-CN",
+    "zh-TW",
+    "ja",
+    "en-US"
+  ],
+  "seedOrder": [
+    "company_info.json",
+    "product_category.json",
+    "product.json",
+    "article.json",
+    "faq.json",
+    "nav_menu.json",
+    "page.json",
+    "content_block.json",
+    "nav_menu_item.json"
+  ],
+  "requiredByModule": {
+    "_always": [
+      "company_info.json",
+      "nav_menu.json",
+      "nav_menu_item.json",
+      "page.json",
+      "content_block.json"
+    ],
+    "products": [
+      "product_category.json",
+      "product.json"
+    ],
+    "articles": [
+      "article.json"
+    ],
+    "faq": [
+      "faq.json"
+    ]
+  },
+  "notes": "Cizhenyu real product seed for default theme. b2b_* slugs rewritten to {ns}_* on deploy inject. Articles marked placeholder."
+}

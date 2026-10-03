@@ -1,0 +1,107 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import { articleContentTypeLabel, type ArticleDetail } from '@/modules/article';
+
+interface Props {
+  article: ArticleDetail | null;
+  backHref: string;
+  backLabel?: string;
+  homeHref: string;
+  homeLabel?: string;
+  listLabel?: string;
+  sidebarTitle?: string;
+  sidebarBody?: string;
+  contactHref?: string;
+  contactLabel?: string;
+  relatedTitle?: string;
+  related?: Array<{ title: string; href: string; date?: string }>;
+  locale?: string;
+  error?: string;
+  warnings?: string[];
+}
+const {
+  article,
+  backHref,
+  backLabel = '← 返回列表',
+  homeHref,
+  homeLabel = '首页',
+  listLabel = '资源',
+  sidebarTitle = '需要方案？',
+  sidebarBody = '提交询盘，获取适合您阶段的模块组合建议。',
+  contactHref = '',
+  contactLabel = '提交询盘',
+  relatedTitle = '相关文章',
+  related = [],
+  locale = 'zh-CN',
+  error,
+  warnings = [],
+} = Astro.props;
+const typeLabel = article ? articleContentTypeLabel(article.contentType, locale) : '';
+---
+<PageBanner
+  title={article?.title || listLabel}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: listLabel, href: backHref },
+    { label: article?.title || listLabel },
+  ]}
+/>
+<section class="cz-page-section">
+  <div class="cz-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {article ? (
+      <div class="cz-article-layout">
+        <article>
+          <div class="cz-article-meta">
+            {typeLabel ? <span class="cz-article-type">{typeLabel}</span> : null}
+            {article.author ? <span>{article.author}</span> : null}
+          </div>
+          <h2 style="margin:0;font-size:clamp(1.45rem,2.4vw,1.9rem);letter-spacing:-0.02em">{article.title}</h2>
+          {article.coverUrl ? (
+            <div class="cz-article-cover">
+              <OptimizedImage
+                src={article.coverUrl}
+                alt={article.title}
+                width={1200}
+                height={630}
+                widths={[640, 960, 1200]}
+                sizes="(max-width: 900px) 100vw, 720px"
+                priority
+              />
+            </div>
+          ) : null}
+          {article.summary ? <p class="cz-article-lead">{article.summary}</p> : null}
+          {article.content ? <div class="cz-prose" set:html={article.content} /> : null}
+          <p style="margin-top:2rem">
+            <a class="cz-btn cz-btn-outline" href={backHref}>{backLabel}</a>
+          </p>
+        </article>
+        <aside>
+          {related.length ? (
+            <div class="cz-side-panel">
+              <h3>{relatedTitle}</h3>
+              <ul class="cz-related-list">
+                {related.map((item) => (
+                  <li>
+                    <a href={item.href}>{item.title}</a>
+                    {item.date ? <span style="display:block;color:var(--muted);font-size:0.8rem">{item.date}</span> : null}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          <div class="cz-side-panel cz-side-cta">
+            <h3>{sidebarTitle}</h3>
+            <p>{sidebarBody}</p>
+            {contactHref ? (
+              <a class="cz-btn cz-btn-primary" href={contactHref}>{contactLabel}</a>
+            ) : null}
+          </div>
+        </aside>
+      </div>
+    ) : null}
+  </div>
+</section>

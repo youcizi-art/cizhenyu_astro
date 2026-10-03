@@ -1,26 +1,31 @@
-/* Default B2B corporate blue skin */
+/* Default · 磁帧鱼 — ycz.me 风格落地页：深色首屏 + 青绿强调 */
 [data-theme='default'] {
   color-scheme: light;
-  --ink: #14213d;
-  --muted: #5c6b7a;
-  --line: #d9e2ec;
-  --bg: #f7f9fc;
-  --bg-subtle: #eef2f7;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --bg: #f8fafc;
+  --bg-subtle: #f1f5f9;
   --surface: #ffffff;
-  --accent: #0b3d91;
-  --accent-hover: #083074;
+  --accent: #0d9488;
+  --accent-hover: #0f766e;
   --accent-ink: #ffffff;
-  --header-bg: #ffffff;
-  --topbar-bg: #14213d;
-  --topbar-fg: #e8eef6;
-  --footer-bg: #ffffff;
-  --footer-fg: var(--ink);
-  --footer-muted: var(--muted);
-  --hero-bg: #ffffff;
-  --hero-border: var(--line);
-  --radius: 4px;
-  --font-sans: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --font-display: var(--font-sans);
-  --wrap-max: 960px;
-  --shadow-nav: 0 8px 24px rgba(20, 33, 61, 0.08);
+  --accent-soft: #ccfbf1;
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --topbar-bg: #0f172a;
+  --topbar-fg: #e2e8f0;
+  --footer-bg: #0f172a;
+  --footer-fg: #e2e8f0;
+  --footer-muted: #94a3b8;
+  --hero-bg: #0f172a;
+  --hero-fg: #f8fafc;
+  --hero-muted: #94a3b8;
+  --hero-border: transparent;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font-sans: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-display: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --wrap-max: 1120px;
+  --shadow-nav: 0 8px 28px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 12px 40px rgba(15, 23, 42, 0.06);
 }

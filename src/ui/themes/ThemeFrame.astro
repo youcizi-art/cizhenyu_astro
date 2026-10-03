@@ -5,6 +5,7 @@
  */
 import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
+import DefaultPageShell from './default/PageShell.astro';
 import TurmillPageShell from './turmill/PageShell.astro';
 import { buildPageShellProps, getThemeMeta, hasPageShell } from './theme-ui';
 import type { PageChrome } from '@/workflows/chrome/load-chrome';
@@ -18,7 +19,11 @@ const meta = getThemeMeta(chrome.site.theme);
 const shell = buildPageShellProps(chrome);
 const useShell = hasPageShell(chrome.site.theme);
 ---
-{useShell && meta.id === 'turmill' ? (
+{useShell && meta.id === 'default' ? (
+  <DefaultPageShell {...shell} showContactCta={showContactCta}>
+    <slot />
+  </DefaultPageShell>
+) : useShell && meta.id === 'turmill' ? (
   <TurmillPageShell {...shell} showContactCta={showContactCta}>
     <slot />
   </TurmillPageShell>

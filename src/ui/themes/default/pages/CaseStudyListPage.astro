@@ -1,0 +1,90 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import type { CaseStudyCard } from '@/modules/case-study';
+import type { PublicPages } from '@/modules/cms';
+
+interface Props {
+  title: string;
+  items: CaseStudyCard[];
+  pages: PublicPages;
+  basePath: string;
+  emptyText?: string;
+  homeHref: string;
+  homeLabel?: string;
+  readMoreText?: string;
+  error?: string;
+  warnings?: string[];
+}
+const {
+  title,
+  items,
+  pages,
+  basePath,
+  emptyText = '暂无案例。',
+  homeHref,
+  homeLabel = '首页',
+  readMoreText = '查看案例',
+  error,
+  warnings = [],
+} = Astro.props;
+
+const totalPages = Math.max(1, pages.totalPages || 1);
+const page = Math.max(1, pages.page || 1);
+const prevHref = page > 1 ? `${basePath}?page=${page - 1}` : '';
+const nextHref = page < totalPages ? `${basePath}?page=${page + 1}` : '';
+---
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+<section class="cz-page-section cz-page-section-alt">
+  <div class="cz-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {!error && !items.length ? <p style="color:var(--muted)">{emptyText}</p> : null}
+    {items.length ? (
+      <div class="cz-grid-cards">
+        {items.map((item) => (
+          <article class="cz-card cz-product-card">
+            <a href={item.href}>
+              <div class="cz-product-cover">
+                {item.coverUrl ? (
+                  <OptimizedImage
+                    src={item.coverUrl}
+                    alt={item.title}
+                    width={640}
+                    height={400}
+                    widths={[320, 640]}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                ) : null}
+              </div>
+              <div class="cz-product-body">
+                <h3>{item.title}</h3>
+                {(item.industry || item.clientName) ? (
+                  <p style="color:var(--accent-hover);font-size:0.8rem;font-weight:700;margin:0">
+                    {[item.clientName, item.industry].filter(Boolean).join(' · ')}
+                  </p>
+                ) : null}
+                {item.summary ? <p>{item.summary}</p> : null}
+                <span class="cz-more">{readMoreText} →</span>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    ) : null}
+    {!error && totalPages > 1 ? (
+      <div class="cz-pager">
+        {prevHref ? <a class="cz-more" href={prevHref}>← Prev</a> : null}
+        <span>Page {page} / {totalPages}</span>
+        {nextHref ? <a class="cz-more" href={nextHref}>Next →</a> : null}
+      </div>
+    ) : null}
+  </div>
+</section>

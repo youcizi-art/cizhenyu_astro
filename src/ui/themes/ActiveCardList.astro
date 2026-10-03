@@ -4,6 +4,9 @@
  */
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import Pagination from '@/ui/blocks/Pagination.astro';
+import DefaultArticleListPage from './default/pages/ArticleListPage.astro';
+import DefaultCaseStudyListPage from './default/pages/CaseStudyListPage.astro';
+import DefaultSimpleCardListPage from './default/pages/SimpleCardListPage.astro';
 import TurmillArticleListPage from './turmill/pages/ArticleListPage.astro';
 import TurmillCaseStudyListPage from './turmill/pages/CaseStudyListPage.astro';
 import TurmillSimpleCardListPage from './turmill/pages/SimpleCardListPage.astro';
@@ -39,8 +42,49 @@ const meta = getThemeMeta(chrome.site.theme);
 const homeHref = `/${chrome.locale}`;
 const homeLabel = t(chrome.locale, 'home');
 const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
+const isDefault = meta.id === 'default';
+const isTurmill = meta.id === 'turmill';
 ---
-{meta.id === 'turmill' && kind === 'articles' ? (
+{isDefault && kind === 'articles' ? (
+  <DefaultArticleListPage
+    title={title}
+    items={items as any}
+    pages={pages}
+    basePath={basePath}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    emptyText={emptyText}
+    readMoreText={chrome.locale.startsWith('zh') ? '阅读更多' : 'Read More'}
+    typeLinks={typeLinks}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : isDefault && kind === 'caseStudies' ? (
+  <DefaultCaseStudyListPage
+    title={title}
+    items={items as any}
+    pages={pages}
+    basePath={basePath}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    emptyText={emptyText}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : isDefault ? (
+  <DefaultSimpleCardListPage
+    title={title}
+    items={items}
+    pages={pages}
+    basePath={basePath}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    emptyText={emptyText}
+    readMoreText={readMore}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : isTurmill && kind === 'articles' ? (
   <TurmillArticleListPage
     title={title}
     items={items as any}
@@ -54,7 +98,7 @@ const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
     error={error}
     warnings={chrome.warnings}
   />
-) : meta.id === 'turmill' && kind === 'caseStudies' ? (
+) : isTurmill && kind === 'caseStudies' ? (
   <TurmillCaseStudyListPage
     title={title}
     items={items as any}
@@ -66,7 +110,7 @@ const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
     error={error}
     warnings={chrome.warnings}
   />
-) : meta.id === 'turmill' ? (
+) : isTurmill ? (
   <TurmillSimpleCardListPage
     title={title}
     items={items}
@@ -82,16 +126,6 @@ const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
 ) : (
   <>
     <h1>{title}</h1>
-    {typeLinks.length ? (
-      <p class="muted">
-        {typeLinks.map((item, idx) => (
-          <>
-            {idx > 0 ? ' · ' : null}
-            <a href={item.href}>{item.title}</a>
-          </>
-        ))}
-      </p>
-    ) : null}
     <AlertBanner messages={error ? [error] : []} />
     <AlertBanner messages={chrome.warnings} tone="warn" />
     <div class="card-list">
@@ -99,9 +133,6 @@ const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
         <article class="card">
           {item.coverUrl ? <img class="card-media" src={item.coverUrl} alt={item.title} loading="lazy" /> : null}
           <h2><a href={item.href}>{item.title}</a></h2>
-          {item.meta || item.author || item.industry || item.clientName ? (
-            <p class="muted">{item.meta || item.author || [item.clientName, item.industry].filter(Boolean).join(' · ')}</p>
-          ) : null}
           {item.summary ? <p>{item.summary}</p> : null}
         </article>
       ))}

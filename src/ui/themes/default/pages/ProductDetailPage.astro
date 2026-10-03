@@ -1,0 +1,164 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import ProductSeoSections from '@/ui/blocks/ProductSeoSections.astro';
+import type { ProductDetail } from '@/modules/product';
+
+interface Props {
+  product: ProductDetail | null;
+  backHref: string;
+  backLabel?: string;
+  homeHref: string;
+  homeLabel?: string;
+  listLabel?: string;
+  specsTitle?: string;
+  inquiryTitle?: string;
+  inquiryBody?: string;
+  contactHref?: string;
+  contactLabel?: string;
+  sectionLabels?: Record<string, string>;
+  error?: string;
+  warnings?: string[];
+}
+const {
+  product,
+  backHref,
+  backLabel = '← 返回产品',
+  homeHref,
+  homeLabel = '首页',
+  listLabel = '产品',
+  specsTitle = '模块信息',
+  inquiryTitle = '模块询盘',
+  inquiryBody = '告诉我们您的行业与现状，获取该模块的部署与组合建议。价格不在线公示。',
+  contactHref = '',
+  contactLabel = '提交询盘',
+  sectionLabels = {},
+  error,
+  warnings = [],
+} = Astro.props;
+
+const images = product?.imageUrls?.length
+  ? product.imageUrls
+  : product?.coverUrl
+    ? [product.coverUrl]
+    : [];
+const mainImage = images[0] || '';
+const thumbs = images;
+const inquiryHref = product?.inquiryHref || contactHref || backHref;
+---
+<PageBanner
+  title={product?.title || listLabel}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: listLabel, href: backHref },
+    { label: product?.title || listLabel },
+  ]}
+/>
+<section class="cz-page-section">
+  <div class="cz-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {product ? (
+      <div class="cz-detail-grid">
+        <div data-cz-gallery>
+          {mainImage ? (
+            <OptimizedImage
+              class="cz-gallery-main"
+              src={mainImage}
+              alt={product.title}
+              width={900}
+              height={675}
+              widths={[480, 720, 900]}
+              sizes="(max-width: 900px) 100vw, 520px"
+              priority
+            />
+          ) : (
+            <div class="cz-gallery-main cz-gallery-empty">No image</div>
+          )}
+          {thumbs.length > 1 ? (
+            <div class="cz-gallery-thumbs">
+              {thumbs.map((src, idx) => (
+                <button
+                  type="button"
+                  class={`cz-gallery-thumb${idx === 0 ? ' is-active' : ''}`}
+                  data-cz-gallery-thumb
+                  data-src={src}
+                  aria-label={`Image ${idx + 1}`}
+                >
+                  <OptimizedImage src={src} alt="" width={120} height={120} widths={[80, 120]} sizes="72px" fill />
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </div>
+
+        <div>
+          <h1 style="margin:0;font-size:clamp(1.6rem,2.5vw,2.1rem);letter-spacing:-0.02em">{product.title}</h1>
+          {product.tagline ? <p style="color:var(--muted);margin:0.65rem 0 0">{product.tagline}</p> : null}
+          {product.sku ? <span class="cz-sku">{product.sku}</span> : null}
+          {product.brand ? <p style="margin:0.75rem 0 0;font-weight:600">{product.brand}</p> : null}
+          {product.summary ? <p style="color:var(--muted);margin:0.85rem 0 0">{product.summary}</p> : null}
+
+          {product.specs?.length ? (
+            <section style="margin-top:1.25rem">
+              <h2 style="margin:0;font-size:1.1rem">{specsTitle}</h2>
+              <table class="cz-specs">
+                <tbody>
+                  {product.specs.map((row) => (
+                    <tr>
+                      <th>{row.key}</th>
+                      <td>{row.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          ) : null}
+
+          {product.descriptionHtml ? (
+            <div class="cz-prose" style="margin-top:1rem" set:html={product.descriptionHtml} />
+          ) : null}
+
+          <div class="cz-product-seo-wrap">
+            <ProductSeoSections
+              product={{ ...product, inquiryHref: '', inquiryLabel: '' }}
+              labels={{
+                ...sectionLabels,
+                inquiryTitle: '',
+                inquiryBody: '',
+                inquiryCta: '',
+              }}
+              classPrefix="cz-product-seo"
+            />
+          </div>
+
+          <div class="cz-inquiry-box">
+            <h2>{inquiryTitle}</h2>
+            <p>{inquiryBody}</p>
+            <div class="cz-inquiry-actions">
+              <a class="cz-btn cz-btn-primary" href={inquiryHref}>{contactLabel}</a>
+              <a class="cz-btn cz-btn-ghost" href={backHref}>{backLabel}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : null}
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector('[data-cz-gallery]');
+  const main = root?.querySelector('img.cz-gallery-main');
+  const thumbs = root?.querySelectorAll('[data-cz-gallery-thumb]');
+  thumbs?.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const src = btn.getAttribute('data-src');
+      if (!src || !(main instanceof HTMLImageElement)) return;
+      main.src = src;
+      main.removeAttribute('srcset');
+      thumbs.forEach((t) => t.classList.remove('is-active'));
+      btn.classList.add('is-active');
+    });
+  });
+</script>

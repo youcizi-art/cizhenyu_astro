@@ -1,0 +1,171 @@
+{
+  "collectionSlug": "b2b_page",
+  "items": [
+    {
+      "languageGroupKey": "def00000-page-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "title": "关于我们",
+          "slug": "about",
+          "summary": "我们只做一件事：让外贸获客可复制",
+          "content": "<p>磁帧鱼围绕外贸 B2B 成交链路提供系统能力：内容在后台沉淀，站点对搜索与买家友好，部署降低上线门槛，询盘中台守住转化，本地 Agent 把 SEO/GEO 与社媒变成日常动作。</p><p><strong>原则：</strong>资产在客户自己的云账户；先解决痛点再谈扩展模块；自动化必须省事、可控、可复盘。价格不在官网公示，请提交询盘。</p>",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_product",
+              "refId": "__BY_SLUG__:cizhenyu-cms",
+              "title": "磁帧鱼后台"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_product",
+              "refId": "__BY_SLUG__:cizhenyu-deploy",
+              "title": "磁帧鱼部署"
+            }
+          ],
+          "status": "published",
+          "seo_title": "关于磁帧鱼",
+          "seo_description": "磁帧鱼外贸 B2B 增长流水线介绍。",
+          "robots_directive": "index,follow",
+          "schema_type": "AboutPage",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=About"
+          }
+        },
+        "zh-TW": {
+          "title": "關於我們",
+          "slug": "about",
+          "summary": "我們只做一件事：讓外貿獲客可複製",
+          "content": "<p>磁幀魚圍繞外貿 B2B 成交鏈路提供系統能力。資產在客戶自己的雲帳戶；價格不在官網公示，請提交詢盤。</p>",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_product",
+              "refId": "__BY_SLUG__:cizhenyu-cms",
+              "title": "磁幀魚後台"
+            }
+          ],
+          "status": "published",
+          "seo_title": "關於磁幀魚",
+          "seo_description": "磁幀魚外貿 B2B 增長流水線介紹。",
+          "robots_directive": "index,follow",
+          "schema_type": "AboutPage",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=About"
+          }
+        },
+        "ja": {
+          "title": "会社概要",
+          "slug": "about",
+          "summary": "輸出獲得を再現可能にする",
+          "content": "<p>磁帧鱼は輸出 B2B の受注導線向けシステムです。資産はお客様のクラウドアカウントへ。価格は公開せずお問い合わせください。</p>",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_product",
+              "refId": "__BY_SLUG__:cizhenyu-cms",
+              "title": "磁帧鱼 CMS"
+            }
+          ],
+          "status": "published",
+          "seo_title": "磁帧鱼について",
+          "seo_description": "磁帧鱼の紹介。",
+          "robots_directive": "index,follow",
+          "schema_type": "AboutPage",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=About"
+          }
+        },
+        "en-US": {
+          "title": "About",
+          "slug": "about",
+          "summary": "Make export acquisition repeatable",
+          "content": "<p>Cizhenyu provides a B2B export growth pipeline: CMS, SEO/GEO site, wizard deploy, inquiry hub, and local Agent ops. Assets live on your cloud account. Pricing is not listed — inquire for a plan.</p>",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_product",
+              "refId": "__BY_SLUG__:cizhenyu-cms",
+              "title": "Cizhenyu CMS"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_product",
+              "refId": "__BY_SLUG__:cizhenyu-deploy",
+              "title": "Cizhenyu Deploy"
+            }
+          ],
+          "status": "published",
+          "seo_title": "About Cizhenyu",
+          "seo_description": "About the Cizhenyu B2B export growth pipeline.",
+          "robots_directive": "index,follow",
+          "schema_type": "AboutPage",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=About"
+          }
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-page-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "title": "联系与询盘",
+          "slug": "contact",
+          "summary": "告诉我们您的获客瓶颈——无需先选套餐",
+          "content": "<p>留下行业、目标市场与现状（有无网站 / 询盘渠道 / 是否要做 SEO·GEO 或社媒自动化）。我们回复可行路径与模块组合建议。</p><p>邮箱：<a href=\"mailto:hello@ycz.me\">hello@ycz.me</a> · 官网：<a href=\"https://ycz.me\">ycz.me</a></p><p>官网不公示套餐价格。</p>",
+          "status": "published",
+          "seo_title": "联系与询盘｜磁帧鱼",
+          "seo_description": "提交外贸获客需求，获取部署与运营方案建议。",
+          "robots_directive": "index,follow",
+          "schema_type": "ContactPage",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Contact"
+          }
+        },
+        "zh-TW": {
+          "title": "聯繫與詢盤",
+          "slug": "contact",
+          "summary": "告訴我們您的獲客瓶頸——無需先選套餐",
+          "content": "<p>留下行業、目標市場與現狀。郵箱：<a href=\"mailto:hello@ycz.me\">hello@ycz.me</a>。官網不公示套餐價格。</p>",
+          "status": "published",
+          "seo_title": "聯繫與詢盤｜磁幀魚",
+          "seo_description": "提交外貿獲客需求，獲取方案建議。",
+          "robots_directive": "index,follow",
+          "schema_type": "ContactPage",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Contact"
+          }
+        },
+        "ja": {
+          "title": "お問い合わせ",
+          "slug": "contact",
+          "summary": "課題を教えてください。プラン選択は不要です",
+          "content": "<p>業界・市場・現状をお送りください。<a href=\"mailto:hello@ycz.me\">hello@ycz.me</a>。公開料金表はありません。</p>",
+          "status": "published",
+          "seo_title": "お問い合わせ｜磁帧鱼",
+          "seo_description": "輸出獲得のご相談。",
+          "robots_directive": "index,follow",
+          "schema_type": "ContactPage",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Contact"
+          }
+        },
+        "en-US": {
+          "title": "Contact & inquiry",
+          "slug": "contact",
+          "summary": "Tell us your acquisition bottlenecks — no package pick required",
+          "content": "<p>Share industry, target markets, and current status. Email <a href=\"mailto:hello@ycz.me\">hello@ycz.me</a> · <a href=\"https://ycz.me\">ycz.me</a>. Pricing is not listed publicly.</p>",
+          "status": "published",
+          "seo_title": "Contact & inquiry | Cizhenyu",
+          "seo_description": "Inquire for a deploy and ops plan for export acquisition.",
+          "robots_directive": "index,follow",
+          "schema_type": "ContactPage",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Contact"
+          }
+        }
+      }
+    }
+  ]
+}

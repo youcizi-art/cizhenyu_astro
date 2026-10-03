@@ -1,0 +1,301 @@
+{
+  "collectionSlug": "b2b_faq",
+  "items": [
+    {
+      "languageGroupKey": "def00000-faq0-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "question": "一定要买全套吗？",
+          "answer": "<p>不必。可按阶段上线：先站与后台，再询盘与自动化运营。</p>",
+          "status": "published",
+          "sort_order": 10,
+          "seo_title": "一定要买全套吗？",
+          "short_answer": "不必。可按阶段上线：先站与后台，再询盘与自动化运营。"
+        },
+        "zh-TW": {
+          "question": "一定要买全套吗？",
+          "answer": "<p>不必。可按阶段上线：先站与後台，再詢盤与自動化運營。</p>",
+          "status": "published",
+          "sort_order": 10,
+          "seo_title": "一定要买全套吗？",
+          "short_answer": "不必。可按阶段上线：先站与後台，再詢盤与自動化運營。"
+        },
+        "ja": {
+          "question": "フルセット必須？",
+          "answer": "<p>いいえ。サイト+CMS から段階導入できます。</p>",
+          "status": "published",
+          "sort_order": 10,
+          "seo_title": "フルセット必須？",
+          "short_answer": "いいえ。サイト+CMS から段階導入できます。"
+        },
+        "en-US": {
+          "question": "Must I buy everything?",
+          "answer": "<p>No. Stage it: site+CMS first, then inquiry hub and Agent ops.</p>",
+          "status": "published",
+          "sort_order": 10,
+          "seo_title": "Must I buy everything?",
+          "short_answer": "No. Stage it: site+CMS first, then inquiry hub and Agent ops."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-faq0-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "question": "会不会绑定你们的服务器？",
+          "answer": "<p>部署目标是您自己的 Cloudflare 账户，资产与账号归您。</p>",
+          "status": "published",
+          "sort_order": 20,
+          "seo_title": "会不会绑定你们的服务器？",
+          "short_answer": "部署目标是您自己的 Cloudflare 账户，资产与账号归您。"
+        },
+        "zh-TW": {
+          "question": "会不会绑定你们的服务器？",
+          "answer": "<p>部署目标是您自己的 Cloudflare 帳戶，资产与账号归您。</p>",
+          "status": "published",
+          "sort_order": 20,
+          "seo_title": "会不会绑定你们的服务器？",
+          "short_answer": "部署目标是您自己的 Cloudflare 帳戶，资产与账号归您。"
+        },
+        "ja": {
+          "question": "御社サーバーにロック？",
+          "answer": "<p>お客様の Cloudflare アカウントへ導入します。</p>",
+          "status": "published",
+          "sort_order": 20,
+          "seo_title": "御社サーバーにロック？",
+          "short_answer": "お客様の Cloudflare アカウントへ導入します。"
+        },
+        "en-US": {
+          "question": "Do you host and lock my data?",
+          "answer": "<p>Deploy targets your Cloudflare account — assets stay yours.</p>",
+          "status": "published",
+          "sort_order": 20,
+          "seo_title": "Do you host and lock my data?",
+          "short_answer": "Deploy targets your Cloudflare account — assets stay yours."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-faq0-4000-8000-000000000003",
+      "locales": {
+        "zh-CN": {
+          "question": "不懂技术能用吗？",
+          "answer": "<p>部署向导与日常改内容面向业务人员；复杂定制可再评估。</p>",
+          "status": "published",
+          "sort_order": 30,
+          "seo_title": "不懂技术能用吗？",
+          "short_answer": "部署向导与日常改内容面向业务人员；复杂定制可再评估。"
+        },
+        "zh-TW": {
+          "question": "不懂技术能用吗？",
+          "answer": "<p>部署向导与日常改內容面向业务人员；复杂定制可再评估。</p>",
+          "status": "published",
+          "sort_order": 30,
+          "seo_title": "不懂技术能用吗？",
+          "short_answer": "部署向导与日常改內容面向业务人员；复杂定制可再评估。"
+        },
+        "ja": {
+          "question": "非エンジニアでも？",
+          "answer": "<p>ウィザードと CMS 更新は現場向け。高度要件は別途。</p>",
+          "status": "published",
+          "sort_order": 30,
+          "seo_title": "非エンジニアでも？",
+          "short_answer": "ウィザードと CMS 更新は現場向け。高度要件は別途。"
+        },
+        "en-US": {
+          "question": "Can non-engineers use it?",
+          "answer": "<p>Wizards and CMS edits are operator-friendly; custom work is optional.</p>",
+          "status": "published",
+          "sort_order": 30,
+          "seo_title": "Can non-engineers use it?",
+          "short_answer": "Wizards and CMS edits are operator-friendly; custom work is optional."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-faq0-4000-8000-000000000004",
+      "locales": {
+        "zh-CN": {
+          "question": "支持多语言吗？",
+          "answer": "<p>展示站与后台按多语言 B2B 场景设计，可按目标市场开启。</p>",
+          "status": "published",
+          "sort_order": 40,
+          "seo_title": "支持多语言吗？",
+          "short_answer": "展示站与后台按多语言 B2B 场景设计，可按目标市场开启。"
+        },
+        "zh-TW": {
+          "question": "支持多語言吗？",
+          "answer": "<p>展示站与後台按多語言 B2B 场景设计，可按目标市场开启。</p>",
+          "status": "published",
+          "sort_order": 40,
+          "seo_title": "支持多語言吗？",
+          "short_answer": "展示站与後台按多語言 B2B 场景设计，可按目标市场开启。"
+        },
+        "ja": {
+          "question": "多言語は？",
+          "answer": "<p>サイトと CMS は多言語 B2B 向けです。</p>",
+          "status": "published",
+          "sort_order": 40,
+          "seo_title": "多言語は？",
+          "short_answer": "サイトと CMS は多言語 B2B 向けです。"
+        },
+        "en-US": {
+          "question": "Multi-locale?",
+          "answer": "<p>Yes — site and CMS are designed for multi-locale B2B.</p>",
+          "status": "published",
+          "sort_order": 40,
+          "seo_title": "Multi-locale?",
+          "short_answer": "Yes — site and CMS are designed for multi-locale B2B."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-faq0-4000-8000-000000000005",
+      "locales": {
+        "zh-CN": {
+          "question": "AI 客服会乱承诺价格或交期吗？",
+          "answer": "<p>应答基于您维护的知识库；关键承诺可配置转人工。</p>",
+          "status": "published",
+          "sort_order": 50,
+          "seo_title": "AI 客服会乱承诺价格或交期吗？",
+          "short_answer": "应答基于您维护的知识库；关键承诺可配置转人工。"
+        },
+        "zh-TW": {
+          "question": "AI 客服会乱承诺價格或交期吗？",
+          "answer": "<p>应答基于您维护的知識庫；关键承诺可配置转人工。</p>",
+          "status": "published",
+          "sort_order": 50,
+          "seo_title": "AI 客服会乱承诺價格或交期吗？",
+          "short_answer": "应答基于您维护的知識庫；关键承诺可配置转人工。"
+        },
+        "ja": {
+          "question": "AI が価格を勝手に？",
+          "answer": "<p>KB ベース。重要約束は有人引き継ぎ可能。</p>",
+          "status": "published",
+          "sort_order": 50,
+          "seo_title": "AI が価格を勝手に？",
+          "short_answer": "KB ベース。重要約束は有人引き継ぎ可能。"
+        },
+        "en-US": {
+          "question": "Will AI invent prices?",
+          "answer": "<p>Answers use your KB; commitments can require human handoff.</p>",
+          "status": "published",
+          "sort_order": 50,
+          "seo_title": "Will AI invent prices?",
+          "short_answer": "Answers use your KB; commitments can require human handoff."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-faq0-4000-8000-000000000006",
+      "locales": {
+        "zh-CN": {
+          "question": "Agent 会不会很耗 Token？",
+          "answer": "<p>方案强调成熟流程与一键动作，目标是少试错、低消耗地完成日常运营。</p>",
+          "status": "published",
+          "sort_order": 60,
+          "seo_title": "Agent 会不会很耗 Token？",
+          "short_answer": "方案强调成熟流程与一键动作，目标是少试错、低消耗地完成日常运营。"
+        },
+        "zh-TW": {
+          "question": "Agent 会不会很耗 Token？",
+          "answer": "<p>方案强调成熟流程与一鍵动作，目标是少试错、低消耗地完成日常運營。</p>",
+          "status": "published",
+          "sort_order": 60,
+          "seo_title": "Agent 会不会很耗 Token？",
+          "short_answer": "方案强调成熟流程与一鍵动作，目标是少试错、低消耗地完成日常運營。"
+        },
+        "ja": {
+          "question": "Token を大量消費？",
+          "answer": "<p>成熟プレイブックで無駄な試行を減らします。</p>",
+          "status": "published",
+          "sort_order": 60,
+          "seo_title": "Token を大量消費？",
+          "short_answer": "成熟プレイブックで無駄な試行を減らします。"
+        },
+        "en-US": {
+          "question": "Will Agent burn tokens?",
+          "answer": "<p>Playbooks prioritize mature one-click flows to keep daily burn low.</p>",
+          "status": "published",
+          "sort_order": 60,
+          "seo_title": "Will Agent burn tokens?",
+          "short_answer": "Playbooks prioritize mature one-click flows to keep daily burn low."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-faq0-4000-8000-000000000007",
+      "locales": {
+        "zh-CN": {
+          "question": "价格在哪里看？",
+          "answer": "<p>因模块组合与行业差异，价格不在官网公示。请提交询盘或预约演示。</p>",
+          "status": "published",
+          "sort_order": 70,
+          "seo_title": "价格在哪里看？",
+          "short_answer": "因模块组合与行业差异，价格不在官网公示。请提交询盘或预约演示。"
+        },
+        "zh-TW": {
+          "question": "價格在哪里看？",
+          "answer": "<p>因模組组合与行业差异，價格不在官網公示。请提交詢盤或预约演示。</p>",
+          "status": "published",
+          "sort_order": 70,
+          "seo_title": "價格在哪里看？",
+          "short_answer": "因模組组合与行业差异，價格不在官網公示。请提交詢盤或预约演示。"
+        },
+        "ja": {
+          "question": "価格は？",
+          "answer": "<p>構成により異なるため非公開。お問い合わせください。</p>",
+          "status": "published",
+          "sort_order": 70,
+          "seo_title": "価格は？",
+          "short_answer": "構成により異なるため非公開。お問い合わせください。"
+        },
+        "en-US": {
+          "question": "Where is pricing?",
+          "answer": "<p>Not listed publicly due to module mix — inquire or book a demo.</p>",
+          "status": "published",
+          "sort_order": 70,
+          "seo_title": "Where is pricing?",
+          "short_answer": "Not listed publicly due to module mix — inquire or book a demo."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-faq0-4000-8000-000000000008",
+      "locales": {
+        "zh-CN": {
+          "question": "多久能上线第一版站点？",
+          "answer": "<p>视域名与内容准备情况而定；部署流程已产品化，演示时可按现状估算。</p>",
+          "status": "published",
+          "sort_order": 80,
+          "seo_title": "多久能上线第一版站点？",
+          "short_answer": "视域名与内容准备情况而定；部署流程已产品化，演示时可按现状估算。"
+        },
+        "zh-TW": {
+          "question": "多久能上线第一版站點？",
+          "answer": "<p>视域名与內容准备情况而定；部署流程已產品化，演示时可按现状估算。</p>",
+          "status": "published",
+          "sort_order": 80,
+          "seo_title": "多久能上线第一版站點？",
+          "short_answer": "视域名与內容准备情况而定；部署流程已產品化，演示时可按现状估算。"
+        },
+        "ja": {
+          "question": "初版公開まで？",
+          "answer": "<p>ドメインとコンテンツ次第。デモで見積可能。</p>",
+          "status": "published",
+          "sort_order": 80,
+          "seo_title": "初版公開まで？",
+          "short_answer": "ドメインとコンテンツ次第。デモで見積可能。"
+        },
+        "en-US": {
+          "question": "How fast to v1?",
+          "answer": "<p>Depends on domain/content readiness; deploy is productized — estimate in a demo.</p>",
+          "status": "published",
+          "sort_order": 80,
+          "seo_title": "How fast to v1?",
+          "short_answer": "Depends on domain/content readiness; deploy is productized — estimate in a demo."
+        }
+      }
+    }
+  ]
+}

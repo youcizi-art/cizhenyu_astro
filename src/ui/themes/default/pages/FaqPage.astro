@@ -1,0 +1,55 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+
+interface FaqItem {
+  question: string;
+  answer: string;
+  shortAnswer?: string;
+}
+interface Props {
+  title: string;
+  items: FaqItem[];
+  homeHref: string;
+  homeLabel?: string;
+  emptyText?: string;
+  shortAnswerLabel?: string;
+  error?: string;
+  warnings?: string[];
+}
+const {
+  title,
+  items,
+  homeHref,
+  homeLabel = '首页',
+  emptyText = '暂无 FAQ。',
+  shortAnswerLabel = '简答',
+  error,
+  warnings = [],
+} = Astro.props;
+---
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+<section class="cz-page-section">
+  <div class="cz-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {!error && !items.length ? <p style="color:var(--muted)">{emptyText}</p> : null}
+    <div class="cz-faq-list">
+      {items.map((item) => (
+        <details class="cz-faq-item">
+          <summary>{item.question}</summary>
+          {item.shortAnswer ? (
+            <p class="cz-prose"><strong>{shortAnswerLabel}:</strong> {item.shortAnswer}</p>
+          ) : null}
+          <div class="cz-prose" set:html={item.answer} />
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

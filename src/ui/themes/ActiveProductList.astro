@@ -2,6 +2,7 @@
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import Pagination from '@/ui/blocks/Pagination.astro';
 import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import DefaultProductListPage from './default/pages/ProductListPage.astro';
 import TurmillProductListPage from './turmill/pages/ProductListPage.astro';
 import { getThemeMeta } from './theme-ui';
 import { t } from '@/modules/i18n';
@@ -22,21 +23,24 @@ const { chrome, items, pages, basePath, listTitle, categoryLinks = [], error } =
 const meta = getThemeMeta(chrome.site.theme);
 const title = listTitle || t(chrome.locale, 'products');
 const readMore = chrome.locale.startsWith('zh') ? '了解更多' : 'Learn More';
+const shared = {
+  title,
+  items,
+  pages,
+  basePath,
+  homeHref: `/${chrome.locale}`,
+  homeLabel: t(chrome.locale, 'home'),
+  emptyText: t(chrome.locale, 'emptyProducts'),
+  readMoreText: readMore,
+  categoryLinks,
+  error,
+  warnings: chrome.warnings,
+};
 ---
-{meta.id === 'turmill' ? (
-  <TurmillProductListPage
-    title={title}
-    items={items}
-    pages={pages}
-    basePath={basePath}
-    homeHref={`/${chrome.locale}`}
-    homeLabel={t(chrome.locale, 'home')}
-    emptyText={t(chrome.locale, 'emptyProducts')}
-    readMoreText={readMore}
-    categoryLinks={categoryLinks}
-    error={error}
-    warnings={chrome.warnings}
-  />
+{meta.id === 'default' ? (
+  <DefaultProductListPage {...shared} />
+) : meta.id === 'turmill' ? (
+  <TurmillProductListPage {...shared} />
 ) : (
   <>
     <h1>{title}</h1>

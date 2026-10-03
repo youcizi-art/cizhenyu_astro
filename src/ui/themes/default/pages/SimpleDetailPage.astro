@@ -1,0 +1,64 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
+interface Props {
+  title: string;
+  summary?: string;
+  content?: string;
+  coverUrl?: string;
+  backHref: string;
+  backLabel?: string;
+  homeHref: string;
+  homeLabel?: string;
+  listLabel?: string;
+  error?: string;
+  warnings?: string[];
+}
+const {
+  title,
+  summary = '',
+  content = '',
+  coverUrl = '',
+  backHref,
+  backLabel = '← 返回',
+  homeHref,
+  homeLabel = '首页',
+  listLabel = '列表',
+  error,
+  warnings = [],
+} = Astro.props;
+---
+<PageBanner
+  title={title}
+  summary={summary}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: listLabel, href: backHref },
+    { label: title },
+  ]}
+/>
+<section class="cz-page-section">
+  <div class="cz-container" style="max-width:52rem">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {coverUrl ? (
+      <div class="cz-case-hero">
+        <OptimizedImage
+          src={coverUrl}
+          alt={title}
+          width={1200}
+          height={640}
+          widths={[640, 960, 1200]}
+          sizes="(max-width: 900px) 100vw, 800px"
+          priority
+        />
+      </div>
+    ) : null}
+    {content ? <div class="cz-prose" set:html={content} /> : null}
+    <p style="margin-top:2rem">
+      <a class="cz-btn cz-btn-outline" href={backHref}>{backLabel}</a>
+    </p>
+  </div>
+</section>

@@ -1,0 +1,95 @@
+{
+  "collectionSlug": "b2b_product_category",
+  "items": [
+    {
+      "languageGroupKey": "def00000-cate-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "name": "核心平台",
+          "slug": "platform-core",
+          "description": "内容后台、SEO/GEO 展示站与一键部署，构成站点交付底座。",
+          "sort_order": 10,
+          "status": "published",
+          "seo_title": "核心平台",
+          "seo_description": "内容后台、SEO/GEO 展示站与一键部署，构成站点交付底座。",
+          "robots_directive": "index,follow"
+        },
+        "zh-TW": {
+          "name": "核心平台",
+          "slug": "platform-core",
+          "description": "內容後台、SEO/GEO 展示站与一鍵部署，构成站點交付底座。",
+          "sort_order": 10,
+          "status": "published",
+          "seo_title": "核心平台",
+          "seo_description": "內容後台、SEO/GEO 展示站与一鍵部署，构成站點交付底座。",
+          "robots_directive": "index,follow"
+        },
+        "ja": {
+          "name": "コア基盤",
+          "slug": "platform-core",
+          "description": "CMS・SEO/GEO サイト・ワンクリック導入の基盤。",
+          "sort_order": 10,
+          "status": "published",
+          "seo_title": "コア基盤",
+          "seo_description": "CMS・SEO/GEO サイト・ワンクリック導入の基盤。",
+          "robots_directive": "index,follow"
+        },
+        "en-US": {
+          "name": "Platform core",
+          "slug": "platform-core",
+          "description": "CMS, SEO/GEO site, and one-click deploy — the delivery foundation.",
+          "sort_order": 10,
+          "status": "published",
+          "seo_title": "Platform core",
+          "seo_description": "CMS, SEO/GEO site, and one-click deploy — the delivery foundation.",
+          "robots_directive": "index,follow"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-cate-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "name": "获客运营",
+          "slug": "growth-ops",
+          "description": "询盘中台与本地 Agent，承接转化与日常 SEO/GEO、社媒节奏。",
+          "sort_order": 20,
+          "status": "published",
+          "seo_title": "获客运营",
+          "seo_description": "询盘中台与本地 Agent，承接转化与日常 SEO/GEO、社媒节奏。",
+          "robots_directive": "index,follow"
+        },
+        "zh-TW": {
+          "name": "获客運營",
+          "slug": "growth-ops",
+          "description": "詢盤中台与本地 Agent，承接转化与日常 SEO/GEO、社媒节奏。",
+          "sort_order": 20,
+          "status": "published",
+          "seo_title": "获客運營",
+          "seo_description": "詢盤中台与本地 Agent，承接转化与日常 SEO/GEO、社媒节奏。",
+          "robots_directive": "index,follow"
+        },
+        "ja": {
+          "name": "獲得オペレーション",
+          "slug": "growth-ops",
+          "description": "問い合わせ中台とローカル Agent で転換と SEO/GEO・SNS を回す。",
+          "sort_order": 20,
+          "status": "published",
+          "seo_title": "獲得オペレーション",
+          "seo_description": "問い合わせ中台とローカル Agent で転換と SEO/GEO・SNS を回す。",
+          "robots_directive": "index,follow"
+        },
+        "en-US": {
+          "name": "Growth ops",
+          "slug": "growth-ops",
+          "description": "Inquiry hub and local Agent for conversion plus SEO/GEO & social cadence.",
+          "sort_order": 20,
+          "status": "published",
+          "seo_title": "Growth ops",
+          "seo_description": "Inquiry hub and local Agent for conversion plus SEO/GEO & social cadence.",
+          "robots_directive": "index,follow"
+        }
+      }
+    }
+  ]
+}

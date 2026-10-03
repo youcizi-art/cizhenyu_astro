@@ -1,0 +1,94 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import type { CaseStudyDetail } from '@/modules/case-study';
+
+interface Props {
+  item: CaseStudyDetail | null;
+  backHref: string;
+  backLabel?: string;
+  homeHref: string;
+  homeLabel?: string;
+  listLabel?: string;
+  labels?: {
+    challenge?: string;
+    solution?: string;
+    results?: string;
+  };
+  error?: string;
+  warnings?: string[];
+}
+const {
+  item,
+  backHref,
+  backLabel = '← 返回列表',
+  homeHref,
+  homeLabel = '首页',
+  listLabel = '案例',
+  labels = {},
+  error,
+  warnings = [],
+} = Astro.props;
+---
+<PageBanner
+  title={item?.title || listLabel}
+  summary={item?.summary}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: listLabel, href: backHref },
+    { label: item?.title || listLabel },
+  ]}
+/>
+<section class="cz-page-section">
+  <div class="cz-container" style="max-width:52rem">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+    {item ? (
+      <div>
+        {(item.clientName || item.industry) ? (
+          <p class="cz-case-meta">{[item.clientName, item.industry].filter(Boolean).join(' · ')}</p>
+        ) : null}
+        {item.coverUrl ? (
+          <div class="cz-case-hero">
+            <OptimizedImage
+              src={item.coverUrl}
+              alt={item.title}
+              width={1200}
+              height={640}
+              widths={[640, 960, 1200]}
+              sizes="(max-width: 900px) 100vw, 900px"
+              priority
+            />
+          </div>
+        ) : null}
+        {item.challenge ? (
+          <section class="cz-case-block">
+            <h2>{labels.challenge || '挑战'}</h2>
+            <div class="cz-prose" set:html={item.challenge} />
+          </section>
+        ) : null}
+        {item.solution ? (
+          <section class="cz-case-block">
+            <h2>{labels.solution || '方案'}</h2>
+            <div class="cz-prose" set:html={item.solution} />
+          </section>
+        ) : null}
+        {item.results ? (
+          <section class="cz-case-block">
+            <h2>{labels.results || '成果'}</h2>
+            <div class="cz-prose" set:html={item.results} />
+          </section>
+        ) : null}
+        {item.content ? (
+          <section class="cz-case-block">
+            <div class="cz-prose" set:html={item.content} />
+          </section>
+        ) : null}
+        <p style="margin-top:2rem">
+          <a class="cz-btn cz-btn-outline" href={backHref}>{backLabel}</a>
+        </p>
+      </div>
+    ) : null}
+  </div>
+</section>
