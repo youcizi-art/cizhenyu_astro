@@ -7,11 +7,11 @@ type EnvBag = Record<string, unknown>;
 
 let cachedRuntimeEnv: EnvBag | null | undefined;
 
-async function loadCloudflareEnv(): Promise<EnvBag | null> {
+async function loadCloudflareEnv(): Promise<EnvMap | null> {
   if (cachedRuntimeEnv !== undefined) return cachedRuntimeEnv;
   try {
     const mod = await import('cloudflare:workers');
-    const env = (mod as { env?: EnvBag }).env;
+    const env = (mod as { env?: EnvMap }).env;
     cachedRuntimeEnv = env && typeof env === 'object' ? env : null;
   } catch {
     cachedRuntimeEnv = null;
@@ -44,8 +44,23 @@ export async function envAsync(name: string): Promise<string> {
 }
 
 export async function getCmsTransport(): Promise<'http' | 'service'> {
-  const raw = (await envAsync('CMS_TRANSPORT')).toLowerCase() || 'http';
-  return raw === 'service' ? 'service' : 'http';
+  // Vite 默认只暴露 PUBLIC_*；交付构建同时写 CMS_TRANSPORT 与 PUBLIC_CMS_TRANSPORT
+  const raw =
+    (await envAsync('CMS_TRANSPORT')).toLowerCase() ||
+    (await envAsync('PUBLIC_CMS_TRANSPORT')).toLowerCase();
+  if (raw === 'service' || raw === 'http') return raw;
+
+  const apiBase = (await envAsync('PUBLIC_CMS_API_BASE')).trim();
+  if (!apiBase) {
+    const cf = await getCloudflareEnv();
+    // 线上 Pages 已绑 CMS Service Binding，或交付包约定无 API base 时走 service
+    if (cf && (typeof (cf as { CMS?: unknown }).CMS === 'object' || cf.CMS)) {
+      return 'service';
+    }
+    // 构建期已烤空 PUBLIC_CMS_API_BASE：生产交付默认 service，避免整站报「未配置」
+    if (import.meta.env.PROD) return 'service';
+  }
+  return 'http';
 }
 
 export async function getCmsServiceBindingName(): Promise<string> {
@@ -54,7 +69,7 @@ export async function getCmsServiceBindingName(): Promise<string> {
 
 export async function getCmsApiBase(): Promise<string> {
   const configured = (await envAsync('PUBLIC_CMS_API_BASE')).replace(/\/$/, '');
-  if (configured) return configured;
+  if (configured && configured !== 'https:' && configured !== 'http:') return configured;
   if ((await getCmsTransport()) === 'service') return 'https://cms.internal';
   return '';
 }
@@ -62,7 +77,7 @@ export async function getCmsApiBase(): Promise<string> {
 export async function getCmsApiPrefix(): Promise<string> {
   const raw = (await envAsync('PUBLIC_CMS_API_PREFIX')) || '/api/p';
   const trimmed = raw.trim();
-  return trimmed.startsWith('/') ? trimmed.replace(/\/$/, '') : `/${trimmed.replace(/\/$/, '')}`;
+  return trimmed.starts_with('/') ? trimmed.replace(/\/$/, '') : `/${trimmed.replace(/\/$/, '')}`;
 }
 
 export async function getSiteKeyEnv(): Promise<string> {
@@ -74,6 +89,6 @@ export async function warmRuntimeEnv() {
   await loadCloudflareEnv();
 }
 
-export async function getCloudflareEnv(): Promise<EnvBag | null> {
+export async function getCloudflareEnv(): Promise<EnvMap | null> {
   return loadCloudflareEnv();
 }

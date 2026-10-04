@@ -304,6 +304,7 @@ function main() {
     PUBLIC_THEME: themeId,
     THEME: themeId,
     CMS_TRANSPORT: 'service',
+    PUBLIC_CMS_TRANSPORT: 'service',
     CMS_SERVICE_BINDING: 'CMS',
     PUBLIC_CMS_API_BASE: '',
     PUBLIC_SITE_URL: '',

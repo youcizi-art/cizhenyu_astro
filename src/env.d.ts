@@ -9,6 +9,8 @@ interface ImportMetaEnv {
   readonly REVALIDATE_SECRET?: string;
   /** http（默认）| service（Cloudflare Service Binding） */
   readonly CMS_TRANSPORT?: string;
+  /** 与 CMS_TRANSPORT 同义，供 Vite 稳定注入交付包 */
+  readonly PUBLIC_CMS_TRANSPORT?: string;
   /** Service Binding 变量名，默认 CMS */
   readonly CMS_SERVICE_BINDING?: string;
   /** 开发环境强制开启 HTML 缓存（默认关闭） */
