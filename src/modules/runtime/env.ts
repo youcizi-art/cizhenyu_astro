@@ -1,11 +1,11 @@
 /**
  * 运行时环境变量：优先 Cloudflare Pages/Workers env，其次 import.meta.env（本地 / 构建兜底）。
- * 交付构建勿依赖本机 .env 烤进 PUBLIC_*；线上以 Pages 变量为准。
+ * 交付构建故意烤空 PUBLIC_CMS_API_BASE；生产默认 CMS_TRANSPORT=service + Service Binding。
  */
 
-type EnvBag = Record<string, unknown>;
+type EnvMap = Record<string, unknown>;
 
-let cachedRuntimeEnv: EnvBag | null | undefined;
+let cachedRuntimeEnv: EnvMap | null | undefined;
 
 async function loadCloudflareEnv(): Promise<EnvMap | null> {
   if (cachedRuntimeEnv !== undefined) return cachedRuntimeEnv;
@@ -23,6 +23,13 @@ function fromImportMeta(name: string): string {
   const bag = import.meta.env as Record<string, unknown>;
   const v = bag?.[name];
   return v == null ? '' : String(v).trim();
+}
+
+/** 可用的 HTTP API base；空 / 无效协议片段视为未配置 */
+function usableCmsApiBase(raw: string): string {
+  const configured = raw.replace(/\/$/, '').trim();
+  if (configured && configured !== 'https:' && configured !== 'http:') return configured;
+  return '';
 }
 
 /** 同步读取（仅 import.meta / 已缓存的 CF env）；构建期与本地可用 */
@@ -43,22 +50,26 @@ export async function envAsync(name: string): Promise<string> {
   return fromImportMeta(name);
 }
 
+/**
+ * 无可用 PUBLIC_CMS_API_BASE 时不得走 http（否则整站报「未配置」）。
+ * Pages 上残留的 CMS_TRANSPORT=http 会被忽略并回落 service。
+ */
 export async function getCmsTransport(): Promise<'http' | 'service'> {
-  // Vite 默认只暴露 PUBLIC_*；交付构建同时写 CMS_TRANSPORT 与 PUBLIC_CMS_TRANSPORT
+  const apiBase = usableCmsApiBase(await envAsync('PUBLIC_CMS_API_BASE'));
   const raw =
     (await envAsync('CMS_TRANSPORT')).toLowerCase() ||
     (await envAsync('PUBLIC_CMS_TRANSPORT')).toLowerCase();
-  if (raw === 'service' || raw === 'http') return raw;
 
-  const apiBase = (await envAsync('PUBLIC_CMS_API_BASE')).trim();
+  if (raw === 'service') return 'service';
+  if (raw === 'http' && apiBase) return 'http';
+
   if (!apiBase) {
+    if (import.meta.env.PROD) return 'service';
     const cf = await getCloudflareEnv();
-    // 线上 Pages 已绑 CMS Service Binding，或交付包约定无 API base 时走 service
     if (cf && (typeof (cf as { CMS?: unknown }).CMS === 'object' || cf.CMS)) {
       return 'service';
     }
-    // 构建期已烤空 PUBLIC_CMS_API_BASE：生产交付默认 service，避免整站报「未配置」
-    if (import.meta.env.PROD) return 'service';
+    return 'http';
   }
   return 'http';
 }
@@ -68,8 +79,8 @@ export async function getCmsServiceBindingName(): Promise<string> {
 }
 
 export async function getCmsApiBase(): Promise<string> {
-  const configured = (await envAsync('PUBLIC_CMS_API_BASE')).replace(/\/$/, '');
-  if (configured && configured !== 'https:' && configured !== 'http:') return configured;
+  const configured = usableCmsApiBase(await envAsync('PUBLIC_CMS_API_BASE'));
+  if (configured) return configured;
   if ((await getCmsTransport()) === 'service') return 'https://cms.internal';
   return '';
 }
@@ -77,7 +88,7 @@ export async function getCmsApiBase(): Promise<string> {
 export async function getCmsApiPrefix(): Promise<string> {
   const raw = (await envAsync('PUBLIC_CMS_API_PREFIX')) || '/api/p';
   const trimmed = raw.trim();
-  return trimmed.starts_with('/') ? trimmed.replace(/\/$/, '') : `/${trimmed.replace(/\/$/, '')}`;
+  return trimmed.startsWith('/') ? trimmed.replace(/\/$/, '') : `/${trimmed.replace(/\/$/, '')}`;
 }
 
 export async function getSiteKeyEnv(): Promise<string> {

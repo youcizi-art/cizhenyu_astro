@@ -215,7 +215,7 @@ function patchLoadSiteForTheme(workRoot, themeId) {
   fs.writeFileSync(p, text);
 }
 
-function updateCatalog(outRoot, entry) {
+function updateCatalog(outRoot, themeId, entryPatch) {
   const catalogPath = path.join(outRoot, 'catalog.json');
   let catalog = {
     version: '1',
@@ -223,6 +223,7 @@ function updateCatalog(outRoot, entry) {
     repo: 'https://github.com/youcizi-art/cizhenyu_astro_themes.git',
     zipUrl: 'https://codeload.github.com/youcizi-art/cizhenyu_astro_themes/zip/refs/heads/master',
     themes: [],
+    updatedAt: new Date().toISOString(),
   };
   if (fs.existsSync(catalogPath)) {
     try {
@@ -234,10 +235,63 @@ function updateCatalog(outRoot, entry) {
       // keep default
     }
   }
-  const idx = catalog.themes.findIndex((t) => t.id === entry.id);
-  if (idx >= 0) catalog.themes[idx] = { ...catalog.themes[idx], ...entry };
+
+  // 以磁盘 themes/<id>/*/bundle.zip 为准重建 versions，避免 catalog 落后
+  const themeDir = path.join(outRoot, 'themes', themeId);
+  const versions = [];
+  if (fs.existsSync(themeDir)) {
+    for (const name of fs.readdirSync(themeDir)) {
+      const verPath = path.join(themeDir, name);
+      const zip = path.join(verPath, 'bundle.zip');
+      if (!fs.statSync(verPath).isDirectory() || !fs.existsSync(zip)) continue;
+      let builtAt = '';
+      let sha256 = '';
+      let hasSeed = false;
+      const manPath = path.join(verPath, 'manifest.json');
+      if (fs.existsSync(manPath)) {
+        try {
+          const man = JSON.parse(fs.readFileSync(manPath, 'utf8'));
+          builtAt = String(man.builtAt || '');
+          sha256 = String(man.sha256 || '');
+          hasSeed = Boolean(man.hasSeed);
+        } catch {
+          // ignore
+        }
+      }
+      if (!sha256) sha256 = sha256File(zip);
+      versions.push({
+        version: name,
+        path: `themes/${themeId}/${name}/bundle.zip`,
+        sha256,
+        hasSeed,
+        builtAt: builtAt || undefined,
+      });
+    }
+  }
+  versions.sort((a, b) => String(b.version).localeCompare(String(a.version)));
+  const latest = versions[0] || null;
+  const baseLabel = themeId === 'default' ? 'default（磁帧鱼）' : themeId;
+
+  // 只写一套命名：label + displayName。勿同时写 display_name，否则 serde alias 会报 duplicate field
+  const entry = {
+    id: themeId,
+    label: baseLabel,
+    displayName: baseLabel,
+    version: latest?.version || entryPatch.version || '',
+    latest: latest?.version || entryPatch.latest || entryPatch.version || '',
+    hasSeed: latest ? latest.hasSeed : Boolean(entryPatch.hasSeed),
+    sha256: latest?.sha256 || entryPatch.sha256 || '',
+    path: latest?.path || entryPatch.path || '',
+    builtAt: latest?.builtAt || entryPatch.builtAt || undefined,
+    versions,
+  };
+
+  const idx = catalog.themes.findIndex((t) => t.id === themeId);
+  // 整项替换，清掉历史残留的 display_name / has_seed 等别名键
+  if (idx >= 0) catalog.themes[idx] = entry;
   else catalog.themes.push(entry);
   catalog.themes.sort((a, b) => String(a.id).localeCompare(String(b.id)));
+  catalog.updatedAt = new Date().toISOString();
   fs.writeFileSync(catalogPath, JSON.stringify(catalog, null, 2) + '\n');
 }
 
@@ -248,7 +302,12 @@ function main() {
     process.exit(1);
   }
   const version =
-    arg('version') || new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    arg('version') ||
+    new Date()
+      .toISOString()
+      .replace(/[-:]/g, '')
+      .replace(/\.\d+Z$/, '')
+      .replace('T', ''); // YYYYMMDDHHmmss — 同日多次打包可区分
   const outRoot = path.resolve(arg('out', themesOutRoot));
   const themeSrc = path.join(astroRoot, 'src/ui/themes', themeId);
   if (!fs.existsSync(themeSrc) || !fs.statSync(themeSrc).isDirectory()) {
@@ -362,17 +421,21 @@ function main() {
   meta.sha256 = sha256File(zipPath);
   fs.writeFileSync(path.join(verDir, 'manifest.json'), JSON.stringify(meta, null, 2) + '\n');
 
-  updateCatalog(outRoot, {
+  updateCatalog(outRoot, themeId, {
     id: themeId,
-    display_name: themeId === 'default' ? 'default（磁帧鱼）' : themeId,
-    label: themeId === 'default' ? 'default（磁帧鱼）' : themeId,
     version,
     latest: version,
     hasSeed,
     sha256: meta.sha256,
     path: meta.path,
+    builtAt: meta.builtAt,
   });
 
+  // 便于人工确认：themes/<id>/latest 指向当前最新版本号
+  fs.writeFileSync(
+    path.join(outRoot, 'themes', themeId, 'latest'),
+    `${version}\n`,
+  );
   const readme = path.join(outRoot, 'README.md');
   if (!fs.existsSync(readme)) {
     fs.writeFileSync(
