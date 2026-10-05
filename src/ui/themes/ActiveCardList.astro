@@ -6,6 +6,7 @@ import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import Pagination from '@/ui/blocks/Pagination.astro';
 import DefaultArticleListPage from './default/pages/ArticleListPage.astro';
 import DefaultCaseStudyListPage from './default/pages/CaseStudyListPage.astro';
+import DefaultDownloadListPage from './default/pages/DownloadListPage.astro';
 import DefaultSimpleCardListPage from './default/pages/SimpleCardListPage.astro';
 import TurmillArticleListPage from './turmill/pages/ArticleListPage.astro';
 import TurmillCaseStudyListPage from './turmill/pages/CaseStudyListPage.astro';
@@ -68,6 +69,27 @@ const isTurmill = meta.id === 'turmill';
     homeHref={homeHref}
     homeLabel={homeLabel}
     emptyText={emptyText}
+    error={error}
+    warnings={chrome.warnings}
+  />
+) : isDefault && kind === 'resources' ? (
+  <DefaultDownloadListPage
+    title={title}
+    items={items.map((item) => ({
+      ...item,
+      inquiryHref: `${homeHref}/contact?intent=download&from=${encodeURIComponent(item.href)}`,
+    }))}
+    pages={pages}
+    basePath={basePath}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    emptyText={emptyText}
+    lead={
+      chrome.locale.startsWith('zh')
+        ? '下载安装包将进入询盘；客服可协作完成安装与初始化。正式安装包通过询盘交付。'
+        : 'Download opens inquiry — we can collaborate on install. Packages are delivered after inquiry.'
+    }
+    downloadLabel={chrome.locale.startsWith('zh') ? '下载 / 询盘' : 'Download / Inquire'}
     error={error}
     warnings={chrome.warnings}
   />

@@ -13,6 +13,7 @@
     "product.json",
     "article.json",
     "faq.json",
+    "resource.json",
     "nav_menu.json",
     "page.json",
     "content_block.json",
@@ -35,7 +36,10 @@
     ],
     "faq": [
       "faq.json"
+    ],
+    "resources": [
+      "resource.json"
     ]
   },
-  "notes": "Cizhenyu real product seed for default theme. b2b_* slugs rewritten to {ns}_* on deploy inject. Articles marked placeholder."
+  "notes": "Cizhenyu marketing seed: 3 products, nav 首页/产品/帮助/下载/动态/关于/联系. Download CTAs → inquiry. Logo empty for lightning fallback."
 }

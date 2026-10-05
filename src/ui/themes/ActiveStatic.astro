@@ -62,6 +62,13 @@ const shortAnswerLabel = chrome.locale.startsWith('zh') ? '简答' : chrome.loca
     error={error}
     warnings={chrome.warnings}
     emptyHint={emptyHint}
+    inquiryLabel={chrome.locale.startsWith('zh') ? '提交询盘' : 'Send inquiry'}
+    inquiryHint={
+      chrome.locale.startsWith('zh')
+        ? '在线表单即将接入；当前点击为预留入口，也可直接发送邮件。下载安装同样走询盘协作。'
+        : 'Online form coming soon. This button is reserved — email us, or inquire for collaborative install.'
+    }
+    mailLabel={chrome.locale.startsWith('zh') ? '发送邮件' : 'Email us'}
   />
 ) : meta.id === 'default' && kind === 'faq' ? (
   <DefaultFaqPage

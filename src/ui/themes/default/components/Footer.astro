@@ -13,7 +13,16 @@ const year = new Date().getFullYear();
 <footer class="cz-footer">
   <div class="cz-container cz-footer-grid">
     <div class="cz-footer-brand">
-      <strong>{company.name}</strong>
+      <strong style="display:inline-flex;align-items:center;gap:0.5rem">
+        {!String(company.logoUrl || '').trim() ? (
+          <span class="cz-brand-mark" aria-hidden="true" style="width:28px;height:28px;border-radius:8px">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true">
+              <path d="M13 2 4 14h7l-1 8 10-14h-7l0-6z" />
+            </svg>
+          </span>
+        ) : null}
+        {company.name}
+      </strong>
       {company.slogan ? <p>{company.slogan}</p> : null}
       <div class="cz-footer-meta" style="display:grid;gap:0.35rem;margin-top:0.85rem">
         {company.email ? <a href={`mailto:${company.email}`}>{company.email}</a> : null}

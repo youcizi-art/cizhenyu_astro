@@ -44,6 +44,7 @@ export function hasPageShell(theme?: string | null): boolean {
 /** 页壳公共 props（各 page-shell 主题共用同一形状） */
 export function buildPageShellProps(chrome: PageChrome) {
   const { locale, navLinks, company, localeOptions, siteName } = chrome;
+  const zh = locale.startsWith('zh');
   return {
     siteName,
     links: navLinks,
@@ -52,8 +53,8 @@ export function buildPageShellProps(chrome: PageChrome) {
     locale,
     homeHref: localePath(locale, '/'),
     contactHref: localePath(locale, '/contact'),
-    contactLabel: t(locale, 'contact'),
-    quickLinksLabel: locale.startsWith('zh') ? '快速链接' : 'Quick Links',
+    contactLabel: zh ? '提交询盘' : t(locale, 'contact'),
+    quickLinksLabel: zh ? '快速链接' : 'Quick Links',
   };
 }
 

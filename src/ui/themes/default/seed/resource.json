@@ -1,0 +1,272 @@
+{
+  "collectionSlug": "b2b_resource",
+  "items": [
+    {
+      "languageGroupKey": "def00000-res-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "title": "磁帧鱼 全能站群管理系统 + B2B 前端站点生成系统 · 安装包",
+          "slug": "download-cizhenyu-sites",
+          "summary": "点击下载将进入询盘，客服可协作完成安装与初始化。一套后台管多站，一键生成可上线的 B2B 外贸站",
+          "description": "<p>点击下载将进入询盘，客服可协作完成安装与初始化。一套后台管多站，一键生成可上线的 B2B 外贸站</p><p>正式安装包与许可证通过询盘交付；页面下载按钮将跳转联系/询盘。</p>",
+          "resource_type": "installer",
+          "file_format": "询盘获取",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL1"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "磁帧鱼 全能站群管理系统 + B2B 前端站点生成系统 · 安装包",
+          "seo_description": "点击下载将进入询盘，客服可协作完成安装与初始化。一套后台管多站，一键生成可上线的 B2B 外贸站",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-sites"
+          ]
+        },
+        "zh-TW": {
+          "title": "磁幀魚 全能站群管理系统 + B2B 前端站點生成系统 · 安裝包",
+          "slug": "download-cizhenyu-sites",
+          "summary": "点击下載将进入詢盤，客服可協作完成安裝与初始化。一套後台管多站，一鍵生成可上线的 B2B 外貿站",
+          "description": "<p>点击下載将进入詢盤，客服可協作完成安裝与初始化。一套後台管多站，一鍵生成可上线的 B2B 外貿站</p><p>正式安裝包透過詢盤交付。</p>",
+          "resource_type": "installer",
+          "file_format": "詢盤獲取",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL1"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "磁幀魚 全能站群管理系统 + B2B 前端站點生成系统 · 安裝包",
+          "seo_description": "点击下載将进入詢盤，客服可協作完成安裝与初始化。一套後台管多站，一鍵生成可上线的 B2B 外貿站",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-sites"
+          ]
+        },
+        "ja": {
+          "title": "Cizhenyu Multi-site CMS + B2B Site Generator · Installer",
+          "slug": "download-cizhenyu-sites",
+          "summary": "Download leads to inquiry — we can collaborate on install. One hub for many sites — generate deployable B2B export sites",
+          "description": "<p>Download leads to inquiry — we can collaborate on install. One hub for many sites — generate deployable B2B export sites</p>",
+          "resource_type": "installer",
+          "file_format": "inquiry",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL1"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "Cizhenyu Multi-site CMS + B2B Site Generator · Installer",
+          "seo_description": "Download leads to inquiry — we can collaborate on install. One hub for many sites — generate deployable B2B export sites",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-sites"
+          ]
+        },
+        "en-US": {
+          "title": "Cizhenyu Multi-site CMS + B2B Site Generator · Installer",
+          "slug": "download-cizhenyu-sites",
+          "summary": "Download leads to inquiry — we can collaborate on install. One hub for many sites — generate deployable B2B export sites",
+          "description": "<p>Download leads to inquiry — we can collaborate on install. One hub for many sites — generate deployable B2B export sites</p><p>Installer packages are delivered after inquiry.</p>",
+          "resource_type": "installer",
+          "file_format": "via inquiry",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL1"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "Cizhenyu Multi-site CMS + B2B Site Generator · Installer",
+          "seo_description": "Download leads to inquiry — we can collaborate on install. One hub for many sites — generate deployable B2B export sites",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-sites"
+          ]
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-res-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "title": "磁帧鱼 智能客服智能询盘系统 · 安装包",
+          "slug": "download-cizhenyu-inquiry",
+          "summary": "点击下载将进入询盘，客服可协作完成安装与初始化。白天夜里都能接住询盘——知识库应答，关键线索转人工",
+          "description": "<p>点击下载将进入询盘，客服可协作完成安装与初始化。白天夜里都能接住询盘——知识库应答，关键线索转人工</p><p>正式安装包与许可证通过询盘交付；页面下载按钮将跳转联系/询盘。</p>",
+          "resource_type": "installer",
+          "file_format": "询盘获取",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL2"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "磁帧鱼 智能客服智能询盘系统 · 安装包",
+          "seo_description": "点击下载将进入询盘，客服可协作完成安装与初始化。白天夜里都能接住询盘——知识库应答，关键线索转人工",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-inquiry"
+          ]
+        },
+        "zh-TW": {
+          "title": "磁幀魚 智慧客服智慧詢盤系统 · 安裝包",
+          "slug": "download-cizhenyu-inquiry",
+          "summary": "点击下載将进入詢盤，客服可協作完成安裝与初始化。白天夜里都能接住詢盤——知識庫应答，关键线索转人工",
+          "description": "<p>点击下載将进入詢盤，客服可協作完成安裝与初始化。白天夜里都能接住詢盤——知識庫应答，关键线索转人工</p><p>正式安裝包透過詢盤交付。</p>",
+          "resource_type": "installer",
+          "file_format": "詢盤獲取",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL2"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "磁幀魚 智慧客服智慧詢盤系统 · 安裝包",
+          "seo_description": "点击下載将进入詢盤，客服可協作完成安裝与初始化。白天夜里都能接住詢盤——知識庫应答，关键线索转人工",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-inquiry"
+          ]
+        },
+        "ja": {
+          "title": "Cizhenyu AI Desk & Inquiry Hub · Installer",
+          "slug": "download-cizhenyu-inquiry",
+          "summary": "Download leads to inquiry — we can collaborate on install. Catch leads day and night — KB answers, humans on high intent",
+          "description": "<p>Download leads to inquiry — we can collaborate on install. Catch leads day and night — KB answers, humans on high intent</p>",
+          "resource_type": "installer",
+          "file_format": "inquiry",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL2"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "Cizhenyu AI Desk & Inquiry Hub · Installer",
+          "seo_description": "Download leads to inquiry — we can collaborate on install. Catch leads day and night — KB answers, humans on high intent",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-inquiry"
+          ]
+        },
+        "en-US": {
+          "title": "Cizhenyu AI Desk & Inquiry Hub · Installer",
+          "slug": "download-cizhenyu-inquiry",
+          "summary": "Download leads to inquiry — we can collaborate on install. Catch leads day and night — KB answers, humans on high intent",
+          "description": "<p>Download leads to inquiry — we can collaborate on install. Catch leads day and night — KB answers, humans on high intent</p><p>Installer packages are delivered after inquiry.</p>",
+          "resource_type": "installer",
+          "file_format": "via inquiry",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL2"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "Cizhenyu AI Desk & Inquiry Hub · Installer",
+          "seo_description": "Download leads to inquiry — we can collaborate on install. Catch leads day and night — KB answers, humans on high intent",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-inquiry"
+          ]
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-res-4000-8000-000000000003",
+      "locales": {
+        "zh-CN": {
+          "title": "磁帧鱼 部署运营获客系统 · 安装包",
+          "slug": "download-cizhenyu-growth",
+          "summary": "点击下载将进入询盘，客服可协作完成安装与初始化。点选部署到自有云账户，再把 SEO/GEO 与日常运营跑起来",
+          "description": "<p>点击下载将进入询盘，客服可协作完成安装与初始化。点选部署到自有云账户，再把 SEO/GEO 与日常运营跑起来</p><p>正式安装包与许可证通过询盘交付；页面下载按钮将跳转联系/询盘。</p>",
+          "resource_type": "installer",
+          "file_format": "询盘获取",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL3"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "磁帧鱼 部署运营获客系统 · 安装包",
+          "seo_description": "点击下载将进入询盘，客服可协作完成安装与初始化。点选部署到自有云账户，再把 SEO/GEO 与日常运营跑起来",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-growth"
+          ]
+        },
+        "zh-TW": {
+          "title": "磁幀魚 部署運營獲客系统 · 安裝包",
+          "slug": "download-cizhenyu-growth",
+          "summary": "点击下載将进入詢盤，客服可協作完成安裝与初始化。点选部署到自有云帳戶，再把 SEO/GEO 与日常運營跑起来",
+          "description": "<p>点击下載将进入詢盤，客服可協作完成安裝与初始化。点选部署到自有云帳戶，再把 SEO/GEO 与日常運營跑起来</p><p>正式安裝包透過詢盤交付。</p>",
+          "resource_type": "installer",
+          "file_format": "詢盤獲取",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL3"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "磁幀魚 部署運營獲客系统 · 安裝包",
+          "seo_description": "点击下載将进入詢盤，客服可協作完成安裝与初始化。点选部署到自有云帳戶，再把 SEO/GEO 与日常運營跑起来",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-growth"
+          ]
+        },
+        "ja": {
+          "title": "Cizhenyu Deploy & Growth Ops · Installer",
+          "slug": "download-cizhenyu-growth",
+          "summary": "Download leads to inquiry — we can collaborate on install. Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
+          "description": "<p>Download leads to inquiry — we can collaborate on install. Wizard deploy to your cloud — then run SEO/GEO acquisition loops</p>",
+          "resource_type": "installer",
+          "file_format": "inquiry",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL3"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "Cizhenyu Deploy & Growth Ops · Installer",
+          "seo_description": "Download leads to inquiry — we can collaborate on install. Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-growth"
+          ]
+        },
+        "en-US": {
+          "title": "Cizhenyu Deploy & Growth Ops · Installer",
+          "slug": "download-cizhenyu-growth",
+          "summary": "Download leads to inquiry — we can collaborate on install. Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
+          "description": "<p>Download leads to inquiry — we can collaborate on install. Wizard deploy to your cloud — then run SEO/GEO acquisition loops</p><p>Installer packages are delivered after inquiry.</p>",
+          "resource_type": "installer",
+          "file_format": "via inquiry",
+          "cover": {
+            "url": "https://placehold.co/800x500/0b1220/38bdf8?text=DL3"
+          },
+          "download_file": {
+            "url": ""
+          },
+          "status": "published",
+          "seo_title": "Cizhenyu Deploy & Growth Ops · Installer",
+          "seo_description": "Download leads to inquiry — we can collaborate on install. Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
+          "robots_directive": "index,follow",
+          "related_product_ids": [
+            "__BY_SLUG__:b2b_product:cizhenyu-growth"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 /**
- * 生成 default theme CMS seed（磁帧鱼真实产品文案）。
+ * 生成 default theme CMS seed（磁帧鱼 · Rinda 风格营销站）
+ * 导航：首页 / 产品 / 帮助 / 下载 / 动态 / 关于 / 联系
+ * 产品：站群+B2B生成 · 智能客服询盘 · 部署运营获客
  * 运行：node src/ui/themes/default/seed/build-seed.mjs
  */
 import fs from 'node:fs';
@@ -10,7 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const LOCALES = ['zh-CN', 'zh-TW', 'ja', 'en-US'];
 
 const img = (seed, w = 800, h = 600) =>
-  `https://placehold.co/${w}x${h}/0f172a/5eead4?text=${encodeURIComponent(seed)}`;
+  `https://placehold.co/${w}x${h}/0b1220/38bdf8?text=${encodeURIComponent(seed)}`;
 
 function lgk(kind, n) {
   return `def00000-${kind}-4000-8000-${String(n).padStart(12, '0')}`;
@@ -31,49 +33,43 @@ function tw(s) {
     .replace(/外贸/g, '外貿')
     .replace(/站点/g, '站點')
     .replace(/后台/g, '後台')
-    .replace(/部署/g, '部署')
     .replace(/询盘/g, '詢盤')
     .replace(/自动化/g, '自動化')
     .replace(/运营/g, '運營')
     .replace(/数据/g, '資料')
     .replace(/内容/g, '內容')
-    .replace(/默认/g, '預設')
     .replace(/获取/g, '獲取')
-    .replace(/诊断/g, '診斷')
     .replace(/方案/g, '方案')
     .replace(/模块/g, '模組')
     .replace(/知识库/g, '知識庫')
     .replace(/客服/g, '客服')
-    .replace(/展示/g, '展示')
     .replace(/一键/g, '一鍵')
-    .replace(/成熟/g, '成熟')
-    .replace(/流程/g, '流程')
     .replace(/个人/g, '個人')
     .replace(/业务员/g, '業務員')
     .replace(/企业/g, '企業')
-    .replace(/工厂/g, '工廠')
     .replace(/服务商/g, '服務商')
     .replace(/独立站/g, '獨立站')
-    .replace(/生成式/g, '生成式')
     .replace(/搜索/g, '搜尋')
     .replace(/优化/g, '優化')
     .replace(/多语言/g, '多語言')
     .replace(/账户/g, '帳戶')
     .replace(/价格/g, '價格')
     .replace(/官网/g, '官網')
-    .replace(/公示/g, '公示')
     .replace(/提交/g, '提交')
     .replace(/关于/g, '關於')
     .replace(/我们/g, '我們')
     .replace(/联系/g, '聯繫')
-    .replace(/资源/g, '資源')
     .replace(/产品/g, '產品')
-    .replace(/解决/g, '解決')
-    .replace(/问题/g, '問題')
-    .replace(/教程/g, '教程')
-    .replace(/文章/g, '文章')
-    .replace(/占位/g, '佔位')
-    .replace(/待补充/g, '待補充');
+    .replace(/帮助/g, '幫助')
+    .replace(/下载/g, '下載')
+    .replace(/动态/g, '動態')
+    .replace(/站群/g, '站群')
+    .replace(/生成/g, '生成')
+    .replace(/智能/g, '智慧')
+    .replace(/部署/g, '部署')
+    .replace(/获客/g, '獲客')
+    .replace(/协作/g, '協作')
+    .replace(/安装/g, '安裝');
 }
 
 function writeJson(name, data) {
@@ -81,7 +77,9 @@ function writeJson(name, data) {
   console.log('wrote', name);
 }
 
-// —— company ——
+const PREFIX = { 'zh-CN': '/zh-CN', 'zh-TW': '/zh-TW', ja: '/ja', 'en-US': '/en-US' };
+
+// —— company（logo 留空，前端闪电图标兜底，可在 CMS 替换）——
 writeJson('company_info.json', {
   collectionSlug: 'b2b_company_info',
   items: [
@@ -91,43 +89,40 @@ writeJson('company_info.json', {
         'zh-CN': {
           company_name: '磁帧鱼',
           company_type: 'software',
-          slogan: '外贸 B2B 增长流水线：建站、部署、询盘、自动化运营',
+          slogan: '第一次做外贸站群与询盘，也能搭出可交付的获客系统',
           summary:
-            '磁帧鱼面向个人外贸业务员与中小外贸企业，提供一整套可落地的获客系统：站点后台、SEO/GEO 展示站、一键云部署、询盘 CRM 与 AI 客服，以及本地 Agent 驱动的 SEO/GEO 与社媒自动化。',
+            '磁帧鱼面向外贸业务员、工厂外贸部与服务商，提供站群与 B2B 站点生成、智能客服询盘、部署运营获客三套可安装产品。资产在您自己的云账户，安装可协作完成。',
           address: '中国',
           phone: '',
           email: 'hello@ycz.me',
           website: 'https://ycz.me',
-          logo: { url: img('Cizhenyu', 240, 80) },
+          logo: { url: '' },
           about_content:
-            '<p>磁帧鱼不是又一个建站模板市场，而是围绕外贸 B2B 成交链路设计的系统：内容在后台沉淀，站点对搜索与买家友好，部署降低上线门槛，询盘中台守住转化，本地 Agent 把 SEO/GEO 与社媒变成日常可执行动作。</p><p>我们服务懂业务、缺技术班子、也不想被复杂云产品劝退的个人业务员与中小企业主。资产部署在客户自己的 Cloudflare 账户；价格不在官网公示，请提交询盘获取模块组合建议。</p>',
-          seo_title: '磁帧鱼｜外贸 B2B 一站式获客与运营系统',
+            '<p>磁帧鱼做的不是「又一个模板站」，而是能装到您账户里、能持续改内容、能接住询盘的增长系统。</p><p>三款产品可单独购买、也可组合交付：全能站群 + B2B 前端生成、智能客服询盘、部署运营获客。下载安装可联系客服协作完成；价格与实施方案通过询盘获取。</p>',
+          seo_title: '磁帧鱼｜外贸站群 · 询盘 · 部署获客系统',
           seo_description:
-            '建站、一键部署、询盘 CRM 与 AI 客服、SEO/GEO 与社媒自动化。面向个人业务员与中小企业，提交询盘获取方案。',
+            '站群与 B2B 站点生成、智能客服询盘、部署运营获客。提交询盘获取安装与协作方案。',
           robots_directive: 'index,follow',
           schema_type: 'Organization',
           og_image: { url: img('Cizhenyu', 1200, 630) },
           country: '中国',
-          social_profiles: [
-            { platform: 'website', url: 'https://ycz.me' },
-          ],
+          social_profiles: [{ platform: 'website', url: 'https://ycz.me' }],
         },
         'zh-TW': {
           company_name: '磁幀魚',
           company_type: 'software',
-          slogan: '外貿 B2B 增長流水線：建站、部署、詢盤、自動化運營',
+          slogan: '第一次做外貿站群與詢盤，也能搭出可交付的獲客系統',
           summary:
-            '磁幀魚面向個人外貿業務員與中小外貿企業，提供一整套可落地的獲客系統：站點後台、SEO/GEO 展示站、一鍵雲部署、詢盤 CRM 與 AI 客服，以及本地 Agent 驅動的 SEO/GEO 與社媒自動化。',
+            '磁幀魚面向外貿業務員、工廠外貿部與服務商，提供站群與 B2B 站點生成、智慧客服詢盤、部署運營獲客三套可安裝產品。',
           address: '中國',
           phone: '',
           email: 'hello@ycz.me',
           website: 'https://ycz.me',
-          logo: { url: img('Cizhenyu', 240, 80) },
+          logo: { url: '' },
           about_content:
-            '<p>磁幀魚不是又一個建站模板市場，而是圍繞外貿 B2B 成交鏈路設計的系統。資產部署在客戶自己的 Cloudflare 帳戶；價格不在官網公示，請提交詢盤獲取模組組合建議。</p>',
-          seo_title: '磁幀魚｜外貿 B2B 一站式獲客與運營系統',
-          seo_description:
-            '建站、一鍵部署、詢盤 CRM 與 AI 客服、SEO/GEO 與社媒自動化。提交詢盤獲取方案。',
+            '<p>磁幀魚提供可裝到您帳戶裡的外貿獲客系統。三款產品可單獨或組合交付；安裝可聯繫客服協作，方案透過詢盤獲取。</p>',
+          seo_title: '磁幀魚｜外貿站群 · 詢盤 · 部署獲客系統',
+          seo_description: '站群與 B2B 站點生成、智慧客服詢盤、部署運營獲客。提交詢盤獲取方案。',
           robots_directive: 'index,follow',
           schema_type: 'Organization',
           og_image: { url: img('Cizhenyu', 1200, 630) },
@@ -137,19 +132,18 @@ writeJson('company_info.json', {
         ja: {
           company_name: '磁帧鱼',
           company_type: 'software',
-          slogan: '輸出 B2B 成長パイプライン：サイト・導入・問い合わせ・自動化運用',
+          slogan: '初めての輸出サイト群・問い合わせでも、届けられる獲得システムを',
           summary:
-            '磁帧鱼は個人営業と中小輸出企業向けに、CMS・SEO/GEO サイト・ワンクリック導入・CRM/AI 問い合わせ・ローカル Agent による SEO/GEO・SNS 自動化を提供します。',
+            '磁帧鱼は営業個人・中小メーカー・支援事業者向けに、サイト群/B2B生成・AI問い合わせ・導入運用の3製品を提供します。',
           address: 'China',
           phone: '',
           email: 'hello@ycz.me',
           website: 'https://ycz.me',
-          logo: { url: img('Cizhenyu', 240, 80) },
+          logo: { url: '' },
           about_content:
-            '<p>磁帧鱼はテンプレート販売ではなく、輸出 B2B の受注導線向けシステムです。資産はお客様の Cloudflare アカウントへ。価格は公開せず、お問い合わせで構成をご提案します。</p>',
-          seo_title: '磁帧鱼｜輸出 B2B 獲得・運用システム',
-          seo_description:
-            'サイト構築、ワンクリック導入、CRM/AI、SEO/GEO・SNS 自動化。お問い合わせでご提案。',
+            '<p>磁帧鱼はテンプレート販売ではなく、お客様アカウントへ導入できる獲得システムです。インストールはサポート同席可能。価格はお問い合わせください。</p>',
+          seo_title: '磁帧鱼｜サイト群・問い合わせ・導入獲得',
+          seo_description: 'サイト群/B2B生成、AI問い合わせ、導入運用。お問い合わせでご提案。',
           robots_directive: 'index,follow',
           schema_type: 'Organization',
           og_image: { url: img('Cizhenyu', 1200, 630) },
@@ -159,19 +153,19 @@ writeJson('company_info.json', {
         'en-US': {
           company_name: 'Cizhenyu',
           company_type: 'software',
-          slogan: 'B2B export growth pipeline: site, deploy, inquiries, automated ops',
+          slogan: 'Ship a real acquisition stack — even if it’s your first export site',
           summary:
-            'Cizhenyu helps solo export sellers and SMEs run a practical acquisition stack: CMS, SEO/GEO site, one-click cloud deploy, inquiry CRM with AI support, and a local Agent for SEO/GEO and social ops.',
+            'Cizhenyu helps export sellers, factory teams, and agencies install three products: multi-site + B2B site generation, AI inquiry desk, and deploy-ops growth. Assets stay on your cloud account.',
           address: 'China',
           phone: '',
           email: 'hello@ycz.me',
           website: 'https://ycz.me',
-          logo: { url: img('Cizhenyu', 240, 80) },
+          logo: { url: '' },
           about_content:
-            '<p>Cizhenyu is not another template marketplace. It is a system designed around B2B export conversion: content in CMS, search-friendly sites, wizard deploy to your Cloudflare account, CRM/AI for inquiries, and local Agent playbooks for SEO/GEO and social. Pricing is not listed publicly — inquire for a module plan.</p>',
-          seo_title: 'Cizhenyu | B2B export acquisition & ops stack',
+            '<p>Cizhenyu is not another template shop. It is an installable growth stack for B2B export. Buy modules alone or together; we can collaborate on install. Pricing via inquiry.</p>',
+          seo_title: 'Cizhenyu | Multi-site · Inquiry · Deploy growth',
           seo_description:
-            'Site, one-click deploy, inquiry CRM & AI, SEO/GEO and social automation. Inquire for a tailored plan.',
+            'Multi-site + B2B generation, AI inquiry desk, deploy-ops growth. Inquire for install collaboration.',
           robots_directive: 'index,follow',
           schema_type: 'Organization',
           og_image: { url: img('Cizhenyu', 1200, 630) },
@@ -183,304 +177,187 @@ writeJson('company_info.json', {
   ],
 });
 
-// —— categories ——
-const categories = [
-  {
-    n: 1,
-    slug: 'platform-core',
-    zh: {
-      name: '核心平台',
-      description: '内容后台、SEO/GEO 展示站与一键部署，构成站点交付底座。',
-    },
-    en: {
-      name: 'Platform core',
-      description: 'CMS, SEO/GEO site, and one-click deploy — the delivery foundation.',
-    },
-    ja: {
-      name: 'コア基盤',
-      description: 'CMS・SEO/GEO サイト・ワンクリック導入の基盤。',
-    },
-  },
-  {
-    n: 2,
-    slug: 'growth-ops',
-    zh: {
-      name: '获客运营',
-      description: '询盘中台与本地 Agent，承接转化与日常 SEO/GEO、社媒节奏。',
-    },
-    en: {
-      name: 'Growth ops',
-      description: 'Inquiry hub and local Agent for conversion plus SEO/GEO & social cadence.',
-    },
-    ja: {
-      name: '獲得オペレーション',
-      description: '問い合わせ中台とローカル Agent で転換と SEO/GEO・SNS を回す。',
-    },
-  },
-];
-
 writeJson('product_category.json', {
   collectionSlug: 'b2b_product_category',
-  items: categories.map((c) => ({
-    languageGroupKey: lgk('cate', c.n),
-    locales: L({
-      'zh-CN': {
-        name: c.zh.name,
-        slug: c.slug,
-        description: c.zh.description,
-        sort_order: c.n * 10,
-        status: 'published',
-        seo_title: c.zh.name,
-        seo_description: c.zh.description,
-        robots_directive: 'index,follow',
-      },
-      'zh-TW': {
-        name: tw(c.zh.name),
-        slug: c.slug,
-        description: tw(c.zh.description),
-        sort_order: c.n * 10,
-        status: 'published',
-        seo_title: tw(c.zh.name),
-        seo_description: tw(c.zh.description),
-        robots_directive: 'index,follow',
-      },
-      ja: {
-        name: c.ja.name,
-        slug: c.slug,
-        description: c.ja.description,
-        sort_order: c.n * 10,
-        status: 'published',
-        seo_title: c.ja.name,
-        seo_description: c.ja.description,
-        robots_directive: 'index,follow',
-      },
-      'en-US': {
-        name: c.en.name,
-        slug: c.slug,
-        description: c.en.description,
-        sort_order: c.n * 10,
-        status: 'published',
-        seo_title: c.en.name,
-        seo_description: c.en.description,
-        robots_directive: 'index,follow',
-      },
-    }),
-  })),
+  items: [
+    {
+      languageGroupKey: lgk('cate', 1),
+      locales: L({
+        'zh-CN': {
+          name: '磁帧鱼产品',
+          slug: 'cizhenyu-products',
+          description: '站群生成、智能询盘、部署获客三条产品线。',
+          sort_order: 10,
+          status: 'published',
+          seo_title: '磁帧鱼产品',
+          seo_description: '站群生成、智能询盘、部署获客。',
+          robots_directive: 'index,follow',
+        },
+        'zh-TW': {
+          name: '磁幀魚產品',
+          slug: 'cizhenyu-products',
+          description: '站群生成、智慧詢盤、部署獲客三條產品線。',
+          sort_order: 10,
+          status: 'published',
+          seo_title: '磁幀魚產品',
+          seo_description: '站群生成、智慧詢盤、部署獲客。',
+          robots_directive: 'index,follow',
+        },
+        ja: {
+          name: '磁帧鱼プロダクト',
+          slug: 'cizhenyu-products',
+          description: 'サイト群生成・AI問い合わせ・導入獲得。',
+          sort_order: 10,
+          status: 'published',
+          seo_title: '磁帧鱼プロダクト',
+          seo_description: 'サイト群生成・AI問い合わせ・導入獲得。',
+          robots_directive: 'index,follow',
+        },
+        'en-US': {
+          name: 'Cizhenyu products',
+          slug: 'cizhenyu-products',
+          description: 'Multi-site generation, AI inquiry, deploy growth.',
+          sort_order: 10,
+          status: 'published',
+          seo_title: 'Cizhenyu products',
+          seo_description: 'Multi-site generation, AI inquiry, deploy growth.',
+          robots_directive: 'index,follow',
+        },
+      }),
+    },
+  ],
 });
 
 const products = [
   {
     n: 1,
-    slug: 'cizhenyu-cms',
-    sku: 'CZ-CMS',
-    cat: 'platform-core',
-    cover: 'CMS',
+    slug: 'cizhenyu-sites',
+    sku: 'CZ-SITES',
+    cover: 'Sites',
     zh: {
-      title: '磁帧鱼后台',
-      tagline: '站点数据中枢：产品、文章、案例与多语言一处管理',
-      summary: '外贸站点的业务后台。改完内容站点自动更新，支撑多站点与日常运营节奏。',
+      title: '磁帧鱼 全能站群管理系统 + B2B 前端站点生成系统',
+      tagline: '一套后台管多站，一键生成可上线的 B2B 外贸站',
+      summary:
+        '面向外贸站群与企业站交付：统一内容后台、多语言结构、产品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。',
       description:
-        '<p><strong>磁帧鱼后台</strong>（cizhenyu_payload）是整套系统的数据中枢。</p><ul><li>动态模型与内容管理，适配 B2B 产品结构</li><li>媒体资源与发布流程</li><li>对接展示站自动刷新</li><li>供部署工具与本地 Agent 共用同一数据源</li></ul><p>解决「改文案找建站公司、多语言内容混乱」的痛点。价格请询盘获取。</p>',
+        '<p><strong>全能站群 + B2B 前端生成</strong>帮您把「多站点内容」和「可交付的企业官网」放在同一套系统里。</p><ul><li>站群统一管理：域名、语言、栏目、内容权限</li><li>B2B 站点结构开箱：产品、帮助、动态、关于、联系</li><li>主题包交付：无需给客户源码环境</li><li>与询盘、部署产品可组合安装</li></ul><p>适合服务商批量交付，也适合工厂/贸易公司自建主站。下载安装可联系客服协作。</p>',
       advantages: [
-        { title: '业务人员可改', description: '不必每次找开发排期。' },
-        { title: '多语言就绪', description: '按目标市场维护本地化内容。' },
-        { title: '联动前台', description: '发布后触发站点刷新。' },
+        { title: '站群一体', description: '多站内容与权限统一，减少重复配置。' },
+        { title: 'B2B 结构就绪', description: '外贸站必备栏目与 SEO 基础已内置。' },
+        { title: '可协作安装', description: '下载后可约客服协助部署上线。' },
       ],
     },
     en: {
-      title: 'Cizhenyu CMS',
-      tagline: 'Content hub for products, articles, cases, and locales',
-      summary: 'The business backend for your export site. Edit once; the site refreshes.',
+      title: 'Cizhenyu Multi-site CMS + B2B Site Generator',
+      tagline: 'One hub for many sites — generate deployable B2B export sites',
+      summary:
+        'Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.',
       description:
-        '<p><strong>Cizhenyu CMS</strong> is the data hub of the stack: dynamic models, media, i18n, and revalidate hooks for the public site. Built for B2B catalogs — not brochure blogs. Pricing via inquiry.</p>',
+        '<p><strong>Multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>',
       advantages: [
-        { title: 'Operator-friendly', description: 'Business users can update content.' },
-        { title: 'i18n ready', description: 'Maintain locale-specific catalogs.' },
-        { title: 'Site sync', description: 'Publish triggers front-end refresh.' },
+        { title: 'Multi-site hub', description: 'Shared content and permissions.' },
+        { title: 'B2B IA ready', description: 'Export-site sections built in.' },
+        { title: 'Guided install', description: 'Download, then collaborate with support.' },
       ],
     },
     ja: {
-      title: '磁帧鱼 CMS',
-      tagline: '製品・記事・事例・多言語を一括管理',
-      summary: '輸出サイトの業務バックエンド。更新はサイトへ自動反映。',
+      title: '磁帧鱼 サイト群CMS + B2Bサイト生成',
+      tagline: '多サイトを一括管理し、納品可能なB2Bサイトを生成',
+      summary: 'サイト群のコンテンツ管理と、Cloudflare Pages向けB2Bサイト生成。',
       description:
-        '<p><strong>磁帧鱼 CMS</strong> はスタックのデータ中枢です。B2B カタログ向けの動的モデル、メディア、多言語、再検証フックを提供します。価格はお問い合わせください。</p>',
+        '<p><strong>サイト群 + B2B生成</strong>で、多サイト運用と企業サイト納品を一本化。問い合わせ・導入製品と組み合わせ可能。インストール同席サポートあり。</p>',
       advantages: [
-        { title: '現場が更新可能', description: '開発待ちを減らす。' },
-        { title: '多言語', description: '市場別にコンテンツ管理。' },
-        { title: 'サイト連携', description: '公開でフロント更新。' },
+        { title: '多サイト一元', description: '権限とコンテンツを共有。' },
+        { title: 'B2B構成済み', description: '輸出サイトの導線を内蔵。' },
+        { title: '同席導入', description: 'ダウンロード後、サポートと導入。' },
       ],
     },
   },
   {
     n: 2,
-    slug: 'cizhenyu-site',
-    sku: 'CZ-SITE',
-    cat: 'platform-core',
-    cover: 'Site',
+    slug: 'cizhenyu-inquiry',
+    sku: 'CZ-INQUIRY',
+    cover: 'Inquiry',
     zh: {
-      title: '磁帧鱼展示站',
-      tagline: '为搜索与询盘而生的 SEO/GEO 前台',
-      summary: 'Astro + Cloudflare Pages 的多语言 B2B 站点结构：产品、方案、FAQ、资源清晰可索引。',
+      title: '磁帧鱼 智能客服智能询盘系统',
+      tagline: '白天夜里都能接住询盘——知识库应答，关键线索转人工',
+      summary:
+        '把散落在邮箱、表单、聊天工具里的询盘收进同一中台：智能客服按知识库应答，高意向线索可转人工跟进。',
       description:
-        '<p><strong>磁帧鱼展示站</strong>（cizhenyu_astro）面向买家检索与生成式引擎引用。</p><ul><li>B2B 信息架构：产品 / 方案 / 案例 / FAQ / 资源</li><li>多语言路由与内容同步</li><li>面向传统搜索 + GEO（生成式引擎优化）的可读结构</li><li>主题可换肤，内容来自后台</li></ul><p>解决「网站漂亮但搜不到、没有答问结构」的问题。</p>',
+        '<p><strong>智能客服 · 智能询盘</strong>解决「线索散、夜间空窗、跟进记不住」。</p><ul><li>统一询盘台：来源可追溯</li><li>知识库驱动自动应答，可配置转人工</li><li>与站点表单、下载意向联动（询盘按钮可预留接入）</li><li>适合外贸业务员与团队协作跟进</li></ul><p>可与站群、部署获客产品组合。安装与对接可联系客服协作。</p>',
       advantages: [
-        { title: 'SEO 结构', description: '不是 PPT 站，是可索引页面体系。' },
-        { title: 'GEO 友好', description: 'FAQ/短答等便于 AI 引用。' },
-        { title: '主题交付', description: '官方主题含可导入 seed。' },
+        { title: '线索不丢', description: '多渠道汇入同一跟进视图。' },
+        { title: '智能应答', description: '常见问题自动回复，高意向转人工。' },
+        { title: '可扩展接入', description: '网页询盘按钮预留，后续接真实表单。' },
       ],
     },
     en: {
-      title: 'Cizhenyu Site',
-      tagline: 'SEO/GEO front-end built for search and inquiries',
-      summary: 'Astro + Cloudflare Pages multi-locale B2B structure: products, solutions, FAQ, resources.',
+      title: 'Cizhenyu AI Desk & Inquiry Hub',
+      tagline: 'Catch leads day and night — KB answers, humans on high intent',
+      summary:
+        'Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.',
       description:
-        '<p><strong>Cizhenyu Site</strong> is the public face of the stack — structured for classic SEO and generative-engine citation (GEO). Content comes from CMS; themes ship with importable seed.</p>',
+        '<p><strong>AI desk + inquiry hub</strong> stops scattered leads and night-time gaps. Wire to site CTAs (form hook reserved). Pair with multi-site and deploy products. Collaborative install available.</p>',
       advantages: [
-        { title: 'Search structure', description: 'Indexable IA, not a slide deck.' },
-        { title: 'GEO-ready', description: 'FAQ/short answers for AI citations.' },
-        { title: 'Theme packs', description: 'Official themes include CMS seed.' },
+        { title: 'One inbox', description: 'Traceable sources in one view.' },
+        { title: 'KB replies', description: 'Auto answers; escalate when needed.' },
+        { title: 'CTA-ready', description: 'Inquiry buttons reserved for form wiring.' },
       ],
     },
     ja: {
-      title: '磁帧鱼 サイト',
-      tagline: '検索と問い合わせのための SEO/GEO フロント',
-      summary: 'Astro + Cloudflare Pages の多言語 B2B 構造。',
+      title: '磁帧鱼 AI客服・問い合わせ中台',
+      tagline: '昼夜問わず問い合わせを受け止め、必要時に有人へ',
+      summary: 'フォームやチャットの問い合わせを一元化。知識ベース応答、高意向は有人。',
       description:
-        '<p><strong>磁帧鱼 サイト</strong>は従来 SEO と生成エンジン引用（GEO）向けの公開サイトです。コンテンツは CMS、テーマは seed 付きで納品できます。</p>',
+        '<p><strong>AI客服・問い合わせ</strong>で漏れと夜間空白を解消。サイトの問い合わせボタンと接続可能（フォームは後日実装可）。他製品と組み合わせ可。</p>',
       advantages: [
-        { title: 'SEO 構造', description: '索引可能な IA。' },
-        { title: 'GEO', description: 'FAQ/短答で引用されやすい。' },
-        { title: 'テーマ納品', description: 'seed 同梱。' },
+        { title: '一元管理', description: '流入経路を追跡。' },
+        { title: '知識ベース', description: '自動応答＋有人切替。' },
+        { title: '拡張余地', description: 'ボタン先行、フォーム後付け。' },
       ],
     },
   },
   {
     n: 3,
-    slug: 'cizhenyu-deploy',
-    sku: 'CZ-DEPLOY',
-    cat: 'platform-core',
-    cover: 'Deploy',
+    slug: 'cizhenyu-growth',
+    sku: 'CZ-GROWTH',
+    cover: 'Growth',
     zh: {
-      title: '磁帧鱼部署',
-      tagline: '不用学会 Cloudflare 也能上线',
-      summary: '桌面向导在您自有 Cloudflare 账户完成 CMS + 站点交付，降低技术与试错成本。',
+      title: '磁帧鱼 部署运营获客系统',
+      tagline: '点选部署到自有云账户，再把 SEO/GEO 与日常运营跑起来',
+      summary:
+        '部署向导把站点交付到您自己的 Cloudflare；运营侧提供可持续的 SEO/GEO 与获客节奏，避免「上线即停更」。',
       description:
-        '<p><strong>磁帧鱼部署</strong>（cizhenyu_deploy）把域名、资源、CMS 与 Pages 交付产品化。</p><ul><li>向导式部署 CMS 与前端站点</li><li>资源创建与域名绑定流程标准化</li><li>更新部署保护线上内容，避免误覆盖业务数据</li><li>适合企业自助，也适合服务商批量交付</li></ul><p>解决「听说 Cloudflare 好，但配置劝退」的痛点。</p>',
+        '<p><strong>部署 · 运营 · 获客</strong>把上线和日常增长连成一条链。</p><ul><li>向导式部署：域名、Pages、环境变量点选完成</li><li>资产在您账户，不锁死在厂商平台</li><li>运营获客节奏：内容、索引、回访触达可按模块扩展</li><li>可与站群、询盘系统组合交付</li></ul><p>下载安装后可约客服协作首发上线与运营初始化。</p>',
       advantages: [
-        { title: '向导化', description: '点选即可完成关键步骤。' },
-        { title: '资产自有', description: '落在客户自己的云账户。' },
-        { title: '安全更新', description: '更新不灌演示数据、不乱绑域名。' },
+        { title: '自有账户', description: 'Cloudflare 资产归您，迁移清晰。' },
+        { title: '降低技术门槛', description: '向导代替手写配置。' },
+        { title: '上线后继续跑', description: '运营获客不是一次性建站。' },
       ],
     },
     en: {
-      title: 'Cizhenyu Deploy',
-      tagline: 'Go live without learning Cloudflare first',
-      summary: 'Desktop wizard delivers CMS + site on your Cloudflare account.',
+      title: 'Cizhenyu Deploy & Growth Ops',
+      tagline: 'Wizard deploy to your cloud — then run SEO/GEO acquisition loops',
+      summary:
+        'Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.',
       description:
-        '<p><strong>Cizhenyu Deploy</strong> productizes domains, resources, CMS, and Pages delivery. Updates protect live content and avoid wrong domain binds. For self-serve SMEs and agencies.</p>',
+        '<p><strong>Deploy + growth ops</strong> connects launch to ongoing acquisition. Assets stay on your account. Pair with multi-site and inquiry products. Collaborative first launch available.</p>',
       advantages: [
-        { title: 'Guided', description: 'Wizard covers critical steps.' },
-        { title: 'Your account', description: 'Assets stay on customer Cloudflare.' },
-        { title: 'Safe updates', description: 'No demo overwrite; no wrong zone binds.' },
+        { title: 'Your account', description: 'Clear ownership on Cloudflare.' },
+        { title: 'Wizard deploy', description: 'Less hand-written config.' },
+        { title: 'Keep shipping', description: 'Ops cadence after go-live.' },
       ],
     },
     ja: {
-      title: '磁帧鱼 Deploy',
-      tagline: 'Cloudflare を学び込まなくても公開',
-      summary: 'デスクトップウィザードで自アカウントへ CMS + サイト導入。',
+      title: '磁帧鱼 導入・運用獲得システム',
+      tagline: '自クラウドアカウントへ導入し、SEO/GEO 運用を回す',
+      summary: 'ウィザードで Cloudflare へ導入。公開後も SEO/GEO・獲得リズムを継続。',
       description:
-        '<p><strong>磁帧鱼 Deploy</strong> はドメイン・リソース・CMS・Pages を製品化。更新時は本番データを守り、誤ったドメイン紐付けを避けます。</p>',
+        '<p><strong>導入・運用・獲得</strong>で公開と継続成長をつなぎます。資産はお客様アカウント。他製品と組み合わせ可。初回導入の同席サポートあり。</p>',
       advantages: [
-        { title: 'ウィザード', description: '重要手順を案内。' },
-        { title: '自アカウント', description: '資産はお客様側。' },
-        { title: '安全更新', description: 'デモ上書きや誤バインドを防止。' },
-      ],
-    },
-  },
-  {
-    n: 4,
-    slug: 'cizhenyu-crm',
-    sku: 'CZ-CRM',
-    cat: 'growth-ops',
-    cover: 'CRM',
-    zh: {
-      title: '磁帧鱼询盘中台',
-      tagline: '询盘接得住，线索跟得上',
-      summary: '在线客服、CRM 跟进与知识库 AI 应答一体，解决来了询盘却转化不了。',
-      description:
-        '<p><strong>磁帧鱼询盘中台</strong>（cizhenyu_chatonline）覆盖网站嵌入沟通、CRM 漏斗与知识库 AI。</p><ul><li>嵌入式在线沟通</li><li>线索跟进与复盘</li><li>知识库 + AI 自动应答，可转人工</li><li>为本地营销 Agent 提供数据接口</li></ul><p>解决时差夜间无人回、新人答不上参数、线索散落聊天软件等问题。</p>',
-      advantages: [
-        { title: '7×24 应答', description: '知识库托底，关键承诺可转人工。' },
-        { title: '线索结构化', description: '不再只靠个人微信记忆。' },
-        { title: '可扩展', description: '与站点与 Agent 联动。' },
-      ],
-    },
-    en: {
-      title: 'Cizhenyu Inquiry Hub',
-      tagline: 'Catch inquiries and keep follow-ups on track',
-      summary: 'Live chat, CRM, and knowledge-base AI in one edge suite.',
-      description:
-        '<p><strong>Cizhenyu Inquiry Hub</strong> combines embeddable chat, CRM follow-ups, and KB-powered AI with human handoff — for time-zone gaps and scattered WhatsApp threads.</p>',
-      advantages: [
-        { title: 'Always-on', description: 'KB answers; humans for commitments.' },
-        { title: 'Structured leads', description: 'Not only personal chat memory.' },
-        { title: 'Extensible', description: 'Hooks for site & local Agent.' },
-      ],
-    },
-    ja: {
-      title: '磁帧鱼 問い合わせ中台',
-      tagline: '問い合わせを逃さずフォロー',
-      summary: 'チャット・CRM・知識ベース AI を一体に。',
-      description:
-        '<p><strong>磁帧鱼 問い合わせ中台</strong>は埋め込みチャット、CRM、KB AI（有人引き継ぎ可）を提供。時差やチャット散在の課題向け。</p>',
-      advantages: [
-        { title: '常時応答', description: 'KB 対応、重要事項は有人。' },
-        { title: 'リード整理', description: '個人チャット頼りから脱却。' },
-        { title: '拡張', description: 'サイト/Agent と連携。' },
-      ],
-    },
-  },
-  {
-    n: 5,
-    slug: 'cizhenyu-agent',
-    sku: 'CZ-AGENT',
-    cat: 'growth-ops',
-    cover: 'Agent',
-    zh: {
-      title: '磁帧鱼 Agent',
-      tagline: '点点鼠标的 SEO/GEO 与社媒运营',
-      summary: '本地 Agent 执行日常运营：成熟一键 SEO/GEO 与社媒方案，AI 自动优化，流程成熟几乎不怎么耗 Token。',
-      description:
-        '<p><strong>磁帧鱼 Agent</strong>（cizhenyu_agent）是本地「AI 员工」桌面端。</p><ul><li>本地执行任务，关键步骤可人工确认</li><li>内置成熟 SEO/GEO、社媒运营解决方案</li><li>与后台真实产品与站点数据联动</li><li>强调能跑通、低消耗，而不是炫技烧 Token</li></ul><p>解决「知道要做内容/发帖，但没人力坚持」的问题。</p>',
-      advantages: [
-        { title: '成熟流程', description: '一键动作，少试错。' },
-        { title: '低 Token', description: '方案成熟，日常几乎不怎么耗 Token。' },
-        { title: '可控', description: '敏感操作可人工闸门。' },
-      ],
-    },
-    en: {
-      title: 'Cizhenyu Agent',
-      tagline: 'Click-to-run SEO/GEO and social ops',
-      summary: 'Local Agent with mature SEO/GEO & social playbooks — low token burn.',
-      description:
-        '<p><strong>Cizhenyu Agent</strong> is a local desktop “AI employee”: skills/MCP on-machine, human gates for risky steps, wired to real CMS products and site data. Built for consistency, not token theatre.</p>',
-      advantages: [
-        { title: 'Playbooks', description: 'One-click mature routines.' },
-        { title: 'Low tokens', description: 'Stable flows, minimal waste.' },
-        { title: 'Human gates', description: 'Approve sensitive actions.' },
-      ],
-    },
-    ja: {
-      title: '磁帧鱼 Agent',
-      tagline: 'クリックで回す SEO/GEO・SNS 運用',
-      summary: 'ローカル Agent。成熟プレイブック、低 Token。',
-      description:
-        '<p><strong>磁帧鱼 Agent</strong> はローカル実行の AI 従業員。重要操作は人手承認、CMS/サイト実データと連携。派手さより継続性。</p>',
-      advantages: [
-        { title: 'プレイブック', description: '成熟した一括動作。' },
-        { title: '低 Token', description: '無駄な試行を減らす。' },
-        { title: '承認ゲート', description: 'リスク操作は人手。' },
+        { title: '自アカウント', description: '所有権が明確。' },
+        { title: 'ウィザード', description: '手書き設定を削減。' },
+        { title: '継続運用', description: '公開で終わらない。' },
       ],
     },
   },
@@ -501,7 +378,7 @@ writeJson('product.json', {
         images: [{ url: img(p.cover, 800, 600) }, { url: img(`${p.cover}+UI`, 800, 600) }],
         availability: 'InStock',
         status: 'published',
-        spec_data: { module: p.sku, stack: 'Cloudflare' },
+        spec_data: { module: p.sku, install: 'download+collaborate' },
         seo_title: `${p.zh.title}｜磁帧鱼`,
         seo_description: p.zh.summary,
         robots_directive: 'index,follow',
@@ -509,7 +386,7 @@ writeJson('product.json', {
         og_image: { url: img(p.cover, 1200, 630) },
         tagline: p.zh.tagline,
         advantages: p.zh.advantages,
-        taxonomy_ids: [`__BY_SLUG__:b2b_product_category:${p.cat}`],
+        taxonomy_ids: ['__BY_SLUG__:b2b_product_category:cizhenyu-products'],
       },
       'zh-TW': {
         title: tw(p.zh.title),
@@ -521,7 +398,7 @@ writeJson('product.json', {
         images: [{ url: img(p.cover, 800, 600) }],
         availability: 'InStock',
         status: 'published',
-        spec_data: { module: p.sku, stack: 'Cloudflare' },
+        spec_data: { module: p.sku, install: 'download+collaborate' },
         seo_title: `${tw(p.zh.title)}｜磁幀魚`,
         seo_description: tw(p.zh.summary),
         robots_directive: 'index,follow',
@@ -529,7 +406,7 @@ writeJson('product.json', {
         og_image: { url: img(p.cover, 1200, 630) },
         tagline: tw(p.zh.tagline),
         advantages: p.zh.advantages.map((a) => ({ title: tw(a.title), description: tw(a.description) })),
-        taxonomy_ids: [`__BY_SLUG__:b2b_product_category:${p.cat}`],
+        taxonomy_ids: ['__BY_SLUG__:b2b_product_category:cizhenyu-products'],
       },
       ja: {
         title: p.ja.title,
@@ -541,7 +418,7 @@ writeJson('product.json', {
         images: [{ url: img(p.cover, 800, 600) }],
         availability: 'InStock',
         status: 'published',
-        spec_data: { module: p.sku, stack: 'Cloudflare' },
+        spec_data: { module: p.sku, install: 'download+collaborate' },
         seo_title: `${p.ja.title}｜磁帧鱼`,
         seo_description: p.ja.summary,
         robots_directive: 'index,follow',
@@ -549,7 +426,7 @@ writeJson('product.json', {
         og_image: { url: img(p.cover, 1200, 630) },
         tagline: p.ja.tagline,
         advantages: p.ja.advantages,
-        taxonomy_ids: [`__BY_SLUG__:b2b_product_category:${p.cat}`],
+        taxonomy_ids: ['__BY_SLUG__:b2b_product_category:cizhenyu-products'],
       },
       'en-US': {
         title: p.en.title,
@@ -558,10 +435,10 @@ writeJson('product.json', {
         brand: 'Cizhenyu',
         summary: p.en.summary,
         description: p.en.description,
-        images: [{ url: img(p.cover, 800, 600) }, { url: img(`${p.cover}+UI`, 800, 600) }],
+        images: [{ url: img(p.cover, 800, 600) }],
         availability: 'InStock',
         status: 'published',
-        spec_data: { module: p.sku, stack: 'Cloudflare' },
+        spec_data: { module: p.sku, install: 'download+collaborate' },
         seo_title: `${p.en.title} | Cizhenyu`,
         seo_description: p.en.summary,
         robots_directive: 'index,follow',
@@ -569,153 +446,386 @@ writeJson('product.json', {
         og_image: { url: img(p.cover, 1200, 630) },
         tagline: p.en.tagline,
         advantages: p.en.advantages,
-        taxonomy_ids: [`__BY_SLUG__:b2b_product_category:${p.cat}`],
+        taxonomy_ids: ['__BY_SLUG__:b2b_product_category:cizhenyu-products'],
       },
     }),
   })),
 });
 
-// —— nav menus ——
+const articles = [
+  {
+    n: 1,
+    slug: 'why-multisite-for-export',
+    zh: {
+      title: '外贸为什么需要站群，而不是只做一个官网？',
+      summary: '主站品牌、行业站引流、语言站本地化——站群让内容与获客分工更清晰。',
+      content:
+        '<p>许多外贸团队只有一个「名片站」，改一次排一期。站群的价值在于：主站承载品牌信任，子站承接细分行业或语种流量，后台仍可统一改内容。</p><p>磁帧鱼站群产品把这件事产品化；本文为占位动态，后续可替换为真实案例。</p>',
+    },
+    en: {
+      title: 'Why export teams need multi-site — not one brochure',
+      summary: 'Brand site, niche sites, locale sites — divide content and acquisition roles.',
+      content:
+        '<p>A single brochure site rarely scales. Multi-site lets brand, niche, and locale jobs split while content stays manageable. Placeholder news — replace later.</p>',
+    },
+  },
+  {
+    n: 2,
+    slug: 'inquiry-desk-basics',
+    zh: {
+      title: '智能询盘中台怎么接住夜间线索？',
+      summary: '知识库先答常见问题，高意向再转人工——先把漏斗守住。',
+      content:
+        '<p>夜间空窗是外贸常见漏点。智能客服用知识库顶住第一轮问答，把联系方式与意向字段留下来，白天人工接力。</p><p>占位文章，后续可换成客户故事与数据。</p>',
+    },
+    en: {
+      title: 'How an AI inquiry desk catches night-time leads',
+      summary: 'KB answers first; humans take high intent.',
+      content: '<p>Night gaps lose deals. KB replies hold the first turn; humans follow up. Placeholder article.</p>',
+    },
+  },
+  {
+    n: 3,
+    slug: 'deploy-then-operate',
+    zh: {
+      title: '上线只是开始：部署之后如何持续获客',
+      summary: '向导部署解决「能不能上线」，运营获客解决「上线后谁来更新」。',
+      content:
+        '<p>很多项目死在上线当天。部署产品把技术门槛压下去；运营获客模块把 SEO/GEO 与内容节奏接上。占位动态，后期替换。</p>',
+    },
+    en: {
+      title: 'Go-live is not the finish line',
+      summary: 'Deploy gets you live; growth ops keeps acquisition moving.',
+      content: '<p>Too many projects stop at launch. Deploy lowers the bar; ops keeps SEO/GEO moving. Placeholder.</p>',
+    },
+  },
+];
+
+writeJson('article.json', {
+  collectionSlug: 'b2b_article',
+  items: articles.map((a) => ({
+    languageGroupKey: lgk('art', a.n),
+    locales: L({
+      'zh-CN': {
+        title: a.zh.title,
+        slug: a.slug,
+        summary: a.zh.summary,
+        content: a.zh.content,
+        content_type: 'article',
+        status: 'published',
+        cover: { url: img(`News${a.n}`, 800, 500) },
+        seo_title: a.zh.title,
+        seo_description: a.zh.summary,
+        robots_directive: 'index,follow',
+        schema_type: 'Article',
+        related_product_ids: ['__BY_SLUG__:b2b_product:cizhenyu-sites'],
+      },
+      'zh-TW': {
+        title: tw(a.zh.title),
+        slug: a.slug,
+        summary: tw(a.zh.summary),
+        content: tw(a.zh.content),
+        content_type: 'article',
+        status: 'published',
+        cover: { url: img(`News${a.n}`, 800, 500) },
+        seo_title: tw(a.zh.title),
+        seo_description: tw(a.zh.summary),
+        robots_directive: 'index,follow',
+        schema_type: 'Article',
+        related_product_ids: ['__BY_SLUG__:b2b_product:cizhenyu-sites'],
+      },
+      ja: {
+        title: a.en.title,
+        slug: a.slug,
+        summary: a.en.summary,
+        content: a.en.content,
+        content_type: 'article',
+        status: 'published',
+        cover: { url: img(`News${a.n}`, 800, 500) },
+        seo_title: a.en.title,
+        seo_description: a.en.summary,
+        robots_directive: 'index,follow',
+        schema_type: 'Article',
+        related_product_ids: ['__BY_SLUG__:b2b_product:cizhenyu-sites'],
+      },
+      'en-US': {
+        title: a.en.title,
+        slug: a.slug,
+        summary: a.en.summary,
+        content: a.en.content,
+        content_type: 'article',
+        status: 'published',
+        cover: { url: img(`News${a.n}`, 800, 500) },
+        seo_title: a.en.title,
+        seo_description: a.en.summary,
+        robots_directive: 'index,follow',
+        schema_type: 'Article',
+        related_product_ids: ['__BY_SLUG__:b2b_product:cizhenyu-sites'],
+      },
+    }),
+  })),
+});
+
+const faqs = [
+  {
+    n: 1,
+    zh: { q: '三款产品必须一起买吗？', a: '不必。可按阶段单独安装站群生成、智能询盘或部署获客，也可组合交付。' },
+    en: { q: 'Must I buy all three?', a: 'No. Install modules by stage, or combine them.' },
+  },
+  {
+    n: 2,
+    zh: { q: '下载后怎么安装？会不会很难？', a: '下载入口会引导您提交询盘，客服可协作安装与首发配置。向导部署会尽量降低 Cloudflare 门槛。' },
+    en: { q: 'Is install hard after download?', a: 'Download CTAs lead to inquiry; support can collaborate on install. Wizard deploy lowers Cloudflare friction.' },
+  },
+  {
+    n: 3,
+    zh: { q: '资产在谁的账户？', a: '默认部署到您自己的 Cloudflare 等云账户，便于自主运维与迁移。' },
+    en: { q: 'Whose cloud account?', a: 'Yours by default — clearer ownership and migration.' },
+  },
+  {
+    n: 4,
+    zh: { q: '询盘表单做好了吗？', a: '页面已预留询盘按钮与联系入口；完整在线表单后续接入。当前可通过邮件或联系页提交需求。' },
+    en: { q: 'Is the inquiry form live?', a: 'CTAs are reserved; full form comes later. Email/contact works now.' },
+  },
+  {
+    n: 5,
+    zh: { q: '价格在哪里看？', a: '官网不公示套餐价。请提交询盘，说明行业与现状，我们给出模块组合与协作安装建议。' },
+    en: { q: 'Where is pricing?', a: 'Not listed publicly. Inquire with industry and status for a plan.' },
+  },
+  {
+    n: 6,
+    zh: { q: 'Logo 可以换成我们的吗？', a: '可以。默认使用闪电图标占位，您在 CMS 公司信息里上传 Logo 即可替换全站展示。' },
+    en: { q: 'Can we replace the logo?', a: 'Yes. Lightning is a placeholder — upload your logo in CMS company info.' },
+  },
+];
+
+writeJson('faq.json', {
+  collectionSlug: 'b2b_faq',
+  items: faqs.map((f) => ({
+    languageGroupKey: lgk('faq', f.n),
+    locales: L({
+      'zh-CN': {
+        question: f.zh.q,
+        answer: `<p>${f.zh.a}</p>`,
+        short_answer: f.zh.a,
+        sort_order: f.n * 10,
+        status: 'published',
+        seo_title: f.zh.q,
+        seo_description: f.zh.a,
+        robots_directive: 'index,follow',
+      },
+      'zh-TW': {
+        question: tw(f.zh.q),
+        answer: `<p>${tw(f.zh.a)}</p>`,
+        short_answer: tw(f.zh.a),
+        sort_order: f.n * 10,
+        status: 'published',
+        seo_title: tw(f.zh.q),
+        seo_description: tw(f.zh.a),
+        robots_directive: 'index,follow',
+      },
+      ja: {
+        question: f.en.q,
+        answer: `<p>${f.en.a}</p>`,
+        short_answer: f.en.a,
+        sort_order: f.n * 10,
+        status: 'published',
+        seo_title: f.en.q,
+        seo_description: f.en.a,
+        robots_directive: 'index,follow',
+      },
+      'en-US': {
+        question: f.en.q,
+        answer: `<p>${f.en.a}</p>`,
+        short_answer: f.en.a,
+        sort_order: f.n * 10,
+        status: 'published',
+        seo_title: f.en.q,
+        seo_description: f.en.a,
+        robots_directive: 'index,follow',
+      },
+    }),
+  })),
+});
+
+// —— resources（下载页：三款产品安装包入口 → 询盘）——
+const resources = products.map((p, idx) => ({
+  n: idx + 1,
+  slug: `download-${p.slug}`,
+  productSlug: p.slug,
+  zh: {
+    title: `${p.zh.title} · 安装包`,
+    summary: `点击下载将进入询盘，客服可协作完成安装与初始化。${p.zh.tagline}`,
+  },
+  en: {
+    title: `${p.en.title} · Installer`,
+    summary: `Download leads to inquiry — we can collaborate on install. ${p.en.tagline}`,
+  },
+}));
+
+writeJson('resource.json', {
+  collectionSlug: 'b2b_resource',
+  items: resources.map((r) => ({
+    languageGroupKey: lgk('res', r.n),
+    locales: L({
+      'zh-CN': {
+        title: r.zh.title,
+        slug: r.slug,
+        summary: r.zh.summary,
+        description: `<p>${r.zh.summary}</p><p>正式安装包与许可证通过询盘交付；页面下载按钮将跳转联系/询盘。</p>`,
+        resource_type: 'installer',
+        file_format: '询盘获取',
+        cover: { url: img(`DL${r.n}`, 800, 500) },
+        download_file: { url: '' },
+        status: 'published',
+        seo_title: r.zh.title,
+        seo_description: r.zh.summary,
+        robots_directive: 'index,follow',
+        related_product_ids: [`__BY_SLUG__:b2b_product:${r.productSlug}`],
+      },
+      'zh-TW': {
+        title: tw(r.zh.title),
+        slug: r.slug,
+        summary: tw(r.zh.summary),
+        description: `<p>${tw(r.zh.summary)}</p><p>正式安裝包透過詢盤交付。</p>`,
+        resource_type: 'installer',
+        file_format: '詢盤獲取',
+        cover: { url: img(`DL${r.n}`, 800, 500) },
+        download_file: { url: '' },
+        status: 'published',
+        seo_title: tw(r.zh.title),
+        seo_description: tw(r.zh.summary),
+        robots_directive: 'index,follow',
+        related_product_ids: [`__BY_SLUG__:b2b_product:${r.productSlug}`],
+      },
+      ja: {
+        title: r.en.title,
+        slug: r.slug,
+        summary: r.en.summary,
+        description: `<p>${r.en.summary}</p>`,
+        resource_type: 'installer',
+        file_format: 'inquiry',
+        cover: { url: img(`DL${r.n}`, 800, 500) },
+        download_file: { url: '' },
+        status: 'published',
+        seo_title: r.en.title,
+        seo_description: r.en.summary,
+        robots_directive: 'index,follow',
+        related_product_ids: [`__BY_SLUG__:b2b_product:${r.productSlug}`],
+      },
+      'en-US': {
+        title: r.en.title,
+        slug: r.slug,
+        summary: r.en.summary,
+        description: `<p>${r.en.summary}</p><p>Installer packages are delivered after inquiry.</p>`,
+        resource_type: 'installer',
+        file_format: 'via inquiry',
+        cover: { url: img(`DL${r.n}`, 800, 500) },
+        download_file: { url: '' },
+        status: 'published',
+        seo_title: r.en.title,
+        seo_description: r.en.summary,
+        robots_directive: 'index,follow',
+        related_product_ids: [`__BY_SLUG__:b2b_product:${r.productSlug}`],
+      },
+    }),
+  })),
+});
+
 writeJson('nav_menu.json', {
   collectionSlug: 'b2b_nav_menu',
   items: [
     {
-      languageGroupKey: lgk('nmen', 1),
+      languageGroupKey: lgk('navm', 1),
       locales: L({
-        'zh-CN': { name: '页头导航', slug: 'header', menu_type: 'header' },
-        'zh-TW': { name: '頁頭導航', slug: 'header', menu_type: 'header' },
-        ja: { name: 'ヘッダーナビ', slug: 'header', menu_type: 'header' },
-        'en-US': { name: 'Header Nav', slug: 'header', menu_type: 'header' },
+        'zh-CN': { title: '主导航', slug: 'header', menu_type: 'header', status: 'published' },
+        'zh-TW': { title: '主導航', slug: 'header', menu_type: 'header', status: 'published' },
+        ja: { title: 'メインナビ', slug: 'header', menu_type: 'header', status: 'published' },
+        'en-US': { title: 'Header', slug: 'header', menu_type: 'header', status: 'published' },
       }),
     },
     {
-      languageGroupKey: lgk('nmen', 2),
+      languageGroupKey: lgk('navm', 2),
       locales: L({
-        'zh-CN': { name: '页脚导航', slug: 'footer', menu_type: 'footer' },
-        'zh-TW': { name: '頁腳導航', slug: 'footer', menu_type: 'footer' },
-        ja: { name: 'フッターナビ', slug: 'footer', menu_type: 'footer' },
-        'en-US': { name: 'Footer Nav', slug: 'footer', menu_type: 'footer' },
+        'zh-CN': { title: '页脚', slug: 'footer', menu_type: 'footer', status: 'published' },
+        'zh-TW': { title: '頁腳', slug: 'footer', menu_type: 'footer', status: 'published' },
+        ja: { title: 'フッター', slug: 'footer', menu_type: 'footer', status: 'published' },
+        'en-US': { title: 'Footer', slug: 'footer', menu_type: 'footer', status: 'published' },
       }),
     },
   ],
 });
 
-/** ycz.me 风格：首页 / 产品 / 解决方案 / 资源 / 关于；询盘走 CTA 按钮也可进导航 */
-const navItems = [
-  { n: 1, slug: 'home', sort: 10, mode: 'link', path: (l) => `/${l}`, zh: '首页', tw: '首頁', ja: 'ホーム', en: 'Home' },
-  {
-    n: 2,
-    slug: 'products',
-    sort: 20,
-    mode: 'reference',
-    refType: 'b2b_product',
-    zh: '产品',
-    tw: '產品',
-    ja: '製品',
-    en: 'Products',
-  },
-  {
-    n: 3,
-    slug: 'solutions',
-    sort: 30,
-    mode: 'link',
-    path: (l) => `/${l}/solutions`,
-    zh: '解决方案',
-    tw: '解決方案',
-    ja: 'ソリューション',
-    en: 'Solutions',
-  },
-  {
-    n: 4,
-    slug: 'resources',
-    sort: 40,
-    mode: 'link',
-    path: (l) => `/${l}/articles`,
-    zh: '资源',
-    tw: '資源',
-    ja: 'リソース',
-    en: 'Resources',
-  },
-  {
-    n: 5,
-    slug: 'about',
-    sort: 50,
-    mode: 'link',
-    path: (l) => `/${l}/about`,
-    zh: '关于',
-    tw: '關於',
-    ja: '会社概要',
-    en: 'About',
-  },
-  {
-    n: 6,
-    slug: 'contact',
-    sort: 60,
-    mode: 'link',
-    path: (l) => `/${l}/contact`,
-    zh: '询盘',
-    tw: '詢盤',
-    ja: 'お問い合わせ',
-    en: 'Inquiry',
-  },
-];
-
-function navLocale(item, loc, title) {
-  const base = {
-    nav_menu_ids: ['__BY_SLUG__:b2b_nav_menu:header'],
-    title,
-    slug: item.slug,
-    link_mode: item.mode,
-    sort_order: item.sort,
-    open_in_new_tab: ['no'],
-    status: 'published',
-  };
-  if (item.mode === 'link') base.link_url = item.path(loc);
-  else
-    base.target_reference = {
-      type: 'internal',
-      refType: item.refType,
+function navItem(n, slug, titles, pathSuffix, sort, mode = 'link', refType) {
+  const mk = (loc, title) => {
+    const row = {
+      nav_menu_ids: ['__BY_SLUG__:b2b_nav_menu:header'],
       title,
-      description: title,
+      slug,
+      link_mode: mode,
+      sort_order: sort,
+      open_in_new_tab: ['no'],
+      status: 'published',
     };
-  return base;
+    if (mode === 'link') row.link_url = `${PREFIX[loc]}${pathSuffix}`;
+    if (mode === 'reference') {
+      row.target_reference = { type: 'internal', refType, refId: '' };
+    }
+    return row;
+  };
+  return {
+    languageGroupKey: lgk('nmit', n),
+    locales: L({
+      'zh-CN': mk('zh-CN', titles.zh),
+      'zh-TW': mk('zh-TW', titles.tw),
+      ja: mk('ja', titles.ja),
+      'en-US': mk('en-US', titles.en),
+    }),
+  };
 }
 
-writeJson('nav_menu_item.json', {
-  collectionSlug: 'b2b_nav_menu_item',
-  items: [
-    ...navItems.map((item) => ({
-      languageGroupKey: lgk('nmit', item.n),
-      locales: L({
-        'zh-CN': navLocale(item, 'zh-CN', item.zh),
-        'zh-TW': navLocale(item, 'zh-TW', item.tw),
-        ja: navLocale(item, 'ja', item.ja),
-        'en-US': navLocale(item, 'en-US', item.en),
-      }),
-    })),
-    // footer mirrors key links
-    ...[1, 2, 5, 6].map((n, idx) => {
-      const item = navItems.find((x) => x.n === n);
-      const mk = (loc, title) => {
-        const o = navLocale(item, loc, title);
-        o.nav_menu_ids = ['__BY_SLUG__:b2b_nav_menu:footer'];
-        o.sort_order = (idx + 1) * 10;
-        return o;
-      };
-      return {
-        languageGroupKey: lgk('nmif', n),
-        locales: L({
-          'zh-CN': mk('zh-CN', item.zh),
-          'zh-TW': mk('zh-TW', item.tw),
-          ja: mk('ja', item.ja),
-          'en-US': mk('en-US', item.en),
-        }),
-      };
-    }),
-  ],
-});
+const headerNav = [
+  navItem(1, 'home', { zh: '首页', tw: '首頁', ja: 'ホーム', en: 'Home' }, '', 10),
+  navItem(2, 'products', { zh: '产品', tw: '產品', ja: '製品', en: 'Products' }, '/products', 20, 'reference', 'b2b_product'),
+  navItem(3, 'help', { zh: '帮助', tw: '幫助', ja: 'ヘルプ', en: 'Help' }, '/faq', 30),
+  navItem(4, 'download', { zh: '下载', tw: '下載', ja: 'ダウンロード', en: 'Download' }, '/resources', 40),
+  navItem(5, 'news', { zh: '动态', tw: '動態', ja: 'ニュース', en: 'News' }, '/articles', 50),
+  navItem(6, 'about', { zh: '关于', tw: '關於', ja: '会社概要', en: 'About' }, '/about', 60),
+  navItem(7, 'contact', { zh: '联系', tw: '聯繫', ja: 'お問い合わせ', en: 'Contact' }, '/contact', 70),
+];
 
-// —— pages ——
+const footerNav = [
+  { n: 11, slug: 'f-products', zh: '产品', tw: '產品', ja: '製品', en: 'Products', path: '/products' },
+  { n: 12, slug: 'f-download', zh: '下载', tw: '下載', ja: 'ダウンロード', en: 'Download', path: '/resources' },
+  { n: 13, slug: 'f-help', zh: '帮助', tw: '幫助', ja: 'ヘルプ', en: 'Help', path: '/faq' },
+  { n: 14, slug: 'f-contact', zh: '联系', tw: '聯繫', ja: 'お問い合わせ', en: 'Contact', path: '/contact' },
+].map((item, idx) => ({
+  languageGroupKey: lgk('nmif', item.n),
+  locales: L(
+    Object.fromEntries(
+      LOCALES.map((loc) => {
+        const title =
+          loc === 'zh-CN' ? item.zh : loc === 'zh-TW' ? item.tw : loc === 'ja' ? item.ja : item.en;
+        return [
+          loc,
+          {
+            nav_menu_ids: ['__BY_SLUG__:b2b_nav_menu:footer'],
+            title,
+            slug: item.slug,
+            link_mode: 'link',
+            sort_order: (idx + 1) * 10,
+            open_in_new_tab: ['no'],
+            status: 'published',
+            link_url: `${PREFIX[loc]}${item.path}`,
+          },
+        ];
+      }),
+    ),
+  ),
+}));
+
+writeJson('nav_menu_item.json', { collectionSlug: 'b2b_nav_menu_item', items: [...headerNav, ...footerNav] });
+
 writeJson('page.json', {
   collectionSlug: 'b2b_page',
   items: [
@@ -723,67 +833,68 @@ writeJson('page.json', {
       languageGroupKey: lgk('page', 1),
       locales: L({
         'zh-CN': {
-          title: '关于我们',
+          title: '关于磁帧鱼',
           slug: 'about',
-          summary: '我们只做一件事：让外贸获客可复制',
+          summary: '把外贸站群、询盘与部署获客，做成可安装的产品',
           content:
-            '<p>磁帧鱼围绕外贸 B2B 成交链路提供系统能力：内容在后台沉淀，站点对搜索与买家友好，部署降低上线门槛，询盘中台守住转化，本地 Agent 把 SEO/GEO 与社媒变成日常动作。</p><p><strong>原则：</strong>资产在客户自己的云账户；先解决痛点再谈扩展模块；自动化必须省事、可控、可复盘。价格不在官网公示，请提交询盘。</p>',
+            '<p>磁帧鱼服务外贸业务员、工厂外贸部与服务商。我们交付三款可下载安装的产品：</p><ol><li>全能站群管理系统 + B2B 前端站点生成系统</li><li>智能客服智能询盘系统</li><li>部署运营获客系统</li></ol><p>默认 Logo 为闪电占位，可在 CMS 公司信息中替换。价格不公示，请通过联系页询盘。</p>',
           target_reference: [
-            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-cms', title: '磁帧鱼后台' },
-            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-deploy', title: '磁帧鱼部署' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: '站群 + B2B 生成' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-inquiry', title: '智能询盘' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-growth', title: '部署获客' },
           ],
           status: 'published',
           seo_title: '关于磁帧鱼',
-          seo_description: '磁帧鱼外贸 B2B 增长流水线介绍。',
+          seo_description: '磁帧鱼三款外贸获客产品介绍。',
           robots_directive: 'index,follow',
           schema_type: 'AboutPage',
           og_image: { url: img('About', 1200, 630) },
         },
         'zh-TW': {
-          title: '關於我們',
+          title: '關於磁幀魚',
           slug: 'about',
-          summary: '我們只做一件事：讓外貿獲客可複製',
+          summary: '把外貿站群、詢盤與部署獲客，做成可安裝的產品',
           content:
-            '<p>磁幀魚圍繞外貿 B2B 成交鏈路提供系統能力。資產在客戶自己的雲帳戶；價格不在官網公示，請提交詢盤。</p>',
+            '<p>磁幀魚交付三款可下載安裝的產品：站群 + B2B 生成、智慧詢盤、部署運營獲客。Logo 可於 CMS 替換。請透過聯繫頁詢盤。</p>',
           target_reference: [
-            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-cms', title: '磁幀魚後台' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: '站群 + B2B 生成' },
           ],
           status: 'published',
           seo_title: '關於磁幀魚',
-          seo_description: '磁幀魚外貿 B2B 增長流水線介紹。',
+          seo_description: '磁幀魚三款外貿獲客產品介紹。',
           robots_directive: 'index,follow',
           schema_type: 'AboutPage',
           og_image: { url: img('About', 1200, 630) },
         },
         ja: {
-          title: '会社概要',
+          title: '磁帧鱼について',
           slug: 'about',
-          summary: '輸出獲得を再現可能にする',
-          content:
-            '<p>磁帧鱼は輸出 B2B の受注導線向けシステムです。資産はお客様のクラウドアカウントへ。価格は公開せずお問い合わせください。</p>',
+          summary: 'サイト群・問い合わせ・導入獲得を、導入可能な製品に',
+          content: '<p>3製品を提供します。ロゴはCMSで差し替え可能。価格はお問い合わせください。</p>',
           target_reference: [
-            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-cms', title: '磁帧鱼 CMS' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: 'サイト群' },
           ],
           status: 'published',
           seo_title: '磁帧鱼について',
-          seo_description: '磁帧鱼の紹介。',
+          seo_description: '磁帧鱼の3製品。',
           robots_directive: 'index,follow',
           schema_type: 'AboutPage',
           og_image: { url: img('About', 1200, 630) },
         },
         'en-US': {
-          title: 'About',
+          title: 'About Cizhenyu',
           slug: 'about',
-          summary: 'Make export acquisition repeatable',
+          summary: 'Installable products for multi-site, inquiry, and deploy growth',
           content:
-            '<p>Cizhenyu provides a B2B export growth pipeline: CMS, SEO/GEO site, wizard deploy, inquiry hub, and local Agent ops. Assets live on your cloud account. Pricing is not listed — inquire for a plan.</p>',
+            '<p>Three products: multi-site + B2B generator, AI inquiry desk, deploy & growth ops. Logo is CMS-replaceable. Pricing via inquiry.</p>',
           target_reference: [
-            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-cms', title: 'Cizhenyu CMS' },
-            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-deploy', title: 'Cizhenyu Deploy' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: 'Multi-site' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-inquiry', title: 'Inquiry' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-growth', title: 'Growth' },
           ],
           status: 'published',
           seo_title: 'About Cizhenyu',
-          seo_description: 'About the Cizhenyu B2B export growth pipeline.',
+          seo_description: 'Three Cizhenyu products for export growth.',
           robots_directive: 'index,follow',
           schema_type: 'AboutPage',
           og_image: { url: img('About', 1200, 630) },
@@ -794,27 +905,27 @@ writeJson('page.json', {
       languageGroupKey: lgk('page', 2),
       locales: L({
         'zh-CN': {
-          title: '联系与询盘',
+          title: '联系我们',
           slug: 'contact',
-          summary: '告诉我们您的获客瓶颈——无需先选套餐',
+          summary: '下载安装、产品组合、协作部署——先告诉我们您的现状',
           content:
-            '<p>留下行业、目标市场与现状（有无网站 / 询盘渠道 / 是否要做 SEO·GEO 或社媒自动化）。我们回复可行路径与模块组合建议。</p><p>邮箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a> · 官网：<a href="https://ycz.me">ycz.me</a></p><p>官网不公示套餐价格。</p>',
+            '<p>请留下行业、目标市场、需要的产品（站群生成 / 智能询盘 / 部署获客），以及是否需要客服协作安装。</p><p>邮箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a> · 官网：<a href="https://ycz.me">ycz.me</a></p><p>在线询盘表单即将接入；当前请使用下方「提交询盘」按钮（预留）或邮件联系。</p>',
           status: 'published',
-          seo_title: '联系与询盘｜磁帧鱼',
-          seo_description: '提交外贸获客需求，获取部署与运营方案建议。',
+          seo_title: '联系｜磁帧鱼',
+          seo_description: '提交询盘，获取产品安装与协作方案。',
           robots_directive: 'index,follow',
           schema_type: 'ContactPage',
           og_image: { url: img('Contact', 1200, 630) },
         },
         'zh-TW': {
-          title: '聯繫與詢盤',
+          title: '聯繫我們',
           slug: 'contact',
-          summary: '告訴我們您的獲客瓶頸——無需先選套餐',
+          summary: '下載安裝、產品組合、協作部署——先告訴我們現狀',
           content:
-            '<p>留下行業、目標市場與現狀。郵箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a>。官網不公示套餐價格。</p>',
+            '<p>請留下行業與需求產品。郵箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a>。線上表單即將接入。</p>',
           status: 'published',
-          seo_title: '聯繫與詢盤｜磁幀魚',
-          seo_description: '提交外貿獲客需求，獲取方案建議。',
+          seo_title: '聯繫｜磁幀魚',
+          seo_description: '提交詢盤，獲取安裝與協作方案。',
           robots_directive: 'index,follow',
           schema_type: 'ContactPage',
           og_image: { url: img('Contact', 1200, 630) },
@@ -822,25 +933,25 @@ writeJson('page.json', {
         ja: {
           title: 'お問い合わせ',
           slug: 'contact',
-          summary: '課題を教えてください。プラン選択は不要です',
+          summary: 'ダウンロード導入・製品組合せ・同席サポート',
           content:
-            '<p>業界・市場・現状をお送りください。<a href="mailto:hello@ycz.me">hello@ycz.me</a>。公開料金表はありません。</p>',
+            '<p>業界と必要な製品をお送りください。<a href="mailto:hello@ycz.me">hello@ycz.me</a>。フォームは後日接続予定です。</p>',
           status: 'published',
           seo_title: 'お問い合わせ｜磁帧鱼',
-          seo_description: '輸出獲得のご相談。',
+          seo_description: '導入とサポートのご相談。',
           robots_directive: 'index,follow',
           schema_type: 'ContactPage',
           og_image: { url: img('Contact', 1200, 630) },
         },
         'en-US': {
-          title: 'Contact & inquiry',
+          title: 'Contact',
           slug: 'contact',
-          summary: 'Tell us your acquisition bottlenecks — no package pick required',
+          summary: 'Download install, product mix, collaborative deploy — tell us your status',
           content:
-            '<p>Share industry, target markets, and current status. Email <a href="mailto:hello@ycz.me">hello@ycz.me</a> · <a href="https://ycz.me">ycz.me</a>. Pricing is not listed publicly.</p>',
+            '<p>Share industry, markets, and which products you need. Email <a href="mailto:hello@ycz.me">hello@ycz.me</a>. Online form coming soon — use the inquiry button (reserved) or email.</p>',
           status: 'published',
-          seo_title: 'Contact & inquiry | Cizhenyu',
-          seo_description: 'Inquire for a deploy and ops plan for export acquisition.',
+          seo_title: 'Contact | Cizhenyu',
+          seo_description: 'Inquire for install and collaboration.',
           robots_directive: 'index,follow',
           schema_type: 'ContactPage',
           og_image: { url: img('Contact', 1200, 630) },
@@ -849,445 +960,174 @@ writeJson('page.json', {
     },
   ],
 });
-
-// —— content blocks ——
-const pains = [
-  {
-    n: 10,
-    slug: 'pain-slow-site',
-    zh: {
-      title: '有产品，没有能接单的网站',
-      summary: '依赖平台与展会；独立站像宣传册，搜不到、转化弱，渠道一变业绩就抖。',
-    },
-    en: {
-      title: 'Products, but no site that wins orders',
-      summary: 'Platform-dependent; brochure sites that do not rank or convert.',
-    },
-    ja: {
-      title: '製品はあるが受注サイトがない',
-      summary: 'プラットフォーム依存。パンフサイトでは検索も転換も弱い。',
-    },
-  },
-  {
-    n: 11,
-    slug: 'pain-cloud-hard',
-    zh: {
-      title: '技术门槛吃掉业务时间',
-      summary: 'Cloudflare、域名、Workers、缓存学不完；项目卡在半成品或被代理商绑架。',
-    },
-    en: {
-      title: 'Tech overhead eats selling time',
-      summary: 'Cloudflare complexity stalls launches or locks you to agencies.',
-    },
-    ja: {
-      title: '技術ハードルが営業時間を奪う',
-      summary: 'Cloudflare 設定に追われ、半完成のまま止まる。',
-    },
-  },
-  {
-    n: 12,
-    slug: 'pain-leads',
-    zh: {
-      title: '询盘进来没人跟、跟了丢线索',
-      summary: '时差夜间无人回；参数问答重复；线索散落聊天软件无法复盘。',
-    },
-    en: {
-      title: 'Inquiries arrive — then get lost',
-      summary: 'Night gaps, repeated tech Q&A, leads stuck in personal chats.',
-    },
-    ja: {
-      title: '問い合わせが来ても逃す',
-      summary: '時差・重複質問・チャット散在でフォロー不能。',
-    },
-  },
-];
 
 writeJson('content_block.json', {
   collectionSlug: 'b2b_content_block',
   items: [
     {
-      languageGroupKey: lgk('blok', 1),
+      languageGroupKey: lgk('blk', 1),
       locales: L({
         'zh-CN': {
-          name: '首页首屏',
+          title: '第一次做外贸站群与询盘，也能搭出可交付的获客系统',
           slug: 'home-hero',
-          block_type: 'hero',
           placement: 'home_hero',
-          eyebrow: '外贸 B2B 增长流水线',
-          title: '从建站到询盘成交，一套系统跑通获客',
+          eyebrow: '磁帧鱼 · 可安装的获客产品',
           subtitle:
-            '面向个人业务员与中小外贸企业。站点建设、SEO/GEO、智能询盘客服、社媒与日常运营自动化——成熟方案，少折腾、快上线。',
-          summary: '一键部署到自有 Cloudflare · 数据自有 · 支持多语言',
-          content: '',
-          link_label: '免费获取方案诊断',
-          link_url: '/zh-CN/contact',
-          image: { url: img('Pipeline', 1600, 900) },
+            '从 8 成「只有名片站、询盘散落、上线即停更」的团队里走出来：站群与 B2B 站点生成、智能客服询盘、部署运营获客——三款产品可下载安装，客服可协作上线。',
+          summary:
+            '您要做的，是说清行业与目标市场；剩下的生成、部署与询盘承接，交给可安装的系统。',
+          cta_label: '免费获取方案',
+          link_url: '/zh-CN/contact?intent=inquiry',
+          image: { url: img('Hero', 960, 720) },
           status: 'published',
-          sort_order: 1,
+          sort_order: 10,
         },
         'zh-TW': {
-          name: '首頁首屏',
+          title: '第一次做外貿站群與詢盤，也能搭出可交付的獲客系統',
           slug: 'home-hero',
-          block_type: 'hero',
           placement: 'home_hero',
-          eyebrow: '外貿 B2B 增長流水線',
-          title: '從建站到詢盤成交，一套系統跑通獲客',
+          eyebrow: '磁幀魚 · 可安裝的獲客產品',
           subtitle:
-            '面向個人業務員與中小外貿企業。站點建設、SEO/GEO、智能詢盤客服、社媒與日常運營自動化。',
-          summary: '一鍵部署到自有 Cloudflare · 資料自有 · 支援多語言',
-          content: '',
-          link_label: '免費獲取方案診斷',
-          link_url: '/zh-TW/contact',
-          image: { url: img('Pipeline', 1600, 900) },
+            '站群與 B2B 站點生成、智慧客服詢盤、部署運營獲客——三款產品可下載安裝，客服可協作上線。',
+          summary: '說清行業與目標市場，其餘交給可安裝系統。',
+          cta_label: '免費獲取方案',
+          link_url: '/zh-TW/contact?intent=inquiry',
+          image: { url: img('Hero', 960, 720) },
           status: 'published',
-          sort_order: 1,
+          sort_order: 10,
         },
         ja: {
-          name: 'ホームヒーロー',
+          title: '初めてでも、納品できる獲得システムを組み立てられる',
           slug: 'home-hero',
-          block_type: 'hero',
           placement: 'home_hero',
-          eyebrow: '輸出 B2B 成長パイプライン',
-          title: 'サイトから問い合わせ成約まで、一本の流れで',
-          subtitle:
-            '個人営業と中小輸出企業向け。構築・SEO/GEO・AI 問い合わせ・SNS/日常運用の自動化。',
-          summary: '自 Cloudflare へ導入 · データは自社 · 多言語',
-          content: '',
-          link_label: '無料診断を依頼',
-          link_url: '/ja/contact',
-          image: { url: img('Pipeline', 1600, 900) },
+          eyebrow: '磁帧鱼 · 導入可能な製品',
+          subtitle: 'サイト群生成・AI問い合わせ・導入運用。ダウンロード後、サポート同席も可能。',
+          summary: '業界と市場を伝えてください。あとは導入可能なシステムへ。',
+          cta_label: '無料で相談',
+          link_url: '/ja/contact?intent=inquiry',
+          image: { url: img('Hero', 960, 720) },
           status: 'published',
-          sort_order: 1,
+          sort_order: 10,
         },
         'en-US': {
-          name: 'Home Hero',
+          title: 'Build a shippable acquisition stack — even on your first export site',
           slug: 'home-hero',
-          block_type: 'hero',
           placement: 'home_hero',
-          eyebrow: 'B2B export growth pipeline',
-          title: 'From site launch to closed inquiries — one runnable stack',
+          eyebrow: 'Cizhenyu · Installable growth products',
           subtitle:
-            'For solo sellers and SMEs: site, SEO/GEO, inquiry AI/CRM, and automated social/ops playbooks.',
-          summary: 'Deploy to your Cloudflare · your data · multi-locale',
-          content: '',
-          link_label: 'Get a free diagnosis',
-          link_url: '/en-US/contact',
-          image: { url: img('Pipeline', 1600, 900) },
+            'Multi-site + B2B generation, AI inquiry desk, deploy & growth ops — download, install, and collaborate with support.',
+          summary: 'Tell us industry and markets; ship with installable products.',
+          cta_label: 'Get a free plan',
+          link_url: '/en-US/contact?intent=inquiry',
+          image: { url: img('Hero', 960, 720) },
           status: 'published',
-          sort_order: 1,
+          sort_order: 10,
         },
       }),
     },
     {
-      languageGroupKey: lgk('blok', 2),
+      languageGroupKey: lgk('blk', 2),
       locales: L({
         'zh-CN': {
-          name: '页脚 CTA',
+          title: '准备好下载安装了吗？',
           slug: 'footer-cta',
-          block_type: 'cta',
           placement: 'footer_cta',
-          title: '先谈您的获客瓶颈，再谈系统怎么配',
-          summary: '留下行业与目标市场，获取模块组合建议。价格不在线公示。',
-          link_label: '提交询盘',
-          link_url: '/zh-CN/contact',
-          background_image: { url: img('CTA', 1600, 600) },
+          subtitle: '三款产品均可下载；点击下载将进入询盘，客服可协作安装。',
+          summary: '不强制全套——按您的阶段选站群、询盘或部署获客。',
+          cta_label: '去下载 / 询盘',
+          link_url: '/zh-CN/resources',
           status: 'published',
-          sort_order: 2,
+          sort_order: 10,
         },
         'zh-TW': {
-          name: '頁腳 CTA',
+          title: '準備好下載安裝了嗎？',
           slug: 'footer-cta',
-          block_type: 'cta',
           placement: 'footer_cta',
-          title: '先談您的獲客瓶頸，再談系統怎麼配',
-          summary: '留下行業與目標市場，獲取模組組合建議。價格不在線公示。',
-          link_label: '提交詢盤',
-          link_url: '/zh-TW/contact',
-          background_image: { url: img('CTA', 1600, 600) },
+          subtitle: '三款產品均可下載；點擊下載將進入詢盤，客服可協作安裝。',
+          summary: '不強制全套——按階段選擇。',
+          cta_label: '去下載 / 詢盤',
+          link_url: '/zh-TW/resources',
           status: 'published',
-          sort_order: 2,
+          sort_order: 10,
         },
         ja: {
-          name: 'フッター CTA',
+          title: 'ダウンロード導入の準備はできましたか？',
           slug: 'footer-cta',
-          block_type: 'cta',
           placement: 'footer_cta',
-          title: 'まずは課題から。構成はあとで',
-          summary: '業界と市場を共有してください。公開料金表はありません。',
-          link_label: '問い合わせる',
-          link_url: '/ja/contact',
-          background_image: { url: img('CTA', 1600, 600) },
+          subtitle: '3製品をダウンロード可能。クリックで問い合わせ、同席導入可。',
+          summary: 'フルセット強制なし。',
+          cta_label: 'ダウンロード / 相談',
+          link_url: '/ja/resources',
           status: 'published',
-          sort_order: 2,
+          sort_order: 10,
         },
         'en-US': {
-          name: 'Footer CTA',
+          title: 'Ready to download and install?',
           slug: 'footer-cta',
-          block_type: 'cta',
           placement: 'footer_cta',
-          title: 'Talk bottlenecks first, stack second',
-          summary: 'Share industry and markets for a module plan. Pricing not listed.',
-          link_label: 'Send inquiry',
-          link_url: '/en-US/contact',
-          background_image: { url: img('CTA', 1600, 600) },
+          subtitle: 'All three products are downloadable. Download CTAs open inquiry — support can collaborate.',
+          summary: 'No forced bundle — pick by stage.',
+          cta_label: 'Download / Inquire',
+          link_url: '/en-US/resources',
           status: 'published',
-          sort_order: 2,
+          sort_order: 10,
         },
       }),
     },
-    ...pains.map((p) => ({
-      languageGroupKey: lgk('blok', p.n),
+    ...[
+      {
+        n: 3,
+        zh: { t: '只有名片站，改内容排期漫长', d: '业务改一版文案要等开发或外包；多语言更是互相覆盖。' },
+        en: { t: 'Brochure site, slow edits', d: 'Every copy change waits on developers or agencies.' },
+      },
+      {
+        n: 4,
+        zh: { t: '询盘散落微信与邮箱，夜间空窗', d: '线索记不住、跟进断档，高意向在非工作时间流失。' },
+        en: { t: 'Leads scattered, night gaps', d: 'Chat and email silos lose high-intent after hours.' },
+      },
+      {
+        n: 5,
+        zh: { t: '上线即停更，SEO/GEO 坚持不住', d: '部署门槛高，运营节奏靠加班，很难形成复利。' },
+        en: { t: 'Go-live then stall', d: 'Hard deploys and manual SEO fade after launch.' },
+      },
+    ].map((a) => ({
+      languageGroupKey: lgk('blk', a.n),
       locales: L({
         'zh-CN': {
-          name: p.zh.title,
-          slug: p.slug,
-          block_type: 'feature',
+          title: a.zh.t,
+          slug: `adv-${a.n}`,
           placement: 'home_advantage',
-          title: p.zh.title,
-          summary: p.zh.summary,
+          summary: a.zh.d,
           status: 'published',
-          sort_order: p.n,
+          sort_order: a.n * 10,
         },
         'zh-TW': {
-          name: tw(p.zh.title),
-          slug: p.slug,
-          block_type: 'feature',
+          title: tw(a.zh.t),
+          slug: `adv-${a.n}`,
           placement: 'home_advantage',
-          title: tw(p.zh.title),
-          summary: tw(p.zh.summary),
+          summary: tw(a.zh.d),
           status: 'published',
-          sort_order: p.n,
+          sort_order: a.n * 10,
         },
         ja: {
-          name: p.ja.title,
-          slug: p.slug,
-          block_type: 'feature',
+          title: a.en.t,
+          slug: `adv-${a.n}`,
           placement: 'home_advantage',
-          title: p.ja.title,
-          summary: p.ja.summary,
+          summary: a.en.d,
           status: 'published',
-          sort_order: p.n,
+          sort_order: a.n * 10,
         },
         'en-US': {
-          name: p.en.title,
-          slug: p.slug,
-          block_type: 'feature',
+          title: a.en.t,
+          slug: `adv-${a.n}`,
           placement: 'home_advantage',
-          title: p.en.title,
-          summary: p.en.summary,
+          summary: a.en.d,
           status: 'published',
-          sort_order: p.n,
+          sort_order: a.n * 10,
         },
       }),
     })),
   ],
-});
-
-// —— FAQ ——
-const faqs = [
-  {
-    n: 1,
-    zh: ['一定要买全套吗？', '不必。可按阶段上线：先站与后台，再询盘与自动化运营。'],
-    en: ['Must I buy everything?', 'No. Stage it: site+CMS first, then inquiry hub and Agent ops.'],
-    ja: ['フルセット必須？', 'いいえ。サイト+CMS から段階導入できます。'],
-  },
-  {
-    n: 2,
-    zh: ['会不会绑定你们的服务器？', '部署目标是您自己的 Cloudflare 账户，资产与账号归您。'],
-    en: ['Do you host and lock my data?', 'Deploy targets your Cloudflare account — assets stay yours.'],
-    ja: ['御社サーバーにロック？', 'お客様の Cloudflare アカウントへ導入します。'],
-  },
-  {
-    n: 3,
-    zh: ['不懂技术能用吗？', '部署向导与日常改内容面向业务人员；复杂定制可再评估。'],
-    en: ['Can non-engineers use it?', 'Wizards and CMS edits are operator-friendly; custom work is optional.'],
-    ja: ['非エンジニアでも？', 'ウィザードと CMS 更新は現場向け。高度要件は別途。'],
-  },
-  {
-    n: 4,
-    zh: ['支持多语言吗？', '展示站与后台按多语言 B2B 场景设计，可按目标市场开启。'],
-    en: ['Multi-locale?', 'Yes — site and CMS are designed for multi-locale B2B.'],
-    ja: ['多言語は？', 'サイトと CMS は多言語 B2B 向けです。'],
-  },
-  {
-    n: 5,
-    zh: ['AI 客服会乱承诺价格或交期吗？', '应答基于您维护的知识库；关键承诺可配置转人工。'],
-    en: ['Will AI invent prices?', 'Answers use your KB; commitments can require human handoff.'],
-    ja: ['AI が価格を勝手に？', 'KB ベース。重要約束は有人引き継ぎ可能。'],
-  },
-  {
-    n: 6,
-    zh: ['Agent 会不会很耗 Token？', '方案强调成熟流程与一键动作，目标是少试错、低消耗地完成日常运营。'],
-    en: ['Will Agent burn tokens?', 'Playbooks prioritize mature one-click flows to keep daily burn low.'],
-    ja: ['Token を大量消費？', '成熟プレイブックで無駄な試行を減らします。'],
-  },
-  {
-    n: 7,
-    zh: ['价格在哪里看？', '因模块组合与行业差异，价格不在官网公示。请提交询盘或预约演示。'],
-    en: ['Where is pricing?', 'Not listed publicly due to module mix — inquire or book a demo.'],
-    ja: ['価格は？', '構成により異なるため非公開。お問い合わせください。'],
-  },
-  {
-    n: 8,
-    zh: ['多久能上线第一版站点？', '视域名与内容准备情况而定；部署流程已产品化，演示时可按现状估算。'],
-    en: ['How fast to v1?', 'Depends on domain/content readiness; deploy is productized — estimate in a demo.'],
-    ja: ['初版公開まで？', 'ドメインとコンテンツ次第。デモで見積可能。'],
-  },
-];
-
-writeJson('faq.json', {
-  collectionSlug: 'b2b_faq',
-  items: faqs.map((f) => ({
-    languageGroupKey: lgk('faq0', f.n),
-    locales: L({
-      'zh-CN': {
-        question: f.zh[0],
-        answer: `<p>${f.zh[1]}</p>`,
-        status: 'published',
-        sort_order: f.n * 10,
-        seo_title: f.zh[0],
-        short_answer: f.zh[1],
-      },
-      'zh-TW': {
-        question: tw(f.zh[0]),
-        answer: `<p>${tw(f.zh[1])}</p>`,
-        status: 'published',
-        sort_order: f.n * 10,
-        seo_title: tw(f.zh[0]),
-        short_answer: tw(f.zh[1]),
-      },
-      ja: {
-        question: f.ja[0],
-        answer: `<p>${f.ja[1]}</p>`,
-        status: 'published',
-        sort_order: f.n * 10,
-        seo_title: f.ja[0],
-        short_answer: f.ja[1],
-      },
-      'en-US': {
-        question: f.en[0],
-        answer: `<p>${f.en[1]}</p>`,
-        status: 'published',
-        sort_order: f.n * 10,
-        seo_title: f.en[0],
-        short_answer: f.en[1],
-      },
-    }),
-  })),
-});
-
-// —— articles (placeholders) ——
-const articles = [
-  {
-    n: 1,
-    slug: 'b2b-site-vs-marketplace',
-    zh: '外贸独立站和 B2B 平台，到底该怎么分工？',
-    en: 'How should export sites and B2B marketplaces split roles?',
-    ja: '自社サイトと B2B プラットフォームの役割分担',
-  },
-  {
-    n: 2,
-    slug: 'what-is-geo-for-exporters',
-    zh: '什么是 GEO（生成式引擎优化），外贸站为什么要布局？',
-    en: 'What is GEO for exporters, and why it matters',
-    ja: '輸出サイトのための GEO とは',
-  },
-  {
-    n: 3,
-    slug: 'low-token-seo-ops',
-    zh: '低 Token 消耗的自动化运营，靠的是流程还是模型？',
-    en: 'Low-token SEO ops: playbooks beat prompt theatre',
-    ja: '低 Token 運用はモデルより手順',
-  },
-];
-
-writeJson('article.json', {
-  collectionSlug: 'b2b_article',
-  items: articles.map((a) => ({
-    languageGroupKey: lgk('arti', a.n),
-    locales: L({
-      'zh-CN': {
-        title: a.zh,
-        slug: a.slug,
-        author: '磁帧鱼',
-        summary: `【占位文章】关于「${a.zh}」的说明将持续补充。当前用于站点结构与 SEO 占位。`,
-        excerpt: a.zh,
-        cover: { url: img(`Article${a.n}`, 960, 540) },
-        content: `<p>【占位】正文待补充。</p><p>主题：${a.zh}</p><p>欢迎通过询盘告诉我们您最关心的行业场景，我们优先完善对应教程。</p>`,
-        status: 'published',
-        featured: a.n === 1 ? ['1'] : [],
-        reading_time: 4,
-        seo_title: a.zh,
-        seo_description: `占位文章：${a.zh}`,
-        robots_directive: 'index,follow',
-        schema_type: 'Article',
-        og_image: { url: img(`Article${a.n}`, 1200, 630) },
-        content_type: 'guide',
-        short_answer: `核心结论（占位）：${a.zh}——完整正文将陆续发布。`,
-        related_product_ids: ['__BY_SLUG__:b2b_product:cizhenyu-site'],
-      },
-      'zh-TW': {
-        title: tw(a.zh),
-        slug: a.slug,
-        author: '磁幀魚',
-        summary: `【佔位文章】關於「${tw(a.zh)}」的說明將持續補充。`,
-        excerpt: tw(a.zh),
-        cover: { url: img(`Article${a.n}`, 960, 540) },
-        content: `<p>【佔位】正文待補充。</p><p>主題：${tw(a.zh)}</p>`,
-        status: 'published',
-        featured: a.n === 1 ? ['1'] : [],
-        reading_time: 4,
-        seo_title: tw(a.zh),
-        seo_description: `佔位文章：${tw(a.zh)}`,
-        robots_directive: 'index,follow',
-        schema_type: 'Article',
-        og_image: { url: img(`Article${a.n}`, 1200, 630) },
-        content_type: 'guide',
-        short_answer: `核心結論（佔位）：${tw(a.zh)}`,
-        related_product_ids: ['__BY_SLUG__:b2b_product:cizhenyu-site'],
-      },
-      ja: {
-        title: a.ja,
-        slug: a.slug,
-        author: '磁帧鱼',
-        summary: `【プレースホルダー】「${a.ja}」の本文は今後追記します。`,
-        excerpt: a.ja,
-        cover: { url: img(`Article${a.n}`, 960, 540) },
-        content: `<p>【プレースホルダー】本文準備中。</p><p>テーマ：${a.ja}</p>`,
-        status: 'published',
-        featured: a.n === 1 ? ['1'] : [],
-        reading_time: 4,
-        seo_title: a.ja,
-        seo_description: `プレースホルダー：${a.ja}`,
-        robots_directive: 'index,follow',
-        schema_type: 'Article',
-        og_image: { url: img(`Article${a.n}`, 1200, 630) },
-        content_type: 'guide',
-        short_answer: `要約（仮）：${a.ja}`,
-        related_product_ids: ['__BY_SLUG__:b2b_product:cizhenyu-site'],
-      },
-      'en-US': {
-        title: a.en,
-        slug: a.slug,
-        author: 'Cizhenyu',
-        summary: `[Placeholder] Full guide for “${a.en}” will be expanded. Used for IA/SEO scaffolding.`,
-        excerpt: a.en,
-        cover: { url: img(`Article${a.n}`, 960, 540) },
-        content: `<p>[Placeholder] Body forthcoming.</p><p>Topic: ${a.en}</p><p>Tell us your industry via inquiry and we will prioritize the matching tutorial.</p>`,
-        status: 'published',
-        featured: a.n === 1 ? ['1'] : [],
-        reading_time: 4,
-        seo_title: a.en,
-        seo_description: `Placeholder article: ${a.en}`,
-        robots_directive: 'index,follow',
-        schema_type: 'Article',
-        og_image: { url: img(`Article${a.n}`, 1200, 630) },
-        content_type: 'guide',
-        short_answer: `Placeholder takeaway: ${a.en}`,
-        related_product_ids: ['__BY_SLUG__:b2b_product:cizhenyu-site'],
-      },
-    }),
-  })),
 });
 
 writeJson('seed.manifest.json', {
@@ -1300,51 +1140,36 @@ writeJson('seed.manifest.json', {
     'product.json',
     'article.json',
     'faq.json',
+    'resource.json',
     'nav_menu.json',
     'page.json',
     'content_block.json',
     'nav_menu_item.json',
   ],
   requiredByModule: {
-    _always: [
-      'company_info.json',
-      'nav_menu.json',
-      'nav_menu_item.json',
-      'page.json',
-      'content_block.json',
-    ],
+    _always: ['company_info.json', 'nav_menu.json', 'nav_menu_item.json', 'page.json', 'content_block.json'],
     products: ['product_category.json', 'product.json'],
     articles: ['article.json'],
     faq: ['faq.json'],
+    resources: ['resource.json'],
   },
   notes:
-    'Cizhenyu real product seed for default theme. b2b_* slugs rewritten to {ns}_* on deploy inject. Articles marked placeholder.',
+    'Cizhenyu marketing seed: 3 products, nav 首页/产品/帮助/下载/动态/关于/联系. Download CTAs → inquiry. Logo empty for lightning fallback.',
 });
 
-fs.writeFileSync(
-  path.join(__dirname, 'README.md'),
-  `# default 主题种子（磁帧鱼）
+writeJson(
+  '../MARKETING_COPY.md',
+  `# 磁帧鱼 default 主题营销文案（CMS seed）
 
-格式对齐 turmill / \`cizhenyu_payload\` b2b data：
+导航：首页 · 产品 · 帮助 · 下载 · 动态 · 关于 · 联系
 
-- \`collectionSlug\` 恒为 \`b2b_*\`（deploy 注入时改写为 \`{siteKey}_*\`）
-- \`items[].languageGroupKey\` + \`locales\`
-- 关联用 \`__BY_SLUG__:b2b_collection:slug\`
+产品：
+1. 全能站群管理系统 + B2B 前端站点生成系统
+2. 智能客服智能询盘系统
+3. 部署运营获客系统
 
-## 内容说明
-
-- **产品**：5 个真实模块（后台 / 展示站 / 部署 / 询盘中台 / Agent）
-- **文章**：SEO 选题占位，正文标注「占位」
-- **导航**：首页 · 产品 · 解决方案 · 资源 · 关于 · 询盘（对齐 ycz.me 信息架构）
-- **价格**：文案引导询盘，不写套餐价
-
-重新生成：
-
-\`\`\`bash
-node src/ui/themes/default/seed/build-seed.mjs
-\`\`\`
+重新生成：\`node src/ui/themes/default/seed/build-seed.mjs\`
 `,
-  'utf8',
 );
-console.log('wrote README.md');
-console.log('done');
+
+console.log('✓ default seed regenerated');

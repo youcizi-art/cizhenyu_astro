@@ -48,8 +48,8 @@ const jsonLd = item
     })
   : null;
 const downloadHtml = item?.downloadUrl
-  ? `<p><a href="${item.downloadUrl}" download target="_blank" rel="noopener">Download${item.fileFormat ? ` (${item.fileFormat})` : ''}</a></p>`
-  : '';
+  ? `<p><a class="cz-btn cz-btn-primary" href="${item.downloadUrl}" download target="_blank" rel="noopener">Download${item.fileFormat ? ` (${item.fileFormat})` : ''}</a></p>`
+  : `<p><a class="cz-btn cz-btn-primary" href="${localePath(data.locale, `/contact?intent=download&resource=${encodeURIComponent(item?.slug || id)}`)}">${data.locale.startsWith('zh') ? '下载 / 询盘（协作安装）' : 'Download / Inquire'}</a></p>`;
 const content = [item?.summary ? `<p>${item.summary}</p>` : '', downloadHtml, item?.content || ''].filter(Boolean).join('');
 ---
 <BaseLayout

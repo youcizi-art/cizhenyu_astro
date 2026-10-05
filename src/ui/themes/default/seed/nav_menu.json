@@ -2,52 +2,60 @@
   "collectionSlug": "b2b_nav_menu",
   "items": [
     {
-      "languageGroupKey": "def00000-nmen-4000-8000-000000000001",
+      "languageGroupKey": "def00000-navm-4000-8000-000000000001",
       "locales": {
         "zh-CN": {
-          "name": "页头导航",
+          "title": "主导航",
           "slug": "header",
-          "menu_type": "header"
+          "menu_type": "header",
+          "status": "published"
         },
         "zh-TW": {
-          "name": "頁頭導航",
+          "title": "主導航",
           "slug": "header",
-          "menu_type": "header"
+          "menu_type": "header",
+          "status": "published"
         },
         "ja": {
-          "name": "ヘッダーナビ",
+          "title": "メインナビ",
           "slug": "header",
-          "menu_type": "header"
+          "menu_type": "header",
+          "status": "published"
         },
         "en-US": {
-          "name": "Header Nav",
+          "title": "Header",
           "slug": "header",
-          "menu_type": "header"
+          "menu_type": "header",
+          "status": "published"
         }
       }
     },
     {
-      "languageGroupKey": "def00000-nmen-4000-8000-000000000002",
+      "languageGroupKey": "def00000-navm-4000-8000-000000000002",
       "locales": {
         "zh-CN": {
-          "name": "页脚导航",
+          "title": "页脚",
           "slug": "footer",
-          "menu_type": "footer"
+          "menu_type": "footer",
+          "status": "published"
         },
         "zh-TW": {
-          "name": "頁腳導航",
+          "title": "頁腳",
           "slug": "footer",
-          "menu_type": "footer"
+          "menu_type": "footer",
+          "status": "published"
         },
         "ja": {
-          "name": "フッターナビ",
+          "title": "フッター",
           "slug": "footer",
-          "menu_type": "footer"
+          "menu_type": "footer",
+          "status": "published"
         },
         "en-US": {
-          "name": "Footer Nav",
+          "title": "Footer",
           "slug": "footer",
-          "menu_type": "footer"
+          "menu_type": "footer",
+          "status": "published"
         }
       }
     }

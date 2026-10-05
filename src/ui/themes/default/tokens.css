@@ -1,31 +1,32 @@
-/* Default · 磁帧鱼 — ycz.me 风格落地页：深色首屏 + 青绿强调 */
+/* Default · 磁帧鱼 — 干净营销站（参考 Rinda 信息架构，蓝电强调） */
 [data-theme='default'] {
   color-scheme: light;
-  --ink: #0f172a;
-  --muted: #64748b;
-  --line: #e2e8f0;
-  --bg: #f8fafc;
-  --bg-subtle: #f1f5f9;
+  --ink: #0b1220;
+  --muted: #5b6578;
+  --line: #e6ebf2;
+  --bg: #f7f9fc;
+  --bg-subtle: #eef3f9;
   --surface: #ffffff;
-  --accent: #0d9488;
-  --accent-hover: #0f766e;
+  --accent: #1d4ed8;
+  --accent-hover: #1e3a8a;
   --accent-ink: #ffffff;
-  --accent-soft: #ccfbf1;
-  --header-bg: rgba(255, 255, 255, 0.92);
-  --topbar-bg: #0f172a;
+  --accent-soft: #dbeafe;
+  --accent-2: #0ea5e9;
+  --header-bg: rgba(255, 255, 255, 0.86);
+  --topbar-bg: #0b1220;
   --topbar-fg: #e2e8f0;
-  --footer-bg: #0f172a;
+  --footer-bg: #0b1220;
   --footer-fg: #e2e8f0;
   --footer-muted: #94a3b8;
-  --hero-bg: #0f172a;
-  --hero-fg: #f8fafc;
-  --hero-muted: #94a3b8;
+  --hero-bg: linear-gradient(165deg, #eef5ff 0%, #f7f9fc 42%, #ffffff 100%);
+  --hero-fg: #0b1220;
+  --hero-muted: #5b6578;
   --hero-border: transparent;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --font-sans: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
-  --font-display: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
-  --wrap-max: 1120px;
-  --shadow-nav: 0 8px 28px rgba(15, 23, 42, 0.08);
-  --shadow-card: 0 12px 40px rgba(15, 23, 42, 0.06);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-display: 'Outfit', 'Noto Sans SC', 'PingFang SC', system-ui, sans-serif;
+  --wrap-max: 1160px;
+  --shadow-nav: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --shadow-card: 0 18px 50px rgba(15, 23, 42, 0.07);
 }

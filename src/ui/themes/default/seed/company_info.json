@@ -7,22 +7,22 @@
         "zh-CN": {
           "company_name": "磁帧鱼",
           "company_type": "software",
-          "slogan": "外贸 B2B 增长流水线：建站、部署、询盘、自动化运营",
-          "summary": "磁帧鱼面向个人外贸业务员与中小外贸企业，提供一整套可落地的获客系统：站点后台、SEO/GEO 展示站、一键云部署、询盘 CRM 与 AI 客服，以及本地 Agent 驱动的 SEO/GEO 与社媒自动化。",
+          "slogan": "第一次做外贸站群与询盘，也能搭出可交付的获客系统",
+          "summary": "磁帧鱼面向外贸业务员、工厂外贸部与服务商，提供站群与 B2B 站点生成、智能客服询盘、部署运营获客三套可安装产品。资产在您自己的云账户，安装可协作完成。",
           "address": "中国",
           "phone": "",
           "email": "hello@ycz.me",
           "website": "https://ycz.me",
           "logo": {
-            "url": "https://placehold.co/240x80/0f172a/5eead4?text=Cizhenyu"
+            "url": ""
           },
-          "about_content": "<p>磁帧鱼不是又一个建站模板市场，而是围绕外贸 B2B 成交链路设计的系统：内容在后台沉淀，站点对搜索与买家友好，部署降低上线门槛，询盘中台守住转化，本地 Agent 把 SEO/GEO 与社媒变成日常可执行动作。</p><p>我们服务懂业务、缺技术班子、也不想被复杂云产品劝退的个人业务员与中小企业主。资产部署在客户自己的 Cloudflare 账户；价格不在官网公示，请提交询盘获取模块组合建议。</p>",
-          "seo_title": "磁帧鱼｜外贸 B2B 一站式获客与运营系统",
-          "seo_description": "建站、一键部署、询盘 CRM 与 AI 客服、SEO/GEO 与社媒自动化。面向个人业务员与中小企业，提交询盘获取方案。",
+          "about_content": "<p>磁帧鱼做的不是「又一个模板站」，而是能装到您账户里、能持续改内容、能接住询盘的增长系统。</p><p>三款产品可单独购买、也可组合交付：全能站群 + B2B 前端生成、智能客服询盘、部署运营获客。下载安装可联系客服协作完成；价格与实施方案通过询盘获取。</p>",
+          "seo_title": "磁帧鱼｜外贸站群 · 询盘 · 部署获客系统",
+          "seo_description": "站群与 B2B 站点生成、智能客服询盘、部署运营获客。提交询盘获取安装与协作方案。",
           "robots_directive": "index,follow",
           "schema_type": "Organization",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Cizhenyu"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Cizhenyu"
           },
           "country": "中国",
           "social_profiles": [
@@ -35,22 +35,22 @@
         "zh-TW": {
           "company_name": "磁幀魚",
           "company_type": "software",
-          "slogan": "外貿 B2B 增長流水線：建站、部署、詢盤、自動化運營",
-          "summary": "磁幀魚面向個人外貿業務員與中小外貿企業，提供一整套可落地的獲客系統：站點後台、SEO/GEO 展示站、一鍵雲部署、詢盤 CRM 與 AI 客服，以及本地 Agent 驅動的 SEO/GEO 與社媒自動化。",
+          "slogan": "第一次做外貿站群與詢盤，也能搭出可交付的獲客系統",
+          "summary": "磁幀魚面向外貿業務員、工廠外貿部與服務商，提供站群與 B2B 站點生成、智慧客服詢盤、部署運營獲客三套可安裝產品。",
           "address": "中國",
           "phone": "",
           "email": "hello@ycz.me",
           "website": "https://ycz.me",
           "logo": {
-            "url": "https://placehold.co/240x80/0f172a/5eead4?text=Cizhenyu"
+            "url": ""
           },
-          "about_content": "<p>磁幀魚不是又一個建站模板市場，而是圍繞外貿 B2B 成交鏈路設計的系統。資產部署在客戶自己的 Cloudflare 帳戶；價格不在官網公示，請提交詢盤獲取模組組合建議。</p>",
-          "seo_title": "磁幀魚｜外貿 B2B 一站式獲客與運營系統",
-          "seo_description": "建站、一鍵部署、詢盤 CRM 與 AI 客服、SEO/GEO 與社媒自動化。提交詢盤獲取方案。",
+          "about_content": "<p>磁幀魚提供可裝到您帳戶裡的外貿獲客系統。三款產品可單獨或組合交付；安裝可聯繫客服協作，方案透過詢盤獲取。</p>",
+          "seo_title": "磁幀魚｜外貿站群 · 詢盤 · 部署獲客系統",
+          "seo_description": "站群與 B2B 站點生成、智慧客服詢盤、部署運營獲客。提交詢盤獲取方案。",
           "robots_directive": "index,follow",
           "schema_type": "Organization",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Cizhenyu"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Cizhenyu"
           },
           "country": "中國",
           "social_profiles": [
@@ -63,22 +63,22 @@
         "ja": {
           "company_name": "磁帧鱼",
           "company_type": "software",
-          "slogan": "輸出 B2B 成長パイプライン：サイト・導入・問い合わせ・自動化運用",
-          "summary": "磁帧鱼は個人営業と中小輸出企業向けに、CMS・SEO/GEO サイト・ワンクリック導入・CRM/AI 問い合わせ・ローカル Agent による SEO/GEO・SNS 自動化を提供します。",
+          "slogan": "初めての輸出サイト群・問い合わせでも、届けられる獲得システムを",
+          "summary": "磁帧鱼は営業個人・中小メーカー・支援事業者向けに、サイト群/B2B生成・AI問い合わせ・導入運用の3製品を提供します。",
           "address": "China",
           "phone": "",
           "email": "hello@ycz.me",
           "website": "https://ycz.me",
           "logo": {
-            "url": "https://placehold.co/240x80/0f172a/5eead4?text=Cizhenyu"
+            "url": ""
           },
-          "about_content": "<p>磁帧鱼はテンプレート販売ではなく、輸出 B2B の受注導線向けシステムです。資産はお客様の Cloudflare アカウントへ。価格は公開せず、お問い合わせで構成をご提案します。</p>",
-          "seo_title": "磁帧鱼｜輸出 B2B 獲得・運用システム",
-          "seo_description": "サイト構築、ワンクリック導入、CRM/AI、SEO/GEO・SNS 自動化。お問い合わせでご提案。",
+          "about_content": "<p>磁帧鱼はテンプレート販売ではなく、お客様アカウントへ導入できる獲得システムです。インストールはサポート同席可能。価格はお問い合わせください。</p>",
+          "seo_title": "磁帧鱼｜サイト群・問い合わせ・導入獲得",
+          "seo_description": "サイト群/B2B生成、AI問い合わせ、導入運用。お問い合わせでご提案。",
           "robots_directive": "index,follow",
           "schema_type": "Organization",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Cizhenyu"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Cizhenyu"
           },
           "country": "China",
           "social_profiles": [
@@ -91,22 +91,22 @@
         "en-US": {
           "company_name": "Cizhenyu",
           "company_type": "software",
-          "slogan": "B2B export growth pipeline: site, deploy, inquiries, automated ops",
-          "summary": "Cizhenyu helps solo export sellers and SMEs run a practical acquisition stack: CMS, SEO/GEO site, one-click cloud deploy, inquiry CRM with AI support, and a local Agent for SEO/GEO and social ops.",
+          "slogan": "Ship a real acquisition stack — even if it’s your first export site",
+          "summary": "Cizhenyu helps export sellers, factory teams, and agencies install three products: multi-site + B2B site generation, AI inquiry desk, and deploy-ops growth. Assets stay on your cloud account.",
           "address": "China",
           "phone": "",
           "email": "hello@ycz.me",
           "website": "https://ycz.me",
           "logo": {
-            "url": "https://placehold.co/240x80/0f172a/5eead4?text=Cizhenyu"
+            "url": ""
           },
-          "about_content": "<p>Cizhenyu is not another template marketplace. It is a system designed around B2B export conversion: content in CMS, search-friendly sites, wizard deploy to your Cloudflare account, CRM/AI for inquiries, and local Agent playbooks for SEO/GEO and social. Pricing is not listed publicly — inquire for a module plan.</p>",
-          "seo_title": "Cizhenyu | B2B export acquisition & ops stack",
-          "seo_description": "Site, one-click deploy, inquiry CRM & AI, SEO/GEO and social automation. Inquire for a tailored plan.",
+          "about_content": "<p>Cizhenyu is not another template shop. It is an installable growth stack for B2B export. Buy modules alone or together; we can collaborate on install. Pricing via inquiry.</p>",
+          "seo_title": "Cizhenyu | Multi-site · Inquiry · Deploy growth",
+          "seo_description": "Multi-site + B2B generation, AI inquiry desk, deploy-ops growth. Inquire for install collaboration.",
           "robots_directive": "index,follow",
           "schema_type": "Organization",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Cizhenyu"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Cizhenyu"
           },
           "country": "China",
           "social_profiles": [

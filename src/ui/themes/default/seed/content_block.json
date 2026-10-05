@@ -2,279 +2,227 @@
   "collectionSlug": "b2b_content_block",
   "items": [
     {
-      "languageGroupKey": "def00000-blok-4000-8000-000000000001",
+      "languageGroupKey": "def00000-blk-4000-8000-000000000001",
       "locales": {
         "zh-CN": {
-          "name": "首页首屏",
+          "title": "第一次做外贸站群与询盘，也能搭出可交付的获客系统",
           "slug": "home-hero",
-          "block_type": "hero",
           "placement": "home_hero",
-          "eyebrow": "外贸 B2B 增长流水线",
-          "title": "从建站到询盘成交，一套系统跑通获客",
-          "subtitle": "面向个人业务员与中小外贸企业。站点建设、SEO/GEO、智能询盘客服、社媒与日常运营自动化——成熟方案，少折腾、快上线。",
-          "summary": "一键部署到自有 Cloudflare · 数据自有 · 支持多语言",
-          "content": "",
-          "link_label": "免费获取方案诊断",
-          "link_url": "/zh-CN/contact",
+          "eyebrow": "磁帧鱼 · 可安装的获客产品",
+          "subtitle": "从 8 成「只有名片站、询盘散落、上线即停更」的团队里走出来：站群与 B2B 站点生成、智能客服询盘、部署运营获客——三款产品可下载安装，客服可协作上线。",
+          "summary": "您要做的，是说清行业与目标市场；剩下的生成、部署与询盘承接，交给可安装的系统。",
+          "cta_label": "免费获取方案",
+          "link_url": "/zh-CN/contact?intent=inquiry",
           "image": {
-            "url": "https://placehold.co/1600x900/0f172a/5eead4?text=Pipeline"
+            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
           },
-          "status": "published",
-          "sort_order": 1
-        },
-        "zh-TW": {
-          "name": "首頁首屏",
-          "slug": "home-hero",
-          "block_type": "hero",
-          "placement": "home_hero",
-          "eyebrow": "外貿 B2B 增長流水線",
-          "title": "從建站到詢盤成交，一套系統跑通獲客",
-          "subtitle": "面向個人業務員與中小外貿企業。站點建設、SEO/GEO、智能詢盤客服、社媒與日常運營自動化。",
-          "summary": "一鍵部署到自有 Cloudflare · 資料自有 · 支援多語言",
-          "content": "",
-          "link_label": "免費獲取方案診斷",
-          "link_url": "/zh-TW/contact",
-          "image": {
-            "url": "https://placehold.co/1600x900/0f172a/5eead4?text=Pipeline"
-          },
-          "status": "published",
-          "sort_order": 1
-        },
-        "ja": {
-          "name": "ホームヒーロー",
-          "slug": "home-hero",
-          "block_type": "hero",
-          "placement": "home_hero",
-          "eyebrow": "輸出 B2B 成長パイプライン",
-          "title": "サイトから問い合わせ成約まで、一本の流れで",
-          "subtitle": "個人営業と中小輸出企業向け。構築・SEO/GEO・AI 問い合わせ・SNS/日常運用の自動化。",
-          "summary": "自 Cloudflare へ導入 · データは自社 · 多言語",
-          "content": "",
-          "link_label": "無料診断を依頼",
-          "link_url": "/ja/contact",
-          "image": {
-            "url": "https://placehold.co/1600x900/0f172a/5eead4?text=Pipeline"
-          },
-          "status": "published",
-          "sort_order": 1
-        },
-        "en-US": {
-          "name": "Home Hero",
-          "slug": "home-hero",
-          "block_type": "hero",
-          "placement": "home_hero",
-          "eyebrow": "B2B export growth pipeline",
-          "title": "From site launch to closed inquiries — one runnable stack",
-          "subtitle": "For solo sellers and SMEs: site, SEO/GEO, inquiry AI/CRM, and automated social/ops playbooks.",
-          "summary": "Deploy to your Cloudflare · your data · multi-locale",
-          "content": "",
-          "link_label": "Get a free diagnosis",
-          "link_url": "/en-US/contact",
-          "image": {
-            "url": "https://placehold.co/1600x900/0f172a/5eead4?text=Pipeline"
-          },
-          "status": "published",
-          "sort_order": 1
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-blok-4000-8000-000000000002",
-      "locales": {
-        "zh-CN": {
-          "name": "页脚 CTA",
-          "slug": "footer-cta",
-          "block_type": "cta",
-          "placement": "footer_cta",
-          "title": "先谈您的获客瓶颈，再谈系统怎么配",
-          "summary": "留下行业与目标市场，获取模块组合建议。价格不在线公示。",
-          "link_label": "提交询盘",
-          "link_url": "/zh-CN/contact",
-          "background_image": {
-            "url": "https://placehold.co/1600x600/0f172a/5eead4?text=CTA"
-          },
-          "status": "published",
-          "sort_order": 2
-        },
-        "zh-TW": {
-          "name": "頁腳 CTA",
-          "slug": "footer-cta",
-          "block_type": "cta",
-          "placement": "footer_cta",
-          "title": "先談您的獲客瓶頸，再談系統怎麼配",
-          "summary": "留下行業與目標市場，獲取模組組合建議。價格不在線公示。",
-          "link_label": "提交詢盤",
-          "link_url": "/zh-TW/contact",
-          "background_image": {
-            "url": "https://placehold.co/1600x600/0f172a/5eead4?text=CTA"
-          },
-          "status": "published",
-          "sort_order": 2
-        },
-        "ja": {
-          "name": "フッター CTA",
-          "slug": "footer-cta",
-          "block_type": "cta",
-          "placement": "footer_cta",
-          "title": "まずは課題から。構成はあとで",
-          "summary": "業界と市場を共有してください。公開料金表はありません。",
-          "link_label": "問い合わせる",
-          "link_url": "/ja/contact",
-          "background_image": {
-            "url": "https://placehold.co/1600x600/0f172a/5eead4?text=CTA"
-          },
-          "status": "published",
-          "sort_order": 2
-        },
-        "en-US": {
-          "name": "Footer CTA",
-          "slug": "footer-cta",
-          "block_type": "cta",
-          "placement": "footer_cta",
-          "title": "Talk bottlenecks first, stack second",
-          "summary": "Share industry and markets for a module plan. Pricing not listed.",
-          "link_label": "Send inquiry",
-          "link_url": "/en-US/contact",
-          "background_image": {
-            "url": "https://placehold.co/1600x600/0f172a/5eead4?text=CTA"
-          },
-          "status": "published",
-          "sort_order": 2
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-blok-4000-8000-000000000010",
-      "locales": {
-        "zh-CN": {
-          "name": "有产品，没有能接单的网站",
-          "slug": "pain-slow-site",
-          "block_type": "feature",
-          "placement": "home_advantage",
-          "title": "有产品，没有能接单的网站",
-          "summary": "依赖平台与展会；独立站像宣传册，搜不到、转化弱，渠道一变业绩就抖。",
           "status": "published",
           "sort_order": 10
         },
         "zh-TW": {
-          "name": "有產品，没有能接单的网站",
-          "slug": "pain-slow-site",
-          "block_type": "feature",
-          "placement": "home_advantage",
-          "title": "有產品，没有能接单的网站",
-          "summary": "依赖平台与展会；獨立站像宣传册，搜不到、转化弱，渠道一变业绩就抖。",
+          "title": "第一次做外貿站群與詢盤，也能搭出可交付的獲客系統",
+          "slug": "home-hero",
+          "placement": "home_hero",
+          "eyebrow": "磁幀魚 · 可安裝的獲客產品",
+          "subtitle": "站群與 B2B 站點生成、智慧客服詢盤、部署運營獲客——三款產品可下載安裝，客服可協作上線。",
+          "summary": "說清行業與目標市場，其餘交給可安裝系統。",
+          "cta_label": "免費獲取方案",
+          "link_url": "/zh-TW/contact?intent=inquiry",
+          "image": {
+            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          },
           "status": "published",
           "sort_order": 10
         },
         "ja": {
-          "name": "製品はあるが受注サイトがない",
-          "slug": "pain-slow-site",
-          "block_type": "feature",
-          "placement": "home_advantage",
-          "title": "製品はあるが受注サイトがない",
-          "summary": "プラットフォーム依存。パンフサイトでは検索も転換も弱い。",
+          "title": "初めてでも、納品できる獲得システムを組み立てられる",
+          "slug": "home-hero",
+          "placement": "home_hero",
+          "eyebrow": "磁帧鱼 · 導入可能な製品",
+          "subtitle": "サイト群生成・AI問い合わせ・導入運用。ダウンロード後、サポート同席も可能。",
+          "summary": "業界と市場を伝えてください。あとは導入可能なシステムへ。",
+          "cta_label": "無料で相談",
+          "link_url": "/ja/contact?intent=inquiry",
+          "image": {
+            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          },
           "status": "published",
           "sort_order": 10
         },
         "en-US": {
-          "name": "Products, but no site that wins orders",
-          "slug": "pain-slow-site",
-          "block_type": "feature",
-          "placement": "home_advantage",
-          "title": "Products, but no site that wins orders",
-          "summary": "Platform-dependent; brochure sites that do not rank or convert.",
+          "title": "Build a shippable acquisition stack — even on your first export site",
+          "slug": "home-hero",
+          "placement": "home_hero",
+          "eyebrow": "Cizhenyu · Installable growth products",
+          "subtitle": "Multi-site + B2B generation, AI inquiry desk, deploy & growth ops — download, install, and collaborate with support.",
+          "summary": "Tell us industry and markets; ship with installable products.",
+          "cta_label": "Get a free plan",
+          "link_url": "/en-US/contact?intent=inquiry",
+          "image": {
+            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          },
           "status": "published",
           "sort_order": 10
         }
       }
     },
     {
-      "languageGroupKey": "def00000-blok-4000-8000-000000000011",
+      "languageGroupKey": "def00000-blk-4000-8000-000000000002",
       "locales": {
         "zh-CN": {
-          "name": "技术门槛吃掉业务时间",
-          "slug": "pain-cloud-hard",
-          "block_type": "feature",
-          "placement": "home_advantage",
-          "title": "技术门槛吃掉业务时间",
-          "summary": "Cloudflare、域名、Workers、缓存学不完；项目卡在半成品或被代理商绑架。",
+          "title": "准备好下载安装了吗？",
+          "slug": "footer-cta",
+          "placement": "footer_cta",
+          "subtitle": "三款产品均可下载；点击下载将进入询盘，客服可协作安装。",
+          "summary": "不强制全套——按您的阶段选站群、询盘或部署获客。",
+          "cta_label": "去下载 / 询盘",
+          "link_url": "/zh-CN/resources",
           "status": "published",
-          "sort_order": 11
+          "sort_order": 10
         },
         "zh-TW": {
-          "name": "技术门槛吃掉业务时间",
-          "slug": "pain-cloud-hard",
-          "block_type": "feature",
-          "placement": "home_advantage",
-          "title": "技术门槛吃掉业务时间",
-          "summary": "Cloudflare、域名、Workers、缓存学不完；项目卡在半成品或被代理商绑架。",
+          "title": "準備好下載安裝了嗎？",
+          "slug": "footer-cta",
+          "placement": "footer_cta",
+          "subtitle": "三款產品均可下載；點擊下載將進入詢盤，客服可協作安裝。",
+          "summary": "不強制全套——按階段選擇。",
+          "cta_label": "去下載 / 詢盤",
+          "link_url": "/zh-TW/resources",
           "status": "published",
-          "sort_order": 11
+          "sort_order": 10
         },
         "ja": {
-          "name": "技術ハードルが営業時間を奪う",
-          "slug": "pain-cloud-hard",
-          "block_type": "feature",
-          "placement": "home_advantage",
-          "title": "技術ハードルが営業時間を奪う",
-          "summary": "Cloudflare 設定に追われ、半完成のまま止まる。",
+          "title": "ダウンロード導入の準備はできましたか？",
+          "slug": "footer-cta",
+          "placement": "footer_cta",
+          "subtitle": "3製品をダウンロード可能。クリックで問い合わせ、同席導入可。",
+          "summary": "フルセット強制なし。",
+          "cta_label": "ダウンロード / 相談",
+          "link_url": "/ja/resources",
           "status": "published",
-          "sort_order": 11
+          "sort_order": 10
         },
         "en-US": {
-          "name": "Tech overhead eats selling time",
-          "slug": "pain-cloud-hard",
-          "block_type": "feature",
-          "placement": "home_advantage",
-          "title": "Tech overhead eats selling time",
-          "summary": "Cloudflare complexity stalls launches or locks you to agencies.",
+          "title": "Ready to download and install?",
+          "slug": "footer-cta",
+          "placement": "footer_cta",
+          "subtitle": "All three products are downloadable. Download CTAs open inquiry — support can collaborate.",
+          "summary": "No forced bundle — pick by stage.",
+          "cta_label": "Download / Inquire",
+          "link_url": "/en-US/resources",
           "status": "published",
-          "sort_order": 11
+          "sort_order": 10
         }
       }
     },
     {
-      "languageGroupKey": "def00000-blok-4000-8000-000000000012",
+      "languageGroupKey": "def00000-blk-4000-8000-000000000003",
       "locales": {
         "zh-CN": {
-          "name": "询盘进来没人跟、跟了丢线索",
-          "slug": "pain-leads",
-          "block_type": "feature",
+          "title": "只有名片站，改内容排期漫长",
+          "slug": "adv-3",
           "placement": "home_advantage",
-          "title": "询盘进来没人跟、跟了丢线索",
-          "summary": "时差夜间无人回；参数问答重复；线索散落聊天软件无法复盘。",
+          "summary": "业务改一版文案要等开发或外包；多语言更是互相覆盖。",
           "status": "published",
-          "sort_order": 12
+          "sort_order": 30
         },
         "zh-TW": {
-          "name": "詢盤进来没人跟、跟了丢线索",
-          "slug": "pain-leads",
-          "block_type": "feature",
+          "title": "只有名片站，改內容排期漫长",
+          "slug": "adv-3",
           "placement": "home_advantage",
-          "title": "詢盤进来没人跟、跟了丢线索",
-          "summary": "时差夜间无人回；参数问答重复；线索散落聊天软件无法复盘。",
+          "summary": "业务改一版文案要等开发或外包；多語言更是互相覆盖。",
           "status": "published",
-          "sort_order": 12
+          "sort_order": 30
         },
         "ja": {
-          "name": "問い合わせが来ても逃す",
-          "slug": "pain-leads",
-          "block_type": "feature",
+          "title": "Brochure site, slow edits",
+          "slug": "adv-3",
           "placement": "home_advantage",
-          "title": "問い合わせが来ても逃す",
-          "summary": "時差・重複質問・チャット散在でフォロー不能。",
+          "summary": "Every copy change waits on developers or agencies.",
           "status": "published",
-          "sort_order": 12
+          "sort_order": 30
         },
         "en-US": {
-          "name": "Inquiries arrive — then get lost",
-          "slug": "pain-leads",
-          "block_type": "feature",
+          "title": "Brochure site, slow edits",
+          "slug": "adv-3",
           "placement": "home_advantage",
-          "title": "Inquiries arrive — then get lost",
-          "summary": "Night gaps, repeated tech Q&A, leads stuck in personal chats.",
+          "summary": "Every copy change waits on developers or agencies.",
           "status": "published",
-          "sort_order": 12
+          "sort_order": 30
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000004",
+      "locales": {
+        "zh-CN": {
+          "title": "询盘散落微信与邮箱，夜间空窗",
+          "slug": "adv-4",
+          "placement": "home_advantage",
+          "summary": "线索记不住、跟进断档，高意向在非工作时间流失。",
+          "status": "published",
+          "sort_order": 40
+        },
+        "zh-TW": {
+          "title": "詢盤散落微信与邮箱，夜间空窗",
+          "slug": "adv-4",
+          "placement": "home_advantage",
+          "summary": "线索记不住、跟进断档，高意向在非工作时间流失。",
+          "status": "published",
+          "sort_order": 40
+        },
+        "ja": {
+          "title": "Leads scattered, night gaps",
+          "slug": "adv-4",
+          "placement": "home_advantage",
+          "summary": "Chat and email silos lose high-intent after hours.",
+          "status": "published",
+          "sort_order": 40
+        },
+        "en-US": {
+          "title": "Leads scattered, night gaps",
+          "slug": "adv-4",
+          "placement": "home_advantage",
+          "summary": "Chat and email silos lose high-intent after hours.",
+          "status": "published",
+          "sort_order": 40
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000005",
+      "locales": {
+        "zh-CN": {
+          "title": "上线即停更，SEO/GEO 坚持不住",
+          "slug": "adv-5",
+          "placement": "home_advantage",
+          "summary": "部署门槛高，运营节奏靠加班，很难形成复利。",
+          "status": "published",
+          "sort_order": 50
+        },
+        "zh-TW": {
+          "title": "上线即停更，SEO/GEO 坚持不住",
+          "slug": "adv-5",
+          "placement": "home_advantage",
+          "summary": "部署门槛高，運營节奏靠加班，很难形成复利。",
+          "status": "published",
+          "sort_order": 50
+        },
+        "ja": {
+          "title": "Go-live then stall",
+          "slug": "adv-5",
+          "placement": "home_advantage",
+          "summary": "Hard deploys and manual SEO fade after launch.",
+          "status": "published",
+          "sort_order": 50
+        },
+        "en-US": {
+          "title": "Go-live then stall",
+          "slug": "adv-5",
+          "placement": "home_advantage",
+          "summary": "Hard deploys and manual SEO fade after launch.",
+          "status": "published",
+          "sort_order": 50
         }
       }
     }

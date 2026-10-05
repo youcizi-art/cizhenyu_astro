@@ -5,185 +5,182 @@
       "languageGroupKey": "def00000-prod-4000-8000-000000000001",
       "locales": {
         "zh-CN": {
-          "title": "磁帧鱼后台",
-          "slug": "cizhenyu-cms",
-          "sku": "CZ-CMS",
+          "title": "磁帧鱼 全能站群管理系统 + B2B 前端站点生成系统",
+          "slug": "cizhenyu-sites",
+          "sku": "CZ-SITES",
           "brand": "磁帧鱼",
-          "summary": "外贸站点的业务后台。改完内容站点自动更新，支撑多站点与日常运营节奏。",
-          "description": "<p><strong>磁帧鱼后台</strong>（cizhenyu_payload）是整套系统的数据中枢。</p><ul><li>动态模型与内容管理，适配 B2B 产品结构</li><li>媒体资源与发布流程</li><li>对接展示站自动刷新</li><li>供部署工具与本地 Agent 共用同一数据源</li></ul><p>解决「改文案找建站公司、多语言内容混乱」的痛点。价格请询盘获取。</p>",
+          "summary": "面向外贸站群与企业站交付：统一内容后台、多语言结构、产品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。",
+          "description": "<p><strong>全能站群 + B2B 前端生成</strong>帮您把「多站点内容」和「可交付的企业官网」放在同一套系统里。</p><ul><li>站群统一管理：域名、语言、栏目、内容权限</li><li>B2B 站点结构开箱：产品、帮助、动态、关于、联系</li><li>主题包交付：无需给客户源码环境</li><li>与询盘、部署产品可组合安装</li></ul><p>适合服务商批量交付，也适合工厂/贸易公司自建主站。下载安装可联系客服协作。</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CMS"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
             },
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CMS%2BUI"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites%2BUI"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-CMS",
-            "stack": "Cloudflare"
+            "module": "CZ-SITES",
+            "install": "download+collaborate"
           },
-          "seo_title": "磁帧鱼后台｜磁帧鱼",
-          "seo_description": "外贸站点的业务后台。改完内容站点自动更新，支撑多站点与日常运营节奏。",
+          "seo_title": "磁帧鱼 全能站群管理系统 + B2B 前端站点生成系统｜磁帧鱼",
+          "seo_description": "面向外贸站群与企业站交付：统一内容后台、多语言结构、产品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=CMS"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
           },
-          "tagline": "站点数据中枢：产品、文章、案例与多语言一处管理",
+          "tagline": "一套后台管多站，一键生成可上线的 B2B 外贸站",
           "advantages": [
             {
-              "title": "业务人员可改",
-              "description": "不必每次找开发排期。"
+              "title": "站群一体",
+              "description": "多站内容与权限统一，减少重复配置。"
             },
             {
-              "title": "多语言就绪",
-              "description": "按目标市场维护本地化内容。"
+              "title": "B2B 结构就绪",
+              "description": "外贸站必备栏目与 SEO 基础已内置。"
             },
             {
-              "title": "联动前台",
-              "description": "发布后触发站点刷新。"
+              "title": "可协作安装",
+              "description": "下载后可约客服协助部署上线。"
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         },
         "zh-TW": {
-          "title": "磁幀魚後台",
-          "slug": "cizhenyu-cms",
-          "sku": "CZ-CMS",
+          "title": "磁幀魚 全能站群管理系统 + B2B 前端站點生成系统",
+          "slug": "cizhenyu-sites",
+          "sku": "CZ-SITES",
           "brand": "磁幀魚",
-          "summary": "外貿站點的业务後台。改完內容站點自动更新，支撑多站點与日常運營节奏。",
-          "description": "<p><strong>磁幀魚後台</strong>（cizhenyu_payload）是整套系统的資料中枢。</p><ul><li>动态模型与內容管理，适配 B2B 產品结构</li><li>媒体資源与发布流程</li><li>对接展示站自动刷新</li><li>供部署工具与本地 Agent 共用同一資料源</li></ul><p>解決「改文案找建站公司、多語言內容混乱」的痛点。價格请詢盤獲取。</p>",
+          "summary": "面向外貿站群与企業站交付：统一內容後台、多語言结构、產品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。",
+          "description": "<p><strong>全能站群 + B2B 前端生成</strong>帮您把「多站點內容」和「可交付的企業官網」放在同一套系统里。</p><ul><li>站群统一管理：域名、语言、栏目、內容权限</li><li>B2B 站點结构开箱：產品、幫助、動態、關於、聯繫</li><li>主题包交付：无需给客户源码环境</li><li>与詢盤、部署產品可组合安裝</li></ul><p>适合服務商批量交付，也适合工厂/贸易公司自建主站。下載安裝可聯繫客服協作。</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CMS"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-CMS",
-            "stack": "Cloudflare"
+            "module": "CZ-SITES",
+            "install": "download+collaborate"
           },
-          "seo_title": "磁幀魚後台｜磁幀魚",
-          "seo_description": "外貿站點的业务後台。改完內容站點自动更新，支撑多站點与日常運營节奏。",
+          "seo_title": "磁幀魚 全能站群管理系统 + B2B 前端站點生成系统｜磁幀魚",
+          "seo_description": "面向外貿站群与企業站交付：统一內容後台、多語言结构、產品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=CMS"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
           },
-          "tagline": "站點資料中枢：產品、文章、案例与多語言一处管理",
+          "tagline": "一套後台管多站，一鍵生成可上线的 B2B 外貿站",
           "advantages": [
             {
-              "title": "业务人员可改",
-              "description": "不必每次找开发排期。"
+              "title": "站群一体",
+              "description": "多站內容与权限统一，减少重复配置。"
             },
             {
-              "title": "多語言就绪",
-              "description": "按目标市场维护本地化內容。"
+              "title": "B2B 结构就绪",
+              "description": "外貿站必备栏目与 SEO 基础已内置。"
             },
             {
-              "title": "联动前台",
-              "description": "发布后触发站點刷新。"
+              "title": "可協作安裝",
+              "description": "下載后可约客服协助部署上线。"
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         },
         "ja": {
-          "title": "磁帧鱼 CMS",
-          "slug": "cizhenyu-cms",
-          "sku": "CZ-CMS",
+          "title": "磁帧鱼 サイト群CMS + B2Bサイト生成",
+          "slug": "cizhenyu-sites",
+          "sku": "CZ-SITES",
           "brand": "磁帧鱼",
-          "summary": "輸出サイトの業務バックエンド。更新はサイトへ自動反映。",
-          "description": "<p><strong>磁帧鱼 CMS</strong> はスタックのデータ中枢です。B2B カタログ向けの動的モデル、メディア、多言語、再検証フックを提供します。価格はお問い合わせください。</p>",
+          "summary": "サイト群のコンテンツ管理と、Cloudflare Pages向けB2Bサイト生成。",
+          "description": "<p><strong>サイト群 + B2B生成</strong>で、多サイト運用と企業サイト納品を一本化。問い合わせ・導入製品と組み合わせ可能。インストール同席サポートあり。</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CMS"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-CMS",
-            "stack": "Cloudflare"
+            "module": "CZ-SITES",
+            "install": "download+collaborate"
           },
-          "seo_title": "磁帧鱼 CMS｜磁帧鱼",
-          "seo_description": "輸出サイトの業務バックエンド。更新はサイトへ自動反映。",
+          "seo_title": "磁帧鱼 サイト群CMS + B2Bサイト生成｜磁帧鱼",
+          "seo_description": "サイト群のコンテンツ管理と、Cloudflare Pages向けB2Bサイト生成。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=CMS"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
           },
-          "tagline": "製品・記事・事例・多言語を一括管理",
+          "tagline": "多サイトを一括管理し、納品可能なB2Bサイトを生成",
           "advantages": [
             {
-              "title": "現場が更新可能",
-              "description": "開発待ちを減らす。"
+              "title": "多サイト一元",
+              "description": "権限とコンテンツを共有。"
             },
             {
-              "title": "多言語",
-              "description": "市場別にコンテンツ管理。"
+              "title": "B2B構成済み",
+              "description": "輸出サイトの導線を内蔵。"
             },
             {
-              "title": "サイト連携",
-              "description": "公開でフロント更新。"
+              "title": "同席導入",
+              "description": "ダウンロード後、サポートと導入。"
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         },
         "en-US": {
-          "title": "Cizhenyu CMS",
-          "slug": "cizhenyu-cms",
-          "sku": "CZ-CMS",
+          "title": "Cizhenyu Multi-site CMS + B2B Site Generator",
+          "slug": "cizhenyu-sites",
+          "sku": "CZ-SITES",
           "brand": "Cizhenyu",
-          "summary": "The business backend for your export site. Edit once; the site refreshes.",
-          "description": "<p><strong>Cizhenyu CMS</strong> is the data hub of the stack: dynamic models, media, i18n, and revalidate hooks for the public site. Built for B2B catalogs — not brochure blogs. Pricing via inquiry.</p>",
+          "summary": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
+          "description": "<p><strong>Multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CMS"
-            },
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CMS%2BUI"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-CMS",
-            "stack": "Cloudflare"
+            "module": "CZ-SITES",
+            "install": "download+collaborate"
           },
-          "seo_title": "Cizhenyu CMS | Cizhenyu",
-          "seo_description": "The business backend for your export site. Edit once; the site refreshes.",
+          "seo_title": "Cizhenyu Multi-site CMS + B2B Site Generator | Cizhenyu",
+          "seo_description": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=CMS"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
           },
-          "tagline": "Content hub for products, articles, cases, and locales",
+          "tagline": "One hub for many sites — generate deployable B2B export sites",
           "advantages": [
             {
-              "title": "Operator-friendly",
-              "description": "Business users can update content."
+              "title": "Multi-site hub",
+              "description": "Shared content and permissions."
             },
             {
-              "title": "i18n ready",
-              "description": "Maintain locale-specific catalogs."
+              "title": "B2B IA ready",
+              "description": "Export-site sections built in."
             },
             {
-              "title": "Site sync",
-              "description": "Publish triggers front-end refresh."
+              "title": "Guided install",
+              "description": "Download, then collaborate with support."
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         }
       }
@@ -192,185 +189,182 @@
       "languageGroupKey": "def00000-prod-4000-8000-000000000002",
       "locales": {
         "zh-CN": {
-          "title": "磁帧鱼展示站",
-          "slug": "cizhenyu-site",
-          "sku": "CZ-SITE",
+          "title": "磁帧鱼 智能客服智能询盘系统",
+          "slug": "cizhenyu-inquiry",
+          "sku": "CZ-INQUIRY",
           "brand": "磁帧鱼",
-          "summary": "Astro + Cloudflare Pages 的多语言 B2B 站点结构：产品、方案、FAQ、资源清晰可索引。",
-          "description": "<p><strong>磁帧鱼展示站</strong>（cizhenyu_astro）面向买家检索与生成式引擎引用。</p><ul><li>B2B 信息架构：产品 / 方案 / 案例 / FAQ / 资源</li><li>多语言路由与内容同步</li><li>面向传统搜索 + GEO（生成式引擎优化）的可读结构</li><li>主题可换肤，内容来自后台</li></ul><p>解决「网站漂亮但搜不到、没有答问结构」的问题。</p>",
+          "summary": "把散落在邮箱、表单、聊天工具里的询盘收进同一中台：智能客服按知识库应答，高意向线索可转人工跟进。",
+          "description": "<p><strong>智能客服 · 智能询盘</strong>解决「线索散、夜间空窗、跟进记不住」。</p><ul><li>统一询盘台：来源可追溯</li><li>知识库驱动自动应答，可配置转人工</li><li>与站点表单、下载意向联动（询盘按钮可预留接入）</li><li>适合外贸业务员与团队协作跟进</li></ul><p>可与站群、部署获客产品组合。安装与对接可联系客服协作。</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Site"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
             },
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Site%2BUI"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry%2BUI"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-SITE",
-            "stack": "Cloudflare"
+            "module": "CZ-INQUIRY",
+            "install": "download+collaborate"
           },
-          "seo_title": "磁帧鱼展示站｜磁帧鱼",
-          "seo_description": "Astro + Cloudflare Pages 的多语言 B2B 站点结构：产品、方案、FAQ、资源清晰可索引。",
+          "seo_title": "磁帧鱼 智能客服智能询盘系统｜磁帧鱼",
+          "seo_description": "把散落在邮箱、表单、聊天工具里的询盘收进同一中台：智能客服按知识库应答，高意向线索可转人工跟进。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Site"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
           },
-          "tagline": "为搜索与询盘而生的 SEO/GEO 前台",
+          "tagline": "白天夜里都能接住询盘——知识库应答，关键线索转人工",
           "advantages": [
             {
-              "title": "SEO 结构",
-              "description": "不是 PPT 站，是可索引页面体系。"
+              "title": "线索不丢",
+              "description": "多渠道汇入同一跟进视图。"
             },
             {
-              "title": "GEO 友好",
-              "description": "FAQ/短答等便于 AI 引用。"
+              "title": "智能应答",
+              "description": "常见问题自动回复，高意向转人工。"
             },
             {
-              "title": "主题交付",
-              "description": "官方主题含可导入 seed。"
+              "title": "可扩展接入",
+              "description": "网页询盘按钮预留，后续接真实表单。"
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         },
         "zh-TW": {
-          "title": "磁幀魚展示站",
-          "slug": "cizhenyu-site",
-          "sku": "CZ-SITE",
+          "title": "磁幀魚 智慧客服智慧詢盤系统",
+          "slug": "cizhenyu-inquiry",
+          "sku": "CZ-INQUIRY",
           "brand": "磁幀魚",
-          "summary": "Astro + Cloudflare Pages 的多語言 B2B 站點结构：產品、方案、FAQ、資源清晰可索引。",
-          "description": "<p><strong>磁幀魚展示站</strong>（cizhenyu_astro）面向买家检索与生成式引擎引用。</p><ul><li>B2B 信息架构：產品 / 方案 / 案例 / FAQ / 資源</li><li>多語言路由与內容同步</li><li>面向传统搜尋 + GEO（生成式引擎優化）的可读结构</li><li>主题可换肤，內容来自後台</li></ul><p>解決「网站漂亮但搜不到、没有答问结构」的問題。</p>",
+          "summary": "把散落在邮箱、表单、聊天工具里的詢盤收进同一中台：智慧客服按知識庫应答，高意向线索可转人工跟进。",
+          "description": "<p><strong>智慧客服 · 智慧詢盤</strong>解决「线索散、夜间空窗、跟进记不住」。</p><ul><li>统一詢盤台：来源可追溯</li><li>知識庫驱动自动应答，可配置转人工</li><li>与站點表单、下載意向联动（詢盤按钮可预留接入）</li><li>适合外貿業務員与团队協作跟进</li></ul><p>可与站群、部署獲客產品组合。安裝与对接可聯繫客服協作。</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Site"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-SITE",
-            "stack": "Cloudflare"
+            "module": "CZ-INQUIRY",
+            "install": "download+collaborate"
           },
-          "seo_title": "磁幀魚展示站｜磁幀魚",
-          "seo_description": "Astro + Cloudflare Pages 的多語言 B2B 站點结构：產品、方案、FAQ、資源清晰可索引。",
+          "seo_title": "磁幀魚 智慧客服智慧詢盤系统｜磁幀魚",
+          "seo_description": "把散落在邮箱、表单、聊天工具里的詢盤收进同一中台：智慧客服按知識庫应答，高意向线索可转人工跟进。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Site"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
           },
-          "tagline": "为搜尋与詢盤而生的 SEO/GEO 前台",
+          "tagline": "白天夜里都能接住詢盤——知識庫应答，关键线索转人工",
           "advantages": [
             {
-              "title": "SEO 结构",
-              "description": "不是 PPT 站，是可索引页面体系。"
+              "title": "线索不丢",
+              "description": "多渠道汇入同一跟进视图。"
             },
             {
-              "title": "GEO 友好",
-              "description": "FAQ/短答等便于 AI 引用。"
+              "title": "智慧应答",
+              "description": "常见问题自动回复，高意向转人工。"
             },
             {
-              "title": "主题交付",
-              "description": "官方主题含可导入 seed。"
+              "title": "可扩展接入",
+              "description": "网页詢盤按钮预留，后续接真实表单。"
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         },
         "ja": {
-          "title": "磁帧鱼 サイト",
-          "slug": "cizhenyu-site",
-          "sku": "CZ-SITE",
+          "title": "磁帧鱼 AI客服・問い合わせ中台",
+          "slug": "cizhenyu-inquiry",
+          "sku": "CZ-INQUIRY",
           "brand": "磁帧鱼",
-          "summary": "Astro + Cloudflare Pages の多言語 B2B 構造。",
-          "description": "<p><strong>磁帧鱼 サイト</strong>は従来 SEO と生成エンジン引用（GEO）向けの公開サイトです。コンテンツは CMS、テーマは seed 付きで納品できます。</p>",
+          "summary": "フォームやチャットの問い合わせを一元化。知識ベース応答、高意向は有人。",
+          "description": "<p><strong>AI客服・問い合わせ</strong>で漏れと夜間空白を解消。サイトの問い合わせボタンと接続可能（フォームは後日実装可）。他製品と組み合わせ可。</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Site"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-SITE",
-            "stack": "Cloudflare"
+            "module": "CZ-INQUIRY",
+            "install": "download+collaborate"
           },
-          "seo_title": "磁帧鱼 サイト｜磁帧鱼",
-          "seo_description": "Astro + Cloudflare Pages の多言語 B2B 構造。",
+          "seo_title": "磁帧鱼 AI客服・問い合わせ中台｜磁帧鱼",
+          "seo_description": "フォームやチャットの問い合わせを一元化。知識ベース応答、高意向は有人。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Site"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
           },
-          "tagline": "検索と問い合わせのための SEO/GEO フロント",
+          "tagline": "昼夜問わず問い合わせを受け止め、必要時に有人へ",
           "advantages": [
             {
-              "title": "SEO 構造",
-              "description": "索引可能な IA。"
+              "title": "一元管理",
+              "description": "流入経路を追跡。"
             },
             {
-              "title": "GEO",
-              "description": "FAQ/短答で引用されやすい。"
+              "title": "知識ベース",
+              "description": "自動応答＋有人切替。"
             },
             {
-              "title": "テーマ納品",
-              "description": "seed 同梱。"
+              "title": "拡張余地",
+              "description": "ボタン先行、フォーム後付け。"
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         },
         "en-US": {
-          "title": "Cizhenyu Site",
-          "slug": "cizhenyu-site",
-          "sku": "CZ-SITE",
+          "title": "Cizhenyu AI Desk & Inquiry Hub",
+          "slug": "cizhenyu-inquiry",
+          "sku": "CZ-INQUIRY",
           "brand": "Cizhenyu",
-          "summary": "Astro + Cloudflare Pages multi-locale B2B structure: products, solutions, FAQ, resources.",
-          "description": "<p><strong>Cizhenyu Site</strong> is the public face of the stack — structured for classic SEO and generative-engine citation (GEO). Content comes from CMS; themes ship with importable seed.</p>",
+          "summary": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
+          "description": "<p><strong>AI desk + inquiry hub</strong> stops scattered leads and night-time gaps. Wire to site CTAs (form hook reserved). Pair with multi-site and deploy products. Collaborative install available.</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Site"
-            },
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Site%2BUI"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-SITE",
-            "stack": "Cloudflare"
+            "module": "CZ-INQUIRY",
+            "install": "download+collaborate"
           },
-          "seo_title": "Cizhenyu Site | Cizhenyu",
-          "seo_description": "Astro + Cloudflare Pages multi-locale B2B structure: products, solutions, FAQ, resources.",
+          "seo_title": "Cizhenyu AI Desk & Inquiry Hub | Cizhenyu",
+          "seo_description": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Site"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
           },
-          "tagline": "SEO/GEO front-end built for search and inquiries",
+          "tagline": "Catch leads day and night — KB answers, humans on high intent",
           "advantages": [
             {
-              "title": "Search structure",
-              "description": "Indexable IA, not a slide deck."
+              "title": "One inbox",
+              "description": "Traceable sources in one view."
             },
             {
-              "title": "GEO-ready",
-              "description": "FAQ/short answers for AI citations."
+              "title": "KB replies",
+              "description": "Auto answers; escalate when needed."
             },
             {
-              "title": "Theme packs",
-              "description": "Official themes include CMS seed."
+              "title": "CTA-ready",
+              "description": "Inquiry buttons reserved for form wiring."
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         }
       }
@@ -379,559 +373,182 @@
       "languageGroupKey": "def00000-prod-4000-8000-000000000003",
       "locales": {
         "zh-CN": {
-          "title": "磁帧鱼部署",
-          "slug": "cizhenyu-deploy",
-          "sku": "CZ-DEPLOY",
+          "title": "磁帧鱼 部署运营获客系统",
+          "slug": "cizhenyu-growth",
+          "sku": "CZ-GROWTH",
           "brand": "磁帧鱼",
-          "summary": "桌面向导在您自有 Cloudflare 账户完成 CMS + 站点交付，降低技术与试错成本。",
-          "description": "<p><strong>磁帧鱼部署</strong>（cizhenyu_deploy）把域名、资源、CMS 与 Pages 交付产品化。</p><ul><li>向导式部署 CMS 与前端站点</li><li>资源创建与域名绑定流程标准化</li><li>更新部署保护线上内容，避免误覆盖业务数据</li><li>适合企业自助，也适合服务商批量交付</li></ul><p>解决「听说 Cloudflare 好，但配置劝退」的痛点。</p>",
+          "summary": "部署向导把站点交付到您自己的 Cloudflare；运营侧提供可持续的 SEO/GEO 与获客节奏，避免「上线即停更」。",
+          "description": "<p><strong>部署 · 运营 · 获客</strong>把上线和日常增长连成一条链。</p><ul><li>向导式部署：域名、Pages、环境变量点选完成</li><li>资产在您账户，不锁死在厂商平台</li><li>运营获客节奏：内容、索引、回访触达可按模块扩展</li><li>可与站群、询盘系统组合交付</li></ul><p>下载安装后可约客服协作首发上线与运营初始化。</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Deploy"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
             },
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Deploy%2BUI"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth%2BUI"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-DEPLOY",
-            "stack": "Cloudflare"
+            "module": "CZ-GROWTH",
+            "install": "download+collaborate"
           },
-          "seo_title": "磁帧鱼部署｜磁帧鱼",
-          "seo_description": "桌面向导在您自有 Cloudflare 账户完成 CMS + 站点交付，降低技术与试错成本。",
+          "seo_title": "磁帧鱼 部署运营获客系统｜磁帧鱼",
+          "seo_description": "部署向导把站点交付到您自己的 Cloudflare；运营侧提供可持续的 SEO/GEO 与获客节奏，避免「上线即停更」。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Deploy"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
           },
-          "tagline": "不用学会 Cloudflare 也能上线",
+          "tagline": "点选部署到自有云账户，再把 SEO/GEO 与日常运营跑起来",
           "advantages": [
             {
-              "title": "向导化",
-              "description": "点选即可完成关键步骤。"
+              "title": "自有账户",
+              "description": "Cloudflare 资产归您，迁移清晰。"
             },
             {
-              "title": "资产自有",
-              "description": "落在客户自己的云账户。"
+              "title": "降低技术门槛",
+              "description": "向导代替手写配置。"
             },
             {
-              "title": "安全更新",
-              "description": "更新不灌演示数据、不乱绑域名。"
+              "title": "上线后继续跑",
+              "description": "运营获客不是一次性建站。"
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         },
         "zh-TW": {
-          "title": "磁幀魚部署",
-          "slug": "cizhenyu-deploy",
-          "sku": "CZ-DEPLOY",
+          "title": "磁幀魚 部署運營獲客系统",
+          "slug": "cizhenyu-growth",
+          "sku": "CZ-GROWTH",
           "brand": "磁幀魚",
-          "summary": "桌面向导在您自有 Cloudflare 帳戶完成 CMS + 站點交付，降低技术与试错成本。",
-          "description": "<p><strong>磁幀魚部署</strong>（cizhenyu_deploy）把域名、資源、CMS 与 Pages 交付產品化。</p><ul><li>向导式部署 CMS 与前端站點</li><li>資源创建与域名绑定流程标准化</li><li>更新部署保护线上內容，避免误覆盖业务資料</li><li>适合企業自助，也适合服務商批量交付</li></ul><p>解決「听说 Cloudflare 好，但配置劝退」的痛点。</p>",
+          "summary": "部署向导把站點交付到您自己的 Cloudflare；運營侧提供可持续的 SEO/GEO 与獲客节奏，避免「上线即停更」。",
+          "description": "<p><strong>部署 · 運營 · 獲客</strong>把上线和日常增长连成一条链。</p><ul><li>向导式部署：域名、Pages、环境变量点选完成</li><li>资产在您帳戶，不锁死在厂商平台</li><li>運營獲客节奏：內容、索引、回访触达可按模組扩展</li><li>可与站群、詢盤系统组合交付</li></ul><p>下載安裝后可约客服協作首发上线与運營初始化。</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Deploy"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-DEPLOY",
-            "stack": "Cloudflare"
+            "module": "CZ-GROWTH",
+            "install": "download+collaborate"
           },
-          "seo_title": "磁幀魚部署｜磁幀魚",
-          "seo_description": "桌面向导在您自有 Cloudflare 帳戶完成 CMS + 站點交付，降低技术与试错成本。",
+          "seo_title": "磁幀魚 部署運營獲客系统｜磁幀魚",
+          "seo_description": "部署向导把站點交付到您自己的 Cloudflare；運營侧提供可持续的 SEO/GEO 与獲客节奏，避免「上线即停更」。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Deploy"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
           },
-          "tagline": "不用学会 Cloudflare 也能上线",
+          "tagline": "点选部署到自有云帳戶，再把 SEO/GEO 与日常運營跑起来",
           "advantages": [
             {
-              "title": "向导化",
-              "description": "点选即可完成关键步骤。"
+              "title": "自有帳戶",
+              "description": "Cloudflare 资产归您，迁移清晰。"
             },
             {
-              "title": "资产自有",
-              "description": "落在客户自己的云帳戶。"
+              "title": "降低技术门槛",
+              "description": "向导代替手写配置。"
             },
             {
-              "title": "安全更新",
-              "description": "更新不灌演示資料、不乱绑域名。"
+              "title": "上线后继续跑",
+              "description": "運營獲客不是一次性建站。"
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         },
         "ja": {
-          "title": "磁帧鱼 Deploy",
-          "slug": "cizhenyu-deploy",
-          "sku": "CZ-DEPLOY",
+          "title": "磁帧鱼 導入・運用獲得システム",
+          "slug": "cizhenyu-growth",
+          "sku": "CZ-GROWTH",
           "brand": "磁帧鱼",
-          "summary": "デスクトップウィザードで自アカウントへ CMS + サイト導入。",
-          "description": "<p><strong>磁帧鱼 Deploy</strong> はドメイン・リソース・CMS・Pages を製品化。更新時は本番データを守り、誤ったドメイン紐付けを避けます。</p>",
+          "summary": "ウィザードで Cloudflare へ導入。公開後も SEO/GEO・獲得リズムを継続。",
+          "description": "<p><strong>導入・運用・獲得</strong>で公開と継続成長をつなぎます。資産はお客様アカウント。他製品と組み合わせ可。初回導入の同席サポートあり。</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Deploy"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-DEPLOY",
-            "stack": "Cloudflare"
+            "module": "CZ-GROWTH",
+            "install": "download+collaborate"
           },
-          "seo_title": "磁帧鱼 Deploy｜磁帧鱼",
-          "seo_description": "デスクトップウィザードで自アカウントへ CMS + サイト導入。",
+          "seo_title": "磁帧鱼 導入・運用獲得システム｜磁帧鱼",
+          "seo_description": "ウィザードで Cloudflare へ導入。公開後も SEO/GEO・獲得リズムを継続。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Deploy"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
           },
-          "tagline": "Cloudflare を学び込まなくても公開",
+          "tagline": "自クラウドアカウントへ導入し、SEO/GEO 運用を回す",
           "advantages": [
-            {
-              "title": "ウィザード",
-              "description": "重要手順を案内。"
-            },
             {
               "title": "自アカウント",
-              "description": "資産はお客様側。"
+              "description": "所有権が明確。"
             },
             {
-              "title": "安全更新",
-              "description": "デモ上書きや誤バインドを防止。"
+              "title": "ウィザード",
+              "description": "手書き設定を削減。"
+            },
+            {
+              "title": "継続運用",
+              "description": "公開で終わらない。"
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         },
         "en-US": {
-          "title": "Cizhenyu Deploy",
-          "slug": "cizhenyu-deploy",
-          "sku": "CZ-DEPLOY",
+          "title": "Cizhenyu Deploy & Growth Ops",
+          "slug": "cizhenyu-growth",
+          "sku": "CZ-GROWTH",
           "brand": "Cizhenyu",
-          "summary": "Desktop wizard delivers CMS + site on your Cloudflare account.",
-          "description": "<p><strong>Cizhenyu Deploy</strong> productizes domains, resources, CMS, and Pages delivery. Updates protect live content and avoid wrong domain binds. For self-serve SMEs and agencies.</p>",
+          "summary": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
+          "description": "<p><strong>Deploy + growth ops</strong> connects launch to ongoing acquisition. Assets stay on your account. Pair with multi-site and inquiry products. Collaborative first launch available.</p>",
           "images": [
             {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Deploy"
-            },
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Deploy%2BUI"
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
             }
           ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
-            "module": "CZ-DEPLOY",
-            "stack": "Cloudflare"
+            "module": "CZ-GROWTH",
+            "install": "download+collaborate"
           },
-          "seo_title": "Cizhenyu Deploy | Cizhenyu",
-          "seo_description": "Desktop wizard delivers CMS + site on your Cloudflare account.",
+          "seo_title": "Cizhenyu Deploy & Growth Ops | Cizhenyu",
+          "seo_description": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
           "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Deploy"
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
           },
-          "tagline": "Go live without learning Cloudflare first",
+          "tagline": "Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
           "advantages": [
-            {
-              "title": "Guided",
-              "description": "Wizard covers critical steps."
-            },
             {
               "title": "Your account",
-              "description": "Assets stay on customer Cloudflare."
+              "description": "Clear ownership on Cloudflare."
             },
             {
-              "title": "Safe updates",
-              "description": "No demo overwrite; no wrong zone binds."
+              "title": "Wizard deploy",
+              "description": "Less hand-written config."
+            },
+            {
+              "title": "Keep shipping",
+              "description": "Ops cadence after go-live."
             }
           ],
           "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:platform-core"
-          ]
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-prod-4000-8000-000000000004",
-      "locales": {
-        "zh-CN": {
-          "title": "磁帧鱼询盘中台",
-          "slug": "cizhenyu-crm",
-          "sku": "CZ-CRM",
-          "brand": "磁帧鱼",
-          "summary": "在线客服、CRM 跟进与知识库 AI 应答一体，解决来了询盘却转化不了。",
-          "description": "<p><strong>磁帧鱼询盘中台</strong>（cizhenyu_chatonline）覆盖网站嵌入沟通、CRM 漏斗与知识库 AI。</p><ul><li>嵌入式在线沟通</li><li>线索跟进与复盘</li><li>知识库 + AI 自动应答，可转人工</li><li>为本地营销 Agent 提供数据接口</li></ul><p>解决时差夜间无人回、新人答不上参数、线索散落聊天软件等问题。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CRM"
-            },
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CRM%2BUI"
-            }
-          ],
-          "availability": "InStock",
-          "status": "published",
-          "spec_data": {
-            "module": "CZ-CRM",
-            "stack": "Cloudflare"
-          },
-          "seo_title": "磁帧鱼询盘中台｜磁帧鱼",
-          "seo_description": "在线客服、CRM 跟进与知识库 AI 应答一体，解决来了询盘却转化不了。",
-          "robots_directive": "index,follow",
-          "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=CRM"
-          },
-          "tagline": "询盘接得住，线索跟得上",
-          "advantages": [
-            {
-              "title": "7×24 应答",
-              "description": "知识库托底，关键承诺可转人工。"
-            },
-            {
-              "title": "线索结构化",
-              "description": "不再只靠个人微信记忆。"
-            },
-            {
-              "title": "可扩展",
-              "description": "与站点与 Agent 联动。"
-            }
-          ],
-          "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:growth-ops"
-          ]
-        },
-        "zh-TW": {
-          "title": "磁幀魚詢盤中台",
-          "slug": "cizhenyu-crm",
-          "sku": "CZ-CRM",
-          "brand": "磁幀魚",
-          "summary": "在线客服、CRM 跟进与知識庫 AI 应答一体，解決来了詢盤却转化不了。",
-          "description": "<p><strong>磁幀魚詢盤中台</strong>（cizhenyu_chatonline）覆盖网站嵌入沟通、CRM 漏斗与知識庫 AI。</p><ul><li>嵌入式在线沟通</li><li>线索跟进与复盘</li><li>知識庫 + AI 自动应答，可转人工</li><li>为本地营销 Agent 提供資料接口</li></ul><p>解決时差夜间无人回、新人答不上参数、线索散落聊天软件等問題。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CRM"
-            }
-          ],
-          "availability": "InStock",
-          "status": "published",
-          "spec_data": {
-            "module": "CZ-CRM",
-            "stack": "Cloudflare"
-          },
-          "seo_title": "磁幀魚詢盤中台｜磁幀魚",
-          "seo_description": "在线客服、CRM 跟进与知識庫 AI 应答一体，解決来了詢盤却转化不了。",
-          "robots_directive": "index,follow",
-          "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=CRM"
-          },
-          "tagline": "詢盤接得住，线索跟得上",
-          "advantages": [
-            {
-              "title": "7×24 应答",
-              "description": "知識庫托底，关键承诺可转人工。"
-            },
-            {
-              "title": "线索结构化",
-              "description": "不再只靠個人微信记忆。"
-            },
-            {
-              "title": "可扩展",
-              "description": "与站點与 Agent 联动。"
-            }
-          ],
-          "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:growth-ops"
-          ]
-        },
-        "ja": {
-          "title": "磁帧鱼 問い合わせ中台",
-          "slug": "cizhenyu-crm",
-          "sku": "CZ-CRM",
-          "brand": "磁帧鱼",
-          "summary": "チャット・CRM・知識ベース AI を一体に。",
-          "description": "<p><strong>磁帧鱼 問い合わせ中台</strong>は埋め込みチャット、CRM、KB AI（有人引き継ぎ可）を提供。時差やチャット散在の課題向け。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CRM"
-            }
-          ],
-          "availability": "InStock",
-          "status": "published",
-          "spec_data": {
-            "module": "CZ-CRM",
-            "stack": "Cloudflare"
-          },
-          "seo_title": "磁帧鱼 問い合わせ中台｜磁帧鱼",
-          "seo_description": "チャット・CRM・知識ベース AI を一体に。",
-          "robots_directive": "index,follow",
-          "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=CRM"
-          },
-          "tagline": "問い合わせを逃さずフォロー",
-          "advantages": [
-            {
-              "title": "常時応答",
-              "description": "KB 対応、重要事項は有人。"
-            },
-            {
-              "title": "リード整理",
-              "description": "個人チャット頼りから脱却。"
-            },
-            {
-              "title": "拡張",
-              "description": "サイト/Agent と連携。"
-            }
-          ],
-          "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:growth-ops"
-          ]
-        },
-        "en-US": {
-          "title": "Cizhenyu Inquiry Hub",
-          "slug": "cizhenyu-crm",
-          "sku": "CZ-CRM",
-          "brand": "Cizhenyu",
-          "summary": "Live chat, CRM, and knowledge-base AI in one edge suite.",
-          "description": "<p><strong>Cizhenyu Inquiry Hub</strong> combines embeddable chat, CRM follow-ups, and KB-powered AI with human handoff — for time-zone gaps and scattered WhatsApp threads.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CRM"
-            },
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=CRM%2BUI"
-            }
-          ],
-          "availability": "InStock",
-          "status": "published",
-          "spec_data": {
-            "module": "CZ-CRM",
-            "stack": "Cloudflare"
-          },
-          "seo_title": "Cizhenyu Inquiry Hub | Cizhenyu",
-          "seo_description": "Live chat, CRM, and knowledge-base AI in one edge suite.",
-          "robots_directive": "index,follow",
-          "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=CRM"
-          },
-          "tagline": "Catch inquiries and keep follow-ups on track",
-          "advantages": [
-            {
-              "title": "Always-on",
-              "description": "KB answers; humans for commitments."
-            },
-            {
-              "title": "Structured leads",
-              "description": "Not only personal chat memory."
-            },
-            {
-              "title": "Extensible",
-              "description": "Hooks for site & local Agent."
-            }
-          ],
-          "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:growth-ops"
-          ]
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-prod-4000-8000-000000000005",
-      "locales": {
-        "zh-CN": {
-          "title": "磁帧鱼 Agent",
-          "slug": "cizhenyu-agent",
-          "sku": "CZ-AGENT",
-          "brand": "磁帧鱼",
-          "summary": "本地 Agent 执行日常运营：成熟一键 SEO/GEO 与社媒方案，AI 自动优化，流程成熟几乎不怎么耗 Token。",
-          "description": "<p><strong>磁帧鱼 Agent</strong>（cizhenyu_agent）是本地「AI 员工」桌面端。</p><ul><li>本地执行任务，关键步骤可人工确认</li><li>内置成熟 SEO/GEO、社媒运营解决方案</li><li>与后台真实产品与站点数据联动</li><li>强调能跑通、低消耗，而不是炫技烧 Token</li></ul><p>解决「知道要做内容/发帖，但没人力坚持」的问题。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Agent"
-            },
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Agent%2BUI"
-            }
-          ],
-          "availability": "InStock",
-          "status": "published",
-          "spec_data": {
-            "module": "CZ-AGENT",
-            "stack": "Cloudflare"
-          },
-          "seo_title": "磁帧鱼 Agent｜磁帧鱼",
-          "seo_description": "本地 Agent 执行日常运营：成熟一键 SEO/GEO 与社媒方案，AI 自动优化，流程成熟几乎不怎么耗 Token。",
-          "robots_directive": "index,follow",
-          "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Agent"
-          },
-          "tagline": "点点鼠标的 SEO/GEO 与社媒运营",
-          "advantages": [
-            {
-              "title": "成熟流程",
-              "description": "一键动作，少试错。"
-            },
-            {
-              "title": "低 Token",
-              "description": "方案成熟，日常几乎不怎么耗 Token。"
-            },
-            {
-              "title": "可控",
-              "description": "敏感操作可人工闸门。"
-            }
-          ],
-          "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:growth-ops"
-          ]
-        },
-        "zh-TW": {
-          "title": "磁幀魚 Agent",
-          "slug": "cizhenyu-agent",
-          "sku": "CZ-AGENT",
-          "brand": "磁幀魚",
-          "summary": "本地 Agent 执行日常運營：成熟一鍵 SEO/GEO 与社媒方案，AI 自动優化，流程成熟几乎不怎么耗 Token。",
-          "description": "<p><strong>磁幀魚 Agent</strong>（cizhenyu_agent）是本地「AI 员工」桌面端。</p><ul><li>本地执行任务，关键步骤可人工确认</li><li>内置成熟 SEO/GEO、社媒運營解決方案</li><li>与後台真实產品与站點資料联动</li><li>强调能跑通、低消耗，而不是炫技烧 Token</li></ul><p>解決「知道要做內容/发帖，但没人力坚持」的問題。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Agent"
-            }
-          ],
-          "availability": "InStock",
-          "status": "published",
-          "spec_data": {
-            "module": "CZ-AGENT",
-            "stack": "Cloudflare"
-          },
-          "seo_title": "磁幀魚 Agent｜磁幀魚",
-          "seo_description": "本地 Agent 执行日常運營：成熟一鍵 SEO/GEO 与社媒方案，AI 自动優化，流程成熟几乎不怎么耗 Token。",
-          "robots_directive": "index,follow",
-          "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Agent"
-          },
-          "tagline": "点点鼠标的 SEO/GEO 与社媒運營",
-          "advantages": [
-            {
-              "title": "成熟流程",
-              "description": "一鍵动作，少试错。"
-            },
-            {
-              "title": "低 Token",
-              "description": "方案成熟，日常几乎不怎么耗 Token。"
-            },
-            {
-              "title": "可控",
-              "description": "敏感操作可人工闸门。"
-            }
-          ],
-          "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:growth-ops"
-          ]
-        },
-        "ja": {
-          "title": "磁帧鱼 Agent",
-          "slug": "cizhenyu-agent",
-          "sku": "CZ-AGENT",
-          "brand": "磁帧鱼",
-          "summary": "ローカル Agent。成熟プレイブック、低 Token。",
-          "description": "<p><strong>磁帧鱼 Agent</strong> はローカル実行の AI 従業員。重要操作は人手承認、CMS/サイト実データと連携。派手さより継続性。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Agent"
-            }
-          ],
-          "availability": "InStock",
-          "status": "published",
-          "spec_data": {
-            "module": "CZ-AGENT",
-            "stack": "Cloudflare"
-          },
-          "seo_title": "磁帧鱼 Agent｜磁帧鱼",
-          "seo_description": "ローカル Agent。成熟プレイブック、低 Token。",
-          "robots_directive": "index,follow",
-          "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Agent"
-          },
-          "tagline": "クリックで回す SEO/GEO・SNS 運用",
-          "advantages": [
-            {
-              "title": "プレイブック",
-              "description": "成熟した一括動作。"
-            },
-            {
-              "title": "低 Token",
-              "description": "無駄な試行を減らす。"
-            },
-            {
-              "title": "承認ゲート",
-              "description": "リスク操作は人手。"
-            }
-          ],
-          "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:growth-ops"
-          ]
-        },
-        "en-US": {
-          "title": "Cizhenyu Agent",
-          "slug": "cizhenyu-agent",
-          "sku": "CZ-AGENT",
-          "brand": "Cizhenyu",
-          "summary": "Local Agent with mature SEO/GEO & social playbooks — low token burn.",
-          "description": "<p><strong>Cizhenyu Agent</strong> is a local desktop “AI employee”: skills/MCP on-machine, human gates for risky steps, wired to real CMS products and site data. Built for consistency, not token theatre.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Agent"
-            },
-            {
-              "url": "https://placehold.co/800x600/0f172a/5eead4?text=Agent%2BUI"
-            }
-          ],
-          "availability": "InStock",
-          "status": "published",
-          "spec_data": {
-            "module": "CZ-AGENT",
-            "stack": "Cloudflare"
-          },
-          "seo_title": "Cizhenyu Agent | Cizhenyu",
-          "seo_description": "Local Agent with mature SEO/GEO & social playbooks — low token burn.",
-          "robots_directive": "index,follow",
-          "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0f172a/5eead4?text=Agent"
-          },
-          "tagline": "Click-to-run SEO/GEO and social ops",
-          "advantages": [
-            {
-              "title": "Playbooks",
-              "description": "One-click mature routines."
-            },
-            {
-              "title": "Low tokens",
-              "description": "Stable flows, minimal waste."
-            },
-            {
-              "title": "Human gates",
-              "description": "Approve sensitive actions."
-            }
-          ],
-          "taxonomy_ids": [
-            "__BY_SLUG__:b2b_product_category:growth-ops"
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
         }
       }

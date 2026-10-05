@@ -1,14 +1,67 @@
-/* Default theme — 内页专属样式 */
+/* Default theme — 页脚 + 内页（与 theme.css 首页壳分离，遵守单文件行数上限） */
+
+[data-theme='default'] .cz-footer {
+  background: var(--footer-bg);
+  color: var(--footer-fg);
+  padding: 3rem 0 0;
+}
+[data-theme='default'] .cz-footer a {
+  color: #cbd5e1;
+}
+[data-theme='default'] .cz-footer a:hover {
+  color: #fff;
+}
+[data-theme='default'] .cz-footer-grid {
+  display: grid;
+  gap: 2rem;
+  padding-bottom: 2rem;
+}
+@media (min-width: 720px) {
+  [data-theme='default'] .cz-footer-grid {
+    grid-template-columns: 1.4fr 1fr;
+  }
+}
+[data-theme='default'] .cz-footer-brand strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+[data-theme='default'] .cz-footer-brand p {
+  color: var(--footer-muted);
+  margin: 0.55rem 0 0;
+  max-width: 28rem;
+}
+[data-theme='default'] .cz-footer-links h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--footer-muted);
+}
+[data-theme='default'] .cz-footer-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+[data-theme='default'] .cz-footer-copy {
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 1rem 0 1.35rem;
+  color: var(--footer-muted);
+  font-size: 0.85rem;
+}
 
 [data-theme='default'] .cz-page-banner {
   background:
-    radial-gradient(900px 320px at 85% -20%, rgba(13, 148, 136, 0.28), transparent 55%),
-    var(--hero-bg);
-  color: var(--hero-fg);
+    radial-gradient(900px 320px at 85% -20%, rgba(56, 189, 248, 0.22), transparent 55%),
+    linear-gradient(165deg, #eef5ff 0%, #f7f9fc 55%, #ffffff 100%);
+  color: var(--ink);
   padding: 2.75rem 0 2.25rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
 }
 [data-theme='default'] .cz-page-banner h1 {
   margin: 0.5rem 0 0;
+  font-family: var(--font-display);
   font-size: clamp(1.75rem, 3vw, 2.35rem);
   letter-spacing: -0.03em;
   line-height: 1.2;
@@ -16,7 +69,7 @@
 }
 [data-theme='default'] .cz-page-banner > .cz-container > p {
   margin: 0.75rem 0 0;
-  color: var(--hero-muted);
+  color: var(--muted);
   max-width: 40rem;
 }
 [data-theme='default'] .cz-breadcrumb {
@@ -25,13 +78,14 @@
   align-items: center;
   gap: 0.35rem;
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: var(--muted);
 }
 [data-theme='default'] .cz-breadcrumb a {
-  color: #5eead4;
+  color: var(--accent);
+  font-weight: 600;
 }
 [data-theme='default'] .cz-breadcrumb a:hover {
-  color: #99f6e4;
+  color: var(--accent-hover);
 }
 [data-theme='default'] .cz-breadcrumb-sep {
   opacity: 0.5;
@@ -82,7 +136,7 @@
   font-weight: 500;
 }
 [data-theme='default'] .cz-chip:hover {
-  border-color: #99f6e4;
+  border-color: #bfdbfe;
   color: var(--accent-hover);
 }
 
@@ -102,6 +156,11 @@
   }
 }
 
+[data-theme='default'] .cz-download-card .cz-btn {
+  width: 100%;
+  margin-top: 0.35rem;
+}
+
 [data-theme='default'] .cz-pager {
   display: flex;
   align-items: center;
@@ -116,7 +175,8 @@
   color: var(--ink);
   line-height: 1.75;
 }
-[data-theme='default'] .cz-prose :global(p) {
+[data-theme='default'] .cz-prose :global(p),
+[data-theme='default'] .cz-prose p {
   margin: 0 0 1rem;
 }
 [data-theme='default'] .cz-prose :global(ul),
@@ -191,7 +251,7 @@
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
   background: var(--accent-soft);
-  color: var(--accent-hover);
+  color: var(--accent);
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -213,6 +273,7 @@
   color: var(--muted);
   font-weight: 600;
 }
+
 [data-theme='default'] .cz-inquiry-box {
   margin-top: 1.5rem;
   padding: 1.35rem;
@@ -220,9 +281,11 @@
   background: var(--ink);
   color: #f8fafc;
 }
-[data-theme='default'] .cz-inquiry-box h2 {
+[data-theme='default'] .cz-inquiry-box h2,
+[data-theme='default'] .cz-inquiry-box h3 {
   margin: 0 0 0.5rem;
   font-size: 1.15rem;
+  font-family: var(--font-display);
 }
 [data-theme='default'] .cz-inquiry-box p {
   margin: 0;
@@ -234,6 +297,15 @@
   flex-wrap: wrap;
   gap: 0.65rem;
   margin-top: 1rem;
+}
+[data-theme='default'] .cz-contact-panel .cz-inquiry-box {
+  background: var(--bg-subtle);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+[data-theme='default'] .cz-contact-panel .cz-inquiry-box p {
+  color: var(--muted);
 }
 
 [data-theme='default'] .cz-about-grid {
@@ -275,6 +347,7 @@
 }
 [data-theme='default'] .cz-contact-panel h2 {
   margin: 0 0 0.75rem;
+  font-family: var(--font-display);
   font-size: 1.2rem;
 }
 
@@ -298,7 +371,7 @@
   display: none;
 }
 [data-theme='default'] .cz-faq-item[open] summary {
-  color: var(--accent-hover);
+  color: var(--accent);
   margin-bottom: 0.65rem;
 }
 
@@ -322,7 +395,7 @@
 }
 [data-theme='default'] .cz-article-type {
   background: var(--accent-soft);
-  color: var(--accent-hover);
+  color: var(--accent);
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
   font-weight: 700;
@@ -386,7 +459,7 @@
 }
 
 [data-theme='default'] .cz-case-meta {
-  color: var(--accent-hover);
+  color: var(--accent);
   font-weight: 600;
   margin: 0 0 1rem;
 }
@@ -411,7 +484,6 @@
   letter-spacing: -0.02em;
 }
 
-/* ProductSeoSections under default */
 [data-theme='default'] .cz-product-seo-wrap {
   margin-top: 1.25rem;
 }

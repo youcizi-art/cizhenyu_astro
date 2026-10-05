@@ -12,6 +12,9 @@ interface Props {
   error?: string;
   warnings?: string[];
   emptyHint?: string;
+  inquiryLabel?: string;
+  inquiryHint?: string;
+  mailLabel?: string;
 }
 const {
   title,
@@ -22,6 +25,9 @@ const {
   error,
   warnings = [],
   emptyHint = '',
+  inquiryLabel = '提交询盘',
+  inquiryHint = '在线表单即将接入；当前点击将记录意向（预留），也可发送邮件。',
+  mailLabel = '发送邮件',
 } = Astro.props;
 ---
 <PageBanner
@@ -57,11 +63,33 @@ const {
       {!company.address && !company.phone && !company.email && emptyHint ? (
         <p style="color:var(--muted)">{emptyHint}</p>
       ) : null}
-      {company.email ? (
-        <p style="margin-top:1.25rem">
-          <a class="cz-btn cz-btn-primary" href={`mailto:${company.email}`}>发送询盘邮件</a>
-        </p>
-      ) : null}
+      <div class="cz-inquiry-box" style="margin-top:1.25rem;box-shadow:none">
+        <h3 style="margin:0 0 0.5rem;font-family:var(--font-display)">{inquiryLabel}</h3>
+        <p style="margin:0;color:var(--muted);font-size:0.95rem">{inquiryHint}</p>
+        <div class="cz-inquiry-actions">
+          <button class="cz-btn cz-btn-primary" type="button" data-cz-inquiry-reserve>
+            {inquiryLabel}
+          </button>
+          {company.email ? (
+            <a class="cz-btn cz-btn-outline" href={`mailto:${company.email}?subject=${encodeURIComponent(inquiryLabel)}`}>
+              {mailLabel}
+            </a>
+          ) : null}
+        </div>
+        <p data-cz-inquiry-msg hidden style="margin:0.85rem 0 0;color:var(--accent);font-weight:600;font-size:0.9rem"></p>
+      </div>
     </div>
   </div>
 </section>
+<script>
+  const btn = document.querySelector('[data-cz-inquiry-reserve]');
+  const msg = document.querySelector('[data-cz-inquiry-msg]');
+  btn?.addEventListener('click', () => {
+    if (!(msg instanceof HTMLElement)) return;
+    msg.hidden = false;
+    const zh = document.documentElement.lang?.startsWith('zh');
+    msg.textContent = zh
+      ? '询盘入口已预留。请发送邮件，或等待在线表单接入。'
+      : 'Inquiry button reserved. Please email us, or wait for the online form.';
+  });
+</script>

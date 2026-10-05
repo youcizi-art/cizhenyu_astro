@@ -27,8 +27,8 @@
     "revalidateUrl": "https://www.example.com/api/revalidate"
   },
   "brand": {
-    "tagline": "外贸 B2B 增长流水线：建站、部署、询盘、自动化运营",
-    "primaryColor": "#0d9488"
+    "tagline": "第一次做外贸站群与询盘，也能搭出可交付的获客系统",
+    "primaryColor": "#1d4ed8"
   },
   "domains": {
     "www": "www.example.com"

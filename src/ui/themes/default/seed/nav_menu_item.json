@@ -80,8 +80,7 @@
           "target_reference": {
             "type": "internal",
             "refType": "b2b_product",
-            "title": "产品",
-            "description": "产品"
+            "refId": ""
           }
         },
         "zh-TW": {
@@ -99,8 +98,7 @@
           "target_reference": {
             "type": "internal",
             "refType": "b2b_product",
-            "title": "產品",
-            "description": "產品"
+            "refId": ""
           }
         },
         "ja": {
@@ -118,8 +116,7 @@
           "target_reference": {
             "type": "internal",
             "refType": "b2b_product",
-            "title": "製品",
-            "description": "製品"
+            "refId": ""
           }
         },
         "en-US": {
@@ -137,8 +134,7 @@
           "target_reference": {
             "type": "internal",
             "refType": "b2b_product",
-            "title": "Products",
-            "description": "Products"
+            "refId": ""
           }
         }
       }
@@ -150,57 +146,57 @@
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "解决方案",
-          "slug": "solutions",
+          "title": "帮助",
+          "slug": "help",
           "link_mode": "link",
           "sort_order": 30,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/zh-CN/solutions"
+          "link_url": "/zh-CN/faq"
         },
         "zh-TW": {
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "解決方案",
-          "slug": "solutions",
+          "title": "幫助",
+          "slug": "help",
           "link_mode": "link",
           "sort_order": 30,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/zh-TW/solutions"
+          "link_url": "/zh-TW/faq"
         },
         "ja": {
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "ソリューション",
-          "slug": "solutions",
+          "title": "ヘルプ",
+          "slug": "help",
           "link_mode": "link",
           "sort_order": 30,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/ja/solutions"
+          "link_url": "/ja/faq"
         },
         "en-US": {
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "Solutions",
-          "slug": "solutions",
+          "title": "Help",
+          "slug": "help",
           "link_mode": "link",
           "sort_order": 30,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/en-US/solutions"
+          "link_url": "/en-US/faq"
         }
       }
     },
@@ -211,57 +207,57 @@
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "资源",
-          "slug": "resources",
+          "title": "下载",
+          "slug": "download",
           "link_mode": "link",
           "sort_order": 40,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/zh-CN/articles"
+          "link_url": "/zh-CN/resources"
         },
         "zh-TW": {
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "資源",
-          "slug": "resources",
+          "title": "下載",
+          "slug": "download",
           "link_mode": "link",
           "sort_order": 40,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/zh-TW/articles"
+          "link_url": "/zh-TW/resources"
         },
         "ja": {
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "リソース",
-          "slug": "resources",
+          "title": "ダウンロード",
+          "slug": "download",
           "link_mode": "link",
           "sort_order": 40,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/ja/articles"
+          "link_url": "/ja/resources"
         },
         "en-US": {
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "Resources",
-          "slug": "resources",
+          "title": "Download",
+          "slug": "download",
           "link_mode": "link",
           "sort_order": 40,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/en-US/articles"
+          "link_url": "/en-US/resources"
         }
       }
     },
@@ -272,57 +268,57 @@
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "关于",
-          "slug": "about",
+          "title": "动态",
+          "slug": "news",
           "link_mode": "link",
           "sort_order": 50,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/zh-CN/about"
+          "link_url": "/zh-CN/articles"
         },
         "zh-TW": {
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "關於",
-          "slug": "about",
+          "title": "動態",
+          "slug": "news",
           "link_mode": "link",
           "sort_order": 50,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/zh-TW/about"
+          "link_url": "/zh-TW/articles"
         },
         "ja": {
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "会社概要",
-          "slug": "about",
+          "title": "ニュース",
+          "slug": "news",
           "link_mode": "link",
           "sort_order": 50,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/ja/about"
+          "link_url": "/ja/articles"
         },
         "en-US": {
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "About",
-          "slug": "about",
+          "title": "News",
+          "slug": "news",
           "link_mode": "link",
           "sort_order": 50,
           "open_in_new_tab": [
             "no"
           ],
           "status": "published",
-          "link_url": "/en-US/about"
+          "link_url": "/en-US/articles"
         }
       }
     },
@@ -333,213 +329,10 @@
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:header"
           ],
-          "title": "询盘",
-          "slug": "contact",
-          "link_mode": "link",
-          "sort_order": 60,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "link_url": "/zh-CN/contact"
-        },
-        "zh-TW": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:header"
-          ],
-          "title": "詢盤",
-          "slug": "contact",
-          "link_mode": "link",
-          "sort_order": 60,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "link_url": "/zh-TW/contact"
-        },
-        "ja": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:header"
-          ],
-          "title": "お問い合わせ",
-          "slug": "contact",
-          "link_mode": "link",
-          "sort_order": 60,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "link_url": "/ja/contact"
-        },
-        "en-US": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:header"
-          ],
-          "title": "Inquiry",
-          "slug": "contact",
-          "link_mode": "link",
-          "sort_order": 60,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "link_url": "/en-US/contact"
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-nmif-4000-8000-000000000001",
-      "locales": {
-        "zh-CN": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
-          ],
-          "title": "首页",
-          "slug": "home",
-          "link_mode": "link",
-          "sort_order": 10,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "link_url": "/zh-CN"
-        },
-        "zh-TW": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
-          ],
-          "title": "首頁",
-          "slug": "home",
-          "link_mode": "link",
-          "sort_order": 10,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "link_url": "/zh-TW"
-        },
-        "ja": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
-          ],
-          "title": "ホーム",
-          "slug": "home",
-          "link_mode": "link",
-          "sort_order": 10,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "link_url": "/ja"
-        },
-        "en-US": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
-          ],
-          "title": "Home",
-          "slug": "home",
-          "link_mode": "link",
-          "sort_order": 10,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "link_url": "/en-US"
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-nmif-4000-8000-000000000002",
-      "locales": {
-        "zh-CN": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
-          ],
-          "title": "产品",
-          "slug": "products",
-          "link_mode": "reference",
-          "sort_order": 20,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "target_reference": {
-            "type": "internal",
-            "refType": "b2b_product",
-            "title": "产品",
-            "description": "产品"
-          }
-        },
-        "zh-TW": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
-          ],
-          "title": "產品",
-          "slug": "products",
-          "link_mode": "reference",
-          "sort_order": 20,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "target_reference": {
-            "type": "internal",
-            "refType": "b2b_product",
-            "title": "產品",
-            "description": "產品"
-          }
-        },
-        "ja": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
-          ],
-          "title": "製品",
-          "slug": "products",
-          "link_mode": "reference",
-          "sort_order": 20,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "target_reference": {
-            "type": "internal",
-            "refType": "b2b_product",
-            "title": "製品",
-            "description": "製品"
-          }
-        },
-        "en-US": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
-          ],
-          "title": "Products",
-          "slug": "products",
-          "link_mode": "reference",
-          "sort_order": 20,
-          "open_in_new_tab": [
-            "no"
-          ],
-          "status": "published",
-          "target_reference": {
-            "type": "internal",
-            "refType": "b2b_product",
-            "title": "Products",
-            "description": "Products"
-          }
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-nmif-4000-8000-000000000005",
-      "locales": {
-        "zh-CN": {
-          "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
-          ],
           "title": "关于",
           "slug": "about",
           "link_mode": "link",
-          "sort_order": 30,
+          "sort_order": 60,
           "open_in_new_tab": [
             "no"
           ],
@@ -548,12 +341,12 @@
         },
         "zh-TW": {
           "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
+            "__BY_SLUG__:b2b_nav_menu:header"
           ],
           "title": "關於",
           "slug": "about",
           "link_mode": "link",
-          "sort_order": 30,
+          "sort_order": 60,
           "open_in_new_tab": [
             "no"
           ],
@@ -562,12 +355,12 @@
         },
         "ja": {
           "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
+            "__BY_SLUG__:b2b_nav_menu:header"
           ],
           "title": "会社概要",
           "slug": "about",
           "link_mode": "link",
-          "sort_order": 30,
+          "sort_order": 60,
           "open_in_new_tab": [
             "no"
           ],
@@ -576,12 +369,12 @@
         },
         "en-US": {
           "nav_menu_ids": [
-            "__BY_SLUG__:b2b_nav_menu:footer"
+            "__BY_SLUG__:b2b_nav_menu:header"
           ],
           "title": "About",
           "slug": "about",
           "link_mode": "link",
-          "sort_order": 30,
+          "sort_order": 60,
           "open_in_new_tab": [
             "no"
           ],
@@ -591,14 +384,258 @@
       }
     },
     {
-      "languageGroupKey": "def00000-nmif-4000-8000-000000000006",
+      "languageGroupKey": "def00000-nmit-4000-8000-000000000007",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "联系",
+          "slug": "contact",
+          "link_mode": "link",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-CN/contact"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "聯繫",
+          "slug": "contact",
+          "link_mode": "link",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-TW/contact"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "お問い合わせ",
+          "slug": "contact",
+          "link_mode": "link",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ja/contact"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Contact",
+          "slug": "contact",
+          "link_mode": "link",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/en-US/contact"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-nmif-4000-8000-000000000011",
       "locales": {
         "zh-CN": {
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:footer"
           ],
-          "title": "询盘",
-          "slug": "contact",
+          "title": "产品",
+          "slug": "f-products",
+          "link_mode": "link",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-CN/products"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "產品",
+          "slug": "f-products",
+          "link_mode": "link",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-TW/products"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "製品",
+          "slug": "f-products",
+          "link_mode": "link",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ja/products"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Products",
+          "slug": "f-products",
+          "link_mode": "link",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/en-US/products"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-nmif-4000-8000-000000000012",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "下载",
+          "slug": "f-download",
+          "link_mode": "link",
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-CN/resources"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "下載",
+          "slug": "f-download",
+          "link_mode": "link",
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-TW/resources"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "ダウンロード",
+          "slug": "f-download",
+          "link_mode": "link",
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ja/resources"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Download",
+          "slug": "f-download",
+          "link_mode": "link",
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/en-US/resources"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-nmif-4000-8000-000000000013",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "帮助",
+          "slug": "f-help",
+          "link_mode": "link",
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-CN/faq"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "幫助",
+          "slug": "f-help",
+          "link_mode": "link",
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-TW/faq"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "ヘルプ",
+          "slug": "f-help",
+          "link_mode": "link",
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ja/faq"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Help",
+          "slug": "f-help",
+          "link_mode": "link",
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/en-US/faq"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-nmif-4000-8000-000000000014",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "联系",
+          "slug": "f-contact",
           "link_mode": "link",
           "sort_order": 40,
           "open_in_new_tab": [
@@ -611,8 +648,8 @@
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:footer"
           ],
-          "title": "詢盤",
-          "slug": "contact",
+          "title": "聯繫",
+          "slug": "f-contact",
           "link_mode": "link",
           "sort_order": 40,
           "open_in_new_tab": [
@@ -626,7 +663,7 @@
             "__BY_SLUG__:b2b_nav_menu:footer"
           ],
           "title": "お問い合わせ",
-          "slug": "contact",
+          "slug": "f-contact",
           "link_mode": "link",
           "sort_order": 40,
           "open_in_new_tab": [
@@ -639,8 +676,8 @@
           "nav_menu_ids": [
             "__BY_SLUG__:b2b_nav_menu:footer"
           ],
-          "title": "Inquiry",
-          "slug": "contact",
+          "title": "Contact",
+          "slug": "f-contact",
           "link_mode": "link",
           "sort_order": 40,
           "open_in_new_tab": [

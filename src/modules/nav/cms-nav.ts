@@ -125,21 +125,24 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
         const nested = sortItems(byParent.get(String(row.id)) || []);
 
         if (linkMode === 'reference') {
-          const children = await resolveReferenceNavChildren(data.target_reference, locale, {
-            collectionRootFallback: title,
-            expandCollection: false,
-          });
           const parsed = parseReferenceField(data.target_reference);
           const first = parsed.items[0];
+          const expandProducts =
+            String(first?.refType || '').includes('product') &&
+            !String(first?.refId || '').trim();
+          const children = await resolveReferenceNavChildren(data.target_reference, locale, {
+            collectionRootFallback: title,
+            expandCollection: expandProducts,
+          });
           const href = first?.refType
             ? collectionListHref(locale, first.refType)
             : resolveHref(locale, String(data.link_url || '/'));
           return {
             label: title,
             href,
-            openInNewTab,
+            ...(openInNewTab ? { openInNewTab: true } : {}),
             children: children.length ? children : undefined,
-          } satisfies NavLink;
+          } as NavLink;
         }
 
         const href = resolveHref(locale, String(data.link_url || `/${String(data.slug || '')}`));
@@ -168,12 +171,12 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
         return {
           label: title,
           href,
-          openInNewTab,
+          ...(openInNewTab ? { openInNewTab: true } : {}),
           children: childLinks.length ? childLinks : undefined,
-        } satisfies NavLink;
+        } as NavLink;
       })
     )
-  ).filter((item): item is NavLink => Boolean(item));
+  ).filter((item): item is NavLink => item != null);
 
   return links.length ? links : null;
 }
