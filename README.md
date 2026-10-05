@@ -70,7 +70,7 @@ npm run accept:cd
 
 - 默认对接本地 `cizhenyu_payload`（`:5173`）；语种与 CMS 一致：`zh-CN` / `zh-TW` / `ja` / `en-US`
 - 回退 Mock：`PUBLIC_CMS_API_BASE=http://127.0.0.1:8787` + `npm run mock:cms`
-- 生产 CDN purge：配置 `CF_ZONE_ID` + `CF_API_TOKEN`（见 `docs/CACHE_STRATEGY.md`）
+- 生产边缘缓存：按 `docs/CACHE_RULES.md` 配置；验收看 `cf-cache-status`（见 `docs/CACHE_STRATEGY.md`）
 
 ### 生产 HTML 缓存失效（revalidate）
 

@@ -162,24 +162,9 @@ export async function enrichProductDetail(
     .filter((item) => item.question);
 
   let faqs = faqsFromIds;
+  // 无 faqIds 时不再全表 pageSize=100 兜底（MISS 路径成本过高）
   if (!faqs.length) {
-    try {
-      const raw = await listEntities('faq', { locale, pageSize: 100, status: 'published' });
-      faqs = raw.list
-        .map((row) => {
-          const data = entityData(row);
-          const related = String(data.related_product || '').trim();
-          if (related !== product.id) return null;
-          return {
-            id: String(row.id),
-            question: String(data.question || ''),
-            answer: String(data.answer || ''),
-          };
-        })
-        .filter(Boolean) as ProductDetail['faqs'];
-    } catch {
-      faqs = [];
-    }
+    faqs = [];
   }
 
   return {

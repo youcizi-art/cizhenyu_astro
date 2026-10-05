@@ -308,13 +308,13 @@ Sprint 4：阶段 D（缓存可验收）+ 阶段 E 基础 SEO
 
 ### 阶段 D checklist（实现侧）
 
-- [x] 选型：**D-opt3 本地/边缘 HTML cache** + **D-opt2 可选 CF Zone Purge**  
-- [x] Middleware 缓存公开 HTML GET（`X-HTML-Cache: HIT|MISS|BYPASS`）；DEV 默认 BYPASS；条目带 TTL  
-- [x] `/api/revalidate` **真实删除**本地/Cache API 条目；有凭证时调 CF purge  
-- [x] `GET /api/revalidate` 返回 `lastPurge` 供观测  
-- [x] 容量估算已在 `CACHE_STRATEGY.md`  
-- [x] CMS 保存后通知前端 revalidate（payload `SITE_REVALIDATE_*`）  
-- [ ] 生产环境配置 `CF_ZONE_ID` + `CF_API_TOKEN` 后验证 CDN purge  
+- [x] 选型：**边缘主缓存（CDN-Cache-Control + Cache Rules）** + Worker Cache API 回落 + Zone Purge  
+- [x] 公开 HTML：`s-maxage` + `CDN-Cache-Control`（默认 48h）；API `no-store`  
+- [x] Middleware：Worker Cache 回落；`X-HTML-Cache` / `X-HTML-Cache-Layer`；写入不阻塞 TTFB  
+- [x] `/api/revalidate` Zone Purge（`CF_ZONE_ID` + `CF_API_TOKEN`）；部署写入 Pages secret  
+- [x] 产品详情 MISS：enrich ∥ hreflang；去掉 FAQ 全表兜底  
+- [x] `docs/CACHE_RULES.md` 任意域名规则模板  
+- [ ] 生产：部署后用 `cf-cache-status` + Function 调用量验收（规则由 deploy 自动写入）  
 
 ### 阶段 E checklist（实现侧）
 

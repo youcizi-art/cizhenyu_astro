@@ -68,10 +68,19 @@ console.log(`accept:cd SITE=${siteBase} CMS=${cmsBase}${prefix} locale=${locale}
 {
   const first = await html(`/${locale}/products`);
   const second = await html(`/${locale}/products`);
-  if (first.res.ok && second.res.ok && second.cache === 'HIT') {
-    pass(`D HTML cache HIT after warm (first=${first.cache || 'MISS'})`);
+  const cf1 = first.res.headers.get('cf-cache-status') || '';
+  const cf2 = second.res.headers.get('cf-cache-status') || '';
+  const cdnCc = second.res.headers.get('cdn-cache-control') || first.res.headers.get('cdn-cache-control') || '';
+  if (cdnCc.toLowerCase().includes('max-age=')) {
+    pass(`D CDN-Cache-Control present (${cdnCc.slice(0, 48)})`);
   } else {
-    fail(`D cache warm first=${first.cache} second=${second.cache}`);
+    fail(`D missing CDN-Cache-Control (got "${cdnCc}")`);
+  }
+  // 本地/未配边缘时：至少 Worker 回落层第二次应为 HIT
+  if (first.res.ok && second.res.ok && (second.cache === 'HIT' || cf2 === 'HIT')) {
+    pass(`D HTML warm ok (x-html-cache first=${first.cache || 'MISS'} second=${second.cache}; cf=${cf1 || '-'}→${cf2 || '-'})`);
+  } else {
+    fail(`D cache warm first=${first.cache} second=${second.cache} cf=${cf1}→${cf2}`);
   }
 
   const rev = await fetch(`${siteBase}/api/revalidate`, {
@@ -84,15 +93,21 @@ console.log(`accept:cd SITE=${siteBase} CMS=${cmsBase}${prefix} locale=${locale}
     }),
   });
   const revBody = await rev.json().catch(() => null);
+  const revCc = rev.headers.get('cache-control') || '';
+  if (revCc.toLowerCase().includes('no-store')) {
+    pass('D revalidate response is no-store');
+  } else {
+    fail(`D revalidate should be no-store, got "${revCc}"`);
+  }
   if (rev.ok && revBody?.ok && (revBody?.purged?.deleted > 0 || revBody?.purged?.mode)) {
-    pass(`D revalidate purged deleted=${revBody.purged.deleted} mode=${revBody.purged.mode}`);
+    pass(`D revalidate purged deleted=${revBody.purged.deleted} mode=${revBody.purged.mode} cf=${JSON.stringify(revBody?.purged?.cloudflare || {})}`);
   } else {
     fail(`D revalidate status=${rev.status} body=${JSON.stringify(revBody)}`);
   }
 
   const third = await html(`/${locale}/products`);
-  if (third.res.ok && third.cache === 'MISS') {
-    pass('D after purge next fetch is MISS');
+  if (third.res.ok && (third.cache === 'MISS' || third.cache === '')) {
+    pass(`D after purge next fetch is MISS/uncached (cache=${third.cache || 'none'})`);
   } else {
     fail(`D after purge cache=${third.cache}`);
   }

@@ -172,10 +172,15 @@ function matchesPath(key: string, patterns: string[]) {
 }
 
 async function purgeCloudflareFiles(files: string[]) {
-  const zone = String(import.meta.env.CF_ZONE_ID || '').trim();
-  const token = String(import.meta.env.CF_API_TOKEN || '').trim();
-  if (!zone || !token) {
-    return { ok: false, skipped: true, detail: 'CF_ZONE_ID/CF_API_TOKEN 未配置' };
+  const { envAsync } = await import('../runtime/env');
+  const zoneId = (await envAsync('CF_ZONE_ID')).trim();
+  const token = (await envAsync('CF_API_TOKEN')).trim();
+  if (!zoneId || !token) {
+    return {
+      ok: false,
+      skipped: true,
+      detail: 'CF_ZONE_ID/CF_API_TOKEN 未配置（Pages 需写入 secret 才能 Zone Purge）',
+    };
   }
   const purgeEverything = files.includes('/*');
   const payload = purgeEverything
@@ -186,7 +191,7 @@ async function purgeCloudflareFiles(files: string[]) {
     return { ok: false, skipped: true, detail: '无绝对 URL 可供 CF purge' };
   }
 
-  const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${zone}/purge_cache`, {
+  const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${zoneId}/purge_cache`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
