@@ -5,13 +5,15 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000001",
       "locales": {
         "zh-CN": {
+          "name": "首页首屏",
+          "block_type": "hero",
           "title": "第一次做外贸站群与询盘，也能搭出可交付的获客系统",
           "slug": "home-hero",
           "placement": "home_hero",
           "eyebrow": "磁帧鱼 · 可安装的获客产品",
           "subtitle": "从 8 成「只有名片站、询盘散落、上线即停更」的团队里走出来：站群与 B2B 站点生成、智能客服询盘、部署运营获客——三款产品可下载安装，客服可协作上线。",
           "summary": "您要做的，是说清行业与目标市场；剩下的生成、部署与询盘承接，交给可安装的系统。",
-          "cta_label": "免费获取方案",
+          "link_label": "免费获取方案",
           "link_url": "/zh-CN/contact?intent=inquiry",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
@@ -20,13 +22,15 @@
           "sort_order": 10
         },
         "zh-TW": {
+          "name": "首頁首屏",
+          "block_type": "hero",
           "title": "第一次做外貿站群與詢盤，也能搭出可交付的獲客系統",
           "slug": "home-hero",
           "placement": "home_hero",
           "eyebrow": "磁幀魚 · 可安裝的獲客產品",
           "subtitle": "站群與 B2B 站點生成、智慧客服詢盤、部署運營獲客——三款產品可下載安裝，客服可協作上線。",
           "summary": "說清行業與目標市場，其餘交給可安裝系統。",
-          "cta_label": "免費獲取方案",
+          "link_label": "免費獲取方案",
           "link_url": "/zh-TW/contact?intent=inquiry",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
@@ -35,13 +39,15 @@
           "sort_order": 10
         },
         "ja": {
+          "name": "ホームヒーロー",
+          "block_type": "hero",
           "title": "初めてでも、納品できる獲得システムを組み立てられる",
           "slug": "home-hero",
           "placement": "home_hero",
           "eyebrow": "磁帧鱼 · 導入可能な製品",
           "subtitle": "サイト群生成・AI問い合わせ・導入運用。ダウンロード後、サポート同席も可能。",
           "summary": "業界と市場を伝えてください。あとは導入可能なシステムへ。",
-          "cta_label": "無料で相談",
+          "link_label": "無料で相談",
           "link_url": "/ja/contact?intent=inquiry",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
@@ -50,13 +56,15 @@
           "sort_order": 10
         },
         "en-US": {
+          "name": "Home Hero",
+          "block_type": "hero",
           "title": "Build a shippable acquisition stack — even on your first export site",
           "slug": "home-hero",
           "placement": "home_hero",
           "eyebrow": "Cizhenyu · Installable growth products",
           "subtitle": "Multi-site + B2B generation, AI inquiry desk, deploy & growth ops — download, install, and collaborate with support.",
           "summary": "Tell us industry and markets; ship with installable products.",
-          "cta_label": "Get a free plan",
+          "link_label": "Get a free plan",
           "link_url": "/en-US/contact?intent=inquiry",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
@@ -70,45 +78,53 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000002",
       "locales": {
         "zh-CN": {
+          "name": "页脚行动号召",
+          "block_type": "cta",
           "title": "准备好下载安装了吗？",
           "slug": "footer-cta",
           "placement": "footer_cta",
           "subtitle": "三款产品均可下载；点击下载将进入询盘，客服可协作安装。",
           "summary": "不强制全套——按您的阶段选站群、询盘或部署获客。",
-          "cta_label": "去下载 / 询盘",
+          "link_label": "去下载 / 询盘",
           "link_url": "/zh-CN/resources",
           "status": "published",
           "sort_order": 10
         },
         "zh-TW": {
+          "name": "頁腳行動號召",
+          "block_type": "cta",
           "title": "準備好下載安裝了嗎？",
           "slug": "footer-cta",
           "placement": "footer_cta",
           "subtitle": "三款產品均可下載；點擊下載將進入詢盤，客服可協作安裝。",
           "summary": "不強制全套——按階段選擇。",
-          "cta_label": "去下載 / 詢盤",
+          "link_label": "去下載 / 詢盤",
           "link_url": "/zh-TW/resources",
           "status": "published",
           "sort_order": 10
         },
         "ja": {
+          "name": "フッターCTA",
+          "block_type": "cta",
           "title": "ダウンロード導入の準備はできましたか？",
           "slug": "footer-cta",
           "placement": "footer_cta",
           "subtitle": "3製品をダウンロード可能。クリックで問い合わせ、同席導入可。",
           "summary": "フルセット強制なし。",
-          "cta_label": "ダウンロード / 相談",
+          "link_label": "ダウンロード / 相談",
           "link_url": "/ja/resources",
           "status": "published",
           "sort_order": 10
         },
         "en-US": {
+          "name": "Footer CTA",
+          "block_type": "cta",
           "title": "Ready to download and install?",
           "slug": "footer-cta",
           "placement": "footer_cta",
           "subtitle": "All three products are downloadable. Download CTAs open inquiry — support can collaborate.",
           "summary": "No forced bundle — pick by stage.",
-          "cta_label": "Download / Inquire",
+          "link_label": "Download / Inquire",
           "link_url": "/en-US/resources",
           "status": "published",
           "sort_order": 10
@@ -119,6 +135,8 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000003",
       "locales": {
         "zh-CN": {
+          "name": "痛点1",
+          "block_type": "feature",
           "title": "只有名片站，改内容排期漫长",
           "slug": "adv-3",
           "placement": "home_advantage",
@@ -127,6 +145,8 @@
           "sort_order": 30
         },
         "zh-TW": {
+          "name": "痛点1",
+          "block_type": "feature",
           "title": "只有名片站，改內容排期漫长",
           "slug": "adv-3",
           "placement": "home_advantage",
@@ -135,6 +155,8 @@
           "sort_order": 30
         },
         "ja": {
+          "name": "Pain 1",
+          "block_type": "feature",
           "title": "Brochure site, slow edits",
           "slug": "adv-3",
           "placement": "home_advantage",
@@ -143,6 +165,8 @@
           "sort_order": 30
         },
         "en-US": {
+          "name": "Pain 1",
+          "block_type": "feature",
           "title": "Brochure site, slow edits",
           "slug": "adv-3",
           "placement": "home_advantage",
@@ -156,6 +180,8 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000004",
       "locales": {
         "zh-CN": {
+          "name": "痛点2",
+          "block_type": "feature",
           "title": "询盘散落微信与邮箱，夜间空窗",
           "slug": "adv-4",
           "placement": "home_advantage",
@@ -164,6 +190,8 @@
           "sort_order": 40
         },
         "zh-TW": {
+          "name": "痛点2",
+          "block_type": "feature",
           "title": "詢盤散落微信与邮箱，夜间空窗",
           "slug": "adv-4",
           "placement": "home_advantage",
@@ -172,6 +200,8 @@
           "sort_order": 40
         },
         "ja": {
+          "name": "Pain 2",
+          "block_type": "feature",
           "title": "Leads scattered, night gaps",
           "slug": "adv-4",
           "placement": "home_advantage",
@@ -180,6 +210,8 @@
           "sort_order": 40
         },
         "en-US": {
+          "name": "Pain 2",
+          "block_type": "feature",
           "title": "Leads scattered, night gaps",
           "slug": "adv-4",
           "placement": "home_advantage",
@@ -193,6 +225,8 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000005",
       "locales": {
         "zh-CN": {
+          "name": "痛点3",
+          "block_type": "feature",
           "title": "上线即停更，SEO/GEO 坚持不住",
           "slug": "adv-5",
           "placement": "home_advantage",
@@ -201,6 +235,8 @@
           "sort_order": 50
         },
         "zh-TW": {
+          "name": "痛点3",
+          "block_type": "feature",
           "title": "上线即停更，SEO/GEO 坚持不住",
           "slug": "adv-5",
           "placement": "home_advantage",
@@ -209,6 +245,8 @@
           "sort_order": 50
         },
         "ja": {
+          "name": "Pain 3",
+          "block_type": "feature",
           "title": "Go-live then stall",
           "slug": "adv-5",
           "placement": "home_advantage",
@@ -217,6 +255,8 @@
           "sort_order": 50
         },
         "en-US": {
+          "name": "Pain 3",
+          "block_type": "feature",
           "title": "Go-live then stall",
           "slug": "adv-5",
           "placement": "home_advantage",

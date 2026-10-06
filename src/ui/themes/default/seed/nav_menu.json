@@ -5,25 +5,25 @@
       "languageGroupKey": "def00000-navm-4000-8000-000000000001",
       "locales": {
         "zh-CN": {
-          "title": "主导航",
+          "name": "主导航",
           "slug": "header",
           "menu_type": "header",
           "status": "published"
         },
         "zh-TW": {
-          "title": "主導航",
+          "name": "主導航",
           "slug": "header",
           "menu_type": "header",
           "status": "published"
         },
         "ja": {
-          "title": "メインナビ",
+          "name": "メインナビ",
           "slug": "header",
           "menu_type": "header",
           "status": "published"
         },
         "en-US": {
-          "title": "Header",
+          "name": "Header",
           "slug": "header",
           "menu_type": "header",
           "status": "published"
@@ -34,25 +34,25 @@
       "languageGroupKey": "def00000-navm-4000-8000-000000000002",
       "locales": {
         "zh-CN": {
-          "title": "页脚",
+          "name": "页脚",
           "slug": "footer",
           "menu_type": "footer",
           "status": "published"
         },
         "zh-TW": {
-          "title": "頁腳",
+          "name": "頁腳",
           "slug": "footer",
           "menu_type": "footer",
           "status": "published"
         },
         "ja": {
-          "title": "フッター",
+          "name": "フッター",
           "slug": "footer",
           "menu_type": "footer",
           "status": "published"
         },
         "en-US": {
-          "title": "Footer",
+          "name": "Footer",
           "slug": "footer",
           "menu_type": "footer",
           "status": "published"
