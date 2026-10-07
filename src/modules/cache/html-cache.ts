@@ -29,7 +29,10 @@ export type PurgeResult = {
 
 const MEMORY = new Map<string, HtmlCacheEntry>();
 let lastPurge: PurgeResult | null = null;
+/** 进程内世代：hosts/全站 purge 后使本 isolate 全部 HTML 条目失效 */
+let memoryPurgeGeneration = 0;
 const DEFAULT_TTL_SECONDS = DEFAULT_HTML_CACHE_TTL_SECONDS;
+const PURGE_GEN_REQ = 'https://html-cache.internal/meta/purge-generation';
 
 function cacheKey(url: URL) {
   return `${url.pathname}${url.search}`;
@@ -87,6 +90,27 @@ function readTtlSeconds(headers?: Headers | Array<[string, string]>) {
   return Math.max(MIN_HTML_CACHE_TTL_SECONDS, Math.floor(ttl));
 }
 
+async function readCacheApiPurgeGeneration(cache: Cache): Promise<number> {
+  try {
+    const hit = await cache.match(PURGE_GEN_REQ);
+    if (!hit) return 0;
+    const n = Number(await hit.text());
+    return Number.isFinite(n) ? n : 0;
+  } catch {
+    return 0;
+  }
+}
+
+async function bumpCacheApiPurgeGeneration(cache: Cache) {
+  const next = Date.now();
+  memoryPurgeGeneration = next;
+  try {
+    await cache.put(PURGE_GEN_REQ, new Response(String(next)));
+  } catch {
+    // ignore
+  }
+}
+
 export async function getCachedHtml(url: URL): Promise<HtmlCacheEntry | null> {
   const key = cacheKey(url);
   const now = Date.now();
@@ -94,11 +118,14 @@ export async function getCachedHtml(url: URL): Promise<HtmlCacheEntry | null> {
   const cachesApi = getGlobalCaches();
   if (cachesApi?.default) {
     try {
+      const gen = await readCacheApiPurgeGeneration(cachesApi.default);
       const req = await cacheApiRequest(url);
       const hit = await cachesApi.default.match(req);
       if (hit) {
+        const storedAt = Number(hit.headers.get('x-html-cache-stored') || 0);
         const storedExp = hit.headers.get('x-html-cache-expires');
-        if (storedExp && Number(storedExp) <= now) {
+        // 无 stored 时间戳的旧条目：有 purge 世代时一律作废
+        if ((gen && (!storedAt || storedAt < gen)) || (storedExp && Number(storedExp) <= now)) {
           await cachesApi.default.delete(req).catch(() => undefined);
         } else {
           return {
@@ -122,6 +149,12 @@ export async function getCachedHtml(url: URL): Promise<HtmlCacheEntry | null> {
     MEMORY.delete(key);
     return null;
   }
+  const storedHeader = mem.headers.find(([k]) => k.toLowerCase() === 'x-html-cache-stored');
+  const storedAt = Number(storedHeader?.[1] || 0);
+  if (storedAt && memoryPurgeGeneration && storedAt < memoryPurgeGeneration) {
+    MEMORY.delete(key);
+    return null;
+  }
   return mem;
 }
 
@@ -130,11 +163,13 @@ export async function putCachedHtml(url: URL, response: Response) {
   const body = await response.text();
   const ttl = readTtlSeconds(response.headers);
   const expiresAt = Date.now() + ttl * 1000;
+  const storedAt = Date.now();
   const headers = [...response.headers.entries()].filter(([name]) => {
     const n = name.toLowerCase();
     return n !== 'set-cookie' && n !== 'transfer-encoding';
   });
   headers.push(['x-html-cache-expires', String(expiresAt)]);
+  headers.push(['x-html-cache-stored', String(storedAt)]);
   const hasCc = headers.some(([n]) => n.toLowerCase() === 'cache-control');
   if (!hasCc) {
     headers.push(['Cache-Control', `public, max-age=${ttl}`]);
@@ -206,7 +241,11 @@ function matchesPath(key: string, patterns: string[]) {
   });
 }
 
-async function purgeCloudflareFiles(files: string[]) {
+async function purgeCloudflareZone(options: {
+  files: string[];
+  /** 集合前缀失效时用 hosts：files 无法覆盖 /products/{id} 等详情 URL */
+  hosts?: string[];
+}) {
   const { envAsync } = await import('../runtime/env');
   const zoneId = (await envAsync('CF_ZONE_ID')).trim();
   const token = (await envAsync('CF_API_TOKEN')).trim();
@@ -217,13 +256,20 @@ async function purgeCloudflareFiles(files: string[]) {
       detail: 'CF_ZONE_ID/CF_API_TOKEN 未配置（Pages 需写入 secret 才能 Zone Purge）',
     };
   }
-  const purgeEverything = files.includes('/*');
-  const payload = purgeEverything
-    ? { purge_everything: true }
-    : { files: files.filter((item) => item.startsWith('http')) };
-
-  if (!purgeEverything && !(payload as { files: string[] }).files.length) {
-    return { ok: false, skipped: true, detail: '无绝对 URL 可供 CF purge' };
+  const purgeEverything = options.files.includes('/*');
+  const hosts = (options.hosts || []).map((h) => h.trim().toLowerCase()).filter(Boolean);
+  let payload: Record<string, unknown>;
+  if (purgeEverything) {
+    payload = { purge_everything: true };
+  } else if (hosts.length) {
+    // 内容变更：清该主机全部边缘缓存（含详情页）；比只 purge 列表 URL 可靠
+    payload = { hosts };
+  } else {
+    const files = options.files.filter((item) => item.startsWith('http'));
+    if (!files.length) {
+      return { ok: false, skipped: true, detail: '无绝对 URL / hosts 可供 CF purge' };
+    }
+    payload = { files };
   }
 
   const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${zoneId}/purge_cache`, {
@@ -258,10 +304,17 @@ export async function purgeHtmlPaths(options: {
   let usedMemory = false;
   const origin = String(options.siteOrigin || '').replace(/\/$/, '');
 
-  if (patterns.includes('/*')) {
+  const singleExact =
+    !patterns.includes('/*')
+    && patterns.length === 1
+    && !patterns[0]!.endsWith('/*');
+  const broadPurge = patterns.includes('/*') || !singleExact;
+
+  if (broadPurge) {
     deleted += MEMORY.size;
     MEMORY.clear();
     usedMemory = true;
+    memoryPurgeGeneration = Date.now();
   } else {
     for (const key of [...MEMORY.keys()]) {
       if (matchesPath(key, patterns)) {
@@ -275,10 +328,16 @@ export async function purgeHtmlPaths(options: {
   const cachesApi = getGlobalCaches();
   if (cachesApi?.default) {
     usedCacheApi = true;
+    if (broadPurge) {
+      await bumpCacheApiPurgeGeneration(cachesApi.default);
+    }
     const toDelete = patterns.includes('/*')
       ? siteDocumentPaths(options.locales)
-      : patterns.filter((p) => p !== '/*');
-    for (const pathOnly of toDelete) {
+      : [
+          ...patterns.filter((p) => p !== '/*'),
+          ...siteDocumentPaths(options.locales).filter((p) => matchesPath(p, patterns)),
+        ];
+    for (const pathOnly of [...new Set(toDelete)]) {
       const pathname = pathOnly.split('?')[0] || pathOnly;
       try {
         const reqUrl = origin
@@ -298,7 +357,18 @@ export async function purgeHtmlPaths(options: {
         .filter((item) => item !== '/*')
         .map((item) => (origin ? `${origin}${item}` : item));
 
-  const cloudflare = await purgeCloudflareFiles(cfFiles);
+  let hosts: string[] | undefined;
+  if (!patterns.includes('/*') && origin && !singleExact) {
+    try {
+      hosts = [new URL(origin).host];
+    } catch {
+      hosts = undefined;
+    }
+  }
+  const cloudflare = await purgeCloudflareZone({
+    files: cfFiles,
+    hosts,
+  });
 
   const mode: PurgeResult['mode'] =
     cloudflare.ok && (usedMemory || usedCacheApi)

@@ -1,6 +1,7 @@
 # Revalidate：集合 → 路径映射
 
 CMS webhook / 管理端「刷新缓存」传入 `collections[]`（collection.slug）时，前端按本表失效路径前缀。  
+线上 slug 为 `{SITE_KEY}_product` 等时，按**逻辑后缀**匹配下表（`ycz_me_product` ≡ `b2b_product`）。  
 所有路径含可选 `locale` 前缀（默认语种可无前缀，与路由实现一致时两边都清）。
 
 ---
@@ -29,7 +30,11 @@ CMS webhook / 管理端「刷新缓存」传入 `collections[]`（collection.slu
 { "collections": [], "paths": ["/*"], "purge": "all" }
 ```
 
-导航 / 公司信息变更：优先 `purge: "chrome"` → 清所有已缓存页的公共头尾（若适配器不支持，则退化为更短 revalidate 或清 `/` + 主要列表）。
+```json
+{ "secret": "…", "paths": ["https://www.example.com/products/sku-1"] }
+```
+
+导航 / 公司信息变更：`collections` 含 `*_nav_menu*` / `*_company_info` 时自动扩大到主要列表入口；也可显式 `purge: "chrome"`。
 
 ---
 

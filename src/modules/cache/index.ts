@@ -1,4 +1,11 @@
-export { COLLECTION_PATH_PREFIXES, pathsForCollections } from './revalidate-map';
+export {
+  CHROME_EXTRA_PREFIXES,
+  COLLECTION_PATH_PREFIXES,
+  normalizePurgePathInput,
+  pathsForChromePurge,
+  pathsForCollections,
+  toTemplateCollectionSlug,
+} from './revalidate-map';
 export {
   getCachedHtml,
   getLastPurge,

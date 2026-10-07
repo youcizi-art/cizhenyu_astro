@@ -36,20 +36,36 @@ export async function loadPageChrome(options: {
 }): Promise<PageChrome> {
   const site = loadSiteManifest();
   const pathname = options.pathname || '/';
-  const i18n = await bootstrapI18n({
-    pathname,
-    paramLocale: options.locale,
-    manifest: site,
-  });
+  const paramLocale = String(options.locale || '').trim();
+
+  // 路径已带语种时：i18n / company / nav 全并行（省掉「先等 languages」的串行）
+  // 根路径无 param 时仍须先解析 CMS 默认语种，再拉 chrome。
+  let i18n: Awaited<ReturnType<typeof bootstrapI18n>>;
+  let companyResult: Awaited<ReturnType<typeof loadCompanyView>>;
+  let nav: Awaited<ReturnType<typeof loadNavLinks>>;
+
+  if (paramLocale) {
+    [i18n, companyResult, nav] = await Promise.all([
+      bootstrapI18n({ pathname, paramLocale, manifest: site }),
+      loadCompanyView(paramLocale, site.displayName),
+      loadNavLinks(site, paramLocale),
+    ]);
+    // 非法 locale 时 bootstrap 会回落默认语种，需按真实 currentLocale 重拉 chrome
+    if (i18n.currentLocale !== paramLocale) {
+      [companyResult, nav] = await Promise.all([
+        loadCompanyView(i18n.currentLocale, site.displayName),
+        loadNavLinks(site, i18n.currentLocale),
+      ]);
+    }
+  } else {
+    i18n = await bootstrapI18n({ pathname, paramLocale: undefined, manifest: site });
+    [companyResult, nav] = await Promise.all([
+      loadCompanyView(i18n.currentLocale, site.displayName),
+      loadNavLinks(site, i18n.currentLocale),
+    ]);
+  }
 
   const currentLocale = i18n.currentLocale;
-
-  // company / nav 无相互依赖：并行，避免串行叠延迟
-  const [companyResult, nav] = await Promise.all([
-    loadCompanyView(currentLocale, site.displayName),
-    loadNavLinks(site, currentLocale),
-  ]);
-
   const warnings = [
     ...(i18n.warning ? [i18n.warning] : []),
     ...(companyResult.ok ? [] : [companyResult.warning]),
@@ -69,7 +85,6 @@ export async function loadPageChrome(options: {
   return {
     site: {
       ...site,
-      // 页面重定向与 hreflang 跟 CMS 默认语种对齐
       defaultLocale,
     },
     locale: currentLocale,
