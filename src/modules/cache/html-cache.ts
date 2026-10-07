@@ -1,15 +1,16 @@
 /**
  * HTML 页面缓存：
- * - 优先 Cloudflare `caches.default`（按站点真实 origin 建键）
+ * - 优先 Cloudflare `caches.default`（按站点真实 origin + 世代键）
  * - 本地 Node / astro dev 回退到进程内 Map
- * - 常态 TTL 默认 48h（对齐 s-maxage）；内容新鲜度靠 CMS webhook purge，不靠短过期
- * - 可选 CF Zone Purge API（生产 CDN）
+ * - 常态 TTL 默认 48h；内容新鲜度靠 CMS webhook / 部署后 revalidate
+ * - Zone Purge 清不掉 Worker Cache API，必须在本模块 delete 或换世代
  */
 
 import {
   DEFAULT_HTML_CACHE_TTL_SECONDS,
   MIN_HTML_CACHE_TTL_SECONDS,
 } from '../site/manifest';
+import { COLLECTION_PATH_PREFIXES } from './revalidate-map';
 
 export type HtmlCacheEntry = {
   status: number;
@@ -34,11 +35,26 @@ function cacheKey(url: URL) {
   return `${url.pathname}${url.search}`;
 }
 
-/** Cache API 请求键：使用页面真实 origin，避免 html-cache.local 碎片化 */
-function cacheApiRequest(url: URL) {
+/** 部署工具写入的世代；变更后旧 Cache API 条目全部失效（Zone Purge 清不掉 Worker Cache） */
+async function cacheEpoch(): Promise<string> {
+  try {
+    const { envAsync } = await import('../runtime/env');
+    const epoch = (await envAsync('HTML_CACHE_EPOCH')).trim();
+    if (epoch) return epoch;
+  } catch {
+    // ignore
+  }
+  return '0';
+}
+
+/** Cache API 请求键：origin + epoch + path，避免跨部署串缓存 */
+async function cacheApiRequest(url: URL) {
   const path = `${url.pathname}${url.search}` || '/';
   const origin = url.origin && url.origin !== 'null' ? url.origin : 'https://html-cache.local';
-  return new Request(new URL(path, origin).href, { method: 'GET' });
+  const epoch = await cacheEpoch();
+  return new Request(new URL(`/.html-cache/${epoch}${path}`, origin).href, {
+    method: 'GET',
+  });
 }
 
 type CfCacheStorage = CacheStorage & { default?: Cache };
@@ -78,11 +94,12 @@ export async function getCachedHtml(url: URL): Promise<HtmlCacheEntry | null> {
   const cachesApi = getGlobalCaches();
   if (cachesApi?.default) {
     try {
-      const hit = await cachesApi.default.match(cacheApiRequest(url));
+      const req = await cacheApiRequest(url);
+      const hit = await cachesApi.default.match(req);
       if (hit) {
         const storedExp = hit.headers.get('x-html-cache-expires');
         if (storedExp && Number(storedExp) <= now) {
-          await cachesApi.default.delete(cacheApiRequest(url)).catch(() => undefined);
+          await cachesApi.default.delete(req).catch(() => undefined);
         } else {
           return {
             status: hit.status,
@@ -118,7 +135,6 @@ export async function putCachedHtml(url: URL, response: Response) {
     return n !== 'set-cookie' && n !== 'transfer-encoding';
   });
   headers.push(['x-html-cache-expires', String(expiresAt)]);
-  // 确保存储条目带长 max-age，供 Cache API 与兜底读取
   const hasCc = headers.some(([n]) => n.toLowerCase() === 'cache-control');
   if (!hasCc) {
     headers.push(['Cache-Control', `public, max-age=${ttl}`]);
@@ -130,14 +146,33 @@ export async function putCachedHtml(url: URL, response: Response) {
   const cachesApi = getGlobalCaches();
   if (cachesApi?.default) {
     try {
+      const req = await cacheApiRequest(url);
       await cachesApi.default.put(
-        cacheApiRequest(url),
+        req,
         new Response(body, { status: entry.status, headers: entry.headers })
       );
     } catch (err) {
       console.warn('[html-cache] Cache API put failed', key, err);
     }
   }
+}
+
+/** purge=all 时 Cache API 无法列举键：展开站点已知路径逐条 delete */
+function siteDocumentPaths(locales: string[]) {
+  const prefixes = new Set<string>(['/']);
+  for (const list of Object.values(COLLECTION_PATH_PREFIXES)) {
+    for (const p of list) prefixes.add(p);
+  }
+  const out = new Set<string>();
+  for (const prefix of prefixes) {
+    out.add(prefix);
+    for (const locale of locales) {
+      if (!locale) continue;
+      if (prefix === '/') out.add(`/${locale}`);
+      else out.add(`/${locale}${prefix}`);
+    }
+  }
+  return [...out];
 }
 
 function expandPaths(paths: string[], locales: string[]) {
@@ -240,14 +275,16 @@ export async function purgeHtmlPaths(options: {
   const cachesApi = getGlobalCaches();
   if (cachesApi?.default) {
     usedCacheApi = true;
-    for (const pattern of patterns) {
-      if (pattern === '/*') continue;
-      const pathOnly = pattern.split('?')[0] || pattern;
+    const toDelete = patterns.includes('/*')
+      ? siteDocumentPaths(options.locales)
+      : patterns.filter((p) => p !== '/*');
+    for (const pathOnly of toDelete) {
+      const pathname = pathOnly.split('?')[0] || pathOnly;
       try {
         const reqUrl = origin
-          ? new URL(pathOnly, origin)
-          : new URL(pathOnly, 'https://html-cache.local');
-        const ok = await cachesApi.default.delete(cacheApiRequest(reqUrl));
+          ? new URL(pathname, origin)
+          : new URL(pathname, 'https://html-cache.local');
+        const ok = await cachesApi.default.delete(await cacheApiRequest(reqUrl));
         if (ok) deleted += 1;
       } catch {
         // ignore
@@ -273,7 +310,7 @@ export async function purgeHtmlPaths(options: {
           : 'memory';
 
   lastPurge = {
-    paths: patterns,
+    paths: patterns.includes('/*') ? ['/*', ...siteDocumentPaths(options.locales)] : patterns,
     deleted,
     mode,
     cloudflare,
