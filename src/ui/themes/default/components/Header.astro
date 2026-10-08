@@ -47,14 +47,27 @@ const activeLocale = localeOptions.find((l) => l.active);
 
     <nav class="cz-nav" aria-label="Primary">
       {links.map((link) => {
-        const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
+        const normalizePath = (p: string) => p.replace(/\/+$/, '') || '/';
+        const currentPath = normalizePath(pathname);
+        const targetPath = normalizePath(link.href);
+        const isHomeLink =
+          targetPath === normalizePath(homeHref) ||
+          targetPath === '/' ||
+          /^\/[a-z]{2}(-[a-z]{2})?$/i.test(targetPath);
+        const active = isHomeLink
+          ? currentPath === targetPath
+          : (currentPath === targetPath || currentPath.startsWith(`${targetPath}/`));
         const kids = link.children || [];
         if (kids.length) {
           return (
             <details class={`cz-nav-item${active ? ' is-active' : ''}`}>
-              <summary>{link.label}</summary>
+              <summary class="cz-nav-summary">
+                <span>{link.label}</span>
+                <svg class="cz-nav-arrow" viewBox="0 0 20 20" fill="currentColor" width="14" height="14" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06z" clip-rule="evenodd" />
+                </svg>
+              </summary>
               <div class="cz-nav-drop">
-                <a href={link.href}>{link.label}</a>
                 {kids.map((child) => (
                   <a href={child.href}>{child.label}</a>
                 ))}

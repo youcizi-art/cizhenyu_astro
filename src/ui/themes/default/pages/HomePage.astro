@@ -13,7 +13,31 @@ interface Props {
   company: CompanyView;
   companyIntro?: string;
   ctaBanner: ContentBlock | null;
-  advantages?: Array<{ title: string; description: string }>;
+  advantages?: Array<{ title: string; description: string; solution?: string }>;
+  testimonials?: Array<{
+    name: string;
+    role?: string;
+    quote: string;
+    avatarUrl?: string;
+    meta?: string;
+    rating?: number;
+  }>;
+  comparisons?: Array<{
+    dimension: string;
+    traditional: string;
+    solution: string;
+  }>;
+  steps?: Array<{
+    stepNumber: string;
+    title: string;
+    description: string;
+  }>;
+  faqs?: Array<{
+    id: string;
+    question: string;
+    answer: string;
+    shortAnswer?: string;
+  }>;
   labels: Record<string, string>;
   paths: {
     about: string;
@@ -25,15 +49,20 @@ interface Props {
   warnings?: string[];
   showProducts?: boolean;
 }
+
 const {
   siteName,
   hero,
   heroImageUrl = '',
   tagline = '',
-  products,
+  products = [],
   company,
   ctaBanner,
   advantages = [],
+  testimonials = [],
+  comparisons = [],
+  steps = [],
+  faqs = [],
   labels,
   paths,
   error,
@@ -43,86 +72,137 @@ const {
 
 const contactHref = paths.contact;
 const productsHref = paths.products || contactHref;
-const resourcesHref = (() => {
-  const parts = contactHref.split('/').filter(Boolean);
-  const locale = parts[0] || 'zh-CN';
-  return `/${locale}/resources`;
-})();
+const currentLocale = contactHref.split('/').filter(Boolean)[0] || 'zh-CN';
+const resourcesHref = `/${currentLocale}/resources`;
+
+// 1. Hero 动态数据
 const heroTitle = hero?.title || siteName;
 const heroLead = hero?.subtitle || hero?.summary || tagline || company.slogan || '';
 const heroNote = hero?.summary && hero?.subtitle ? hero.summary : '';
-const heroCtaLabel = hero?.ctaLabel || labels.ctaBtn || '免费获取方案';
+const heroCtaLabel = hero?.ctaLabel || labels.heroCtaPrimary || labels.ctaBtn || '免费获取方案';
 const heroCtaUrl = hero?.ctaUrl || `${contactHref}?intent=inquiry`;
 const mediaUrl = heroImageUrl || hero?.imageUrl || '';
+const statsList = Array.isArray((hero?.extra as any)?.stats)
+  ? ((hero?.extra as any).stats as Array<{ value: string; label: string; desc?: string }>)
+  : [];
 
-const compareRows = [
-  { dim: labels.compareDim1, old: labels.compareOld1, neu: labels.compareNew1 },
-  { dim: labels.compareDim2, old: labels.compareOld2, neu: labels.compareNew2 },
-  { dim: labels.compareDim3, old: labels.compareOld3, neu: labels.compareNew3 },
-  { dim: labels.compareDim4, old: labels.compareOld4, neu: labels.compareNew4 },
-];
-
-const steps = [
-  { n: '1', title: labels.step1Title, body: labels.step1Body },
-  { n: '2', title: labels.step2Title, body: labels.step2Body },
-  { n: '3', title: labels.step3Title, body: labels.step3Body },
-];
-
-const roles = [
-  { title: labels.role1, body: labels.role1Body },
-  { title: labels.role2, body: labels.role2Body },
-  { title: labels.role3, body: labels.role3Body },
-];
-
-const ctaTitle = ctaBanner?.title || labels.ctaTitle;
-const ctaSub = ctaBanner?.summary || ctaBanner?.subtitle || labels.ctaSub;
+// 2. 页底 CTA 动态数据
+const ctaTitle = ctaBanner?.title;
+const ctaSub = ctaBanner?.subtitle || ctaBanner?.summary;
 const ctaLabel = ctaBanner?.ctaLabel || labels.ctaBtn;
-const ctaUrl = ctaBanner?.ctaUrl || resourcesHref;
+const ctaUrl = ctaBanner?.ctaUrl || `${contactHref}?intent=consult`;
+
+// 3. SEO / GEO FAQ 结构化数据
+const hasFaqs = faqs && faqs.length > 0;
+const faqSchema = hasFaqs ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqs.map((f) => ({
+    '@type': 'Question',
+    'name': f.question,
+    'acceptedAnswer': {
+      '@type': 'Answer',
+      'text': f.answer.replace(/<[^>]+>/g, ''),
+    },
+  })),
+} : null;
 ---
+
+<!-- 1. SEO / GEO 结构化标记 (当存在 FAQ 数据时注入) -->
+{faqSchema ? (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+) : null}
+
 {(error || warnings.length) ? (
   <div class="cz-container" style="padding-top:1rem">
-    {error ? <p class="cz-card" style="border-color:#fecaca;color:#b91c1c">{error}</p> : null}
+    {error ? <p class="cz-card cz-alert-error">{error}</p> : null}
     {warnings.map((w) => (
-      <p class="cz-card" style="border-color:#fde68a;color:#92400e;margin-top:0.5rem">{w}</p>
+      <p class="cz-card cz-alert-warning">{w}</p>
     ))}
   </div>
 ) : null}
 
+<!-- 2. Hero 价值首屏 (来自 CMS home_hero) -->
 <section class="cz-hero">
   <div class="cz-container cz-hero-grid">
-    <div>
-      {hero?.eyebrow ? <p class="cz-eyebrow">{hero.eyebrow}</p> : <p class="cz-eyebrow">磁帧鱼</p>}
-      <h1>{heroTitle}</h1>
+    <div class="cz-hero-content">
+      {hero?.eyebrow ? (
+        <div class="cz-badge-wrap">
+          <span class="cz-badge-pulse"></span>
+          <span class="cz-badge-text">{hero.eyebrow}</span>
+        </div>
+      ) : null}
+      <h1 class="cz-hero-heading">{heroTitle}</h1>
       {heroLead ? <p class="cz-hero-lead">{heroLead}</p> : null}
       {heroNote ? <p class="cz-hero-note">{heroNote}</p> : null}
       <div class="cz-hero-actions">
-        <a class="cz-btn cz-btn-primary cz-btn-lg" href={heroCtaUrl}>{heroCtaLabel}</a>
+        <a class="cz-btn cz-btn-primary cz-btn-lg" href={heroCtaUrl}>
+          <span>{heroCtaLabel}</span>
+          <svg class="cz-btn-arrow" viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+        </a>
         {showProducts ? (
-          <a class="cz-btn cz-btn-ghost cz-btn-lg" href={productsHref}>{labels.exploreAll}</a>
+          <a class="cz-btn cz-btn-ghost cz-btn-lg" href={productsHref}>{labels.heroCtaSecondary || labels.exploreAll}</a>
         ) : null}
       </div>
       <ul class="cz-trust">
-        <li>{labels.trust1}</li>
-        <li>{labels.trust2}</li>
-        <li>{labels.trust3}</li>
+        <li><span class="cz-trust-icon">✓</span> {labels.trust1}</li>
+        <li><span class="cz-trust-icon">✓</span> {labels.trust2}</li>
+        <li><span class="cz-trust-icon">✓</span> {labels.trust3}</li>
       </ul>
     </div>
-    <div class="cz-hero-media" aria-hidden={!mediaUrl}>
+    <div class="cz-hero-media">
       {mediaUrl ? (
-        <OptimizedImage
-          src={mediaUrl}
-          alt={heroTitle}
-          width={960}
-          height={660}
-          widths={[480, 720, 960]}
-          sizes="(max-width: 900px) 100vw, 460px"
-          priority
-        />
+        <div class="cz-media-frame">
+          <OptimizedImage
+            src={mediaUrl}
+            alt={heroTitle}
+            width={960}
+            height={660}
+            widths={[480, 720, 960]}
+            sizes="(max-width: 900px) 100vw, 540px"
+            priority
+          />
+        </div>
       ) : (
-        <div class="cz-hero-panel">
-          <div>
-            <strong>{siteName}</strong>
-            <span>{labels.heroPanel || '站群 · 询盘 · 部署获客'}</span>
+        <div class="cz-console-mockup">
+          <div class="cz-console-head">
+            <div class="cz-console-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="cz-console-bar">https://app.cizhenyu.com/matrix/live</div>
+          </div>
+          <div class="cz-console-body">
+            <div class="cz-mock-banner">
+              <div>
+                <strong>{siteName} 获客中台</strong>
+                <p>{company.slogan || '全栈站群 · 智能客服 · 部署获客'}</p>
+              </div>
+              <span class="cz-pill-live">● 24/7 运行中</span>
+            </div>
+            <div class="cz-mock-stats">
+              <div class="cz-mock-stat">
+                <span class="cz-stat-num">5</span>
+                <span class="cz-stat-lbl">多语种活跃站</span>
+              </div>
+              <div class="cz-mock-stat">
+                <span class="cz-stat-num">99.8%</span>
+                <span class="cz-stat-lbl">在线可用率</span>
+              </div>
+              <div class="cz-mock-stat">
+                <span class="cz-stat-num">+18</span>
+                <span class="cz-stat-lbl">今日有效询盘</span>
+              </div>
+            </div>
+            <div class="cz-mock-chat">
+              <div class="cz-chat-msg cz-chat-in">
+                <div class="cz-chat-sender">Buyer from Berlin, Germany</div>
+                <div class="cz-chat-bubble">Hello, we are interested in your export products. Could you send specifications and MOQ?</div>
+              </div>
+              <div class="cz-chat-msg cz-chat-out">
+                <div class="cz-chat-sender">AI Desk · {siteName}</div>
+                <div class="cz-chat-bubble">Catalog sent to your inbox. High-intent inquiry alerted to our sales director!</div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -130,23 +210,43 @@ const ctaUrl = ctaBanner?.ctaUrl || resourcesHref;
   </div>
 </section>
 
+<!-- 3. 核心增长指标 (来自 CMS hero.extra.stats) -->
+{statsList.length ? (
+  <section class="cz-stats-section">
+    <div class="cz-container">
+      <div class="cz-stats-grid">
+        {statsList.map((st) => (
+          <div class="cz-stat-item">
+            <div class="cz-stat-val">{st.value}</div>
+            <div class="cz-stat-name">{st.label}</div>
+            {st.desc ? <div class="cz-stat-sub">{st.desc}</div> : null}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+) : null}
+
+<!-- 4. 痛点与破局 (来自 CMS home_advantage) -->
 {advantages.length ? (
   <section class="cz-section">
     <div class="cz-container">
       <div class="cz-section-head">
-        <h2>{labels.painTitle}</h2>
-        <p>{labels.painSub}</p>
+        <p class="cz-section-eyebrow">{labels.painEyebrow}</p>
+        <h2>痛点深入剖析与工程破局</h2>
       </div>
       <div class="cz-pain-grid">
-        {advantages.map((item) => (
-          <article class="cz-card">
+        {advantages.map((item, idx) => (
+          <article class="cz-card cz-pain-card">
+            <div class="cz-pain-badge">瓶颈 0{idx + 1}</div>
             <h3>{item.title}</h3>
-            <p>{item.description}</p>
-            <p class="cz-card-solve">
-              <strong>{labels.solveLabel}</strong>
-              {' — '}
-              {labels.solveHint}
-            </p>
+            <p class="cz-pain-body">{item.description}</p>
+            {item.solution ? (
+              <div class="cz-card-solve">
+                <span class="cz-solve-tag">{labels.solveLabel}</span>
+                <span>{item.solution}</span>
+              </div>
+            ) : null}
           </article>
         ))}
       </div>
@@ -154,116 +254,179 @@ const ctaUrl = ctaBanner?.ctaUrl || resourcesHref;
   </section>
 ) : null}
 
+<!-- 5. 核心产品矩阵 (来自 CMS listProducts) -->
 {showProducts && products.length ? (
-  <section class="cz-section cz-section-alt">
+  <section class="cz-section cz-section-alt" id="products">
     <div class="cz-container">
       <div class="cz-section-head">
-        <h2>{labels.productsTitle}</h2>
-        <p>{labels.productsSub}</p>
+        <p class="cz-section-eyebrow">{labels.productsEyebrow}</p>
+        <h2>核心产品套件矩阵</h2>
       </div>
       <div class="cz-product-grid">
         {products.slice(0, 3).map((p) => (
           <article class="cz-card cz-product-card">
-            <a href={p.href}>
+            <a href={p.href} class="cz-product-link">
               <div class="cz-product-cover">
                 {p.coverUrl ? (
                   <OptimizedImage
                     src={p.coverUrl}
                     alt={p.title}
                     width={640}
-                    height={400}
+                    height={380}
                     widths={[320, 640]}
                     sizes="(max-width: 720px) 100vw, 360px"
                   />
-                ) : null}
+                ) : (
+                  <div class="cz-product-placeholder">
+                    <span>{p.sku || p.title}</span>
+                  </div>
+                )}
               </div>
               <div class="cz-product-body">
                 <h3>{p.title}</h3>
-                {p.summary ? <p>{p.summary}</p> : null}
-                <span class="cz-more">{labels.readMore} →</span>
+                {p.summary ? <p class="cz-product-summary">{p.summary}</p> : null}
+                <div class="cz-product-footer">
+                  <span class="cz-more">{labels.readMore} →</span>
+                </div>
               </div>
             </a>
           </article>
         ))}
       </div>
-      <p style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:0.75rem">
+      <div class="cz-product-actions">
         <a class="cz-btn cz-btn-outline" href={productsHref}>{labels.exploreAll}</a>
-        <a class="cz-btn cz-btn-primary" href={resourcesHref}>{labels.downloadCta || '去下载安装'}</a>
-      </p>
+        <a class="cz-btn cz-btn-primary" href={resourcesHref}>{labels.downloadCta}</a>
+      </div>
     </div>
   </section>
 ) : null}
 
-<section class="cz-section">
-  <div class="cz-container">
-    <div class="cz-section-head">
-      <h2>{labels.compareTitle}</h2>
-      <p>{labels.compareSub}</p>
-    </div>
-    <div class="cz-table-wrap">
-      <table class="cz-table">
-        <thead>
-          <tr>
-            <th>{labels.compareDim}</th>
-            <th>{labels.compareColOld}</th>
-            <th>{labels.compareColNew}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {compareRows.map((row) => (
+<!-- 6. 全维度对比表格 (来自 CMS home_comparison) -->
+{comparisons.length ? (
+  <section class="cz-section">
+    <div class="cz-container">
+      <div class="cz-section-head">
+        <p class="cz-section-eyebrow">{labels.compareEyebrow}</p>
+        <h2>方案全维度深度对比</h2>
+      </div>
+      <div class="cz-table-wrap">
+        <table class="cz-table">
+          <thead>
             <tr>
-              <td>{row.dim}</td>
-              <td>{row.old}</td>
-              <td>{row.neu}</td>
+              <th class="cz-th-dim">{labels.compareDim}</th>
+              <th class="cz-th-old">{labels.compareColOld}</th>
+              <th class="cz-th-new">{labels.compareColNew}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {comparisons.map((row) => (
+              <tr>
+                <td class="cz-td-dim"><strong>{row.dimension}</strong></td>
+                <td class="cz-td-old">
+                  <span class="cz-cross-mark">✕</span>
+                  {row.traditional}
+                </td>
+                <td class="cz-td-new">
+                  <span class="cz-check-mark">✓</span>
+                  <strong>{row.solution}</strong>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+) : null}
 
-<section class="cz-section cz-section-alt">
-  <div class="cz-container">
-    <div class="cz-section-head">
-      <h2>{labels.stepsTitle}</h2>
-      <p>{labels.stepsSub}</p>
+<!-- 7. 极简实施路径 (来自 CMS home_step) -->
+{steps.length ? (
+  <section class="cz-section cz-section-alt">
+    <div class="cz-container">
+      <div class="cz-section-head">
+        <p class="cz-section-eyebrow">{labels.stepsEyebrow}</p>
+        <h2>极简落地实施流程</h2>
+      </div>
+      <div class="cz-steps">
+        {steps.map((s) => (
+          <article class="cz-card cz-step-card">
+            <div class="cz-step-num">{s.stepNumber}</div>
+            <h3>{s.title}</h3>
+            <p>{s.description}</p>
+          </article>
+        ))}
+      </div>
     </div>
-    <div class="cz-steps">
-      {steps.map((s) => (
-        <article class="cz-card">
-          <div class="cz-step-num">{s.n}</div>
-          <h3>{s.title}</h3>
-          <p>{s.body}</p>
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
+  </section>
+) : null}
 
-<section class="cz-section">
-  <div class="cz-container">
-    <div class="cz-section-head">
-      <h2>{labels.rolesTitle}</h2>
-      <p>{labels.rolesSub || ''}</p>
+<!-- 8. 真实客户见证 (来自 CMS home_testimonial) -->
+{testimonials.length ? (
+  <section class="cz-section">
+    <div class="cz-container">
+      <div class="cz-section-head">
+        <p class="cz-section-eyebrow">{labels.testimonialsEyebrow}</p>
+        <h2>客户真实成效与反馈</h2>
+      </div>
+      <div class="cz-review-grid">
+        {testimonials.map((rev) => (
+          <article class="cz-card cz-review-card">
+            <div class="cz-stars">★★★★★</div>
+            <p class="cz-quote">“{rev.quote}”</p>
+            <div class="cz-reviewer">
+              <div class="cz-reviewer-avatar">
+                {rev.name.charAt(0)}
+              </div>
+              <div>
+                <strong>{rev.name}</strong>
+                {rev.role ? <span class="cz-reviewer-role">{rev.role}</span> : null}
+                {rev.meta ? <span class="cz-reviewer-meta">{rev.meta}</span> : null}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
-    <div class="cz-role-grid">
-      {roles.map((r) => (
-        <article class="cz-card">
-          <h3>{r.title}</h3>
-          <p>{r.body}</p>
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
+  </section>
+) : null}
 
-<section class="cz-cta">
-  <div class="cz-container cz-cta-inner">
-    <div>
-      <h2>{ctaTitle}</h2>
-      {ctaSub ? <p>{ctaSub}</p> : null}
+<!-- 9. 常见问题解答 (来自 CMS faq 集合) -->
+{faqs.length ? (
+  <section class="cz-section cz-section-alt" id="faq">
+    <div class="cz-container">
+      <div class="cz-section-head">
+        <p class="cz-section-eyebrow">{labels.faqEyebrow}</p>
+        <h2>常见问题解答 (FAQ)</h2>
+      </div>
+      <div class="cz-faq-wrap">
+        {faqs.map((f) => (
+          <details class="cz-faq-item">
+            <summary class="cz-faq-q">
+              <span>{f.question}</span>
+              <svg class="cz-faq-icon" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+            </summary>
+            <div class="cz-faq-a">
+              <div set:html={f.answer} />
+            </div>
+          </details>
+        ))}
+      </div>
     </div>
-    <a class="cz-btn cz-btn-primary cz-btn-lg" href={ctaUrl}>{ctaLabel}</a>
-  </div>
-</section>
+  </section>
+) : null}
+
+<!-- 10. 底部行动号召 (来自 CMS footer_cta) -->
+{ctaBanner ? (
+  <section class="cz-cta">
+    <div class="cz-container cz-cta-inner">
+      <div class="cz-cta-text">
+        <h2>{ctaTitle}</h2>
+        {ctaSub ? <p>{ctaSub}</p> : null}
+      </div>
+      <div class="cz-cta-buttons">
+        <a class="cz-btn cz-btn-primary cz-btn-lg" href={ctaUrl}>{ctaLabel}</a>
+        <a class="cz-btn cz-btn-ghost cz-btn-lg" href={resourcesHref}>{labels.downloadCta}</a>
+      </div>
+    </div>
+  </section>
+) : null}

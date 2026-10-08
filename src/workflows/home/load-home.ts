@@ -4,6 +4,7 @@ import { listArticles } from '../../modules/article';
 import { listCaseStudies } from '../../modules/case-study';
 import { listSolutions } from '../../modules/industry';
 import { listBlocksGroupedByPlacements, type ContentBlock } from '../../modules/content-block';
+import { listFaqs, type FaqItem } from '../../modules/faq';
 import { getPageBySlug, type SitePage } from '../../modules/page';
 import { localePath, toErrorMessage } from '../../modules/cms';
 import { t } from '../../modules/i18n';
@@ -38,7 +39,28 @@ function mapAdvantages(blocks: ContentBlock[]) {
   return blocks
     .map((b) => ({
       title: b.title || b.name,
-      description: b.summary || b.subtitle || b.body,
+      description: b.summary || b.body,
+      solution: b.subtitle || '',
+    }))
+    .filter((b) => b.title && (b.description || b.solution));
+}
+
+function mapComparisons(blocks: ContentBlock[]) {
+  return blocks
+    .map((b) => ({
+      dimension: b.title || b.name,
+      traditional: b.summary || b.body,
+      solution: b.subtitle || b.ctaLabel,
+    }))
+    .filter((b) => b.dimension && b.traditional);
+}
+
+function mapSteps(blocks: ContentBlock[]) {
+  return blocks
+    .map((b, idx) => ({
+      stepNumber: b.eyebrow || String(idx + 1).padStart(2, '0'),
+      title: b.title || b.name,
+      description: b.summary || b.body,
     }))
     .filter((b) => b.title && b.description);
 }
@@ -88,10 +110,13 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       ctaBanner: null as ContentBlock | null,
       advantages: [] as ReturnType<typeof mapAdvantages>,
       testimonials: [] as ReturnType<typeof mapTestimonials>,
+      comparisons: [] as ReturnType<typeof mapComparisons>,
+      steps: [] as ReturnType<typeof mapSteps>,
       factoryItems: [] as ReturnType<typeof mapFactory>,
       companyIntro: chrome.company.summary,
       companyStats: [] as Array<{ label: string; value: string }>,
       cmsPage: null as SitePage | null,
+      faqs: [] as FaqItem[],
       paths,
       labels,
       error: undefined as string | undefined,
@@ -109,9 +134,11 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       'home_advantage',
       'home_testimonial',
       'home_factory',
+      'home_comparison',
+      'home_step',
     ] as const;
     // 区块 / 列表 / SEO page 全部并行（无依赖不串行）
-    const [blockMap, products, articles, caseStudies, solutions, cmsPage] = await Promise.all([
+    const [blockMap, products, articles, caseStudies, solutions, faqs, cmsPage] = await Promise.all([
       listBlocksGroupedByPlacements(
         [...homePlacements],
         {
@@ -147,6 +174,9 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
             pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 },
           }))
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } }),
+      site.modules.faq
+        ? listFaqs({ locale: currentLocale, page: 1, pageSize: 8 }).then((r) => r.items).catch(() => [] as FaqItem[])
+        : Promise.resolve([] as FaqItem[]),
       getPageBySlug('home', { locale: currentLocale }).catch(() => null),
     ]);
 
@@ -156,6 +186,8 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
     const advantageBlocks = blockMap.home_advantage || [];
     const testimonialBlocks = blockMap.home_testimonial || [];
     const factoryBlocks = blockMap.home_factory || [];
+    const comparisonBlocks = blockMap.home_comparison || [];
+    const stepBlocks = blockMap.home_step || [];
 
     const hero = heroes[0] || null;
     const featuredRefs = [
@@ -177,9 +209,12 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       ctaBanner: ctaBlocks[0] || null,
       advantages: mapAdvantages(advantageBlocks),
       testimonials: mapTestimonials(testimonialBlocks),
+      comparisons: mapComparisons(comparisonBlocks),
+      steps: mapSteps(stepBlocks),
       factoryItems: mapFactory(factoryBlocks),
       companyIntro: chrome.company.summary,
       companyStats: [] as Array<{ label: string; value: string }>,
+      faqs,
       cmsPage,
       paths,
       labels,
@@ -200,9 +235,12 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       ctaBanner: null,
       advantages: [],
       testimonials: [],
+      comparisons: [],
+      steps: [],
       factoryItems: [],
       companyIntro: chrome.company.summary,
       companyStats: [],
+      faqs: [] as FaqItem[],
       cmsPage: null as SitePage | null,
       paths,
       labels,

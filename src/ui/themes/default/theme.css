@@ -94,6 +94,7 @@
 [data-theme='default'] .cz-nav-item > a:hover,
 [data-theme='default'] .cz-nav-item.is-active > a,
 [data-theme='default'] .cz-nav-item > summary:hover,
+[data-theme='default'] .cz-nav-item.is-active > summary,
 [data-theme='default'] .cz-nav-item[open] > summary {
   background: var(--accent-soft);
   color: var(--accent-hover);
@@ -104,9 +105,23 @@
 [data-theme='default'] .cz-nav-item summary {
   list-style: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 [data-theme='default'] .cz-nav-item summary::-webkit-details-marker {
   display: none;
+}
+[data-theme='default'] .cz-nav-arrow {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  opacity: 0.7;
+}
+[data-theme='default'] .cz-nav-item[open] .cz-nav-arrow,
+[data-theme='default'] .cz-nav-item:hover .cz-nav-arrow {
+  transform: rotate(180deg);
 }
 [data-theme='default'] .cz-nav-drop {
   position: absolute;

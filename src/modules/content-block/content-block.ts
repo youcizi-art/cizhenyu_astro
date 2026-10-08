@@ -17,6 +17,8 @@ export type ContentBlock = {
   ctaUrl: string;
   imageUrl: string;
   backgroundImageUrl: string;
+  /** 扩展配置（JSON 格式） */
+  extra?: Record<string, unknown> | null;
   /** 原始 target_reference */
   targetReference: unknown;
   /** 解析后的引用卡片 */
@@ -49,6 +51,7 @@ async function toBlock(
     ctaUrl: String(data.link_url || data.cta_url || data.button_url || data.link || ''),
     imageUrl: resolveMediaUrl(data.image || data.cover),
     backgroundImageUrl: resolveMediaUrl(data.background_image),
+    extra: (data.extra as Record<string, unknown>) ?? null,
     targetReference,
     references,
   };

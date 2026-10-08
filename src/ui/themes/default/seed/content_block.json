@@ -7,16 +7,40 @@
         "zh-CN": {
           "name": "首页首屏",
           "block_type": "hero",
-          "title": "第一次做外贸站群与询盘，也能搭出可交付的获客系统",
+          "title": "让每一个外贸独立站，都成为 24 小时自主获客的询盘转化中枢",
           "slug": "home-hero",
           "placement": "home_hero",
-          "eyebrow": "磁帧鱼 · 可安装的获客产品",
-          "subtitle": "从 8 成「只有名片站、询盘散落、上线即停更」的团队里走出来：站群与 B2B 站点生成、智能客服询盘、部署运营获客——三款产品可下载安装，客服可协作上线。",
-          "summary": "您要做的，是说清行业与目标市场；剩下的生成、部署与询盘承接，交给可安装的系统。",
-          "link_label": "免费获取方案",
+          "eyebrow": "磁帧鱼 · 可安装交付的 B2B 外贸出海获客系统",
+          "subtitle": "彻底告别「名片站零流量、时差漏询盘、内容停更死循环」。站群与 B2B 生成、24/7 智能客服询盘、向导部署与持续获客——三款独立可安装系统，支持客服同席协作上线。",
+          "summary": "资产 100% 部署至您自有的云账户，源代码与客户数据完全自主可控。",
+          "link_label": "免费获取方案 / 预约演示",
           "link_url": "/zh-CN/contact?intent=inquiry",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          },
+          "extra": {
+            "stats": [
+              {
+                "value": "99.2%",
+                "label": "海外客情承接率",
+                "desc": "24/7 知识库智能秒回"
+              },
+              {
+                "value": "10x",
+                "label": "站群交付速度",
+                "desc": "多语种全静态极速上线"
+              },
+              {
+                "value": "<300ms",
+                "label": "全球边缘时延",
+                "desc": "Cloudflare 架构超快加载"
+              },
+              {
+                "value": "100+",
+                "label": "语言与目标市场",
+                "desc": "精准契合海外 AI 检索"
+              }
+            ]
           },
           "status": "published",
           "sort_order": 10
@@ -24,16 +48,40 @@
         "zh-TW": {
           "name": "首頁首屏",
           "block_type": "hero",
-          "title": "第一次做外貿站群與詢盤，也能搭出可交付的獲客系統",
+          "title": "讓每一個外貿獨立站，都成為 24 小時自主獲客的詢盤轉化中樞",
           "slug": "home-hero",
           "placement": "home_hero",
-          "eyebrow": "磁幀魚 · 可安裝的獲客產品",
-          "subtitle": "站群與 B2B 站點生成、智慧客服詢盤、部署運營獲客——三款產品可下載安裝，客服可協作上線。",
-          "summary": "說清行業與目標市場，其餘交給可安裝系統。",
-          "link_label": "免費獲取方案",
+          "eyebrow": "磁幀魚 · 可安裝交付的 B2B 外貿出海獲客系統",
+          "subtitle": "徹底告別「名片站零流量、時差漏詢盤、內容停更死循環」。站群與 B2B 生成、24/7 智慧客服詢盤、向導部署與持續獲客——三款獨立可安裝系統，支援客服同席協作上線。",
+          "summary": "資產 100% 部署至您自有的雲端帳戶，原始碼與客戶資料完全自主可控。",
+          "link_label": "免費獲取方案 / 預約演示",
           "link_url": "/zh-TW/contact?intent=inquiry",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          },
+          "extra": {
+            "stats": [
+              {
+                "value": "99.2%",
+                "label": "海外客情及時承接率",
+                "desc": "24/7 知識庫智慧秒回"
+              },
+              {
+                "value": "10x",
+                "label": "站群交付速度",
+                "desc": "多語種全靜態極速上線"
+              },
+              {
+                "value": "<300ms",
+                "label": "全球邊緣時延",
+                "desc": "Cloudflare 架構超快載入"
+              },
+              {
+                "value": "100+",
+                "label": "多語言與目標市場",
+                "desc": "精準契合海外 AI 檢索"
+              }
+            ]
           },
           "status": "published",
           "sort_order": 10
@@ -41,16 +89,40 @@
         "ja": {
           "name": "ホームヒーロー",
           "block_type": "hero",
-          "title": "初めてでも、納品できる獲得システムを組み立てられる",
+          "title": "すべての海外向け独立サイトを、24時間稼働の問い合わせ獲得ハブへ",
           "slug": "home-hero",
           "placement": "home_hero",
-          "eyebrow": "磁帧鱼 · 導入可能な製品",
-          "subtitle": "サイト群生成・AI問い合わせ・導入運用。ダウンロード後、サポート同席も可能。",
-          "summary": "業界と市場を伝えてください。あとは導入可能なシステムへ。",
-          "link_label": "無料で相談",
+          "eyebrow": "磁帧鱼 · 導入可能なB2B海外獲得システム",
+          "subtitle": "更新停止、時差によるリード損失、高額な外注依存を解消。サイト群生成、AI問い合わせデスク、導入運用システムの3製品を提供。サポート同席導入にも対応。",
+          "summary": "データと資産は自社のクラウド環境へ100%配備。ベンダーロックインなし。",
+          "link_label": "無料相談 / デモ予約",
           "link_url": "/ja/contact?intent=inquiry",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          },
+          "extra": {
+            "stats": [
+              {
+                "value": "99.2%",
+                "label": "リード即時対応率",
+                "desc": "24時間体制でAI自動初期対応"
+              },
+              {
+                "value": "10x",
+                "label": "サイト構築スピード",
+                "desc": "多言語全静的サイトを即時展開"
+              },
+              {
+                "value": "<300ms",
+                "label": "グローバル読込速度",
+                "desc": "Cloudflareエッジ高速配信"
+              },
+              {
+                "value": "100+",
+                "label": "多言語マーケット対応",
+                "desc": "AI検索・SEO構造化最適化"
+              }
+            ]
           },
           "status": "published",
           "sort_order": 10
@@ -58,16 +130,40 @@
         "en-US": {
           "name": "Home Hero",
           "block_type": "hero",
-          "title": "Build a shippable acquisition stack — even on your first export site",
+          "title": "Turn Every Export Website into a 24/7 Autonomous Lead Engine",
           "slug": "home-hero",
           "placement": "home_hero",
-          "eyebrow": "Cizhenyu · Installable growth products",
-          "subtitle": "Multi-site + B2B generation, AI inquiry desk, deploy & growth ops — download, install, and collaborate with support.",
-          "summary": "Tell us industry and markets; ship with installable products.",
-          "link_label": "Get a free plan",
+          "eyebrow": "Cizhenyu · Enterprise-Grade B2B Lead Engine",
+          "subtitle": "Break free from stagnant brochure sites, time-zone lead drops, and slow agency queues. Multi-site CMS generation, 24/7 AI inquiry handling, and wizard deployment with collaborative onboarding.",
+          "summary": "100% deployed to your own cloud account (Cloudflare). Full data sovereignty, zero lock-in.",
+          "link_label": "Get Free Plan / Book Demo",
           "link_url": "/en-US/contact?intent=inquiry",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          },
+          "extra": {
+            "stats": [
+              {
+                "value": "99.2%",
+                "label": "Lead Response Rate",
+                "desc": "24/7 KB-driven instant response"
+              },
+              {
+                "value": "10x",
+                "label": "Site Rollout Speed",
+                "desc": "High-speed static multilingual sites"
+              },
+              {
+                "value": "<300ms",
+                "label": "Global Edge Latency",
+                "desc": "Fast Cloudflare Pages architecture"
+              },
+              {
+                "value": "100+",
+                "label": "Target Market Coverage",
+                "desc": "Structured for AI search & GEO"
+              }
+            ]
           },
           "status": "published",
           "sort_order": 10
@@ -80,52 +176,52 @@
         "zh-CN": {
           "name": "页脚行动号召",
           "block_type": "cta",
-          "title": "准备好下载安装了吗？",
+          "title": "准备好升级您的外贸获客系统了吗？",
           "slug": "footer-cta",
           "placement": "footer_cta",
-          "subtitle": "三款产品均可下载；点击下载将进入询盘，客服可协作安装。",
-          "summary": "不强制全套——按您的阶段选站群、询盘或部署获客。",
-          "link_label": "去下载 / 询盘",
-          "link_url": "/zh-CN/resources",
+          "subtitle": "立即预约一对一专属顾问演示，告诉我们您的目标市场与产品品类，我们将为您量身打造出海获客方案。",
+          "summary": "三款产品可单选或组合交付；支持客服同席协助部署上线。",
+          "link_label": "免费咨询 / 预约演示",
+          "link_url": "/zh-CN/contact?intent=consult",
           "status": "published",
           "sort_order": 10
         },
         "zh-TW": {
           "name": "頁腳行動號召",
           "block_type": "cta",
-          "title": "準備好下載安裝了嗎？",
+          "title": "準備好升級您的外貿獲客系統了嗎？",
           "slug": "footer-cta",
           "placement": "footer_cta",
-          "subtitle": "三款產品均可下載；點擊下載將進入詢盤，客服可協作安裝。",
-          "summary": "不強制全套——按階段選擇。",
-          "link_label": "去下載 / 詢盤",
-          "link_url": "/zh-TW/resources",
+          "subtitle": "立即預約一對一專屬顧問演示，告訴我們您的目標市場與產品品類，我們將為您量身打造出海獲客方案。",
+          "summary": "三款產品可單選或組合交付；支援客服同席協助部署上線。",
+          "link_label": "免費諮詢 / 預約演示",
+          "link_url": "/zh-TW/contact?intent=consult",
           "status": "published",
           "sort_order": 10
         },
         "ja": {
           "name": "フッターCTA",
           "block_type": "cta",
-          "title": "ダウンロード導入の準備はできましたか？",
+          "title": "海外獲得の仕組みを今すぐアップデートしませんか？",
           "slug": "footer-cta",
           "placement": "footer_cta",
-          "subtitle": "3製品をダウンロード可能。クリックで問い合わせ、同席導入可。",
-          "summary": "フルセット強制なし。",
-          "link_label": "ダウンロード / 相談",
-          "link_url": "/ja/resources",
+          "subtitle": "貴社のターゲット市場と製品に合わせた最適な導入プランをご提案します。",
+          "summary": "3製品は単体でも組み合わせでも導入可能。サポート同席導入可。",
+          "link_label": "無料相談 / デモ予約",
+          "link_url": "/ja/contact?intent=consult",
           "status": "published",
           "sort_order": 10
         },
         "en-US": {
           "name": "Footer CTA",
           "block_type": "cta",
-          "title": "Ready to download and install?",
+          "title": "Ready to Transform Your Overseas Lead Generation?",
           "slug": "footer-cta",
           "placement": "footer_cta",
-          "subtitle": "All three products are downloadable. Download CTAs open inquiry — support can collaborate.",
-          "summary": "No forced bundle — pick by stage.",
-          "link_label": "Download / Inquire",
-          "link_url": "/en-US/resources",
+          "subtitle": "Schedule a 1-on-1 demo consultation today. Tell us your target markets and we will tailor your deployment strategy.",
+          "summary": "Modular install alone or combined. Guided deploy with live onboarding.",
+          "link_label": "Free Consultation / Book Demo",
+          "link_url": "/en-US/contact?intent=consult",
           "status": "published",
           "sort_order": 10
         }
@@ -135,42 +231,46 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000003",
       "locales": {
         "zh-CN": {
-          "name": "痛点1",
+          "name": "瓶颈01-名片站死局",
           "block_type": "feature",
-          "title": "只有名片站，改内容排期漫长",
-          "slug": "adv-3",
+          "title": "只有摆设名片站，改动困难且零自然流",
+          "slug": "adv-1",
           "placement": "home_advantage",
-          "summary": "业务改一版文案要等开发或外包；多语言更是互相覆盖。",
+          "summary": "外包建站耗时数月，改个产品排期两周；缺乏 SEO/GEO 结构设计，半年收不到一条有效询盘。",
+          "subtitle": "全能站群中台统一管理，多语言自动路由，秒级静态构建极速交付。",
           "status": "published",
           "sort_order": 30
         },
         "zh-TW": {
-          "name": "痛点1",
+          "name": "瓶颈01-名片站死局",
           "block_type": "feature",
-          "title": "只有名片站，改內容排期漫长",
-          "slug": "adv-3",
+          "title": "只有摆设名片站，改动困难且零自然流",
+          "slug": "adv-1",
           "placement": "home_advantage",
-          "summary": "业务改一版文案要等开发或外包；多語言更是互相覆盖。",
+          "summary": "外包建站耗时数月，改个產品排期两周；缺乏 SEO/GEO 结构设计，半年收不到一条有效詢盤。",
+          "subtitle": "全能站群中台统一管理，多語言自动路由，秒级静态构建极速交付。",
           "status": "published",
           "sort_order": 30
         },
         "ja": {
-          "name": "Pain 1",
+          "name": "Pain 01 - Stagnant Site",
           "block_type": "feature",
-          "title": "Brochure site, slow edits",
-          "slug": "adv-3",
+          "title": "Brochure Site Trap: Slow Edits & Zero Traffic",
+          "slug": "adv-1",
           "placement": "home_advantage",
-          "summary": "Every copy change waits on developers or agencies.",
+          "summary": "Agency queues take weeks for every catalog change; lack of GEO/SEO structure yields zero organic leads.",
+          "subtitle": "Unified multi-site CMS hub with automated multilingual routing and instant static deployments.",
           "status": "published",
           "sort_order": 30
         },
         "en-US": {
-          "name": "Pain 1",
+          "name": "Pain 01 - Stagnant Site",
           "block_type": "feature",
-          "title": "Brochure site, slow edits",
-          "slug": "adv-3",
+          "title": "Brochure Site Trap: Slow Edits & Zero Traffic",
+          "slug": "adv-1",
           "placement": "home_advantage",
-          "summary": "Every copy change waits on developers or agencies.",
+          "summary": "Agency queues take weeks for every catalog change; lack of GEO/SEO structure yields zero organic leads.",
+          "subtitle": "Unified multi-site CMS hub with automated multilingual routing and instant static deployments.",
           "status": "published",
           "sort_order": 30
         }
@@ -180,42 +280,46 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000004",
       "locales": {
         "zh-CN": {
-          "name": "痛点2",
+          "name": "瓶颈02-时差漏询盘",
           "block_type": "feature",
-          "title": "询盘散落微信与邮箱，夜间空窗",
-          "slug": "adv-4",
+          "title": "海外时差断档，夜间高意向询盘大量流失",
+          "slug": "adv-2",
           "placement": "home_advantage",
-          "summary": "线索记不住、跟进断档，高意向在非工作时间流失。",
+          "summary": "欧美买家活跃时国内正是深夜，静态表单无人响应，线索散落各处，商机转瞬被竞争对手截流。",
+          "subtitle": "24/7 智能客服依据知识库深度应答，高意向即时通知并转人工。",
           "status": "published",
           "sort_order": 40
         },
         "zh-TW": {
-          "name": "痛点2",
+          "name": "瓶颈02-时差漏詢盤",
           "block_type": "feature",
-          "title": "詢盤散落微信与邮箱，夜间空窗",
-          "slug": "adv-4",
+          "title": "海外时差断档，夜间高意向詢盤大量流失",
+          "slug": "adv-2",
           "placement": "home_advantage",
-          "summary": "线索记不住、跟进断档，高意向在非工作时间流失。",
+          "summary": "欧美买家活跃时国内正是深夜，静态表单无人响应，线索散落各处，商机转瞬被竞争对手截流。",
+          "subtitle": "24/7 智慧客服依据知識庫深度应答，高意向即时通知并转人工。",
           "status": "published",
           "sort_order": 40
         },
         "ja": {
-          "name": "Pain 2",
+          "name": "Pain 02 - Timezone Loss",
           "block_type": "feature",
-          "title": "Leads scattered, night gaps",
-          "slug": "adv-4",
+          "title": "Time-zone Gaps: High-Intent Night Leads Lost",
+          "slug": "adv-2",
           "placement": "home_advantage",
-          "summary": "Chat and email silos lose high-intent after hours.",
+          "summary": "Overseas buyers reach out during off-hours with no real-time response; leads go cold or bounce to rivals.",
+          "subtitle": "24/7 knowledge-base AI desk responds instantly and escalates qualified leads to live staff.",
           "status": "published",
           "sort_order": 40
         },
         "en-US": {
-          "name": "Pain 2",
+          "name": "Pain 02 - Timezone Loss",
           "block_type": "feature",
-          "title": "Leads scattered, night gaps",
-          "slug": "adv-4",
+          "title": "Time-zone Gaps: High-Intent Night Leads Lost",
+          "slug": "adv-2",
           "placement": "home_advantage",
-          "summary": "Chat and email silos lose high-intent after hours.",
+          "summary": "Overseas buyers reach out during off-hours with no real-time response; leads go cold or bounce to rivals.",
+          "subtitle": "24/7 knowledge-base AI desk responds instantly and escalates qualified leads to live staff.",
           "status": "published",
           "sort_order": 40
         }
@@ -225,44 +329,550 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000005",
       "locales": {
         "zh-CN": {
-          "name": "痛点3",
+          "name": "瓶颈03-技术绑架",
           "block_type": "feature",
-          "title": "上线即停更，SEO/GEO 坚持不住",
-          "slug": "adv-5",
+          "title": "上线即停更，资产被建站服务商绑架",
+          "slug": "adv-3",
           "placement": "home_advantage",
-          "summary": "部署门槛高，运营节奏靠加班，很难形成复利。",
+          "summary": "不懂底层运维，服务器托管在第三方建站商名下，年年支付昂贵维护费却无法自主沉淀数字资产。",
+          "subtitle": "一键向导部署到自有 Cloudflare 账户，企业数据 100% 自主掌控。",
           "status": "published",
           "sort_order": 50
         },
         "zh-TW": {
-          "name": "痛点3",
+          "name": "瓶颈03-技术绑架",
           "block_type": "feature",
-          "title": "上线即停更，SEO/GEO 坚持不住",
-          "slug": "adv-5",
+          "title": "上线即停更，资产被建站服務商绑架",
+          "slug": "adv-3",
           "placement": "home_advantage",
-          "summary": "部署门槛高，運營节奏靠加班，很难形成复利。",
+          "summary": "不懂底层运维，服务器托管在第三方建站商名下，年年支付昂贵维护费却无法自主沉淀数字资产。",
+          "subtitle": "一鍵向导部署到自有 Cloudflare 帳戶，企業資料 100% 自主掌控。",
           "status": "published",
           "sort_order": 50
         },
         "ja": {
-          "name": "Pain 3",
+          "name": "Pain 03 - Vendor Lock-in",
           "block_type": "feature",
-          "title": "Go-live then stall",
-          "slug": "adv-5",
+          "title": "Go-Live Stall & Host Captivity",
+          "slug": "adv-3",
           "placement": "home_advantage",
-          "summary": "Hard deploys and manual SEO fade after launch.",
+          "summary": "High dev friction leaves sites abandoned; hosted on third-party servers with recurring annual lock-ins.",
+          "subtitle": "Deploy straight to your own Cloudflare account with 100% code, data, and lead ownership.",
           "status": "published",
           "sort_order": 50
         },
         "en-US": {
-          "name": "Pain 3",
+          "name": "Pain 03 - Vendor Lock-in",
           "block_type": "feature",
-          "title": "Go-live then stall",
-          "slug": "adv-5",
+          "title": "Go-Live Stall & Host Captivity",
+          "slug": "adv-3",
           "placement": "home_advantage",
-          "summary": "Hard deploys and manual SEO fade after launch.",
+          "summary": "High dev friction leaves sites abandoned; hosted on third-party servers with recurring annual lock-ins.",
+          "subtitle": "Deploy straight to your own Cloudflare account with 100% code, data, and lead ownership.",
           "status": "published",
           "sort_order": 50
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000006",
+      "locales": {
+        "zh-CN": {
+          "name": "陈总 · 营销总监",
+          "block_type": "testimonial",
+          "title": "陈总 · 营销总监",
+          "eyebrow": "工贸一体机械制造出口企业",
+          "slug": "rev-1",
+          "placement": "home_testimonial",
+          "summary": "过去官网就像死水，现在通过磁帧鱼智能询盘系统，夜间自动接待了 20 多位欧洲意向买家，并直接获取了 WhatsApp 联系方式，转化率提升极其明显！",
+          "link_label": "年出口额 8,000 万+",
+          "status": "published",
+          "sort_order": 60
+        },
+        "zh-TW": {
+          "name": "陈总 · 营销总监",
+          "block_type": "testimonial",
+          "title": "陈总 · 营销总监",
+          "eyebrow": "工贸一体机械制造出口企業",
+          "slug": "rev-1",
+          "placement": "home_testimonial",
+          "summary": "过去官網就像死水，现在通过磁幀魚智慧詢盤系统，夜间自动接待了 20 多位欧洲意向买家，并直接獲取了 WhatsApp 聯繫方式，转化率提升极其明显！",
+          "link_label": "年出口额 8,000 万+",
+          "status": "published",
+          "sort_order": 60
+        },
+        "ja": {
+          "name": "Marcus Chen · VP of Marketing",
+          "block_type": "testimonial",
+          "title": "Marcus Chen · VP of Marketing",
+          "eyebrow": "Industrial Machinery Manufacturer",
+          "slug": "rev-1",
+          "placement": "home_testimonial",
+          "summary": "Our previous website had almost zero inquiries. With Cizhenyu AI Sales Desk, we automatically engaged 20+ European buyers off-hours and captured their WhatsApp info. Conversion jumped remarkably!",
+          "link_label": "$12M+ Annual Export",
+          "status": "published",
+          "sort_order": 60
+        },
+        "en-US": {
+          "name": "Marcus Chen · VP of Marketing",
+          "block_type": "testimonial",
+          "title": "Marcus Chen · VP of Marketing",
+          "eyebrow": "Industrial Machinery Manufacturer",
+          "slug": "rev-1",
+          "placement": "home_testimonial",
+          "summary": "Our previous website had almost zero inquiries. With Cizhenyu AI Sales Desk, we automatically engaged 20+ European buyers off-hours and captured their WhatsApp info. Conversion jumped remarkably!",
+          "link_label": "$12M+ Annual Export",
+          "status": "published",
+          "sort_order": 60
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000007",
+      "locales": {
+        "zh-CN": {
+          "name": "David W. · 创始人",
+          "block_type": "testimonial",
+          "title": "David W. · 创始人",
+          "eyebrow": "跨境硬件品牌独立站出海",
+          "slug": "rev-2",
+          "placement": "home_testimonial",
+          "summary": "站群生成和多语言部署帮我们迅速铺开了 5 个目标语种站点，全静态部署在 Cloudflare 上毫秒级打开，海外客户访问体验非常流畅，AI 搜索推荐量持续上升。",
+          "link_label": "覆盖 12 个海外市场",
+          "status": "published",
+          "sort_order": 70
+        },
+        "zh-TW": {
+          "name": "David W. · 创始人",
+          "block_type": "testimonial",
+          "title": "David W. · 创始人",
+          "eyebrow": "跨境硬件品牌獨立站出海",
+          "slug": "rev-2",
+          "placement": "home_testimonial",
+          "summary": "站群生成和多語言部署帮我們迅速铺开了 5 个目标语种站點，全静态部署在 Cloudflare 上毫秒级打开，海外客户访问体验非常流畅，AI 搜尋推荐量持续上升。",
+          "link_label": "覆盖 12 个海外市场",
+          "status": "published",
+          "sort_order": 70
+        },
+        "ja": {
+          "name": "David W. · Founder",
+          "block_type": "testimonial",
+          "title": "David W. · Founder",
+          "eyebrow": "Hardware DTC & B2B Brand",
+          "slug": "rev-2",
+          "placement": "home_testimonial",
+          "summary": "The multi-site generator helped us launch 5 multilingual regional portals in days. Edge caching on Cloudflare loads in milliseconds, delivering incredible user experience and top AI search visibility.",
+          "link_label": "Present in 12 Global Markets",
+          "status": "published",
+          "sort_order": 70
+        },
+        "en-US": {
+          "name": "David W. · Founder",
+          "block_type": "testimonial",
+          "title": "David W. · Founder",
+          "eyebrow": "Hardware DTC & B2B Brand",
+          "slug": "rev-2",
+          "placement": "home_testimonial",
+          "summary": "The multi-site generator helped us launch 5 multilingual regional portals in days. Edge caching on Cloudflare loads in milliseconds, delivering incredible user experience and top AI search visibility.",
+          "link_label": "Present in 12 Global Markets",
+          "status": "published",
+          "sort_order": 70
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000008",
+      "locales": {
+        "zh-CN": {
+          "name": "林经理 · 业务主管",
+          "block_type": "testimonial",
+          "title": "林经理 · 业务主管",
+          "eyebrow": "外贸建站与数字营销服务商",
+          "slug": "rev-3",
+          "placement": "home_testimonial",
+          "summary": "作为服务商，磁帧鱼的安装包交付极大降低了运维成本。客服同席协助部署，客户资产放在他们自己的云端，双方都极其安心，交付效率提高数倍。",
+          "link_label": "累计交付 40+ 独立站点",
+          "status": "published",
+          "sort_order": 80
+        },
+        "zh-TW": {
+          "name": "林经理 · 业务主管",
+          "block_type": "testimonial",
+          "title": "林经理 · 业务主管",
+          "eyebrow": "外貿建站与数字营销服務商",
+          "slug": "rev-3",
+          "placement": "home_testimonial",
+          "summary": "作为服務商，磁幀魚的安裝包交付极大降低了运维成本。客服同席协助部署，客户资产放在他们自己的云端，双方都极其安心，交付效率提高数倍。",
+          "link_label": "累计交付 40+ 獨立站點",
+          "status": "published",
+          "sort_order": 80
+        },
+        "ja": {
+          "name": "Grace Lin · Operations Director",
+          "block_type": "testimonial",
+          "title": "Grace Lin · Operations Director",
+          "eyebrow": "Export Agency & Marketing Partner",
+          "slug": "rev-3",
+          "placement": "home_testimonial",
+          "summary": "Packaging delivery with Cizhenyu drastically reduced client turnaround time. Collaborative install to the client’s own cloud ensures data sovereignty and zero ongoing maintenance headaches.",
+          "link_label": "40+ Portals Delivered",
+          "status": "published",
+          "sort_order": 80
+        },
+        "en-US": {
+          "name": "Grace Lin · Operations Director",
+          "block_type": "testimonial",
+          "title": "Grace Lin · Operations Director",
+          "eyebrow": "Export Agency & Marketing Partner",
+          "slug": "rev-3",
+          "placement": "home_testimonial",
+          "summary": "Packaging delivery with Cizhenyu drastically reduced client turnaround time. Collaborative install to the client’s own cloud ensures data sovereignty and zero ongoing maintenance headaches.",
+          "link_label": "40+ Portals Delivered",
+          "status": "published",
+          "sort_order": 80
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000009",
+      "locales": {
+        "zh-CN": {
+          "name": "建站效率与内容改版",
+          "block_type": "feature",
+          "title": "建站效率与内容改版",
+          "slug": "cmp-1",
+          "placement": "home_comparison",
+          "summary": "外包修改排期数周，改版成本高，多语言内容容易错乱覆盖",
+          "subtitle": "站群中台统一维护，一键同步多站，全静态秒级发布更新",
+          "status": "published",
+          "sort_order": 90
+        },
+        "zh-TW": {
+          "name": "建站效率与內容改版",
+          "block_type": "feature",
+          "title": "建站效率与內容改版",
+          "slug": "cmp-1",
+          "placement": "home_comparison",
+          "summary": "外包修改排期数周，改版成本高，多語言內容容易错乱覆盖",
+          "subtitle": "站群中台统一维护，一鍵同步多站，全静态秒级发布更新",
+          "status": "published",
+          "sort_order": 90
+        },
+        "ja": {
+          "name": "Build Speed & Content Updates",
+          "block_type": "feature",
+          "title": "Build Speed & Content Updates",
+          "slug": "cmp-1",
+          "placement": "home_comparison",
+          "summary": "Queued agency tickets taking weeks; costly revisions and messy translations",
+          "subtitle": "Single multi-site CMS hub; instant static updates published in seconds",
+          "status": "published",
+          "sort_order": 90
+        },
+        "en-US": {
+          "name": "Build Speed & Content Updates",
+          "block_type": "feature",
+          "title": "Build Speed & Content Updates",
+          "slug": "cmp-1",
+          "placement": "home_comparison",
+          "summary": "Queued agency tickets taking weeks; costly revisions and messy translations",
+          "subtitle": "Single multi-site CMS hub; instant static updates published in seconds",
+          "status": "published",
+          "sort_order": 90
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000010",
+      "locales": {
+        "zh-CN": {
+          "name": "询盘承接与商机留存",
+          "block_type": "feature",
+          "title": "询盘承接与商机留存",
+          "slug": "cmp-2",
+          "placement": "home_comparison",
+          "summary": "静态留言表单等邮件，海外夜间时差造成大量高意向客户流失",
+          "subtitle": "24/7 智能客服依据知识库深度应答促单，高意向即时提醒并转人工",
+          "status": "published",
+          "sort_order": 100
+        },
+        "zh-TW": {
+          "name": "詢盤承接与商机留存",
+          "block_type": "feature",
+          "title": "詢盤承接与商机留存",
+          "slug": "cmp-2",
+          "placement": "home_comparison",
+          "summary": "静态留言表单等邮件，海外夜间时差造成大量高意向客户流失",
+          "subtitle": "24/7 智慧客服依据知識庫深度应答促单，高意向即时提醒并转人工",
+          "status": "published",
+          "sort_order": 100
+        },
+        "ja": {
+          "name": "Inquiry Capture & Conversion",
+          "block_type": "feature",
+          "title": "Inquiry Capture & Conversion",
+          "slug": "cmp-2",
+          "placement": "home_comparison",
+          "summary": "Static contact forms with email delay; off-hours time zones lose hot leads",
+          "subtitle": "24/7 AI desk with knowledge base answers; instant escalation for qualified leads",
+          "status": "published",
+          "sort_order": 100
+        },
+        "en-US": {
+          "name": "Inquiry Capture & Conversion",
+          "block_type": "feature",
+          "title": "Inquiry Capture & Conversion",
+          "slug": "cmp-2",
+          "placement": "home_comparison",
+          "summary": "Static contact forms with email delay; off-hours time zones lose hot leads",
+          "subtitle": "24/7 AI desk with knowledge base answers; instant escalation for qualified leads",
+          "status": "published",
+          "sort_order": 100
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000011",
+      "locales": {
+        "zh-CN": {
+          "name": "技术门槛与资产归属",
+          "block_type": "feature",
+          "title": "技术门槛与资产归属",
+          "slug": "cmp-3",
+          "placement": "home_comparison",
+          "summary": "服务器托管在厂商名下，每年高额续费绑定，无法自由迁移",
+          "subtitle": "部署至企业自有 Cloudflare 云账户，资产与数据自主掌控",
+          "status": "published",
+          "sort_order": 110
+        },
+        "zh-TW": {
+          "name": "技术门槛与资产归属",
+          "block_type": "feature",
+          "title": "技术门槛与资产归属",
+          "slug": "cmp-3",
+          "placement": "home_comparison",
+          "summary": "服务器托管在厂商名下，每年高额续费绑定，无法自由迁移",
+          "subtitle": "部署至企業自有 Cloudflare 云帳戶，资产与資料自主掌控",
+          "status": "published",
+          "sort_order": 110
+        },
+        "ja": {
+          "name": "Ownership & Infrastructure",
+          "block_type": "feature",
+          "title": "Ownership & Infrastructure",
+          "slug": "cmp-3",
+          "placement": "home_comparison",
+          "summary": "Locked inside third-party servers with recurring annual host fees",
+          "subtitle": "Deployed straight to your own Cloudflare account; full code & data ownership",
+          "status": "published",
+          "sort_order": 110
+        },
+        "en-US": {
+          "name": "Ownership & Infrastructure",
+          "block_type": "feature",
+          "title": "Ownership & Infrastructure",
+          "slug": "cmp-3",
+          "placement": "home_comparison",
+          "summary": "Locked inside third-party servers with recurring annual host fees",
+          "subtitle": "Deployed straight to your own Cloudflare account; full code & data ownership",
+          "status": "published",
+          "sort_order": 110
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000012",
+      "locales": {
+        "zh-CN": {
+          "name": "SEO / GEO 与长效运营",
+          "block_type": "feature",
+          "title": "SEO / GEO 与长效运营",
+          "slug": "cmp-4",
+          "placement": "home_comparison",
+          "summary": "网站上线即停更，缺乏长尾词规划与 AI 搜索结构化数据",
+          "subtitle": "内置 GEO 结构化标记与多语言路由，持续跑出搜索复利节奏",
+          "status": "published",
+          "sort_order": 120
+        },
+        "zh-TW": {
+          "name": "SEO / GEO 与长效運營",
+          "block_type": "feature",
+          "title": "SEO / GEO 与长效運營",
+          "slug": "cmp-4",
+          "placement": "home_comparison",
+          "summary": "网站上线即停更，缺乏长尾词规划与 AI 搜尋结构化資料",
+          "subtitle": "内置 GEO 结构化标记与多語言路由，持续跑出搜尋复利节奏",
+          "status": "published",
+          "sort_order": 120
+        },
+        "ja": {
+          "name": "GEO / SEO Compounding",
+          "block_type": "feature",
+          "title": "GEO / SEO Compounding",
+          "slug": "cmp-4",
+          "placement": "home_comparison",
+          "summary": "Site abandoned post-launch; zero structured data for modern AI engines",
+          "subtitle": "Built-in GEO schema markup, multilingual routing, and ongoing growth ops",
+          "status": "published",
+          "sort_order": 120
+        },
+        "en-US": {
+          "name": "GEO / SEO Compounding",
+          "block_type": "feature",
+          "title": "GEO / SEO Compounding",
+          "slug": "cmp-4",
+          "placement": "home_comparison",
+          "summary": "Site abandoned post-launch; zero structured data for modern AI engines",
+          "subtitle": "Built-in GEO schema markup, multilingual routing, and ongoing growth ops",
+          "status": "published",
+          "sort_order": 120
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000013",
+      "locales": {
+        "zh-CN": {
+          "name": "步骤01",
+          "block_type": "feature",
+          "eyebrow": "01",
+          "title": "明确目标市场与核心痛点",
+          "slug": "step-1",
+          "placement": "home_step",
+          "summary": "梳理目标国家、主推品类及当前询盘痛点（无站/时差漏单/多语言需求）。",
+          "status": "published",
+          "sort_order": 130
+        },
+        "zh-TW": {
+          "name": "步驟01",
+          "block_type": "feature",
+          "eyebrow": "01",
+          "title": "明确目标市场与核心痛点",
+          "slug": "step-1",
+          "placement": "home_step",
+          "summary": "梳理目标国家、主推品类及当前詢盤痛点（无站/时差漏单/多語言需求）。",
+          "status": "published",
+          "sort_order": 130
+        },
+        "ja": {
+          "name": "Step 01",
+          "block_type": "feature",
+          "eyebrow": "01",
+          "title": "Diagnose Market & Bottlenecks",
+          "slug": "step-1",
+          "placement": "home_step",
+          "summary": "Share target countries, product categories, and current lead leakage points.",
+          "status": "published",
+          "sort_order": 130
+        },
+        "en-US": {
+          "name": "Step 01",
+          "block_type": "feature",
+          "eyebrow": "01",
+          "title": "Diagnose Market & Bottlenecks",
+          "slug": "step-1",
+          "placement": "home_step",
+          "summary": "Share target countries, product categories, and current lead leakage points.",
+          "status": "published",
+          "sort_order": 130
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000014",
+      "locales": {
+        "zh-CN": {
+          "name": "步骤02",
+          "block_type": "feature",
+          "eyebrow": "02",
+          "title": "灵活选配所需产品模块",
+          "slug": "step-2",
+          "placement": "home_step",
+          "summary": "按业务成熟度单选或组合：站群生成系统、智能询盘客服、部署运营中台。",
+          "status": "published",
+          "sort_order": 140
+        },
+        "zh-TW": {
+          "name": "步驟02",
+          "block_type": "feature",
+          "eyebrow": "02",
+          "title": "灵活选配所需產品模組",
+          "slug": "step-2",
+          "placement": "home_step",
+          "summary": "按业务成熟度单选或组合：站群生成系统、智慧詢盤客服、部署運營中台。",
+          "status": "published",
+          "sort_order": 140
+        },
+        "ja": {
+          "name": "Step 02",
+          "block_type": "feature",
+          "eyebrow": "02",
+          "title": "Select Product Modules",
+          "slug": "step-2",
+          "placement": "home_step",
+          "summary": "Pick what fits: Multi-site Generator, AI Inquiry Desk, and Deploy Ops.",
+          "status": "published",
+          "sort_order": 140
+        },
+        "en-US": {
+          "name": "Step 02",
+          "block_type": "feature",
+          "eyebrow": "02",
+          "title": "Select Product Modules",
+          "slug": "step-2",
+          "placement": "home_step",
+          "summary": "Pick what fits: Multi-site Generator, AI Inquiry Desk, and Deploy Ops.",
+          "status": "published",
+          "sort_order": 140
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000015",
+      "locales": {
+        "zh-CN": {
+          "name": "步骤03",
+          "block_type": "feature",
+          "eyebrow": "03",
+          "title": "下载部署并由客服协作上线",
+          "slug": "step-3",
+          "placement": "home_step",
+          "summary": "通过向导部署至自有云环境，专业工程客服同席协助首发初始化与联调。",
+          "status": "published",
+          "sort_order": 150
+        },
+        "zh-TW": {
+          "name": "步驟03",
+          "block_type": "feature",
+          "eyebrow": "03",
+          "title": "下載部署并由客服協作上线",
+          "slug": "step-3",
+          "placement": "home_step",
+          "summary": "通过向导部署至自有云环境，专业工程客服同席协助首发初始化与联调。",
+          "status": "published",
+          "sort_order": 150
+        },
+        "ja": {
+          "name": "Step 03",
+          "block_type": "feature",
+          "eyebrow": "03",
+          "title": "Download & Collaborative Install",
+          "slug": "step-3",
+          "placement": "home_step",
+          "summary": "Deploy to your cloud account with guided wizard and support onboarding.",
+          "status": "published",
+          "sort_order": 150
+        },
+        "en-US": {
+          "name": "Step 03",
+          "block_type": "feature",
+          "eyebrow": "03",
+          "title": "Download & Collaborative Install",
+          "slug": "step-3",
+          "placement": "home_step",
+          "summary": "Deploy to your cloud account with guided wizard and support onboarding.",
+          "status": "published",
+          "sort_order": 150
         }
       }
     }
