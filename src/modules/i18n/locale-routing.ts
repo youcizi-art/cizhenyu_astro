@@ -50,12 +50,13 @@ function shouldPassthrough(pathname: string) {
 /**
  * 默认语种无前缀（公开 URL 由 localePath 生成）：
  * - 无前缀 → rewrite 到 /{default}/...（浏览器 URL 不变）
- * - 已有语种前缀（含默认）→ 直接放行，不做 302 strip
- *   （若 strip + rewrite 叠加，Astro rewrite 会重进 middleware，形成死循环）
+ * - 命中默认语种前缀 /{defaultLocale}/... → 301 重定向到无前缀规范路径
+ * - 其他有效非默认语种前缀 → 直接放行 next
  */
 export async function applyLocaleRouting(requestUrl: URL): Promise<
   | { action: 'next' }
   | { action: 'rewrite'; pathname: string }
+  | { action: 'redirect'; status: 301; location: string }
 > {
   const pathname = requestUrl.pathname || '/';
   if (shouldPassthrough(pathname)) {
@@ -68,6 +69,13 @@ export async function applyLocaleRouting(requestUrl: URL): Promise<
   const first = segments[0] || '';
 
   if (first && codes.has(first)) {
+    // 若用户或爬虫请求了 /{defaultLocale} 或 /{defaultLocale}/...，301 重定向至无前缀的规范路径
+    if (first === defaultLocale) {
+      const rest = segments.slice(1);
+      const canonicalPath = rest.length ? `/${rest.join('/')}` : '/';
+      return { action: 'redirect', status: 301, location: canonicalPath };
+    }
+    // 非默认有效语种正常放行
     return { action: 'next' };
   }
 

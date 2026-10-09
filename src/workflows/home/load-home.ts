@@ -25,13 +25,13 @@ function homeLabels(locale: string) {
   };
 }
 
-function homePaths(locale: string) {
+function homePaths(locale: string, defaultLocale?: string) {
   return {
-    home: localePath(locale, '/'),
-    about: localePath(locale, '/about'),
-    contact: localePath(locale, '/contact'),
-    products: localePath(locale, '/products'),
-    solutions: localePath(locale, '/solutions'),
+    home: localePath(locale, '/', defaultLocale),
+    about: localePath(locale, '/about', defaultLocale),
+    contact: localePath(locale, '/contact', defaultLocale),
+    products: localePath(locale, '/products', defaultLocale),
+    solutions: localePath(locale, '/solutions', defaultLocale),
   };
 }
 
@@ -94,7 +94,7 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
     pathname: options.pathname,
   });
   const labels = homeLabels(chrome.locale);
-  const paths = homePaths(chrome.locale);
+  const paths = homePaths(chrome.locale, chrome.site.defaultLocale);
 
   if (!chrome.localeValid) {
     return {

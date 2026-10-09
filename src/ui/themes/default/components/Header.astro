@@ -27,6 +27,27 @@ const {
 const logoUrl = String(company?.logoUrl || '').trim();
 const pathname = Astro.url.pathname;
 const activeLocale = localeOptions.find((l) => l.active);
+
+const normalizePath = (p: string) => p.replace(/\/+$/, '') || '/';
+const currentPath = normalizePath(pathname);
+const normalizedContactHref = normalizePath(contactHref);
+
+function isLinkActive(href: string) {
+  const targetPath = normalizePath(href);
+  const isHomeLink =
+    targetPath === normalizePath(homeHref) ||
+    targetPath === '/' ||
+    /^\/[a-z]{2}(-[a-z]{2})?$/i.test(targetPath);
+  return isHomeLink
+    ? currentPath === targetPath
+    : (currentPath === targetPath || currentPath.startsWith(`${targetPath}/`));
+}
+
+// 移动端若已展示底部联系 CTA，则在常规导航链接中过滤联系项，避免出现两个联系方式
+const drawerLinks = links.filter((link) => {
+  if (!showContactCta) return true;
+  return normalizePath(link.href) !== normalizedContactHref;
+});
 ---
 <header class="cz-header">
   <div class="cz-container cz-header-inner">
@@ -47,16 +68,7 @@ const activeLocale = localeOptions.find((l) => l.active);
 
     <nav class="cz-nav" aria-label="Primary">
       {links.map((link) => {
-        const normalizePath = (p: string) => p.replace(/\/+$/, '') || '/';
-        const currentPath = normalizePath(pathname);
-        const targetPath = normalizePath(link.href);
-        const isHomeLink =
-          targetPath === normalizePath(homeHref) ||
-          targetPath === '/' ||
-          /^\/[a-z]{2}(-[a-z]{2})?$/i.test(targetPath);
-        const active = isHomeLink
-          ? currentPath === targetPath
-          : (currentPath === targetPath || currentPath.startsWith(`${targetPath}/`));
+        const active = isLinkActive(link.href);
         const kids = link.children || [];
         if (kids.length) {
           return (
@@ -111,17 +123,70 @@ const activeLocale = localeOptions.find((l) => l.active);
       </button>
     </div>
   </div>
+
   <div class="cz-container cz-drawer" data-cz-drawer>
-    {links.map((link) => (
-      <>
-        <a href={link.href}>{link.label}</a>
-        {(link.children || []).map((child) => (
-          <a class="cz-drawer-sub" href={child.href}>{child.label}</a>
-        ))}
-      </>
-    ))}
-    {showContactCta ? <a href={contactHref}>{contactLabel}</a> : null}
-    {activeLocale ? <p class="muted" style="margin-top:0.75rem;font-size:0.8rem">{activeLocale.name}</p> : null}
+    <div class="cz-drawer-nav">
+      {drawerLinks.map((link) => {
+        const active = isLinkActive(link.href);
+        const rawKids = link.children || [];
+        // 去除与父级 label+href 均重复的项
+        const kids = rawKids.filter(
+          (c) => !(c.label === link.label && normalizePath(c.href) === normalizePath(link.href))
+        );
+
+        if (kids.length) {
+          const hasActiveChild = kids.some((c) => isLinkActive(c.href));
+          return (
+            <details class={`cz-drawer-group${active || hasActiveChild ? ' is-active' : ''}`} open={active || hasActiveChild}>
+              <summary class="cz-drawer-group-summary">
+                <span class="cz-drawer-group-title">{link.label}</span>
+                <svg class="cz-drawer-group-arrow" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06z" clip-rule="evenodd" />
+                </svg>
+              </summary>
+              <div class="cz-drawer-sub-group">
+                {kids.map((child) => {
+                  const childActive = isLinkActive(child.href);
+                  return (
+                    <a
+                      href={child.href}
+                      class={`cz-drawer-sub-link${childActive ? ' is-active' : ''}`}
+                    >
+                      <span>{child.label}</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </details>
+          );
+        }
+
+        return (
+          <a
+            href={link.href}
+            class={`cz-drawer-link${active ? ' is-active' : ''}`}
+            target={link.openInNewTab ? '_blank' : undefined}
+            rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+          >
+            {link.label}
+          </a>
+        );
+      })}
+    </div>
+
+    {showContactCta ? (
+      <div class="cz-drawer-cta">
+        <a class="cz-btn cz-btn-primary cz-drawer-cta-btn" href={contactHref}>
+          {contactLabel}
+        </a>
+      </div>
+    ) : null}
+
+    {activeLocale ? (
+      <div class="cz-drawer-footer">
+        <span class="muted">{activeLocale.name}</span>
+      </div>
+    ) : null}
   </div>
 </header>
 <script>

@@ -19,15 +19,14 @@ function relationIds(value: unknown): string[] {
   return [];
 }
 
-function resolveHref(locale: string, raw: string) {
+function resolveHref(locale: string, raw: string, defaultLocale?: string) {
   const url = String(raw || '').trim();
-  if (!url) return localePath(locale, '/');
+  if (!url) return localePath(locale, '/', defaultLocale);
   if (/^https?:\/\//i.test(url) || url.startsWith('//')) return url;
-  if (url.startsWith(`/${locale}/`) || url === `/${locale}`) return url;
-  // 去掉任意 locale 前缀后按当前 locale 重建，避免 seed 写死 /zh-CN/... 在其他语种串链
-  const stripped = url.replace(/^\/[a-z]{2}(?:-[A-Za-z]{2})?(?=\/|$)/i, '') || '/';
-  if (stripped.startsWith('/')) return localePath(locale, stripped);
-  return localePath(locale, `/${stripped}`);
+  // 必须剥离旧的 locale 前缀，统一走 localePath 生成（默认语种无前缀，非默认带前缀）
+  const stripped = url.replace(/^\/[a-z]{2}(?:-[A-Za-z]{2,4})?(?=\/|$)/i, '') || '/';
+  const clean = stripped.startsWith('/') ? stripped : `/${stripped}`;
+  return localePath(locale, clean, defaultLocale);
 }
 
 function sortItems(rows: CmsEntity[]) {
@@ -61,7 +60,7 @@ function parentKey(row: CmsEntity) {
   return parent;
 }
 
-async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
+async function buildCmsNavLinks(locale: string, defaultLocale?: string): Promise<NavLink[] | null> {
   // 当前语种菜单/菜单项 + 全量菜单（语组 id 匹配）并行拉取，禁止串行叠延迟
   const [menusResult, itemsResult, allMenusResult] = await Promise.all([
     listEntities('navMenu', { locale, pageSize: 20 }),
@@ -136,7 +135,7 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
           });
           const href = first?.refType
             ? collectionListHref(locale, first.refType)
-            : resolveHref(locale, String(data.link_url || '/'));
+            : resolveHref(locale, String(data.link_url || '/'), defaultLocale);
           return {
             label: title,
             href,
@@ -145,7 +144,7 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
           } as NavLink;
         }
 
-        const href = resolveHref(locale, String(data.link_url || `/${String(data.slug || '')}`));
+        const href = resolveHref(locale, String(data.link_url || `/${String(data.slug || '')}`), defaultLocale);
         const childLinks = (
           await Promise.all(
             nested.map(async (child) => {
@@ -161,7 +160,7 @@ async function buildCmsNavLinks(locale: string): Promise<NavLink[] | null> {
               return [
                 {
                   label: childTitle,
-                  href: resolveHref(locale, String(cd.link_url || '')),
+                  href: resolveHref(locale, String(cd.link_url || ''), defaultLocale),
                 },
               ];
             })
@@ -187,7 +186,7 @@ export async function loadNavLinks(
   locale: string
 ): Promise<{ links: NavLink[]; warning?: string; source: 'cms' | 'manifest' }> {
   try {
-    const cms = await buildCmsNavLinks(locale);
+    const cms = await buildCmsNavLinks(locale, site.defaultLocale);
     if (cms?.length) return { links: cms, source: 'cms' };
     return {
       links: buildNavLinks(site, locale),

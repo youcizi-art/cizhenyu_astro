@@ -1,5 +1,5 @@
 ---
-import { toAbsoluteUrl, toOgLocale } from '@/modules/seo';
+import { siteOrigin, toAbsoluteUrl, toOgLocale } from '@/modules/seo';
 
 interface Props {
   title: string;
@@ -30,9 +30,15 @@ const {
   jsonLd = null,
 } = Astro.props;
 
-const canonical = canonicalUrl ? toAbsoluteUrl(canonicalUrl) : '';
-const image = ogImage ? toAbsoluteUrl(ogImage) : '';
-const shareUrl = ogUrl ? toAbsoluteUrl(ogUrl) : canonical;
+// 优先采用配置的 siteOrigin，若未配置则自动使用 Astro.site 或当前请求的 Astro.url.origin 确保生成绝对网址
+const currentOrigin =
+  siteOrigin() ||
+  (Astro.site ? String(Astro.site).replace(/\/$/, '') : '') ||
+  (Astro.url ? Astro.url.origin : '');
+
+const canonical = canonicalUrl ? toAbsoluteUrl(canonicalUrl, currentOrigin) : '';
+const image = ogImage ? toAbsoluteUrl(ogImage, currentOrigin) : '';
+const shareUrl = ogUrl ? toAbsoluteUrl(ogUrl, currentOrigin) : canonical;
 const jsonLdText = jsonLd ? JSON.stringify(jsonLd) : '';
 const ogLocale = locale ? toOgLocale(locale) : '';
 const ogLocaleAlts = (alternateLocales.length ? alternateLocales : alternates.map((a) => a.hreflang))
@@ -44,7 +50,7 @@ const ogLocaleAlts = (alternateLocales.length ? alternateLocales : alternates.ma
 {robots ? <meta name="robots" content={robots} /> : null}
 {canonical ? <link rel="canonical" href={canonical} /> : null}
 {alternates.map((item) => (
-  <link rel="alternate" hreflang={item.hreflang} href={item.href} />
+  <link rel="alternate" hreflang={item.hreflang} href={toAbsoluteUrl(item.href, currentOrigin)} />
 ))}
 <meta property="og:title" content={title} />
 {description ? <meta property="og:description" content={description} /> : null}

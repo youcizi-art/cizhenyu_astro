@@ -1,5 +1,6 @@
 import { listEntities, entityData, isPublishedEntity, localePath } from '../cms';
 import { loadSiteManifest } from '../site';
+import { loadLanguages } from '../i18n';
 import { toAbsoluteUrl } from './urls';
 
 export type SitemapEntry = {
@@ -70,7 +71,7 @@ async function slugList(key: Parameters<typeof listEntities>[0], locale: string,
   return out;
 }
 
-function attachAlternates(paths: RawPath[], origin: string): SitemapEntry[] {
+function attachAlternates(paths: RawPath[], origin: string, defaultLocale?: string): SitemapEntry[] {
   const byGroup = new Map<string, RawPath[]>();
   for (const item of paths) {
     if (isNoindex(item.robots || '')) continue;
@@ -87,6 +88,17 @@ function attachAlternates(paths: RawPath[], origin: string): SitemapEntry[] {
       hreflang: item.locale,
       href: toAbsoluteUrl(item.path, origin),
     }));
+
+    if (defaultLocale) {
+      const defaultHit = group.find((item) => item.locale === defaultLocale) || group[0];
+      if (defaultHit) {
+        alternates.push({
+          hreflang: 'x-default',
+          href: toAbsoluteUrl(defaultHit.path, origin),
+        });
+      }
+    }
+
     for (const item of group) {
       const loc = toAbsoluteUrl(item.path, origin);
       if (!loc || seen.has(loc)) continue;
@@ -108,10 +120,15 @@ function attachAlternates(paths: RawPath[], origin: string): SitemapEntry[] {
 export async function collectSitemapEntries(options?: { origin?: string }): Promise<SitemapEntry[]> {
   const site = loadSiteManifest();
   const origin = String(options?.origin || '').trim() || undefined;
-  if (!origin && !String(import.meta.env.PUBLIC_SITE_URL || '').trim()) {
-    // Relative <loc> is invalid for search engines; still return paths for local debug.
-  }
-  const locales = site.locales?.length ? site.locales : [site.defaultLocale || 'zh-CN'];
+
+  // 1. 动态获取后台真实语种与默认语种
+  const { languages } = await loadLanguages(site);
+  const activeLangs = languages.filter((l) => l.status === 'active');
+  const candidateLangs = activeLangs.length ? activeLangs : languages;
+  const defaultLang = candidateLangs.find((l) => l.isDefault) || candidateLangs[0];
+  const defaultLocale = defaultLang?.code || site.defaultLocale || 'en';
+  const locales = candidateLangs.length ? candidateLangs.map((l) => l.code) : [defaultLocale];
+
   const staticPaths = [
     '/',
     '/products',
@@ -134,7 +151,7 @@ export async function collectSitemapEntries(options?: { origin?: string }): Prom
   for (const locale of locales) {
     for (const path of staticPaths) {
       raw.push({
-        path: localePath(locale, path),
+        path: localePath(locale, path, defaultLocale),
         locale,
         groupKey: `static:${path}`,
         priority: path === '/' ? '1.0' : path.startsWith('/articles/type/') ? '0.65' : '0.8',
@@ -142,18 +159,20 @@ export async function collectSitemapEntries(options?: { origin?: string }): Prom
       });
     }
 
-    const [products, articles, cases, industries, resources, categories] = await Promise.all([
+    // 动态产品、文章、案例、方案、资源、分类，以及单页（隐私政策、条款等）
+    const [products, articles, cases, industries, resources, categories, pages] = await Promise.all([
       slugList('product', locale),
       slugList('article', locale),
       slugList('caseStudy', locale),
       slugList('industry', locale),
       slugList('resource', locale),
       slugList('productCategory', locale),
+      slugList('page', locale),
     ]);
 
     for (const item of products) {
       raw.push({
-        path: localePath(locale, `/products/${encodeURIComponent(item.slug)}`),
+        path: localePath(locale, `/products/${encodeURIComponent(item.slug)}`, defaultLocale),
         locale,
         groupKey: `product:${item.groupKey}`,
         priority: '0.7',
@@ -163,7 +182,7 @@ export async function collectSitemapEntries(options?: { origin?: string }): Prom
     }
     for (const item of articles) {
       raw.push({
-        path: localePath(locale, `/articles/${encodeURIComponent(item.slug)}`),
+        path: localePath(locale, `/articles/${encodeURIComponent(item.slug)}`, defaultLocale),
         locale,
         groupKey: `article:${item.groupKey}`,
         priority: '0.7',
@@ -173,7 +192,7 @@ export async function collectSitemapEntries(options?: { origin?: string }): Prom
     }
     for (const item of cases) {
       raw.push({
-        path: localePath(locale, `/case-studies/${encodeURIComponent(item.slug)}`),
+        path: localePath(locale, `/case-studies/${encodeURIComponent(item.slug)}`, defaultLocale),
         locale,
         groupKey: `case:${item.groupKey}`,
         priority: '0.7',
@@ -183,7 +202,7 @@ export async function collectSitemapEntries(options?: { origin?: string }): Prom
     }
     for (const item of industries) {
       raw.push({
-        path: localePath(locale, `/solutions/${encodeURIComponent(item.slug)}`),
+        path: localePath(locale, `/solutions/${encodeURIComponent(item.slug)}`, defaultLocale),
         locale,
         groupKey: `industry:${item.groupKey}`,
         priority: '0.7',
@@ -193,7 +212,7 @@ export async function collectSitemapEntries(options?: { origin?: string }): Prom
     }
     for (const item of resources) {
       raw.push({
-        path: localePath(locale, `/resources/${encodeURIComponent(item.slug)}`),
+        path: localePath(locale, `/resources/${encodeURIComponent(item.slug)}`, defaultLocale),
         locale,
         groupKey: `resource:${item.groupKey}`,
         priority: '0.6',
@@ -203,7 +222,7 @@ export async function collectSitemapEntries(options?: { origin?: string }): Prom
     }
     for (const item of categories) {
       raw.push({
-        path: localePath(locale, `/products/category/${encodeURIComponent(item.slug)}`),
+        path: localePath(locale, `/products/category/${encodeURIComponent(item.slug)}`, defaultLocale),
         locale,
         groupKey: `productCategory:${item.groupKey}`,
         priority: '0.75',
@@ -211,9 +230,21 @@ export async function collectSitemapEntries(options?: { origin?: string }): Prom
         robots: item.robots,
       });
     }
+    const builtInSlugs = new Set(['home', 'about', 'contact']);
+    for (const item of pages) {
+      if (builtInSlugs.has(item.slug)) continue;
+      raw.push({
+        path: localePath(locale, `/${encodeURIComponent(item.slug)}`, defaultLocale),
+        locale,
+        groupKey: `page:${item.groupKey}`,
+        priority: '0.6',
+        lastmod: item.lastmod,
+        robots: item.robots,
+      });
+    }
   }
 
-  return attachAlternates(raw, origin || '');
+  return attachAlternates(raw, origin || '', defaultLocale);
 }
 
 export function renderSitemapXml(entries: SitemapEntry[]) {

@@ -22,6 +22,11 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (!context.locals.localeRoutingDone) {
     context.locals.localeRoutingDone = true;
     const routed = await applyLocaleRouting(url);
+    if (routed.action === 'redirect') {
+      const target = new URL(url.href);
+      target.pathname = routed.location;
+      return context.redirect(target.pathname + target.search, routed.status);
+    }
     if (routed.action === 'rewrite') {
       const target = new URL(url.href);
       target.pathname = routed.pathname;
