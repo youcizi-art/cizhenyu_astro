@@ -23,6 +23,7 @@ const turmillLabels = meta.id === 'turmill' ? turmillHomeLabels(data.locale) : n
   <DefaultHomePage
     siteName={data.siteName}
     locale={data.locale}
+    heroImageUrl={data.heroImageUrl || data.hero?.imageUrl || ''}
     products={data.products}
     labels={{ ...data.labels, ...defaultLabels }}
     paths={{
