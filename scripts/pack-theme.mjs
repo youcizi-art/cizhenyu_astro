@@ -1,6 +1,8 @@
 /**
  * 单主题交付打包：裁剪 → build → 输出到 sibling cizhenyu_astro_themes
  *
+ * 样式：自动扫描主题目录下全部 .css 写入 styles.ts（无需人工配置，禁止按主题名手写清单）。
+ *
  * 用法:
  *   node scripts/pack-theme.mjs --id=default
  *   node scripts/pack-theme.mjs --id=turmill
@@ -69,8 +71,81 @@ function pascal(id) {
     .join('');
 }
 
-function writeSingleThemeKernel(themesDir, themeId) {
+/** 主题目录：仅收录含 PageShell.astro 的目录，避免误扫工具文件夹 */
+function listThemeIds(themesDir) {
+  if (!fs.existsSync(themesDir)) return [];
+  return fs
+    .readdirSync(themesDir)
+    .filter((name) => {
+      if (name.startsWith('.')) return false;
+      const p = path.join(themesDir, name);
+      return fs.statSync(p).isDirectory() && fs.existsSync(path.join(p, 'PageShell.astro'));
+    })
+    .sort();
+}
+
+/**
+ * 收集主题下全部 CSS（自动发现，禁止按主题名手写清单）。
+ * 跳过 seed；优先 tokens → theme → pages，其余按路径排序。
+ */
+function collectThemeCssRelPaths(themeDir) {
+  const skipDirs = new Set(['seed', 'node_modules', 'dist']);
+  const found = [];
+
+  function walk(dir, prefix) {
+    for (const name of fs.readdirSync(dir)) {
+      if (name.startsWith('.')) continue;
+      const full = path.join(dir, name);
+      const rel = prefix ? `${prefix}/${name}` : name;
+      const st = fs.statSync(full);
+      if (st.isDirectory()) {
+        if (skipDirs.has(name)) continue;
+        walk(full, rel);
+        continue;
+      }
+      if (name.endsWith('.css')) found.push(rel.replace(/\\/g, '/'));
+    }
+  }
+
+  walk(themeDir, '');
+  const priority = new Map([
+    ['tokens.css', 0],
+    ['theme.css', 1],
+    ['pages.css', 2],
+  ]);
+  found.sort((a, b) => {
+    const ab = path.posix.basename(a);
+    const bb = path.posix.basename(b);
+    const ap = priority.has(ab) ? priority.get(ab) : 100;
+    const bp = priority.has(bb) ? priority.get(bb) : 100;
+    if (ap !== bp) return ap - bp;
+    return a.localeCompare(b);
+  });
+  return found;
+}
+
+function buildThemeStylesTs(themeId, cssRelPaths) {
+  if (!cssRelPaths.length) {
+    throw new Error(`主题 ${themeId} 未发现任何 .css，无法生成 styles.ts`);
+  }
+  const hasTokens = cssRelPaths.some((f) => path.posix.basename(f) === 'tokens.css');
+  const hasTheme = cssRelPaths.some((f) => path.posix.basename(f) === 'theme.css');
+  if (!hasTokens || !hasTheme) {
+    throw new Error(
+      `主题 ${themeId} 缺少必要样式（需要 tokens.css 与 theme.css），实际: ${cssRelPaths.join(', ')}`,
+    );
+  }
+  const imports = cssRelPaths.map((rel) => `import './${themeId}/${rel}';`).join('\n');
+  return (
+    `/** 单主题交付包：仅 ${themeId}（由 pack-theme 自动扫描 CSS，勿手写清单） */\n` +
+    `${imports}\n`
+  );
+}
+
+function writeSingleThemeKernel(themesDir, themeId, allThemeIds) {
   const P = pascal(themeId);
+  const themeDir = path.join(themesDir, themeId);
+  const cssRelPaths = collectThemeCssRelPaths(themeDir);
 
   fs.writeFileSync(
     path.join(themesDir, 'load-theme.ts'),
@@ -88,16 +163,10 @@ function writeSingleThemeKernel(themesDir, themeId) {
       `}\n`,
   );
 
-  const cssImports =
-    themeId === 'default'
-      ? `import './default/tokens.css';\nimport './default/theme.css';\nimport './default/pages.css';\n`
-      : themeId === 'turmill'
-        ? `import './turmill/tokens.css';\nimport './turmill/theme.css';\n`
-        : `import './${themeId}/tokens.css';\nimport './${themeId}/theme.css';\n`;
-  fs.writeFileSync(
-    path.join(themesDir, 'styles.ts'),
-    `/** 单主题交付包：仅 ${themeId} */\n${cssImports}`,
-  );
+  const stylesBody = buildThemeStylesTs(themeId, cssRelPaths);
+  fs.writeFileSync(path.join(themesDir, 'styles.ts'), stylesBody);
+  console.log(`  styles.ts 已纳入 ${cssRelPaths.length} 个 CSS:`);
+  for (const rel of cssRelPaths) console.log(`    - ${themeId}/${rel}`);
 
   fs.writeFileSync(
     path.join(themesDir, 'theme-ui.ts'),
@@ -146,14 +215,14 @@ function writeSingleThemeKernel(themesDir, themeId) {
   );
 
   // Active*：把其它主题分支去掉，仅保留目标主题（用源文件做字符串手术）
+  const others = (allThemeIds || listThemeIds(themesDir)).filter((t) => t !== themeId);
   for (const file of fs.readdirSync(themesDir).filter((f) => f.startsWith('Active') && f.endsWith('.astro'))) {
-    slimActiveFile(path.join(themesDir, file), themeId);
+    slimActiveFile(path.join(themesDir, file), themeId, others);
   }
 }
 
-function slimActiveFile(filePath, themeId) {
+function slimActiveFile(filePath, themeId, others) {
   let text = fs.readFileSync(filePath, 'utf8');
-  const others = ['default', 'turmill'].filter((t) => t !== themeId);
 
   // 删除其它主题 import
   for (const o of others) {
@@ -180,18 +249,16 @@ function slimActiveFile(filePath, themeId) {
     new RegExp(`isTurmill\\s*=\\s*meta\\.id\\s*===\\s*['"]turmill['"]`, 'g'),
     `isTurmill = ${themeId === 'turmill'}`,
   );
+  // 任意多主题组合的 isShellTheme 判断统一恒真（单主题包始终使用 page-shell）
   text = text.replace(
-    /isShellTheme\s*=\s*meta\.id\s*===\s*['"]default['"]\s*\|\|\s*meta\.id\s*===\s*['"]turmill['"]/g,
-    'isShellTheme = true',
+    /isShellTheme\s*=\s*[^;]+;/g,
+    'isShellTheme = true;',
   );
 
-  // 删除其它主题 home-copy 变量
+  // 删除其它主题 home-copy 变量（约定：defaultLabels / turmillLabels / <id>Labels）
   for (const o of others) {
-    const varName = o === 'default' ? 'defaultLabels' : o === 'turmill' ? 'turmillLabels' : `${o}Labels`;
-    text = text.replace(
-      new RegExp(`const\\s+${varName}\\s*=\\s*[^;]+;\\r?\\n`, 'g'),
-      '',
-    );
+    const varName = `${o}Labels`;
+    text = text.replace(new RegExp(`const\\s+${varName}\\s*=\\s*[^;]+;\\r?\\n`, 'g'), '');
   }
 
   fs.writeFileSync(filePath, text);
@@ -325,17 +392,19 @@ function main() {
   copyDir(astroRoot, work);
 
   const workThemes = path.join(work, 'src/ui/themes');
-  for (const name of fs.readdirSync(workThemes)) {
-    const p = path.join(workThemes, name);
-    if (!fs.statSync(p).isDirectory()) continue;
-    if (name !== themeId) {
-      console.log('  删除其它主题:', name);
-      rmDir(p);
-    }
+  const allThemeIds = listThemeIds(workThemes);
+  if (!allThemeIds.includes(themeId)) {
+    console.error(`staging 中未找到主题目录: ${themeId}`);
+    process.exit(1);
+  }
+  for (const name of allThemeIds) {
+    if (name === themeId) continue;
+    console.log('  删除其它主题:', name);
+    rmDir(path.join(workThemes, name));
   }
 
   console.log('▶ 改写为单主题内核…');
-  writeSingleThemeKernel(workThemes, themeId);
+  writeSingleThemeKernel(workThemes, themeId, allThemeIds);
   patchLoadSiteForTheme(work, themeId);
 
   // 依赖：优先 symlink/copy 源 node_modules 加速
