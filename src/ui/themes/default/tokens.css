@@ -1,4 +1,4 @@
-/* Default · 磁帧鱼 — 干净营销站（参考 Rinda 信息架构，蓝电强调） */
+/* Default · 磁帧鱼 — 轻量 B2B 落地页（蓝电强调，编辑式分区） */
 [data-theme='default'] {
   color-scheme: light;
   --ink: #0b1220;
@@ -18,7 +18,7 @@
   --footer-bg: #0b1220;
   --footer-fg: #e2e8f0;
   --footer-muted: #94a3b8;
-  --hero-bg: linear-gradient(165deg, #eef5ff 0%, #f7f9fc 42%, #ffffff 100%);
+  --hero-bg: linear-gradient(180deg, #eef4fb 0%, #f7f9fc 48%, #ffffff 100%);
   --hero-fg: #0b1220;
   --hero-muted: #5b6578;
   --hero-border: transparent;
@@ -26,7 +26,7 @@
   --radius-sm: 10px;
   --font-sans: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
   --font-display: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
-  --wrap-max: 1160px;
+  --wrap-max: 1120px;
   --shadow-nav: 0 10px 30px rgba(15, 23, 42, 0.06);
   --shadow-card: 0 18px 50px rgba(15, 23, 42, 0.07);
 }

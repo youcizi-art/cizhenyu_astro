@@ -89,9 +89,9 @@ writeJson('company_info.json', {
         'zh-CN': {
           company_name: '磁帧鱼',
           company_type: 'software',
-          slogan: '第一次做外贸站群与询盘，也能搭出可交付的获客系统',
+          slogan: '建好网站，管好客户，让全球客户找到你',
           summary:
-            '磁帧鱼面向外贸业务员、工厂外贸部与服务商，提供站群与 B2B 站点生成、智能客服询盘、部署运营获客三套可安装产品。资产在您自己的云账户，安装可协作完成。',
+            '磁帧鱼提供网站建设、CRM 与 AI 客服、SEO / GEO 运营三套可组合产品。基于 Cloudflare 轻量架构，降低运维负担，让网站真正服务业务增长。',
           address: '中国',
           phone: '',
           email: 'hello@ycz.me',
@@ -99,9 +99,9 @@ writeJson('company_info.json', {
           logo: { url: '' },
           about_content:
             '<p>磁帧鱼做的不是「又一个模板站」，而是能装到您账户里、能持续改内容、能接住询盘的增长系统。</p><p>三款产品可单独购买、也可组合交付：全能站群 + B2B 前端生成、智能客服询盘、部署运营获客。下载安装可联系客服协作完成；价格与实施方案通过询盘获取。</p>',
-          seo_title: '磁帧鱼｜外贸站群 · 询盘 · 部署获客系统',
+          seo_title: '磁帧鱼｜网站建设 · 客户管理 · 搜索增长',
           seo_description:
-            '站群与 B2B 站点生成、智能客服询盘、部署运营获客。提交询盘获取安装与协作方案。',
+            'Cloudflare 轻量建站、CRM 与 AI 客服、SEO / GEO 长期运营。咨询适合你的方案。',
           robots_directive: 'index,follow',
           schema_type: 'Organization',
           og_image: { url: img('Cizhenyu', 1200, 630) },
@@ -570,67 +570,76 @@ const faqs = [
   {
     n: 1,
     zh: {
-      q: '三款产品必须一起购买吗？可以按需单独安装吗？',
-      a: '完全不必捆绑购买。磁帧鱼采用模块化解耦设计，您可以根据当前外贸阶段单独选配「全能站群管理系统」、「智能客服智能询盘系统」或「部署运营获客系统」，后续可随时无缝组合。',
+      q: '使用这套方案，一年需要多少基础设施费用？',
+      a: '对于经过合理缓存和程序优化的常规 B2B 网站，基础设施成本可以非常低，很多项目主要只需承担域名等基本费用。随着访问量、动态请求和功能增加，再按实际需要升级。最终费用以项目使用的具体服务为准。',
+    },
+    ja: {
+      q: 'この方案で、年間のインフラ費用はどのくらいですか？',
+      a: '適切なキャッシュと最適化をした一般的な B2B サイトでは、インフラ費用を非常に低く抑えられ、多くの案件ではドメインなど基本費用が中心になります。アクセスや動的処理、機能が増えたら必要に応じて拡張します。最終費用は利用サービスによります。',
     },
     en: {
-      q: 'Must I buy all three products together? Can I install them standalone?',
-      a: 'Not at all. Cizhenyu is fully modular. You can stage standalone products (Multi-site CMS, AI Inquiry Desk, or Deploy Ops) based on your current export needs and combine them anytime.',
+      q: 'How much infrastructure cost should I expect per year?',
+      a: 'For a typical B2B site with sensible caching and optimization, infrastructure can stay very low—often mostly domain and basic fees. Scale up with traffic, dynamic load, and features as needed. Final cost depends on the services you use.',
     },
   },
   {
     n: 2,
     zh: {
-      q: '团队没有专业技术人员，能搞定下载和安装部署吗？',
-      a: '完全可以。系统提供直观的图形化向导部署，大幅降低了云服务技术门槛；同时我们提供 1v1 专属工程客服同席远程协助，协助您完成域名解析、环境配置和首发上线。',
+      q: '网站可以服务全球客户吗？',
+      a: '可以利用 Cloudflare 全球网络交付网站静态资源，帮助不同地区的访客更高效地访问内容。具体体验仍与页面优化、动态接口和网络环境有关。',
+    },
+    ja: {
+      q: 'サイトは世界中の顧客に対応できますか？',
+      a: 'Cloudflare のグローバル配信で静的リソースを届け、地域ごとの訪問をより効率的にできます。体感はページ最適化、動的 API、ネットワーク環境にも依存します。',
     },
     en: {
-      q: 'We do not have developers. Can we install and deploy successfully?',
-      a: 'Absolutely. The setup provides an intuitive guided wizard that minimizes Cloudflare complexity. Plus, our dedicated support team offers 1-on-1 collaborative onboarding to help you launch smoothly.',
+      q: 'Can the website serve global customers?',
+      a: 'Yes—Cloudflare’s global network can deliver static assets so visitors in different regions reach content more efficiently. Actual experience still depends on page optimization, dynamic APIs, and network conditions.',
     },
   },
   {
     n: 3,
     zh: {
-      q: '为什么磁帧鱼强调将资产部署到企业自有的云账户？',
-      a: '传统建站常将数据和代码锁死在第三方服务器上，企业每年被动续费。磁帧鱼支持一键部署到您自有的 Cloudflare 等云账户，代码、内容与客户询盘数据 100% 归属于您，安全自主可控。',
+      q: '我已经有网站，可以只买 CRM 或 SEO / GEO 吗？',
+      a: '可以。三项产品可以独立选择。先评估现有网站与业务流程，再决定需要增加的能力，不必为了使用单项服务而全部重建。',
+    },
+    ja: {
+      q: '既存サイトがあっても、CRM や SEO / GEO だけ購入できますか？',
+      a: 'できます。三製品は独立選択可能です。既存サイトと業務フローを評価し、必要な能力だけ追加すればよく、すべてを作り直す必要はありません。',
     },
     en: {
-      q: 'Why does Cizhenyu deploy assets to our own cloud account?',
-      a: 'Traditional agencies lock sites onto their servers with recurring host fees. Cizhenyu deploys directly to your Cloudflare account, giving you 100% ownership of your data, code, and customer leads.',
+      q: 'I already have a site. Can I buy only CRM or SEO / GEO?',
+      a: 'Yes. The three products can be chosen independently. Assess your current site and workflow, then add only the capabilities you need—no full rebuild required.',
     },
   },
   {
     n: 4,
     zh: {
-      q: '智能客服询盘系统如何保证专业度？会不会胡乱回答买家？',
-      a: '智能客服严格基于您上传的企业产品知识库（规格书、常见问答、认证资质）进行语义检索与应答，严控幻觉；遇到高价值采购意向或超出知识库的问题，会自动引导买家留资并即时转交人工接管。',
+      q: 'SEO / GEO 是否能保证排名或订单？',
+      a: '不能保证固定排名、AI 引用或订单数量。运营会围绕关键词、内容质量、页面表现和可获取的数据持续优化，具体效果取决于行业竞争、产品、市场和执行情况。',
+    },
+    ja: {
+      q: 'SEO / GEO は順位や受注を保証しますか？',
+      a: '固定順位、AI 引用、受注数は保証しません。キーワード、コンテンツ品質、ページ成果、取得可能なデータに基づき継続改善します。成果は競争、製品、市場、実行次第です。',
     },
     en: {
-      q: 'How does the AI sales desk ensure accuracy without hallucinating?',
-      a: 'The AI answers strictly based on your verified product knowledge base (catalogs, spec sheets, certifications). High-intent inquiries automatically trigger contact capture and human handoff.',
+      q: 'Can SEO / GEO guarantee rankings or orders?',
+      a: 'No fixed rankings, AI citations, or order volumes are guaranteed. Work focuses on keywords, content quality, page performance, and measurable signals. Results depend on competition, product, market, and execution.',
     },
   },
   {
     n: 5,
     zh: {
-      q: '如何获取具体产品报价与预约系统演示？',
-      a: '磁帧鱼为商业 B2B 交付模式，官网不设公开固定套餐价。您可以点击页面任意「免费获取方案 / 预约演示」按钮提交基本需求，我们的出海顾问将在 15 分钟内为您出具针对性方案。',
+      q: '网站和数据能否由我自己管理？',
+      a: '可以根据项目约定部署到客户自己的 Cloudflare 账号，并明确后台权限、代码、数据与备份的管理方式。具体交付边界在项目开始前确认。',
+    },
+    ja: {
+      q: 'サイトとデータは自社で管理できますか？',
+      a: 'プロジェクト合意に基づき、お客様自身の Cloudflare アカウントへ導入し、管理画面権限、コード、データ、バックアップの扱いを明確にできます。納品境界は開始前に確認します。',
     },
     en: {
-      q: 'Where can I see pricing and book a live demo?',
-      a: 'Pricing is tailored via direct inquiry to match your scale. Submit your requirements through any CTA button, and our export consultant will provide a targeted solution and live demo.',
-    },
-  },
-  {
-    n: 6,
-    zh: {
-      q: '品牌 Logo 与企业信息可以随时替换吗？',
-      a: '可以。默认 Logo 仅为演示占位，您在后台 CMS 公司信息（Company Info）中上传企业专属 Logo 与图文介绍，即可一键同步替换全站展示。',
-    },
-    en: {
-      q: 'Can we replace the brand logo and company profile anytime?',
-      a: 'Yes. The default lightning logo is a placeholder. You can upload your own brand logo and company profile in the CMS to instantly update your global sites.',
+      q: 'Can I manage the site and data myself?',
+      a: 'By project agreement, we can deploy to your own Cloudflare account and define admin rights, code, data, and backup ownership. Delivery boundaries are confirmed before kickoff.',
     },
   },
 ];
@@ -661,13 +670,13 @@ writeJson('faq.json', {
         robots_directive: 'index,follow',
       },
       ja: {
-        question: f.en.q,
-        answer: `<p>${f.en.a}</p>`,
-        short_answer: f.en.a,
+        question: f.ja.q,
+        answer: `<p>${f.ja.a}</p>`,
+        short_answer: f.ja.a,
         sort_order: f.n * 10,
         status: 'published',
-        seo_title: f.en.q,
-        seo_description: f.en.a,
+        seo_title: f.ja.q,
+        seo_description: f.ja.a,
         robots_directive: 'index,follow',
       },
       'en-US': {
@@ -1006,96 +1015,64 @@ writeJson('content_block.json', {
         'zh-CN': {
           name: '首页首屏',
           block_type: 'hero',
-          title: '让每一个外贸独立站，都成为 24 小时自主获客的询盘转化中枢',
+          title: '建好网站，管好客户，让全球客户找到你。',
           slug: 'home-hero',
           placement: 'home_hero',
-          eyebrow: '磁帧鱼 · 可安装交付的 B2B 外贸出海获客系统',
+          eyebrow: '网站建设 · 客户管理 · 搜索增长',
           subtitle:
-            '彻底告别「名片站零流量、时差漏询盘、内容停更死循环」。站群与 B2B 生成、24/7 智能客服询盘、向导部署与持续获客——三款独立可安装系统，支持客服同席协作上线。',
-          summary: '资产 100% 部署至您自有的云账户，源代码与客户数据完全自主可控。',
-          link_label: '免费获取方案 / 预约演示',
-          link_url: '/zh-CN/contact?intent=inquiry',
+            '不再为昂贵的服务器、零散的客户线索和长期缺乏流量而烦恼。用 Cloudflare 构建轻量、高效、可扩展的业务网站，配合 CRM、AI 客服与 SEO / GEO 运营，让网站真正服务于你的业务增长。',
+          summary: '面向全球网络交付 · 极低运维成本 · SEO / GEO 长期运营',
+          link_label: '选择建站方案',
+          link_url: '/zh-CN/contact?intent=sites',
           image: { url: img('Hero', 960, 720) },
-          extra: {
-            stats: [
-              { value: '99.2%', label: '海外客情承接率', desc: '24/7 知识库智能秒回' },
-              { value: '10x', label: '站群交付速度', desc: '多语种全静态极速上线' },
-              { value: '<300ms', label: '全球边缘时延', desc: 'Cloudflare 架构超快加载' },
-              { value: '100+', label: '语言与目标市场', desc: '精准契合海外 AI 检索' },
-            ],
-          },
           status: 'published',
           sort_order: 10,
         },
         'zh-TW': {
           name: '首頁首屏',
           block_type: 'hero',
-          title: '讓每一個外貿獨立站，都成為 24 小時自主獲客的詢盤轉化中樞',
+          title: '建好網站，管好客戶，讓全球客戶找到你。',
           slug: 'home-hero',
           placement: 'home_hero',
-          eyebrow: '磁幀魚 · 可安裝交付的 B2B 外貿出海獲客系統',
+          eyebrow: '網站建設 · 客戶管理 · 搜尋增長',
           subtitle:
-            '徹底告別「名片站零流量、時差漏詢盤、內容停更死循環」。站群與 B2B 生成、24/7 智慧客服詢盤、向導部署與持續獲客——三款獨立可安裝系統，支援客服同席協作上線。',
-          summary: '資產 100% 部署至您自有的雲端帳戶，原始碼與客戶資料完全自主可控。',
-          link_label: '免費獲取方案 / 預約演示',
-          link_url: '/zh-TW/contact?intent=inquiry',
+            '不再為昂貴的伺服器、零散的客戶線索和長期缺乏流量而煩惱。用 Cloudflare 構建輕量、高效、可擴展的業務網站，配合 CRM、AI 客服與 SEO / GEO 運營，讓網站真正服務於你的業務增長。',
+          summary: '面向全球網路交付 · 極低運維成本 · SEO / GEO 長期運營',
+          link_label: '選擇建站方案',
+          link_url: '/zh-TW/contact?intent=sites',
           image: { url: img('Hero', 960, 720) },
-          extra: {
-            stats: [
-              { value: '99.2%', label: '海外客情及時承接率', desc: '24/7 知識庫智慧秒回' },
-              { value: '10x', label: '站群交付速度', desc: '多語種全靜態極速上線' },
-              { value: '<300ms', label: '全球邊緣時延', desc: 'Cloudflare 架構超快載入' },
-              { value: '100+', label: '多語言與目標市場', desc: '精準契合海外 AI 檢索' },
-            ],
-          },
           status: 'published',
           sort_order: 10,
         },
         ja: {
           name: 'ホームヒーロー',
           block_type: 'hero',
-          title: 'すべての海外向け独立サイトを、24時間稼働の問い合わせ獲得ハブへ',
+          title: 'サイトを整え、顧客を管理し、世界中の顧客に見つけてもらう。',
           slug: 'home-hero',
           placement: 'home_hero',
-          eyebrow: '磁帧鱼 · 導入可能なB2B海外獲得システム',
+          eyebrow: 'サイト構築 · 顧客管理 · 検索成長',
           subtitle:
-            '更新停止、時差によるリード損失、高額な外注依存を解消。サイト群生成、AI問い合わせデスク、導入運用システムの3製品を提供。サポート同席導入にも対応。',
-          summary: 'データと資産は自社のクラウド環境へ100%配備。ベンダーロックインなし。',
-          link_label: '無料相談 / デモ予約',
-          link_url: '/ja/contact?intent=inquiry',
+            '高額なサーバー、散在するリード、慢性的な流入不足から解放されます。Cloudflare で軽量・高速・拡張可能なビジネスサイトを構築し、CRM・AI カスタマーサポート・SEO / GEO 運用と組み合わせて、サイトを本当の成長エンジンにします。',
+          summary: 'グローバル配信 · 極低運用コスト · SEO / GEO 長期運用',
+          link_label: 'サイト構築プランを見る',
+          link_url: '/ja/contact?intent=sites',
           image: { url: img('Hero', 960, 720) },
-          extra: {
-            stats: [
-              { value: '99.2%', label: 'リード即時対応率', desc: '24時間体制でAI自動初期対応' },
-              { value: '10x', label: 'サイト構築スピード', desc: '多言語全静的サイトを即時展開' },
-              { value: '<300ms', label: 'グローバル読込速度', desc: 'Cloudflareエッジ高速配信' },
-              { value: '100+', label: '多言語マーケット対応', desc: 'AI検索・SEO構造化最適化' },
-            ],
-          },
           status: 'published',
           sort_order: 10,
         },
         'en-US': {
           name: 'Home Hero',
           block_type: 'hero',
-          title: 'Turn Every Export Website into a 24/7 Autonomous Lead Engine',
+          title: 'Build the site, manage customers, and help global buyers find you.',
           slug: 'home-hero',
           placement: 'home_hero',
-          eyebrow: 'Cizhenyu · Enterprise-Grade B2B Lead Engine',
+          eyebrow: 'Website · CRM · Search Growth',
           subtitle:
-            'Break free from stagnant brochure sites, time-zone lead drops, and slow agency queues. Multi-site CMS generation, 24/7 AI inquiry handling, and wizard deployment with collaborative onboarding.',
-          summary: '100% deployed to your own cloud account (Cloudflare). Full data sovereignty, zero lock-in.',
-          link_label: 'Get Free Plan / Book Demo',
-          link_url: '/en-US/contact?intent=inquiry',
+            'Stop wrestling with expensive servers, scattered leads, and long stretches of zero traffic. Build a lightweight, fast, scalable business site on Cloudflare—then pair it with CRM, AI support, and SEO / GEO so the website actually drives growth.',
+          summary: 'Global delivery · Ultra-low ops cost · Long-term SEO / GEO',
+          link_label: 'Choose a website plan',
+          link_url: '/en-US/contact?intent=sites',
           image: { url: img('Hero', 960, 720) },
-          extra: {
-            stats: [
-              { value: '99.2%', label: 'Lead Response Rate', desc: '24/7 KB-driven instant response' },
-              { value: '10x', label: 'Site Rollout Speed', desc: 'High-speed static multilingual sites' },
-              { value: '<300ms', label: 'Global Edge Latency', desc: 'Fast Cloudflare Pages architecture' },
-              { value: '100+', label: 'Target Market Coverage', desc: 'Structured for AI search & GEO' },
-            ],
-          },
           status: 'published',
           sort_order: 10,
         },
@@ -1107,12 +1084,12 @@ writeJson('content_block.json', {
         'zh-CN': {
           name: '页脚行动号召',
           block_type: 'cta',
-          title: '准备好升级您的外贸获客系统了吗？',
+          title: '别让网站停留在展示阶段。',
           slug: 'footer-cta',
           placement: 'footer_cta',
-          subtitle: '立即预约一对一专属顾问演示，告诉我们您的目标市场与产品品类，我们将为您量身打造出海获客方案。',
-          summary: '三款产品可单选或组合交付；支持客服同席协助部署上线。',
-          link_label: '免费咨询 / 预约演示',
+          subtitle: '从建站、客户管理到搜索增长，选择真正适合你业务的产品，让线上投入逐步沉淀为可管理、可持续经营的业务资产。',
+          summary: '网站建设 · 客户管理 · SEO / GEO 可独立选择或组合。',
+          link_label: '咨询适合我的方案',
           link_url: '/zh-CN/contact?intent=consult',
           status: 'published',
           sort_order: 10,
@@ -1120,12 +1097,12 @@ writeJson('content_block.json', {
         'zh-TW': {
           name: '頁腳行動號召',
           block_type: 'cta',
-          title: '準備好升級您的外貿獲客系統了嗎？',
+          title: '別讓網站停留在展示階段。',
           slug: 'footer-cta',
           placement: 'footer_cta',
-          subtitle: '立即預約一對一專屬顧問演示，告訴我們您的目標市場與產品品類，我們將為您量身打造出海獲客方案。',
-          summary: '三款產品可單選或組合交付；支援客服同席協助部署上線。',
-          link_label: '免費諮詢 / 預約演示',
+          subtitle: '從建站、客戶管理到搜尋增長，選擇真正適合你業務的產品，讓線上投入逐步沉澱為可管理、可持續經營的業務資產。',
+          summary: '網站建設 · 客戶管理 · SEO / GEO 可獨立選擇或組合。',
+          link_label: '諮詢適合我的方案',
           link_url: '/zh-TW/contact?intent=consult',
           status: 'published',
           sort_order: 10,
@@ -1133,12 +1110,12 @@ writeJson('content_block.json', {
         ja: {
           name: 'フッターCTA',
           block_type: 'cta',
-          title: '海外獲得の仕組みを今すぐアップデートしませんか？',
+          title: 'サイトを見せるだけで終わらせない。',
           slug: 'footer-cta',
           placement: 'footer_cta',
-          subtitle: '貴社のターゲット市場と製品に合わせた最適な導入プランをご提案します。',
-          summary: '3製品は単体でも組み合わせでも導入可能。サポート同席導入可。',
-          link_label: '無料相談 / デモ予約',
+          subtitle: 'サイト構築、顧客管理、検索成長から、本当に合うプロダクトを選び、オンライン投資を管理可能で継続経営できる事業資産へ変えていきましょう。',
+          summary: 'サイト構築 · 顧客管理 · SEO / GEO は単体でも組み合わせでも選択可能。',
+          link_label: '自分に合う方案を相談する',
           link_url: '/ja/contact?intent=consult',
           status: 'published',
           sort_order: 10,
@@ -1146,12 +1123,12 @@ writeJson('content_block.json', {
         'en-US': {
           name: 'Footer CTA',
           block_type: 'cta',
-          title: 'Ready to Transform Your Overseas Lead Generation?',
+          title: 'Don’t leave your website stuck in brochure mode.',
           slug: 'footer-cta',
           placement: 'footer_cta',
-          subtitle: 'Schedule a 1-on-1 demo consultation today. Tell us your target markets and we will tailor your deployment strategy.',
-          summary: 'Modular install alone or combined. Guided deploy with live onboarding.',
-          link_label: 'Free Consultation / Book Demo',
+          subtitle: 'From website building and CRM to search growth, choose products that fit your business—and turn online spend into manageable, lasting operating assets.',
+          summary: 'Website, CRM, and SEO / GEO can be chosen alone or combined.',
+          link_label: 'Talk about the right plan for me',
           link_url: '/en-US/contact?intent=consult',
           status: 'published',
           sort_order: 10,
@@ -1587,19 +1564,26 @@ writeJson('seed.manifest.json', {
     'Cizhenyu marketing seed: 3 products, nav 首页/产品/帮助/下载/动态/关于/联系. Download CTAs → inquiry. Logo empty for lightning fallback.',
 });
 
-writeJson(
-  '../MARKETING_COPY.md',
-  `# 磁帧鱼 default 主题营销文案（CMS seed）
+fs.writeFileSync(
+  path.join(__dirname, '../MARKETING_COPY.md'),
+  `# 磁帧鱼 default 主题营销文案
 
-导航：首页 · 产品 · 帮助 · 下载 · 动态 · 关于 · 联系
+首页叙事以 \`PRD.md\` 为准，四语文案在：
 
-产品：
-1. 全能站群管理系统 + B2B 前端站点生成系统
-2. 智能客服智能询盘系统
-3. 部署运营获客系统
+- \`home-content-zh-cn.ts\`
+- \`home-content-zh-tw.ts\`
+- \`home-content-ja.ts\`
+- \`home-content-en.ts\`
 
-重新生成：\`node src/ui/themes/default/seed/build-seed.mjs\`
+产品定位：
+
+1. Cloudflare 前后台建站系统
+2. CRM 客户管理与 AI 智能客服
+3. SEO / GEO 长期运营方案
+
+重新生成 CMS seed：\`node src/ui/themes/default/seed/build-seed.mjs\`
 `,
+  'utf8',
 );
 
 console.log('✓ default seed regenerated');

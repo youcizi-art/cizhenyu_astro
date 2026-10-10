@@ -1,10 +1,10 @@
 import { defineMiddleware } from 'astro:middleware';
 import { getCachedHtml, putCachedHtml, shouldUseHtmlCache } from '@/modules/cache/html-cache';
-import { warmRuntimeEnv } from '@/modules/runtime/env';
+import { warmRuntimeEnv, envAsync } from '@/modules/runtime/env';
 import { applyLocaleRouting } from '@/modules/i18n/locale-routing';
 
 /**
- * 运行时 env 预热 + 默认语种 rewrite + HTML 回落缓存。
+ * 运行时 env 预热 + 域名 301 重定向 + 默认语种 rewrite + HTML 回落缓存。
  *
  * 主缓存目标：边缘 CDN（CDN-Cache-Control / s-maxage）HIT 时本 middleware 不执行。
  * 当请求仍进入 Function 时，Worker Cache API 仅作同 colo 回落，避免重复打 CMS。
@@ -15,6 +15,21 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   const { request } = context;
   const url = new URL(request.url);
+
+  // 域名 301/302 重定向（方案 B 原生支持，保留原始路径与查询参数，优先于任何路由与 API 处理）
+  const redirectConfigRaw = await envAsync('REDIRECT_CONFIG');
+  if (redirectConfigRaw) {
+    try {
+      const cfg = JSON.parse(redirectConfigRaw);
+      const host = url.hostname.toLowerCase();
+      const fromList = ((cfg.from_domains || cfg.fromDomains || []) as string[]).map((d) => d.toLowerCase());
+      const target = String(cfg.target_domain || cfg.targetDomain || '').toLowerCase();
+      if (target && fromList.includes(host) && host !== target) {
+        const targetUrl = new URL(url.pathname + url.search, `https://${target}`);
+        return context.redirect(targetUrl.href, cfg.status_code || cfg.statusCode || 301);
+      }
+    } catch {}
+  }
 
   if (request.method !== 'GET') return next();
   if (url.pathname.startsWith('/api/')) return next();

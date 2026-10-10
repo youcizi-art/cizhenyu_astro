@@ -1,43 +1,13 @@
 ---
 import OptimizedImage from '@/ui/components/OptimizedImage.astro';
-import type { ContentBlock } from '@/modules/content-block';
 import type { ProductCard } from '@/modules/product';
-import type { CompanyView } from '@/modules/company';
+import { defaultHomeContent } from '../home-content';
+import { productSectionTitle } from '../home-copy';
 
 interface Props {
   siteName: string;
-  hero: ContentBlock | null;
-  heroImageUrl?: string;
-  tagline?: string;
+  locale: string;
   products: ProductCard[];
-  company: CompanyView;
-  companyIntro?: string;
-  ctaBanner: ContentBlock | null;
-  advantages?: Array<{ title: string; description: string; solution?: string }>;
-  testimonials?: Array<{
-    name: string;
-    role?: string;
-    quote: string;
-    avatarUrl?: string;
-    meta?: string;
-    rating?: number;
-  }>;
-  comparisons?: Array<{
-    dimension: string;
-    traditional: string;
-    solution: string;
-  }>;
-  steps?: Array<{
-    stepNumber: string;
-    title: string;
-    description: string;
-  }>;
-  faqs?: Array<{
-    id: string;
-    question: string;
-    answer: string;
-    shortAnswer?: string;
-  }>;
   labels: Record<string, string>;
   paths: {
     about: string;
@@ -52,17 +22,8 @@ interface Props {
 
 const {
   siteName,
-  hero,
-  heroImageUrl = '',
-  tagline = '',
+  locale,
   products = [],
-  company,
-  ctaBanner,
-  advantages = [],
-  testimonials = [],
-  comparisons = [],
-  steps = [],
-  faqs = [],
   labels,
   paths,
   error,
@@ -70,48 +31,38 @@ const {
   showProducts = true,
 } = Astro.props;
 
+const copy = defaultHomeContent(locale);
 const contactHref = paths.contact;
 const productsHref = paths.products || contactHref;
-const currentLocale = contactHref.split('/').filter(Boolean)[0] || 'zh-CN';
-const resourcesHref = `/${currentLocale}/resources`;
 
-// 1. Hero 动态数据
-const heroTitle = hero?.title || siteName;
-const heroLead = hero?.subtitle || hero?.summary || tagline || company.slogan || '';
-const heroNote = hero?.summary && hero?.subtitle ? hero.summary : '';
-const heroCtaLabel = hero?.ctaLabel || labels.heroCtaPrimary || labels.ctaBtn || '免费获取方案';
-const heroCtaUrl = hero?.ctaUrl || `${contactHref}?intent=inquiry`;
-const mediaUrl = heroImageUrl || hero?.imageUrl || '';
-const statsList = Array.isArray((hero?.extra as any)?.stats)
-  ? ((hero?.extra as any).stats as Array<{ value: string; label: string; desc?: string }>)
-  : [];
+const productBySlug = new Map(products.map((p) => [p.slug, p]));
 
-// 2. 页底 CTA 动态数据
-const ctaTitle = ctaBanner?.title;
-const ctaSub = ctaBanner?.subtitle || ctaBanner?.summary;
-const ctaLabel = ctaBanner?.ctaLabel || labels.ctaBtn;
-const ctaUrl = ctaBanner?.ctaUrl || `${contactHref}?intent=consult`;
+function productHref(slug: string, intent: string) {
+  const card = productBySlug.get(slug);
+  if (card?.href) return card.href;
+  return `${contactHref}?intent=${intent}`;
+}
 
-// 3. SEO / GEO FAQ 结构化数据
-const hasFaqs = faqs && faqs.length > 0;
-const faqSchema = hasFaqs ? {
+function productCover(slug: string) {
+  return productBySlug.get(slug)?.coverUrl || '';
+}
+
+const faqs = copy.faq.items;
+const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  'mainEntity': faqs.map((f) => ({
+  mainEntity: faqs.map((f) => ({
     '@type': 'Question',
-    'name': f.question,
-    'acceptedAnswer': {
+    name: f.question,
+    acceptedAnswer: {
       '@type': 'Answer',
-      'text': f.answer.replace(/<[^>]+>/g, ''),
+      text: f.answer,
     },
   })),
-} : null;
+};
 ---
 
-<!-- 1. SEO / GEO 结构化标记 (当存在 FAQ 数据时注入) -->
-{faqSchema ? (
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-) : null}
+<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 {(error || warnings.length) ? (
   <div class="cz-container" style="padding-top:1rem">
@@ -122,311 +73,240 @@ const faqSchema = hasFaqs ? {
   </div>
 ) : null}
 
-<!-- 2. Hero 价值首屏 (来自 CMS home_hero) -->
-<section class="cz-hero">
-  <div class="cz-container cz-hero-grid">
-    <div class="cz-hero-content">
-      {hero?.eyebrow ? (
-        <div class="cz-badge-wrap">
-          <span class="cz-badge-pulse"></span>
-          <span class="cz-badge-text">{hero.eyebrow}</span>
-        </div>
-      ) : null}
-      <h1 class="cz-hero-heading">{heroTitle}</h1>
-      {heroLead ? <p class="cz-hero-lead">{heroLead}</p> : null}
-      {heroNote ? <p class="cz-hero-note">{heroNote}</p> : null}
-      <div class="cz-hero-actions">
-        <a class="cz-btn cz-btn-primary cz-btn-lg" href={heroCtaUrl}>
-          <span>{heroCtaLabel}</span>
-          <svg class="cz-btn-arrow" viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-        </a>
-        {showProducts ? (
-          <a class="cz-btn cz-btn-ghost cz-btn-lg" href={productsHref}>{labels.heroCtaSecondary || labels.exploreAll}</a>
-        ) : null}
-      </div>
-      <ul class="cz-trust">
-        <li><span class="cz-trust-icon">✓</span> {labels.trust1}</li>
-        <li><span class="cz-trust-icon">✓</span> {labels.trust2}</li>
-        <li><span class="cz-trust-icon">✓</span> {labels.trust3}</li>
-      </ul>
+<!-- Hero -->
+<section class="cz-hero cz-home-hero">
+  <div class="cz-container cz-home-hero-inner">
+    <p class="cz-home-brand">{siteName}</p>
+    <p class="cz-home-brand-line">{copy.brandLine}</p>
+    <h1 class="cz-hero-heading">{copy.hero.title}</h1>
+    <p class="cz-hero-lead">{copy.hero.lead}</p>
+    <div class="cz-hero-actions">
+      <a class="cz-btn cz-btn-primary cz-btn-lg" href={`${contactHref}?intent=sites`}>
+        <span>{copy.hero.ctaPrimary}</span>
+        <svg class="cz-btn-arrow" viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+      </a>
+      <a class="cz-btn cz-btn-ghost cz-btn-lg" href={`${contactHref}?intent=crm`}>{copy.hero.ctaSecondary}</a>
     </div>
-    <div class="cz-hero-media">
-      {mediaUrl ? (
-        <div class="cz-media-frame">
-          <OptimizedImage
-            src={mediaUrl}
-            alt={heroTitle}
-            width={960}
-            height={660}
-            widths={[480, 720, 960]}
-            sizes="(max-width: 900px) 100vw, 540px"
-            priority
-          />
-        </div>
-      ) : (
-        <div class="cz-console-mockup">
-          <div class="cz-console-head">
-            <div class="cz-console-dots">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="cz-console-bar">https://app.cizhenyu.com/matrix/live</div>
-          </div>
-          <div class="cz-console-body">
-            <div class="cz-mock-banner">
-              <div>
-                <strong>{siteName} 获客中台</strong>
-                <p>{company.slogan || '全栈站群 · 智能客服 · 部署获客'}</p>
-              </div>
-              <span class="cz-pill-live">● 24/7 运行中</span>
-            </div>
-            <div class="cz-mock-stats">
-              <div class="cz-mock-stat">
-                <span class="cz-stat-num">5</span>
-                <span class="cz-stat-lbl">多语种活跃站</span>
-              </div>
-              <div class="cz-mock-stat">
-                <span class="cz-stat-num">99.8%</span>
-                <span class="cz-stat-lbl">在线可用率</span>
-              </div>
-              <div class="cz-mock-stat">
-                <span class="cz-stat-num">+18</span>
-                <span class="cz-stat-lbl">今日有效询盘</span>
-              </div>
-            </div>
-            <div class="cz-mock-chat">
-              <div class="cz-chat-msg cz-chat-in">
-                <div class="cz-chat-sender">Buyer from Berlin, Germany</div>
-                <div class="cz-chat-bubble">Hello, we are interested in your export products. Could you send specifications and MOQ?</div>
-              </div>
-              <div class="cz-chat-msg cz-chat-out">
-                <div class="cz-chat-sender">AI Desk · {siteName}</div>
-                <div class="cz-chat-bubble">Catalog sent to your inbox. High-intent inquiry alerted to our sales director!</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+    <ul class="cz-home-highlights">
+      {copy.hero.highlights.map((h) => (
+        <li>
+          <strong>{h.title}</strong>
+          <span>{h.desc}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- Pain -->
+<section class="cz-section cz-home-pain">
+  <div class="cz-container">
+    <div class="cz-section-head cz-section-head-wide">
+      <h2>{copy.pain.title}</h2>
+    </div>
+    <div class="cz-home-pain-grid">
+      {copy.pain.items.map((item, idx) => (
+        <article class="cz-home-pain-item">
+          <span class="cz-home-num">0{idx + 1}</span>
+          <h3>{item.title}</h3>
+          <p>{item.desc}</p>
+        </article>
+      ))}
+    </div>
+    <div class="cz-home-bridge">
+      <p class="cz-home-bridge-title">{copy.pain.bridge}</p>
+      <p>{copy.pain.bridgeLead}</p>
     </div>
   </div>
 </section>
 
-<!-- 3. 核心增长指标 (来自 CMS hero.extra.stats) -->
-{statsList.length ? (
-  <section class="cz-stats-section">
+<!-- Products -->
+{showProducts ? (
+  <section class="cz-section cz-section-alt cz-home-products" id="products">
     <div class="cz-container">
-      <div class="cz-stats-grid">
-        {statsList.map((st) => (
-          <div class="cz-stat-item">
-            <div class="cz-stat-val">{st.value}</div>
-            <div class="cz-stat-name">{st.label}</div>
-            {st.desc ? <div class="cz-stat-sub">{st.desc}</div> : null}
-          </div>
-        ))}
+      <div class="cz-section-head cz-section-head-wide">
+        <h2>{copy.products.title}</h2>
       </div>
-    </div>
-  </section>
-) : null}
-
-<!-- 4. 痛点与破局 (来自 CMS home_advantage) -->
-{advantages.length ? (
-  <section class="cz-section">
-    <div class="cz-container">
-      <div class="cz-section-head">
-        <p class="cz-section-eyebrow">{labels.painEyebrow}</p>
-        <h2>痛点深入剖析与工程破局</h2>
-      </div>
-      <div class="cz-pain-grid">
-        {advantages.map((item, idx) => (
-          <article class="cz-card cz-pain-card">
-            <div class="cz-pain-badge">瓶颈 0{idx + 1}</div>
-            <h3>{item.title}</h3>
-            <p class="cz-pain-body">{item.description}</p>
-            {item.solution ? (
-              <div class="cz-card-solve">
-                <span class="cz-solve-tag">{labels.solveLabel}</span>
-                <span>{item.solution}</span>
-              </div>
-            ) : null}
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-) : null}
-
-<!-- 5. 核心产品矩阵 (来自 CMS listProducts) -->
-{showProducts && products.length ? (
-  <section class="cz-section cz-section-alt" id="products">
-    <div class="cz-container">
-      <div class="cz-section-head">
-        <p class="cz-section-eyebrow">{labels.productsEyebrow}</p>
-        <h2>核心产品套件矩阵</h2>
-      </div>
-      <div class="cz-product-grid">
-        {products.slice(0, 3).map((p) => (
-          <article class="cz-card cz-product-card">
-            <a href={p.href} class="cz-product-link">
-              <div class="cz-product-cover">
-                {p.coverUrl ? (
-                  <OptimizedImage
-                    src={p.coverUrl}
-                    alt={p.title}
-                    width={640}
-                    height={380}
-                    widths={[320, 640]}
-                    sizes="(max-width: 720px) 100vw, 360px"
-                  />
-                ) : (
-                  <div class="cz-product-placeholder">
-                    <span>{p.sku || p.title}</span>
-                  </div>
-                )}
-              </div>
-              <div class="cz-product-body">
-                <h3>{p.title}</h3>
-                {p.summary ? <p class="cz-product-summary">{p.summary}</p> : null}
-                <div class="cz-product-footer">
-                  <span class="cz-more">{labels.readMore} →</span>
+      {copy.products.items.map((item, i) => {
+        const cover = productCover(item.slug);
+        const href = productHref(item.slug, item.slug.includes('inquiry') ? 'crm' : item.slug.includes('growth') ? 'growth' : 'sites');
+        const reverse = i % 2 === 1;
+        return (
+          <article class:list={['cz-home-product', reverse && 'is-reverse']}>
+            <div class="cz-home-product-copy">
+              <p class="cz-home-product-index">{productSectionTitle(locale, item.index)}</p>
+              <p class="cz-home-product-tag">{item.tag}</p>
+              <h3>{item.title}</h3>
+              <p class="cz-home-product-suit">{item.suit}</p>
+              <ul class="cz-home-feature-list">
+                {item.features.map((f) => (
+                  <li>
+                    <strong>{f.title}</strong>
+                    <span>{f.desc}</span>
+                  </li>
+                ))}
+              </ul>
+              <p class="cz-home-product-value">{item.value}</p>
+              <a class="cz-btn cz-btn-primary" href={href}>{item.cta}</a>
+            </div>
+            <div class="cz-home-product-visual">
+              {cover ? (
+                <OptimizedImage
+                  src={cover}
+                  alt={item.tag}
+                  width={720}
+                  height={480}
+                  widths={[360, 540, 720]}
+                  sizes="(max-width: 900px) 100vw, 420px"
+                />
+              ) : (
+                <div class="cz-home-product-placeholder">
+                  <span>{item.index}</span>
+                  <strong>{item.tag}</strong>
                 </div>
-              </div>
-            </a>
+              )}
+            </div>
           </article>
-        ))}
-      </div>
-      <div class="cz-product-actions">
+        );
+      })}
+      <div class="cz-home-products-more">
         <a class="cz-btn cz-btn-outline" href={productsHref}>{labels.exploreAll}</a>
-        <a class="cz-btn cz-btn-primary" href={resourcesHref}>{labels.downloadCta}</a>
       </div>
     </div>
   </section>
 ) : null}
 
-<!-- 6. 全维度对比表格 (来自 CMS home_comparison) -->
-{comparisons.length ? (
-  <section class="cz-section">
-    <div class="cz-container">
-      <div class="cz-section-head">
-        <p class="cz-section-eyebrow">{labels.compareEyebrow}</p>
-        <h2>方案全维度深度对比</h2>
-      </div>
-      <div class="cz-table-wrap">
-        <table class="cz-table">
-          <thead>
-            <tr>
-              <th class="cz-th-dim">{labels.compareDim}</th>
-              <th class="cz-th-old">{labels.compareColOld}</th>
-              <th class="cz-th-new">{labels.compareColNew}</th>
+<!-- Architecture -->
+<section class="cz-section cz-home-arch">
+  <div class="cz-container">
+    <div class="cz-section-head cz-section-head-wide">
+      <h2>{copy.architecture.title}</h2>
+    </div>
+    <div class="cz-home-arch-list">
+      {copy.architecture.items.map((item, idx) => (
+        <article class="cz-home-arch-item">
+          <span class="cz-home-num">0{idx + 1}</span>
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="cz-home-note">{copy.architecture.note}</p>
+  </div>
+</section>
+
+<!-- Compare -->
+<section class="cz-section cz-section-alt cz-home-compare">
+  <div class="cz-container">
+    <div class="cz-section-head cz-section-head-wide">
+      <h2>{copy.compare.title}</h2>
+      <p>{copy.compare.lead}</p>
+    </div>
+    <div class="cz-table-wrap">
+      <table class="cz-table cz-home-table">
+        <thead>
+          <tr>
+            <th>{copy.compare.colPlan}</th>
+            <th>{copy.compare.colGet}</th>
+            <th>{copy.compare.colCost}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {copy.compare.rows.map((row, idx) => (
+            <tr class:list={[idx === copy.compare.rows.length - 1 && 'is-highlight']}>
+              <td>
+                <strong>{row.plan}</strong>
+                {idx === copy.compare.rows.length - 1 ? (
+                  <span class="cz-home-rec">{labels.compareHighlight}</span>
+                ) : null}
+              </td>
+              <td>{row.get}</td>
+              <td>{row.cost}</td>
             </tr>
-          </thead>
-          <tbody>
-            {comparisons.map((row) => (
-              <tr>
-                <td class="cz-td-dim"><strong>{row.dimension}</strong></td>
-                <td class="cz-td-old">
-                  <span class="cz-cross-mark">✕</span>
-                  {row.traditional}
-                </td>
-                <td class="cz-td-new">
-                  <span class="cz-check-mark">✓</span>
-                  <strong>{row.solution}</strong>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
-  </section>
-) : null}
+    <div class="cz-home-why">
+      <h3>{copy.compare.whyTitle}</h3>
+      <p>{copy.compare.whyBody}</p>
+    </div>
+  </div>
+</section>
 
-<!-- 7. 极简实施路径 (来自 CMS home_step) -->
-{steps.length ? (
-  <section class="cz-section cz-section-alt">
-    <div class="cz-container">
-      <div class="cz-section-head">
-        <p class="cz-section-eyebrow">{labels.stepsEyebrow}</p>
-        <h2>极简落地实施流程</h2>
-      </div>
-      <div class="cz-steps">
-        {steps.map((s) => (
-          <article class="cz-card cz-step-card">
-            <div class="cz-step-num">{s.stepNumber}</div>
-            <h3>{s.title}</h3>
-            <p>{s.description}</p>
-          </article>
-        ))}
-      </div>
+<!-- SEO / GEO -->
+<section class="cz-section cz-home-seo">
+  <div class="cz-container">
+    <div class="cz-section-head cz-section-head-wide">
+      <h2>{copy.seoGeo.title}</h2>
+      <p>{copy.seoGeo.lead}</p>
     </div>
-  </section>
-) : null}
+    <div class="cz-home-steps">
+      {copy.seoGeo.steps.map((s) => (
+        <article class="cz-home-step">
+          <span class="cz-home-step-index">{s.index}</span>
+          <h3>{s.title}</h3>
+          <p>{s.desc}</p>
+        </article>
+      ))}
+    </div>
+    <p class="cz-home-goal">{copy.seoGeo.goal}</p>
+    <p class="cz-home-note">{copy.seoGeo.disclaimer}</p>
+  </div>
+</section>
 
-<!-- 8. 真实客户见证 (来自 CMS home_testimonial) -->
-{testimonials.length ? (
-  <section class="cz-section">
-    <div class="cz-container">
-      <div class="cz-section-head">
-        <p class="cz-section-eyebrow">{labels.testimonialsEyebrow}</p>
-        <h2>客户真实成效与反馈</h2>
-      </div>
-      <div class="cz-review-grid">
-        {testimonials.map((rev) => (
-          <article class="cz-card cz-review-card">
-            <div class="cz-stars">★★★★★</div>
-            <p class="cz-quote">“{rev.quote}”</p>
-            <div class="cz-reviewer">
-              <div class="cz-reviewer-avatar">
-                {rev.name.charAt(0)}
-              </div>
-              <div>
-                <strong>{rev.name}</strong>
-                {rev.role ? <span class="cz-reviewer-role">{rev.role}</span> : null}
-                {rev.meta ? <span class="cz-reviewer-meta">{rev.meta}</span> : null}
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
+<!-- Paths -->
+<section class="cz-section cz-section-alt cz-home-paths">
+  <div class="cz-container">
+    <div class="cz-section-head cz-section-head-wide">
+      <h2>{copy.paths.title}</h2>
     </div>
-  </section>
-) : null}
+    <div class="cz-home-path-grid">
+      {copy.paths.items.map((item) => (
+        <a class="cz-home-path" href={`${contactHref}?intent=${item.intent}`}>
+          <h3>{item.title}</h3>
+          <p>{item.desc}</p>
+          <span>{item.cta} →</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
 
-<!-- 9. 常见问题解答 (来自 CMS faq 集合) -->
-{faqs.length ? (
-  <section class="cz-section cz-section-alt" id="faq">
-    <div class="cz-container">
-      <div class="cz-section-head">
-        <p class="cz-section-eyebrow">{labels.faqEyebrow}</p>
-        <h2>常见问题解答 (FAQ)</h2>
-      </div>
-      <div class="cz-faq-wrap">
-        {faqs.map((f) => (
-          <details class="cz-faq-item">
-            <summary class="cz-faq-q">
-              <span>{f.question}</span>
-              <svg class="cz-faq-icon" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-            </summary>
-            <div class="cz-faq-a">
-              <div set:html={f.answer} />
-            </div>
-          </details>
-        ))}
-      </div>
+<!-- FAQ -->
+<section class="cz-section cz-home-faq" id="faq">
+  <div class="cz-container">
+    <div class="cz-section-head">
+      <p class="cz-section-eyebrow">{labels.faqEyebrow}</p>
+      <h2>{copy.faq.title}</h2>
     </div>
-  </section>
-) : null}
+    <div class="cz-faq-wrap">
+      {faqs.map((f, idx) => (
+        <details class="cz-faq-item" open={idx === 0}>
+          <summary class="cz-faq-q">
+            <span><em>{String(idx + 1).padStart(2, '0')}</em> {f.question}</span>
+            <svg class="cz-faq-icon" viewBox="0 0 20 20" fill="currentColor" width="20" height="20" aria-hidden="true"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+          </summary>
+          <div class="cz-faq-a">
+            <p>{f.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
 
-<!-- 10. 底部行动号召 (来自 CMS footer_cta) -->
-{ctaBanner ? (
-  <section class="cz-cta">
-    <div class="cz-container cz-cta-inner">
-      <div class="cz-cta-text">
-        <h2>{ctaTitle}</h2>
-        {ctaSub ? <p>{ctaSub}</p> : null}
-      </div>
-      <div class="cz-cta-buttons">
-        <a class="cz-btn cz-btn-primary cz-btn-lg" href={ctaUrl}>{ctaLabel}</a>
-        <a class="cz-btn cz-btn-ghost cz-btn-lg" href={resourcesHref}>{labels.downloadCta}</a>
-      </div>
+<!-- CTA -->
+<section class="cz-cta cz-home-cta">
+  <div class="cz-container cz-cta-inner">
+    <div class="cz-cta-text">
+      <h2>{copy.cta.title}</h2>
+      <p>{copy.cta.lead}</p>
     </div>
-  </section>
-) : null}
+    <div class="cz-cta-buttons">
+      <a class="cz-btn cz-btn-primary cz-btn-lg" href={`${contactHref}?intent=consult`}>{copy.cta.button}</a>
+    </div>
+  </div>
+</section>

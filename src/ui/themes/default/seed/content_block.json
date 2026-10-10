@@ -7,40 +7,16 @@
         "zh-CN": {
           "name": "首页首屏",
           "block_type": "hero",
-          "title": "让每一个外贸独立站，都成为 24 小时自主获客的询盘转化中枢",
+          "title": "建好网站，管好客户，让全球客户找到你。",
           "slug": "home-hero",
           "placement": "home_hero",
-          "eyebrow": "磁帧鱼 · 可安装交付的 B2B 外贸出海获客系统",
-          "subtitle": "彻底告别「名片站零流量、时差漏询盘、内容停更死循环」。站群与 B2B 生成、24/7 智能客服询盘、向导部署与持续获客——三款独立可安装系统，支持客服同席协作上线。",
-          "summary": "资产 100% 部署至您自有的云账户，源代码与客户数据完全自主可控。",
-          "link_label": "免费获取方案 / 预约演示",
-          "link_url": "/zh-CN/contact?intent=inquiry",
+          "eyebrow": "网站建设 · 客户管理 · 搜索增长",
+          "subtitle": "不再为昂贵的服务器、零散的客户线索和长期缺乏流量而烦恼。用 Cloudflare 构建轻量、高效、可扩展的业务网站，配合 CRM、AI 客服与 SEO / GEO 运营，让网站真正服务于你的业务增长。",
+          "summary": "面向全球网络交付 · 极低运维成本 · SEO / GEO 长期运营",
+          "link_label": "选择建站方案",
+          "link_url": "/zh-CN/contact?intent=sites",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
-          },
-          "extra": {
-            "stats": [
-              {
-                "value": "99.2%",
-                "label": "海外客情承接率",
-                "desc": "24/7 知识库智能秒回"
-              },
-              {
-                "value": "10x",
-                "label": "站群交付速度",
-                "desc": "多语种全静态极速上线"
-              },
-              {
-                "value": "<300ms",
-                "label": "全球边缘时延",
-                "desc": "Cloudflare 架构超快加载"
-              },
-              {
-                "value": "100+",
-                "label": "语言与目标市场",
-                "desc": "精准契合海外 AI 检索"
-              }
-            ]
           },
           "status": "published",
           "sort_order": 10
@@ -48,40 +24,16 @@
         "zh-TW": {
           "name": "首頁首屏",
           "block_type": "hero",
-          "title": "讓每一個外貿獨立站，都成為 24 小時自主獲客的詢盤轉化中樞",
+          "title": "建好網站，管好客戶，讓全球客戶找到你。",
           "slug": "home-hero",
           "placement": "home_hero",
-          "eyebrow": "磁幀魚 · 可安裝交付的 B2B 外貿出海獲客系統",
-          "subtitle": "徹底告別「名片站零流量、時差漏詢盤、內容停更死循環」。站群與 B2B 生成、24/7 智慧客服詢盤、向導部署與持續獲客——三款獨立可安裝系統，支援客服同席協作上線。",
-          "summary": "資產 100% 部署至您自有的雲端帳戶，原始碼與客戶資料完全自主可控。",
-          "link_label": "免費獲取方案 / 預約演示",
-          "link_url": "/zh-TW/contact?intent=inquiry",
+          "eyebrow": "網站建設 · 客戶管理 · 搜尋增長",
+          "subtitle": "不再為昂貴的伺服器、零散的客戶線索和長期缺乏流量而煩惱。用 Cloudflare 構建輕量、高效、可擴展的業務網站，配合 CRM、AI 客服與 SEO / GEO 運營，讓網站真正服務於你的業務增長。",
+          "summary": "面向全球網路交付 · 極低運維成本 · SEO / GEO 長期運營",
+          "link_label": "選擇建站方案",
+          "link_url": "/zh-TW/contact?intent=sites",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
-          },
-          "extra": {
-            "stats": [
-              {
-                "value": "99.2%",
-                "label": "海外客情及時承接率",
-                "desc": "24/7 知識庫智慧秒回"
-              },
-              {
-                "value": "10x",
-                "label": "站群交付速度",
-                "desc": "多語種全靜態極速上線"
-              },
-              {
-                "value": "<300ms",
-                "label": "全球邊緣時延",
-                "desc": "Cloudflare 架構超快載入"
-              },
-              {
-                "value": "100+",
-                "label": "多語言與目標市場",
-                "desc": "精準契合海外 AI 檢索"
-              }
-            ]
           },
           "status": "published",
           "sort_order": 10
@@ -89,40 +41,16 @@
         "ja": {
           "name": "ホームヒーロー",
           "block_type": "hero",
-          "title": "すべての海外向け独立サイトを、24時間稼働の問い合わせ獲得ハブへ",
+          "title": "サイトを整え、顧客を管理し、世界中の顧客に見つけてもらう。",
           "slug": "home-hero",
           "placement": "home_hero",
-          "eyebrow": "磁帧鱼 · 導入可能なB2B海外獲得システム",
-          "subtitle": "更新停止、時差によるリード損失、高額な外注依存を解消。サイト群生成、AI問い合わせデスク、導入運用システムの3製品を提供。サポート同席導入にも対応。",
-          "summary": "データと資産は自社のクラウド環境へ100%配備。ベンダーロックインなし。",
-          "link_label": "無料相談 / デモ予約",
-          "link_url": "/ja/contact?intent=inquiry",
+          "eyebrow": "サイト構築 · 顧客管理 · 検索成長",
+          "subtitle": "高額なサーバー、散在するリード、慢性的な流入不足から解放されます。Cloudflare で軽量・高速・拡張可能なビジネスサイトを構築し、CRM・AI カスタマーサポート・SEO / GEO 運用と組み合わせて、サイトを本当の成長エンジンにします。",
+          "summary": "グローバル配信 · 極低運用コスト · SEO / GEO 長期運用",
+          "link_label": "サイト構築プランを見る",
+          "link_url": "/ja/contact?intent=sites",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
-          },
-          "extra": {
-            "stats": [
-              {
-                "value": "99.2%",
-                "label": "リード即時対応率",
-                "desc": "24時間体制でAI自動初期対応"
-              },
-              {
-                "value": "10x",
-                "label": "サイト構築スピード",
-                "desc": "多言語全静的サイトを即時展開"
-              },
-              {
-                "value": "<300ms",
-                "label": "グローバル読込速度",
-                "desc": "Cloudflareエッジ高速配信"
-              },
-              {
-                "value": "100+",
-                "label": "多言語マーケット対応",
-                "desc": "AI検索・SEO構造化最適化"
-              }
-            ]
           },
           "status": "published",
           "sort_order": 10
@@ -130,40 +58,16 @@
         "en-US": {
           "name": "Home Hero",
           "block_type": "hero",
-          "title": "Turn Every Export Website into a 24/7 Autonomous Lead Engine",
+          "title": "Build the site, manage customers, and help global buyers find you.",
           "slug": "home-hero",
           "placement": "home_hero",
-          "eyebrow": "Cizhenyu · Enterprise-Grade B2B Lead Engine",
-          "subtitle": "Break free from stagnant brochure sites, time-zone lead drops, and slow agency queues. Multi-site CMS generation, 24/7 AI inquiry handling, and wizard deployment with collaborative onboarding.",
-          "summary": "100% deployed to your own cloud account (Cloudflare). Full data sovereignty, zero lock-in.",
-          "link_label": "Get Free Plan / Book Demo",
-          "link_url": "/en-US/contact?intent=inquiry",
+          "eyebrow": "Website · CRM · Search Growth",
+          "subtitle": "Stop wrestling with expensive servers, scattered leads, and long stretches of zero traffic. Build a lightweight, fast, scalable business site on Cloudflare—then pair it with CRM, AI support, and SEO / GEO so the website actually drives growth.",
+          "summary": "Global delivery · Ultra-low ops cost · Long-term SEO / GEO",
+          "link_label": "Choose a website plan",
+          "link_url": "/en-US/contact?intent=sites",
           "image": {
             "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
-          },
-          "extra": {
-            "stats": [
-              {
-                "value": "99.2%",
-                "label": "Lead Response Rate",
-                "desc": "24/7 KB-driven instant response"
-              },
-              {
-                "value": "10x",
-                "label": "Site Rollout Speed",
-                "desc": "High-speed static multilingual sites"
-              },
-              {
-                "value": "<300ms",
-                "label": "Global Edge Latency",
-                "desc": "Fast Cloudflare Pages architecture"
-              },
-              {
-                "value": "100+",
-                "label": "Target Market Coverage",
-                "desc": "Structured for AI search & GEO"
-              }
-            ]
           },
           "status": "published",
           "sort_order": 10
@@ -176,12 +80,12 @@
         "zh-CN": {
           "name": "页脚行动号召",
           "block_type": "cta",
-          "title": "准备好升级您的外贸获客系统了吗？",
+          "title": "别让网站停留在展示阶段。",
           "slug": "footer-cta",
           "placement": "footer_cta",
-          "subtitle": "立即预约一对一专属顾问演示，告诉我们您的目标市场与产品品类，我们将为您量身打造出海获客方案。",
-          "summary": "三款产品可单选或组合交付；支持客服同席协助部署上线。",
-          "link_label": "免费咨询 / 预约演示",
+          "subtitle": "从建站、客户管理到搜索增长，选择真正适合你业务的产品，让线上投入逐步沉淀为可管理、可持续经营的业务资产。",
+          "summary": "网站建设 · 客户管理 · SEO / GEO 可独立选择或组合。",
+          "link_label": "咨询适合我的方案",
           "link_url": "/zh-CN/contact?intent=consult",
           "status": "published",
           "sort_order": 10
@@ -189,12 +93,12 @@
         "zh-TW": {
           "name": "頁腳行動號召",
           "block_type": "cta",
-          "title": "準備好升級您的外貿獲客系統了嗎？",
+          "title": "別讓網站停留在展示階段。",
           "slug": "footer-cta",
           "placement": "footer_cta",
-          "subtitle": "立即預約一對一專屬顧問演示，告訴我們您的目標市場與產品品類，我們將為您量身打造出海獲客方案。",
-          "summary": "三款產品可單選或組合交付；支援客服同席協助部署上線。",
-          "link_label": "免費諮詢 / 預約演示",
+          "subtitle": "從建站、客戶管理到搜尋增長，選擇真正適合你業務的產品，讓線上投入逐步沉澱為可管理、可持續經營的業務資產。",
+          "summary": "網站建設 · 客戶管理 · SEO / GEO 可獨立選擇或組合。",
+          "link_label": "諮詢適合我的方案",
           "link_url": "/zh-TW/contact?intent=consult",
           "status": "published",
           "sort_order": 10
@@ -202,12 +106,12 @@
         "ja": {
           "name": "フッターCTA",
           "block_type": "cta",
-          "title": "海外獲得の仕組みを今すぐアップデートしませんか？",
+          "title": "サイトを見せるだけで終わらせない。",
           "slug": "footer-cta",
           "placement": "footer_cta",
-          "subtitle": "貴社のターゲット市場と製品に合わせた最適な導入プランをご提案します。",
-          "summary": "3製品は単体でも組み合わせでも導入可能。サポート同席導入可。",
-          "link_label": "無料相談 / デモ予約",
+          "subtitle": "サイト構築、顧客管理、検索成長から、本当に合うプロダクトを選び、オンライン投資を管理可能で継続経営できる事業資産へ変えていきましょう。",
+          "summary": "サイト構築 · 顧客管理 · SEO / GEO は単体でも組み合わせでも選択可能。",
+          "link_label": "自分に合う方案を相談する",
           "link_url": "/ja/contact?intent=consult",
           "status": "published",
           "sort_order": 10
@@ -215,12 +119,12 @@
         "en-US": {
           "name": "Footer CTA",
           "block_type": "cta",
-          "title": "Ready to Transform Your Overseas Lead Generation?",
+          "title": "Don’t leave your website stuck in brochure mode.",
           "slug": "footer-cta",
           "placement": "footer_cta",
-          "subtitle": "Schedule a 1-on-1 demo consultation today. Tell us your target markets and we will tailor your deployment strategy.",
-          "summary": "Modular install alone or combined. Guided deploy with live onboarding.",
-          "link_label": "Free Consultation / Book Demo",
+          "subtitle": "From website building and CRM to search growth, choose products that fit your business—and turn online spend into manageable, lasting operating assets.",
+          "summary": "Website, CRM, and SEO / GEO can be chosen alone or combined.",
+          "link_label": "Talk about the right plan for me",
           "link_url": "/en-US/contact?intent=consult",
           "status": "published",
           "sort_order": 10

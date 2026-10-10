@@ -7,8 +7,8 @@
         "zh-CN": {
           "company_name": "磁帧鱼",
           "company_type": "software",
-          "slogan": "第一次做外贸站群与询盘，也能搭出可交付的获客系统",
-          "summary": "磁帧鱼面向外贸业务员、工厂外贸部与服务商，提供站群与 B2B 站点生成、智能客服询盘、部署运营获客三套可安装产品。资产在您自己的云账户，安装可协作完成。",
+          "slogan": "建好网站，管好客户，让全球客户找到你",
+          "summary": "磁帧鱼提供网站建设、CRM 与 AI 客服、SEO / GEO 运营三套可组合产品。基于 Cloudflare 轻量架构，降低运维负担，让网站真正服务业务增长。",
           "address": "中国",
           "phone": "",
           "email": "hello@ycz.me",
@@ -17,8 +17,8 @@
             "url": ""
           },
           "about_content": "<p>磁帧鱼做的不是「又一个模板站」，而是能装到您账户里、能持续改内容、能接住询盘的增长系统。</p><p>三款产品可单独购买、也可组合交付：全能站群 + B2B 前端生成、智能客服询盘、部署运营获客。下载安装可联系客服协作完成；价格与实施方案通过询盘获取。</p>",
-          "seo_title": "磁帧鱼｜外贸站群 · 询盘 · 部署获客系统",
-          "seo_description": "站群与 B2B 站点生成、智能客服询盘、部署运营获客。提交询盘获取安装与协作方案。",
+          "seo_title": "磁帧鱼｜网站建设 · 客户管理 · 搜索增长",
+          "seo_description": "Cloudflare 轻量建站、CRM 与 AI 客服、SEO / GEO 长期运营。咨询适合你的方案。",
           "robots_directive": "index,follow",
           "schema_type": "Organization",
           "og_image": {

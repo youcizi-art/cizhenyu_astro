@@ -1,7 +1,7 @@
 ---
 /**
  * 首页主题内容切换。新主题在此增加分支；pages 只调 ActiveHome。
- * 展示数据一律来自 CMS（load-home）；禁止 theme 内假数据兜底。
+ * CMS 列表/链接由 load-home 注入；default 落地页叙事见 home-content（禁止捏造产品/文章等业务列表）。
  */
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import CardSection from '@/ui/blocks/CardSection.astro';
@@ -22,18 +22,8 @@ const turmillLabels = meta.id === 'turmill' ? turmillHomeLabels(data.locale) : n
 {meta.id === 'default' && defaultLabels ? (
   <DefaultHomePage
     siteName={data.siteName}
-    hero={data.hero}
-    heroImageUrl={data.heroImageUrl || data.hero?.imageUrl || ''}
-    tagline={data.tagline}
+    locale={data.locale}
     products={data.products}
-    company={data.company}
-    companyIntro={data.companyIntro}
-    ctaBanner={data.ctaBanner}
-    advantages={data.advantages}
-    testimonials={data.testimonials}
-    comparisons={data.comparisons}
-    steps={data.steps}
-    faqs={data.faqs}
     labels={{ ...data.labels, ...defaultLabels }}
     paths={{
       about: data.paths.about,
