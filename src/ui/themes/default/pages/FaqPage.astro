@@ -44,9 +44,6 @@ const {
       {items.map((item) => (
         <details class="cz-faq-item">
           <summary>{item.question}</summary>
-          {item.shortAnswer ? (
-            <p class="cz-prose"><strong>{shortAnswerLabel}:</strong> {item.shortAnswer}</p>
-          ) : null}
           <div class="cz-prose" set:html={item.answer} />
         </details>
       ))}

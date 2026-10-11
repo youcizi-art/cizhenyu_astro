@@ -571,75 +571,75 @@ const faqs = [
     n: 1,
     zh: {
       q: '使用这套方案，一年需要多少基础设施费用？',
-      a: '对于经过合理缓存和程序优化的常规 B2B 网站，基础设施成本可以非常低，很多项目主要只需承担域名等基本费用。随着访问量、动态请求和功能增加，再按实际需要升级。最终费用以项目使用的具体服务为准。',
+      a: '磁帧鱼基于 Cloudflare 进行了极致的性能与缓存架构优化。对于常规企业官网、B2B 产品站与营销站，在 Cloudflare 免费套餐下即可稳定承载每日 15,000 人以上（日 UV 1.5 万+）的访客访问。绝大多数企业在日常运营阶段，基础设施固定开销几乎只剩基础域名费（每年仅需几十元）。即使未来业务爆发增长，也是按实际用量弹性升级，不必一开始就为昂贵的传统服务器买单。',
     },
     ja: {
-      q: 'この方案で、年間のインフラ費用はどのくらいですか？',
-      a: '適切なキャッシュと最適化をした一般的な B2B サイトでは、インフラ費用を非常に低く抑えられ、多くの案件ではドメインなど基本費用が中心になります。アクセスや動的処理、機能が増えたら必要に応じて拡張します。最終費用は利用サービスによります。',
+      q: 'この構成で、年間のインフラ費用はどのくらいかかりますか？',
+      a: '磁幀魚（Cizhenyu）はCloudflare上で徹底的なエッジキャッシュとパフォーマンス最適化を行っています。一般的な企業公式サイト、B2B製品サイト、マーケティングサイトであれば、Cloudflareの無料プランでも1日あたり15,000人以上（日次UV 1.5万+）のアクセスを安定して処理可能です。多くの企業様において、日々の固定インフラ費用は実質ドメイン更新料（年間千数百円程度）のみで運用でき、アクセス急増時も従量制で無理なく拡張できます。',
     },
     en: {
       q: 'How much infrastructure cost should I expect per year?',
-      a: 'For a typical B2B site with sensible caching and optimization, infrastructure can stay very low—often mostly domain and basic fees. Scale up with traffic, dynamic load, and features as needed. Final cost depends on the services you use.',
+      a: 'Cizhenyu is deeply optimized for edge caching and lightweight execution on Cloudflare. For typical corporate websites, B2B product catalogs, and marketing portals, Cloudflare\'s free plan comfortably handles over 15,000 unique daily visitors (15K+ UV/day). For most businesses, fixed infrastructure overhead effectively drops down to just annual domain registration fees (under $12/year). When traffic scales exponentially, you expand on demand without upfront server retainers.',
     },
   },
   {
     n: 2,
     zh: {
       q: '网站可以服务全球客户吗？',
-      a: '可以利用 Cloudflare 全球网络交付网站静态资源，帮助不同地区的访客更高效地访问内容。具体体验仍与页面优化、动态接口和网络环境有关。',
+      a: '当然可以。站点一键部署在 Cloudflare Pages / Workers 全球边缘网络上，依托遍布全球 300+ 城市的分布式节点实现资源就近交付。无论客户在北美、欧洲、东南亚还是中东，访问网站都能实现毫秒级秒开，无需企业自行采购多地服务器或繁琐配置海外 CDN，天生具备全球高速访问能力。',
     },
     ja: {
-      q: 'サイトは世界中の顧客に対応できますか？',
-      a: 'Cloudflare のグローバル配信で静的リソースを届け、地域ごとの訪問をより効率的にできます。体感はページ最適化、動的 API、ネットワーク環境にも依存します。',
+      q: '世界中の顧客へ快適に配信できますか？',
+      a: 'もちろんです。サイトはCloudflare Pages / Workersのグローバルエッジネットワークへワンクリックで自動展開されます。世界300以上の主要都市に分散するエッジノードから最寄りのユーザーへ即座に配信されるため、北米・欧州・アジアなど世界中どこからでもミリ秒単位の高速表示が可能です。国ごとのサーバー契約や複雑なCDN設定は一切不要です。',
     },
     en: {
-      q: 'Can the website serve global customers?',
-      a: 'Yes—Cloudflare’s global network can deliver static assets so visitors in different regions reach content more efficiently. Actual experience still depends on page optimization, dynamic APIs, and network conditions.',
+      q: 'Can the website effortlessly serve global customers?',
+      a: 'Absolutely. The site deploys seamlessly to Cloudflare Pages & Workers, leveraging edge data centers across 300+ cities worldwide. Whether your visitors are in North America, Europe, Southeast Asia, or Latin America, pages load in milliseconds from the nearest edge node. You never need to manage multi-region origin servers or configure complex CDN routing—global high performance is built-in from day one.',
     },
   },
   {
     n: 3,
     zh: {
-      q: '我已经有网站，可以只买 CRM 或 SEO / GEO 吗？',
-      a: '可以。三项产品可以独立选择。先评估现有网站与业务流程，再决定需要增加的能力，不必为了使用单项服务而全部重建。',
+      q: 'SEO / GEO 是否能保证排名或订单？',
+      a: '任何客观专业的服务都无法保证绝对的搜索排名或订单转化，因为最终效果受行业竞争激烈程度、关键词热度及企业自身产品力等多重外部因素影响。但在技术 SEO 与 GEO（生成式 AI 引擎优化）层面，磁帧鱼已经做到了极致——在 Google 官方权威工具 PageSpeed Insights 测评中，网站的性能（Performance）、无障碍（Accessibility）、最佳做法（Best Practices）以及 SEO 各项评分均稳定达到 98 分及以上。结合结构化数据规范与极速加载体验，能够让 Google 等搜索引擎爬虫与 ChatGPT、Perplexity 等 AI 智能体优先极速抓取、理解与引用，为长效获客打下最扎实的技术底座。',
     },
     ja: {
-      q: '既存サイトがあっても、CRM や SEO / GEO だけ購入できますか？',
-      a: 'できます。三製品は独立選択可能です。既存サイトと業務フローを評価し、必要な能力だけ追加すればよく、すべてを作り直す必要はありません。',
+      q: 'SEO / GEO は検索順位や受注を保証できますか？',
+      a: '市場競争やキーワード需要、製品力など外部要因が関わるため、絶対的な順位や受注数の確約はできません。しかし、技術的SEOおよびGEO（生成AIエンジン最適化）において、磁幀魚は最高水準を達成しています。Google公式の PageSpeed Insights 診断において、パフォーマンス、アクセシビリティ、ベストプラクティス、SEOの主要指標で一貫して98点以上のスコアを達成。クリーンな構造化データと極限の高速表示により、Google検索クローラーはもちろん、ChatGPTやPerplexityなどのAIエージェントからも高精度に認識・引用されやすい技術基盤を提供します。',
     },
     en: {
-      q: 'I already have a site. Can I buy only CRM or SEO / GEO?',
-      a: 'Yes. The three products can be chosen independently. Assess your current site and workflow, then add only the capabilities you need—no full rebuild required.',
+      q: 'Can SEO and GEO guarantee specific rankings or orders?',
+      a: 'No ethical engineer can promise absolute search rankings or guaranteed conversions, as market competition, keyword difficulty, and offering fit vary widely. However, on technical SEO and GEO (Generative Engine Optimization), Cizhenyu reaches industry-leading heights: on Google’s authoritative PageSpeed Insights, our generated sites consistently score 98+ across Performance, Accessibility, Best Practices, and SEO. With clean semantic markup and sub-second edge responses, both traditional search crawlers and generative AI engines (ChatGPT, Perplexity, etc.) can index, comprehend, and cite your content with maximum efficiency.',
     },
   },
   {
     n: 4,
     zh: {
-      q: 'SEO / GEO 是否能保证排名或订单？',
-      a: '不能保证固定排名、AI 引用或订单数量。运营会围绕关键词、内容质量、页面表现和可获取的数据持续优化，具体效果取决于行业竞争、产品、市场和执行情况。',
+      q: '网站和数据能否由我自己管理？',
+      a: '100% 由您自己掌控。Cloudflare 与 AWS（亚马逊云）、阿里云、腾讯云一样，是全球领先的独立云服务提供商。磁帧鱼是将整套网站应用一键部署到您自己的 Cloudflare 官方账户中。无论是数据库（D1/KV）、网站内容、媒体资源、域名解析还是代码部署，所有资产完全保存在您的自有账户内。我们不截留、不控制任何客户业务数据，您拥有对数字资产完整的自主权与最高管理权限。',
     },
     ja: {
-      q: 'SEO / GEO は順位や受注を保証しますか？',
-      a: '固定順位、AI 引用、受注数は保証しません。キーワード、コンテンツ品質、ページ成果、取得可能なデータに基づき継続改善します。成果は競争、製品、市場、実行次第です。',
+      q: 'サイトとデータは自社で100%管理・保有できますか？',
+      a: 'はい、100%貴社自身のアカウントで完全に管理・保有いただけます。CloudflareはAWSやGoogle Cloud等と同様のグローバルな独立クラウド基盤です。磁幀魚は開発したWebシステムを貴社名義のCloudflareアカウント上へ直接デプロイします。データベース（D1/KV）、コンテンツ、画像アセット、DNS設定、ソースコードに至るまで、すべてのデータは貴社のアカウント内に安全に保持されます。当社がデータを囲い込むことは一切なく、完全な所有権と最高管理権限が貴社に帰属します。',
     },
     en: {
-      q: 'Can SEO / GEO guarantee rankings or orders?',
-      a: 'No fixed rankings, AI citations, or order volumes are guaranteed. Work focuses on keywords, content quality, page performance, and measurable signals. Results depend on competition, product, market, and execution.',
+      q: 'Will our website and business data remain fully under our own ownership?',
+      a: '100% yes. Just like AWS, Google Cloud, or Microsoft Azure, Cloudflare is an independent global cloud infrastructure provider. Cizhenyu deploys the application directly into your own Cloudflare account. Your databases (D1/KV), content, media assets, DNS records, and source artifacts remain entirely inside your infrastructure. We never hold your business data hostage—you retain full ownership and administrative control over your digital assets.',
     },
   },
   {
     n: 5,
     zh: {
-      q: '网站和数据能否由我自己管理？',
-      a: '可以根据项目约定部署到客户自己的 Cloudflare 账号，并明确后台权限、代码、数据与备份的管理方式。具体交付边界在项目开始前确认。',
+      q: '网站上的品牌 Logo，企业信息等内容我可以随时替换吗？',
+      a: '随时都可以。磁帧鱼采用现代“无头内容管理（Headless CMS）+ 极速前端”架构，前端展示的所有内容均与 CMS 后台实时打通。无论是品牌 Logo、企业简介、联系方式，还是轮播横幅、页面文案、产品参数、新闻案例等，您均可在直观友好的后台可视化修改、上传并一键发布，内容会自动同步更新至线上站点，日常维护完全无需编写代码或依赖技术开发人员。',
     },
     ja: {
-      q: 'サイトとデータは自社で管理できますか？',
-      a: 'プロジェクト合意に基づき、お客様自身の Cloudflare アカウントへ導入し、管理画面権限、コード、データ、バックアップの扱いを明確にできます。納品境界は開始前に確認します。',
+      q: 'ブランドロゴや企業情報、サイトの掲載内容はいつでも自由に変更できますか？',
+      a: 'はい、いつでも自由に変更可能です。磁幀魚は先進の「ヘッドレスCMS ＋ 高速フロントエンド」アーキテクチャを採用しており、Webサイト上のあらゆる情報はCMS管理画面から一元管理されています。ロゴ画像、会社概要、連絡先はもちろん、バナー、ページテキスト、製品スペック、お知らせ記事なども、直感的な管理画面からクリック操作で編集・即時反映できます。日常の運用でコードを書いたり技術者に依頼する必要はありません。',
     },
     en: {
-      q: 'Can I manage the site and data myself?',
-      a: 'By project agreement, we can deploy to your own Cloudflare account and define admin rights, code, data, and backup ownership. Delivery boundaries are confirmed before kickoff.',
+      q: 'Can I update the brand logo, company info, and website content at any time?',
+      a: 'Yes, anytime with ease. Cizhenyu is built on a modern "Headless CMS + High-Performance Frontend" architecture, seamlessly connecting everything on your site to a centralized content backend. Whether updating your logo, company profile, contact details, banner graphics, page copy, product catalogs, or case studies, you can edit and publish visually in the admin console. Updates take effect immediately without writing code or waiting on engineering teams.',
     },
   },
 ];

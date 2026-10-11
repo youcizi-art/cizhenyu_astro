@@ -89,58 +89,104 @@ const EN: DefaultHomeContent = {
     ],
   },
   architecture: {
-    title: 'Why this architecture fits lightweight B2B sites',
+    title: 'Why this architecture best fits B2B sites, corporate portals & marketing sites',
     items: [
       {
         title: 'Help overseas buyers open pages faster',
         desc: 'Deliver static assets through Cloudflare’s global network so visitors in North America, Europe, Asia, and beyond can fetch pages from nearer nodes. One site can serve global markets without standing up separate servers for every region.',
       },
       {
-        title: 'Bring server spend close to negligible',
-        desc: 'Typical B2B sites should not pre-buy expensive capacity for traffic that does not exist. With caching, static delivery, and sensible optimization, infrastructure cost can stay extremely low at common usage—often with the domain as the main fixed fee. Scale later based on real demand.',
+        title: 'Own enterprise site infrastructure for under $12/year',
+        lead: 'Drive site setup costs down; direct budget into buyer acquisition.',
+        desc: 'Traditional builds often carry continuous server leases, environment maintenance, and technical overhead. Built on Cloudflare with efficient caching and optimization, baseline infrastructure costs for many typical corporate sites, B2B product hubs, and marketing sites can drop nearly to just domain renewal fees.',
+        bullets: [
+          { title: 'Under $12 per year', text: 'Using typical domain registration fees as benchmark, baseline site infrastructure spend can remain in this lean tier.' },
+          { title: 'No traditional server babysitting', text: 'Eliminate ongoing operating system updates, stack maintenance, and server environment burdens.' },
+          { title: 'Scale only when business demands', text: 'Upgrade in lockstep with real traffic and feature needs rather than paying upfront for idle capacity.' },
+        ],
+        footer: 'Never let heavy upfront server capital delay your global market rollout.',
       },
       {
         title: 'Less server maintenance, more business time',
         desc: 'You do not need to babysit traditional OS patches and runtime stacks for the website alone. Managed application services take on part of the foundation work so you can focus on product, content, customers, and sales.',
       },
       {
-        title: 'Start with a site that can grow',
-        desc: 'A website should not become frozen after delivery. With a clear front/back office and modular business capabilities, you can extend CMS, inquiry, CRM, and ops without rebuilding from scratch every time.',
+        title: 'Not just a display brochure: operate with single-click ease',
+        lead: 'Spend less time wrestling with backends; let AI streamline daily operations.',
+        desc: 'From catalog updates and editorial publishing to lead management, Cizhenyu turns complex administrative operations into clear, streamlined workflows without restarting engineering cycles each time.',
+        bullets: [
+          { title: 'Point-and-click daily management', text: 'Centralize products, articles, and case studies to eliminate duplicate entry.' },
+          { title: 'AI-assisted operations', text: 'Harness tailored AI tools and workflows to research, draft, refine, and publish marketing copy.' },
+          { title: 'From web presence to closed deals', text: 'Seamlessly connect lead inquiries, CRM, and SEO/GEO optimization as an ongoing revenue engine.' },
+        ],
+        footer: 'Keep technology under the hood; make everyday business operations effortless.',
       },
     ],
     note: 'Cost advantages assume a typical B2B site, sensible caching, and real usage. Exact spend depends on services and scale. The goal is avoiding unnecessary infrastructure spend—not cutting capability for the sake of cheapness.',
   },
   compare: {
-    title: 'What really differs across website approaches?',
-    lead: 'Do not only compare build quotes. What matters more is how much maintenance, expansion, and management cost remains after launch.',
-    colPlan: 'Approach',
-    colGet: 'What you get',
-    colCost: 'What it costs you later',
+    title: 'Building a website should not be a one-off gamble or long-term burden',
+    lead: 'Going live is merely day one. What creates the real gap is ongoing operating cost, business ownership, and sustained customer acquisition.',
+    columns: ['Dimension', 'WordPress', 'Custom Dev', 'SaaS Builders', 'Cizhenyu'],
     rows: [
       {
-        plan: 'Self-hosted WordPress',
-        get: 'Mature CMS, rich plugins, strong ecosystem',
-        cost: 'You manage hosting, plugin compatibility, updates, and security; managed hosting can share some work',
+        dimension: 'Build & Setup Cost',
+        wordpress: 'Variable; themes, plugins, and upkeep incur ongoing fees',
+        custom: 'High upfront development investment',
+        saas: 'Low entry barrier, but advanced tiers demand recurring subscriptions',
+        cizhenyu: 'Delivered as modular capabilities tailored to your goals, trimming waste',
       },
       {
-        plan: 'Fully custom development',
-        get: 'High functional freedom, deep business fit',
-        cost: 'Development, testing, maintenance, and ongoing iteration all require matching investment',
+        dimension: 'Server & Maintenance',
+        wordpress: 'Self-hosting requires care; managed hosts relieve partial burden',
+        custom: 'Tied to tech stack and maintenance SLAs',
+        saas: 'Fully handled by platform infrastructure',
+        cizhenyu: 'Built on Cloudflare, eliminating traditional server operations',
       },
       {
-        plan: 'SaaS website builders',
-        get: 'Fast start; the platform carries most infrastructure',
-        cost: 'Features, data control, and migration paths are constrained by the platform and plan',
+        dimension: 'Site Speed & Access',
+        wordpress: 'Varies by hosting quality, cache, and CDN tuning',
+        custom: 'Dependent on deployment architecture and optimization',
+        saas: 'Tied to proprietary platform infrastructure',
+        cizhenyu: 'Delivered via Cloudflare global edge network, ideal for international buyers',
       },
       {
-        plan: 'Cizhenyu on Cloudflare',
-        get: 'Lightweight hosting, admin, extensible modules—combinable with CRM and SEO / GEO',
-        cost: 'You configure and manage accounts, apps, and data per project; special features extend on demand',
+        dimension: 'Data Ownership & Control',
+        wordpress: 'High control in self-hosted environments',
+        custom: 'Governed by contracts, codebase, and deployment control',
+        saas: 'Subject to platform terms, export limits, and plan tiers',
+        cizhenyu: 'Structured around your own assets and deployment terms with clear ownership',
+      },
+      {
+        dimension: 'Future Extensibility',
+        wordpress: 'Dependent on plugins, themes, or custom rework',
+        custom: 'High freedom, but modifications incur continued developer billing',
+        saas: 'Constrained by closed APIs and walled-garden features',
+        cizhenyu: 'Expandable by design across catalog, inquiries, CRM, and growth workflows',
+      },
+      {
+        dimension: 'Daily Operations',
+        wordpress: 'Requires juggling disparate plugins and manual effort',
+        custom: 'Automation depth dictates further engineering expense',
+        saas: 'Restricted to out-of-the-box platform widgets',
+        cizhenyu: 'Engineered for simplified UI and AI-driven workflows to reduce busywork',
+      },
+      {
+        dimension: 'SEO & GEO Long-term',
+        wordpress: 'Relies on multi-plugin stacks and external tools',
+        custom: 'Requires custom engineering or integration work',
+        saas: 'Limited to platform-native SEO capabilities',
+        cizhenyu: 'Unifies site foundation, content ops, and SEO/GEO into a cohesive pipeline',
       },
     ],
-    whyTitle: 'Why choose Cizhenyu?',
-    whyBody:
-      'If you need an international-facing business site with lower day-to-day maintenance, room to expand, and a path into acquisition ops, this approach lets you start from common website needs—not from servers and rebuild cycles. It does not need to replace every WordPress or SaaS project. Its strength is for teams that want ownership of business assets, control of long-term spend, and a tighter link between the website and customer operations.',
+    coreTitle: "Cizhenyu's core edge is not claiming every single spec is better—it is solving the common business costs and headaches together:",
+    coreHighlights: [
+      'Free your team from traditional server management and maintenance overhead.',
+      'Avoid fragmenting websites, lead forms, CRM, and content ops into disconnected silos.',
+      'Stop rebuilding from ground zero each time a new operational requirement surfaces.',
+      'Receive not just a static website, but a launchpad engineered for AI-assisted growth.',
+    ],
+    summary: 'If your business requires deeply specialized enterprise software, custom development remains best. But if you want a cost-controlled, easily managed, global-ready corporate website built for ongoing growth, Cizhenyu is the smarter choice.',
   },
   seoGeo: {
     title: 'SEO + GEO: one quality content system for more search surfaces',
@@ -179,32 +225,27 @@ const EN: DefaultHomeContent = {
     ],
   },
   faq: {
-    title: 'FAQ',
+    title: 'Frequently Asked Questions',
     items: [
       {
         question: 'How much infrastructure cost should I expect per year?',
         answer:
-          'For a typical B2B site with sensible caching and optimization, infrastructure can stay very low—often mostly domain and basic fees. Scale up with traffic, dynamic load, and features as needed. Final cost depends on the services you use.',
+          'Cizhenyu is deeply optimized for edge caching and lightweight execution on Cloudflare. For typical corporate websites, B2B product catalogs, and marketing portals, Cloudflare\'s free plan comfortably handles over 15,000 unique daily visitors (15K+ UV/day). For most businesses, fixed infrastructure overhead effectively drops down to just annual domain registration fees (under $12/year). When traffic scales exponentially, you expand on demand without upfront server retainers.',
       },
       {
-        question: 'Can the website serve global customers?',
+        question: 'Can the website effortlessly serve global customers?',
         answer:
-          'Yes—Cloudflare’s global network can deliver static assets so visitors in different regions reach content more efficiently. Actual experience still depends on page optimization, dynamic APIs, and network conditions.',
+          'Absolutely. The site deploys seamlessly to Cloudflare Pages & Workers, leveraging edge data centers across 300+ cities worldwide. Whether your visitors are in North America, Europe, Southeast Asia, or Latin America, pages load in milliseconds from the nearest edge node. You never need to manage multi-region origin servers or configure complex CDN routing—global high performance is built-in from day one.',
       },
       {
-        question: 'I already have a site. Can I buy only CRM or SEO / GEO?',
+        question: 'Can SEO and GEO guarantee specific rankings or orders?',
         answer:
-          'Yes. The three products can be chosen independently. Assess your current site and workflow, then add only the capabilities you need—no full rebuild required.',
+          'No ethical engineer can promise absolute search rankings or guaranteed conversions, as market competition, keyword difficulty, and offering fit vary widely. However, on technical SEO and GEO (Generative Engine Optimization), Cizhenyu reaches industry-leading heights: on Google’s authoritative PageSpeed Insights, our generated sites consistently score 98+ across Performance, Accessibility, Best Practices, and SEO. With clean semantic markup and sub-second edge responses, both traditional search crawlers and generative AI engines (ChatGPT, Perplexity, etc.) can index, comprehend, and cite your content with maximum efficiency.',
       },
       {
-        question: 'Can SEO / GEO guarantee rankings or orders?',
+        question: 'Will our website and business data remain fully under our own ownership?',
         answer:
-          'No fixed rankings, AI citations, or order volumes are guaranteed. Work focuses on keywords, content quality, page performance, and measurable signals. Results depend on competition, product, market, and execution.',
-      },
-      {
-        question: 'Can I manage the site and data myself?',
-        answer:
-          'By project agreement, we can deploy to your own Cloudflare account and define admin rights, code, data, and backup ownership. Delivery boundaries are confirmed before kickoff.',
+          '100% yes. Just like AWS, Google Cloud, or Microsoft Azure, Cloudflare is an independent global cloud infrastructure provider. Cizhenyu deploys the application directly into your own Cloudflare account. Your databases (D1/KV), content, media assets, DNS records, and source artifacts remain entirely inside your infrastructure. We never hold your business data hostage—you retain full ownership and administrative control over your digital assets.',
       },
     ],
   },

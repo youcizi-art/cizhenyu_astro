@@ -21,8 +21,20 @@ export type HomeProduct = {
   value: string;
   cta: string;
 };
-export type HomeBenefit = { title: string; desc: string };
-export type HomeCompareRow = { plan: string; get: string; cost: string };
+export type HomeBenefit = {
+  title: string;
+  lead?: string;
+  desc: string;
+  bullets?: Array<{ title?: string; text: string }>;
+  footer?: string;
+};
+export type HomeCompareCell = {
+  dimension: string;
+  wordpress: string;
+  custom: string;
+  saas: string;
+  cizhenyu: string;
+};
 export type HomeStep = { index: string; title: string; desc: string };
 export type HomePath = { title: string; desc: string; cta: string; intent: string };
 export type HomeFaq = { question: string; answer: string };
@@ -54,12 +66,11 @@ export type DefaultHomeContent = {
   compare: {
     title: string;
     lead: string;
-    colPlan: string;
-    colGet: string;
-    colCost: string;
-    rows: HomeCompareRow[];
-    whyTitle: string;
-    whyBody: string;
+    columns: [string, string, string, string, string];
+    rows: HomeCompareCell[];
+    coreTitle: string;
+    coreHighlights: string[];
+    summary: string;
   };
   seoGeo: {
     title: string;
