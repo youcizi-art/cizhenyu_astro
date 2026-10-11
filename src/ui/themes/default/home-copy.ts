@@ -16,6 +16,10 @@ export function defaultHomeLabels(locale: string) {
       productPrefixCrm: 'CRM 客戶管理與 AI 智慧客服',
       productPrefixSeo: 'SEO / GEO 長期運營方案',
       compareHighlight: '推薦',
+      testimonialsEyebrow: '客戶反饋',
+      testimonialsTitle: '客戶反饋',
+      updatesEyebrow: '行業動態',
+      viewDetail: '查看詳情',
     };
   }
 
@@ -29,6 +33,10 @@ export function defaultHomeLabels(locale: string) {
       productPrefixCrm: 'CRM 客户管理与 AI 智能客服',
       productPrefixSeo: 'SEO / GEO 长期运营方案',
       compareHighlight: '推荐',
+      testimonialsEyebrow: '客户反馈',
+      testimonialsTitle: '客户反馈',
+      updatesEyebrow: '行业动态',
+      viewDetail: '查看详情',
     };
   }
 
@@ -42,6 +50,10 @@ export function defaultHomeLabels(locale: string) {
       productPrefixCrm: 'CRM と AI カスタマーサポート',
       productPrefixSeo: 'SEO / GEO 長期運用プラン',
       compareHighlight: 'おすすめ',
+      testimonialsEyebrow: 'お客様の声',
+      testimonialsTitle: 'お客様の声',
+      updatesEyebrow: 'ニュース',
+      viewDetail: '詳細を見る',
     };
   }
 
@@ -54,6 +66,10 @@ export function defaultHomeLabels(locale: string) {
     productPrefixCrm: 'CRM & AI support',
     productPrefixSeo: 'SEO / GEO growth plan',
     compareHighlight: 'Recommended',
+    testimonialsEyebrow: 'Customer Feedback',
+    testimonialsTitle: 'Customer Feedback',
+    updatesEyebrow: 'Industry Updates',
+    viewDetail: 'View details',
   };
 }
 

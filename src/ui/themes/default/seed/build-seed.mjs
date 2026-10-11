@@ -644,6 +644,12 @@ const faqs = [
   },
 ];
 
+function trimSeoDesc(s, max = 220) {
+  if (!s) return '';
+  const clean = String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  return clean.length > max ? clean.slice(0, max - 1) + '…' : clean;
+}
+
 writeJson('faq.json', {
   collectionSlug: 'b2b_faq',
   items: faqs.map((f) => ({
@@ -656,7 +662,7 @@ writeJson('faq.json', {
         sort_order: f.n * 10,
         status: 'published',
         seo_title: f.zh.q,
-        seo_description: f.zh.a,
+        seo_description: trimSeoDesc(f.zh.a),
         robots_directive: 'index,follow',
       },
       'zh-TW': {
@@ -666,7 +672,7 @@ writeJson('faq.json', {
         sort_order: f.n * 10,
         status: 'published',
         seo_title: tw(f.zh.q),
-        seo_description: tw(f.zh.a),
+        seo_description: trimSeoDesc(tw(f.zh.a)),
         robots_directive: 'index,follow',
       },
       ja: {
@@ -676,7 +682,7 @@ writeJson('faq.json', {
         sort_order: f.n * 10,
         status: 'published',
         seo_title: f.ja.q,
-        seo_description: f.ja.a,
+        seo_description: trimSeoDesc(f.ja.a),
         robots_directive: 'index,follow',
       },
       'en-US': {
@@ -686,7 +692,7 @@ writeJson('faq.json', {
         sort_order: f.n * 10,
         status: 'published',
         seo_title: f.en.q,
-        seo_description: f.en.a,
+        seo_description: trimSeoDesc(f.en.a),
         robots_directive: 'index,follow',
       },
     }),

@@ -44,7 +44,7 @@ const {
 } = Astro.props;
 
 const copy = defaultHomeContent(locale);
-const finalTestimonials = testimonials.length > 0 ? testimonials : copy.testimonials;
+const finalTestimonials = (testimonials && testimonials.length > 0) ? testimonials : (copy.testimonials?.items || []);
 const contactHref = paths.contact;
 const productsHref = paths.products || contactHref;
 const productBySlug = new Map(products.map((p) => [p.slug, p]));
@@ -369,11 +369,17 @@ const highlightIcons = [
 </section>
 
 <!-- Testimonials -->
-<HomeTestimonials title={labels.testimonials} items={finalTestimonials} />
+<HomeTestimonials
+  title={labels.testimonialsTitle || labels.testimonials || copy.testimonials?.title}
+  eyebrow={labels.testimonialsEyebrow || '客户反馈'}
+  items={finalTestimonials}
+/>
 
 <!-- Articles -->
 <HomeArticles
   title={labels.latestNews}
+  eyebrow={labels.updatesEyebrow || '行业动态'}
+  detailLabel={labels.viewDetail || '查看详情'}
   articles={articles}
   viewAllHref={articlesHref}
   viewAllLabel={labels.viewAllNews}

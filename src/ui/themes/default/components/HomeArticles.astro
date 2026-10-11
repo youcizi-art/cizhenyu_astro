@@ -4,13 +4,22 @@ import type { ArticleCard } from '@/modules/article';
 
 interface Props {
   title: string;
+  eyebrow?: string;
+  detailLabel?: string;
   articles: ArticleCard[];
   viewAllHref?: string;
   viewAllLabel?: string;
 }
 
-const { title, articles = [], viewAllHref = '', viewAllLabel = '' } = Astro.props;
-const displayArticles = articles.slice(0, 3);
+const {
+  title,
+  eyebrow = '行业动态',
+  detailLabel = '查看详情',
+  articles = [],
+  viewAllHref = '',
+  viewAllLabel = '',
+} = Astro.props;
+const displayArticles = articles.slice(0, 6);
 if (!displayArticles.length) return null;
 ---
 
@@ -18,7 +27,7 @@ if (!displayArticles.length) return null;
   <div class="cz-container">
     <div class="cz-section-head cz-section-head-split">
       <div>
-        <p class="cz-section-eyebrow">UPDATES</p>
+        <p class="cz-section-eyebrow">{eyebrow}</p>
         <h2>{title}</h2>
       </div>
       {viewAllHref && viewAllLabel ? (
@@ -61,6 +70,14 @@ if (!displayArticles.length) return null;
             {article.summary ? (
               <p class="cz-home-article-summary">{article.summary}</p>
             ) : null}
+            <div class="cz-home-article-footer">
+              <a class="cz-btn cz-btn-sm cz-btn-ghost cz-home-article-btn" href={article.href}>
+                <span>{detailLabel}</span>
+                <svg class="cz-btn-arrow" viewBox="0 0 20 20" fill="currentColor" width="14" height="14" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
           </div>
         </article>
       ))}

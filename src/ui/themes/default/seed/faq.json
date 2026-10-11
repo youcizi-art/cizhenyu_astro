@@ -31,7 +31,7 @@
           "sort_order": 10,
           "status": "published",
           "seo_title": "この構成で、年間のインフラ費用はどのくらいかかりますか？",
-          "seo_description": "磁幀魚（Cizhenyu）はCloudflare上で徹底的なエッジキャッシュとパフォーマンス最適化を行っています。一般的な企業公式サイト、B2B製品サイト、マーケティングサイトであれば、Cloudflareの無料プランでも1日あたり15,000人以上（日次UV 1.5万+）のアクセスを安定して処理可能です。多くの企業様において、日々の固定インフラ費用は実質ドメイン更新料（年間千数百円程度）のみで運用でき、アクセス急増時も従量制で無理なく拡張できます。",
+          "seo_description": "磁幀魚（Cizhenyu）はCloudflare上で徹底的なエッジキャッシュとパフォーマンス最適化を行っています。一般的な企業公式サイト、B2B製品サイト、マーケティングサイトであれば、Cloudflareの無料プランでも1日あたり15,000人以上（日次UV 1.5万+）のアクセスを安定して処理可能です。多くの企業様において、日々の固定インフラ費用は実質ドメイン更新料（年間千数百円程度）のみで運用でき、アクセス急増時も従量制で無理な…",
           "robots_directive": "index,follow"
         },
         "en-US": {
@@ -41,7 +41,7 @@
           "sort_order": 10,
           "status": "published",
           "seo_title": "How much infrastructure cost should I expect per year?",
-          "seo_description": "Cizhenyu is deeply optimized for edge caching and lightweight execution on Cloudflare. For typical corporate websites, B2B product catalogs, and marketing portals, Cloudflare's free plan comfortably handles over 15,000 unique daily visitors (15K+ UV/day). For most businesses, fixed infrastructure overhead effectively drops down to just annual domain registration fees (under $12/year). When traffic scales exponentially, you expand on demand without upfront server retainers.",
+          "seo_description": "Cizhenyu is deeply optimized for edge caching and lightweight execution on Cloudflare. For typical corporate websites, B2B product catalogs, and marketing portals, Cloudflare's free plan comfortably handles over 15,000 …",
           "robots_directive": "index,follow"
         }
       }
@@ -86,7 +86,7 @@
           "sort_order": 20,
           "status": "published",
           "seo_title": "Can the website effortlessly serve global customers?",
-          "seo_description": "Absolutely. The site deploys seamlessly to Cloudflare Pages & Workers, leveraging edge data centers across 300+ cities worldwide. Whether your visitors are in North America, Europe, Southeast Asia, or Latin America, pages load in milliseconds from the nearest edge node. You never need to manage multi-region origin servers or configure complex CDN routing—global high performance is built-in from day one.",
+          "seo_description": "Absolutely. The site deploys seamlessly to Cloudflare Pages & Workers, leveraging edge data centers across 300+ cities worldwide. Whether your visitors are in North America, Europe, Southeast Asia, or Latin America, pag…",
           "robots_directive": "index,follow"
         }
       }
@@ -101,7 +101,7 @@
           "sort_order": 30,
           "status": "published",
           "seo_title": "SEO / GEO 是否能保证排名或订单？",
-          "seo_description": "任何客观专业的服务都无法保证绝对的搜索排名或订单转化，因为最终效果受行业竞争激烈程度、关键词热度及企业自身产品力等多重外部因素影响。但在技术 SEO 与 GEO（生成式 AI 引擎优化）层面，磁帧鱼已经做到了极致——在 Google 官方权威工具 PageSpeed Insights 测评中，网站的性能（Performance）、无障碍（Accessibility）、最佳做法（Best Practices）以及 SEO 各项评分均稳定达到 98 分及以上。结合结构化数据规范与极速加载体验，能够让 Google 等搜索引擎爬虫与 ChatGPT、Perplexity 等 AI 智能体优先极速抓取、理解与引用，为长效获客打下最扎实的技术底座。",
+          "seo_description": "任何客观专业的服务都无法保证绝对的搜索排名或订单转化，因为最终效果受行业竞争激烈程度、关键词热度及企业自身产品力等多重外部因素影响。但在技术 SEO 与 GEO（生成式 AI 引擎优化）层面，磁帧鱼已经做到了极致——在 Google 官方权威工具 PageSpeed Insights 测评中，网站的性能（Performance）、无障碍（Accessibility）、最佳做法（Best Practices）以及 SEO 各项评分均稳定…",
           "robots_directive": "index,follow"
         },
         "zh-TW": {
@@ -111,7 +111,7 @@
           "sort_order": 30,
           "status": "published",
           "seo_title": "SEO / GEO 是否能保证排名或订单？",
-          "seo_description": "任何客观专业的服务都无法保证绝对的搜尋排名或订单转化，因为最终效果受行业竞争激烈程度、关键词热度及企業自身產品力等多重外部因素影响。但在技术 SEO 与 GEO（生成式 AI 引擎優化）层面，磁幀魚已经做到了极致——在 Google 官方权威工具 PageSpeed Insights 测评中，网站的性能（Performance）、无障碍（Accessibility）、最佳做法（Best Practices）以及 SEO 各项评分均稳定达到 98 分及以上。结合结构化資料规范与极速加载体验，能够让 Google 等搜尋引擎爬虫与 ChatGPT、Perplexity 等 AI 智慧体优先极速抓取、理解与引用，为长效獲客打下最扎实的技术底座。",
+          "seo_description": "任何客观专业的服务都无法保证绝对的搜尋排名或订单转化，因为最终效果受行业竞争激烈程度、关键词热度及企業自身產品力等多重外部因素影响。但在技术 SEO 与 GEO（生成式 AI 引擎優化）层面，磁幀魚已经做到了极致——在 Google 官方权威工具 PageSpeed Insights 测评中，网站的性能（Performance）、无障碍（Accessibility）、最佳做法（Best Practices）以及 SEO 各项评分均稳定…",
           "robots_directive": "index,follow"
         },
         "ja": {
@@ -121,7 +121,7 @@
           "sort_order": 30,
           "status": "published",
           "seo_title": "SEO / GEO は検索順位や受注を保証できますか？",
-          "seo_description": "市場競争やキーワード需要、製品力など外部要因が関わるため、絶対的な順位や受注数の確約はできません。しかし、技術的SEOおよびGEO（生成AIエンジン最適化）において、磁幀魚は最高水準を達成しています。Google公式の PageSpeed Insights 診断において、パフォーマンス、アクセシビリティ、ベストプラクティス、SEOの主要指標で一貫して98点以上のスコアを達成。クリーンな構造化データと極限の高速表示により、Google検索クローラーはもちろん、ChatGPTやPerplexityなどのAIエージェントからも高精度に認識・引用されやすい技術基盤を提供します。",
+          "seo_description": "市場競争やキーワード需要、製品力など外部要因が関わるため、絶対的な順位や受注数の確約はできません。しかし、技術的SEOおよびGEO（生成AIエンジン最適化）において、磁幀魚は最高水準を達成しています。Google公式の PageSpeed Insights 診断において、パフォーマンス、アクセシビリティ、ベストプラクティス、SEOの主要指標で一貫して98点以上のスコアを達成。クリーンな構造化データと極限の高速表示により、Google検…",
           "robots_directive": "index,follow"
         },
         "en-US": {
@@ -131,7 +131,7 @@
           "sort_order": 30,
           "status": "published",
           "seo_title": "Can SEO and GEO guarantee specific rankings or orders?",
-          "seo_description": "No ethical engineer can promise absolute search rankings or guaranteed conversions, as market competition, keyword difficulty, and offering fit vary widely. However, on technical SEO and GEO (Generative Engine Optimization), Cizhenyu reaches industry-leading heights: on Google’s authoritative PageSpeed Insights, our generated sites consistently score 98+ across Performance, Accessibility, Best Practices, and SEO. With clean semantic markup and sub-second edge responses, both traditional search crawlers and generative AI engines (ChatGPT, Perplexity, etc.) can index, comprehend, and cite your content with maximum efficiency.",
+          "seo_description": "No ethical engineer can promise absolute search rankings or guaranteed conversions, as market competition, keyword difficulty, and offering fit vary widely. However, on technical SEO and GEO (Generative Engine Optimizat…",
           "robots_directive": "index,follow"
         }
       }
@@ -166,7 +166,7 @@
           "sort_order": 40,
           "status": "published",
           "seo_title": "サイトとデータは自社で100%管理・保有できますか？",
-          "seo_description": "はい、100%貴社自身のアカウントで完全に管理・保有いただけます。CloudflareはAWSやGoogle Cloud等と同様のグローバルな独立クラウド基盤です。磁幀魚は開発したWebシステムを貴社名義のCloudflareアカウント上へ直接デプロイします。データベース（D1/KV）、コンテンツ、画像アセット、DNS設定、ソースコードに至るまで、すべてのデータは貴社のアカウント内に安全に保持されます。当社がデータを囲い込むことは一切なく、完全な所有権と最高管理権限が貴社に帰属します。",
+          "seo_description": "はい、100%貴社自身のアカウントで完全に管理・保有いただけます。CloudflareはAWSやGoogle Cloud等と同様のグローバルな独立クラウド基盤です。磁幀魚は開発したWebシステムを貴社名義のCloudflareアカウント上へ直接デプロイします。データベース（D1/KV）、コンテンツ、画像アセット、DNS設定、ソースコードに至るまで、すべてのデータは貴社のアカウント内に安全に保持されます。当社がデータを囲い込むことは一切…",
           "robots_directive": "index,follow"
         },
         "en-US": {
@@ -176,7 +176,7 @@
           "sort_order": 40,
           "status": "published",
           "seo_title": "Will our website and business data remain fully under our own ownership?",
-          "seo_description": "100% yes. Just like AWS, Google Cloud, or Microsoft Azure, Cloudflare is an independent global cloud infrastructure provider. Cizhenyu deploys the application directly into your own Cloudflare account. Your databases (D1/KV), content, media assets, DNS records, and source artifacts remain entirely inside your infrastructure. We never hold your business data hostage—you retain full ownership and administrative control over your digital assets.",
+          "seo_description": "100% yes. Just like AWS, Google Cloud, or Microsoft Azure, Cloudflare is an independent global cloud infrastructure provider. Cizhenyu deploys the application directly into your own Cloudflare account. Your databases (D…",
           "robots_directive": "index,follow"
         }
       }
@@ -221,7 +221,7 @@
           "sort_order": 50,
           "status": "published",
           "seo_title": "Can I update the brand logo, company info, and website content at any time?",
-          "seo_description": "Yes, anytime with ease. Cizhenyu is built on a modern \"Headless CMS + High-Performance Frontend\" architecture, seamlessly connecting everything on your site to a centralized content backend. Whether updating your logo, company profile, contact details, banner graphics, page copy, product catalogs, or case studies, you can edit and publish visually in the admin console. Updates take effect immediately without writing code or waiting on engineering teams.",
+          "seo_description": "Yes, anytime with ease. Cizhenyu is built on a modern \"Headless CMS + High-Performance Frontend\" architecture, seamlessly connecting everything on your site to a centralized content backend. Whether updating your logo, …",
           "robots_directive": "index,follow"
         }
       }

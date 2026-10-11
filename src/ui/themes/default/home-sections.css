@@ -40,12 +40,8 @@
 }
 [data-theme='default'] .cz-home-arch-grid {
   display: grid;
-  gap: 1.1rem;
-}
-@media (min-width: 720px) {
-  [data-theme='default'] .cz-home-arch-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
 }
 [data-theme='default'] .cz-home-arch-card {
   position: relative;
