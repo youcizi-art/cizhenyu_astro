@@ -10,6 +10,7 @@ import { localePath, toErrorMessage } from '../../modules/cms';
 import { t } from '../../modules/i18n';
 import type { ResolvedReferenceCard } from '../../modules/reference';
 import type { CaseStudyCard } from '../../modules/case-study';
+import { getThemeHomeRequirements } from '../../ui/themes/theme-ui';
 
 function homeLabels(locale: string) {
   return {
@@ -127,7 +128,8 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
   const warnings = [...chrome.warnings];
 
   try {
-    const homePlacements = [
+    const reqs = getThemeHomeRequirements(site.theme);
+    const placements = reqs.placements ?? [
       'home_hero',
       'home_featured',
       'footer_cta',
@@ -136,45 +138,49 @@ export async function loadHomePage(options: { locale?: string; pathname: string 
       'home_factory',
       'home_comparison',
       'home_step',
-    ] as const;
-    // 区块 / 列表 / SEO page 全部并行（无依赖不串行）
+    ];
+    const resolveFor = reqs.resolveReferencesFor ?? ['home_hero', 'home_featured'];
+
+    // 区块 / 列表 / SEO page 按主题声明需求并行拉取（避免拉取该主题未使用的无用模块）
     const [blockMap, products, articles, caseStudies, solutions, faqs, cmsPage] = await Promise.all([
-      listBlocksGroupedByPlacements(
-        [...homePlacements],
-        {
-          locale: currentLocale,
-          pageSize: 50,
-        },
-        { resolveReferencesFor: ['home_hero', 'home_featured'] }
-      ).catch((error) => {
-        warnings.push(toErrorMessage(error, '首页区块加载失败'));
-        return Object.fromEntries(homePlacements.map((p) => [p, [] as ContentBlock[]]));
-      }),
+      placements.length
+        ? listBlocksGroupedByPlacements(
+            [...placements],
+            {
+              locale: currentLocale,
+              pageSize: Math.max(10, placements.length * 6),
+            },
+            { resolveReferencesFor: resolveFor }
+          ).catch((error) => {
+            warnings.push(toErrorMessage(error, '首页区块加载失败'));
+            return Object.fromEntries(placements.map((p) => [p, [] as ContentBlock[]]));
+          })
+        : Promise.resolve({} as Record<string, ContentBlock[]>),
       site.modules.products
         ? listProducts({ locale: currentLocale, page: 1, pageSize: 6 }).catch((error) => {
             warnings.push(toErrorMessage(error, '产品加载失败'));
             return { items: [], pages: { total: 0, page: 1, pageSize: 6, totalPages: 0 } };
           })
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 6, totalPages: 0 } }),
-      site.modules.articles
+      reqs.articles !== false && site.modules.articles
         ? listArticles({ locale: currentLocale, page: 1, pageSize: 3 }).catch((error) => {
             warnings.push(toErrorMessage(error, '文章加载失败'));
             return { items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } };
           })
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } }),
-      site.modules.caseStudies
+      reqs.caseStudies !== false && site.modules.caseStudies
         ? listCaseStudies({ locale: currentLocale, page: 1, pageSize: 3 }).catch(() => ({
             items: [],
             pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 },
           }))
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } }),
-      site.modules.solutions
+      reqs.solutions !== false && site.modules.solutions
         ? listSolutions({ locale: currentLocale, page: 1, pageSize: 3 }).catch(() => ({
             items: [],
             pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 },
           }))
         : Promise.resolve({ items: [], pages: { total: 0, page: 1, pageSize: 3, totalPages: 0 } }),
-      site.modules.faq
+      reqs.faq !== false && site.modules.faq
         ? listFaqs({ locale: currentLocale, page: 1, pageSize: 8 }).then((r) => r.items).catch(() => [] as FaqItem[])
         : Promise.resolve([] as FaqItem[]),
       getPageBySlug('home', { locale: currentLocale }).catch(() => null),

@@ -180,24 +180,49 @@ async function buildCmsNavLinks(locale: string, defaultLocale?: string): Promise
   return links.length ? links : null;
 }
 
+type NavCacheEntry = {
+  at: number;
+  result: { links: NavLink[]; warning?: string; source: 'cms' | 'manifest' };
+};
+
+const navCache = new Map<string, NavCacheEntry>();
+const NAV_CACHE_TTL_MS = 3 * 60_000;
+
+export function clearNavCache() {
+  navCache.clear();
+}
+
 /** 优先 CMS 导航；失败或不完整时回退 manifest 模块链接（会带 warning） */
 export async function loadNavLinks(
   site: SiteManifest,
   locale: string
 ): Promise<{ links: NavLink[]; warning?: string; source: 'cms' | 'manifest' }> {
+  const cacheKey = `${site.siteKey || 'default'}::${locale}::${site.defaultLocale || ''}`;
+  const now = Date.now();
+  const cached = navCache.get(cacheKey);
+  if (cached && now - cached.at < NAV_CACHE_TTL_MS) {
+    return cached.result;
+  }
+
+  let result: { links: NavLink[]; warning?: string; source: 'cms' | 'manifest' };
   try {
     const cms = await buildCmsNavLinks(locale, site.defaultLocale);
-    if (cms?.length) return { links: cms, source: 'cms' };
-    return {
-      links: buildNavLinks(site, locale),
-      source: 'manifest',
-      warning: 'CMS 导航为空，已使用站点模块默认菜单',
-    };
+    if (cms?.length) {
+      result = { links: cms, source: 'cms' };
+    } else {
+      result = {
+        links: buildNavLinks(site, locale),
+        source: 'manifest',
+        warning: 'CMS 导航为空，已使用站点模块默认菜单',
+      };
+    }
   } catch (error) {
-    return {
+    result = {
       links: buildNavLinks(site, locale),
       source: 'manifest',
       warning: toErrorMessage(error, '导航加载失败，已使用本地菜单'),
     };
   }
+  navCache.set(cacheKey, { at: now, result });
+  return result;
 }

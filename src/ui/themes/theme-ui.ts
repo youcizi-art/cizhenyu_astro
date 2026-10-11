@@ -7,11 +7,29 @@ import type { PageChrome } from '@/workflows/chrome/load-chrome';
 /** 主题能力：default = 通用 chrome；page-shell = 主题自带 Header/Footer 页壳 */
 export type ThemeShellKind = 'default' | 'page-shell';
 
+/** 首页数据契约：按需声明，避免首屏拉取无关模块拖慢 TTFB */
+export type ThemeHomeRequirements = {
+  /** 首页需要拉取的 placement 区块列表，未指定时默认全量拉取 */
+  placements?: string[];
+  /** 需要解析引用的 placement 列表 */
+  resolveReferencesFor?: string[];
+  /** 是否需要文章列表（需同时站点开启） */
+  articles?: boolean;
+  /** 是否需要案例列表（需同时站点开启） */
+  caseStudies?: boolean;
+  /** 是否需要行业方案列表（需同时站点开启） */
+  solutions?: boolean;
+  /** 是否需要常见问题（需同时站点开启） */
+  faq?: boolean;
+};
+
 export type ThemeMeta = {
   id: ThemeId;
   shell: ThemeShellKind;
   /** Google Fonts CSS2 family query；空则不加载品牌字体 */
   fontHref: string;
+  /** 首页数据需求：未配置时按全量模块回退 */
+  homeRequirements?: ThemeHomeRequirements;
 };
 
 /**
@@ -23,14 +41,62 @@ export const THEME_META: Record<ThemeId, ThemeMeta> = {
     id: 'default',
     shell: 'page-shell',
     fontHref: '',
+    homeRequirements: {
+      placements: ['home_hero', 'footer_cta'],
+      resolveReferencesFor: [],
+      articles: false,
+      caseStudies: false,
+      solutions: false,
+      faq: false,
+    },
   },
   turmill: {
     id: 'turmill',
     shell: 'page-shell',
     // 站内系统字体栈，避免外链 Google Fonts 拖慢首屏
     fontHref: '',
+    homeRequirements: {
+      placements: [
+        'home_hero',
+        'home_featured',
+        'footer_cta',
+        'home_advantage',
+        'home_testimonial',
+        'home_factory',
+        'home_comparison',
+        'home_step',
+      ],
+      resolveReferencesFor: ['home_hero', 'home_featured'],
+      articles: true,
+      caseStudies: true,
+      solutions: true,
+      faq: true,
+    },
   },
 };
+
+const DEFAULT_FULL_HOME_REQUIREMENTS: ThemeHomeRequirements = {
+  placements: [
+    'home_hero',
+    'home_featured',
+    'footer_cta',
+    'home_advantage',
+    'home_testimonial',
+    'home_factory',
+    'home_comparison',
+    'home_step',
+  ],
+  resolveReferencesFor: ['home_hero', 'home_featured'],
+  articles: true,
+  caseStudies: true,
+  solutions: true,
+  faq: true,
+};
+
+export function getThemeHomeRequirements(theme?: string | null): ThemeHomeRequirements {
+  const meta = getThemeMeta(theme);
+  return meta.homeRequirements || DEFAULT_FULL_HOME_REQUIREMENTS;
+}
 
 export function getThemeMeta(theme?: string | null): ThemeMeta {
   const { themeId } = resolveTheme({ theme });

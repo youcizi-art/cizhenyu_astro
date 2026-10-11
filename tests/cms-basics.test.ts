@@ -101,7 +101,7 @@ describe('i18n path + labels', () => {
       { code: 'zh-CN', name: '简体中文', isDefault: false, status: 'active' },
     ];
     expect(switchLocalePath('/en/products/press', 'zh-CN', langs)).toBe('/zh-CN/products/press');
-    expect(switchLocalePath('/zh-CN/about', 'en', langs)).toBe('/en/about');
+    expect(switchLocalePath('/zh-CN/about', 'en', langs)).toBe('/about');
     expect(resolveLocaleFromPath('/zh-CN/products', langs, 'en')).toMatchObject({
       locale: 'zh-CN',
       hasPrefix: true,

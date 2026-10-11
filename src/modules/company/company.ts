@@ -60,23 +60,45 @@ export function companyDisplayName(info: CompanyInfo | null, fallback: string) {
   return toCompanyView(info, fallback).name;
 }
 
+type CompanyCacheEntry = {
+  at: number;
+  result: CompanyLoadResult;
+};
+
+const companyCache = new Map<string, CompanyCacheEntry>();
+const COMPANY_CACHE_TTL_MS = 3 * 60_000;
+
+export function clearCompanyCache() {
+  companyCache.clear();
+}
+
 /** 公司信息为可选 chrome：失败时返回 fallback + warning，不伪装成「正常空公司」无提示 */
 export async function loadCompanyView(
   locale: string | undefined,
   fallbackName: string
 ): Promise<CompanyLoadResult> {
+  const cacheKey = `${String(locale || '').trim()}::${fallbackName}`;
+  const now = Date.now();
+  const cached = companyCache.get(cacheKey);
+  if (cached && now - cached.at < COMPANY_CACHE_TTL_MS) {
+    return cached.result;
+  }
+
   const empty = toCompanyView(null, fallbackName);
+  let result: CompanyLoadResult;
   try {
     const info = await fetchCollectionSingle<CompanyInfo>(
       'companyInfo',
       locale ? { locale } : undefined
     );
-    return { ok: true, company: toCompanyView(info, fallbackName) };
+    result = { ok: true, company: toCompanyView(info, fallbackName) };
   } catch (error) {
-    return {
+    result = {
       ok: false,
       company: empty,
       warning: toErrorMessage(error, '公司信息加载失败'),
     };
   }
+  companyCache.set(cacheKey, { at: now, result });
+  return result;
 }

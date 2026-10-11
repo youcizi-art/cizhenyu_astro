@@ -32,6 +32,10 @@ let langCache: LangCache | null = null;
 /** isolate 内短缓存：middleware 与页面 bootstrap 共用，避免同请求重复打 /languages */
 const LANG_TTL_MS = 5 * 60_000;
 
+export function clearLanguagesCache() {
+  langCache = null;
+}
+
 /** 优先 CMS /languages；失败则回退 manifest.locales（带 warning） */
 export async function loadLanguages(manifest: SiteManifest): Promise<{
   languages: SiteLanguage[];

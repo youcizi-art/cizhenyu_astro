@@ -8,6 +8,10 @@ import { getLastPurge, purgeHtmlPaths } from '@/modules/cache/html-cache';
 import { getSiteKey, loadSiteManifest } from '@/modules/site';
 import { envSync, warmRuntimeEnv } from '@/modules/runtime/env';
 import { applyApiNoStoreHeaders } from '@/workflows/chrome/http';
+import { clearCompanyCache } from '@/modules/company/company';
+import { clearNavCache } from '@/modules/nav/cms-nav';
+import { clearLanguagesCache } from '@/modules/i18n/languages';
+import { clearRequestDataCache } from '@/modules/cms/request-cache';
 
 export const prerender = false;
 
@@ -69,6 +73,11 @@ export const POST: APIRoute = async ({ request }) => {
       msg: '无有效失效路径：请传 collections、paths，或 purge=all|chrome',
     }, { status: 400 });
   }
+
+  clearCompanyCache();
+  clearNavCache();
+  clearLanguagesCache();
+  clearRequestDataCache();
 
   const siteOrigin = envSync('PUBLIC_SITE_URL').replace(/\/$/, '');
   const purge = await purgeHtmlPaths({

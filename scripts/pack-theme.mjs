@@ -168,6 +168,13 @@ function writeSingleThemeKernel(themesDir, themeId, allThemeIds) {
   console.log(`  styles.ts 已纳入 ${cssRelPaths.length} 个 CSS:`);
   for (const rel of cssRelPaths) console.log(`    - ${themeId}/${rel}`);
 
+  let homeReqCode = 'undefined';
+  try {
+    const srcThemeUi = fs.readFileSync(path.join(astroRoot, 'src/ui/themes/theme-ui.ts'), 'utf8');
+    const match = srcThemeUi.match(new RegExp(`${themeId}:\\s*\\{[\\s\\S]*?homeRequirements:\\s*(\\{[\\s\\S]*?\\})\\s*\\}`, 'm'));
+    if (match?.[1]) homeReqCode = match[1].replace(/\r?\n\s*/g, ' ');
+  } catch {}
+
   fs.writeFileSync(
     path.join(themesDir, 'theme-ui.ts'),
     `import type { ThemeId } from './load-theme';\n` +
@@ -176,12 +183,23 @@ function writeSingleThemeKernel(themesDir, themeId, allThemeIds) {
       `import { t } from '@/modules/i18n';\n` +
       `import type { PageChrome } from '@/workflows/chrome/load-chrome';\n\n` +
       `export type ThemeShellKind = 'default' | 'page-shell';\n` +
-      `export type ThemeMeta = { id: ThemeId; shell: ThemeShellKind; fontHref: string };\n\n` +
+      `export type ThemeHomeRequirements = {\n` +
+      `  placements?: string[];\n` +
+      `  resolveReferencesFor?: string[];\n` +
+      `  articles?: boolean;\n` +
+      `  caseStudies?: boolean;\n` +
+      `  solutions?: boolean;\n` +
+      `  faq?: boolean;\n` +
+      `};\n\n` +
+      `export type ThemeMeta = { id: ThemeId; shell: ThemeShellKind; fontHref: string; homeRequirements?: ThemeHomeRequirements };\n\n` +
       `export const THEME_META: Record<ThemeId, ThemeMeta> = {\n` +
-      `  ${themeId}: { id: '${themeId}', shell: 'page-shell', fontHref: '' },\n` +
+      `  ${themeId}: { id: '${themeId}', shell: 'page-shell', fontHref: '', homeRequirements: ${homeReqCode} },\n` +
       `};\n\n` +
       `export function getThemeMeta(theme?: string | null): ThemeMeta {\n` +
       `  return THEME_META[resolveTheme({ theme }).themeId];\n` +
+      `}\n` +
+      `export function getThemeHomeRequirements(theme?: string | null): ThemeHomeRequirements {\n` +
+      `  return getThemeMeta(theme).homeRequirements || {};\n` +
       `}\n` +
       `export function hasPageShell(_theme?: string | null): boolean { return true; }\n` +
       `export function buildPageShellProps(chrome: PageChrome) {\n` +
