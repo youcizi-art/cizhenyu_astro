@@ -1,0 +1,54 @@
+---
+interface TestimonialItem {
+  id?: string;
+  author?: string;
+  role?: string;
+  content: string;
+  avatarUrl?: string;
+}
+
+interface Props {
+  title: string;
+  items: TestimonialItem[];
+}
+
+const { title, items = [] } = Astro.props;
+if (!items.length) return null;
+---
+
+<section class="cz-section cz-home-testimonials" id="testimonials">
+  <div class="cz-container">
+    <div class="cz-section-head">
+      <p class="cz-section-eyebrow">FEEDBACK</p>
+      <h2>{title}</h2>
+    </div>
+    <div class="cz-home-testimonial-grid">
+      {items.map((item) => (
+        <article class="cz-home-testimonial-card">
+          <div class="cz-home-testimonial-quote" aria-hidden="true">“</div>
+          <p class="cz-home-testimonial-content">{item.content}</p>
+          <div class="cz-home-testimonial-author">
+            {item.avatarUrl ? (
+              <img
+                class="cz-home-testimonial-avatar"
+                src={item.avatarUrl}
+                alt={item.author || ''}
+                width="44"
+                height="44"
+                loading="lazy"
+              />
+            ) : (
+              <div class="cz-home-testimonial-avatar-fallback">
+                {(item.author || 'U').charAt(0).toUpperCase()}
+              </div>
+            )}
+            <div class="cz-home-testimonial-meta">
+              <strong>{item.author || '客户'}</strong>
+              {item.role ? <span>{item.role}</span> : null}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

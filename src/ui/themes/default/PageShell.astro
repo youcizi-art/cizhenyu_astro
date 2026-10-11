@@ -4,6 +4,8 @@ import Footer from './components/Footer.astro';
 import type { NavLink } from '@/modules/nav';
 import type { CompanyView } from '@/modules/company';
 
+import { t } from '@/modules/i18n';
+
 interface Props {
   siteName: string;
   links: NavLink[];
@@ -21,13 +23,20 @@ const {
   links,
   localeOptions = [],
   company,
+  locale,
   homeHref,
   contactHref,
   contactLabel,
   showContactCta = true,
-  quickLinksLabel = '快速链接',
+  quickLinksLabel,
 } = Astro.props;
+
+const resolvedQuickLinks = quickLinksLabel || t(locale, 'quickLinks');
 ---
+<!-- Cloudflare 在线智能客服挂件代码（专属嵌入代码） -->
+<link rel="stylesheet" href="https://chat.ycz.me/style.css" />
+<script src="https://chat.ycz.me/widget.js" defer></script>
+
 <Header
   siteName={siteName}
   links={links}
@@ -41,4 +50,94 @@ const {
 <main class="cz-main">
   <slot />
 </main>
-<Footer company={company} links={links} quickLinksLabel={quickLinksLabel} />
+<Footer company={company} links={links} quickLinksLabel={resolvedQuickLinks} />
+
+<script is:inline>
+  (function () {
+    /**
+     * 响应页面中所有带 [data-cf-chat] 的交互按钮或链接
+     * 支持直接打开、携带产品参数与自定义事件广播
+     */
+    function triggerChatOpen(trigger) {
+      var productTitle = trigger.getAttribute('data-product-title') || '';
+      var productPrice = trigger.getAttribute('data-product-price') || '';
+      var productSku = trigger.getAttribute('data-product-sku') || '';
+      var initialMsg = trigger.getAttribute('data-initial-message') || '';
+
+      var payload = undefined;
+      if (productTitle || productPrice || productSku || initialMsg) {
+        payload = {};
+        if (productTitle || productPrice || productSku) {
+          payload.product = {
+            title: productTitle,
+            price: productPrice,
+            sku: productSku
+          };
+        }
+        if (initialMsg) {
+          payload.initialMessage = initialMsg;
+        } else if (productTitle) {
+          var docLang = (document.documentElement.lang || '').toLowerCase();
+          if (docLang.startsWith('en')) {
+            payload.initialMessage = 'Hello, I am interested in [' + productTitle + '], please share more details.';
+          } else if (docLang.startsWith('ja')) {
+            payload.initialMessage = 'こんにちは、【' + productTitle + '】について詳細を伺いたいです。';
+          } else if (docLang.includes('tw') || docLang.includes('hk')) {
+            payload.initialMessage = '你好，我對【' + productTitle + '】很感興趣，想了解更多細節。';
+          } else {
+            payload.initialMessage = '你好，我对【' + productTitle + '】很感兴趣，想了解更多细节。';
+          }
+        }
+      }
+
+      function executeOpen() {
+        if (window.CFIMChat && typeof window.CFIMChat.open === 'function') {
+          if (payload) {
+            window.CFIMChat.open(payload);
+          } else {
+            window.CFIMChat.open();
+          }
+          return true;
+        }
+        return false;
+      }
+
+      // 广播 CustomEvent 事件
+      try {
+        window.dispatchEvent(
+          new CustomEvent('cf-chat:open', {
+            detail: {
+              productTitle: productTitle,
+              productPrice: productPrice,
+              productSku: productSku,
+              payload: payload
+            }
+          })
+        );
+      } catch (err) {}
+
+      // 若客服挂件已加载完毕则立即打开；否则进行重试轮询
+      if (!executeOpen()) {
+        var retries = 0;
+        var intervalId = setInterval(function () {
+          retries++;
+          if (executeOpen() || retries > 25) {
+            clearInterval(intervalId);
+          }
+        }, 120);
+      }
+    }
+
+    document.addEventListener('click', function (e) {
+      var target = e.target;
+      if (!target || !target.closest) return;
+      var trigger = target.closest('[data-cf-chat="open"], [data-cf-chat], a[href="#chat"]');
+      if (!trigger) return;
+
+      if (trigger.tagName === 'A') {
+        e.preventDefault();
+      }
+      triggerChatOpen(trigger);
+    });
+  })();
+</script>

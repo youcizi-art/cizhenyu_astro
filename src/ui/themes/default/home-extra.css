@@ -1,0 +1,321 @@
+/* ==========================================================================
+   Home Page Extra Sections: SEO/GEO, Testimonials, Articles
+   ========================================================================== */
+
+/* —— SEO / GEO —— */
+[data-theme='default'] .cz-home-seo-lead {
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+[data-theme='default'] .cz-home-seo-intro {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+[data-theme='default'] .cz-home-seo-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+@media (min-width: 860px) {
+  [data-theme='default'] .cz-home-seo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+[data-theme='default'] .cz-home-seo-column-card {
+  padding: 1.5rem;
+  border-radius: 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+}
+[data-theme='default'] .cz-home-seo-col-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+[data-theme='default'] .cz-home-seo-col-head h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+[data-theme='default'] .cz-home-seo-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: var(--accent);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+[data-theme='default'] .cz-home-seo-tag.is-alt {
+  background: #0ea5e9;
+}
+[data-theme='default'] .cz-home-seo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+[data-theme='default'] .cz-home-seo-list li {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+[data-theme='default'] .cz-home-seo-num {
+  flex-shrink: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: rgba(29, 78, 216, 0.08);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.15rem;
+}
+[data-theme='default'] .cz-home-seo-info strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+[data-theme='default'] .cz-home-seo-info p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+[data-theme='default'] .cz-home-seo-value-box {
+  margin-top: 1.75rem;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, #0b1220 0%, #172554 100%);
+  color: #f8fafc;
+  box-shadow: 0 16px 40px rgba(11, 18, 32, 0.18);
+}
+[data-theme='default'] .cz-home-seo-value-head h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.25rem;
+  color: #fff;
+}
+[data-theme='default'] .cz-home-seo-value-lead {
+  margin: 0 0 1.25rem;
+  color: #7dd3fc;
+  font-size: 0.95rem;
+}
+[data-theme='default'] .cz-home-seo-value-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+@media (min-width: 760px) {
+  [data-theme='default'] .cz-home-seo-value-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+[data-theme='default'] .cz-home-seo-value-item {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+[data-theme='default'] .cz-home-seo-value-item strong {
+  display: block;
+  color: #fff;
+  font-size: 0.92rem;
+  margin-bottom: 0.2rem;
+}
+[data-theme='default'] .cz-home-seo-value-item p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  line-height: 1.55;
+}
+[data-theme='default'] .cz-home-seo-workflow-panel {
+  margin-top: 1.5rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+@media (min-width: 860px) {
+  [data-theme='default'] .cz-home-seo-workflow-panel {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+[data-theme='default'] .cz-home-seo-workflow-copy h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+}
+[data-theme='default'] .cz-home-seo-wf-lead {
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+[data-theme='default'] .cz-home-seo-wf-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* —— Testimonials & Articles —— */
+[data-theme='default'] .cz-home-testimonial-grid,
+[data-theme='default'] .cz-home-article-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+@media (min-width: 768px) {
+  [data-theme='default'] .cz-home-testimonial-grid,
+  [data-theme='default'] .cz-home-article-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+[data-theme='default'] .cz-home-testimonial-card {
+  position: relative;
+  padding: 1.6rem 1.4rem;
+  border-radius: 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
+}
+[data-theme='default'] .cz-home-testimonial-quote {
+  font-size: 3rem;
+  line-height: 1;
+  color: rgba(29, 78, 216, 0.15);
+  font-family: serif;
+  margin-bottom: -0.5rem;
+}
+[data-theme='default'] .cz-home-testimonial-content {
+  font-size: 0.93rem;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 0 0 1.25rem;
+  flex-grow: 1;
+}
+[data-theme='default'] .cz-home-testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+[data-theme='default'] .cz-home-testimonial-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+[data-theme='default'] .cz-home-testimonial-avatar-fallback {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #0ea5e9);
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+[data-theme='default'] .cz-home-testimonial-meta strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+[data-theme='default'] .cz-home-testimonial-meta span {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+[data-theme='default'] .cz-home-article-card {
+  border-radius: 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+[data-theme='default'] .cz-home-article-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.07);
+}
+[data-theme='default'] .cz-home-article-media {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+[data-theme='default'] .cz-home-article-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+[data-theme='default'] .cz-home-article-card:hover .cz-home-article-media img {
+  transform: scale(1.04);
+}
+[data-theme='default'] .cz-home-article-media-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+[data-theme='default'] .cz-home-article-body {
+  padding: 1.25rem;
+}
+[data-theme='default'] .cz-home-article-date {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+[data-theme='default'] .cz-home-article-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+[data-theme='default'] .cz-home-article-title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+[data-theme='default'] .cz-home-article-title a:hover {
+  color: var(--accent);
+}
+[data-theme='default'] .cz-home-article-summary {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+[data-theme='default'] .cz-section-head-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}

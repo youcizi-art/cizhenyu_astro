@@ -135,6 +135,153 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000003",
       "locales": {
         "zh-CN": {
+          "name": "用户反馈-机械出口",
+          "block_type": "testimonial",
+          "title": "李先生",
+          "subtitle": "某精密机械出口业务负责人",
+          "summary": "以前建站找外包花了几万，改个产品图都要等一周。用磁帧鱼后架构轻、上线快，内嵌的客服挂件让我们直接接住了中东客户的询盘，运营效率提升非常明显。",
+          "slug": "testimonial-1",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 10
+        },
+        "zh-TW": {
+          "name": "用戶反饋-機械出口",
+          "block_type": "testimonial",
+          "title": "李先生",
+          "subtitle": "某精密機械出口業務負責人",
+          "summary": "以前建站找外包花了好幾萬，改個產品圖都要等一週。用磁幀魚後架構輕、上線快，內嵌的客服掛件讓我們直接接住了中東客戶的詢盤，運營效率提升非常明顯。",
+          "slug": "testimonial-1",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 10
+        },
+        "ja": {
+          "name": "お客様の声-機械輸出",
+          "block_type": "testimonial",
+          "title": "李 様",
+          "subtitle": "精密機械輸出部門マネージャー",
+          "summary": "以前はサイト制作の外注に多額を投じ、画像変更すら1週間待たされていました。磁帧鱼に移行してからは運用が格段に軽快になり、内蔵チャットで中東バイヤーからの問い合わせを確実にキャッチできています。",
+          "slug": "testimonial-1",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 10
+        },
+        "en-US": {
+          "name": "Testimonial - Machinery Export",
+          "block_type": "testimonial",
+          "title": "Mr. Li",
+          "subtitle": "Head of Export, Precision Machinery",
+          "summary": "We used to spend tens of thousands on external agencies, waiting a week just to swap a product photo. With Cizhenyu, everything is lightweight and fast. The embedded chat helped us capture direct inquiries from Middle Eastern buyers.",
+          "slug": "testimonial-1",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 10
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000004",
+      "locales": {
+        "zh-CN": {
+          "name": "用户反馈-跨境品牌",
+          "block_type": "testimonial",
+          "title": "Sarah Chen",
+          "subtitle": "消费电子独立站创始人",
+          "summary": "Cloudflare 架构在全球访问真的秒开，不用担心服务器宕机和高昂运维账单。AI Agent 结合 SEO 运营工作流，帮我们持续生产多语言内容，自然搜索流量稳步上涨。",
+          "slug": "testimonial-2",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 20
+        },
+        "zh-TW": {
+          "name": "用戶反饋-跨境品牌",
+          "block_type": "testimonial",
+          "title": "Sarah Chen",
+          "subtitle": "消費電子獨立站創始人",
+          "summary": "Cloudflare 架構在全球訪問真的秒開，不用擔心伺服器宕機和高昂運維賬單。AI Agent 結合 SEO 運營工作流，幫我們持續生產多語言內容，自然搜尋流量穩步上漲。",
+          "slug": "testimonial-2",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 20
+        },
+        "ja": {
+          "name": "お客様の声-D2Cブランド",
+          "block_type": "testimonial",
+          "title": "Sarah Chen",
+          "subtitle": "越境家電ECファウンダー",
+          "summary": "Cloudflare基盤により世界中どこからでも瞬時に表示され、サーバーダウンや高額な保守費用の心配がありません。AI Agentを活用したSEOワークフローにより自然検索流入が着実に伸びています。",
+          "slug": "testimonial-2",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 20
+        },
+        "en-US": {
+          "name": "Testimonial - Cross-border Brand",
+          "block_type": "testimonial",
+          "title": "Sarah Chen",
+          "subtitle": "Founder, Consumer Electronics DTC",
+          "summary": "The Cloudflare stack delivers near-instant global page loads without server crashes or hefty maintenance bills. The AI-assisted SEO workflow continuously drives organic search impressions.",
+          "slug": "testimonial-2",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 20
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000005",
+      "locales": {
+        "zh-CN": {
+          "name": "用户反馈-服务商",
+          "block_type": "testimonial",
+          "title": "王经理",
+          "subtitle": "数字化出海服务商合伙人",
+          "summary": "基于模型低代码架构非常灵活，客户需要什么业务页面和表单都能快速配置落地。不再是死板的展示站，而是真正能帮企业沉淀客户资产的增长系统。",
+          "slug": "testimonial-3",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 30
+        },
+        "zh-TW": {
+          "name": "用戶反饋-服務商",
+          "block_type": "testimonial",
+          "title": "王經理",
+          "subtitle": "數位化出海服務商合夥人",
+          "summary": "基於模型低代碼架構非常靈活，客戶需要什麼業務頁面和表單都能快速配置落地。不再是死板的展示站，而是真正能幫企業沉澱客戶資產的增長系統。",
+          "slug": "testimonial-3",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 30
+        },
+        "ja": {
+          "name": "お客様の声-パートナー企業",
+          "block_type": "testimonial",
+          "title": "王 氏",
+          "subtitle": "DX海外展開支援パートナー",
+          "summary": "モデル駆動のローコード構成が極めて柔軟で、クライアントが求めるページやフォームを即座に具現化できます。形だけの静的サイトではなく、確実に顧客データを蓄積できる実践的システムです。",
+          "slug": "testimonial-3",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 30
+        },
+        "en-US": {
+          "name": "Testimonial - Agency Partner",
+          "block_type": "testimonial",
+          "title": "Manager Wang",
+          "subtitle": "Partner, Digital Export Agency",
+          "summary": "The model-driven low-code architecture is remarkably flexible. We can roll out custom business pages and forms effortlessly. It turns rigid brochure sites into real customer acquisition engines.",
+          "slug": "testimonial-3",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 30
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-blk-4000-8000-000000000003",
+      "locales": {
+        "zh-CN": {
           "name": "瓶颈01-名片站死局",
           "block_type": "feature",
           "title": "只有摆设名片站，改动困难且零自然流",

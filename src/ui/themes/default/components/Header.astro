@@ -3,6 +3,8 @@ import OptimizedImage from '@/ui/components/OptimizedImage.astro';
 import type { NavLink } from '@/modules/nav';
 import type { CompanyView } from '@/modules/company';
 
+import { t } from '@/modules/i18n';
+
 interface Props {
   siteName: string;
   links: NavLink[];
@@ -19,7 +21,7 @@ const {
   localeOptions = [],
   company,
   contactHref = '/contact',
-  contactLabel = '提交询盘',
+  contactLabel: rawContactLabel,
   homeHref = '/',
   showContactCta = true,
 } = Astro.props;
@@ -27,6 +29,9 @@ const {
 const logoUrl = String(company?.logoUrl || '').trim();
 const pathname = Astro.url.pathname;
 const activeLocale = localeOptions.find((l) => l.active);
+const currentLocale = activeLocale?.code || 'en';
+
+const contactLabel = rawContactLabel || t(currentLocale, 'contact');
 
 const normalizePath = (p: string) => p.replace(/\/+$/, '') || '/';
 const currentPath = normalizePath(pathname);
@@ -41,6 +46,25 @@ function isLinkActive(href: string) {
   return isHomeLink
     ? currentPath === targetPath
     : (currentPath === targetPath || currentPath.startsWith(`${targetPath}/`));
+}
+
+/**
+ * 语言显示名称：完全优先后台接口返回的语言名称
+ * 若后台未填或仅为语言代码，使用国际标准 Intl.DisplayNames 自动动态解析该语言的本族自然名称，绝不写死字典
+ */
+function getLocaleDisplayName(opt: { code: string; name?: string }): string {
+  const customName = String(opt.name || '').trim();
+  if (customName && customName.toLowerCase() !== opt.code.toLowerCase()) {
+    return customName;
+  }
+  try {
+    const dn = new Intl.DisplayNames([opt.code], { type: 'language' });
+    const resolved = dn.of(opt.code);
+    if (resolved) {
+      return resolved.charAt(0).toUpperCase() + resolved.slice(1);
+    }
+  } catch {}
+  return customName || opt.code;
 }
 
 // 移动端若已展示底部联系 CTA，则在常规导航链接中过滤联系项，避免出现两个联系方式
@@ -110,13 +134,13 @@ const drawerLinks = links.filter((link) => {
             aria-label="Language"
           >
             {localeOptions.map((opt) => (
-              <option value={opt.href} selected={opt.active}>{opt.code}</option>
+              <option value={opt.href} selected={opt.active}>{getLocaleDisplayName(opt)}</option>
             ))}
           </select>
         </div>
       ) : null}
       {showContactCta ? (
-        <a class="cz-btn cz-btn-primary" href={contactHref}>{contactLabel}</a>
+        <a class="cz-btn cz-btn-primary" href={contactHref} data-cf-chat="open">{contactLabel}</a>
       ) : null}
       <button class="cz-menu-toggle" type="button" aria-label="Menu" data-cz-menu>
         Menu
@@ -176,7 +200,7 @@ const drawerLinks = links.filter((link) => {
 
     {showContactCta ? (
       <div class="cz-drawer-cta">
-        <a class="cz-btn cz-btn-primary cz-drawer-cta-btn" href={contactHref}>
+        <a class="cz-btn cz-btn-primary cz-drawer-cta-btn" href={contactHref} data-cf-chat="open">
           {contactLabel}
         </a>
       </div>
@@ -184,15 +208,37 @@ const drawerLinks = links.filter((link) => {
 
     {activeLocale ? (
       <div class="cz-drawer-footer">
-        <span class="muted">{activeLocale.name}</span>
+        <span class="muted">{getLocaleDisplayName(activeLocale)}</span>
       </div>
     ) : null}
   </div>
 </header>
 <script>
+  // 移动端菜单抽屉
   const btn = document.querySelector('[data-cz-menu]');
   const drawer = document.querySelector('[data-cz-drawer]');
   btn?.addEventListener('click', () => drawer?.classList.toggle('is-open'));
+
+  // PC 端鼠标移入有二级菜单的项时自动弹出下拉（移动端保留点击切换）
+  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (isFinePointer) {
+    const navItems = document.querySelectorAll('.cz-nav .cz-nav-item');
+    navItems.forEach((item) => {
+      let closeTimer: ReturnType<typeof setTimeout> | null = null;
+      item.addEventListener('mouseenter', () => {
+        if (closeTimer) {
+          clearTimeout(closeTimer);
+          closeTimer = null;
+        }
+        (item as HTMLDetailsElement).open = true;
+      });
+      item.addEventListener('mouseleave', () => {
+        closeTimer = setTimeout(() => {
+          (item as HTMLDetailsElement).open = false;
+        }, 150);
+      });
+    });
+  }
 </script>
 <style>
   .sr-only {

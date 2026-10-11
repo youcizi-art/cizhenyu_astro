@@ -17,6 +17,7 @@ export type CompanyView = {
   sameAs: string[];
   geoLat: string;
   geoLng: string;
+  aboutContent?: string;
 };
 
 export type CompanyLoadResult =
@@ -53,6 +54,7 @@ export function toCompanyView(info: CompanyInfo | null, fallbackName: string): C
     sameAs,
     geoLat: String(data.geo_latitude || '').trim(),
     geoLng: String(data.geo_longitude || '').trim(),
+    aboutContent: String(data.about_content || data.about || '').trim(),
   };
 }
 

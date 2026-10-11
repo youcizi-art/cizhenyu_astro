@@ -179,27 +179,79 @@ const EN: DefaultHomeContent = {
         cizhenyu: 'Unifies site foundation, content ops, and SEO/GEO into a cohesive pipeline',
       },
     ],
-    coreTitle: "Cizhenyu's core edge is not claiming every single spec is better—it is solving the common business costs and headaches together:",
+    coreTitle: 'Spend less on web setup, eliminate operational friction, and acquire buyers with clarity. Cizhenyu doesn\'t just deliver a static site—it unites web infrastructure, CRM, and SEO/GEO operations around your real business goals.',
     coreHighlights: [
-      'Free your team from traditional server management and maintenance overhead.',
-      'Avoid fragmenting websites, lead forms, CRM, and content ops into disconnected silos.',
-      'Stop rebuilding from ground zero each time a new operational requirement surfaces.',
-      'Receive not just a static website, but a launchpad engineered for AI-assisted growth.',
+      'Lighter cost: Built on Cloudflare to eliminate traditional hosting, OS maintenance, and DevOps retainers.',
+      'Simpler management: Consolidate content, catalogs, and operational tools into one clear interface.',
+      'Higher efficiency: Drive daily marketing with streamlined workflows and AI assistance to automate busywork.',
+      'Clear growth path: From catalog displays and lead inquiries to ongoing SEO/GEO, build a solid foundation for revenue.',
     ],
-    summary: 'If your business requires deeply specialized enterprise software, custom development remains best. But if you want a cost-controlled, easily managed, global-ready corporate website built for ongoing growth, Cizhenyu is the smarter choice.',
+    summary: 'Never settle for a passive website that merely waits for visitors. Build a cost-controlled, easily managed, global-ready portal engineered to actively win buyers. Cizhenyu makes business setup lighter and operations effortless.',
   },
   seoGeo: {
-    title: 'SEO + GEO: one quality content system for more search surfaces',
-    lead: 'One content strategy for search engines and AI search. No duplicate content stacks, no keyword stuffing—just stronger site information quality around real products and buyer questions.',
-    steps: [
-      { index: '01', title: 'Find opportunities', desc: 'Analyze industry, competitors, and keywords to prioritize product pages and topics.' },
-      { index: '02', title: 'Build content', desc: 'Strengthen specs, use cases, solutions, cases, and FAQs so buyers can decide.' },
-      { index: '03', title: 'Publish & optimize', desc: 'Produce, review, and ship on a plan while improving structure, internal links, and coverage.' },
-      { index: '04', title: 'Measure & iterate', desc: 'Use indexing, exposure, clicks, and conversions to set the next optimization focus.' },
+    title: 'SEO + GEO: Empower AI for Professional Growth & Continuous Exposure',
+    lead: 'No need to master complex SEO or GEO frameworks from scratch. Feed in your goals, activate specialized workflows, and let AI execute research, optimization, and content distribution.',
+    intro:
+      'Cizhenyu integrates specialized SEO/GEO skills, MCP tools, and APIs into modern AI Agent environments. Use your preferred AI coding and agent tools to trigger our proven workflows—turning laborious manual research and publishing into automated, repeatable business growth.',
+    onsite: {
+      title: 'On-Page Optimization: From Audit to Execution in One Flow',
+      items: [
+        { title: 'Full Site Auditing', desc: 'Analyze technical markup, crawl health, keyword gaps, and UX roadblocks with clear remediation priorities.' },
+        { title: 'Keyword & Topic Planning', desc: 'Uncover high-intent search queries across industry, rivals, and products to plan high-converting landing pages.' },
+        { title: 'Batch Tuning & Copywriting', desc: 'Refine metadata, internal linking, product specs, and rich editorial copy crafted for search engines and AI citation.' },
+        { title: 'CMS Sync & Re-verification', desc: 'Publish approved updates directly via authorized CMS APIs and re-audit results without juggling disparate tools.' },
+      ],
+    },
+    offsite: {
+      title: 'Off-Page Promotion: Expanding Reach Beyond Mere Blogging',
+      items: [
+        { title: 'Outreach Discovery', desc: 'Uncover industry hubs, trade directories, editorial partnerships, and organic citation opportunities.' },
+        { title: 'Multi-Channel Distribution', desc: 'Tailor promotional excerpts, press snippets, and asset variants for third-party platforms.' },
+        { title: 'Repetitive Task Automation', desc: 'Let autonomous agents, specialized skills, MCPs, and APIs execute approved distribution pipelines.' },
+        { title: 'Continuous KPI Tracking', desc: 'Monitor organic impressions, crawl frequency, and conversion signals to steer subsequent operational sprints.' },
+      ],
+    },
+    value: {
+      title: 'What Real Value Do You Receive?',
+      lead: 'Not a confusing pile of disjointed SEO utilities, but an executable operational system.',
+      items: [
+        { title: 'Zero Expertise Hurdle', desc: 'Drive enterprise-grade SEO and GEO campaigns with AI without becoming a technical specialist.' },
+        { title: 'Drastic Time & Labor Savings', desc: 'Hand over repetitive audits, drafting, link checking, and scheduling to automated pipelines.' },
+        { title: 'From Scattered Posts to Systematic Ops', desc: 'Connect site audits, keyword mapping, on-page tuning, content ops, and analytics into one loop.' },
+        { title: 'Full Editorial Governance', desc: 'Review task outputs, verify key copy, and govern exactly what goes live based on business priorities.' },
+        { title: 'Sustained Organic Visibility', desc: 'Target genuine buyer problems to maximize discovery across both classic search engines and generative AI agents.' },
+      ],
+    },
+    workflow: {
+      title: 'From Stating Your Intent to Executing Professional Workflows',
+      lead: 'Instruct the AI which website to optimize, which products to showcase, and which buyer personas to reach. The system analyzes, generates tasks, and executes connected actions.',
+      desc: 'You maintain strategic business direction and crucial approvals; AI handles the repetitive execution. Cizhenyu doesn’t promise overnight magic—we give you a battle-tested operational engine that steadily compounds organic buyer acquisition.',
+      cta: 'Explore Service Workflow',
+    },
+  },
+  testimonials: {
+    title: 'Client Experiences & Proven Results',
+    lead: 'Discover how real export manufacturers and global brands reduce web overhead and unlock sustained buyer acquisition on Cizhenyu.',
+    items: [
+      {
+        name: 'Mr. Chen · Industrial Machinery Exporter',
+        role: 'Manufacturing / Global Trade',
+        quote: 'We used to spend thousands annually on foreign servers and maintenance, yet still battled sluggish overseas page loads. After deploying on Cizhenyu Cloudflare, our US and EU buyers experience instantaneous loading with virtually zero server upkeep. Those savings now go straight into marketing.',
+        rating: 5,
+      },
+      {
+        name: 'Sarah Lin · Smart Electronics Export Director',
+        role: 'Consumer Tech / Brand Direct',
+        quote: 'Our old open-source CMS was plagued with plugin conflicts and security patches. Updating a hero banner or catalog spec required waiting on dev tickets. Cizhenyu’s admin is refreshingly intuitive—our sales reps update products and multilingual case studies with a few clicks.',
+        rating: 5,
+      },
+      {
+        name: 'David Zhang · Founder of B2B Trade Agency',
+        role: 'B2B Services / Growth Operations',
+        quote: 'We audited the site on PageSpeed Insights and scored 98+ across Performance and Best Practices. Between the structured data and the built-in AI chat widget, our overseas buyer inquiries doubled compared to our previous portal.',
+        rating: 5,
+      },
     ],
-    goal: 'Goal: accumulate reusable content assets and search visibility—not publish once and disappear.',
-    disclaimer:
-      'SEO / GEO cannot guarantee rankings, AI citations, or orders. Continuous research, content building, and measurement turn site ops from gut feel into planned execution and improvement.',
   },
   paths: {
     title: 'Pick the product that matches your stage',

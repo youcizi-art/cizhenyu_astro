@@ -11,6 +11,8 @@ import { getThemeMeta } from './theme-ui';
 import { defaultHomeLabels } from './default/home-copy';
 import { turmillHomeLabels } from './turmill/home-copy';
 
+import { localePath } from '@/modules/cms';
+
 interface Props {
   data: Awaited<ReturnType<typeof import('@/workflows/home/load-home').loadHomePage>>;
 }
@@ -25,6 +27,9 @@ const turmillLabels = meta.id === 'turmill' ? turmillHomeLabels(data.locale) : n
     locale={data.locale}
     heroImageUrl={data.heroImageUrl || data.hero?.imageUrl || ''}
     products={data.products}
+    articles={data.articles}
+    testimonials={data.testimonials}
+    articlesHref={data.site.modules.articles ? localePath(data.locale, '/articles', data.site.defaultLocale) : ''}
     labels={{ ...data.labels, ...defaultLabels }}
     paths={{
       about: data.paths.about,

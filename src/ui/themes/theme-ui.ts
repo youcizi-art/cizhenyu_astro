@@ -42,9 +42,9 @@ export const THEME_META: Record<ThemeId, ThemeMeta> = {
     shell: 'page-shell',
     fontHref: '',
     homeRequirements: {
-      placements: ['home_hero', 'footer_cta'],
+      placements: ['home_hero', 'footer_cta', 'home_testimonial'],
       resolveReferencesFor: [],
-      articles: false,
+      articles: true,
       caseStudies: false,
       solutions: false,
       faq: false,

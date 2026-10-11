@@ -12,7 +12,16 @@ export type UiLabelKey =
   | 'emptyProducts'
   | 'loadFailed'
   | 'notFound'
-  | 'backHome';
+  | 'backHome'
+  | 'quickLinks'
+  | 'testimonials'
+  | 'latestNews'
+  | 'viewAllNews'
+  | 'learnMore'
+  | 'exploreServiceFlow'
+  | 'inquiry'
+  | 'inquiryHint'
+  | 'sendEmail';
 
 const EN: Record<UiLabelKey, string> = {
   home: 'Home',
@@ -29,6 +38,15 @@ const EN: Record<UiLabelKey, string> = {
   loadFailed: 'Failed to load.',
   notFound: 'Page not found',
   backHome: 'Back to home',
+  quickLinks: 'Quick Links',
+  testimonials: 'Client Reviews',
+  latestNews: 'Latest Updates',
+  viewAllNews: 'View All News',
+  learnMore: 'Learn More',
+  exploreServiceFlow: 'Explore Service Workflow',
+  inquiry: 'Submit Inquiry',
+  inquiryHint: 'Click to open the online smart consultant for instant inquiry, or send us an email directly.',
+  sendEmail: 'Send Email',
 };
 
 const ZH_CN: Record<UiLabelKey, string> = {
@@ -46,6 +64,15 @@ const ZH_CN: Record<UiLabelKey, string> = {
   loadFailed: '加载失败。',
   notFound: '页面不存在',
   backHome: '返回首页',
+  quickLinks: '快速链接',
+  testimonials: '用户反馈',
+  latestNews: '行业动态',
+  viewAllNews: '查看全部动态',
+  learnMore: '了解详情',
+  exploreServiceFlow: '了解服务流程',
+  inquiry: '提交询盘',
+  inquiryHint: '点击即可打开在线智能咨询窗口进行即时沟通，也可直接向我们发送邮件。',
+  sendEmail: '发送邮件',
 };
 
 const ZH_TW: Record<UiLabelKey, string> = {
@@ -63,6 +90,15 @@ const ZH_TW: Record<UiLabelKey, string> = {
   loadFailed: '載入失敗。',
   notFound: '頁面不存在',
   backHome: '返回首頁',
+  quickLinks: '快速連結',
+  testimonials: '用戶反饋',
+  latestNews: '行業動態',
+  viewAllNews: '查看全部動態',
+  learnMore: '了解詳情',
+  exploreServiceFlow: '了解服務流程',
+  inquiry: '提交詢盤',
+  inquiryHint: '點擊即可打開在線智能諮詢窗口進行即時溝通，也可直接向我們發送郵件。',
+  sendEmail: '發送郵件',
 };
 
 const JA: Record<UiLabelKey, string> = {
@@ -80,6 +116,15 @@ const JA: Record<UiLabelKey, string> = {
   loadFailed: '読み込みに失敗しました。',
   notFound: 'ページが見つかりません',
   backHome: 'ホームへ戻る',
+  quickLinks: 'クイックリンク',
+  testimonials: 'お客様の声',
+  latestNews: '最新の動向',
+  viewAllNews: 'すべての動向を見る',
+  learnMore: '詳細を見る',
+  exploreServiceFlow: 'サービスの流れを見る',
+  inquiry: 'お問い合わせを送信',
+  inquiryHint: 'クリックしてオンラインチャットで相談するか、直接メールを送信してください。',
+  sendEmail: 'メールを送信',
 };
 
 const DICTS: Record<string, Record<UiLabelKey, string>> = {

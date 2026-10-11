@@ -7,5 +7,6 @@ import './default/theme.css';
 import './default/pages.css';
 import './default/home.css';
 import './default/home-sections.css';
+import './default/home-extra.css';
 import './turmill/tokens.css';
 import './turmill/theme.css';

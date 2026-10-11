@@ -75,9 +75,36 @@ export type DefaultHomeContent = {
   seoGeo: {
     title: string;
     lead: string;
-    steps: HomeStep[];
-    goal: string;
-    disclaimer: string;
+    intro: string;
+    onsite: {
+      title: string;
+      items: Array<{ title: string; desc: string }>;
+    };
+    offsite: {
+      title: string;
+      items: Array<{ title: string; desc: string }>;
+    };
+    value: {
+      title: string;
+      lead: string;
+      items: Array<{ title: string; desc: string }>;
+    };
+    workflow: {
+      title: string;
+      lead: string;
+      desc: string;
+      cta: string;
+    };
+  };
+  testimonials?: {
+    title: string;
+    lead: string;
+    items: Array<{
+      name: string;
+      role: string;
+      quote: string;
+      rating?: number;
+    }>;
   };
   paths: {
     title: string;

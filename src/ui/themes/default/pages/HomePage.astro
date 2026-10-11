@@ -1,8 +1,12 @@
 ---
 import OptimizedImage from '@/ui/components/OptimizedImage.astro';
 import type { ProductCard } from '@/modules/product';
+import type { ArticleCard } from '@/modules/article';
 import { defaultHomeContent } from '../home-content';
 import { productSectionTitle } from '../home-copy';
+import HomeSeoGeo from '../components/HomeSeoGeo.astro';
+import HomeTestimonials from '../components/HomeTestimonials.astro';
+import HomeArticles from '../components/HomeArticles.astro';
 
 interface Props {
   siteName: string;
@@ -19,6 +23,9 @@ interface Props {
   error?: string;
   warnings?: string[];
   showProducts?: boolean;
+  articles?: ArticleCard[];
+  testimonials?: Array<{ id: string; author?: string; role?: string; content: string; avatarUrl?: string }>;
+  articlesHref?: string;
 }
 
 const {
@@ -31,9 +38,13 @@ const {
   error,
   warnings = [],
   showProducts = true,
+  articles = [],
+  testimonials = [],
+  articlesHref = '',
 } = Astro.props;
 
 const copy = defaultHomeContent(locale);
+const finalTestimonials = testimonials.length > 0 ? testimonials : copy.testimonials;
 const contactHref = paths.contact;
 const productsHref = paths.products || contactHref;
 const productBySlug = new Map(products.map((p) => [p.slug, p]));
@@ -333,28 +344,7 @@ const highlightIcons = [
 </section>
 
 <!-- SEO / GEO -->
-<section class="cz-section cz-section-alt cz-home-seo">
-  <div class="cz-container">
-    <div class="cz-section-head cz-section-head-wide">
-      <p class="cz-section-eyebrow">05</p>
-      <h2>{copy.seoGeo.title}</h2>
-      <p>{copy.seoGeo.lead}</p>
-    </div>
-    <div class="cz-home-steps">
-      {copy.seoGeo.steps.map((s) => (
-        <article class="cz-home-step-card">
-          <span class="cz-home-step-index">{s.index}</span>
-          <h3>{s.title}</h3>
-          <p>{s.desc}</p>
-        </article>
-      ))}
-    </div>
-    <div class="cz-home-seo-footer">
-      <p class="cz-home-goal">{copy.seoGeo.goal}</p>
-      <p class="cz-home-note">{copy.seoGeo.disclaimer}</p>
-    </div>
-  </div>
-</section>
+<HomeSeoGeo seoGeo={copy.seoGeo} />
 
 <!-- Paths -->
 <section class="cz-section cz-home-paths">
@@ -377,6 +367,17 @@ const highlightIcons = [
     </div>
   </div>
 </section>
+
+<!-- Testimonials -->
+<HomeTestimonials title={labels.testimonials} items={finalTestimonials} />
+
+<!-- Articles -->
+<HomeArticles
+  title={labels.latestNews}
+  articles={articles}
+  viewAllHref={articlesHref}
+  viewAllLabel={labels.viewAllNews}
+/>
 
 <!-- FAQ -->
 <section class="cz-section cz-section-alt cz-home-faq" id="faq">
