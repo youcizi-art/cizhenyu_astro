@@ -46,6 +46,7 @@ const images = product?.imageUrls?.length
 const mainImage = images[0] || '';
 const thumbs = images;
 const inquiryHref = product?.inquiryHref || contactHref || backHref;
+const descTitle = sectionLabels.description || (backLabel.includes('返回') ? '详细介绍' : 'Product Details');
 ---
 <PageBanner
   title={product?.title || listLabel}
@@ -60,64 +61,84 @@ const inquiryHref = product?.inquiryHref || contactHref || backHref;
     <Alerts messages={error ? [error] : []} />
     <Alerts messages={warnings} tone="warn" />
     {product ? (
-      <div class="cz-detail-grid">
-        <div data-cz-gallery>
-          {mainImage ? (
-            <OptimizedImage
-              class="cz-gallery-main"
-              src={mainImage}
-              alt={product.title}
-              width={900}
-              height={675}
-              widths={[480, 720, 900]}
-              sizes="(max-width: 900px) 100vw, 520px"
-              priority
-            />
-          ) : (
-            <div class="cz-gallery-main cz-gallery-empty">No image</div>
-          )}
-          {thumbs.length > 1 ? (
-            <div class="cz-gallery-thumbs">
-              {thumbs.map((src, idx) => (
-                <button
-                  type="button"
-                  class={`cz-gallery-thumb${idx === 0 ? ' is-active' : ''}`}
-                  data-cz-gallery-thumb
-                  data-src={src}
-                  aria-label={`Image ${idx + 1}`}
-                >
-                  <OptimizedImage src={src} alt="" width={120} height={120} widths={[80, 120]} sizes="72px" fill />
-                </button>
-              ))}
+      <div class="cz-product-detail-layout">
+        <!-- 上部分：左右布局（左产品图，右规格、标题、简介、快速咨询） -->
+        <div class="cz-product-hero-grid">
+          <div class="cz-product-gallery-wrap" data-cz-gallery>
+            {mainImage ? (
+              <OptimizedImage
+                class="cz-gallery-main"
+                src={mainImage}
+                alt={product.title}
+                width={900}
+                height={675}
+                widths={[480, 720, 900]}
+                sizes="(max-width: 900px) 100vw, 560px"
+                priority
+              />
+            ) : (
+              <div class="cz-gallery-main cz-gallery-empty">No image</div>
+            )}
+            {thumbs.length > 1 ? (
+              <div class="cz-gallery-thumbs">
+                {thumbs.map((src, idx) => (
+                  <button
+                    type="button"
+                    class={`cz-gallery-thumb${idx === 0 ? ' is-active' : ''}`}
+                    data-cz-gallery-thumb
+                    data-src={src}
+                    aria-label={`Image ${idx + 1}`}
+                  >
+                    <OptimizedImage src={src} alt="" width={120} height={120} widths={[80, 120]} sizes="72px" fill />
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          <div class="cz-product-hero-info">
+            <h1 class="cz-product-detail-title">{product.title}</h1>
+            {product.tagline ? <p class="cz-product-detail-tagline">{product.tagline}</p> : null}
+
+            {(product.sku || product.brand) ? (
+              <div class="cz-product-meta-pills">
+                {product.sku ? <span class="cz-sku">{product.sku}</span> : null}
+                {product.brand ? <span class="cz-brand-pill">{product.brand}</span> : null}
+              </div>
+            ) : null}
+
+            {product.summary ? <p class="cz-product-detail-summary">{product.summary}</p> : null}
+
+            {product.specs?.length ? (
+              <div class="cz-product-specs-box">
+                <h2 class="cz-specs-heading">{specsTitle}</h2>
+                <table class="cz-specs">
+                  <tbody>
+                    {product.specs.map((row) => (
+                      <tr>
+                        <th>{row.key}</th>
+                        <td>{row.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : null}
+
+            <div class="cz-product-hero-actions">
+              <a class="cz-btn cz-btn-primary" href={inquiryHref} data-cf-chat="open">{contactLabel}</a>
+              <a class="cz-btn cz-btn-ghost" href={backHref}>{backLabel}</a>
             </div>
-          ) : null}
+          </div>
         </div>
 
-        <div>
-          <h1 style="margin:0;font-size:clamp(1.6rem,2.5vw,2.1rem);letter-spacing:-0.02em">{product.title}</h1>
-          {product.tagline ? <p style="color:var(--muted);margin:0.65rem 0 0">{product.tagline}</p> : null}
-          {product.sku ? <span class="cz-sku">{product.sku}</span> : null}
-          {product.brand ? <p style="margin:0.75rem 0 0;font-weight:600">{product.brand}</p> : null}
-          {product.summary ? <p style="color:var(--muted);margin:0.85rem 0 0">{product.summary}</p> : null}
-
-          {product.specs?.length ? (
-            <section style="margin-top:1.25rem">
-              <h2 style="margin:0;font-size:1.1rem">{specsTitle}</h2>
-              <table class="cz-specs">
-                <tbody>
-                  {product.specs.map((row) => (
-                    <tr>
-                      <th>{row.key}</th>
-                      <td>{row.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </section>
-          ) : null}
-
+        <!-- 下部分：产品详情以及其他模块信息 -->
+        <div class="cz-product-bottom-layout">
           {product.descriptionHtml ? (
-            <div class="cz-prose" style="margin-top:1rem" set:html={product.descriptionHtml} />
+            <section class="cz-product-desc-section">
+              <h2 class="cz-desc-heading">{descTitle}</h2>
+              <div class="cz-prose" set:html={product.descriptionHtml} />
+            </section>
           ) : null}
 
           <div class="cz-product-seo-wrap">
@@ -133,11 +154,11 @@ const inquiryHref = product?.inquiryHref || contactHref || backHref;
             />
           </div>
 
-          <div class="cz-inquiry-box">
+          <div class="cz-inquiry-box cz-product-inquiry-card">
             <h2>{inquiryTitle}</h2>
             <p>{inquiryBody}</p>
             <div class="cz-inquiry-actions">
-              <a class="cz-btn cz-btn-primary" href={inquiryHref}>{contactLabel}</a>
+              <a class="cz-btn cz-btn-primary" href={inquiryHref} data-cf-chat="open">{contactLabel}</a>
               <a class="cz-btn cz-btn-ghost" href={backHref}>{backLabel}</a>
             </div>
           </div>

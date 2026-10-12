@@ -504,3 +504,133 @@
 [data-theme='default'] .cz-product-seo-advantages li {
   margin-bottom: 0.4rem;
 }
+
+/* ==========================================================================
+   产品详情页专用：上下结构布局（上部左右双列，下部通栏详情与模块）
+   ========================================================================== */
+
+[data-theme='default'] .cz-product-detail-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* 上部分：左右分栏（左产品图画廊，右产品标题、简介、规格参数、快速操作） */
+[data-theme='default'] .cz-product-hero-grid {
+  display: grid;
+  gap: 2.25rem;
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  [data-theme='default'] .cz-product-hero-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
+    gap: 3.5rem;
+  }
+}
+
+[data-theme='default'] .cz-product-gallery-wrap {
+  position: sticky;
+  top: 5.5rem;
+}
+
+[data-theme='default'] .cz-product-hero-info {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme='default'] .cz-product-detail-title {
+  margin: 0;
+  font-size: clamp(1.65rem, 2.8vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+[data-theme='default'] .cz-product-detail-tagline {
+  margin: 0.65rem 0 0;
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+[data-theme='default'] .cz-product-meta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+[data-theme='default'] .cz-brand-pill {
+  display: inline-flex;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+[data-theme='default'] .cz-product-detail-summary {
+  margin: 1.1rem 0 0;
+  color: #334155;
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+[data-theme='default'] .cz-product-specs-box {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.35rem;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+[data-theme='default'] .cz-specs-heading {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+[data-theme='default'] .cz-product-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+/* 下部分：产品详细介绍与扩展模块（通栏排列） */
+[data-theme='default'] .cz-product-bottom-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+  border-top: 1px solid var(--line);
+  padding-top: 3.25rem;
+}
+
+[data-theme='default'] .cz-product-desc-section {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2.25rem 2.5rem;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+}
+
+[data-theme='default'] .cz-desc-heading {
+  margin: 0 0 1.35rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  padding-bottom: 0.85rem;
+  border-bottom: 2px solid var(--accent-soft, #e0f2fe);
+}
+
+[data-theme='default'] .cz-product-inquiry-card {
+  margin-top: 0.5rem;
+}
+
