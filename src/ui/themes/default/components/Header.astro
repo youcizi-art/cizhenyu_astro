@@ -33,15 +33,17 @@ const currentLocale = activeLocale?.code || 'en';
 
 const contactLabel = rawContactLabel || t(currentLocale, 'contact');
 
+const normalizePath = (p: string) => String(p || '').replace(/\/+$/, '') || '/';
+
 // 剥离语种前缀（如 /zh-CN, /zh-cn, /en-US, /ja 等），得到纯净路由用于精准比对
 function stripLocalePrefix(p: string): string {
-  const norm = (p || '').replace(/\/+$/, '') || '/';
+  const norm = normalizePath(p);
   const stripped = norm.replace(/^\/[a-z]{2}(?:-[a-z0-9]{2,4})?(?=\/|$)/i, '') || '/';
   return stripped.toLowerCase();
 }
 
 const currentPurePath = stripLocalePrefix(pathname);
-const normalizedContactHref = (contactHref || '').replace(/\/+$/, '') || '/';
+const normalizedContactHref = normalizePath(contactHref);
 
 function isLinkActive(href: string) {
   if (!href) return false;
