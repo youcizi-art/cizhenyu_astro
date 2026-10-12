@@ -42,12 +42,21 @@ export const THEME_META: Record<ThemeId, ThemeMeta> = {
     shell: 'page-shell',
     fontHref: '',
     homeRequirements: {
-      placements: ['home_hero', 'footer_cta', 'home_testimonial'],
+      placements: [
+        'home_hero',
+        'home_pain',
+        'home_architecture',
+        'home_compare',
+        'home_seo_geo',
+        'home_paths',
+        'home_testimonial',
+        'footer_cta',
+      ],
       resolveReferencesFor: [],
       articles: true,
       caseStudies: false,
       solutions: false,
-      faq: false,
+      faq: true,
     },
   },
   turmill: {

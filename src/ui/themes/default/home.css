@@ -201,8 +201,7 @@
   border-radius: 1.35rem;
   overflow: hidden;
   aspect-ratio: 4 / 3;
-  background: #0b1220;
-  border: 1px solid rgba(15, 23, 42, 0.1);
+  border: 12px solid #fff;
   box-shadow:
     0 28px 60px rgba(15, 23, 42, 0.18),
     0 0 0 1px rgba(255, 255, 255, 0.04) inset;
@@ -319,7 +318,6 @@
 [data-theme='default'] .cz-home-product-visual {
   position: relative;
   min-height: 240px;
-  background: #0f172a;
   overflow: hidden;
 }
 [data-theme='default'] .cz-home-product-visual img {
@@ -329,6 +327,7 @@
   object-fit: cover;
   display: block;
   transition: transform 0.45s ease;
+  border-radius: 15px;
 }
 [data-theme='default'] .cz-home-product-card:hover .cz-home-product-visual img {
   transform: scale(1.04);

@@ -1704,10 +1704,11 @@ writeJson('seed.manifest.json', {
     'nav_menu.json',
     'page.json',
     'content_block.json',
+    'translation_field.json',
     'nav_menu_item.json',
   ],
   requiredByModule: {
-    _always: ['company_info.json', 'nav_menu.json', 'nav_menu_item.json', 'page.json', 'content_block.json'],
+    _always: ['company_info.json', 'nav_menu.json', 'nav_menu_item.json', 'page.json', 'content_block.json', 'translation_field.json'],
     products: ['product_category.json', 'product.json'],
     articles: ['article.json'],
     faq: ['faq.json'],

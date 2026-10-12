@@ -17,6 +17,7 @@
     "nav_menu.json",
     "page.json",
     "content_block.json",
+    "translation_field.json",
     "nav_menu_item.json"
   ],
   "requiredByModule": {
@@ -25,7 +26,8 @@
       "nav_menu.json",
       "nav_menu_item.json",
       "page.json",
-      "content_block.json"
+      "content_block.json",
+      "translation_field.json"
     ],
     "products": [
       "product_category.json",

@@ -2,7 +2,9 @@
 import OptimizedImage from "@/ui/components/OptimizedImage.astro";
 import type { ProductCard } from "@/modules/product";
 import type { ArticleCard } from "@/modules/article";
-import { defaultHomeContent } from "../home-content";
+import type { ContentBlock } from "@/modules/content-block";
+import type { FaqItem } from "@/modules/faq";
+import { resolveDefaultHomeContent } from "../home-content";
 import { productSectionTitle } from "../home-copy";
 import HomeSeoGeo from "../components/HomeSeoGeo.astro";
 import HomeTestimonials from "../components/HomeTestimonials.astro";
@@ -32,6 +34,8 @@ interface Props {
     avatarUrl?: string;
   }>;
   articlesHref?: string;
+  blocks?: Record<string, ContentBlock[]>;
+  cmsFaqs?: FaqItem[];
 }
 
 const {
@@ -47,9 +51,15 @@ const {
   articles = [],
   testimonials = [],
   articlesHref = "",
+  blocks = {},
+  cmsFaqs = [],
 } = Astro.props;
 
-const copy = defaultHomeContent(locale);
+const copy = resolveDefaultHomeContent(
+  locale,
+  blocks,
+  cmsFaqs.map((f) => ({ question: f.question, answer: f.answer }))
+);
 const finalTestimonials =
   testimonials && testimonials.length > 0
     ? testimonials

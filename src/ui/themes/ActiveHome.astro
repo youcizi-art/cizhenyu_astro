@@ -40,6 +40,8 @@ const turmillLabels = meta.id === 'turmill' ? turmillHomeLabels(data.locale) : n
     error={data.error}
     warnings={data.warnings}
     showProducts={data.site.modules.products}
+    blocks={data.blocks}
+    cmsFaqs={data.faqs}
   />
 ) : meta.id === 'turmill' && turmillLabels ? (
   <TurmillHomePage

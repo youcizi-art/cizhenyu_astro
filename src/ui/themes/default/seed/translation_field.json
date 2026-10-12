@@ -1,0 +1,305 @@
+{
+  "collectionSlug": "b2b_translation_fields",
+  "items": [
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.exploreAll",
+          "field_name": "查看全部产品",
+          "content": "查看全部产品"
+        },
+        "zh-TW": {
+          "field_key": "default.exploreAll",
+          "field_name": "查看全部產品",
+          "content": "查看全部產品"
+        },
+        "ja": {
+          "field_key": "default.exploreAll",
+          "field_name": "すべての製品",
+          "content": "すべての製品"
+        },
+        "en-US": {
+          "field_key": "default.exploreAll",
+          "field_name": "View all products",
+          "content": "View all products"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.readMore",
+          "field_name": "了解详情",
+          "content": "了解详情"
+        },
+        "zh-TW": {
+          "field_key": "default.readMore",
+          "field_name": "了解詳情",
+          "content": "了解詳情"
+        },
+        "ja": {
+          "field_key": "default.readMore",
+          "field_name": "詳しく見る",
+          "content": "詳しく見る"
+        },
+        "en-US": {
+          "field_key": "default.readMore",
+          "field_name": "Learn more",
+          "content": "Learn more"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000003",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.faqEyebrow",
+          "field_name": "常见问题",
+          "content": "常见问题"
+        },
+        "zh-TW": {
+          "field_key": "default.faqEyebrow",
+          "field_name": "常見問題",
+          "content": "常見問題"
+        },
+        "ja": {
+          "field_key": "default.faqEyebrow",
+          "field_name": "よくある質問",
+          "content": "よくある質問"
+        },
+        "en-US": {
+          "field_key": "default.faqEyebrow",
+          "field_name": "FAQ",
+          "content": "FAQ"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000004",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.ctaBtn",
+          "field_name": "立即咨询",
+          "content": "立即咨询"
+        },
+        "zh-TW": {
+          "field_key": "default.ctaBtn",
+          "field_name": "立即諮詢",
+          "content": "立即諮詢"
+        },
+        "ja": {
+          "field_key": "default.ctaBtn",
+          "field_name": "お問い合わせ",
+          "content": "お問い合わせ"
+        },
+        "en-US": {
+          "field_key": "default.ctaBtn",
+          "field_name": "Contact us",
+          "content": "Contact us"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000005",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.productPrefix",
+          "field_name": "Cloudflare 前后台建站系统",
+          "content": "Cloudflare 前后台建站系统"
+        },
+        "zh-TW": {
+          "field_key": "default.productPrefix",
+          "field_name": "Cloudflare 前後台建站系統",
+          "content": "Cloudflare 前後台建站系統"
+        },
+        "ja": {
+          "field_key": "default.productPrefix",
+          "field_name": "Cloudflare 前後台サイトシステム",
+          "content": "Cloudflare 前後台サイトシステム"
+        },
+        "en-US": {
+          "field_key": "default.productPrefix",
+          "field_name": "Cloudflare site system",
+          "content": "Cloudflare site system"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000006",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.productPrefixCrm",
+          "field_name": "CRM 客户管理与 AI 智能客服",
+          "content": "CRM 客户管理与 AI 智能客服"
+        },
+        "zh-TW": {
+          "field_key": "default.productPrefixCrm",
+          "field_name": "CRM 客戶管理與 AI 智慧客服",
+          "content": "CRM 客戶管理與 AI 智慧客服"
+        },
+        "ja": {
+          "field_key": "default.productPrefixCrm",
+          "field_name": "CRM と AI カスタマーサポート",
+          "content": "CRM と AI カスタマーサポート"
+        },
+        "en-US": {
+          "field_key": "default.productPrefixCrm",
+          "field_name": "CRM & AI support",
+          "content": "CRM & AI support"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000007",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.productPrefixSeo",
+          "field_name": "SEO / GEO 长期运营方案",
+          "content": "SEO / GEO 长期运营方案"
+        },
+        "zh-TW": {
+          "field_key": "default.productPrefixSeo",
+          "field_name": "SEO / GEO 長期運營方案",
+          "content": "SEO / GEO 長期運營方案"
+        },
+        "ja": {
+          "field_key": "default.productPrefixSeo",
+          "field_name": "SEO / GEO 長期運用プラン",
+          "content": "SEO / GEO 長期運用プラン"
+        },
+        "en-US": {
+          "field_key": "default.productPrefixSeo",
+          "field_name": "SEO / GEO growth plan",
+          "content": "SEO / GEO growth plan"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000008",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.compareHighlight",
+          "field_name": "推荐",
+          "content": "推荐"
+        },
+        "zh-TW": {
+          "field_key": "default.compareHighlight",
+          "field_name": "推薦",
+          "content": "推薦"
+        },
+        "ja": {
+          "field_key": "default.compareHighlight",
+          "field_name": "おすすめ",
+          "content": "おすすめ"
+        },
+        "en-US": {
+          "field_key": "default.compareHighlight",
+          "field_name": "Recommended",
+          "content": "Recommended"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000009",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.testimonialsEyebrow",
+          "field_name": "客户反馈",
+          "content": "客户反馈"
+        },
+        "zh-TW": {
+          "field_key": "default.testimonialsEyebrow",
+          "field_name": "客戶反饋",
+          "content": "客戶反饋"
+        },
+        "ja": {
+          "field_key": "default.testimonialsEyebrow",
+          "field_name": "お客様の声",
+          "content": "お客様の声"
+        },
+        "en-US": {
+          "field_key": "default.testimonialsEyebrow",
+          "field_name": "Customer Feedback",
+          "content": "Customer Feedback"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000010",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.testimonialsTitle",
+          "field_name": "客户反馈",
+          "content": "客户反馈"
+        },
+        "zh-TW": {
+          "field_key": "default.testimonialsTitle",
+          "field_name": "客戶反饋",
+          "content": "客戶反饋"
+        },
+        "ja": {
+          "field_key": "default.testimonialsTitle",
+          "field_name": "お客様の声",
+          "content": "お客様の声"
+        },
+        "en-US": {
+          "field_key": "default.testimonialsTitle",
+          "field_name": "Customer Feedback",
+          "content": "Customer Feedback"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000011",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.updatesEyebrow",
+          "field_name": "行业动态",
+          "content": "行业动态"
+        },
+        "zh-TW": {
+          "field_key": "default.updatesEyebrow",
+          "field_name": "行業動態",
+          "content": "行業動態"
+        },
+        "ja": {
+          "field_key": "default.updatesEyebrow",
+          "field_name": "ニュース",
+          "content": "ニュース"
+        },
+        "en-US": {
+          "field_key": "default.updatesEyebrow",
+          "field_name": "Industry Updates",
+          "content": "Industry Updates"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-trn-4000-8000-000000000012",
+      "locales": {
+        "zh-CN": {
+          "field_key": "default.viewDetail",
+          "field_name": "查看详情",
+          "content": "查看详情"
+        },
+        "zh-TW": {
+          "field_key": "default.viewDetail",
+          "field_name": "查看詳情",
+          "content": "查看詳情"
+        },
+        "ja": {
+          "field_key": "default.viewDetail",
+          "field_name": "詳細を見る",
+          "content": "詳細を見る"
+        },
+        "en-US": {
+          "field_key": "default.viewDetail",
+          "field_name": "View details",
+          "content": "View details"
+        }
+      }
+    }
+  ]
+}

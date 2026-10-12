@@ -33,19 +33,25 @@ const currentLocale = activeLocale?.code || 'en';
 
 const contactLabel = rawContactLabel || t(currentLocale, 'contact');
 
-const normalizePath = (p: string) => p.replace(/\/+$/, '') || '/';
-const currentPath = normalizePath(pathname);
-const normalizedContactHref = normalizePath(contactHref);
+// 剥离语种前缀（如 /zh-CN, /zh-cn, /en-US, /ja 等），得到纯净路由用于精准比对
+function stripLocalePrefix(p: string): string {
+  const norm = (p || '').replace(/\/+$/, '') || '/';
+  const stripped = norm.replace(/^\/[a-z]{2}(?:-[a-z0-9]{2,4})?(?=\/|$)/i, '') || '/';
+  return stripped.toLowerCase();
+}
+
+const currentPurePath = stripLocalePrefix(pathname);
+const normalizedContactHref = (contactHref || '').replace(/\/+$/, '') || '/';
 
 function isLinkActive(href: string) {
-  const targetPath = normalizePath(href);
-  const isHomeLink =
-    targetPath === normalizePath(homeHref) ||
-    targetPath === '/' ||
-    /^\/[a-z]{2}(-[a-z]{2})?$/i.test(targetPath);
-  return isHomeLink
-    ? currentPath === targetPath
-    : (currentPath === targetPath || currentPath.startsWith(`${targetPath}/`));
+  if (!href) return false;
+  if (/^https?:\/\//i.test(href) || href.startsWith('//')) return false;
+
+  const targetPurePath = stripLocalePrefix(href);
+  if (targetPurePath === '/') {
+    return currentPurePath === '/';
+  }
+  return currentPurePath === targetPurePath || currentPurePath.startsWith(`${targetPurePath}/`);
 }
 
 /**
@@ -92,8 +98,8 @@ const drawerLinks = links.filter((link) => {
 
     <nav class="cz-nav" aria-label="Primary">
       {links.map((link) => {
-        const active = isLinkActive(link.href);
         const kids = link.children || [];
+        const active = isLinkActive(link.href) || kids.some((c) => isLinkActive(c.href));
         if (kids.length) {
           return (
             <details class={`cz-nav-item${active ? ' is-active' : ''}`}>
@@ -104,9 +110,14 @@ const drawerLinks = links.filter((link) => {
                 </svg>
               </summary>
               <div class="cz-nav-drop">
-                {kids.map((child) => (
-                  <a href={child.href}>{child.label}</a>
-                ))}
+                {kids.map((child) => {
+                  const childActive = isLinkActive(child.href);
+                  return (
+                    <a href={child.href} class={childActive ? 'is-active' : undefined}>
+                      {child.label}
+                    </a>
+                  );
+                })}
               </div>
             </details>
           );

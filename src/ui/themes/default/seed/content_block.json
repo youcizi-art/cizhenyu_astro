@@ -7,16 +7,29 @@
         "zh-CN": {
           "name": "首页首屏",
           "block_type": "hero",
-          "title": "建好网站，管好客户，让全球客户找到你。",
-          "slug": "home-hero",
           "placement": "home_hero",
+          "slug": "home-hero",
+          "title": "建好网站，管好客户，让全球客户找到你。",
           "eyebrow": "网站建设 · 客户管理 · 搜索增长",
           "subtitle": "不再为昂贵的服务器、零散的客户线索和长期缺乏流量而烦恼。用 Cloudflare 构建轻量、高效、可扩展的业务网站，配合 CRM、AI 客服与 SEO / GEO 运营，让网站真正服务于你的业务增长。",
-          "summary": "面向全球网络交付 · 极低运维成本 · SEO / GEO 长期运营",
           "link_label": "选择建站方案",
-          "link_url": "/zh-CN/contact?intent=sites",
-          "image": {
-            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          "link_url": "/contact?intent=sites",
+          "extra": {
+            "ctaSecondary": "了解客户管理",
+            "highlights": [
+              {
+                "title": "面向全球",
+                "desc": "全球网络交付"
+              },
+              {
+                "title": "极低运维成本",
+                "desc": "告别传统服务器负担"
+              },
+              {
+                "title": "持续获客",
+                "desc": "SEO / GEO 长期运营"
+              }
+            ]
           },
           "status": "published",
           "sort_order": 10
@@ -24,16 +37,29 @@
         "zh-TW": {
           "name": "首頁首屏",
           "block_type": "hero",
-          "title": "建好網站，管好客戶，讓全球客戶找到你。",
-          "slug": "home-hero",
           "placement": "home_hero",
+          "slug": "home-hero",
+          "title": "建好網站，管好客戶，讓全球客戶找到你。",
           "eyebrow": "網站建設 · 客戶管理 · 搜尋增長",
           "subtitle": "不再為昂貴的伺服器、零散的客戶線索和長期缺乏流量而煩惱。用 Cloudflare 構建輕量、高效、可擴展的業務網站，配合 CRM、AI 客服與 SEO / GEO 運營，讓網站真正服務於你的業務增長。",
-          "summary": "面向全球網路交付 · 極低運維成本 · SEO / GEO 長期運營",
           "link_label": "選擇建站方案",
           "link_url": "/zh-TW/contact?intent=sites",
-          "image": {
-            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          "extra": {
+            "ctaSecondary": "了解客戶管理",
+            "highlights": [
+              {
+                "title": "面向全球",
+                "desc": "全球網路交付"
+              },
+              {
+                "title": "極低運維成本",
+                "desc": "告別傳統伺服器負擔"
+              },
+              {
+                "title": "持續獲客",
+                "desc": "SEO / GEO 長期運營"
+              }
+            ]
           },
           "status": "published",
           "sort_order": 10
@@ -41,16 +67,29 @@
         "ja": {
           "name": "ホームヒーロー",
           "block_type": "hero",
-          "title": "サイトを整え、顧客を管理し、世界中の顧客に見つけてもらう。",
-          "slug": "home-hero",
           "placement": "home_hero",
+          "slug": "home-hero",
+          "title": "サイトを整え、顧客を管理し、世界中の顧客に見つけてもらう。",
           "eyebrow": "サイト構築 · 顧客管理 · 検索成長",
           "subtitle": "高額なサーバー、散在するリード、慢性的な流入不足から解放されます。Cloudflare で軽量・高速・拡張可能なビジネスサイトを構築し、CRM・AI カスタマーサポート・SEO / GEO 運用と組み合わせて、サイトを本当の成長エンジンにします。",
-          "summary": "グローバル配信 · 極低運用コスト · SEO / GEO 長期運用",
           "link_label": "サイト構築プランを見る",
           "link_url": "/ja/contact?intent=sites",
-          "image": {
-            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          "extra": {
+            "ctaSecondary": "顧客管理を知る",
+            "highlights": [
+              {
+                "title": "グローバル対応",
+                "desc": "世界規模の配信"
+              },
+              {
+                "title": "極低運用コスト",
+                "desc": "従来型サーバー負担から解放"
+              },
+              {
+                "title": "継続的な獲得",
+                "desc": "SEO / GEO の長期運用"
+              }
+            ]
           },
           "status": "published",
           "sort_order": 10
@@ -58,16 +97,29 @@
         "en-US": {
           "name": "Home Hero",
           "block_type": "hero",
-          "title": "Build the site, manage customers, and help global buyers find you.",
-          "slug": "home-hero",
           "placement": "home_hero",
+          "slug": "home-hero",
+          "title": "Build the site, manage customers, and help global buyers find you.",
           "eyebrow": "Website · CRM · Search Growth",
           "subtitle": "Stop wrestling with expensive servers, scattered leads, and long stretches of zero traffic. Build a lightweight, fast, scalable business site on Cloudflare—then pair it with CRM, AI support, and SEO / GEO so the website actually drives growth.",
-          "summary": "Global delivery · Ultra-low ops cost · Long-term SEO / GEO",
           "link_label": "Choose a website plan",
           "link_url": "/en-US/contact?intent=sites",
-          "image": {
-            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          "extra": {
+            "ctaSecondary": "Explore CRM",
+            "highlights": [
+              {
+                "title": "Global reach",
+                "desc": "Worldwide network delivery"
+              },
+              {
+                "title": "Ultra-low ops cost",
+                "desc": "Leave traditional server burden behind"
+              },
+              {
+                "title": "Ongoing acquisition",
+                "desc": "Long-term SEO / GEO operations"
+              }
+            ]
           },
           "status": "published",
           "sort_order": 10
@@ -78,56 +130,128 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000002",
       "locales": {
         "zh-CN": {
-          "name": "页脚行动号召",
-          "block_type": "cta",
-          "title": "别让网站停留在展示阶段。",
-          "slug": "footer-cta",
-          "placement": "footer_cta",
-          "subtitle": "从建站、客户管理到搜索增长，选择真正适合你业务的产品，让线上投入逐步沉淀为可管理、可持续经营的业务资产。",
-          "summary": "网站建设 · 客户管理 · SEO / GEO 可独立选择或组合。",
-          "link_label": "咨询适合我的方案",
-          "link_url": "/zh-CN/contact?intent=consult",
+          "name": "首页痛点与业务承接",
+          "block_type": "banner",
+          "placement": "home_pain",
+          "slug": "home-pain",
+          "title": "你的线上业务，缺的可能不只是一个网站",
+          "subtitle": "磁帧鱼用一套清晰的产品体系，解决三个关键问题。",
+          "summary": "网站建设负责承载业务，CRM 与 AI 客服负责管理客户，SEO / GEO 负责持续拓展搜索曝光。需要哪一项，就从哪一项开始。",
+          "extra": {
+            "items": [
+              {
+                "title": "建站投入高，维护麻烦",
+                "desc": "服务器、运行环境、网站更新，花钱还要花时间。"
+              },
+              {
+                "title": "网站上线，流量却没来",
+                "desc": "缺少关键词规划、有效内容和持续优化，网站很难被目标客户发现。"
+              },
+              {
+                "title": "客户咨询，线索容易流失",
+                "desc": "询盘分散、重复答疑、跟进不及时，获客投入难以沉淀。"
+              },
+              {
+                "title": "工具越买越多，系统却不连贯",
+                "desc": "网站、客服、客户管理和运营各自为战，增加成本，也增加协作负担。"
+              }
+            ]
+          },
           "status": "published",
-          "sort_order": 10
+          "sort_order": 20
         },
         "zh-TW": {
-          "name": "頁腳行動號召",
-          "block_type": "cta",
-          "title": "別讓網站停留在展示階段。",
-          "slug": "footer-cta",
-          "placement": "footer_cta",
-          "subtitle": "從建站、客戶管理到搜尋增長，選擇真正適合你業務的產品，讓線上投入逐步沉澱為可管理、可持續經營的業務資產。",
-          "summary": "網站建設 · 客戶管理 · SEO / GEO 可獨立選擇或組合。",
-          "link_label": "諮詢適合我的方案",
-          "link_url": "/zh-TW/contact?intent=consult",
+          "name": "首頁痛點與業務承接",
+          "block_type": "banner",
+          "placement": "home_pain",
+          "slug": "home-pain",
+          "title": "你的線上業務，缺的可能不只是一個網站",
+          "subtitle": "磁幀魚用一套清晰的產品體系，解決三個關鍵問題。",
+          "summary": "網站建設負責承載業務，CRM 與 AI 客服負責管理客戶，SEO / GEO 負責持續拓展搜尋曝光。需要哪一項，就從哪一項開始。",
+          "extra": {
+            "items": [
+              {
+                "title": "建站投入高，維護麻煩",
+                "desc": "伺服器、運行環境、網站更新，花錢還要花時間。"
+              },
+              {
+                "title": "網站上線，流量卻沒來",
+                "desc": "缺少關鍵詞規劃、有效內容和持續優化，網站很難被目標客戶發現。"
+              },
+              {
+                "title": "客戶諮詢，線索容易流失",
+                "desc": "詢盤分散、重複答疑、跟進不及時，獲客投入難以沉澱。"
+              },
+              {
+                "title": "工具越買越多，系統卻不連貫",
+                "desc": "網站、客服、客戶管理和運營各自為戰，增加成本，也增加協作負擔。"
+              }
+            ]
+          },
           "status": "published",
-          "sort_order": 10
+          "sort_order": 20
         },
         "ja": {
-          "name": "フッターCTA",
-          "block_type": "cta",
-          "title": "サイトを見せるだけで終わらせない。",
-          "slug": "footer-cta",
-          "placement": "footer_cta",
-          "subtitle": "サイト構築、顧客管理、検索成長から、本当に合うプロダクトを選び、オンライン投資を管理可能で継続経営できる事業資産へ変えていきましょう。",
-          "summary": "サイト構築 · 顧客管理 · SEO / GEO は単体でも組み合わせでも選択可能。",
-          "link_label": "自分に合う方案を相談する",
-          "link_url": "/ja/contact?intent=consult",
+          "name": "事業課題と解決アプローチ",
+          "block_type": "banner",
+          "placement": "home_pain",
+          "slug": "home-pain",
+          "title": "オンライン事業に足りないのは、サイトだけではかもしれません",
+          "subtitle": "明確なプロダクト体系で、三つの重要課題を解決します。",
+          "summary": "サイト構築が業務を支え、CRM と AI サポートが顧客を管理し、SEO / GEO が検索露出を広げます。必要なものから始められます。",
+          "extra": {
+            "items": [
+              {
+                "title": "構築コストが高く、保守が大変",
+                "desc": "サーバー、実行環境、更新——お金も時間もかかる。"
+              },
+              {
+                "title": "公開しても流入が来ない",
+                "desc": "キーワード設計、有効なコンテンツ、継続改善がなければ、狙った顧客に届きにくい。"
+              },
+              {
+                "title": "問い合わせのリードが流失しやすい",
+                "desc": "問い合わせが散在し、同じ説明が繰り返し、フォローが遅れ、獲得投資が積み上がらない。"
+              },
+              {
+                "title": "ツールは増えるのに、仕組みは分断される",
+                "desc": "サイト、サポート、顧客管理、運用がバラバラで、コストも連携負荷も増える。"
+              }
+            ]
+          },
           "status": "published",
-          "sort_order": 10
+          "sort_order": 20
         },
         "en-US": {
-          "name": "Footer CTA",
-          "block_type": "cta",
-          "title": "Don’t leave your website stuck in brochure mode.",
-          "slug": "footer-cta",
-          "placement": "footer_cta",
-          "subtitle": "From website building and CRM to search growth, choose products that fit your business—and turn online spend into manageable, lasting operating assets.",
-          "summary": "Website, CRM, and SEO / GEO can be chosen alone or combined.",
-          "link_label": "Talk about the right plan for me",
-          "link_url": "/en-US/contact?intent=consult",
+          "name": "Challenges & Bridge",
+          "block_type": "banner",
+          "placement": "home_pain",
+          "slug": "home-pain",
+          "title": "Your online business may need more than just a website",
+          "subtitle": "One clear product system solves three critical problems.",
+          "summary": "Website building carries the business. CRM and AI support manage customers. SEO / GEO expand search visibility. Start with whichever you need first.",
+          "extra": {
+            "items": [
+              {
+                "title": "Building is expensive; upkeep is messy",
+                "desc": "Servers, runtime environments, and updates cost both money and time."
+              },
+              {
+                "title": "The site launches—but traffic never comes",
+                "desc": "Without keyword planning, useful content, and ongoing optimization, target buyers rarely find you."
+              },
+              {
+                "title": "Inquiries arrive; leads slip away",
+                "desc": "Scattered inquiries, repeated Q&A, and slow follow-up waste acquisition spend."
+              },
+              {
+                "title": "More tools, less coherence",
+                "desc": "Website, support, CRM, and ops each run alone—raising cost and coordination load."
+              }
+            ]
+          },
           "status": "published",
-          "sort_order": 10
+          "sort_order": 20
         }
       }
     },
@@ -135,48 +259,252 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000003",
       "locales": {
         "zh-CN": {
-          "name": "用户反馈-机械出口",
-          "block_type": "testimonial",
-          "title": "李先生",
-          "subtitle": "某精密机械出口业务负责人",
-          "summary": "以前建站找外包花了几万，改个产品图都要等一周。用磁帧鱼后架构轻、上线快，内嵌的客服挂件让我们直接接住了中东客户的询盘，运营效率提升非常明显。",
-          "slug": "testimonial-1",
-          "placement": "home_testimonial",
+          "name": "架构优势与适合场景",
+          "block_type": "grid",
+          "placement": "home_architecture",
+          "slug": "home-architecture",
+          "title": "为什么这套架构更适合 B2B 站、企业官网与营销网站？",
+          "subtitle": "费用优势以常规 B2B 网站、合理缓存和实际用量为前提；具体取决于所用服务和业务规模。重点是避免不必要的基础设施支出，而不是为了低成本牺牲网站能力。",
+          "extra": {
+            "items": [
+              {
+                "title": "让海外客户更快打开网站",
+                "desc": "通过 Cloudflare 全球网络交付静态资源，让北美、欧洲、亚洲等地区的访客有机会从更近的网络节点获取页面内容。一个网站，就能面向全球市场提供服务，不必仅为覆盖不同地区而单独搭建多套服务器。"
+              },
+              {
+                "title": "一年不到 80 元，也能拥有企业网站的基础设施",
+                "lead": "把建站成本降下来，把预算留给获客。",
+                "desc": "传统建站往往要承担服务器租用、环境维护和各种技术开销。磁帧鱼基于 Cloudflare 构建网站，经过合理的缓存与程序优化，许多常规企业官网、B2B 产品站和营销网站，基础设施成本可以低到几乎只剩域名费。",
+                "bullets": [
+                  {
+                    "title": "每年不到 80 元",
+                    "text": "以常见域名费用为例，网站基础设施开销可以低至这个量级。"
+                  },
+                  {
+                    "title": "无需自己维护传统服务器",
+                    "text": "减少服务器环境、系统维护等日常技术负担。"
+                  },
+                  {
+                    "title": "业务需要时再扩展",
+                    "text": "根据实际流量和功能需求升级，不必一开始就为用不上的资源买单。"
+                  }
+                ],
+                "footer": "不必先投入大笔服务器费用，才能开始做全球业务。"
+              },
+              {
+                "title": "少维护服务器，多经营业务",
+                "desc": "不必为了网站单独管理传统服务器的操作系统、运行环境和日常补丁。托管式应用服务替你承担部分底层运行工作，你可以把更多时间投入产品、内容、客户和销售。"
+              },
+              {
+                "title": "网站不只用来展示，更要做到一点就能运营",
+                "lead": "少折腾后台，少依赖技术人员，让 AI 帮你把日常运营做起来。",
+                "desc": "从产品更新、内容发布到客户线索管理，磁帧鱼希望把复杂的后台操作变成清晰、简单的工作流程。未来需要增加运营能力，也不必每次都从头开发。",
+                "bullets": [
+                  {
+                    "title": "点点鼠标，完成日常管理",
+                    "text": "产品、文章、案例等内容集中管理，减少重复操作。"
+                  },
+                  {
+                    "title": "AI 辅助运营，把重复工作交给 AI",
+                    "text": "结合相应的 AI 工具与运营技能，辅助分析、撰写、优化和发布内容。"
+                  },
+                  {
+                    "title": "从网站到获客，逐步打通业务流程",
+                    "text": "按需接入询盘、客户管理与 SEO/GEO 运营，让网站从展示窗口变成持续运转的业务工具。"
+                  }
+                ],
+                "footer": "让技术藏在后台，让运营变得简单。"
+              }
+            ]
+          },
           "status": "published",
-          "sort_order": 10
+          "sort_order": 30
         },
         "zh-TW": {
-          "name": "用戶反饋-機械出口",
-          "block_type": "testimonial",
-          "title": "李先生",
-          "subtitle": "某精密機械出口業務負責人",
-          "summary": "以前建站找外包花了好幾萬，改個產品圖都要等一週。用磁幀魚後架構輕、上線快，內嵌的客服掛件讓我們直接接住了中東客戶的詢盤，運營效率提升非常明顯。",
-          "slug": "testimonial-1",
-          "placement": "home_testimonial",
+          "name": "架構優勢與適合場景",
+          "block_type": "grid",
+          "placement": "home_architecture",
+          "slug": "home-architecture",
+          "title": "為什麼這套架構更適合 B2B 站、企業官網與營銷網站？",
+          "subtitle": "費用優勢以常規 B2B 網站、合理快取和實際用量為前提；具體取決於所用服務和業務規模。重點是避免不必要的基礎設施支出，而不是為了低成本犧牲網站能力。",
+          "extra": {
+            "items": [
+              {
+                "title": "讓海外客戶更快打開網站",
+                "desc": "通過 Cloudflare 全球網路交付靜態資源，讓北美、歐洲、亞洲等地區的訪客有機會從更近的網路節點獲取頁面內容。一個網站，就能面向全球市場提供服務，不必僅為覆蓋不同地區而單獨搭建多套伺服器。"
+              },
+              {
+                "title": "一年不到 80 元，也能擁有企業網站的基礎設施",
+                "lead": "把建站成本降下來，把預算留給獲客。",
+                "desc": "傳統建站往往要承擔伺服器租用、環境維護和各種技術開銷。磁幀魚基於 Cloudflare 構建網站，經過合理的快取與程式優化，許多常規企業官網、B2B 產品站和營銷網站，基礎設施成本可以低到幾乎只剩域名費。",
+                "bullets": [
+                  {
+                    "title": "每年不到 80 元",
+                    "text": "以常見域名費用為例，網站基礎設施開銷可以低至這個量級。"
+                  },
+                  {
+                    "title": "無需自己維護傳統伺服器",
+                    "text": "減少伺服器環境、系統維護等日常技術負擔。"
+                  },
+                  {
+                    "title": "業務需要時再擴展",
+                    "text": "根據實際流量和功能需求升級，不必一開始就為用不上的資源買單。"
+                  }
+                ],
+                "footer": "不必先投入大筆伺服器費用，才能開始做全球業務。"
+              },
+              {
+                "title": "少維護伺服器，多經營業務",
+                "desc": "不必為了網站單獨管理傳統伺服器的作業系統、執行環境和日常修補程式。託管式應用服務替你承擔部分底層執行工作，你可以把更多時間投入產品、內容、客戶和銷售。"
+              },
+              {
+                "title": "網站不只用來展示，更要做到一點就能營運",
+                "lead": "少折騰後台，少依賴技術人員，讓 AI 幫你把日常營運做起來。",
+                "desc": "從產品更新、內容發布到客戶線索管理，磁幀魚希望把複雜的後台操作變成清晰、簡單的工作流程。未來需要增加營運能力，也不必每次都從頭開發。",
+                "bullets": [
+                  {
+                    "title": "點點滑鼠，完成日常管理",
+                    "text": "產品、文章、案例等內容集中管理，減少重複操作。"
+                  },
+                  {
+                    "title": "AI 輔助營運，把重複工作交給 AI",
+                    "text": "結合相應的 AI 工具與營運技能，輔助分析、撰寫、優化和發布內容。"
+                  },
+                  {
+                    "title": "從網站到獲客，逐步打通業務流程",
+                    "text": "按需接入詢盤、客戶管理與 SEO/GEO 營運，讓網站從展示窗口變成持續運轉的業務工具。"
+                  }
+                ],
+                "footer": "讓技術藏在後台，讓營運變得簡單。"
+              }
+            ]
+          },
           "status": "published",
-          "sort_order": 10
+          "sort_order": 30
         },
         "ja": {
-          "name": "お客様の声-機械輸出",
-          "block_type": "testimonial",
-          "title": "李 様",
-          "subtitle": "精密機械輸出部門マネージャー",
-          "summary": "以前はサイト制作の外注に多額を投じ、画像変更すら1週間待たされていました。磁帧鱼に移行してからは運用が格段に軽快になり、内蔵チャットで中東バイヤーからの問い合わせを確実にキャッチできています。",
-          "slug": "testimonial-1",
-          "placement": "home_testimonial",
+          "name": "アーキテクチャの強み",
+          "block_type": "grid",
+          "placement": "home_architecture",
+          "slug": "home-architecture",
+          "title": "なぜこのアーキテクチャが B2B・企業公式サイト・マーケティングサイトに最適なのか？",
+          "subtitle": "費用メリットは一般的なB2Bサイト、適切なキャッシュ設計、および実際の利用規模を前提としています。サイトの機能を犠牲にすることなく、不要な固定費を削減することが目的です。",
+          "extra": {
+            "items": [
+              {
+                "title": "海外の訪問者にも素早くページを表示",
+                "desc": "Cloudflareのグローバルネットワークを介して静的リソースを配信。北米・欧州・アジアなど世界中の訪問者が最寄りの拠点から高速にページを読み込めます。複数のサーバーを地域ごとに用意する必要はありません。"
+              },
+              {
+                "title": "年間80元（約1,600円）未満で、本格的な企業サイト基盤を所有",
+                "lead": "制作コストを最小化し、予算を見込み顧客獲得へ集中。",
+                "desc": "従来のWeb制作ではサーバー代や保守管理に継続的なコストがかかります。磁幀魚（Cizhenyu）はCloudflareをベースに構築し、適切なキャッシュと最適化により、多くの企業サイトやB2B製品サイトの基盤費用をほぼドメイン代のみに抑えられます。",
+                "bullets": [
+                  {
+                    "title": "年間80元未満の低水準",
+                    "text": "一般的なドメイン維持費と同等水準で、Webサイトの基盤を維持できます。"
+                  },
+                  {
+                    "title": "自社でのサーバー保守が不要",
+                    "text": "OSアップデートやミドルウェアの保守負担から解放されます。"
+                  },
+                  {
+                    "title": "事業成長に合わせた柔軟な拡張",
+                    "text": "初期費用を抑え、実際のアクセス増や機能要件に応じて無理なくスケールできます。"
+                  }
+                ],
+                "footer": "多額のサーバー初期投資なしで、グローバルビジネスを即座に始動。"
+              },
+              {
+                "title": "サーバー管理を減らし、本業に集中",
+                "desc": "WebサイトのためにOSパッチの適用や実行環境の保守に追われる必要はありません。基盤運用を任せることで、製品開発、コンテンツ作成、顧客対応、営業活動により多くの時間を投資できます。"
+              },
+              {
+                "title": "単なる展示サイトではなく、直感的に運用できる業務ツールへ",
+                "lead": "複雑な管理画面から脱却し、AIの力で日々の運用を効率化。",
+                "desc": "製品登録、記事配信からリード獲得まで、磁幀魚は直感的な管理体験を提供します。将来の機能拡張時も、ゼロから再開発する必要はありません。",
+                "bullets": [
+                  {
+                    "title": "クリック中心の明快な管理",
+                    "text": "製品・導入事例・コンテンツを一元管理し、重複作業を排除します。"
+                  },
+                  {
+                    "title": "AI支援による運用自動化",
+                    "text": "AIツールと連携し、構成案作成・執筆・SEO最適化・配信を効率的に支援します。"
+                  },
+                  {
+                    "title": "サイトから受注まで業務を一気通貫",
+                    "text": "問い合わせ管理、顧客CRM、SEO/GEO運用を柔軟に統合し、成果を生むサイトへ育てます。"
+                  }
+                ],
+                "footer": "技術はバックエンドに、日々の運用はスマートに。"
+              }
+            ]
+          },
           "status": "published",
-          "sort_order": 10
+          "sort_order": 30
         },
         "en-US": {
-          "name": "Testimonial - Machinery Export",
-          "block_type": "testimonial",
-          "title": "Mr. Li",
-          "subtitle": "Head of Export, Precision Machinery",
-          "summary": "We used to spend tens of thousands on external agencies, waiting a week just to swap a product photo. With Cizhenyu, everything is lightweight and fast. The embedded chat helped us capture direct inquiries from Middle Eastern buyers.",
-          "slug": "testimonial-1",
-          "placement": "home_testimonial",
+          "name": "Architecture Advantages",
+          "block_type": "grid",
+          "placement": "home_architecture",
+          "slug": "home-architecture",
+          "title": "Why this architecture best fits B2B sites, corporate portals & marketing sites",
+          "subtitle": "Cost advantages assume a typical B2B site, sensible caching, and real usage. Exact spend depends on services and scale. The goal is avoiding unnecessary infrastructure spend—not cutting capability for the sake of cheapness.",
+          "extra": {
+            "items": [
+              {
+                "title": "Help overseas buyers open pages faster",
+                "desc": "Deliver static assets through Cloudflare’s global network so visitors in North America, Europe, Asia, and beyond can fetch pages from nearer nodes. One site can serve global markets without standing up separate servers for every region."
+              },
+              {
+                "title": "Own enterprise site infrastructure for under $12/year",
+                "lead": "Drive site setup costs down; direct budget into buyer acquisition.",
+                "desc": "Traditional builds often carry continuous server leases, environment maintenance, and technical overhead. Built on Cloudflare with efficient caching and optimization, baseline infrastructure costs for many typical corporate sites, B2B product hubs, and marketing sites can drop nearly to just domain renewal fees.",
+                "bullets": [
+                  {
+                    "title": "Under $12 per year",
+                    "text": "Using typical domain registration fees as benchmark, baseline site infrastructure spend can remain in this lean tier."
+                  },
+                  {
+                    "title": "No traditional server babysitting",
+                    "text": "Eliminate ongoing operating system updates, stack maintenance, and server environment burdens."
+                  },
+                  {
+                    "title": "Scale only when business demands",
+                    "text": "Upgrade in lockstep with real traffic and feature needs rather than paying upfront for idle capacity."
+                  }
+                ],
+                "footer": "Never let heavy upfront server capital delay your global market rollout."
+              },
+              {
+                "title": "Less server maintenance, more business time",
+                "desc": "You do not need to babysit traditional OS patches and runtime stacks for the website alone. Managed application services take on part of the foundation work so you can focus on product, content, customers, and sales."
+              },
+              {
+                "title": "Not just a display brochure: operate with single-click ease",
+                "lead": "Spend less time wrestling with backends; let AI streamline daily operations.",
+                "desc": "From catalog updates and editorial publishing to lead management, Cizhenyu turns complex administrative operations into clear, streamlined workflows without restarting engineering cycles each time.",
+                "bullets": [
+                  {
+                    "title": "Point-and-click daily management",
+                    "text": "Centralize products, articles, and case studies to eliminate duplicate entry."
+                  },
+                  {
+                    "title": "AI-assisted operations",
+                    "text": "Harness tailored AI tools and workflows to research, draft, refine, and publish marketing copy."
+                  },
+                  {
+                    "title": "From web presence to closed deals",
+                    "text": "Seamlessly connect lead inquiries, CRM, and SEO/GEO optimization as an ongoing revenue engine."
+                  }
+                ],
+                "footer": "Keep technology under the hood; make everyday business operations effortless."
+              }
+            ]
+          },
           "status": "published",
-          "sort_order": 10
+          "sort_order": 30
         }
       }
     },
@@ -184,48 +512,316 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000004",
       "locales": {
         "zh-CN": {
-          "name": "用户反馈-跨境品牌",
-          "block_type": "testimonial",
-          "title": "Sarah Chen",
-          "subtitle": "消费电子独立站创始人",
-          "summary": "Cloudflare 架构在全球访问真的秒开，不用担心服务器宕机和高昂运维账单。AI Agent 结合 SEO 运营工作流，帮我们持续生产多语言内容，自然搜索流量稳步上涨。",
-          "slug": "testimonial-2",
-          "placement": "home_testimonial",
+          "name": "建站与运营方案全维对比",
+          "block_type": "table",
+          "placement": "home_compare",
+          "slug": "home-compare",
+          "title": "建站不该是一次性投入，更不该成为长期负担",
+          "subtitle": "网站上线只是开始。真正拉开差距的，是后续运营成本、业务掌控权，以及持续获客的能力。",
+          "summary": "建站少花钱，运营少折腾，获客有方向。磁帧鱼不是只帮你把网站做出来，而是围绕企业的实际业务，把网站建设、客户管理与 SEO/GEO 运营连接起来。",
+          "body": "别只建一个等客户上门的网站。建一个成本可控、方便运营、能够持续争取客户的网站。磁帧鱼，让企业建站更轻，让业务运营更进一步。",
+          "extra": {
+            "columns": [
+              "对比维度",
+              "WordPress",
+              "定制开发",
+              "SaaS 建站平台",
+              "磁帧鱼"
+            ],
+            "rows": [
+              {
+                "dimension": "建站成本",
+                "wordpress": "可低可高，主题、插件与维护可能持续产生费用",
+                "custom": "前期开发投入通常较高",
+                "saas": "入门方便，但高级功能可能需要持续订阅",
+                "cizhenyu": "一次性交付收费，无后续年费/月费等任何订阅隐形支出，代码、数据与数据库 100% 完整交付给您"
+              },
+              {
+                "dimension": "服务器与维护",
+                "wordpress": "自托管需要维护；托管服务可分担部分工作",
+                "custom": "取决于技术架构与维护合同",
+                "saas": "通常由平台负责底层基础设施",
+                "cizhenyu": "基于 Cloudflare 全托管架构开发，性能与安全拉满，一年仅需一个域名费用（注：若使用 Cloudflare 免费二级域名可实现 0 费用运营）"
+              },
+              {
+                "dimension": "网站访问",
+                "wordpress": "取决于主机、缓存和 CDN 配置",
+                "custom": "取决于部署架构与优化水平",
+                "saas": "取决于平台基础设施",
+                "cizhenyu": "依托 Cloudflare 全球 300+ 边缘 CDN 节点智能分发，全球任何国家与地区的用户均能毫秒级秒开网站"
+              },
+              {
+                "dimension": "数据与控制权",
+                "wordpress": "自托管时控制权较高",
+                "custom": "取决于合同、源码和部署安排",
+                "saas": "受平台规则、导出能力与套餐限制影响",
+                "cizhenyu": "全量系统直接部署于客户自主拥有的 Cloudflare 账户，所有业务数据、文件与权限 100% 完全由您自主掌控"
+              },
+              {
+                "dimension": "后续功能扩展",
+                "wordpress": "依赖插件、主题或二次开发",
+                "custom": "自由度高，但新增需求可能继续产生开发费用",
+                "saas": "受平台功能和接口限制",
+                "cizhenyu": "后台基于低代码模型驱动架构设计，未来无论拓展任何复杂业务模型与功能均可敏捷配置上线，告别推倒重来的重复开发"
+              },
+              {
+                "dimension": "日常运营",
+                "wordpress": "常需组合插件和人工流程",
+                "custom": "自动化能力取决于开发投入",
+                "saas": "取决于平台提供的工具",
+                "cizhenyu": "深度结合常用 AI Agent 与专业预置 Skill/MCP 插件包，点点鼠标或输入简单意图即可自动完成内容编排与日常运营，无需耗时学习与繁琐配置"
+              },
+              {
+                "dimension": "SEO/GEO 长期运营",
+                "wordpress": "可借助插件和外部工具完成",
+                "custom": "需要自行开发或整合工具",
+                "saas": "取决于平台能力",
+                "cizhenyu": "站内技术 SEO 与生成式引擎优化（GEO）已做到极致，随站交付专家级 Agent Skill/MCP 运营工具包，导入常用 Agent 即可一键持续获客，省心省力"
+              }
+            ],
+            "coreHighlights": [
+              "成本更轻：依托 Cloudflare 架构，减少传统服务器与日常运维开销。",
+              "管理更简单：把网站内容和业务功能集中起来，减少多套系统来回切换。",
+              "运营更高效：以一键操作和 AI 辅助为方向，让重复工作逐步自动化。",
+              "增长有路径：从产品展示、客户询盘到搜索内容运营，为持续获客打好基础。"
+            ]
+          },
           "status": "published",
-          "sort_order": 20
+          "sort_order": 40
         },
         "zh-TW": {
-          "name": "用戶反饋-跨境品牌",
-          "block_type": "testimonial",
-          "title": "Sarah Chen",
-          "subtitle": "消費電子獨立站創始人",
-          "summary": "Cloudflare 架構在全球訪問真的秒開，不用擔心伺服器宕機和高昂運維賬單。AI Agent 結合 SEO 運營工作流，幫我們持續生產多語言內容，自然搜尋流量穩步上漲。",
-          "slug": "testimonial-2",
-          "placement": "home_testimonial",
+          "name": "建站與營運方案全維對比",
+          "block_type": "table",
+          "placement": "home_compare",
+          "slug": "home-compare",
+          "title": "建站不該是一次性投入，更不該成為長期負擔",
+          "subtitle": "網站上線只是開始。真正拉開差距的，是後續營運成本、業務掌控權，以及持續獲客的能力。",
+          "summary": "建站少花錢，營運少折騰，獲客有方向。磁幀魚不是只幫你把網站做出來，而是圍繞企業的實際業務，把網站建設、客戶管理與 SEO/GEO 營運連接起來。",
+          "body": "別只建一個等客戶上門的網站。建一個成本可控、方便營運、能夠持續爭取客戶的網站。磁幀魚，讓企業建站更輕，讓業務營運更進一步。",
+          "extra": {
+            "columns": [
+              "對比維度",
+              "WordPress",
+              "客製化開發",
+              "SaaS 建站平台",
+              "磁幀魚"
+            ],
+            "rows": [
+              {
+                "dimension": "建站成本",
+                "wordpress": "可高可低，佈景主題、外掛與維護可能持續產生費用",
+                "custom": "前期開發投入通常較高",
+                "saas": "入門方便，但進階功能可能需要持續訂閱",
+                "cizhenyu": "一次性交付收費，無後續年費/月費等任何訂閱隱形支出，程式碼、數據與資料庫 100% 完整交付給您"
+              },
+              {
+                "dimension": "伺服器與維護",
+                "wordpress": "自託管需要維護；託管服務可分擔部分工作",
+                "custom": "取決於技術架構與維護合約",
+                "saas": "通常由平台負責底層基礎設施",
+                "cizhenyu": "基於 Cloudflare 全託管架構開發，性能與安全拉滿，一年僅需一個域名費用（註：若使用 Cloudflare 免費二級域名可實現 0 費用營運）"
+              },
+              {
+                "dimension": "網站訪問",
+                "wordpress": "取決於主機、快取和 CDN 配置",
+                "custom": "取決於部署架構與優化水平",
+                "saas": "取決於平台基礎設施",
+                "cizhenyu": "依託 Cloudflare 全球 300+ 邊緣 CDN 節點智慧分發，全球任何國家與地區的用戶均能毫秒級秒開網站"
+              },
+              {
+                "dimension": "數據與控制權",
+                "wordpress": "自託管時控制權較高",
+                "custom": "取決於合約、源碼和部署安排",
+                "saas": "受平台規則、導出能力與套餐限制影響",
+                "cizhenyu": "全量系統直接部署於客戶自主擁有的 Cloudflare 帳戶，所有業務數據、檔案與權限 100% 完全由您自主掌控"
+              },
+              {
+                "dimension": "後續功能擴展",
+                "wordpress": "依賴外掛、主題或二次開發",
+                "custom": "自由度高，但新增需求可能繼續產生開發費用",
+                "saas": "受平台功能和介面限制",
+                "cizhenyu": "後台基於低代碼模型驅動架構設計，未來無論拓展任何複雜業務模型與功能均可敏捷配置上線，告別推倒重來的重複開發"
+              },
+              {
+                "dimension": "日常營運",
+                "wordpress": "常需組合外掛和人工流程",
+                "custom": "自動化能力取決於開發投入",
+                "saas": "取決於平台提供的工具",
+                "cizhenyu": "深度結合常用 AI Agent 與專業預置 Skill/MCP 插件包，點點滑鼠或輸入簡單意圖即可自動完成內容編排與日常營運，無需耗時學習與繁瑣配置"
+              },
+              {
+                "dimension": "SEO/GEO 長期營運",
+                "wordpress": "可借助外掛和外部工具完成",
+                "custom": "需要自行開發或整合工具",
+                "saas": "取決於平台能力",
+                "cizhenyu": "站內技術 SEO 與生成式引擎優化（GEO）已做到極致，隨站交付專家級 Agent Skill/MCP 營運工具包，匯入常用 Agent 即可一鍵持續獲客，省心省力"
+              }
+            ],
+            "coreHighlights": [
+              "成本更輕：依託 Cloudflare 架構，減少傳統伺服器與日常維運開銷。",
+              "管理更簡單：把網站內容和業務功能集中起來，減少多套系統來回切換。",
+              "營運更高效：以一鍵操作和 AI 輔助為方向，讓重複工作逐步自動化。",
+              "增長有路徑：從產品展示、客戶詢盤到搜尋內容營運，為持續獲客打好基礎。"
+            ]
+          },
           "status": "published",
-          "sort_order": 20
+          "sort_order": 40
         },
         "ja": {
-          "name": "お客様の声-D2Cブランド",
-          "block_type": "testimonial",
-          "title": "Sarah Chen",
-          "subtitle": "越境家電ECファウンダー",
-          "summary": "Cloudflare基盤により世界中どこからでも瞬時に表示され、サーバーダウンや高額な保守費用の心配がありません。AI Agentを活用したSEOワークフローにより自然検索流入が着実に伸びています。",
-          "slug": "testimonial-2",
-          "placement": "home_testimonial",
+          "name": "包括的なソリューション比較",
+          "block_type": "table",
+          "placement": "home_compare",
+          "slug": "home-compare",
+          "title": "Webサイト構築は一時的な投資でも、長期的な負担でもありません",
+          "subtitle": "公開はスタートに過ぎません。差がつくのは、その後の運用コスト、自社資産としての主導権、そして持続的な顧客獲得力です。",
+          "summary": "Web制作費を抑え、運用の手間をなくし、確実な集客へ。磁幀魚は単にサイトを作るだけでなく、実際の事業目標に即してサイト基盤、顧客管理、SEO/GEO運用を一体化します。",
+          "body": "訪問者を待つだけの静的なWebサイトはもう必要ありません。コストを抑え、管理しやすく、持続的に顧客を獲得できるサイトへ。磁幀魚が企業のWeb構築と事業運用を力強く後押しします。",
+          "extra": {
+            "columns": [
+              "比較軸",
+              "WordPress",
+              "フルスクラッチ開発",
+              "SaaS型CMS",
+              "磁幀魚 (Cizhenyu)"
+            ],
+            "rows": [
+              {
+                "dimension": "構築コスト",
+                "wordpress": "幅があるが、テーマ・プラグイン・保守費用が継続発生",
+                "custom": "初期開発費が高額になりやすい",
+                "saas": "初期は手軽だが、上位機能は継続課金が必要",
+                "cizhenyu": "一括納品で月額・年額のサブスク費用は一切不要。ソースコード・データ・データベースを100%お客様に完全納品"
+              },
+              {
+                "dimension": "サーバー保守",
+                "wordpress": "自社管理の場合は定期的な更新・セキュリティ対策が必要",
+                "custom": "保守契約やアーキテクチャ設計に依存",
+                "saas": "インフラ保守はプラットフォーム側に一任されるがブラックボックス",
+                "cizhenyu": "Cloudflare完全サーバーレス基盤により最高水準の速度と堅牢性を両立。年間の維持費はドメイン代のみ（注：Cloudflare無料サブドメインを利用すればランニングコスト0円も可能）"
+              },
+              {
+                "dimension": "表示速度・アクセス",
+                "wordpress": "ホスティング性能、キャッシュ設定、CDN構成によって大きく変動",
+                "custom": "インフラ設計とチューニング水準に左右される",
+                "saas": "プラットフォーム側の設備能力に依存",
+                "cizhenyu": "世界300以上のCloudflareエッジCDN拠点から瞬時に配信。世界中どこからアクセスしてもミリ秒単位で高速表示"
+              },
+              {
+                "dimension": "データ資産と主権",
+                "wordpress": "自社運用であれば高い自由度を持つが保守が重荷",
+                "custom": "契約・ソースコード開示・納品条件次第",
+                "saas": "利用規約・エクスポート制限・契約プランに縛られやすい",
+                "cizhenyu": "お客様ご自身のCloudflareアカウントへ直接デプロイ。すべての業務データ、顧客情報、システム権限をお客様自身が100%完全に保有"
+              },
+              {
+                "dimension": "機能拡張性",
+                "wordpress": "プラグインの選定や追加の二次開発に依存",
+                "custom": "自由度は高いが、新規要件ごとに都度開発費用が発生",
+                "saas": "プラットフォームの提供機能やAPI仕様の範囲に限定",
+                "cizhenyu": "ローコードのモデル駆動型アーキテクチャを採用。将来新しい業務機能やエンティティを追加・拡張する際も、重複開発なしで柔軟かつ迅速に対応可能"
+              },
+              {
+                "dimension": "日常運用・省力化",
+                "wordpress": "複数ツールの組み合わせと手作業運用になりやすい",
+                "custom": "自動化の範囲は開発投資額によって決まる",
+                "saas": "用意された管理画面の範囲内での作業にとどまる",
+                "cizhenyu": "主要なAIエージェントと専門Skill/MCPパッケージをプリセット。簡単な指示を入力するだけで日々の運用をAIが自動完結、学習コストや複雑な設定は一切不要"
+              },
+              {
+                "dimension": "SEO / GEO 成長",
+                "wordpress": "プラグインや外部SEOツールの個別設定が必要",
+                "custom": "独自実装やツールの個別連携が必要",
+                "saas": "プラットフォームのSEO基本仕様に依存",
+                "cizhenyu": "サイト内の技術的SEOおよびAI検索エンジン最適化（GEO）を徹底実装。専門のAgent Skill/MCP運用パックを付属し、AIツールで簡単に持続的な集客を実現"
+              }
+            ],
+            "coreHighlights": [
+              "低コスト：Cloudflare基盤により、従来のサーバー契約や保守管理の固定費を大幅削減。",
+              "シンプルな管理：サイト情報と業務機能を一元化し、複数ツールの行き来を解消。",
+              "高効率な運用：ワンクリック操作とAI支援により、日々のルーティン作業を着実に自動化。",
+              "成長への道筋：製品掲載、問い合わせ管理から検索エンジン・AI集客まで、継続的な売上基盤を構築。"
+            ]
+          },
           "status": "published",
-          "sort_order": 20
+          "sort_order": 40
         },
         "en-US": {
-          "name": "Testimonial - Cross-border Brand",
-          "block_type": "testimonial",
-          "title": "Sarah Chen",
-          "subtitle": "Founder, Consumer Electronics DTC",
-          "summary": "The Cloudflare stack delivers near-instant global page loads without server crashes or hefty maintenance bills. The AI-assisted SEO workflow continuously drives organic search impressions.",
-          "slug": "testimonial-2",
-          "placement": "home_testimonial",
+          "name": "Solution Comparison",
+          "block_type": "table",
+          "placement": "home_compare",
+          "slug": "home-compare",
+          "title": "Building a website should not be a one-off gamble or long-term burden",
+          "subtitle": "Going live is merely day one. What creates the real gap is ongoing operating cost, business ownership, and sustained customer acquisition.",
+          "summary": "Spend less on web setup, eliminate operational friction, and acquire buyers with clarity. Cizhenyu doesn't just deliver a static site—it unites web infrastructure, CRM, and SEO/GEO operations around your real business goals.",
+          "body": "Never settle for a passive website that merely waits for visitors. Build a cost-controlled, easily managed, global-ready portal engineered to actively win buyers. Cizhenyu makes business setup lighter and operations effortless.",
+          "extra": {
+            "columns": [
+              "Dimension",
+              "WordPress",
+              "Custom Dev",
+              "SaaS Builders",
+              "Cizhenyu"
+            ],
+            "rows": [
+              {
+                "dimension": "Build & Setup Cost",
+                "wordpress": "Variable; themes, plugins, and upkeep incur ongoing fees",
+                "custom": "High upfront development investment",
+                "saas": "Accessible start, but advanced capabilities require subscriptions",
+                "cizhenyu": "One-time upfront fee with zero recurring monthly/annual subscriptions; full source code, data, and database are 100% handed over to you"
+              },
+              {
+                "dimension": "Server & Maintenance",
+                "wordpress": "Self-hosting requires maintenance; managed services offload some work",
+                "custom": "Depends on architecture and retainer agreement",
+                "saas": "Platform generally handles infrastructure",
+                "cizhenyu": "Built entirely on Cloudflare edge serverless infrastructure with enterprise-grade speed and DDoS security; only requires an annual domain fee (Note: 100% $0 running cost if using Cloudflare free subdomain)"
+              },
+              {
+                "dimension": "Website Speed",
+                "wordpress": "Depends on host, cache, and CDN setup",
+                "custom": "Depends on stack architecture and optimization effort",
+                "saas": "Depends on platform capabilities",
+                "cizhenyu": "Powered by Cloudflare's global 300+ edge CDN points of presence; international buyers anywhere in the world experience instant sub-second page loads"
+              },
+              {
+                "dimension": "Data Ownership",
+                "wordpress": "High when self-hosted",
+                "custom": "Depends on contract, code, and deployment",
+                "saas": "Subject to platform policies, export limits, and tiers",
+                "cizhenyu": "Deployed directly into your own Cloudflare account; all business data, customer records, and system assets are 100% owned and controlled by you"
+              },
+              {
+                "dimension": "Feature Expansion",
+                "wordpress": "Relies on plugins, themes, or custom modules",
+                "custom": "High flexibility, but new requirements often mean added billing",
+                "saas": "Limited by platform features and APIs",
+                "cizhenyu": "Engineered on a low-code, model-driven architecture; easily configure and scale any new business modules or custom entities without reinventing the wheel"
+              },
+              {
+                "dimension": "Daily Operations",
+                "wordpress": "Often stitches together plugins and manual tasks",
+                "custom": "Automation ceiling depends on invested budget",
+                "saas": "Limited to provided tooling",
+                "cizhenyu": "Integrates with popular AI Agents via pre-tuned professional Skill/MCP packages; simply click or describe your goals to let AI handle daily ops without steep learning curves"
+              },
+              {
+                "dimension": "SEO / GEO Ops",
+                "wordpress": "Supported through plugins and external tools",
+                "custom": "Requires in-house engineering or tooling integration",
+                "saas": "Bounded by platform-native SEO capabilities",
+                "cizhenyu": "On-site technical SEO and AI-engine GEO are maximized out of the box, delivered with expert Agent Skill/MCP packs for effortless long-term growth and visibility"
+              }
+            ],
+            "coreHighlights": [
+              "Lighter cost: Built on Cloudflare to eliminate traditional hosting, OS maintenance, and DevOps retainers.",
+              "Simpler management: Consolidate content, catalogs, and operational tools into one clear interface.",
+              "Higher efficiency: Drive daily marketing with streamlined workflows and AI assistance to automate busywork.",
+              "Clear growth path: From catalog displays and lead inquiries to ongoing SEO/GEO, build a solid foundation for revenue."
+            ]
+          },
           "status": "published",
-          "sort_order": 20
+          "sort_order": 40
         }
       }
     },
@@ -233,193 +829,350 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000005",
       "locales": {
         "zh-CN": {
-          "name": "用户反馈-服务商",
-          "block_type": "testimonial",
-          "title": "王经理",
-          "subtitle": "数字化出海服务商合伙人",
-          "summary": "基于模型低代码架构非常灵活，客户需要什么业务页面和表单都能快速配置落地。不再是死板的展示站，而是真正能帮企业沉淀客户资产的增长系统。",
-          "slug": "testimonial-3",
-          "placement": "home_testimonial",
-          "status": "published",
-          "sort_order": 30
-        },
-        "zh-TW": {
-          "name": "用戶反饋-服務商",
-          "block_type": "testimonial",
-          "title": "王經理",
-          "subtitle": "數位化出海服務商合夥人",
-          "summary": "基於模型低代碼架構非常靈活，客戶需要什麼業務頁面和表單都能快速配置落地。不再是死板的展示站，而是真正能幫企業沉澱客戶資產的增長系統。",
-          "slug": "testimonial-3",
-          "placement": "home_testimonial",
-          "status": "published",
-          "sort_order": 30
-        },
-        "ja": {
-          "name": "お客様の声-パートナー企業",
-          "block_type": "testimonial",
-          "title": "王 氏",
-          "subtitle": "DX海外展開支援パートナー",
-          "summary": "モデル駆動のローコード構成が極めて柔軟で、クライアントが求めるページやフォームを即座に具現化できます。形だけの静的サイトではなく、確実に顧客データを蓄積できる実践的システムです。",
-          "slug": "testimonial-3",
-          "placement": "home_testimonial",
-          "status": "published",
-          "sort_order": 30
-        },
-        "en-US": {
-          "name": "Testimonial - Agency Partner",
-          "block_type": "testimonial",
-          "title": "Manager Wang",
-          "subtitle": "Partner, Digital Export Agency",
-          "summary": "The model-driven low-code architecture is remarkably flexible. We can roll out custom business pages and forms effortlessly. It turns rigid brochure sites into real customer acquisition engines.",
-          "slug": "testimonial-3",
-          "placement": "home_testimonial",
-          "status": "published",
-          "sort_order": 30
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-blk-4000-8000-000000000003",
-      "locales": {
-        "zh-CN": {
-          "name": "瓶颈01-名片站死局",
-          "block_type": "feature",
-          "title": "只有摆设名片站，改动困难且零自然流",
-          "slug": "adv-1",
-          "placement": "home_advantage",
-          "summary": "外包建站耗时数月，改个产品排期两周；缺乏 SEO/GEO 结构设计，半年收不到一条有效询盘。",
-          "subtitle": "全能站群中台统一管理，多语言自动路由，秒级静态构建极速交付。",
-          "status": "published",
-          "sort_order": 30
-        },
-        "zh-TW": {
-          "name": "瓶颈01-名片站死局",
-          "block_type": "feature",
-          "title": "只有摆设名片站，改动困难且零自然流",
-          "slug": "adv-1",
-          "placement": "home_advantage",
-          "summary": "外包建站耗时数月，改个產品排期两周；缺乏 SEO/GEO 结构设计，半年收不到一条有效詢盤。",
-          "subtitle": "全能站群中台统一管理，多語言自动路由，秒级静态构建极速交付。",
-          "status": "published",
-          "sort_order": 30
-        },
-        "ja": {
-          "name": "Pain 01 - Stagnant Site",
-          "block_type": "feature",
-          "title": "Brochure Site Trap: Slow Edits & Zero Traffic",
-          "slug": "adv-1",
-          "placement": "home_advantage",
-          "summary": "Agency queues take weeks for every catalog change; lack of GEO/SEO structure yields zero organic leads.",
-          "subtitle": "Unified multi-site CMS hub with automated multilingual routing and instant static deployments.",
-          "status": "published",
-          "sort_order": 30
-        },
-        "en-US": {
-          "name": "Pain 01 - Stagnant Site",
-          "block_type": "feature",
-          "title": "Brochure Site Trap: Slow Edits & Zero Traffic",
-          "slug": "adv-1",
-          "placement": "home_advantage",
-          "summary": "Agency queues take weeks for every catalog change; lack of GEO/SEO structure yields zero organic leads.",
-          "subtitle": "Unified multi-site CMS hub with automated multilingual routing and instant static deployments.",
-          "status": "published",
-          "sort_order": 30
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-blk-4000-8000-000000000004",
-      "locales": {
-        "zh-CN": {
-          "name": "瓶颈02-时差漏询盘",
-          "block_type": "feature",
-          "title": "海外时差断档，夜间高意向询盘大量流失",
-          "slug": "adv-2",
-          "placement": "home_advantage",
-          "summary": "欧美买家活跃时国内正是深夜，静态表单无人响应，线索散落各处，商机转瞬被竞争对手截流。",
-          "subtitle": "24/7 智能客服依据知识库深度应答，高意向即时通知并转人工。",
-          "status": "published",
-          "sort_order": 40
-        },
-        "zh-TW": {
-          "name": "瓶颈02-时差漏詢盤",
-          "block_type": "feature",
-          "title": "海外时差断档，夜间高意向詢盤大量流失",
-          "slug": "adv-2",
-          "placement": "home_advantage",
-          "summary": "欧美买家活跃时国内正是深夜，静态表单无人响应，线索散落各处，商机转瞬被竞争对手截流。",
-          "subtitle": "24/7 智慧客服依据知識庫深度应答，高意向即时通知并转人工。",
-          "status": "published",
-          "sort_order": 40
-        },
-        "ja": {
-          "name": "Pain 02 - Timezone Loss",
-          "block_type": "feature",
-          "title": "Time-zone Gaps: High-Intent Night Leads Lost",
-          "slug": "adv-2",
-          "placement": "home_advantage",
-          "summary": "Overseas buyers reach out during off-hours with no real-time response; leads go cold or bounce to rivals.",
-          "subtitle": "24/7 knowledge-base AI desk responds instantly and escalates qualified leads to live staff.",
-          "status": "published",
-          "sort_order": 40
-        },
-        "en-US": {
-          "name": "Pain 02 - Timezone Loss",
-          "block_type": "feature",
-          "title": "Time-zone Gaps: High-Intent Night Leads Lost",
-          "slug": "adv-2",
-          "placement": "home_advantage",
-          "summary": "Overseas buyers reach out during off-hours with no real-time response; leads go cold or bounce to rivals.",
-          "subtitle": "24/7 knowledge-base AI desk responds instantly and escalates qualified leads to live staff.",
-          "status": "published",
-          "sort_order": 40
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-blk-4000-8000-000000000005",
-      "locales": {
-        "zh-CN": {
-          "name": "瓶颈03-技术绑架",
-          "block_type": "feature",
-          "title": "上线即停更，资产被建站服务商绑架",
-          "slug": "adv-3",
-          "placement": "home_advantage",
-          "summary": "不懂底层运维，服务器托管在第三方建站商名下，年年支付昂贵维护费却无法自主沉淀数字资产。",
-          "subtitle": "一键向导部署到自有 Cloudflare 账户，企业数据 100% 自主掌控。",
+          "name": "SEO 与 GEO 长期运营体系",
+          "block_type": "banner",
+          "placement": "home_seo_geo",
+          "slug": "home-seo-geo",
+          "title": "SEO + GEO：让 AI 帮你做专业运营，让网站持续获得曝光机会",
+          "subtitle": "不懂 SEO、不懂 GEO，也不必从零学习复杂的运营流程。输入需求，启动专业工作流，让 AI 帮你完成从分析、优化到内容推广的一系列工作。",
+          "summary": "磁帧鱼将专业 SEO/GEO 技能、MCP 工具与 API 接入成熟的 AI Agent 工具。你可以使用熟悉的 AI 编程与智能体工具，调用我们提供的专业运营方案，把过去需要人工反复研究、操作和执行的工作，变成更高效、可重复的工作流程。",
+          "extra": {
+            "onsite": {
+              "title": "站内优化：从诊断到执行，一键推进",
+              "items": [
+                {
+                  "title": "网站全面诊断",
+                  "desc": "分析页面结构、SEO 基础、内容质量、关键词布局与潜在问题，明确优先解决什么。"
+                },
+                {
+                  "title": "关键词与内容规划",
+                  "desc": "结合行业、竞品、产品和目标客户，挖掘关键词机会，规划更有针对性的页面与内容。"
+                },
+                {
+                  "title": "批量优化与内容生产",
+                  "desc": "辅助优化页面标题、描述、内容结构与内链，撰写产品文案、行业文章及适合 AI 搜索理解的内容。"
+                },
+                {
+                  "title": "执行与复查",
+                  "desc": "通过授权的 CMS 接口完成支持的修改与发布操作，并检查执行结果，减少反复切换工具和手动处理。"
+                }
+              ]
+            },
+            "offsite": {
+              "title": "站外推广：不止发布文章，还要拓展曝光渠道",
+              "items": [
+                {
+                  "title": "寻找推广机会",
+                  "desc": "辅助研究行业网站、相关平台、内容合作与潜在外链机会。"
+                },
+                {
+                  "title": "辅助内容分发",
+                  "desc": "根据不同平台的特点生成推广文案与内容素材，提高内容复用效率。"
+                },
+                {
+                  "title": "减少重复操作",
+                  "desc": "通过 Agent、专业 Skill、MCP 与 API 执行已接入且获授权的工作，降低人工逐项操作的负担。"
+                },
+                {
+                  "title": "持续跟踪与调整",
+                  "desc": "结合可用的搜索表现和运营数据，发现问题、调整策略，让每一轮运营都有明确的改进方向。"
+                }
+              ]
+            },
+            "value": {
+              "title": "你真正得到的是什么？",
+              "lead": "不是一堆需要自己研究的 SEO 工具，而是一套可以实际执行的专业运营方案。",
+              "items": [
+                {
+                  "title": "降低专业门槛",
+                  "desc": "不必先成为 SEO/GEO 专家，也能借助 AI 推进专业工作。"
+                },
+                {
+                  "title": "节省时间与人力",
+                  "desc": "把重复的分析、撰写、检查和发布工作交给自动化流程辅助完成。"
+                },
+                {
+                  "title": "从单篇内容走向系统运营",
+                  "desc": "把网站诊断、关键词研究、页面优化、内容生产、站外推广与效果复查串联起来。"
+                },
+                {
+                  "title": "运营过程更可控",
+                  "desc": "可以检查任务结果、审核关键内容，并根据实际业务决定是否发布和继续执行。"
+                },
+                {
+                  "title": "持续争取更多曝光机会",
+                  "desc": "围绕目标客户的问题和搜索需求优化内容，争取来自传统搜索引擎与 AI 搜索场景的发现机会。"
+                }
+              ]
+            },
+            "workflow": {
+              "title": "从输入需求，到执行专业工作流",
+              "lead": "告诉 AI 你要优化哪个网站、推广什么产品、希望触达哪些客户。系统便可根据对应的专业方案开展分析、生成任务并执行已接入的操作。",
+              "desc": "你负责业务方向与关键决策，AI 负责协助完成繁杂的运营工作。磁帧鱼不承诺一键获得排名或询盘，而是帮助你把专业运营流程真正落地，持续优化网站的获客基础。",
+              "cta": "了解服务流程"
+            }
+          },
           "status": "published",
           "sort_order": 50
         },
         "zh-TW": {
-          "name": "瓶颈03-技术绑架",
-          "block_type": "feature",
-          "title": "上线即停更，资产被建站服務商绑架",
-          "slug": "adv-3",
-          "placement": "home_advantage",
-          "summary": "不懂底层运维，服务器托管在第三方建站商名下，年年支付昂贵维护费却无法自主沉淀数字资产。",
-          "subtitle": "一鍵向导部署到自有 Cloudflare 帳戶，企業資料 100% 自主掌控。",
+          "name": "SEO 與 GEO 長期營運體系",
+          "block_type": "banner",
+          "placement": "home_seo_geo",
+          "slug": "home-seo-geo",
+          "title": "SEO + GEO：讓 AI 幫你做專業營運，讓網站持續獲得曝光機會",
+          "subtitle": "不懂 SEO、不懂 GEO，也不必從零學習複雜的營運流程。輸入需求，啟動專業工作流，讓 AI 幫你完成從分析、優化到內容推廣的一系列工作。",
+          "summary": "磁幀魚將專業 SEO/GEO 技能、MCP 工具與 API 接入成熟的 AI Agent 工具。你可以使用熟悉的 AI 編程與智能體工具，調用我們提供的專業營運方案，把過去需要人工反覆研究、操作和執行的工作，變成更高效、可重複的工作流程。",
+          "extra": {
+            "onsite": {
+              "title": "站內優化：從診斷到執行，一鍵推進",
+              "items": [
+                {
+                  "title": "網站全面診斷",
+                  "desc": "分析頁面結構、SEO 基礎、內容質量、關鍵詞布局與潛在問題，明確優先解決什麼。"
+                },
+                {
+                  "title": "關鍵詞與內容規劃",
+                  "desc": "結合行業、競品、產品和目標客戶，挖掘關鍵詞機會，規劃更有針對性的頁面與內容。"
+                },
+                {
+                  "title": "批量優化與內容生產",
+                  "desc": "輔助優化頁面標題、描述、內容結構與內鏈，撰寫產品文案、行業文章及適合 AI 搜尋理解的內容。"
+                },
+                {
+                  "title": "執行與複查",
+                  "desc": "通過授權的 CMS 介面完成支援的修改與發布操作，並檢查執行結果，減少反覆切換工具和手動處理。"
+                }
+              ]
+            },
+            "offsite": {
+              "title": "站外推廣：不止發布文章，還要拓展曝光渠道",
+              "items": [
+                {
+                  "title": "尋找推廣機會",
+                  "desc": "輔助研究行業網站、相關平台、內容合作與潛在外鏈機會。"
+                },
+                {
+                  "title": "輔助內容分發",
+                  "desc": "根據不同平台的特點生成推廣文案與內容素材，提高內容複用效率。"
+                },
+                {
+                  "title": "減少重複操作",
+                  "desc": "通過 Agent、專業 Skill、MCP 與 API 執行已接入且獲授權的工作，降低人工逐項操作的負擔。"
+                },
+                {
+                  "title": "持續跟蹤與調整",
+                  "desc": "結合可用的搜尋表現和營運數據，發現問題、調整策略，讓每一輪營運都有明確的改進方向。"
+                }
+              ]
+            },
+            "value": {
+              "title": "你真正得到的是什麼？",
+              "lead": "不是一堆需要自己研究的 SEO 工具，而是一套可以實際執行的專業營運方案。",
+              "items": [
+                {
+                  "title": "降低專業門檻",
+                  "desc": "不必先成為 SEO/GEO 專家，也能借助 AI 推進專業工作。"
+                },
+                {
+                  "title": "節省時間與人力",
+                  "desc": "把重複的分析、撰寫、檢查和發布工作交給自動化流程輔助完成。"
+                },
+                {
+                  "title": "從單篇內容走向系統營運",
+                  "desc": "把網站診斷、關鍵詞研究、頁面優化、內容生產、站外推廣與效果複查串聯起來。"
+                },
+                {
+                  "title": "營運過程更可控",
+                  "desc": "可以檢查任務結果、審核關鍵內容，並根據實際業務決定是否發布和繼續執行。"
+                },
+                {
+                  "title": "持續爭取更多曝光機會",
+                  "desc": "圍繞目標客戶的問題和搜尋需求優化內容，爭取來自傳統搜尋引擎與 AI 搜尋場景的發現機會。"
+                }
+              ]
+            },
+            "workflow": {
+              "title": "從輸入需求，到執行專業工作流",
+              "lead": "告訴 AI 你要優化哪個網站、推廣什麼產品、希望觸達哪些客戶。系統便可根據對應的專業方案開展分析、生成任務並執行已接入的操作。",
+              "desc": "你負責業務方向與關鍵決策，AI 負責協助完成繁雜的營運工作。磁幀魚不承諾一鍵獲得排名或詢盤，而是幫助你把專業營運流程真正落地，持續優化網站的獲客基礎。",
+              "cta": "了解服務流程"
+            }
+          },
           "status": "published",
           "sort_order": 50
         },
         "ja": {
-          "name": "Pain 03 - Vendor Lock-in",
-          "block_type": "feature",
-          "title": "Go-Live Stall & Host Captivity",
-          "slug": "adv-3",
-          "placement": "home_advantage",
-          "summary": "High dev friction leaves sites abandoned; hosted on third-party servers with recurring annual lock-ins.",
-          "subtitle": "Deploy straight to your own Cloudflare account with 100% code, data, and lead ownership.",
+          "name": "SEO と GEO の長期運用体系",
+          "block_type": "banner",
+          "placement": "home_seo_geo",
+          "slug": "home-seo-geo",
+          "title": "SEO + GEO：AIの力で専門的な運用を自動化し、持続的な露出を獲得",
+          "subtitle": "SEOやGEOの専門知識を一から学ぶ必要はありません。要件を入力し、専門ワークフローを起動するだけで、分析・最適化からコンテンツ配信までAIが支援します。",
+          "summary": "磁幀魚は、プロフェッショナルなSEO/GEOスキル、MCPツール、APIを定評あるAI Agentツール群へ連携。使い慣れたAIツールから当社の専門運用ソリューションを呼び出し、従来の手作業を再現性の高い自動ワークフローへと変革します。",
+          "extra": {
+            "onsite": {
+              "title": "内部最適化：現状診断から施策実行までワンクリック",
+              "items": [
+                {
+                  "title": "サイト総合診断",
+                  "desc": "ページ構造、SEO基盤、コンテンツ品質、キーワード配置、潜在課題を分析し、優先順位を明確化。"
+                },
+                {
+                  "title": "キーワード＆構成設計",
+                  "desc": "業界動向、競合、製品特性に基づき有望な検索クエリを発掘し、効果的なページ構成を立案。"
+                },
+                {
+                  "title": "一括最適化と原稿作成",
+                  "desc": "メタデータ、内部リンク、製品説明、AI検索に認識されやすい高品質コンテンツの作成を支援。"
+                },
+                {
+                  "title": "CMS反映と再検証",
+                  "desc": "API経由で承認済みコンテンツをCMSへ即時反映し、手作業の転記ミスやツール往復を排除。"
+                }
+              ]
+            },
+            "offsite": {
+              "title": "外部プロモーション：記事配信にとどまらない露出拡大",
+              "items": [
+                {
+                  "title": "掲載機会の発掘",
+                  "desc": "業界ポータル、関連メディア、コンテンツ提携、オーガニックな被リンク候補をリサーチ。"
+                },
+                {
+                  "title": "マルチチャネル配信支援",
+                  "desc": "各プラットフォームの特性に合わせた訴求テキストや素材のバリエーションを生成。"
+                },
+                {
+                  "title": "定型作業の削減",
+                  "desc": "AIエージェント、専門Skill、MCP、APIを活用し、外部配信に伴う反復作業を大幅に省力化。"
+                },
+                {
+                  "title": "継続的な計測と改善",
+                  "desc": "検索流入やエンゲージメント指標をモニタリングし、次サイクルの運用施策へ即座に反映。"
+                }
+              ]
+            },
+            "value": {
+              "title": "お客様が真に得られる価値とは？",
+              "lead": "自力で研究しなければならない単なるツールの寄せ集めではなく、即座に実行可能なプロの運用ソリューションです。",
+              "items": [
+                {
+                  "title": "専門知識のハードルを解消",
+                  "desc": "SEOやGEOの専門家でなくても、AIの力で高度な施策をスムーズに推進できます。"
+                },
+                {
+                  "title": "時間と人的コストの大幅節約",
+                  "desc": "分析・執筆・チェック・公開といった定型業務を自動化フローへ委託。"
+                },
+                {
+                  "title": "単発記事から体系的な集客へ",
+                  "desc": "診断、キーワード選定、内部施策、制作、外部展開、成果測定を一貫した仕組みへ統合。"
+                },
+                {
+                  "title": "安心のガバナンス管理",
+                  "desc": "AIの生成結果を人間が確認・承認した上で本番反映できるため、ブランド品質を確実に維持。"
+                },
+                {
+                  "title": "持続的な露出チャンスの獲得",
+                  "desc": "顧客の検索意図に沿った情報提供により、従来の検索エンジンと生成AIの両方で発見されやすくなります。"
+                }
+              ]
+            },
+            "workflow": {
+              "title": "要件入力から、専門ワークフローの実行まで",
+              "lead": "どのサイトを最適化し、どの製品をアピールし、どのような顧客へ届けたいかをAIへ伝えるだけで、専門方案に基づきタスクを生成・実行します。",
+              "desc": "事業方針と最終判断はお客様自身が、煩雑な運用実務はAIが担当します。磁幀魚は安易な順位保証ではなく、地に足の着いた運用フローを着実に定着させ、Webサイトの集客基盤を継続的に育てます。",
+              "cta": "サービスの流れを見る"
+            }
+          },
           "status": "published",
           "sort_order": 50
         },
         "en-US": {
-          "name": "Pain 03 - Vendor Lock-in",
-          "block_type": "feature",
-          "title": "Go-Live Stall & Host Captivity",
-          "slug": "adv-3",
-          "placement": "home_advantage",
-          "summary": "High dev friction leaves sites abandoned; hosted on third-party servers with recurring annual lock-ins.",
-          "subtitle": "Deploy straight to your own Cloudflare account with 100% code, data, and lead ownership.",
+          "name": "SEO & GEO Operations",
+          "block_type": "banner",
+          "placement": "home_seo_geo",
+          "slug": "home-seo-geo",
+          "title": "SEO + GEO: Empower AI for Professional Growth & Continuous Exposure",
+          "subtitle": "No need to master complex SEO or GEO frameworks from scratch. Feed in your goals, activate specialized workflows, and let AI execute research, optimization, and content distribution.",
+          "summary": "Cizhenyu integrates specialized SEO/GEO skills, MCP tools, and APIs into modern AI Agent environments. Use your preferred AI coding and agent tools to trigger our proven workflows—turning laborious manual research and publishing into automated, repeatable business growth.",
+          "extra": {
+            "onsite": {
+              "title": "On-Page Optimization: From Audit to Execution in One Flow",
+              "items": [
+                {
+                  "title": "Full Site Auditing",
+                  "desc": "Analyze technical markup, crawl health, keyword gaps, and UX roadblocks with clear remediation priorities."
+                },
+                {
+                  "title": "Keyword & Topic Planning",
+                  "desc": "Uncover high-intent search queries across industry, rivals, and products to plan high-converting landing pages."
+                },
+                {
+                  "title": "Batch Tuning & Copywriting",
+                  "desc": "Refine metadata, internal linking, product specs, and rich editorial copy crafted for search engines and AI citation."
+                },
+                {
+                  "title": "CMS Sync & Re-verification",
+                  "desc": "Publish approved updates directly via authorized CMS APIs and re-audit results without juggling disparate tools."
+                }
+              ]
+            },
+            "offsite": {
+              "title": "Off-Page Promotion: Expanding Reach Beyond Mere Blogging",
+              "items": [
+                {
+                  "title": "Outreach Discovery",
+                  "desc": "Uncover industry hubs, trade directories, editorial partnerships, and organic citation opportunities."
+                },
+                {
+                  "title": "Multi-Channel Distribution",
+                  "desc": "Tailor promotional excerpts, press snippets, and asset variants for third-party platforms."
+                },
+                {
+                  "title": "Repetitive Task Automation",
+                  "desc": "Let autonomous agents, specialized skills, MCPs, and APIs execute approved distribution pipelines."
+                },
+                {
+                  "title": "Continuous KPI Tracking",
+                  "desc": "Monitor organic impressions, crawl frequency, and conversion signals to steer subsequent operational sprints."
+                }
+              ]
+            },
+            "value": {
+              "title": "What Real Value Do You Receive?",
+              "lead": "Not a confusing pile of disjointed SEO utilities, but an executable operational system.",
+              "items": [
+                {
+                  "title": "Zero Expertise Hurdle",
+                  "desc": "Drive enterprise-grade SEO and GEO campaigns with AI without becoming a technical specialist."
+                },
+                {
+                  "title": "Drastic Time & Labor Savings",
+                  "desc": "Hand over repetitive audits, drafting, link checking, and scheduling to automated pipelines."
+                },
+                {
+                  "title": "From Scattered Posts to Systematic Ops",
+                  "desc": "Connect site audits, keyword mapping, on-page tuning, content ops, and analytics into one loop."
+                },
+                {
+                  "title": "Full Editorial Governance",
+                  "desc": "Review task outputs, verify key copy, and govern exactly what goes live based on business priorities."
+                },
+                {
+                  "title": "Sustained Organic Visibility",
+                  "desc": "Target genuine buyer problems to maximize discovery across both classic search engines and generative AI agents."
+                }
+              ]
+            },
+            "workflow": {
+              "title": "From Stating Your Intent to Executing Professional Workflows",
+              "lead": "Instruct the AI which website to optimize, which products to showcase, and which buyer personas to reach. The system analyzes, generates tasks, and executes connected actions.",
+              "desc": "You maintain strategic business direction and crucial approvals; AI handles the repetitive execution. Cizhenyu doesn’t promise overnight magic—we give you a battle-tested operational engine that steadily compounds organic buyer acquisition.",
+              "cta": "Explore Service Workflow"
+            }
+          },
           "status": "published",
           "sort_order": 50
         }
@@ -429,50 +1182,126 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000006",
       "locales": {
         "zh-CN": {
-          "name": "陈总 · 营销总监",
-          "block_type": "testimonial",
-          "title": "陈总 · 营销总监",
-          "eyebrow": "工贸一体机械制造出口企业",
-          "slug": "rev-1",
-          "placement": "home_testimonial",
-          "summary": "过去官网就像死水，现在通过磁帧鱼智能询盘系统，夜间自动接待了 20 多位欧洲意向买家，并直接获取了 WhatsApp 联系方式，转化率提升极其明显！",
-          "link_label": "年出口额 8,000 万+",
+          "name": "阶段业务入口选择",
+          "block_type": "grid",
+          "placement": "home_paths",
+          "slug": "home-paths",
+          "title": "选择适合你当前阶段的产品",
+          "extra": {
+            "items": [
+              {
+                "title": "我需要建站",
+                "desc": "建设企业官网、产品目录和内容管理后台，明确部署与交付范围。",
+                "cta": "建站方案",
+                "intent": "sites"
+              },
+              {
+                "title": "我需要管客户",
+                "desc": "整合询盘、客户资料、知识库与 AI 客服，减少线索遗漏。",
+                "cta": "CRM 方案",
+                "intent": "crm"
+              },
+              {
+                "title": "我需要获客",
+                "desc": "建立长期 SEO / GEO 运营流程，持续完善内容与搜索表现。",
+                "cta": "运营方案",
+                "intent": "growth"
+              }
+            ]
+          },
           "status": "published",
           "sort_order": 60
         },
         "zh-TW": {
-          "name": "陈总 · 营销总监",
-          "block_type": "testimonial",
-          "title": "陈总 · 营销总监",
-          "eyebrow": "工贸一体机械制造出口企業",
-          "slug": "rev-1",
-          "placement": "home_testimonial",
-          "summary": "过去官網就像死水，现在通过磁幀魚智慧詢盤系统，夜间自动接待了 20 多位欧洲意向买家，并直接獲取了 WhatsApp 聯繫方式，转化率提升极其明显！",
-          "link_label": "年出口额 8,000 万+",
+          "name": "階段業務入口選擇",
+          "block_type": "grid",
+          "placement": "home_paths",
+          "slug": "home-paths",
+          "title": "選擇適合你當前階段的產品",
+          "extra": {
+            "items": [
+              {
+                "title": "我需要建站",
+                "desc": "建設企業官網、產品目錄和內容管理後台，明確部署與交付範圍。",
+                "cta": "建站方案",
+                "intent": "sites"
+              },
+              {
+                "title": "我需要管客戶",
+                "desc": "整合詢盤、客戶資料、知識庫與 AI 客服，減少線索遺漏。",
+                "cta": "CRM 方案",
+                "intent": "crm"
+              },
+              {
+                "title": "我需要獲客",
+                "desc": "建立長期 SEO / GEO 運營流程，持續完善內容與搜尋表現。",
+                "cta": "運營方案",
+                "intent": "growth"
+              }
+            ]
+          },
           "status": "published",
           "sort_order": 60
         },
         "ja": {
-          "name": "Marcus Chen · VP of Marketing",
-          "block_type": "testimonial",
-          "title": "Marcus Chen · VP of Marketing",
-          "eyebrow": "Industrial Machinery Manufacturer",
-          "slug": "rev-1",
-          "placement": "home_testimonial",
-          "summary": "Our previous website had almost zero inquiries. With Cizhenyu AI Sales Desk, we automatically engaged 20+ European buyers off-hours and captured their WhatsApp info. Conversion jumped remarkably!",
-          "link_label": "$12M+ Annual Export",
+          "name": "成長フェーズ別プラン",
+          "block_type": "grid",
+          "placement": "home_paths",
+          "slug": "home-paths",
+          "title": "今の段階に合うプロダクトを選ぶ",
+          "extra": {
+            "items": [
+              {
+                "title": "サイトが必要",
+                "desc": "企業サイト、製品カタログ、CMS を整え、導入と納品範囲を明確にする。",
+                "cta": "サイト構築プラン",
+                "intent": "sites"
+              },
+              {
+                "title": "顧客管理が必要",
+                "desc": "問い合わせ、顧客情報、ナレッジ、AI サポートを統合し、取りこぼしを減らす。",
+                "cta": "CRM プラン",
+                "intent": "crm"
+              },
+              {
+                "title": "獲得が必要",
+                "desc": "長期 SEO / GEO 運用を確立し、コンテンツと検索成果を継続改善する。",
+                "cta": "運用プラン",
+                "intent": "growth"
+              }
+            ]
+          },
           "status": "published",
           "sort_order": 60
         },
         "en-US": {
-          "name": "Marcus Chen · VP of Marketing",
-          "block_type": "testimonial",
-          "title": "Marcus Chen · VP of Marketing",
-          "eyebrow": "Industrial Machinery Manufacturer",
-          "slug": "rev-1",
-          "placement": "home_testimonial",
-          "summary": "Our previous website had almost zero inquiries. With Cizhenyu AI Sales Desk, we automatically engaged 20+ European buyers off-hours and captured their WhatsApp info. Conversion jumped remarkably!",
-          "link_label": "$12M+ Annual Export",
+          "name": "Growth Stage Offerings",
+          "block_type": "grid",
+          "placement": "home_paths",
+          "slug": "home-paths",
+          "title": "Pick the product that matches your stage",
+          "extra": {
+            "items": [
+              {
+                "title": "I need a website",
+                "desc": "Build a corporate site, product catalog, and content admin—with clear deploy and delivery scope.",
+                "cta": "Website plans",
+                "intent": "sites"
+              },
+              {
+                "title": "I need CRM",
+                "desc": "Unify inquiries, profiles, knowledge base, and AI support to reduce dropped leads.",
+                "cta": "CRM plans",
+                "intent": "crm"
+              },
+              {
+                "title": "I need acquisition",
+                "desc": "Establish a long-term SEO / GEO process and keep improving content and search performance.",
+                "cta": "Growth plans",
+                "intent": "growth"
+              }
+            ]
+          },
           "status": "published",
           "sort_order": 60
         }
@@ -482,154 +1311,52 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000007",
       "locales": {
         "zh-CN": {
-          "name": "David W. · 创始人",
-          "block_type": "testimonial",
-          "title": "David W. · 创始人",
-          "eyebrow": "跨境硬件品牌独立站出海",
-          "slug": "rev-2",
-          "placement": "home_testimonial",
-          "summary": "站群生成和多语言部署帮我们迅速铺开了 5 个目标语种站点，全静态部署在 Cloudflare 上毫秒级打开，海外客户访问体验非常流畅，AI 搜索推荐量持续上升。",
-          "link_label": "覆盖 12 个海外市场",
+          "name": "页脚行动号召",
+          "block_type": "cta",
+          "placement": "footer_cta",
+          "slug": "footer-cta",
+          "title": "别让网站停留在展示阶段。",
+          "subtitle": "从建站、客户管理到搜索增长，选择真正适合你业务的产品，让线上投入逐步沉淀为可管理、可持续经营的业务资产。",
+          "link_label": "咨询适合我的方案",
+          "link_url": "/contact?intent=consult",
           "status": "published",
           "sort_order": 70
         },
         "zh-TW": {
-          "name": "David W. · 创始人",
-          "block_type": "testimonial",
-          "title": "David W. · 创始人",
-          "eyebrow": "跨境硬件品牌獨立站出海",
-          "slug": "rev-2",
-          "placement": "home_testimonial",
-          "summary": "站群生成和多語言部署帮我們迅速铺开了 5 个目标语种站點，全静态部署在 Cloudflare 上毫秒级打开，海外客户访问体验非常流畅，AI 搜尋推荐量持续上升。",
-          "link_label": "覆盖 12 个海外市场",
+          "name": "頁腳行動號召",
+          "block_type": "cta",
+          "placement": "footer_cta",
+          "slug": "footer-cta",
+          "title": "別讓網站停留在展示階段。",
+          "subtitle": "從建站、客戶管理到搜尋增長，選擇真正適合你業務的產品，讓線上投入逐步沉澱為可管理、可持續經營的業務資產。",
+          "link_label": "諮詢適合我的方案",
+          "link_url": "/zh-TW/contact?intent=consult",
           "status": "published",
           "sort_order": 70
         },
         "ja": {
-          "name": "David W. · Founder",
-          "block_type": "testimonial",
-          "title": "David W. · Founder",
-          "eyebrow": "Hardware DTC & B2B Brand",
-          "slug": "rev-2",
-          "placement": "home_testimonial",
-          "summary": "The multi-site generator helped us launch 5 multilingual regional portals in days. Edge caching on Cloudflare loads in milliseconds, delivering incredible user experience and top AI search visibility.",
-          "link_label": "Present in 12 Global Markets",
+          "name": "フッターお問い合わせCTA",
+          "block_type": "cta",
+          "placement": "footer_cta",
+          "slug": "footer-cta",
+          "title": "サイトを見せるだけで終わらせない。",
+          "subtitle": "サイト構築、顧客管理、検索成長から、本当に合うプロダクトを選び、オンライン投資を管理可能で継続経営できる事業資産へ変えていきましょう。",
+          "link_label": "自分に合う方案を相談する",
+          "link_url": "/ja/contact?intent=consult",
           "status": "published",
           "sort_order": 70
         },
         "en-US": {
-          "name": "David W. · Founder",
-          "block_type": "testimonial",
-          "title": "David W. · Founder",
-          "eyebrow": "Hardware DTC & B2B Brand",
-          "slug": "rev-2",
-          "placement": "home_testimonial",
-          "summary": "The multi-site generator helped us launch 5 multilingual regional portals in days. Edge caching on Cloudflare loads in milliseconds, delivering incredible user experience and top AI search visibility.",
-          "link_label": "Present in 12 Global Markets",
+          "name": "Footer CTA",
+          "block_type": "cta",
+          "placement": "footer_cta",
+          "slug": "footer-cta",
+          "title": "Don’t leave your website stuck in brochure mode.",
+          "subtitle": "From website building and CRM to search growth, choose products that fit your business—and turn online spend into manageable, lasting operating assets.",
+          "link_label": "Talk about the right plan for me",
+          "link_url": "/en-US/contact?intent=consult",
           "status": "published",
           "sort_order": 70
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-blk-4000-8000-000000000008",
-      "locales": {
-        "zh-CN": {
-          "name": "林经理 · 业务主管",
-          "block_type": "testimonial",
-          "title": "林经理 · 业务主管",
-          "eyebrow": "外贸建站与数字营销服务商",
-          "slug": "rev-3",
-          "placement": "home_testimonial",
-          "summary": "作为服务商，磁帧鱼的安装包交付极大降低了运维成本。客服同席协助部署，客户资产放在他们自己的云端，双方都极其安心，交付效率提高数倍。",
-          "link_label": "累计交付 40+ 独立站点",
-          "status": "published",
-          "sort_order": 80
-        },
-        "zh-TW": {
-          "name": "林经理 · 业务主管",
-          "block_type": "testimonial",
-          "title": "林经理 · 业务主管",
-          "eyebrow": "外貿建站与数字营销服務商",
-          "slug": "rev-3",
-          "placement": "home_testimonial",
-          "summary": "作为服務商，磁幀魚的安裝包交付极大降低了运维成本。客服同席协助部署，客户资产放在他们自己的云端，双方都极其安心，交付效率提高数倍。",
-          "link_label": "累计交付 40+ 獨立站點",
-          "status": "published",
-          "sort_order": 80
-        },
-        "ja": {
-          "name": "Grace Lin · Operations Director",
-          "block_type": "testimonial",
-          "title": "Grace Lin · Operations Director",
-          "eyebrow": "Export Agency & Marketing Partner",
-          "slug": "rev-3",
-          "placement": "home_testimonial",
-          "summary": "Packaging delivery with Cizhenyu drastically reduced client turnaround time. Collaborative install to the client’s own cloud ensures data sovereignty and zero ongoing maintenance headaches.",
-          "link_label": "40+ Portals Delivered",
-          "status": "published",
-          "sort_order": 80
-        },
-        "en-US": {
-          "name": "Grace Lin · Operations Director",
-          "block_type": "testimonial",
-          "title": "Grace Lin · Operations Director",
-          "eyebrow": "Export Agency & Marketing Partner",
-          "slug": "rev-3",
-          "placement": "home_testimonial",
-          "summary": "Packaging delivery with Cizhenyu drastically reduced client turnaround time. Collaborative install to the client’s own cloud ensures data sovereignty and zero ongoing maintenance headaches.",
-          "link_label": "40+ Portals Delivered",
-          "status": "published",
-          "sort_order": 80
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-blk-4000-8000-000000000009",
-      "locales": {
-        "zh-CN": {
-          "name": "建站效率与内容改版",
-          "block_type": "feature",
-          "title": "建站效率与内容改版",
-          "slug": "cmp-1",
-          "placement": "home_comparison",
-          "summary": "外包修改排期数周，改版成本高，多语言内容容易错乱覆盖",
-          "subtitle": "站群中台统一维护，一键同步多站，全静态秒级发布更新",
-          "status": "published",
-          "sort_order": 90
-        },
-        "zh-TW": {
-          "name": "建站效率与內容改版",
-          "block_type": "feature",
-          "title": "建站效率与內容改版",
-          "slug": "cmp-1",
-          "placement": "home_comparison",
-          "summary": "外包修改排期数周，改版成本高，多語言內容容易错乱覆盖",
-          "subtitle": "站群中台统一维护，一鍵同步多站，全静态秒级发布更新",
-          "status": "published",
-          "sort_order": 90
-        },
-        "ja": {
-          "name": "Build Speed & Content Updates",
-          "block_type": "feature",
-          "title": "Build Speed & Content Updates",
-          "slug": "cmp-1",
-          "placement": "home_comparison",
-          "summary": "Queued agency tickets taking weeks; costly revisions and messy translations",
-          "subtitle": "Single multi-site CMS hub; instant static updates published in seconds",
-          "status": "published",
-          "sort_order": 90
-        },
-        "en-US": {
-          "name": "Build Speed & Content Updates",
-          "block_type": "feature",
-          "title": "Build Speed & Content Updates",
-          "slug": "cmp-1",
-          "placement": "home_comparison",
-          "summary": "Queued agency tickets taking weeks; costly revisions and messy translations",
-          "subtitle": "Single multi-site CMS hub; instant static updates published in seconds",
-          "status": "published",
-          "sort_order": 90
         }
       }
     },
@@ -637,46 +1364,46 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000010",
       "locales": {
         "zh-CN": {
-          "name": "询盘承接与商机留存",
-          "block_type": "feature",
-          "title": "询盘承接与商机留存",
-          "slug": "cmp-2",
-          "placement": "home_comparison",
-          "summary": "静态留言表单等邮件，海外夜间时差造成大量高意向客户流失",
-          "subtitle": "24/7 智能客服依据知识库深度应答促单，高意向即时提醒并转人工",
+          "name": "陈先生 · 某工业装备出海企业负责人",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-1",
+          "title": "陈先生 · 某工业装备出海企业负责人",
+          "eyebrow": "机械制造 / 跨境出海",
+          "summary": "过去我们每年在境外独立服务器和维护上要花上万元，动不动还遇到跨国访问超时卡顿。切换到磁帧鱼 Cloudflare 方案后，北美和欧洲客户页面基本秒开，日常运维几乎为零，省下来的预算让我们能直接投入到海外推广上。",
           "status": "published",
           "sort_order": 100
         },
         "zh-TW": {
-          "name": "詢盤承接与商机留存",
-          "block_type": "feature",
-          "title": "詢盤承接与商机留存",
-          "slug": "cmp-2",
-          "placement": "home_comparison",
-          "summary": "静态留言表单等邮件，海外夜间时差造成大量高意向客户流失",
-          "subtitle": "24/7 智慧客服依据知識庫深度应答促单，高意向即时提醒并转人工",
+          "name": "陳先生 · 某工業裝備出海企業負責人",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-1",
+          "title": "陳先生 · 某工業裝備出海企業負責人",
+          "eyebrow": "機械製造 / 跨境出海",
+          "summary": "過去我們每年在境外獨立伺服器和維護上要花上萬元，動不動還遇到跨國訪問超時卡頓。切換到磁幀魚 Cloudflare 方案後，北美和歐洲客戶頁面基本秒開，日常維運幾乎為零，省下來的預算讓我們能直接投入到海外推廣上。",
           "status": "published",
           "sort_order": 100
         },
         "ja": {
-          "name": "Inquiry Capture & Conversion",
-          "block_type": "feature",
-          "title": "Inquiry Capture & Conversion",
-          "slug": "cmp-2",
-          "placement": "home_comparison",
-          "summary": "Static contact forms with email delay; off-hours time zones lose hot leads",
-          "subtitle": "24/7 AI desk with knowledge base answers; instant escalation for qualified leads",
+          "name": "陳 代表 · 産業機械メーカー輸出部門責任者",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-1",
+          "title": "陳 代表 · 産業機械メーカー輸出部門責任者",
+          "eyebrow": "機械製造 / グローバル展開",
+          "summary": "以前は海外専用サーバーの保守に多額の費用を投じていましたが、それでも海外からの表示遅延に悩まされていました。磁幀魚のCloudflare構成に移行してからは、北米や欧州のお客様へも瞬時に表示され、サーバー管理の手間もゼロに。浮いた予算を海外マーケティングへ回せています。",
           "status": "published",
           "sort_order": 100
         },
         "en-US": {
-          "name": "Inquiry Capture & Conversion",
-          "block_type": "feature",
-          "title": "Inquiry Capture & Conversion",
-          "slug": "cmp-2",
-          "placement": "home_comparison",
-          "summary": "Static contact forms with email delay; off-hours time zones lose hot leads",
-          "subtitle": "24/7 AI desk with knowledge base answers; instant escalation for qualified leads",
+          "name": "Mr. Chen · Industrial Machinery Exporter",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-1",
+          "title": "Mr. Chen · Industrial Machinery Exporter",
+          "eyebrow": "Manufacturing / Global Trade",
+          "summary": "We used to spend thousands annually on foreign servers and maintenance, yet still battled sluggish overseas page loads. After deploying on Cizhenyu Cloudflare, our US and EU buyers experience instantaneous loading with virtually zero server upkeep. Those savings now go straight into marketing.",
           "status": "published",
           "sort_order": 100
         }
@@ -686,46 +1413,46 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000011",
       "locales": {
         "zh-CN": {
-          "name": "技术门槛与资产归属",
-          "block_type": "feature",
-          "title": "技术门槛与资产归属",
-          "slug": "cmp-3",
-          "placement": "home_comparison",
-          "summary": "服务器托管在厂商名下，每年高额续费绑定，无法自由迁移",
-          "subtitle": "部署至企业自有 Cloudflare 云账户，资产与数据自主掌控",
+          "name": "Sarah Lin · 智能硬件品牌外贸团队主管",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-2",
+          "title": "Sarah Lin · 智能硬件品牌外贸团队主管",
+          "eyebrow": "消费电子 / 品牌独立站",
+          "summary": "以前用开源系统经常担心插件冲突和漏洞，改个首页横幅或产品参数都要找技术排期。磁帧鱼后台非常清爽，产品、案例和多语言动态点点鼠标就能更新，连不懂代码的业务员也能直接上手管理。",
           "status": "published",
           "sort_order": 110
         },
         "zh-TW": {
-          "name": "技术门槛与资产归属",
-          "block_type": "feature",
-          "title": "技术门槛与资产归属",
-          "slug": "cmp-3",
-          "placement": "home_comparison",
-          "summary": "服务器托管在厂商名下，每年高额续费绑定，无法自由迁移",
-          "subtitle": "部署至企業自有 Cloudflare 云帳戶，资产与資料自主掌控",
+          "name": "Sarah Lin · 智慧硬體品牌外貿團隊主管",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-2",
+          "title": "Sarah Lin · 智慧硬體品牌外貿團隊主管",
+          "eyebrow": "消費電子 / 品牌獨立站",
+          "summary": "以前用開源系統經常擔心外掛衝突和漏洞，改個首頁橫幅或產品參數都要找技術排期。磁幀魚後台非常清爽，產品、案例和多語言動態點點滑鼠就能更新，連不懂程式碼的業務員也能直接上手管理。",
           "status": "published",
           "sort_order": 110
         },
         "ja": {
-          "name": "Ownership & Infrastructure",
-          "block_type": "feature",
-          "title": "Ownership & Infrastructure",
-          "slug": "cmp-3",
-          "placement": "home_comparison",
-          "summary": "Locked inside third-party servers with recurring annual host fees",
-          "subtitle": "Deployed straight to your own Cloudflare account; full code & data ownership",
+          "name": "Sarah Lin 統括 · スマート家電ブランド輸出責任者",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-2",
+          "title": "Sarah Lin 統括 · スマート家電ブランド輸出責任者",
+          "eyebrow": "家電・エレクトロニクス / 独自ブランド",
+          "summary": "以前のオープンソースCMSではプラグインの不具合や脆弱性対応に追われ、トップページの更新すら技術者に頼む必要がありました。磁幀魚の管理画面は直感的で、営業担当者が自らクリック操作で製品や多言語事例を更新できています。",
           "status": "published",
           "sort_order": 110
         },
         "en-US": {
-          "name": "Ownership & Infrastructure",
-          "block_type": "feature",
-          "title": "Ownership & Infrastructure",
-          "slug": "cmp-3",
-          "placement": "home_comparison",
-          "summary": "Locked inside third-party servers with recurring annual host fees",
-          "subtitle": "Deployed straight to your own Cloudflare account; full code & data ownership",
+          "name": "Sarah Lin · Smart Electronics Export Director",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-2",
+          "title": "Sarah Lin · Smart Electronics Export Director",
+          "eyebrow": "Consumer Tech / Brand Direct",
+          "summary": "Our old open-source CMS was plagued with plugin conflicts and security patches. Updating a hero banner or catalog spec required waiting on dev tickets. Cizhenyu’s admin is refreshingly intuitive—our sales reps update products and multilingual case studies with a few clicks.",
           "status": "published",
           "sort_order": 110
         }
@@ -735,195 +1462,48 @@
       "languageGroupKey": "def00000-blk-4000-8000-000000000012",
       "locales": {
         "zh-CN": {
-          "name": "SEO / GEO 与长效运营",
-          "block_type": "feature",
-          "title": "SEO / GEO 与长效运营",
-          "slug": "cmp-4",
-          "placement": "home_comparison",
-          "summary": "网站上线即停更，缺乏长尾词规划与 AI 搜索结构化数据",
-          "subtitle": "内置 GEO 结构化标记与多语言路由，持续跑出搜索复利节奏",
+          "name": "David Zhang · 跨境贸易服务机构创始人",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-3",
+          "title": "David Zhang · 跨境贸易服务机构创始人",
+          "eyebrow": "B2B 服务 / 获客运营",
+          "summary": "我们在 PageSpeed Insights 上做过全面跑分，性能和最佳做法均在 98 分以上。结合结构化数据和 AI 智能客服，海外买家咨询和精准询盘留存率相比老站提升了将近两倍，是一套真正能产生业务价值的系统。",
           "status": "published",
           "sort_order": 120
         },
         "zh-TW": {
-          "name": "SEO / GEO 与长效運營",
-          "block_type": "feature",
-          "title": "SEO / GEO 与长效運營",
-          "slug": "cmp-4",
-          "placement": "home_comparison",
-          "summary": "网站上线即停更，缺乏长尾词规划与 AI 搜尋结构化資料",
-          "subtitle": "内置 GEO 结构化标记与多語言路由，持续跑出搜尋复利节奏",
+          "name": "David Zhang · 跨境貿易服務機構創始人",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-3",
+          "title": "David Zhang · 跨境貿易服務機構創始人",
+          "eyebrow": "B2B 服務 / 獲客營運",
+          "summary": "我們在 PageSpeed Insights 上做過全面跑分，性能和最佳做法均在 98 分以上。結合結構化數據和 AI 智能客服，海外買家諮詢和精準詢盤留存率相比老站提升了將近兩倍，是一套真正能產生業務價值的系統。",
           "status": "published",
           "sort_order": 120
         },
         "ja": {
-          "name": "GEO / SEO Compounding",
-          "block_type": "feature",
-          "title": "GEO / SEO Compounding",
-          "slug": "cmp-4",
-          "placement": "home_comparison",
-          "summary": "Site abandoned post-launch; zero structured data for modern AI engines",
-          "subtitle": "Built-in GEO schema markup, multilingual routing, and ongoing growth ops",
+          "name": "David Zhang 創業者 · 海外B2B貿易支援企業代表",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-3",
+          "title": "David Zhang 創業者 · 海外B2B貿易支援企業代表",
+          "eyebrow": "B2B支援 / 集客コンサルティング",
+          "summary": "PageSpeed Insightsで診断したところ、パフォーマンスとベストプラクティスで98点以上を記録。構造化データとAIチャット掛件の連携により、以前のサイトと比較して海外バイヤーからの有効問い合わせ数が約2倍に伸長しました。",
           "status": "published",
           "sort_order": 120
         },
         "en-US": {
-          "name": "GEO / SEO Compounding",
-          "block_type": "feature",
-          "title": "GEO / SEO Compounding",
-          "slug": "cmp-4",
-          "placement": "home_comparison",
-          "summary": "Site abandoned post-launch; zero structured data for modern AI engines",
-          "subtitle": "Built-in GEO schema markup, multilingual routing, and ongoing growth ops",
+          "name": "David Zhang · Founder of B2B Trade Agency",
+          "block_type": "testimonial",
+          "placement": "home_testimonial",
+          "slug": "home-testimonial-3",
+          "title": "David Zhang · Founder of B2B Trade Agency",
+          "eyebrow": "B2B Services / Growth Operations",
+          "summary": "We audited the site on PageSpeed Insights and scored 98+ across Performance and Best Practices. Between the structured data and the built-in AI chat widget, our overseas buyer inquiries doubled compared to our previous portal.",
           "status": "published",
           "sort_order": 120
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-blk-4000-8000-000000000013",
-      "locales": {
-        "zh-CN": {
-          "name": "步骤01",
-          "block_type": "feature",
-          "eyebrow": "01",
-          "title": "明确目标市场与核心痛点",
-          "slug": "step-1",
-          "placement": "home_step",
-          "summary": "梳理目标国家、主推品类及当前询盘痛点（无站/时差漏单/多语言需求）。",
-          "status": "published",
-          "sort_order": 130
-        },
-        "zh-TW": {
-          "name": "步驟01",
-          "block_type": "feature",
-          "eyebrow": "01",
-          "title": "明确目标市场与核心痛点",
-          "slug": "step-1",
-          "placement": "home_step",
-          "summary": "梳理目标国家、主推品类及当前詢盤痛点（无站/时差漏单/多語言需求）。",
-          "status": "published",
-          "sort_order": 130
-        },
-        "ja": {
-          "name": "Step 01",
-          "block_type": "feature",
-          "eyebrow": "01",
-          "title": "Diagnose Market & Bottlenecks",
-          "slug": "step-1",
-          "placement": "home_step",
-          "summary": "Share target countries, product categories, and current lead leakage points.",
-          "status": "published",
-          "sort_order": 130
-        },
-        "en-US": {
-          "name": "Step 01",
-          "block_type": "feature",
-          "eyebrow": "01",
-          "title": "Diagnose Market & Bottlenecks",
-          "slug": "step-1",
-          "placement": "home_step",
-          "summary": "Share target countries, product categories, and current lead leakage points.",
-          "status": "published",
-          "sort_order": 130
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-blk-4000-8000-000000000014",
-      "locales": {
-        "zh-CN": {
-          "name": "步骤02",
-          "block_type": "feature",
-          "eyebrow": "02",
-          "title": "灵活选配所需产品模块",
-          "slug": "step-2",
-          "placement": "home_step",
-          "summary": "按业务成熟度单选或组合：站群生成系统、智能询盘客服、部署运营中台。",
-          "status": "published",
-          "sort_order": 140
-        },
-        "zh-TW": {
-          "name": "步驟02",
-          "block_type": "feature",
-          "eyebrow": "02",
-          "title": "灵活选配所需產品模組",
-          "slug": "step-2",
-          "placement": "home_step",
-          "summary": "按业务成熟度单选或组合：站群生成系统、智慧詢盤客服、部署運營中台。",
-          "status": "published",
-          "sort_order": 140
-        },
-        "ja": {
-          "name": "Step 02",
-          "block_type": "feature",
-          "eyebrow": "02",
-          "title": "Select Product Modules",
-          "slug": "step-2",
-          "placement": "home_step",
-          "summary": "Pick what fits: Multi-site Generator, AI Inquiry Desk, and Deploy Ops.",
-          "status": "published",
-          "sort_order": 140
-        },
-        "en-US": {
-          "name": "Step 02",
-          "block_type": "feature",
-          "eyebrow": "02",
-          "title": "Select Product Modules",
-          "slug": "step-2",
-          "placement": "home_step",
-          "summary": "Pick what fits: Multi-site Generator, AI Inquiry Desk, and Deploy Ops.",
-          "status": "published",
-          "sort_order": 140
-        }
-      }
-    },
-    {
-      "languageGroupKey": "def00000-blk-4000-8000-000000000015",
-      "locales": {
-        "zh-CN": {
-          "name": "步骤03",
-          "block_type": "feature",
-          "eyebrow": "03",
-          "title": "下载部署并由客服协作上线",
-          "slug": "step-3",
-          "placement": "home_step",
-          "summary": "通过向导部署至自有云环境，专业工程客服同席协助首发初始化与联调。",
-          "status": "published",
-          "sort_order": 150
-        },
-        "zh-TW": {
-          "name": "步驟03",
-          "block_type": "feature",
-          "eyebrow": "03",
-          "title": "下載部署并由客服協作上线",
-          "slug": "step-3",
-          "placement": "home_step",
-          "summary": "通过向导部署至自有云环境，专业工程客服同席协助首发初始化与联调。",
-          "status": "published",
-          "sort_order": 150
-        },
-        "ja": {
-          "name": "Step 03",
-          "block_type": "feature",
-          "eyebrow": "03",
-          "title": "Download & Collaborative Install",
-          "slug": "step-3",
-          "placement": "home_step",
-          "summary": "Deploy to your cloud account with guided wizard and support onboarding.",
-          "status": "published",
-          "sort_order": 150
-        },
-        "en-US": {
-          "name": "Step 03",
-          "block_type": "feature",
-          "eyebrow": "03",
-          "title": "Download & Collaborative Install",
-          "slug": "step-3",
-          "placement": "home_step",
-          "summary": "Deploy to your cloud account with guided wizard and support onboarding.",
-          "status": "published",
-          "sort_order": 150
         }
       }
     }
