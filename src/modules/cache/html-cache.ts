@@ -161,6 +161,8 @@ export async function getCachedHtml(url: URL): Promise<HtmlCacheEntry | null> {
 export async function putCachedHtml(url: URL, response: Response) {
   const key = cacheKey(url);
   const body = await response.text();
+  // 禁止缓存空 HTML，否则边缘/Worker Cache 会长时间锁死空白页
+  if (!body.trim()) return;
   const ttl = readTtlSeconds(response.headers);
   const expiresAt = Date.now() + ttl * 1000;
   const storedAt = Date.now();

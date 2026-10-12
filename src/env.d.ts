@@ -29,6 +29,8 @@ declare namespace App {
   interface Locals {
     /** middleware 语种路由已处理（防止 rewrite 二次进入形成 302 死循环） */
     localeRoutingDone?: boolean;
+    /** 外层已负责 HTML 缓存；rewrite 内层勿再 wrap */
+    htmlCacheOwned?: boolean;
   }
 }
 
