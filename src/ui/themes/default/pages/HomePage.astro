@@ -1,12 +1,12 @@
 ---
-import OptimizedImage from '@/ui/components/OptimizedImage.astro';
-import type { ProductCard } from '@/modules/product';
-import type { ArticleCard } from '@/modules/article';
-import { defaultHomeContent } from '../home-content';
-import { productSectionTitle } from '../home-copy';
-import HomeSeoGeo from '../components/HomeSeoGeo.astro';
-import HomeTestimonials from '../components/HomeTestimonials.astro';
-import HomeArticles from '../components/HomeArticles.astro';
+import OptimizedImage from "@/ui/components/OptimizedImage.astro";
+import type { ProductCard } from "@/modules/product";
+import type { ArticleCard } from "@/modules/article";
+import { defaultHomeContent } from "../home-content";
+import { productSectionTitle } from "../home-copy";
+import HomeSeoGeo from "../components/HomeSeoGeo.astro";
+import HomeTestimonials from "../components/HomeTestimonials.astro";
+import HomeArticles from "../components/HomeArticles.astro";
 
 interface Props {
   siteName: string;
@@ -24,14 +24,20 @@ interface Props {
   warnings?: string[];
   showProducts?: boolean;
   articles?: ArticleCard[];
-  testimonials?: Array<{ id: string; author?: string; role?: string; content: string; avatarUrl?: string }>;
+  testimonials?: Array<{
+    id: string;
+    author?: string;
+    role?: string;
+    content: string;
+    avatarUrl?: string;
+  }>;
   articlesHref?: string;
 }
 
 const {
   siteName,
   locale,
-  heroImageUrl = '',
+  heroImageUrl = "",
   products = [],
   labels,
   paths,
@@ -40,17 +46,20 @@ const {
   showProducts = true,
   articles = [],
   testimonials = [],
-  articlesHref = '',
+  articlesHref = "",
 } = Astro.props;
 
 const copy = defaultHomeContent(locale);
-const finalTestimonials = (testimonials && testimonials.length > 0) ? testimonials : (copy.testimonials?.items || []);
+const finalTestimonials =
+  testimonials && testimonials.length > 0
+    ? testimonials
+    : copy.testimonials?.items || [];
 const contactHref = paths.contact;
 const productsHref = paths.products || contactHref;
 const productBySlug = new Map(products.map((p) => [p.slug, p]));
 
 const PLACEHOLDER = {
-  hero: 'https://placehold.co/960x720/0b1220/38bdf8?text=Hero',
+  hero: "https://placehold.co/960x720/0b1220/38bdf8?text=Hero",
   product: (label: string) =>
     `https://placehold.co/720x480/0b1220/38bdf8?text=${encodeURIComponent(label)}`,
 };
@@ -62,62 +71,70 @@ function productHref(slug: string, intent: string) {
 }
 
 function productCover(slug: string, fallbackLabel: string) {
-  return productBySlug.get(slug)?.coverUrl || PLACEHOLDER.product(fallbackLabel);
+  return (
+    productBySlug.get(slug)?.coverUrl || PLACEHOLDER.product(fallbackLabel)
+  );
 }
 
 function productIntent(slug: string) {
-  if (slug.includes('inquiry')) return 'crm';
-  if (slug.includes('growth')) return 'growth';
-  return 'sites';
+  if (slug.includes("inquiry")) return "crm";
+  if (slug.includes("growth")) return "growth";
+  return "sites";
 }
 
 const heroMedia = heroImageUrl || PLACEHOLDER.hero;
 const faqs = copy.faq.items;
 const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
   mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
+    "@type": "Question",
     name: f.question,
-    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
   })),
 };
 
 /** 紧凑 stroke 图标 path（SVG 必须自带 width/height，避免打包漏 CSS 时撑满屏） */
 const painIcons = [
-  'M4 6h16v10H4zM4 18h16M8 21h8',
-  'M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3',
-  'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',
-  'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z',
+  "M4 6h16v10H4zM4 18h16M8 21h8",
+  "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3",
+  "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+  "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z",
 ];
 const archIcons = [
-  'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z',
-  'M21 12V7H5a2 2 0 0 1 0-4h14v4M3 5v14a2 2 0 0 0 2 2h16v-5M18 12a2 2 0 0 0 0 4h4v-4z',
-  'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z',
-  'M3 3v18h18M7 14l4-4 4 4 5-6',
+  "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z",
+  "M21 12V7H5a2 2 0 0 1 0-4h14v4M3 5v14a2 2 0 0 0 2 2h16v-5M18 12a2 2 0 0 0 0 4h4v-4z",
+  "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z",
+  "M3 3v18h18M7 14l4-4 4 4 5-6",
 ];
 const pathIcons = [
-  'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10',
-  'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
-  'M3 3v18h18M7 14l4-4 4 4 5-6',
+  "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10",
+  "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+  "M3 3v18h18M7 14l4-4 4 4 5-6",
 ];
 const highlightIcons = [
-  'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z',
-  'M12 19V5M5 12l7-7 7 7',
-  'M3 3v18h18M7 14l4-4 4 4 5-6',
+  "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z",
+  "M12 19V5M5 12l7-7 7 7",
+  "M3 3v18h18M7 14l4-4 4 4 5-6",
 ];
 ---
 
-<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(faqSchema)}
+/>
 
-{(error || warnings.length) ? (
-  <div class="cz-container" style="padding-top:1rem">
-    {error ? <p class="cz-card cz-alert-error">{error}</p> : null}
-    {warnings.map((w) => (
-      <p class="cz-card cz-alert-warning">{w}</p>
-    ))}
-  </div>
-) : null}
+{
+  error || warnings.length ? (
+    <div class="cz-container" style="padding-top:1rem">
+      {error ? <p class="cz-card cz-alert-error">{error}</p> : null}
+      {warnings.map((w) => (
+        <p class="cz-card cz-alert-warning">{w}</p>
+      ))}
+    </div>
+  ) : null
+}
 
 <!-- Hero -->
 <section class="cz-hero cz-home-hero" data-home-hero>
@@ -130,22 +147,58 @@ const highlightIcons = [
       <h1 class="cz-hero-heading">{copy.hero.title}</h1>
       <p class="cz-hero-lead">{copy.hero.lead}</p>
       <div class="cz-hero-actions">
-        <a class="cz-btn cz-btn-primary cz-btn-lg" href={`${contactHref}?intent=sites`} data-cf-chat="open" data-product-title={copy.products.items[0]?.title || copy.hero.ctaPrimary}>
+        <a
+          class="cz-btn cz-btn-primary cz-btn-lg"
+          href={`${contactHref}?intent=sites`}
+          data-cf-chat="open"
+          data-product-title={copy.products.items[0]?.title ||
+            copy.hero.ctaPrimary}
+        >
           <span>{copy.hero.ctaPrimary}</span>
-          <svg class="cz-btn-arrow" viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+          <svg
+            class="cz-btn-arrow"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            width="18"
+            height="18"
+            aria-hidden="true"
+            ><path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path></svg
+          >
         </a>
-        <a class="cz-btn cz-btn-ghost cz-btn-lg" href={`${contactHref}?intent=crm`} data-cf-chat="open" data-product-title={copy.products.items[1]?.title || copy.hero.ctaSecondary}>{copy.hero.ctaSecondary}</a>
+        <a
+          class="cz-btn cz-btn-ghost cz-btn-lg"
+          href={`${contactHref}?intent=crm`}
+          data-cf-chat="open"
+          data-product-title={copy.products.items[1]?.title ||
+            copy.hero.ctaSecondary}>{copy.hero.ctaSecondary}</a
+        >
       </div>
       <ul class="cz-home-highlight-cards">
-        {copy.hero.highlights.map((h, idx) => (
-          <li class="cz-home-hl-card">
-            <span class="cz-home-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={highlightIcons[idx]} /></svg>
-            </span>
-            <strong>{h.title}</strong>
-            <span>{h.desc}</span>
-          </li>
-        ))}
+        {
+          copy.hero.highlights.map((h, idx) => (
+            <li class="cz-home-hl-card">
+              <span class="cz-home-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d={highlightIcons[idx]} />
+                </svg>
+              </span>
+              <strong>{h.title}</strong>
+              <span>{h.desc}</span>
+            </li>
+          ))
+        }
       </ul>
     </div>
     <div class="cz-home-hero-media">
@@ -168,22 +221,34 @@ const highlightIcons = [
 <section class="cz-section cz-home-pain">
   <div class="cz-container">
     <div class="cz-section-head cz-section-head-wide">
-      <p class="cz-section-eyebrow">01</p>
       <h2>{copy.pain.title}</h2>
     </div>
     <div class="cz-home-pain-grid">
-      {copy.pain.items.map((item, idx) => (
-        <article class="cz-home-pain-card">
-          <div class="cz-home-pain-top">
-            <span class="cz-home-icon cz-home-icon-lg" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d={painIcons[idx]} /></svg>
-            </span>
-            <span class="cz-home-num-badge">0{idx + 1}</span>
-          </div>
-          <h3>{item.title}</h3>
-          <p>{item.desc}</p>
-        </article>
-      ))}
+      {
+        copy.pain.items.map((item, idx) => (
+          <article class="cz-home-pain-card">
+            <div class="cz-home-pain-top">
+              <span class="cz-home-icon cz-home-icon-lg" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d={painIcons[idx]} />
+                </svg>
+              </span>
+              <span class="cz-home-num-badge">0{idx + 1}</span>
+            </div>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </article>
+        ))
+      }
     </div>
     <aside class="cz-home-bridge-panel">
       <p class="cz-home-bridge-title">{copy.pain.bridge}</p>
@@ -193,87 +258,124 @@ const highlightIcons = [
 </section>
 
 <!-- Products -->
-{showProducts ? (
-  <section class="cz-section cz-section-alt cz-home-products" id="products">
-    <div class="cz-container">
-      <div class="cz-section-head cz-section-head-wide">
-        <p class="cz-section-eyebrow">02</p>
-        <h2>{copy.products.title}</h2>
+{
+  showProducts ? (
+    <section class="cz-section cz-section-alt cz-home-products" id="products">
+      <div class="cz-container">
+        <div class="cz-section-head cz-section-head-wide">
+          <h2>{copy.products.title}</h2>
+        </div>
+        <div class="cz-home-product-stack">
+          {copy.products.items.map((item, i) => {
+            const cover = productCover(item.slug, item.tag);
+            const href = productHref(item.slug, productIntent(item.slug));
+            return (
+              <article
+                class:list={[
+                  "cz-home-product-card",
+                  i % 2 === 1 && "is-reverse",
+                ]}
+              >
+                <div class="cz-home-product-visual">
+                  <OptimizedImage
+                    src={cover}
+                    alt={item.tag}
+                    width={720}
+                    height={480}
+                    widths={[360, 540, 720]}
+                    sizes="(max-width: 900px) 100vw, 420px"
+                  />
+                  <span class="cz-home-product-chip">{item.tag}</span>
+                </div>
+                <div class="cz-home-product-copy">
+                  <p class="cz-home-product-index">
+                    {productSectionTitle(locale, item.index)}
+                  </p>
+                  <h3>{item.title}</h3>
+                  <p class="cz-home-product-suit">{item.suit}</p>
+                  <ul class="cz-home-feature-list">
+                    {item.features.map((f) => (
+                      <li>
+                        <strong>{f.title}</strong>
+                        <span>{f.desc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p class="cz-home-product-value">{item.value}</p>
+                  <a
+                    class="cz-btn cz-btn-primary"
+                    href={href}
+                    data-cf-chat="open"
+                    data-product-title={item.title}
+                  >
+                    {item.cta}
+                  </a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        <div class="cz-home-products-more">
+          <a class="cz-btn cz-btn-outline" href={productsHref}>
+            {labels.exploreAll}
+          </a>
+        </div>
       </div>
-      <div class="cz-home-product-stack">
-        {copy.products.items.map((item, i) => {
-          const cover = productCover(item.slug, item.tag);
-          const href = productHref(item.slug, productIntent(item.slug));
-          return (
-            <article class:list={['cz-home-product-card', i % 2 === 1 && 'is-reverse']}>
-              <div class="cz-home-product-visual">
-                <OptimizedImage
-                  src={cover}
-                  alt={item.tag}
-                  width={720}
-                  height={480}
-                  widths={[360, 540, 720]}
-                  sizes="(max-width: 900px) 100vw, 420px"
-                />
-                <span class="cz-home-product-chip">{item.tag}</span>
-              </div>
-              <div class="cz-home-product-copy">
-                <p class="cz-home-product-index">{productSectionTitle(locale, item.index)}</p>
-                <h3>{item.title}</h3>
-                <p class="cz-home-product-suit">{item.suit}</p>
-                <ul class="cz-home-feature-list">
-                  {item.features.map((f) => (
-                    <li>
-                      <strong>{f.title}</strong>
-                      <span>{f.desc}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p class="cz-home-product-value">{item.value}</p>
-                <a class="cz-btn cz-btn-primary" href={href} data-cf-chat="open" data-product-title={item.title}>{item.cta}</a>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-      <div class="cz-home-products-more">
-        <a class="cz-btn cz-btn-outline" href={productsHref}>{labels.exploreAll}</a>
-      </div>
-    </div>
-  </section>
-) : null}
+    </section>
+  ) : null
+}
 
 <!-- Architecture -->
 <section class="cz-section cz-home-arch">
   <div class="cz-home-arch-bg" aria-hidden="true"></div>
   <div class="cz-container cz-home-arch-inner">
     <div class="cz-section-head cz-section-head-wide cz-home-arch-head">
-      <p class="cz-section-eyebrow">03</p>
       <h2>{copy.architecture.title}</h2>
     </div>
     <div class="cz-home-arch-grid">
-      {copy.architecture.items.map((item, idx) => (
-        <article class="cz-home-arch-card">
-          <span class="cz-home-icon cz-home-icon-arch" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d={archIcons[idx]} /></svg>
-          </span>
-          <span class="cz-home-num-badge is-light">0{idx + 1}</span>
-          <h3>{item.title}</h3>
-          {item.lead ? <p class="cz-home-arch-lead"><strong>{item.lead}</strong></p> : null}
-          <p>{item.desc}</p>
-          {item.bullets?.length ? (
-            <ul class="cz-home-arch-bullets">
-              {item.bullets.map((b) => (
-                <li>
-                  {b.title ? <strong>{b.title}：</strong> : null}
-                  <span>{b.text}</span>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-          {item.footer ? <p class="cz-home-arch-footer"><strong>{item.footer}</strong></p> : null}
-        </article>
-      ))}
+      {
+        copy.architecture.items.map((item, idx) => (
+          <article class="cz-home-arch-card">
+            <span class="cz-home-icon cz-home-icon-arch" aria-hidden="true">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d={archIcons[idx]} />
+              </svg>
+            </span>
+            <span class="cz-home-num-badge is-light">0{idx + 1}</span>
+            <h3>{item.title}</h3>
+            {item.lead ? (
+              <p class="cz-home-arch-lead">
+                <strong>{item.lead}</strong>
+              </p>
+            ) : null}
+            <p>{item.desc}</p>
+            {item.bullets?.length ? (
+              <ul class="cz-home-arch-bullets">
+                {item.bullets.map((b) => (
+                  <li>
+                    {b.title ? <strong>{b.title}：</strong> : null}
+                    <span>{b.text}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            {item.footer ? (
+              <p class="cz-home-arch-footer">
+                <strong>{item.footer}</strong>
+              </p>
+            ) : null}
+          </article>
+        ))
+      }
     </div>
     <p class="cz-home-note is-on-dark">{copy.architecture.note}</p>
   </div>
@@ -283,7 +385,6 @@ const highlightIcons = [
 <section class="cz-section cz-home-compare">
   <div class="cz-container">
     <div class="cz-section-head cz-section-head-wide">
-      <p class="cz-section-eyebrow">04</p>
       <h2>{copy.compare.title}</h2>
       <p>{copy.compare.lead}</p>
     </div>
@@ -292,25 +393,35 @@ const highlightIcons = [
         <table class="cz-table cz-home-table cz-home-table-5col">
           <thead>
             <tr>
-              {copy.compare.columns.map((col, idx) => (
-                <th class:list={[idx === copy.compare.columns.length - 1 && 'is-brand-col']}>
-                  {col}
-                </th>
-              ))}
+              {
+                copy.compare.columns.map((col, idx) => (
+                  <th
+                    class:list={[
+                      idx === copy.compare.columns.length - 1 && "is-brand-col",
+                    ]}
+                  >
+                    {col}
+                  </th>
+                ))
+              }
             </tr>
           </thead>
           <tbody>
-            {copy.compare.rows.map((row) => (
-              <tr>
-                <td><strong>{row.dimension}</strong></td>
-                <td>{row.wordpress}</td>
-                <td>{row.custom}</td>
-                <td>{row.saas}</td>
-                <td class="is-highlight">
-                  <strong>{row.cizhenyu}</strong>
-                </td>
-              </tr>
-            ))}
+            {
+              copy.compare.rows.map((row) => (
+                <tr>
+                  <td>
+                    <strong>{row.dimension}</strong>
+                  </td>
+                  <td>{row.wordpress}</td>
+                  <td>{row.custom}</td>
+                  <td>{row.saas}</td>
+                  <td class="is-highlight">
+                    <strong>{row.cizhenyu}</strong>
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
@@ -319,14 +430,27 @@ const highlightIcons = [
       <p class="cz-home-why-label">{labels.compareHighlight}</p>
       <h3>{copy.compare.coreTitle}</h3>
       <ul class="cz-home-core-highlights">
-        {copy.compare.coreHighlights.map((hl) => (
-          <li>
-            <svg class="cz-check-icon" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-            </svg>
-            <span>{hl}</span>
-          </li>
-        ))}
+        {
+          copy.compare.coreHighlights.map((hl) => (
+            <li>
+              <svg
+                class="cz-check-icon"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span>{hl}</span>
+            </li>
+          ))
+        }
       </ul>
       <p class="cz-home-why-summary">{copy.compare.summary}</p>
       <div class="cz-home-why-actions">
@@ -350,36 +474,55 @@ const highlightIcons = [
 <section class="cz-section cz-home-paths">
   <div class="cz-container">
     <div class="cz-section-head cz-section-head-wide">
-      <p class="cz-section-eyebrow">06</p>
       <h2>{copy.paths.title}</h2>
     </div>
     <div class="cz-home-path-grid">
-      {copy.paths.items.map((item, idx) => (
-        <a class="cz-home-path-card" href={`${contactHref}?intent=${item.intent}`} data-cf-chat="open" data-product-title={item.title}>
-          <span class="cz-home-icon cz-home-icon-lg" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d={pathIcons[idx]} /></svg>
-          </span>
-          <h3>{item.title}</h3>
-          <p>{item.desc}</p>
-          <span class="cz-home-path-cta">{item.cta}</span>
-        </a>
-      ))}
+      {
+        copy.paths.items.map((item, idx) => (
+          <a
+            class="cz-home-path-card"
+            href={`${contactHref}?intent=${item.intent}`}
+            data-cf-chat="open"
+            data-product-title={item.title}
+          >
+            <span class="cz-home-icon cz-home-icon-lg" aria-hidden="true">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d={pathIcons[idx]} />
+              </svg>
+            </span>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+            <span class="cz-home-path-cta">{item.cta}</span>
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <!-- Testimonials -->
 <HomeTestimonials
-  title={labels.testimonialsTitle || labels.testimonials || copy.testimonials?.title}
-  eyebrow={labels.testimonialsEyebrow || '客户反馈'}
+  title={labels.testimonialsTitle ||
+    labels.testimonials ||
+    copy.testimonials?.title}
+  eyebrow={labels.testimonialsEyebrow || "客户反馈"}
   items={finalTestimonials}
 />
 
 <!-- Articles -->
 <HomeArticles
   title={labels.latestNews}
-  eyebrow={labels.updatesEyebrow || '行业动态'}
-  detailLabel={labels.viewDetail || '查看详情'}
+  eyebrow={labels.updatesEyebrow || "行业动态"}
+  detailLabel={labels.viewDetail || "查看详情"}
   articles={articles}
   viewAllHref={articlesHref}
   viewAllLabel={labels.viewAllNews}
@@ -389,19 +532,37 @@ const highlightIcons = [
 <section class="cz-section cz-section-alt cz-home-faq" id="faq">
   <div class="cz-container">
     <div class="cz-section-head">
-      <p class="cz-section-eyebrow">{labels.faqEyebrow}</p>
       <h2>{copy.faq.title}</h2>
     </div>
     <div class="cz-faq-wrap">
-      {faqs.map((f, idx) => (
-        <details class="cz-faq-item" open={idx === 0}>
-          <summary class="cz-faq-q">
-            <span><em>{String(idx + 1).padStart(2, '0')}</em> {f.question}</span>
-            <svg class="cz-faq-icon" viewBox="0 0 20 20" fill="currentColor" width="20" height="20" aria-hidden="true"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-          </summary>
-          <div class="cz-faq-a"><p>{f.answer}</p></div>
-        </details>
-      ))}
+      {
+        faqs.map((f, idx) => (
+          <details class="cz-faq-item" open={idx === 0}>
+            <summary class="cz-faq-q">
+              <span>
+                <em>{String(idx + 1).padStart(2, "0")}</em> {f.question}
+              </span>
+              <svg
+                class="cz-faq-icon"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                width="20"
+                height="20"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </summary>
+            <div class="cz-faq-a">
+              <p>{f.answer}</p>
+            </div>
+          </details>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -415,7 +576,12 @@ const highlightIcons = [
       <p>{copy.cta.lead}</p>
     </div>
     <div class="cz-cta-buttons">
-      <a class="cz-btn cz-btn-primary cz-btn-lg" href={`${contactHref}?intent=consult`} data-cf-chat="open" data-product-title={copy.cta.button}>{copy.cta.button}</a>
+      <a
+        class="cz-btn cz-btn-primary cz-btn-lg"
+        href={`${contactHref}?intent=consult`}
+        data-cf-chat="open"
+        data-product-title={copy.cta.button}>{copy.cta.button}</a
+      >
     </div>
   </div>
 </section>
@@ -423,13 +589,13 @@ const highlightIcons = [
 <script is:inline>
   (function () {
     function initHeroCanvas() {
-      var root = document.querySelector('[data-home-hero]');
+      var root = document.querySelector("[data-home-hero]");
       if (!root) return;
-      var canvas = root.querySelector('.cz-home-hero-canvas');
+      var canvas = root.querySelector(".cz-home-hero-canvas");
       if (!canvas || !canvas.getContext) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      var ctx = canvas.getContext('2d');
+      var ctx = canvas.getContext("2d");
       if (!ctx) return;
 
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -444,8 +610,8 @@ const highlightIcons = [
         h = Math.max(320, Math.floor(rect.height));
         canvas.width = Math.floor(w * dpr);
         canvas.height = Math.floor(h * dpr);
-        canvas.style.width = w + 'px';
-        canvas.style.height = h + 'px';
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         var count = Math.min(56, Math.max(28, Math.floor((w * h) / 18000)));
         nodes = [];
@@ -476,7 +642,8 @@ const highlightIcons = [
             var dy = p.y - q.y;
             var dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < 120) {
-              ctx.strokeStyle = 'rgba(29, 78, 216, ' + 0.18 * (1 - dist / 120) + ')';
+              ctx.strokeStyle =
+                "rgba(29, 78, 216, " + 0.18 * (1 - dist / 120) + ")";
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(q.x, q.y);
@@ -486,7 +653,7 @@ const highlightIcons = [
         }
         for (var k = 0; k < nodes.length; k++) {
           var node = nodes[k];
-          ctx.fillStyle = 'rgba(14, 165, 233, 0.55)';
+          ctx.fillStyle = "rgba(14, 165, 233, 0.55)";
           ctx.beginPath();
           ctx.arc(node.x, node.y, 1.6, 0, Math.PI * 2);
           ctx.fill();
@@ -496,15 +663,17 @@ const highlightIcons = [
 
       resize();
       tick();
-      window.addEventListener('resize', resize, { passive: true });
-      document.addEventListener('visibilitychange', function () {
+      window.addEventListener("resize", resize, { passive: true });
+      document.addEventListener("visibilitychange", function () {
         if (document.hidden) cancelAnimationFrame(raf);
         else raf = requestAnimationFrame(tick);
       });
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initHeroCanvas, { once: true });
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initHeroCanvas, {
+        once: true,
+      });
     } else {
       initHeroCanvas();
     }

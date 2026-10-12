@@ -1,6 +1,6 @@
 ---
-import OptimizedImage from '@/ui/components/OptimizedImage.astro';
-import type { ArticleCard } from '@/modules/article';
+import OptimizedImage from "@/ui/components/OptimizedImage.astro";
+import type { ArticleCard } from "@/modules/article";
 
 interface Props {
   title: string;
@@ -13,11 +13,11 @@ interface Props {
 
 const {
   title,
-  eyebrow = '行业动态',
-  detailLabel = '查看详情',
+  eyebrow = "行业动态",
+  detailLabel = "查看详情",
   articles = [],
-  viewAllHref = '',
-  viewAllLabel = '',
+  viewAllHref = "",
+  viewAllLabel = "",
 } = Astro.props;
 const displayArticles = articles.slice(0, 6);
 if (!displayArticles.length) return null;
@@ -27,60 +27,94 @@ if (!displayArticles.length) return null;
   <div class="cz-container">
     <div class="cz-section-head cz-section-head-split">
       <div>
-        <p class="cz-section-eyebrow">{eyebrow}</p>
-        <h2>{title}</h2>
+        <h2>{title || eyebrow}</h2>
       </div>
-      {viewAllHref && viewAllLabel ? (
-        <a class="cz-btn cz-btn-ghost cz-home-articles-more" href={viewAllHref}>
-          <span>{viewAllLabel}</span>
-          <svg class="cz-btn-arrow" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </a>
-      ) : null}
+      {
+        viewAllHref && viewAllLabel ? (
+          <a
+            class="cz-btn cz-btn-ghost cz-home-articles-more"
+            href={viewAllHref}
+          >
+            <span>{viewAllLabel}</span>
+            <svg
+              class="cz-btn-arrow"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+        ) : null
+      }
     </div>
     <div class="cz-home-article-grid">
-      {displayArticles.map((article) => (
-        <article class="cz-home-article-card">
-          <a class="cz-home-article-media" href={article.href}>
-            {article.coverUrl ? (
-              <OptimizedImage
-                src={article.coverUrl}
-                alt={article.title}
-                width={480}
-                height={280}
-                widths={[320, 480]}
-                sizes="(max-width: 768px) 100vw, 360px"
-              />
-            ) : (
-              <div class="cz-home-article-media-placeholder">
-                <span>{title}</span>
+      {
+        displayArticles.map((article) => (
+          <article class="cz-home-article-card">
+            <a class="cz-home-article-media" href={article.href}>
+              {article.coverUrl ? (
+                <OptimizedImage
+                  src={article.coverUrl}
+                  alt={article.title}
+                  width={480}
+                  height={280}
+                  widths={[320, 480]}
+                  sizes="(max-width: 768px) 100vw, 360px"
+                />
+              ) : (
+                <div class="cz-home-article-media-placeholder">
+                  <span>{title}</span>
+                </div>
+              )}
+            </a>
+            <div class="cz-home-article-body">
+              {article.publishedAt ? (
+                <time
+                  class="cz-home-article-date"
+                  datetime={article.publishedAt}
+                >
+                  {article.publishedAt.slice(0, 10)}
+                </time>
+              ) : null}
+              <h3 class="cz-home-article-title">
+                <a href={article.href}>{article.title}</a>
+              </h3>
+              {article.summary ? (
+                <p class="cz-home-article-summary">{article.summary}</p>
+              ) : null}
+              <div class="cz-home-article-footer">
+                <a
+                  class="cz-btn cz-btn-sm cz-btn-ghost cz-home-article-btn"
+                  href={article.href}
+                >
+                  <span>{detailLabel}</span>
+                  <svg
+                    class="cz-btn-arrow"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    width="14"
+                    height="14"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </a>
               </div>
-            )}
-          </a>
-          <div class="cz-home-article-body">
-            {article.publishedAt ? (
-              <time class="cz-home-article-date" datetime={article.publishedAt}>
-                {article.publishedAt.slice(0, 10)}
-              </time>
-            ) : null}
-            <h3 class="cz-home-article-title">
-              <a href={article.href}>{article.title}</a>
-            </h3>
-            {article.summary ? (
-              <p class="cz-home-article-summary">{article.summary}</p>
-            ) : null}
-            <div class="cz-home-article-footer">
-              <a class="cz-btn cz-btn-sm cz-btn-ghost cz-home-article-btn" href={article.href}>
-                <span>{detailLabel}</span>
-                <svg class="cz-btn-arrow" viewBox="0 0 20 20" fill="currentColor" width="14" height="14" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </a>
             </div>
-          </div>
-        </article>
-      ))}
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>

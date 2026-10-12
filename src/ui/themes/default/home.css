@@ -270,8 +270,7 @@
     linear-gradient(135deg, rgba(239, 246, 255, 0.95), rgba(255, 255, 255, 0.92)),
     var(--surface);
   border: 1px solid #bfdbfe;
-  box-shadow: 0 14px 36px rgba(29, 78, 216, 0.08);
-  max-width: 52rem;
+  box-shadow: 0 14px 36px rgba(29, 78, 216, 0.08);  
 }
 [data-theme='default'] .cz-home-bridge-title {
   margin: 0 0 0.55rem;

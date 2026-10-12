@@ -15,47 +15,50 @@ interface Props {
   items: TestimonialItem[];
 }
 
-const { title = '客户反馈', eyebrow = '客户反馈', items = [] } = Astro.props;
+const { title = "客户反馈", eyebrow = "客户反馈", items = [] } = Astro.props;
 if (!items || !items.length) return null;
 ---
 
 <section class="cz-section cz-home-testimonials" id="testimonials">
   <div class="cz-container">
     <div class="cz-section-head">
-      <p class="cz-section-eyebrow">{eyebrow}</p>
       <h2>{title}</h2>
     </div>
     <div class="cz-home-testimonial-grid">
-      {items.map((item) => {
-        const author = item.author || item.name || '客户';
-        const content = item.content || item.quote || '';
-        return (
-          <article class="cz-home-testimonial-card">
-            <div class="cz-home-testimonial-quote" aria-hidden="true">“</div>
-            <p class="cz-home-testimonial-content">{content}</p>
-            <div class="cz-home-testimonial-author">
-              {item.avatarUrl ? (
-                <img
-                  class="cz-home-testimonial-avatar"
-                  src={item.avatarUrl}
-                  alt={author}
-                  width="44"
-                  height="44"
-                  loading="lazy"
-                />
-              ) : (
-                <div class="cz-home-testimonial-avatar-fallback">
-                  {author.charAt(0).toUpperCase()}
-                </div>
-              )}
-              <div class="cz-home-testimonial-meta">
-                <strong>{author}</strong>
-                {item.role ? <span>{item.role}</span> : null}
+      {
+        items.map((item) => {
+          const author = item.author || item.name || "客户";
+          const content = item.content || item.quote || "";
+          return (
+            <article class="cz-home-testimonial-card">
+              <div class="cz-home-testimonial-quote" aria-hidden="true">
+                “
               </div>
-            </div>
-          </article>
-        );
-      })}
+              <p class="cz-home-testimonial-content">{content}</p>
+              <div class="cz-home-testimonial-author">
+                {item.avatarUrl ? (
+                  <img
+                    class="cz-home-testimonial-avatar"
+                    src={item.avatarUrl}
+                    alt={author}
+                    width="44"
+                    height="44"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="cz-home-testimonial-avatar-fallback">
+                    {author.charAt(0).toUpperCase()}
+                  </div>
+                )}
+                <div class="cz-home-testimonial-meta">
+                  <strong>{author}</strong>
+                  {item.role ? <span>{item.role}</span> : null}
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
     </div>
   </div>
 </section>

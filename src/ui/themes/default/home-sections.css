@@ -122,7 +122,6 @@
   font-size: 0.86rem;
   color: var(--muted);
   line-height: 1.7;
-  max-width: 48rem;
 }
 [data-theme='default'] .cz-home-note.is-on-dark {
   color: #94a3b8;
@@ -280,8 +279,7 @@
 }
 
 /* —— FAQ —— */
-[data-theme='default'] .cz-faq-wrap {
-  max-width: 860px;
+[data-theme='default'] .cz-faq-wrap {  
   display: flex;
   flex-direction: column;
   gap: 0.75rem;

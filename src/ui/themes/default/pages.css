@@ -354,7 +354,6 @@
 [data-theme='default'] .cz-faq-list {
   display: grid;
   gap: 0.65rem;
-  max-width: 48rem;
 }
 [data-theme='default'] .cz-faq-item {
   background: var(--surface);
