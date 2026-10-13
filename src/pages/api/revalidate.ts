@@ -56,9 +56,10 @@ export const POST: APIRoute = async ({ request }) => {
   const explicitPaths = (Array.isArray(body.paths) ? body.paths.map(String) : [])
     .map((p) => normalizePurgePathInput(p))
     .filter((p): p is string => Boolean(p));
-  const mapped = pathsForCollections(collections, site.locales);
+  const defaultLocale = site.defaultLocale || site.locales[0] || 'zh-CN';
+  const mapped = pathsForCollections(collections, site.locales, defaultLocale);
   const chromePaths =
-    body.purge === 'chrome' ? pathsForChromePurge(site.locales) : [];
+    body.purge === 'chrome' ? pathsForChromePurge(site.locales, defaultLocale) : [];
 
   let paths: string[];
   if (body.purge === 'all') {
@@ -83,6 +84,7 @@ export const POST: APIRoute = async ({ request }) => {
   const purge = await purgeHtmlPaths({
     paths,
     locales: site.locales,
+    defaultLocale,
     siteOrigin,
   });
 

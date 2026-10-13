@@ -1,12 +1,6 @@
 /**
- * 集中引入各主题 CSS。新主题：加一行 import，样式用 [data-theme='xxx'] 隔离。
- * 不在此写业务逻辑。
+ * 自动扫描并引入所有已安装主题目录下的 CSS 样式。
+ * 样式由各自主题的 [data-theme='xxx'] 作用域隔离，删除某个主题文件夹时自动不引入其样式。
  */
-import './default/tokens.css';
-import './default/theme.css';
-import './default/pages.css';
-import './default/home.css';
-import './default/home-sections.css';
-import './default/home-extra.css';
-import './turmill/tokens.css';
-import './turmill/theme.css';
+import.meta.glob(['./*/*.css', './*/**/*.css', '!./*/seed/**'], { eager: true });
+

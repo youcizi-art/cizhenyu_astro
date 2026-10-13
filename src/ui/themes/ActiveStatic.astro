@@ -1,11 +1,5 @@
 ---
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
-import DefaultAboutPage from './default/pages/AboutPage.astro';
-import DefaultContactPage from './default/pages/ContactPage.astro';
-import DefaultFaqPage from './default/pages/FaqPage.astro';
-import TurmillAboutPage from './turmill/pages/AboutPage.astro';
-import TurmillContactPage from './turmill/pages/ContactPage.astro';
-import TurmillFaqPage from './turmill/pages/FaqPage.astro';
 import { getThemeMeta } from './theme-ui';
 import { t } from '@/modules/i18n';
 import type { PageChrome } from '@/workflows/chrome/load-chrome';
@@ -37,9 +31,17 @@ const homeHref = `/${chrome.locale}`;
 const homeLabel = t(chrome.locale, 'home');
 const relatedTitle = chrome.locale.startsWith('zh') ? '相关内容' : 'Related';
 const shortAnswerLabel = chrome.locale.startsWith('zh') ? '简答' : chrome.locale === 'ja' ? '簡潔な回答' : 'Short answer';
+
+const aboutModules = import.meta.glob<{ default: any }>('./*/pages/AboutPage.astro', { eager: true });
+const contactModules = import.meta.glob<{ default: any }>('./*/pages/ContactPage.astro', { eager: true });
+const faqModules = import.meta.glob<{ default: any }>('./*/pages/FaqPage.astro', { eager: true });
+
+const TargetAbout = aboutModules[`./${meta.id}/pages/AboutPage.astro`]?.default || aboutModules['./default/pages/AboutPage.astro']?.default;
+const TargetContact = contactModules[`./${meta.id}/pages/ContactPage.astro`]?.default || contactModules['./default/pages/ContactPage.astro']?.default;
+const TargetFaq = faqModules[`./${meta.id}/pages/FaqPage.astro`]?.default || faqModules['./default/pages/FaqPage.astro']?.default;
 ---
-{meta.id === 'default' && kind === 'about' ? (
-  <DefaultAboutPage
+{kind === 'about' && TargetAbout ? (
+  <TargetAbout
     title={title}
     summary={summary}
     content={content}
@@ -52,8 +54,8 @@ const shortAnswerLabel = chrome.locale.startsWith('zh') ? '简答' : chrome.loca
     warnings={chrome.warnings}
     emptyHint={emptyHint}
   />
-) : meta.id === 'default' && kind === 'contact' ? (
-  <DefaultContactPage
+) : kind === 'contact' && TargetContact ? (
+  <TargetContact
     title={title}
     content={content}
     company={chrome.company}
@@ -66,44 +68,8 @@ const shortAnswerLabel = chrome.locale.startsWith('zh') ? '简答' : chrome.loca
     inquiryHint={t(chrome.locale, 'inquiryHint')}
     mailLabel={t(chrome.locale, 'sendEmail')}
   />
-) : meta.id === 'default' && kind === 'faq' ? (
-  <DefaultFaqPage
-    title={title}
-    items={faqItems}
-    homeHref={homeHref}
-    homeLabel={homeLabel}
-    shortAnswerLabel={shortAnswerLabel}
-    emptyText={emptyHint || (chrome.locale.startsWith('zh') ? '暂无 FAQ。' : 'No FAQs yet.')}
-    error={error}
-    warnings={chrome.warnings}
-  />
-) : meta.id === 'turmill' && kind === 'about' ? (
-  <TurmillAboutPage
-    title={title}
-    summary={summary}
-    content={content}
-    company={chrome.company}
-    references={references}
-    relatedTitle={relatedTitle}
-    homeHref={homeHref}
-    homeLabel={homeLabel}
-    error={error}
-    warnings={chrome.warnings}
-    emptyHint={emptyHint}
-  />
-) : meta.id === 'turmill' && kind === 'contact' ? (
-  <TurmillContactPage
-    title={title}
-    content={content}
-    company={chrome.company}
-    homeHref={homeHref}
-    homeLabel={homeLabel}
-    error={error}
-    warnings={chrome.warnings}
-    emptyHint={emptyHint}
-  />
-) : meta.id === 'turmill' && kind === 'faq' ? (
-  <TurmillFaqPage
+) : kind === 'faq' && TargetFaq ? (
+  <TargetFaq
     title={title}
     items={faqItems}
     homeHref={homeHref}

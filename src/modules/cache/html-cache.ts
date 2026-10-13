@@ -10,7 +10,7 @@ import {
   DEFAULT_HTML_CACHE_TTL_SECONDS,
   MIN_HTML_CACHE_TTL_SECONDS,
 } from '../site/manifest';
-import { COLLECTION_PATH_PREFIXES } from './revalidate-map';
+import { COLLECTION_PATH_PREFIXES, expandPurgePaths, normalizePathname } from './revalidate-map';
 
 export type HtmlCacheEntry = {
   status: number;
@@ -212,25 +212,6 @@ function siteDocumentPaths(locales: string[]) {
   return [...out];
 }
 
-function expandPaths(paths: string[], locales: string[]) {
-  const out = new Set<string>();
-  for (const raw of paths) {
-    const path = String(raw || '').trim();
-    if (!path) continue;
-    if (path === '/*' || path === '*') {
-      out.add('/*');
-      continue;
-    }
-    out.add(path.startsWith('/') ? path : `/${path}`);
-    if (!locales.some((locale) => path === `/${locale}` || path.startsWith(`/${locale}/`))) {
-      for (const locale of locales) {
-        out.add(`/${locale}${path === '/' ? '' : path}`);
-      }
-    }
-  }
-  return [...out];
-}
-
 function matchesPath(key: string, patterns: string[]) {
   if (patterns.includes('/*')) return true;
   const pathname = key.split('?')[0] || '/';
@@ -298,9 +279,15 @@ async function purgeCloudflareZone(options: {
 export async function purgeHtmlPaths(options: {
   paths: string[];
   locales: string[];
+  defaultLocale?: string;
   siteOrigin?: string;
 }): Promise<PurgeResult> {
-  const patterns = expandPaths(options.paths, options.locales);
+  const defaultLocale =
+    String(options.defaultLocale || options.locales[0] || 'zh-CN').trim() || 'zh-CN';
+  const normalizedInputs = options.paths
+    .map((p) => normalizePathname(String(p || '').trim()))
+    .filter(Boolean);
+  const patterns = expandPurgePaths(normalizedInputs, options.locales, defaultLocale);
   let deleted = 0;
   let usedCacheApi = false;
   let usedMemory = false;

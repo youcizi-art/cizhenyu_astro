@@ -16,7 +16,13 @@ import { spawnSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const astroRoot = path.resolve(__dirname, '..');
-const themesOutRoot = path.resolve(astroRoot, '..', 'cizhenyu_astro_themes');
+const isPrivate =
+  process.argv.includes('-p') ||
+  process.argv.includes('--p') ||
+  process.argv.includes('--private') ||
+  process.argv.some((a) => a.startsWith('--private=1') || a.startsWith('--private=true'));
+const targetDirName = isPrivate ? 'cizhenyu_astro_private' : 'cizhenyu_astro_themes';
+const themesOutRoot = path.resolve(astroRoot, '..', targetDirName);
 
 function arg(name, def = '') {
   const hit = process.argv.find((a) => a.startsWith(`--${name}=`));
@@ -231,55 +237,6 @@ function writeSingleThemeKernel(themesDir, themeId, allThemeIds) {
       `  <slot />\n` +
       `</${P}PageShell>\n`,
   );
-
-  // Active*：把其它主题分支去掉，仅保留目标主题（用源文件做字符串手术）
-  const others = (allThemeIds || listThemeIds(themesDir)).filter((t) => t !== themeId);
-  for (const file of fs.readdirSync(themesDir).filter((f) => f.startsWith('Active') && f.endsWith('.astro'))) {
-    slimActiveFile(path.join(themesDir, file), themeId, others);
-  }
-}
-
-function slimActiveFile(filePath, themeId, others) {
-  let text = fs.readFileSync(filePath, 'utf8');
-
-  // 删除其它主题 import
-  for (const o of others) {
-    text = text.replace(new RegExp(`^import\\s+.+?from\\s+['"]\\.\\/${o}\\/.+?['"];\\r?\\n`, 'gm'), '');
-  }
-  // labels helper import：只保留当前主题
-  for (const o of others) {
-    text = text.replace(
-      new RegExp(`^import\\s+\\{[^}]*\\}\\s+from\\s+['"]\\.\\/${o}\\/home-copy['"];\\r?\\n`, 'gm'),
-      '',
-    );
-  }
-
-  // 条件恒真/恒假
-  text = text.replace(new RegExp(`meta\\.id\\s*===\\s*['"]${themeId}['"]`, 'g'), 'true');
-  for (const o of others) {
-    text = text.replace(new RegExp(`meta\\.id\\s*===\\s*['"]${o}['"]`, 'g'), 'false');
-  }
-  text = text.replace(
-    new RegExp(`isDefault\\s*=\\s*meta\\.id\\s*===\\s*['"]default['"]`, 'g'),
-    `isDefault = ${themeId === 'default'}`,
-  );
-  text = text.replace(
-    new RegExp(`isTurmill\\s*=\\s*meta\\.id\\s*===\\s*['"]turmill['"]`, 'g'),
-    `isTurmill = ${themeId === 'turmill'}`,
-  );
-  // 任意多主题组合的 isShellTheme 判断统一恒真（单主题包始终使用 page-shell）
-  text = text.replace(
-    /isShellTheme\s*=\s*[^;]+;/g,
-    'isShellTheme = true;',
-  );
-
-  // 删除其它主题 home-copy 变量（约定：defaultLabels / turmillLabels / <id>Labels）
-  for (const o of others) {
-    const varName = `${o}Labels`;
-    text = text.replace(new RegExp(`const\\s+${varName}\\s*=\\s*[^;]+;\\r?\\n`, 'g'), '');
-  }
-
-  fs.writeFileSync(filePath, text);
 }
 
 function patchLoadSiteForTheme(workRoot, themeId) {
@@ -380,12 +337,53 @@ function updateCatalog(outRoot, themeId, entryPatch) {
   fs.writeFileSync(catalogPath, JSON.stringify(catalog, null, 2) + '\n');
 }
 
+function syncPackageJsonPackScripts(availableThemes) {
+  const pkgPath = path.join(astroRoot, 'package.json');
+  if (!fs.existsSync(pkgPath)) return;
+  try {
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    let changed = false;
+    if (!pkg.scripts) pkg.scripts = {};
+    if (!pkg.scripts['pack']) {
+      pkg.scripts['pack'] = 'node scripts/pack-theme.mjs';
+      changed = true;
+    }
+    for (const id of availableThemes) {
+      const scriptKey = `pack:${id}`;
+      const expected = `node scripts/pack-theme.mjs --id=${id}`;
+      if (pkg.scripts[scriptKey] !== expected) {
+        pkg.scripts[scriptKey] = expected;
+        changed = true;
+      }
+    }
+    if (changed) {
+      fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
+    }
+  } catch {}
+}
+
 function main() {
-  const themeId = arg('id', '');
+  const themesDir = path.join(astroRoot, 'src/ui/themes');
+  const availableThemes = listThemeIds(themesDir);
+  syncPackageJsonPackScripts(availableThemes);
+
+  let themeId = arg('id', '');
   if (!themeId) {
-    console.error('用法: node scripts/pack-theme.mjs --id=<theme>');
+    const pos = process.argv.slice(2).find((a) => !a.startsWith('-'));
+    if (pos) themeId = pos;
+  }
+
+  if (!themeId) {
+    console.error('⚠ 请指定要打包的主题名称！');
+    console.error(`当前本地已发现的主题列表: ${availableThemes.join(', ')}`);
+    console.error('用法示例:');
+    console.error('  npm run pack:default          (打包公共主题到 cizhenyu_astro_themes)');
+    console.error('  npm run pack:default -- -p     (打包私密主题到 cizhenyu_astro_private)');
+    console.error('  npm run pack -- <theme> -p    (通用打包私密主题)');
     process.exit(1);
   }
+
+  console.log(`▶ 开始打包主题 [${themeId}] (${isPrivate ? '私密包 -> cizhenyu_astro_private' : '公共包 -> cizhenyu_astro_themes'})…`);
   const version =
     arg('version') ||
     new Date()

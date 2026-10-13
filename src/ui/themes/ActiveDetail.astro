@@ -2,12 +2,6 @@
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import GeoAnswer from '@/ui/blocks/GeoAnswer.astro';
 import RelatedLinks from '@/ui/blocks/RelatedLinks.astro';
-import DefaultArticleDetailPage from './default/pages/ArticleDetailPage.astro';
-import DefaultCaseStudyDetailPage from './default/pages/CaseStudyDetailPage.astro';
-import DefaultSimpleDetailPage from './default/pages/SimpleDetailPage.astro';
-import TurmillArticleDetailPage from './turmill/pages/ArticleDetailPage.astro';
-import TurmillCaseStudyDetailPage from './turmill/pages/CaseStudyDetailPage.astro';
-import TurmillSimpleDetailPage from './turmill/pages/SimpleDetailPage.astro';
 import { getThemeMeta } from './theme-ui';
 import { t } from '@/modules/i18n';
 import type { PageChrome } from '@/workflows/chrome/load-chrome';
@@ -40,13 +34,21 @@ const articleProducts = Array.isArray(article?.relatedProducts) ? article.relate
 const articleIndustries = Array.isArray(article?.relatedIndustries) ? article.relatedIndustries : [];
 const caseIndustries = Array.isArray(caseItem?.industries) ? caseItem.industries : [];
 const caseProducts = Array.isArray(caseItem?.relatedProducts) ? caseItem.relatedProducts : [];
-const isShellTheme = meta.id === 'default' || meta.id === 'turmill';
+const isShellTheme = true;
+
+const articleDetailModules = import.meta.glob<{ default: any }>('./*/pages/ArticleDetailPage.astro', { eager: true });
+const caseStudyDetailModules = import.meta.glob<{ default: any }>('./*/pages/CaseStudyDetailPage.astro', { eager: true });
+const simpleDetailModules = import.meta.glob<{ default: any }>('./*/pages/SimpleDetailPage.astro', { eager: true });
+
+const TargetArticleDetail = articleDetailModules[`./${meta.id}/pages/ArticleDetailPage.astro`]?.default || articleDetailModules['./default/pages/ArticleDetailPage.astro']?.default;
+const TargetCaseStudyDetail = caseStudyDetailModules[`./${meta.id}/pages/CaseStudyDetailPage.astro`]?.default || caseStudyDetailModules['./default/pages/CaseStudyDetailPage.astro']?.default;
+const TargetSimpleDetail = simpleDetailModules[`./${meta.id}/pages/SimpleDetailPage.astro`]?.default || simpleDetailModules['./default/pages/SimpleDetailPage.astro']?.default;
 ---
 {articleShortAnswer ? (
   <GeoAnswer title={shortAnswerLabel} shortAnswer={articleShortAnswer} />
 ) : null}
-{meta.id === 'default' && kind === 'article' ? (
-  <DefaultArticleDetailPage
+{kind === 'article' && TargetArticleDetail ? (
+  <TargetArticleDetail
     article={article}
     backHref={backHref}
     backLabel={`← ${listLabel}`}
@@ -68,8 +70,8 @@ const isShellTheme = meta.id === 'default' || meta.id === 'turmill';
     error={error}
     warnings={chrome.warnings}
   />
-) : meta.id === 'default' && kind === 'caseStudy' ? (
-  <DefaultCaseStudyDetailPage
+) : kind === 'caseStudy' && TargetCaseStudyDetail ? (
+  <TargetCaseStudyDetail
     item={caseItem}
     backHref={backHref}
     backLabel={`← ${listLabel}`}
@@ -84,61 +86,8 @@ const isShellTheme = meta.id === 'default' || meta.id === 'turmill';
     error={error}
     warnings={chrome.warnings}
   />
-) : meta.id === 'default' ? (
-  <DefaultSimpleDetailPage
-    title={title}
-    summary={summary}
-    content={content}
-    coverUrl={coverUrl}
-    backHref={backHref}
-    backLabel={`← ${listLabel}`}
-    homeHref={homeHref}
-    homeLabel={homeLabel}
-    listLabel={listLabel}
-    error={error}
-    warnings={chrome.warnings}
-  />
-) : meta.id === 'turmill' && kind === 'article' ? (
-  <TurmillArticleDetailPage
-    article={article}
-    backHref={backHref}
-    backLabel={`← ${listLabel}`}
-    homeHref={homeHref}
-    homeLabel={homeLabel}
-    listLabel={listLabel}
-    locale={chrome.locale}
-    contactHref={`/${chrome.locale}/contact`}
-    contactLabel={t(chrome.locale, 'contact')}
-    relatedTitle={relatedArticlesTitle}
-    related={relatedArticles.map((item: { title: string; href: string }) => ({
-      title: item.title,
-      href: item.href,
-    }))}
-    sidebarTitle={zh ? '需要方案？' : 'Need a Solution?'}
-    sidebarBody={chrome.company.summary || (zh
-      ? '联系我们获取规格、交期与定制方案。'
-      : 'Talk to our team for specs, MOQ, and lead times.')}
-    error={error}
-    warnings={chrome.warnings}
-  />
-) : meta.id === 'turmill' && kind === 'caseStudy' ? (
-  <TurmillCaseStudyDetailPage
-    item={caseItem}
-    backHref={backHref}
-    backLabel={`← ${listLabel}`}
-    homeHref={homeHref}
-    homeLabel={homeLabel}
-    listLabel={listLabel}
-    labels={{
-      challenge: zh ? '挑战' : 'Challenge',
-      solution: zh ? '方案' : 'Solution',
-      results: zh ? '成果' : 'Results',
-    }}
-    error={error}
-    warnings={chrome.warnings}
-  />
-) : meta.id === 'turmill' ? (
-  <TurmillSimpleDetailPage
+) : TargetSimpleDetail ? (
+  <TargetSimpleDetail
     title={title}
     summary={summary}
     content={content}

@@ -1,12 +1,10 @@
 ---
 /**
- * 通用页壳切换：page-shell 主题走各自 PageShell；否则走默认 SiteHeader/Footer。
- * 新增 page-shell 主题时在此登记组件，勿散落到 pages。
+ * 通用页壳切换：通过 glob 自动匹配当前激活主题的 PageShell；未匹配时回退默认 SiteHeader/Footer。
+ * 彻底告别新增主题时在此处手动 import 和增加条件分支。
  */
 import SiteHeader from '@/ui/layout/SiteHeader.astro';
 import SiteFooter from '@/ui/layout/SiteFooter.astro';
-import DefaultPageShell from './default/PageShell.astro';
-import TurmillPageShell from './turmill/PageShell.astro';
 import { buildPageShellProps, getThemeMeta, hasPageShell } from './theme-ui';
 import type { PageChrome } from '@/workflows/chrome/load-chrome';
 
@@ -18,15 +16,14 @@ const { chrome, showContactCta = true } = Astro.props;
 const meta = getThemeMeta(chrome.site.theme);
 const shell = buildPageShellProps(chrome);
 const useShell = hasPageShell(chrome.site.theme);
+
+const shellModules = import.meta.glob<{ default: any }>('./*/PageShell.astro', { eager: true });
+const TargetShell = shellModules[`./${meta.id}/PageShell.astro`]?.default;
 ---
-{useShell && meta.id === 'default' ? (
-  <DefaultPageShell {...shell} showContactCta={showContactCta}>
+{useShell && TargetShell ? (
+  <TargetShell {...shell} showContactCta={showContactCta}>
     <slot />
-  </DefaultPageShell>
-) : useShell && meta.id === 'turmill' ? (
-  <TurmillPageShell {...shell} showContactCta={showContactCta}>
-    <slot />
-  </TurmillPageShell>
+  </TargetShell>
 ) : (
   <>
     <SiteHeader
@@ -44,3 +41,4 @@ const useShell = hasPageShell(chrome.site.theme);
     <SiteFooter company={chrome.company} />
   </>
 )}
+

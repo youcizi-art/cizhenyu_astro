@@ -2,8 +2,6 @@
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import Pagination from '@/ui/blocks/Pagination.astro';
 import OptimizedImage from '@/ui/components/OptimizedImage.astro';
-import DefaultProductListPage from './default/pages/ProductListPage.astro';
-import TurmillProductListPage from './turmill/pages/ProductListPage.astro';
 import { getThemeMeta } from './theme-ui';
 import { t } from '@/modules/i18n';
 import type { ProductCard } from '@/modules/product';
@@ -36,11 +34,12 @@ const shared = {
   error,
   warnings: chrome.warnings,
 };
+
+const listModules = import.meta.glob<{ default: any }>('./*/pages/ProductListPage.astro', { eager: true });
+const TargetList = listModules[`./${meta.id}/pages/ProductListPage.astro`]?.default || listModules['./default/pages/ProductListPage.astro']?.default;
 ---
-{meta.id === 'default' ? (
-  <DefaultProductListPage {...shared} />
-) : meta.id === 'turmill' ? (
-  <TurmillProductListPage {...shared} />
+{TargetList ? (
+  <TargetList {...shared} />
 ) : (
   <>
     <h1>{title}</h1>

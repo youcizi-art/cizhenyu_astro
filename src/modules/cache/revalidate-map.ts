@@ -58,21 +58,70 @@ function isChromeCollection(templateSlug: string) {
   );
 }
 
-function expandPrefixes(prefixes: Iterable<string>, locales: string[]) {
+/** 统一 pathname：保留 `/`，其余去掉尾部 `/` */
+export function normalizePathname(path: string): string {
+  const raw = String(path || '').trim();
+  if (!raw) return '/';
+  const withSlash = raw.startsWith('/') ? raw : `/${raw}`;
+  const noHash = withSlash.split('#')[0] || '/';
+  const noQuery = noHash.split('?')[0] || '/';
+  if (noQuery.length > 1 && noQuery.endsWith('/')) {
+    return noQuery.replace(/\/+$/, '') || '/';
+  }
+  return noQuery || '/';
+}
+
+function expandPrefixes(prefixes: Iterable<string>, locales: string[], defaultLocale: string) {
+  return expandPurgePaths([...prefixes], locales, defaultLocale);
+}
+
+/**
+ * 失效路径展开：默认语种 canonical 无前缀 URL 与 /{locale}/… 双向补齐。
+ * 例：default=zh-CN 时 `/about` ↔ `/zh-CN/about`；`/en-US/about` 仅保留自身。
+ */
+export function expandPurgePaths(
+  paths: string[],
+  locales: string[],
+  defaultLocale: string
+): string[] {
   const out = new Set<string>();
-  for (const prefix of prefixes) {
-    out.add(prefix);
-    for (const locale of locales) {
-      if (!locale) continue;
-      if (prefix === '/') out.add(`/${locale}`);
-      else out.add(`/${locale}${prefix}`);
+  const def = String(defaultLocale || '').trim();
+  const codes = locales.map((l) => String(l || '').trim()).filter(Boolean);
+
+  for (const raw of paths) {
+    const trimmed = String(raw || '').trim();
+    if (!trimmed || trimmed === '/*' || trimmed === '*') {
+      out.add('/*');
+      continue;
+    }
+    const path = normalizePathname(trimmed);
+    out.add(path);
+
+    const defPrefix = def ? `/${def}` : '';
+    if (defPrefix && (path === defPrefix || path.startsWith(`${defPrefix}/`))) {
+      const canonical = path === defPrefix ? '/' : path.slice(defPrefix.length) || '/';
+      out.add(normalizePathname(canonical));
+    }
+
+    const hasLocalePrefix = codes.some(
+      (locale) => path === `/${locale}` || path.startsWith(`/${locale}/`)
+    );
+    if (!hasLocalePrefix) {
+      for (const locale of codes) {
+        if (path === '/') out.add(`/${locale}`);
+        else out.add(`/${locale}${path}`);
+      }
     }
   }
   return [...out];
 }
 
 /** 由集合 slug 列表解析应失效的路径（含各语种前缀） */
-export function pathsForCollections(collections: string[], locales: string[]) {
+export function pathsForCollections(
+  collections: string[],
+  locales: string[],
+  defaultLocale: string
+) {
   const prefixes = new Set<string>();
   let chrome = false;
   for (const slug of collections) {
@@ -87,12 +136,12 @@ export function pathsForCollections(collections: string[], locales: string[]) {
     for (const p of CHROME_EXTRA_PREFIXES) prefixes.add(p);
   }
   if (!prefixes.size) return [] as string[];
-  return expandPrefixes(prefixes, locales);
+  return expandPrefixes(prefixes, locales, defaultLocale);
 }
 
 /** purge=chrome：头尾/导航相关入口页 */
-export function pathsForChromePurge(locales: string[]) {
-  return expandPrefixes(CHROME_EXTRA_PREFIXES, locales);
+export function pathsForChromePurge(locales: string[], defaultLocale: string) {
+  return expandPrefixes(CHROME_EXTRA_PREFIXES, locales, defaultLocale);
 }
 
 /**
@@ -105,14 +154,10 @@ export function normalizePurgePathInput(input: string): string | null {
   try {
     if (/^https?:\/\//i.test(raw)) {
       const u = new URL(raw);
-      const path = u.pathname || '/';
-      return path.startsWith('/') ? path : `/${path}`;
+      return normalizePathname(u.pathname || '/');
     }
   } catch {
     return null;
   }
-  const path = raw.startsWith('/') ? raw : `/${raw}`;
-  const noHash = path.split('#')[0] || '/';
-  const noQuery = noHash.split('?')[0] || '/';
-  return noQuery || '/';
+  return normalizePathname(raw);
 }

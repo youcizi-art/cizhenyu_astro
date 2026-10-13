@@ -1,6 +1,8 @@
 export {
   CHROME_EXTRA_PREFIXES,
   COLLECTION_PATH_PREFIXES,
+  expandPurgePaths,
+  normalizePathname,
   normalizePurgePathInput,
   pathsForChromePurge,
   pathsForCollections,

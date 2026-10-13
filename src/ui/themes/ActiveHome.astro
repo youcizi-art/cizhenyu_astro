@@ -5,12 +5,7 @@
  */
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import CardSection from '@/ui/blocks/CardSection.astro';
-import DefaultHomePage from './default/pages/HomePage.astro';
-import TurmillHomePage from './turmill/pages/HomePage.astro';
 import { getThemeMeta } from './theme-ui';
-import { defaultHomeLabels } from './default/home-copy';
-import { turmillHomeLabels } from './turmill/home-copy';
-
 import { localePath } from '@/modules/cms';
 
 interface Props {
@@ -18,61 +13,54 @@ interface Props {
 }
 const { data } = Astro.props;
 const meta = getThemeMeta(data.site.theme);
-const defaultLabels = meta.id === 'default' ? defaultHomeLabels(data.locale) : null;
-const turmillLabels = meta.id === 'turmill' ? turmillHomeLabels(data.locale) : null;
+
+const homeModules = import.meta.glob<{ default: any }>('./*/pages/HomePage.astro', { eager: true });
+const copyModules = import.meta.glob<{ [key: string]: any }>('./*/home-copy.ts', { eager: true });
+
+const activeCopyMod = copyModules[`./${meta.id}/home-copy.ts`];
+const getLabelsFn = activeCopyMod
+  ? (activeCopyMod[`${meta.id}HomeLabels`] || activeCopyMod.defaultHomeLabels || activeCopyMod.getHomeLabels)
+  : null;
+const activeThemeLabels = typeof getLabelsFn === 'function' ? getLabelsFn(data.locale) : {};
+
+const TargetHomePage = homeModules[`./${meta.id}/pages/HomePage.astro`]?.default || homeModules['./default/pages/HomePage.astro']?.default;
+
+const commonHomeProps = {
+  siteName: data.siteName,
+  locale: data.locale,
+  hero: data.hero,
+  heroImageUrl: data.heroImageUrl || data.hero?.imageUrl || '',
+  tagline: data.tagline,
+  products: data.products,
+  caseStudies: data.caseStudies,
+  articles: data.articles,
+  solutions: data.solutions,
+  company: data.company,
+  companyIntro: data.companyIntro,
+  companyStats: data.companyStats,
+  ctaBanner: data.ctaBanner,
+  advantages: data.advantages,
+  testimonials: data.testimonials,
+  factoryItems: data.factoryItems,
+  heroThumbs: [] as any[],
+  articlesHref: data.site.modules.articles ? localePath(data.locale, '/articles', data.site.defaultLocale) : '',
+  labels: { ...data.labels, ...activeThemeLabels },
+  paths: {
+    about: data.paths.about,
+    contact: data.paths.contact,
+    products: data.paths.products,
+    solutions: data.paths.solutions,
+  },
+  error: data.error,
+  warnings: data.warnings,
+  showProducts: data.site.modules.products,
+  showArticles: data.site.modules.articles,
+  blocks: data.blocks,
+  cmsFaqs: data.faqs,
+};
 ---
-{meta.id === 'default' && defaultLabels ? (
-  <DefaultHomePage
-    siteName={data.siteName}
-    locale={data.locale}
-    heroImageUrl={data.heroImageUrl || data.hero?.imageUrl || ''}
-    products={data.products}
-    articles={data.articles}
-    testimonials={data.testimonials}
-    articlesHref={data.site.modules.articles ? localePath(data.locale, '/articles', data.site.defaultLocale) : ''}
-    labels={{ ...data.labels, ...defaultLabels }}
-    paths={{
-      about: data.paths.about,
-      contact: data.paths.contact,
-      products: data.paths.products,
-      solutions: data.paths.solutions,
-    }}
-    error={data.error}
-    warnings={data.warnings}
-    showProducts={data.site.modules.products}
-    blocks={data.blocks}
-    cmsFaqs={data.faqs}
-  />
-) : meta.id === 'turmill' && turmillLabels ? (
-  <TurmillHomePage
-    siteName={data.siteName}
-    hero={data.hero}
-    heroImageUrl={data.heroImageUrl || data.hero?.imageUrl || ''}
-    tagline={data.tagline}
-    products={data.products}
-    caseStudies={data.caseStudies}
-    articles={data.articles}
-    solutions={data.solutions}
-    company={data.company}
-    companyIntro={data.companyIntro}
-    companyStats={data.companyStats}
-    ctaBanner={data.ctaBanner}
-    advantages={data.advantages}
-    testimonials={data.testimonials}
-    factoryItems={data.factoryItems}
-    heroThumbs={[]}
-    labels={{ ...data.labels, ...turmillLabels }}
-    paths={{
-      about: data.paths.about,
-      contact: data.paths.contact,
-      products: data.paths.products,
-      solutions: data.paths.solutions,
-    }}
-    error={data.error}
-    warnings={data.warnings}
-    showProducts={data.site.modules.products}
-    showArticles={data.site.modules.articles}
-  />
+{TargetHomePage ? (
+  <TargetHomePage {...commonHomeProps} />
 ) : (
   <>
     <AlertBanner messages={data.error ? [data.error] : []} />

@@ -20,7 +20,8 @@
     "accept:cd": "node scripts/accept-cd.mjs",
     "pack:theme": "node scripts/pack-theme.mjs",
     "pack:default": "node scripts/pack-theme.mjs --id=default",
-    "pack:turmill": "node scripts/pack-theme.mjs --id=turmill"
+    "pack:turmill": "node scripts/pack-theme.mjs --id=turmill",
+    "pack": "node scripts/pack-theme.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",

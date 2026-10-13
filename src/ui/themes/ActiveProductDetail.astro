@@ -1,8 +1,6 @@
 ---
 import AlertBanner from '@/ui/blocks/AlertBanner.astro';
 import ProductSeoSections from '@/ui/blocks/ProductSeoSections.astro';
-import DefaultProductDetailPage from './default/pages/ProductDetailPage.astro';
-import TurmillProductDetailPage from './turmill/pages/ProductDetailPage.astro';
 import { getThemeMeta } from './theme-ui';
 import { t } from '@/modules/i18n';
 import type { ProductDetail } from '@/modules/product';
@@ -57,11 +55,12 @@ const shared = {
   error,
   warnings: chrome.warnings,
 };
+
+const detailModules = import.meta.glob<{ default: any }>('./*/pages/ProductDetailPage.astro', { eager: true });
+const TargetDetail = detailModules[`./${meta.id}/pages/ProductDetailPage.astro`]?.default || detailModules['./default/pages/ProductDetailPage.astro']?.default;
 ---
-{meta.id === 'default' ? (
-  <DefaultProductDetailPage {...shared} />
-) : meta.id === 'turmill' ? (
-  <TurmillProductDetailPage {...shared} />
+{TargetDetail ? (
+  <TargetDetail {...shared} />
 ) : (
   <>
     <p><a href={backHref}>← {t(chrome.locale, 'products')}</a></p>
