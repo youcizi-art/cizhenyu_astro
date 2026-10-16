@@ -31,7 +31,7 @@ describe('catalog', () => {
 
 describe('revalidate map', () => {
   it('expands collection to locale paths', () => {
-    const paths = pathsForCollections(['b2b_product'], ['en', 'zh-CN']);
+    const paths = pathsForCollections(['b2b_product'], ['en', 'zh-CN'], 'zh-CN');
     expect(paths).toContain('/products');
     expect(paths).toContain('/en/products');
     expect(paths).toContain('/zh-CN/products');
