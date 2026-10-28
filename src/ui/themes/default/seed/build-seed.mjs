@@ -850,6 +850,8 @@ const footerNav = [
   { n: 12, slug: 'f-download', zh: '下载', tw: '下載', ja: 'ダウンロード', en: 'Download', path: '/resources' },
   { n: 13, slug: 'f-help', zh: '帮助', tw: '幫助', ja: 'ヘルプ', en: 'Help', path: '/faq' },
   { n: 14, slug: 'f-contact', zh: '联系', tw: '聯繫', ja: 'お問い合わせ', en: 'Contact', path: '/contact' },
+  { n: 15, slug: 'f-privacy', zh: '隐私权政策', tw: '隱私權政策', ja: 'プライバシーポリシー', en: 'Privacy Policy', path: '/privacy' },
+  { n: 16, slug: 'f-terms', zh: '服务条款', tw: '服務條款', ja: '利用規約', en: 'Terms of Service', path: '/terms' },
 ].map((item, idx) => ({
   languageGroupKey: lgk('nmif', item.n),
   locales: L(
@@ -888,7 +890,7 @@ writeJson('page.json', {
           slug: 'about',
           summary: '把外贸站群、询盘与部署获客，做成可安装的产品',
           content:
-            '<p>磁帧鱼服务外贸业务员、工厂外贸部与服务商。我们交付三款可下载安装的产品：</p><ol><li>全能站群管理系统 + B2B 前端站点生成系统</li><li>智能客服智能询盘系统</li><li>部署运营获客系统</li></ol><p>默认 Logo 为闪电占位，可在 CMS 公司信息中替换。价格不公示，请通过联系页询盘。</p>',
+            '<p>磁帧鱼服务外贸业务员、工厂外贸部与服务商。我们交付三款可下载安装的产品：</p><ol><li>全能站群管理系统 + B2B 前端站点生成系统</li><li>智能客服智能询盘系统</li><li>部署运营获客系统</li></ol><p>默认 Logo 为闪电占位，可在 CMS 公司信息中替换。系统提供标准建站（$599）、智能营销（$899）与源码自主（$1,599）交付方案，具体产品按组合交付。</p>',
           target_reference: [
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: '站群 + B2B 生成' },
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-inquiry', title: '智能询盘' },
@@ -906,7 +908,7 @@ writeJson('page.json', {
           slug: 'about',
           summary: '把外貿站群、詢盤與部署獲客，做成可安裝的產品',
           content:
-            '<p>磁幀魚交付三款可下載安裝的產品：站群 + B2B 生成、智慧詢盤、部署運營獲客。Logo 可於 CMS 替換。請透過聯繫頁詢盤。</p>',
+            '<p>磁幀魚交付三款可下載安裝的產品：站群 + B2B 生成、智慧詢盤、部署運營獲客。Logo 可於 CMS 替換。系統提供標準建站（$599）、智慧行銷（$899）與源碼自主（$1,599）交付方案，具體產品按組合交付。</p>',
           target_reference: [
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: '站群 + B2B 生成' },
           ],
@@ -921,7 +923,7 @@ writeJson('page.json', {
           title: '磁帧鱼について',
           slug: 'about',
           summary: 'サイト群・問い合わせ・導入獲得を、導入可能な製品に',
-          content: '<p>3製品を提供します。ロゴはCMSで差し替え可能。価格はお問い合わせください。</p>',
+          content: '<p>3製品を提供します。ロゴはCMSで差し替え可能。標準（$599）、スマート集客（$899）、ソースコード自主（$1,599）の組み合わせパッケージで納品します。</p>',
           target_reference: [
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: 'サイト群' },
           ],
@@ -937,7 +939,7 @@ writeJson('page.json', {
           slug: 'about',
           summary: 'Installable products for multi-site, inquiry, and deploy growth',
           content:
-            '<p>Three products: multi-site + B2B generator, AI inquiry desk, deploy & growth ops. Logo is CMS-replaceable. Pricing via inquiry.</p>',
+            '<p>Three products: multi-site + B2B generator, AI inquiry desk, deploy & growth ops. Logo is CMS-replaceable. Available in Standard ($599), Smart Marketing ($899), and Source Ownership ($1,599) delivery packages.</p>',
           target_reference: [
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: 'Multi-site' },
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-inquiry', title: 'Inquiry' },
@@ -960,7 +962,7 @@ writeJson('page.json', {
           slug: 'contact',
           summary: '下载安装、产品组合、协作部署——先告诉我们您的现状',
           content:
-            '<p>请留下行业、目标市场、需要的产品（站群生成 / 智能询盘 / 部署获客），以及是否需要客服协作安装。</p><p>邮箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a> · 官网：<a href="https://ycz.me">ycz.me</a></p><p>在线询盘表单即将接入；当前请使用下方「提交询盘」按钮（预留）或邮件联系。</p>',
+            '<p>请留下行业、目标市场、需要的产品组合与交付套餐（标准建站 $599 / 智能营销 $899 / 源码自主 $1,599），以及是否需要客服协作安装。</p><p>邮箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a> · 官网：<a href="https://ycz.me">ycz.me</a></p><p>在线询盘表单即将接入；当前请使用下方「提交询盘」按钮或邮件联系。</p>',
           status: 'published',
           seo_title: '联系｜磁帧鱼',
           seo_description: '提交询盘，获取产品安装与协作方案。',
@@ -973,7 +975,7 @@ writeJson('page.json', {
           slug: 'contact',
           summary: '下載安裝、產品組合、協作部署——先告訴我們現狀',
           content:
-            '<p>請留下行業與需求產品。郵箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a>。線上表單即將接入。</p>',
+            '<p>請留下行業與交付套餐（標準建站 $599 / 智慧行銷 $899 / 源碼自主 $1,599）。郵箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a>。線上表單即將接入。</p>',
           status: 'published',
           seo_title: '聯繫｜磁幀魚',
           seo_description: '提交詢盤，獲取安裝與協作方案。',
@@ -986,7 +988,7 @@ writeJson('page.json', {
           slug: 'contact',
           summary: 'ダウンロード導入・製品組合せ・同席サポート',
           content:
-            '<p>業界と必要な製品をお送りください。<a href="mailto:hello@ycz.me">hello@ycz.me</a>。フォームは後日接続予定です。</p>',
+            '<p>業界とご希望の導入パッケージ（標準 $599 / スマート集客 $899 / ソースコード自主 $1,599）をお送りください。<a href="mailto:hello@ycz.me">hello@ycz.me</a>。フォームは後日接続予定です。</p>',
           status: 'published',
           seo_title: 'お問い合わせ｜磁帧鱼',
           seo_description: '導入とサポートのご相談。',
@@ -999,13 +1001,127 @@ writeJson('page.json', {
           slug: 'contact',
           summary: 'Download install, product mix, collaborative deploy — tell us your status',
           content:
-            '<p>Share industry, markets, and which products you need. Email <a href="mailto:hello@ycz.me">hello@ycz.me</a>. Online form coming soon — use the inquiry button (reserved) or email.</p>',
+            '<p>Share industry, markets, and your target package (Standard $599 / Smart Marketing $899 / Source Ownership $1,599). Email <a href="mailto:hello@ycz.me">hello@ycz.me</a>.</p>',
           status: 'published',
           seo_title: 'Contact | Cizhenyu',
           seo_description: 'Inquire for install and collaboration.',
           robots_directive: 'index,follow',
           schema_type: 'ContactPage',
           og_image: { url: img('Contact', 1200, 630) },
+        },
+      }),
+    },
+    {
+      languageGroupKey: lgk('page', 3),
+      locales: L({
+        'zh-CN': {
+          title: '隐私权政策',
+          slug: 'privacy',
+          summary: '磁帧鱼（Cizhenyu）隐私权政策与个人信息保护声明',
+          content:
+            '<h2>隐私权政策</h2><p>生效日期：2026年1月1日</p><h3>1. 信息收集</h3><p>磁帧鱼系统尊重并保护所有使用服务用户的个人隐私权。在您通过网站表单或在线咨询工具提交询盘时，我们可能会收集您的姓名、电子邮箱、联系电话、所属行业及产品需求等信息，用于为您提供针对性的产品与实施服务。</p><h3>2. 信息使用与保护</h3><p>我们承诺不会向任何无关第三方出售、出租、分享或交易您的个人资料。您的系统部署于您自主掌控的云服务账户（如 Cloudflare）中，业务数据与数据库 100% 由您自主掌控。</p><h3>3. Cookie 与追踪技术</h3><p>本网站使用必要的 Cookie 及统计工具（如 Google Analytics、Cloudflare Web Analytics）来分析流量与提升网站性能。您可以通过浏览器设置拒绝或清除 Cookie。</p><h3>4. 联系方式</h3><p>如对本隐私权政策有任何疑问或希望更正您的个人信息，请通过 <a href="mailto:service@ycz.me">service@ycz.me</a> 与我们联系。</p>',
+          status: 'published',
+          seo_title: '隐私权政策｜磁帧鱼',
+          seo_description: '磁帧鱼官方隐私权政策与数据保护声明。',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Privacy', 1200, 630) },
+        },
+        'zh-TW': {
+          title: '隱私權政策',
+          slug: 'privacy',
+          summary: '磁幀魚（Cizhenyu）隱私權政策與個人資訊保護聲明',
+          content:
+            '<h2>隱私權政策</h2><p>生效日期：2026年1月1日</p><h3>1. 資訊收集</h3><p>磁幀魚系統尊重並保護所有使用服務使用者的個人隱私權。在您透過網站表單或在線諮詢工具提交詢盤時，我們可能會收集您的姓名、電子郵件、聯絡電話、所屬行業及產品需求等資訊，用於為您提供針對性的產品與實施服務。</p><h3>2. 資訊使用與保護</h3><p>我們承諾不會向任何無關第三方出售、出租、分享或交易您的個人資料。您的系統部署於您自主掌控的雲端服務帳戶（如 Cloudflare）中，業務資料與資料庫 100% 由您自主掌控。</p><h3>3. Cookie 與追蹤技術</h3><p>本網站使用必要的 Cookie 及統計工具以分析流量與提升網站性能。您可以透過瀏覽器設定拒絕或清除 Cookie。</p><h3>4. 聯絡方式</h3><p>如對本隱私權政策有任何疑問，請透過 <a href="mailto:service@ycz.me">service@ycz.me</a> 與我們聯絡。</p>',
+          status: 'published',
+          seo_title: '隱私權政策｜磁幀魚',
+          seo_description: '磁幀魚官方隱私權政策與資料保護聲明。',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Privacy', 1200, 630) },
+        },
+        ja: {
+          title: 'プライバシーポリシー',
+          slug: 'privacy',
+          summary: '磁帧鱼（Cizhenyu）プライバシーポリシーおよび個人情報保護方針',
+          content:
+            '<h2>プライバシーポリシー</h2><p>発効日：2026年1月1日</p><h3>1. 個人情報の収集</h3><p>磁帧鱼は、お客様の個人情報保護を重視しています。お問い合わせやお見積もり依頼の際、氏名、メールアドレス、電話番号、企業情報などを収集する場合があります。</p><h3>2. 情報の利用と保護</h3><p>当社は収集した個人情報を第三者に販売・提供いたしません。システムはお客様自身のクラウド環境（Cloudflare等）に構築され、データ主権は100%お客様に帰属します。</p><h3>3. Cookie の使用</h3><p>サイトの利便性向上およびアクセス解析のため、Cookie を使用する場合があります。</p><h3>4. お問い合わせ</h3><p>プライバシーポリシーに関するご質問は <a href="mailto:service@ycz.me">service@ycz.me</a> までご連絡ください。</p>',
+          status: 'published',
+          seo_title: 'プライバシーポリシー｜磁帧鱼',
+          seo_description: '磁帧鱼のプライバシーポリシーとデータ保護について。',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Privacy', 1200, 630) },
+        },
+        'en-US': {
+          title: 'Privacy Policy',
+          slug: 'privacy',
+          summary: 'Cizhenyu Privacy Policy and personal data protection statement',
+          content:
+            '<h2>Privacy Policy</h2><p>Effective Date: January 1, 2026</p><h3>1. Information Collection</h3><p>Cizhenyu respects and protects your privacy. When you submit inquiries through our web forms or live chat, we may collect your name, email address, phone number, and business requirements to deliver our products and deployment services.</p><h3>2. Use and Protection of Information</h3><p>We do not sell, rent, or trade your personal information to third parties. Your web system is deployed to your own Cloudflare account, ensuring 100% data ownership.</p><h3>3. Cookies and Analytics</h3><p>We use essential cookies and web analytics tools to ensure site reliability and measure performance.</p><h3>4. Contact Us</h3><p>If you have questions regarding this Privacy Policy, please contact us at <a href="mailto:service@ycz.me">service@ycz.me</a>.</p>',
+          status: 'published',
+          seo_title: 'Privacy Policy | Cizhenyu',
+          seo_description: 'Official privacy policy and data governance statement for Cizhenyu.',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Privacy', 1200, 630) },
+        },
+      }),
+    },
+    {
+      languageGroupKey: lgk('page', 4),
+      locales: L({
+        'zh-CN': {
+          title: '服务条款',
+          slug: 'terms',
+          summary: '磁帧鱼（Cizhenyu）系统与技术服务条款',
+          content:
+            '<h2>服务条款</h2><p>生效日期：2026年1月1日</p><h3>1. 协议接受</h3><p>欢迎使用磁帧鱼 B2B 外贸独立站系统。购买、安装或使用我们的系统与服务，即表示您已阅读并同意接受本服务条款的所有内容。</p><h3>2. 交付与授权范围</h3><p>磁帧鱼提供三种标准化交付方案：标准建站版（$599）、智能营销版（$899）及源码自主版（$1,599）。前两项交付编译后的生产运行版本，源码自主版在约定范围内交付原始工程源码及二次开发授权。所有方案均以最终合同与交付功能清单为准。</p><h3>3. 第三方费用与持续服务边界</h3><p>本系统定价为一次性项目交付费用，不包含持续性第三方费用。包括 Cloudflare 账单、AI 模型 API 调用费用、Google Ads 广告预算及第三方服务订阅费用均由客户自行承担。</p><h3>4. 技术支持与保修</h3><p>根据不同交付方案提供约定维保支持：标准建站版提供交付后 30 天基础保修；智能营销版提供 3 个月技术支持；源码自主版提供 12 个月约定技术支持。系统缺陷按约定范围修复，新增定制需求另行约定。</p><h3>5. 知识产权与适用法律</h3><p>磁帧鱼系统核心架构与自主设计组件受知识产权法保护。源码授权客户在授权许可范围内合法使用。</p>',
+          status: 'published',
+          seo_title: '服务条款｜磁帧鱼',
+          seo_description: '磁帧鱼系统交付与技术服务条款。',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Terms', 1200, 630) },
+        },
+        'zh-TW': {
+          title: '服務條款',
+          slug: 'terms',
+          summary: '磁幀魚（Cizhenyu）系統與技術服務條款',
+          content:
+            '<h2>服務條款</h2><p>生效日期：2026年1月1日</p><h3>1. 協議接受</h3><p>歡迎使用磁幀魚 B2B 外貿獨立站系統。購買、安裝或使用我們的系統與服務，即表示您已閱讀並同意接受本服務條款的所有內容。</p><h3>2. 交付與授權範圍</h3><p>磁幀魚提供三種標準化交付方案：標準建站版（$599）、智慧行銷版（$899）及源碼自主版（$1,599）。所有方案均以最終合約與交付功能清單為準。</p><h3>3. 第三方費用與持續服務邊界</h3><p>本系統定價為一次性專案交付費用，不包含持續性第三方費用（如 Cloudflare 帳單、AI 模型調用費、Google Ads 廣告預算等均由客戶自行承擔）。</p><h3>4. 技術支援與保修</h3><p>標準建站版提供交付後 30 天基礎保修；智慧行銷版提供 3 個月技術支援；源碼自主版提供 12 個月約定技術支援。</p><h3>5. 智慧財產權</h3><p>磁幀魚系統核心架構受智慧財產權法律保護。源碼授權客戶在許可範圍內合法使用。</p>',
+          status: 'published',
+          seo_title: '服務條款｜磁幀魚',
+          seo_description: '磁幀魚系統交付與技術服務條款。',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Terms', 1200, 630) },
+        },
+        ja: {
+          title: '利用規約',
+          slug: 'terms',
+          summary: '磁帧鱼（Cizhenyu）システムおよびサービス利用規約',
+          content:
+            '<h2>利用規約</h2><p>発効日：2026年1月1日</p><h3>1. 規約への同意</h3><p>磁帧鱼システムをご利用いただくことで、本規約に同意されたものとみなします。</p><h3>2. 提供パッケージとライセンス</h3><p>標準サイト構築版（$599）、スマート集客版（$899）、ソースコード自主版（$1,599）の3つのティアを提供します。詳細は各契約書に基づきます。</p><h3>3. 第三者費用</h3><p>Cloudflare運用費、AI API利用料、Google Ads広告費などの外部実費はお客様のご負担となります。</p><h3>4. 保証と技術サポート</h3><p>各パッケージに定められた期間（30日〜12ヶ月）の技術サポートと不具合修正を提供します。</p>',
+          status: 'published',
+          seo_title: '利用規約｜磁帧鱼',
+          seo_description: '磁帧鱼システムの利用規約とライセンス条件。',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Terms', 1200, 630) },
+        },
+        'en-US': {
+          title: 'Terms of Service',
+          slug: 'terms',
+          summary: 'Cizhenyu System and Technical Services Terms of Service',
+          content:
+            '<h2>Terms of Service</h2><p>Effective Date: January 1, 2026</p><h3>1. Acceptance of Terms</h3><p>By purchasing, installing, or using Cizhenyu B2B website systems and services, you agree to be bound by these Terms of Service.</p><h3>2. Delivery Packages & Scope</h3><p>Cizhenyu provides three distinct delivery tiers: Standard Site ($599), Smart Marketing ($899), and Source Ownership ($1,599). Delivery scope follows the signed agreement.</p><h3>3. Third-Party Costs & Boundaries</h3><p>Pricing represents a one-time project delivery fee. External ongoing costs including Cloudflare usage, AI model API tokens, and Google Ads ad spend remain client responsibility.</p><h3>4. Technical Support & Warranty</h3><p>Warranties apply per plan: 30 days for Standard Site, 3 months for Smart Marketing, and 12 months for Source Ownership.</p>',
+          status: 'published',
+          seo_title: 'Terms of Service | Cizhenyu',
+          seo_description: 'Cizhenyu system delivery terms and service license agreement.',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Terms', 1200, 630) },
         },
       }),
     },

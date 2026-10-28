@@ -42,10 +42,10 @@ const caseStudyListModules = import.meta.glob<{ default: any }>('./*/pages/CaseS
 const downloadListModules = import.meta.glob<{ default: any }>('./*/pages/DownloadListPage.astro', { eager: true });
 const simpleCardListModules = import.meta.glob<{ default: any }>('./*/pages/SimpleCardListPage.astro', { eager: true });
 
-const TargetArticleList = articleListModules[`./${meta.id}/pages/ArticleListPage.astro`]?.default || articleListModules['./default/pages/ArticleListPage.astro']?.default;
-const TargetCaseStudyList = caseStudyListModules[`./${meta.id}/pages/CaseStudyListPage.astro`]?.default || caseStudyListModules['./default/pages/CaseStudyListPage.astro']?.default;
+const TargetArticleList = articleListModules[`./${meta.id}/pages/ArticleListPage.astro`]?.default;
+const TargetCaseStudyList = caseStudyListModules[`./${meta.id}/pages/CaseStudyListPage.astro`]?.default;
 const TargetDownloadList = downloadListModules[`./${meta.id}/pages/DownloadListPage.astro`]?.default;
-const TargetSimpleCardList = simpleCardListModules[`./${meta.id}/pages/SimpleCardListPage.astro`]?.default || simpleCardListModules['./default/pages/SimpleCardListPage.astro']?.default;
+const TargetSimpleCardList = simpleCardListModules[`./${meta.id}/pages/SimpleCardListPage.astro`]?.default;
 ---
 {kind === 'articles' && TargetArticleList ? (
   <TargetArticleList

@@ -40,9 +40,9 @@ const articleDetailModules = import.meta.glob<{ default: any }>('./*/pages/Artic
 const caseStudyDetailModules = import.meta.glob<{ default: any }>('./*/pages/CaseStudyDetailPage.astro', { eager: true });
 const simpleDetailModules = import.meta.glob<{ default: any }>('./*/pages/SimpleDetailPage.astro', { eager: true });
 
-const TargetArticleDetail = articleDetailModules[`./${meta.id}/pages/ArticleDetailPage.astro`]?.default || articleDetailModules['./default/pages/ArticleDetailPage.astro']?.default;
-const TargetCaseStudyDetail = caseStudyDetailModules[`./${meta.id}/pages/CaseStudyDetailPage.astro`]?.default || caseStudyDetailModules['./default/pages/CaseStudyDetailPage.astro']?.default;
-const TargetSimpleDetail = simpleDetailModules[`./${meta.id}/pages/SimpleDetailPage.astro`]?.default || simpleDetailModules['./default/pages/SimpleDetailPage.astro']?.default;
+const TargetArticleDetail = articleDetailModules[`./${meta.id}/pages/ArticleDetailPage.astro`]?.default;
+const TargetCaseStudyDetail = caseStudyDetailModules[`./${meta.id}/pages/CaseStudyDetailPage.astro`]?.default;
+const TargetSimpleDetail = simpleDetailModules[`./${meta.id}/pages/SimpleDetailPage.astro`]?.default;
 ---
 {articleShortAnswer ? (
   <GeoAnswer title={shortAnswerLabel} shortAnswer={articleShortAnswer} />

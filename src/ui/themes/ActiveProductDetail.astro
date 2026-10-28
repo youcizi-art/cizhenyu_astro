@@ -15,26 +15,26 @@ const { chrome, product, error } = Astro.props;
 const meta = getThemeMeta(chrome.site.theme);
 const backHref = `/${chrome.locale}/products`;
 const zh = chrome.locale.startsWith('zh');
-const specsTitle = zh ? '模块信息' : 'Module details';
-const inquiryTitle = zh ? '模块询盘' : 'Module inquiry';
+const specsTitle = zh ? '规格参数' : 'Specifications';
+const inquiryTitle = zh ? '产品询盘' : 'Product Inquiry';
 const inquiryBody = zh
-  ? '告诉我们您的行业与现状，获取该模块的部署与组合建议。价格不在线公示。'
-  : 'Share your industry and status for a module plan. Pricing is not listed publicly.';
+  ? '欢迎咨询产品采购、规格定制及批发合作，我们将尽快为您提供详细报价与支持。'
+  : 'Contact us for wholesale pricing, custom specifications, and OEM inquiries.';
 const sectionLabels = {
   description: zh ? '详细介绍' : 'Product Details',
-  advantages: zh ? '核心能力' : 'Key capabilities',
+  advantages: zh ? '核心优势' : 'Key Advantages',
   video: zh ? '产品视频' : 'Product Video',
-  application: zh ? '适用场景' : 'Applications',
-  howItWorks: zh ? '如何协作' : 'How it works',
-  capacity: zh ? '交付能力' : 'Delivery',
+  application: zh ? '应用场景' : 'Applications',
+  howItWorks: zh ? '工作原理' : 'How it works',
+  capacity: zh ? '制造交付' : 'Capacity',
   oem: 'OEM / ODM',
-  quality: zh ? '质量与可控' : 'Quality & control',
-  certifications: zh ? '认证' : 'Certifications',
+  quality: zh ? '品质控制' : 'Quality Control',
+  certifications: zh ? '认证资质' : 'Certifications',
   faqs: 'FAQ',
-  industries: zh ? '适用角色' : 'Ideal for',
-  relatedProducts: zh ? '相关模块' : 'Related modules',
-  relatedCases: zh ? '相关案例' : 'Related Cases',
-  relatedArticles: zh ? '相关文章' : 'Guides & Articles',
+  industries: zh ? '适用行业' : 'Industries',
+  relatedProducts: zh ? '相关产品' : 'Related Products',
+  relatedCases: zh ? '应用案例' : 'Related Cases',
+  relatedArticles: zh ? '相关文章' : 'Articles & Guides',
   inquiryTitle,
   inquiryBody,
   inquiryCta: product?.inquiryLabel || t(chrome.locale, 'contact'),
@@ -57,7 +57,7 @@ const shared = {
 };
 
 const detailModules = import.meta.glob<{ default: any }>('./*/pages/ProductDetailPage.astro', { eager: true });
-const TargetDetail = detailModules[`./${meta.id}/pages/ProductDetailPage.astro`]?.default || detailModules['./default/pages/ProductDetailPage.astro']?.default;
+const TargetDetail = detailModules[`./${meta.id}/pages/ProductDetailPage.astro`]?.default;
 ---
 {TargetDetail ? (
   <TargetDetail {...shared} />

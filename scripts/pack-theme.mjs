@@ -198,14 +198,19 @@ function writeSingleThemeKernel(themesDir, themeId, allThemeIds) {
       `  faq?: boolean;\n` +
       `};\n\n` +
       `export type ThemeMeta = { id: ThemeId; shell: ThemeShellKind; fontHref: string; homeRequirements?: ThemeHomeRequirements };\n\n` +
+      `const DEFAULT_FULL_HOME_REQUIREMENTS: ThemeHomeRequirements = {\n` +
+      `  placements: ['home_hero', 'home_featured', 'footer_cta', 'home_advantage', 'home_testimonial', 'home_factory', 'home_comparison', 'home_step'],\n` +
+      `  resolveReferencesFor: ['home_hero', 'home_featured'],\n` +
+      `  articles: true, caseStudies: true, solutions: true, faq: true,\n` +
+      `};\n\n` +
       `export const THEME_META: Record<ThemeId, ThemeMeta> = {\n` +
       `  ${themeId}: { id: '${themeId}', shell: 'page-shell', fontHref: '', homeRequirements: ${homeReqCode} },\n` +
       `};\n\n` +
       `export function getThemeMeta(theme?: string | null): ThemeMeta {\n` +
-      `  return THEME_META[resolveTheme({ theme }).themeId];\n` +
+      `  return THEME_META[resolveTheme({ theme }).themeId] || { id: '${themeId}', shell: 'page-shell', fontHref: '', homeRequirements: DEFAULT_FULL_HOME_REQUIREMENTS };\n` +
       `}\n` +
       `export function getThemeHomeRequirements(theme?: string | null): ThemeHomeRequirements {\n` +
-      `  return getThemeMeta(theme).homeRequirements || {};\n` +
+      `  return getThemeMeta(theme).homeRequirements || DEFAULT_FULL_HOME_REQUIREMENTS;\n` +
       `}\n` +
       `export function hasPageShell(_theme?: string | null): boolean { return true; }\n` +
       `export function buildPageShellProps(chrome: PageChrome) {\n` +

@@ -109,7 +109,14 @@ export function getThemeHomeRequirements(theme?: string | null): ThemeHomeRequir
 
 export function getThemeMeta(theme?: string | null): ThemeMeta {
   const { themeId } = resolveTheme({ theme });
-  return THEME_META[themeId];
+  return (
+    THEME_META[themeId] || {
+      id: themeId,
+      shell: 'page-shell',
+      fontHref: '',
+      homeRequirements: DEFAULT_FULL_HOME_REQUIREMENTS,
+    }
+  );
 }
 
 export function hasPageShell(theme?: string | null): boolean {

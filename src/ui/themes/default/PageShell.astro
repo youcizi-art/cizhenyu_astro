@@ -62,7 +62,7 @@ const resolvedQuickLinks = quickLinksLabel || t(locale, 'quickLinks');
 <main class="cz-main">
   <slot />
 </main>
-<Footer company={company} links={links} quickLinksLabel={resolvedQuickLinks} />
+<Footer company={company} links={links} locale={locale} quickLinksLabel={resolvedQuickLinks} />
 
 <script is:inline>
   (function () {

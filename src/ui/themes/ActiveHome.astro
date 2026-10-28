@@ -23,7 +23,7 @@ const getLabelsFn = activeCopyMod
   : null;
 const activeThemeLabels = typeof getLabelsFn === 'function' ? getLabelsFn(data.locale) : {};
 
-const TargetHomePage = homeModules[`./${meta.id}/pages/HomePage.astro`]?.default || homeModules['./default/pages/HomePage.astro']?.default;
+const TargetHomePage = homeModules[`./${meta.id}/pages/HomePage.astro`]?.default;
 
 const commonHomeProps = {
   siteName: data.siteName,

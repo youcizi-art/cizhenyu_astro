@@ -6,7 +6,7 @@ import type { PageChrome } from '@/workflows/chrome/load-chrome';
 
 interface Props {
   chrome: PageChrome;
-  kind: 'about' | 'contact' | 'faq';
+  kind: 'about' | 'contact' | 'faq' | 'page' | 'privacy' | 'terms';
   title: string;
   summary?: string;
   content?: string;
@@ -35,10 +35,12 @@ const shortAnswerLabel = chrome.locale.startsWith('zh') ? '简答' : chrome.loca
 const aboutModules = import.meta.glob<{ default: any }>('./*/pages/AboutPage.astro', { eager: true });
 const contactModules = import.meta.glob<{ default: any }>('./*/pages/ContactPage.astro', { eager: true });
 const faqModules = import.meta.glob<{ default: any }>('./*/pages/FaqPage.astro', { eager: true });
+const simpleDetailModules = import.meta.glob<{ default: any }>('./*/pages/SimpleDetailPage.astro', { eager: true });
 
-const TargetAbout = aboutModules[`./${meta.id}/pages/AboutPage.astro`]?.default || aboutModules['./default/pages/AboutPage.astro']?.default;
-const TargetContact = contactModules[`./${meta.id}/pages/ContactPage.astro`]?.default || contactModules['./default/pages/ContactPage.astro']?.default;
-const TargetFaq = faqModules[`./${meta.id}/pages/FaqPage.astro`]?.default || faqModules['./default/pages/FaqPage.astro']?.default;
+const TargetAbout = aboutModules[`./${meta.id}/pages/AboutPage.astro`]?.default;
+const TargetContact = contactModules[`./${meta.id}/pages/ContactPage.astro`]?.default;
+const TargetFaq = faqModules[`./${meta.id}/pages/FaqPage.astro`]?.default;
+const TargetSimpleDetail = simpleDetailModules[`./${meta.id}/pages/SimpleDetailPage.astro`]?.default;
 ---
 {kind === 'about' && TargetAbout ? (
   <TargetAbout
@@ -90,6 +92,19 @@ const TargetFaq = faqModules[`./${meta.id}/pages/FaqPage.astro`]?.default || faq
       </details>
     ))}
   </>
+) : (kind === 'page' || kind === 'privacy' || kind === 'terms') && TargetSimpleDetail ? (
+  <TargetSimpleDetail
+    title={title}
+    summary={summary}
+    content={content}
+    backHref={homeHref}
+    backLabel={`← ${homeLabel}`}
+    homeHref={homeHref}
+    homeLabel={homeLabel}
+    listLabel={homeLabel}
+    error={error}
+    warnings={chrome.warnings}
+  />
 ) : (
   <>
     <AlertBanner messages={error ? [error] : []} />

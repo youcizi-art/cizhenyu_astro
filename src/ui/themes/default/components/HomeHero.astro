@@ -1,0 +1,214 @@
+---
+import OptimizedImage from "@/ui/components/OptimizedImage.astro";
+
+interface Highlight {
+  title: string;
+  desc: string;
+}
+
+interface Props {
+  siteName: string;
+  brandLine: string;
+  title: string;
+  lead: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+  highlights: Highlight[];
+  heroMedia: string;
+  contactHref: string;
+  primaryProductTitle?: string;
+  secondaryProductTitle?: string;
+  highlightIcons: string[];
+}
+
+const {
+  siteName,
+  brandLine,
+  title,
+  lead,
+  ctaPrimary,
+  ctaSecondary,
+  highlights,
+  heroMedia,
+  contactHref,
+  primaryProductTitle,
+  secondaryProductTitle,
+  highlightIcons,
+} = Astro.props;
+---
+
+<section class="cz-hero cz-home-hero" data-home-hero>
+  <canvas class="cz-home-hero-canvas" aria-hidden="true"></canvas>
+  <div class="cz-home-hero-glow" aria-hidden="true"></div>
+  <div class="cz-container cz-home-hero-grid">
+    <div class="cz-home-hero-copy">
+      <p class="cz-home-brand">{siteName}</p>
+      <p class="cz-home-brand-line">{brandLine}</p>
+      <h1 class="cz-hero-heading">{title}</h1>
+      <p class="cz-hero-lead">{lead}</p>
+      <div class="cz-hero-actions">
+        <a
+          class="cz-btn cz-btn-primary cz-btn-lg"
+          href={`${contactHref}?intent=sites`}
+          data-cf-chat="open"
+          data-product-title={primaryProductTitle || ctaPrimary}
+        >
+          <span>{ctaPrimary}</span>
+          <svg
+            class="cz-btn-arrow"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            width="18"
+            height="18"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </a>
+        <a
+          class="cz-btn cz-btn-ghost cz-btn-lg"
+          href={`${contactHref}?intent=crm`}
+          data-cf-chat="open"
+          data-product-title={secondaryProductTitle || ctaSecondary}
+        >
+          {ctaSecondary}
+        </a>
+      </div>
+      <ul class="cz-home-highlight-cards">
+        {
+          highlights.map((h, idx) => (
+            <li class="cz-home-hl-card">
+              <span class="cz-home-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d={highlightIcons[idx]} />
+                </svg>
+              </span>
+              <strong>{h.title}</strong>
+              <span>{h.desc}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="cz-home-hero-media">
+      <div class="cz-home-hero-frame">
+        <OptimizedImage
+          src={heroMedia}
+          alt={siteName}
+          width={960}
+          height={720}
+          widths={[480, 720, 960]}
+          sizes="(max-width: 900px) 100vw, 460px"
+          priority
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    function initHeroCanvas() {
+      var root = document.querySelector("[data-home-hero]");
+      if (!root) return;
+      var canvas = root.querySelector(".cz-home-hero-canvas");
+      if (!canvas || !canvas.getContext) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      var ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = 0;
+      var h = 0;
+      var raf = 0;
+      var nodes = [];
+
+      function resize() {
+        var rect = root.getBoundingClientRect();
+        w = Math.max(320, Math.floor(rect.width));
+        h = Math.max(320, Math.floor(rect.height));
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        var count = Math.min(56, Math.max(28, Math.floor((w * h) / 18000)));
+        nodes = [];
+        for (var i = 0; i < count; i++) {
+          nodes.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+          });
+        }
+      }
+
+      function tick() {
+        ctx.clearRect(0, 0, w, h);
+        for (var i = 0; i < nodes.length; i++) {
+          var n = nodes[i];
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
+        }
+        for (var a = 0; a < nodes.length; a++) {
+          for (var b = a + 1; b < nodes.length; b++) {
+            var p = nodes[a];
+            var q = nodes[b];
+            var dx = p.x - q.x;
+            var dy = p.y - q.y;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+              ctx.strokeStyle =
+                "rgba(29, 78, 216, " + 0.18 * (1 - dist / 120) + ")";
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.stroke();
+            }
+          }
+        }
+        for (var k = 0; k < nodes.length; k++) {
+          var node = nodes[k];
+          ctx.fillStyle = "rgba(14, 165, 233, 0.55)";
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, 1.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        raf = requestAnimationFrame(tick);
+      }
+
+      resize();
+      tick();
+      window.addEventListener("resize", resize, { passive: true });
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) cancelAnimationFrame(raf);
+        else raf = requestAnimationFrame(tick);
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initHeroCanvas, {
+        once: true,
+      });
+    } else {
+      initHeroCanvas();
+    }
+  })();
+</script>

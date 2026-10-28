@@ -74,3 +74,40 @@ export async function loadContactPage(options: { locale?: string; pathname: stri
     };
   }
 }
+
+/**
+ * 通用独立页面加载逻辑（支持 privacy / terms 等独立页面模型数据）
+ */
+export async function loadCustomPage(slug: string, options: { locale?: string; pathname: string }) {
+  const chrome = await loadPageChrome({
+    locale: options.locale,
+    pathname: options.pathname,
+  });
+
+  if (!chrome.localeValid) {
+    return {
+      ...chrome,
+      enabled: false as const,
+      page: null,
+      error: undefined as string | undefined,
+    };
+  }
+
+  try {
+    const page = await getPageBySlug(slug, { locale: chrome.locale });
+    return {
+      ...chrome,
+      enabled: Boolean(page) as const,
+      page,
+      error: undefined as string | undefined,
+    };
+  } catch (error) {
+    return {
+      ...chrome,
+      enabled: false as const,
+      page: null,
+      error: toErrorMessage(error, t(chrome.locale, 'loadFailed')),
+    };
+  }
+}
+

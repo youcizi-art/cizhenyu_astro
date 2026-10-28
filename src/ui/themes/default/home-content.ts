@@ -39,6 +39,19 @@ export type HomeStep = { index: string; title: string; desc: string };
 export type HomePath = { title: string; desc: string; cta: string; intent: string };
 export type HomeFaq = { question: string; answer: string };
 
+export type HomePricingPlan = {
+  price: string;
+  currency?: string;
+  period?: string;
+  title: string;
+  subtitle?: string;
+  tagline?: string;
+  isPopular?: boolean;
+  features: string[];
+  ctaLabel: string;
+  intent: string;
+};
+
 export type DefaultHomeContent = {
   brandLine: string;
   hero: {
@@ -71,6 +84,11 @@ export type DefaultHomeContent = {
     coreTitle: string;
     coreHighlights: string[];
     summary: string;
+  };
+  pricing: {
+    title: string;
+    lead: string;
+    plans: HomePricingPlan[];
   };
   seoGeo: {
     title: string;
@@ -263,6 +281,7 @@ export function resolveDefaultHomeContent(
     products: base.products,
     architecture,
     compare,
+    pricing: base.pricing,
     seoGeo,
     paths,
     testimonials: base.testimonials,

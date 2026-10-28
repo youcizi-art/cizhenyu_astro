@@ -1,0 +1,93 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  plans: Array<{
+    price: string;
+    currency?: string;
+    period?: string;
+    title: string;
+    subtitle?: string;
+    tagline?: string;
+    isPopular?: boolean;
+    features: string[];
+    ctaLabel: string;
+    intent: string;
+  }>;
+  contactHref: string;
+}
+
+const {
+  eyebrow = 'PRICING PLANS',
+  title = '灵活套餐，透明定价',
+  lead = '从基础独立站到完整营销系统与源码自主权，按需选择适合当前业务发展阶段的交付方案。',
+  plans = [],
+  contactHref,
+} = Astro.props;
+---
+
+<section class="cz-section cz-home-pricing" id="pricing">
+  <div class="cz-container">
+    <div class="cz-section-head cz-section-head-wide" style="text-align:center;margin-left:auto;margin-right:auto">
+      {eyebrow ? <p class="cz-section-eyebrow">{eyebrow}</p> : null}
+      <h2>{title}</h2>
+      {lead ? <p class="cz-hero-lead" style="margin:0 auto">{lead}</p> : null}
+    </div>
+
+    <div class="cz-pricing-grid">
+      {plans.map((plan) => (
+        <article class:list={["cz-pricing-card", plan.isPopular && "is-popular"]}>
+          {plan.isPopular ? (
+            <div class="cz-pricing-badge">最受推荐 / 主推</div>
+          ) : null}
+
+          <div class="cz-pricing-header">
+            <h3 class="cz-pricing-title">{plan.title}</h3>
+            {plan.tagline ? <p class="cz-pricing-tagline">{plan.tagline}</p> : null}
+            <div class="cz-pricing-price-wrap">
+              <span class="cz-pricing-price">{plan.price}</span>
+              {plan.period ? <span class="cz-pricing-period">{plan.period}</span> : null}
+            </div>
+            {plan.subtitle ? <p class="cz-pricing-subtitle">{plan.subtitle}</p> : null}
+          </div>
+
+          <div class="cz-pricing-body">
+            <ul class="cz-pricing-features">
+              {plan.features.map((feat) => (
+                <li>
+                  <svg
+                    class="cz-check-icon"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>{feat}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="cz-pricing-footer">
+            <a
+              class:list={["cz-btn", plan.isPopular ? "cz-btn-primary" : "cz-btn-outline", "cz-btn-block"]}
+              href={`${contactHref}?intent=${plan.intent}`}
+              data-cf-chat="open"
+              data-product-title={`${plan.title} (${plan.price})`}
+            >
+              {plan.ctaLabel}
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

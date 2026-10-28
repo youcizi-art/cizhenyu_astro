@@ -36,7 +36,7 @@ const shared = {
 };
 
 const listModules = import.meta.glob<{ default: any }>('./*/pages/ProductListPage.astro', { eager: true });
-const TargetList = listModules[`./${meta.id}/pages/ProductListPage.astro`]?.default || listModules['./default/pages/ProductListPage.astro']?.default;
+const TargetList = listModules[`./${meta.id}/pages/ProductListPage.astro`]?.default;
 ---
 {TargetList ? (
   <TargetList {...shared} />

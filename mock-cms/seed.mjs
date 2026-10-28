@@ -231,6 +231,34 @@ export const collections = {
       content: '<p>邮箱 sales@demo-industrial.example</p>',
       status: 'published',
     }),
+    row('55555555-5555-4555-8555-555555555505', 'en', 'g-page-privacy', {
+      title: 'Privacy Policy',
+      slug: 'privacy',
+      summary: 'Privacy policy and data governance.',
+      content: '<h2>Privacy Policy</h2><p>Data is stored securely on customer accounts.</p>',
+      status: 'published',
+    }),
+    row('55555555-5555-4555-8555-555555555506', 'zh-CN', 'g-page-privacy', {
+      title: '隐私权政策',
+      slug: 'privacy',
+      summary: '隐私权保护声明。',
+      content: '<h2>隐私权政策</h2><p>业务数据完全由客户自主掌控与保管。</p>',
+      status: 'published',
+    }),
+    row('55555555-5555-4555-8555-555555555507', 'en', 'g-page-terms', {
+      title: 'Terms of Service',
+      slug: 'terms',
+      summary: 'Terms of service and package licenses.',
+      content: '<h2>Terms of Service</h2><p>Tiered plans: $599 Standard, $899 Smart Marketing, $1,599 Source Ownership.</p>',
+      status: 'published',
+    }),
+    row('55555555-5555-4555-8555-555555555508', 'zh-CN', 'g-page-terms', {
+      title: '服务条款',
+      slug: 'terms',
+      summary: '服务条款与交付方案说明。',
+      content: '<h2>服务条款</h2><p>阶梯方案：$599 标准建站版、$899 智能营销版、$1,599 源码自主版。</p>',
+      status: 'published',
+    }),
   ],
 
   'b2b/content/b2b_case_study': [

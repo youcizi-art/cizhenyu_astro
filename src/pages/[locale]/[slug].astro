@@ -1,0 +1,104 @@
+---
+import BaseLayout from '@/ui/layout/BaseLayout.astro';
+import ThemeFrame from '@/ui/themes/ThemeFrame.astro';
+import ActiveStatic from '@/ui/themes/ActiveStatic.astro';
+import { loadCustomPage } from '@/workflows/pages/load-static-pages';
+import { applyCacheHeaders } from '@/workflows/chrome/http';
+import { buildAlternateLinks } from '@/workflows/chrome/urls';
+import { layoutSeoProps, pageJsonLd, resolveEntityLocaleAlternates, siteOrigin } from '@/modules/seo';
+import { defaultLocaleHref } from '@/modules/i18n';
+import { localePath } from '@/modules/cms';
+
+export const prerender = false;
+
+const slug = String(Astro.params.slug || '').trim();
+
+// 内置系统保留路径禁止落入通配独立页面
+const BUILT_IN_SLUGS = new Set([
+  'products',
+  'articles',
+  'case-studies',
+  'solutions',
+  'resources',
+  'faq',
+  'about',
+  'contact',
+  'api',
+]);
+
+if (!slug || BUILT_IN_SLUGS.has(slug)) {
+  return Astro.rewrite('/404');
+}
+
+const data = await loadCustomPage(slug, {
+  locale: Astro.params.locale,
+  pathname: Astro.url.pathname,
+});
+
+if (!data.localeValid) {
+  return Astro.redirect(defaultLocaleHref(`/${slug}`), 302);
+}
+
+applyCacheHeaders(Astro.response.headers, data.revalidateSeconds);
+
+// 若当前站点在 CMS 中未配置该 slug 的页面，或状态非已发布，直接返回 404
+if (!data.enabled || !data.page) {
+  return Astro.rewrite('/404');
+}
+
+const origin = siteOrigin() || Astro.url.origin;
+const seoProps = layoutSeoProps(data.page.seo, Astro.url.pathname);
+
+const alternates = (data.page as any).languageGroupKey
+  ? await resolveEntityLocaleAlternates({
+      catalogKey: 'page',
+      languageGroupKey: (data.page as any).languageGroupKey,
+      locales: data.languages.map((item) => item.code),
+      defaultLocale: data.site.defaultLocale,
+      currentLocale: data.locale,
+      currentPath: Astro.url.pathname,
+      pathForSlug: (locale, itemSlug) => localePath(locale, `/${encodeURIComponent(itemSlug)}`),
+      origin,
+    })
+  : buildAlternateLinks(data.localeOptions, { defaultLocale: data.site.defaultLocale });
+
+const jsonLd = pageJsonLd(
+  data.page.seo || {
+    title: data.page.title,
+    description: data.page.summary || '',
+    canonicalUrl: Astro.url.pathname,
+    robots: 'index,follow',
+    ogImage: data.company.logoUrl || '',
+    ogType: 'website',
+    schemaType: 'WebPage',
+    schemaMapping: '',
+    geoLat: '',
+    geoLng: '',
+  },
+  Astro.url.pathname,
+  {
+    siteName: data.siteName,
+    company: data.company,
+  }
+);
+---
+
+<BaseLayout
+  title={`${data.page.seoTitle || data.page.title} · ${data.siteName}`}
+  description={data.page.seoDescription || data.page.summary || data.company.summary}
+  lang={data.locale}
+  alternates={alternates}
+  {...seoProps}
+  jsonLd={jsonLd}
+>
+  <ThemeFrame chrome={data}>
+    <ActiveStatic
+      chrome={data}
+      kind="page"
+      title={data.page.title}
+      summary={data.page.summary}
+      content={data.page.content}
+      error={data.error}
+    />
+  </ThemeFrame>
+</BaseLayout>

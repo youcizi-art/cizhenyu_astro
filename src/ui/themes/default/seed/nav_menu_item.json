@@ -687,6 +687,128 @@
           "link_url": "/en-US/contact"
         }
       }
+    },
+    {
+      "languageGroupKey": "def00000-nmif-4000-8000-000000000015",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "隐私权政策",
+          "slug": "f-privacy",
+          "link_mode": "link",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-CN/privacy"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "隱私權政策",
+          "slug": "f-privacy",
+          "link_mode": "link",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-TW/privacy"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "プライバシーポリシー",
+          "slug": "f-privacy",
+          "link_mode": "link",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ja/privacy"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Privacy Policy",
+          "slug": "f-privacy",
+          "link_mode": "link",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/en-US/privacy"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "def00000-nmif-4000-8000-000000000016",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "服务条款",
+          "slug": "f-terms",
+          "link_mode": "link",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-CN/terms"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "服務條款",
+          "slug": "f-terms",
+          "link_mode": "link",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/zh-TW/terms"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "利用規約",
+          "slug": "f-terms",
+          "link_mode": "link",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ja/terms"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Terms of Service",
+          "slug": "f-terms",
+          "link_mode": "link",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/en-US/terms"
+        }
+      }
     }
   ]
 }
