@@ -1,0 +1,150 @@
+{
+  "collectionSlug": "b2b_company_info",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-c001-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "company_name": "Turmill Tech",
+          "company_type": "manufacturer",
+          "slogan": "创新遇见关爱，品质成就呵护",
+          "summary": "Turmill Tech 专注高端智能宠物产品的研发、制造与销售。我们相信宠物是家人，因此把前沿技术与匠心工艺结合，为全球养宠人提供更智能的解决方案。",
+          "address": "中国深圳",
+          "phone": "+86 18676660241",
+          "email": "joyce@turmill.com",
+          "website": "https://www.turmill.com",
+          "logo": {
+            "url": "https://picsum.photos/seed/b2b-logo/240/80"
+          },
+          "about_content": "<p>我们专注智能猫砂盆与宠物护理设备，服务全球批发与 OEM 客户。</p>",
+          "seo_title": "Turmill Tech — 智能宠物护理",
+          "seo_description": "智能猫砂盆与自动宠物护理解决方案",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          },
+          "country": "中国",
+          "founding_date": "2018",
+          "geo_latitude": "22.5431",
+          "geo_longitude": "114.0579",
+          "social_profiles": [
+            {
+              "platform": "website",
+              "url": "https://www.turmill.com"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://www.linkedin.com/company/turmill"
+            }
+          ]
+        },
+        "zh-TW": {
+          "company_name": "Turmill Tech",
+          "company_type": "manufacturer",
+          "slogan": "創新遇見關愛，品質成就呵護",
+          "summary": "Turmill Tech 專注高端智能寵物產品的研發、製造與銷售。我們相信寵物是家人，因此把前沿技術與匠心工藝結合，為全球養寵人提供更智能的解決方案。",
+          "address": "中國深圳",
+          "phone": "+86 18676660241",
+          "email": "joyce@turmill.com",
+          "website": "https://www.turmill.com",
+          "logo": {
+            "url": "https://picsum.photos/seed/b2b-logo/240/80"
+          },
+          "about_content": "<p>我們專注智能貓砂盆與寵物護理設備，服務全球批發與 OEM 客戶。</p>",
+          "seo_title": "Turmill Tech — 智能寵物護理",
+          "seo_description": "智能貓砂盆與自動寵物護理解決方案",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          },
+          "country": "中国",
+          "founding_date": "2018",
+          "geo_latitude": "22.5431",
+          "geo_longitude": "114.0579",
+          "social_profiles": [
+            {
+              "platform": "website",
+              "url": "https://www.turmill.com"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://www.linkedin.com/company/turmill"
+            }
+          ]
+        },
+        "ja": {
+          "company_name": "Turmill Tech",
+          "company_type": "manufacturer",
+          "slogan": "イノベーションと愛情、品質とケアが出会う場所",
+          "summary": "Turmill Tech はプレミアムなスマートペット製品の研究開発・製造・販売に特化したハイテク企業です。ペットは家族——最先端技術と丁寧な職人技で、世界中の飼い主の暮らしを豊かにします。",
+          "address": "中国・深圳",
+          "phone": "+86 18676660241",
+          "email": "joyce@turmill.com",
+          "website": "https://www.turmill.com",
+          "logo": {
+            "url": "https://picsum.photos/seed/b2b-logo/240/80"
+          },
+          "about_content": "<p>スマートトイレとペットケア機器を中心に、世界の卸売・OEM 顧客を支援します。</p>",
+          "seo_title": "Turmill Tech — スマートペットケア",
+          "seo_description": "スマートトイレと自動ペットケアソリューション",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          },
+          "country": "中国",
+          "founding_date": "2018",
+          "geo_latitude": "22.5431",
+          "geo_longitude": "114.0579",
+          "social_profiles": [
+            {
+              "platform": "website",
+              "url": "https://www.turmill.com"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://www.linkedin.com/company/turmill"
+            }
+          ]
+        },
+        "en-US": {
+          "company_name": "Turmill Tech",
+          "company_type": "manufacturer",
+          "slogan": "Where Innovation Meets Love, and Quality Meets Care",
+          "summary": "Turmill Tech is a high-tech enterprise specializing in the R&D, manufacturing, and sales of premium smart pet products. We believe pets are family — that is why we combine cutting-edge technology with heartfelt craftsmanship.",
+          "address": "Shenzhen, China",
+          "phone": "+86 18676660241",
+          "email": "joyce@turmill.com",
+          "website": "https://www.turmill.com",
+          "logo": {
+            "url": "https://picsum.photos/seed/b2b-logo/240/80"
+          },
+          "about_content": "<p>We specialize in smart litter boxes and pet care equipment for global wholesale and OEM partners.</p>",
+          "seo_title": "Turmill Tech — Smart Pet Care",
+          "seo_description": "Smart litter boxes and automated pet care solutions",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://picsum.photos/seed/b2b-logo/1200/630"
+          },
+          "country": "China",
+          "founding_date": "2018",
+          "geo_latitude": "22.5431",
+          "geo_longitude": "114.0579",
+          "social_profiles": [
+            {
+              "platform": "website",
+              "url": "https://www.turmill.com"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://www.linkedin.com/company/turmill"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

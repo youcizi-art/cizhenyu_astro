@@ -1,0 +1,11 @@
+---
+interface Props {
+  messages?: string[];
+  tone?: 'error' | 'warn';
+}
+const { messages = [], tone = 'error' } = Astro.props;
+const cls = tone === 'warn' ? 'tm-alert tm-alert-warn' : 'tm-alert tm-alert-error';
+---
+{messages.filter(Boolean).map((msg) => (
+  <div class={cls}>{msg}</div>
+))}

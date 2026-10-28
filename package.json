@@ -21,7 +21,9 @@
     "pack:theme": "node scripts/pack-theme.mjs",
     "pack:default": "node scripts/pack-theme.mjs --id=default",
     "pack:turmill": "node scripts/pack-theme.mjs --id=turmill",
-    "pack": "node scripts/pack-theme.mjs"
+    "pack": "node scripts/pack-theme.mjs",
+    "pack:theme-machinery": "node scripts/pack-theme.mjs --id=theme-machinery",
+    "pack:theme-energy": "node scripts/pack-theme.mjs --id=theme-energy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",

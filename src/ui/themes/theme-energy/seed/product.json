@@ -1,0 +1,195 @@
+{
+  "collectionSlug": "b2b_product",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-prod-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "title": "NovaGrid 125kW 大功率工商业光伏并网逆变器",
+          "slug": "novagrid-125kw-commercial-pv-inverter",
+          "sku": "NG-125K-C",
+          "brand": "WattNova",
+          "summary": "NovaGrid 125kW 专为工商业屋顶与地面电站设计，具备10路独立 MPPT，最高转换效率达 98.8%，支持智能 IV 曲线扫描与 AFCI 2.0 直流防拉弧防护。",
+          "description": "<p><strong>NovaGrid 125kW 工商业组串式逆变器</strong></p><p>采用业界顶尖的碳化硅 (SiC) 功率器件，支持 15A/20A 大电流组件完美匹配。内置交直流二级防雷模块，IP66 防护等级无惧高湿、高盐雾严苛工业环境。搭载云端毫秒级遥测能力，运维效率提升 40% 以上。</p>",
+          "images": [
+            { "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=800&h=600&fit=crop" },
+            { "url": "https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=800&h=600&fit=crop" }
+          ],
+          "price": 4200,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "Rated Power": "125 kW",
+            "Max. Efficiency": "98.8%",
+            "MPPT Trackers": "10 Strings / 20 Inputs",
+            "Max. DC Input Voltage": "1100 V",
+            "Protection Degree": "IP66 / C5 Anti-Corrosion",
+            "Cooling Method": "Smart Redundant Fan Cooling",
+            "Dimensions": "980 x 620 x 310 mm",
+            "Weight": "86 kg"
+          },
+          "seo_title": "NovaGrid 125kW 商用组串式光伏并网逆变器 — 10路MPPT高能效比",
+          "seo_description": "工商业大功率光伏逆变器批发与海外工程采购，支持 AFCI 防拉弧与 1100V 高压输入。",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": { "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=800&h=600&fit=crop" },
+          "tagline": "高效稳定 · 赋能工商业电站全生命周期高发电收益",
+          "advantages": [
+            { "title": "98.8% 超高转换效率", "description": "SiC 拓扑设计与低损耗滤波，显著降低内部温升与热衰减。" },
+            { "title": "AFCI 2.0 智能防拉弧", "description": "基于 AI 频谱算法在 0.5 秒内自动切断故障电弧，彻底杜绝火灾隐患。" },
+            { "title": "10路独立 MPPT 追踪", "description": "完美适应复杂阴影遮挡与异向倾角屋顶，消除组件失配功率损耗。" }
+          ],
+          "oem_content": "<p>提供面板品牌专属丝印、多国电网代码预置、包装箱定制与第三方国际质检陪同服务。</p>",
+          "quality_content": "<p>100% 经过出厂高温满负荷老化测试、防孤岛跳闸响应实测与绝缘耐压核验，提供出厂批次检测报告。</p>",
+          "certifications": [
+            { "name": "IEC 62109-1/2" },
+            { "name": "VDE-AR-N 4105" },
+            { "name": "UL 1741-SB" },
+            { "name": "CE / TÜV Rheinland" }
+          ]
+        },
+        "en-US": {
+          "title": "NovaGrid 125kW Commercial On-Grid Solar Inverter",
+          "slug": "novagrid-125kw-commercial-pv-inverter",
+          "sku": "NG-125K-C",
+          "brand": "WattNova",
+          "summary": "Engineered for high-yield commercial rooftops and decentralized utility solar plants, featuring 10 independent MPPTs, 98.8% max efficiency, and AI-powered AFCI 2.0 arc fault protection.",
+          "description": "<p><strong>NovaGrid 125kW High-Power String Solar Inverter</strong></p><p>Equipped with state-of-the-art Silicon Carbide (SiC) semiconductors, the NovaGrid 125kW accommodates high-power 182mm/210mm PV modules with up to 20A per string. IP66 and C5 corrosion-resistant housing ensures bulletproof durability in coastal and harsh industrial conditions.</p>",
+          "images": [
+            { "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=800&h=600&fit=crop" },
+            { "url": "https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=800&h=600&fit=crop" }
+          ],
+          "price": 4200,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "Rated Power": "125 kW",
+            "Max. Efficiency": "98.8%",
+            "MPPT Trackers": "10 Strings / 20 Inputs",
+            "Max. DC Input Voltage": "1100 V",
+            "Protection Degree": "IP66 / C5 Anti-Corrosion",
+            "Cooling Method": "Smart Redundant Fan Cooling",
+            "Dimensions": "980 x 620 x 310 mm",
+            "Weight": "86 kg"
+          },
+          "seo_title": "NovaGrid 125kW String Inverter — High-Efficiency Commercial PV Conversion",
+          "seo_description": "Wholesale commercial solar inverters with 10 MPPTs, 98.8% efficiency, and certified grid-tie compliance across North America, Europe, and APAC.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": { "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=800&h=600&fit=crop" },
+          "tagline": "Peak Performance & Maximum ROI for Industrial Solar Assets",
+          "advantages": [
+            { "title": "98.8% Ultra-High Efficiency", "description": "SiC topology and optimized magnetics reduce thermal losses across all load ranges." },
+            { "title": "AI-Powered AFCI 2.0 Protection", "description": "Interrupts electrical arc faults within 0.5s up to 200m string lengths." },
+            { "title": "10 Independent MPPTs", "description": "Eliminates string mismatch losses caused by shading and uneven orientations." }
+          ],
+          "oem_content": "<p>Full private label OEM/ODM support, pre-configured regional grid codes, tailored packaging, and custom communication protocols.</p>",
+          "quality_content": "<p>100% factory full-load burn-in testing under 50°C, anti-islanding verification, and insulation surge testing with complete batch reports.</p>",
+          "certifications": [
+            { "name": "IEC 62109-1/2" },
+            { "name": "VDE-AR-N 4105" },
+            { "name": "UL 1741-SB" },
+            { "name": "CE / TÜV Rheinland" }
+          ]
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-prod-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "title": "WattVault 100kW/215kWh 工商业智能液冷储能一体柜",
+          "slug": "wattvault-100kw-215kwh-liquid-cooling-bess-cabinet",
+          "sku": "WV-100K-215KWH",
+          "brand": "WattNova",
+          "summary": "WattVault 215kWh 采用汽车级宁德时代/亿纬 280Ah/314Ah 磷酸铁锂电芯与微通道液冷温控，电芯温差控制在2.5℃以内，实现超8000次长循环寿命。",
+          "description": "<p><strong>WattVault 100kW / 215kWh 户外一体化储能柜</strong></p><p>集成了磷酸铁锂电池簇、高效双向 PCS、智能液冷机组、自动气溶胶+全氟己酮消防灭火系统以及本地边缘 EMS 控制器。即插即用（All-in-One），大幅减少现场土建与接线工程量，特别适合工厂削峰填谷、需量响应与应急离网供电。</p>",
+          "images": [
+            { "url": "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=800&h=600&fit=crop" },
+            { "url": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&h=600&fit=crop" }
+          ],
+          "price": 28500,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "Rated AC Power": "100 kW",
+            "Battery Capacity": "215 kWh (0.5C Charge/Discharge)",
+            "Cell Chemistry": "LiFePO4 (LFP) 280Ah/314Ah",
+            "Cycle Life": "≥ 8000 Cycles @ 25°C, 80% DOD",
+            "Cooling Type": "Micro-Channel Liquid Cooling",
+            "Fire Suppression": "Dual-stage Aerosol + Novec 1230",
+            "Enclosure Rating": "IP55 Outdoor Cabinet",
+            "Footprint": "1.3m² (1300 x 1150 x 2200 mm)"
+          },
+          "seo_title": "WattVault 100kW/215kWh 工商业液冷储能柜 — 8000次循环寿命电池系统",
+          "seo_description": "工商业户外储能一体化机柜批发采购，集成BMS/PCS/EMS，安全合规支持全球电网认证。",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": { "url": "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=800&h=600&fit=crop" },
+          "tagline": "高安全 · 长寿命 · 极简部署工商业储能新标杆",
+          "advantages": [
+            { "title": "PACK 级精准液冷温控", "description": "系统电芯平均温差≤2.5℃，大幅减缓电芯衰减，整体寿命延长20%以上。" },
+            { "title": "四级重特大安全防护", "description": "电芯级热失控预警 + 泄爆排烟 + 双介质快速灭火，杜绝热蔓延链式反应。" },
+            { "title": "一体化即插即用", "description": "厂内完成系统集成与预调试，现场仅需接网线与交流电缆，半天内完成通电投运。" }
+          ],
+          "oem_content": "<p>支持柜体定制喷涂配色、品牌铭牌、定制 EMS 协议打通与海外本地化并网申请支持。</p>",
+          "quality_content": "<p>满足全球最严苛的 UL 9540A 大规模热失控燃烧蔓延测试，出厂进行 100% 满负荷充放电循环测试。</p>",
+          "certifications": [
+            { "name": "UL 9540 / UL 9540A" },
+            { "name": "IEC 62619 / IEC 62477" },
+            { "name": "UN 38.3" },
+            { "name": "CE-LVD / EMC" }
+          ]
+        },
+        "en-US": {
+          "title": "WattVault 100kW/215kWh Commercial Liquid-Cooled BESS Cabinet",
+          "slug": "wattvault-100kw-215kwh-liquid-cooling-bess-cabinet",
+          "sku": "WV-100K-215KWH",
+          "brand": "WattNova",
+          "summary": "Turnkey outdoor battery energy storage cabinet powered by Tier-1 280Ah/314Ah LFP cells. Featuring intelligent micro-channel liquid cooling, 8,000+ cycle life, and multi-stage fire suppression for commercial peak shaving.",
+          "description": "<p><strong>WattVault 100kW / 215kWh All-in-One Commercial Storage System</strong></p><p>Integrating high-density LFP battery clusters, bi-directional PCS, liquid chilling loop, and an embedded edge EMS controller within a compact 1.3m² footprint. Pre-commissioned and factory-tested to drastically reduce on-site engineering and commissioning lead time.</p>",
+          "images": [
+            { "url": "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=800&h=600&fit=crop" },
+            { "url": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&h=600&fit=crop" }
+          ],
+          "price": 28500,
+          "price_currency": "USD",
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "Rated AC Power": "100 kW",
+            "Battery Capacity": "215 kWh (0.5C Charge/Discharge)",
+            "Cell Chemistry": "LiFePO4 (LFP) 280Ah/314Ah",
+            "Cycle Life": "≥ 8000 Cycles @ 25°C, 80% DOD",
+            "Cooling Type": "Micro-Channel Liquid Cooling",
+            "Fire Suppression": "Dual-stage Aerosol + Novec 1230",
+            "Enclosure Rating": "IP55 Outdoor Cabinet",
+            "Footprint": "1.3m² (1300 x 1150 x 2200 mm)"
+          },
+          "seo_title": "WattVault 100kW/215kWh Liquid-Cooled BESS — Industrial Energy Storage",
+          "seo_description": "Outdoor turnkey commercial battery storage cabinet for peak shaving, backup power, and microgrid integration. UL9540A certified.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": { "url": "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=800&h=600&fit=crop" },
+          "tagline": "Uncompromising Safety & Maximum Lifecycle Value for Industrial Microgrids",
+          "advantages": [
+            { "title": "Precision Liquid Cooling", "description": "Maintains inter-cell temperature differences ≤ 2.5°C to extend battery lifecycle by 20%." },
+            { "title": "Multi-Layer Safety Assurance", "description": "Cell-level off-gas telemetry, structural explosion relief, and fast-acting clean agent fire suppression." },
+            { "title": "Plug-and-Play Delivery", "description": "100% factory pre-assembled and tested, ready for AC grid tie-in within half a day." }
+          ],
+          "oem_content": "<p>Custom exterior livery branding, localized EMS API integration, and engineering assistance for utility grid interconnection filings.</p>",
+          "quality_content": "<p>Complies with rigorous UL 9540A thermal runaway propagation testing standards with comprehensive full-power factory acceptance testing (FAT).</p>",
+          "certifications": [
+            { "name": "UL 9540 / UL 9540A" },
+            { "name": "IEC 62619 / IEC 62477" },
+            { "name": "UN 38.3" },
+            { "name": "CE-LVD / EMC" }
+          ]
+        }
+      }
+    }
+  ]
+}

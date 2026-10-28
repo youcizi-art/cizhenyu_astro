@@ -1,0 +1,150 @@
+{
+  "collectionSlug": "b2b_company_info",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-c001-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "company_name": "WattNova Energy 诺瓦智慧能源",
+          "company_type": "manufacturer",
+          "slogan": "智领光储 · 驱动零碳未来",
+          "summary": "WattNova Energy 是全球领先的分布式光伏逆变器、商用储能一体柜与智慧能源管理系统供应商。凭借在电力电子与电化学储能领域的核心突破，为全球100多个国家和地区的工商业园区、地面电站及家庭提供安全、高效、全生命周期智慧能源保障。",
+          "address": "中国深圳高新技术产业园科技南路108号光储研发中心",
+          "phone": "+86 755 8899 6600",
+          "email": "contact@wattnova-energy.com",
+          "website": "https://www.wattnova-energy.com",
+          "logo": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=240&h=80&fit=crop"
+          },
+          "about_content": "<p>作为一家集技术研发、精密智能制造与全球化本地服务于一体的高科技新能源企业，WattNova 在全球部署了8大智能制造基地与超过30个海外技术服务网点。我们的逆变转换效率高达98.8%，储能电芯循环寿命突破8000次，获得标普全球Tier 1、TÜV、UL及CE等全系列国际严苛认证。</p>",
+          "seo_title": "WattNova Energy — 全球商用光储一体化与光伏逆变器制造解决方案",
+          "seo_description": "WattNova 专注于并网光伏逆变器、高压工商业储能一体柜与光储充微电网系统的研发与生产，支持海外OEM/ODM与工程大宗采购。",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=1200&h=630&fit=crop"
+          },
+          "country": "中国",
+          "founding_date": "2012",
+          "geo_latitude": "22.5431",
+          "geo_longitude": "114.0579",
+          "social_profiles": [
+            {
+              "platform": "website",
+              "url": "https://www.wattnova-energy.com"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://www.linkedin.com/company/wattnova-energy"
+            }
+          ]
+        },
+        "zh-TW": {
+          "company_name": "WattNova Energy 諾瓦智慧能源",
+          "company_type": "manufacturer",
+          "slogan": "智領光儲 · 驅動零碳未來",
+          "summary": "WattNova Energy 是全球領先的分布式光伏逆變器、商用儲能一體櫃與智慧能源管理系統供應商。為全球100多個國家和地區的工商業園區、地面電站及家庭提供安全、高效、全生命周期智慧能源保障。",
+          "address": "中國深圳高新技術產業園科技南路108號光儲研發中心",
+          "phone": "+86 755 8899 6600",
+          "email": "contact@wattnova-energy.com",
+          "website": "https://www.wattnova-energy.com",
+          "logo": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=240&h=80&fit=crop"
+          },
+          "about_content": "<p>作為一家集技術研發、精密智能製造與全球化本地服務於一體的高科技新能源企業，WattNova 逆變轉換效率高達98.8%，儲能電芯循環壽命突破8000次。</p>",
+          "seo_title": "WattNova Energy — 全球商用光儲一體化與光伏逆變器製造解決方案",
+          "seo_description": "WattNova 專注於並網光伏逆變器、高壓工商業儲能一體櫃與光儲充微電網系統的研發與生產。",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=1200&h=630&fit=crop"
+          },
+          "country": "中國",
+          "founding_date": "2012",
+          "geo_latitude": "22.5431",
+          "geo_longitude": "114.0579",
+          "social_profiles": [
+            {
+              "platform": "website",
+              "url": "https://www.wattnova-energy.com"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://www.linkedin.com/company/wattnova-energy"
+            }
+          ]
+        },
+        "ja": {
+          "company_name": "WattNova Energy ワットノバ・エナジー",
+          "company_type": "manufacturer",
+          "slogan": "スマート光蓄電技術でゼロカーボンな未来を創る",
+          "summary": "WattNova Energyは、分散型太陽光発電インバータ（パワコン）、産業用蓄電一体型キャビネット、およびスマートEMSクラウドプラットフォームのグローバルプロバイダーです。",
+          "address": "中国深セン市南山区ハイテクパーク 光蓄技術センター",
+          "phone": "+86 755 8899 6600",
+          "email": "contact@wattnova-energy.com",
+          "website": "https://www.wattnova-energy.com",
+          "logo": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=240&h=80&fit=crop"
+          },
+          "about_content": "<p>最大変換効率98.8%、サイクル寿命8,000回以上の高信頼性セルを採用。JET、TÜV、UL認証を取得し、産業用から家庭用まで高品質なOEM/ODMソリューションを提供します。</p>",
+          "seo_title": "WattNova Energy — 産業用光蓄電システム・太陽光パワコン製造ソリューション",
+          "seo_description": "太陽光発電インバータ、産業用大型蓄電池、マイクログリッドEMSソリューションの設計・製造メーカー。",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=1200&h=630&fit=crop"
+          },
+          "country": "中国",
+          "founding_date": "2012",
+          "geo_latitude": "22.5431",
+          "geo_longitude": "114.0579",
+          "social_profiles": [
+            {
+              "platform": "website",
+              "url": "https://www.wattnova-energy.com"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://www.linkedin.com/company/wattnova-energy"
+            }
+          ]
+        },
+        "en-US": {
+          "company_name": "WattNova Energy",
+          "company_type": "manufacturer",
+          "slogan": "Smart Solar & Energy Storage for a Zero-Carbon World",
+          "summary": "WattNova Energy is a premier global manufacturer of on-grid solar inverters, commercial & industrial (C&I) all-in-one storage cabinets, and intelligent cloud energy management systems (EMS). Empowering energy independence across 100+ countries.",
+          "address": "High-Tech Industrial Park, Nanshan, Shenzhen, China",
+          "phone": "+86 755 8899 6600",
+          "email": "contact@wattnova-energy.com",
+          "website": "https://www.wattnova-energy.com",
+          "logo": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=240&h=80&fit=crop"
+          },
+          "about_content": "<p>With over a decade of deep R&D in power conversion systems (PCS) and advanced LFP battery management, WattNova delivers up to 98.8% conversion efficiency and 8,000+ cycle life. Accredited with BloombergNEF Tier 1, TÜV, UL9540A, and CE certificates, we are the trusted partner for tier-1 EPC contractors, distributors, and C&I project developers worldwide.</p>",
+          "seo_title": "WattNova Energy — Global Manufacturer of Solar Inverters & C&I Energy Storage",
+          "seo_description": "Tier-1 commercial and industrial energy storage systems (BESS), hybrid PV inverters, and utility-scale solar conversion solutions. Inquire for wholesale pricing & OEM partnerships.",
+          "robots_directive": "index,follow",
+          "schema_type": "Organization",
+          "og_image": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=1200&h=630&fit=crop"
+          },
+          "country": "China",
+          "founding_date": "2012",
+          "geo_latitude": "22.5431",
+          "geo_longitude": "114.0579",
+          "social_profiles": [
+            {
+              "platform": "website",
+              "url": "https://www.wattnova-energy.com"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://www.linkedin.com/company/wattnova-energy"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

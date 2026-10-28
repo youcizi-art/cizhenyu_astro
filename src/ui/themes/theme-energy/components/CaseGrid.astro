@@ -1,0 +1,53 @@
+---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
+interface CaseItem {
+  title: string;
+  href: string;
+  summary?: string;
+  coverUrl?: string;
+  industry?: string;
+}
+interface Props {
+  title?: string;
+  subtitle?: string;
+  cases?: CaseItem[];
+}
+const { title = 'Case Studies', subtitle = '', cases = [] } = Astro.props;
+---
+{cases.length > 0 ? (
+  <section class="tm-section tm-section-cases">
+    {title || subtitle ? (
+      <div class="tm-title-wrap">
+        {title ? <h2 class="tm-title-main">{title}</h2> : null}
+        {subtitle ? <p class="tm-title-desc">{subtitle}</p> : null}
+      </div>
+    ) : null}
+    <div class="tm-container tm-grid-3">
+      {cases.map((item) => (
+        <a class="tm-case-card tm-card-hover" href={item.href}>
+          <div class="tm-case-media">
+            {item.coverUrl ? (
+              <div class="tm-case-media-bg">
+                <OptimizedImage
+                  src={item.coverUrl}
+                  alt={item.title}
+                  width={640}
+                  height={360}
+                  widths={[320, 640, 960]}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  fill
+                />
+              </div>
+            ) : null}
+            {item.industry ? <span class="tm-case-tag">{item.industry}</span> : null}
+          </div>
+          <div class="tm-case-body">
+            <h3>{item.title}</h3>
+            {item.summary ? <p style="margin:0;color:#55665b;font-size:0.95rem">{item.summary}</p> : null}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+) : null}

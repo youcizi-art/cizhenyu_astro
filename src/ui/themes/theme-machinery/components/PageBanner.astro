@@ -1,0 +1,28 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  title: string;
+  summary?: string;
+  crumbs?: Crumb[];
+}
+const { title, summary = '', crumbs = [] } = Astro.props;
+---
+<section class="tm-page-banner">
+  <div class="tm-container">
+    {crumbs.length ? (
+      <nav class="tm-breadcrumb" aria-label="Breadcrumb">
+        {crumbs.map((c, i) => (
+          <>
+            {i > 0 ? <span class="tm-breadcrumb-sep">/</span> : null}
+            {c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}
+          </>
+        ))}
+      </nav>
+    ) : null}
+    <h1 class="tm-display">{title}</h1>
+    {summary ? <p>{summary}</p> : null}
+  </div>
+</section>

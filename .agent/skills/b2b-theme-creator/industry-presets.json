@@ -1,0 +1,264 @@
+{
+  "themeCatalog": [
+    {
+      "id": "theme-machinery",
+      "name": "重型机械与工程液压 (Heavy Machinery & Hydraulics)",
+      "industry": "machinery",
+      "tokens": {
+        "primary": "#D9531E",
+        "primaryHover": "#B84012",
+        "accent": "#F59E0B",
+        "bgSurface": "#FFFFFF",
+        "bgDark": "#0E1217",
+        "textMain": "#0F172A",
+        "textMuted": "#64748B",
+        "radius": "4px"
+      },
+      "features": ["360度机械结构拆解", "吨位与工作行程 Specs 表", "工况实录与 FAT 检测"],
+      "recommendedModules": {
+        "products": true,
+        "articles": true,
+        "caseStudies": true,
+        "solutions": true,
+        "faq": true,
+        "resources": true,
+        "about": true,
+        "contact": true
+      }
+    },
+    {
+      "id": "theme-energy",
+      "name": "储能系统与光伏光储充 (Solar & Energy Storage)",
+      "industry": "new-energy",
+      "tokens": {
+        "primary": "#059669",
+        "primaryHover": "#047857",
+        "accent": "#10B981",
+        "bgSurface": "#FFFFFF",
+        "bgDark": "#0B1120",
+        "textMain": "#0F172A",
+        "textMuted": "#64748B",
+        "radius": "6px"
+      },
+      "features": ["系统拓扑图解", "充放电循环寿命对比表", "IEC/UL 安全认证矩阵"],
+      "recommendedModules": {
+        "products": true,
+        "articles": true,
+        "caseStudies": true,
+        "solutions": true,
+        "faq": true,
+        "resources": true,
+        "about": true,
+        "contact": true
+      }
+    },
+    {
+      "id": "theme-precision",
+      "name": "数控机床与精密制造 (CNC Machine & Mold)",
+      "industry": "precision-manufacturing",
+      "tokens": {
+        "primary": "#0066FF",
+        "primaryHover": "#0052CC",
+        "accent": "#00E5FF",
+        "bgSurface": "#FFFFFF",
+        "bgDark": "#0A1128",
+        "textMain": "#0F172A",
+        "textMuted": "#64748B",
+        "radius": "4px"
+      },
+      "features": ["微米级公差标注", "主轴转速与行程矩阵", "五轴联动加工动态图解"],
+      "recommendedModules": {
+        "products": true,
+        "articles": true,
+        "caseStudies": true,
+        "solutions": true,
+        "faq": true,
+        "resources": false,
+        "about": true,
+        "contact": true
+      }
+    },
+    {
+      "id": "theme-medtech",
+      "name": "医疗仪器与生化实验室 (Medical Device & Lab Tech)",
+      "industry": "medical",
+      "tokens": {
+        "primary": "#0D9488",
+        "primaryHover": "#0F766E",
+        "accent": "#06B6D4",
+        "bgSurface": "#FFFFFF",
+        "bgDark": "#042F2E",
+        "textMain": "#0F172A",
+        "textMuted": "#475569",
+        "radius": "6px"
+      },
+      "features": ["FDA/CE 医疗合规面板", "GMP 洁净车间认证", "临床数据对比展示"],
+      "recommendedModules": {
+        "products": true,
+        "articles": true,
+        "caseStudies": true,
+        "solutions": false,
+        "faq": true,
+        "resources": true,
+        "about": true,
+        "contact": true
+      }
+    },
+    {
+      "id": "theme-chemical",
+      "name": "精细化工与塑料粒子 (Chemical & Materials)",
+      "industry": "chemical",
+      "tokens": {
+        "primary": "#2563EB",
+        "primaryHover": "#1D4ED8",
+        "accent": "#7C3AED",
+        "bgSurface": "#FFFFFF",
+        "bgDark": "#0F172A",
+        "textMain": "#0F172A",
+        "textMuted": "#64748B",
+        "radius": "6px"
+      },
+      "features": ["MSDS 安全技术书下载", "分子式与纯度标准表", "危化品防爆包装与海运合规"],
+      "recommendedModules": {
+        "products": true,
+        "articles": true,
+        "caseStudies": false,
+        "solutions": true,
+        "faq": true,
+        "resources": true,
+        "about": true,
+        "contact": true
+      }
+    },
+    {
+      "id": "theme-electronics",
+      "name": "工业传感器与物联网硬件 (Sensors & IoT)",
+      "industry": "electronics",
+      "tokens": {
+        "primary": "#4F46E5",
+        "primaryHover": "#4338CA",
+        "accent": "#F59E0B",
+        "bgSurface": "#FFFFFF",
+        "bgDark": "#0B0F19",
+        "textMain": "#0F172A",
+        "textMuted": "#64748B",
+        "radius": "4px"
+      },
+      "features": ["引脚接口定义图解", "通信协议（Modbus/MQTT）兼容库", "固件与驱动支持库"],
+      "recommendedModules": {
+        "products": true,
+        "articles": true,
+        "caseStudies": true,
+        "solutions": true,
+        "faq": true,
+        "resources": true,
+        "about": true,
+        "contact": true
+      }
+    },
+    {
+      "id": "theme-auto-parts",
+      "name": "汽配外贸与底盘悬挂 (Auto Parts & Chassis)",
+      "industry": "auto-parts",
+      "tokens": {
+        "primary": "#DC2626",
+        "primaryHover": "#B91C1C",
+        "accent": "#475569",
+        "bgSurface": "#FFFFFF",
+        "bgDark": "#18181B",
+        "textMain": "#0F172A",
+        "textMuted": "#64748B",
+        "radius": "4px"
+      },
+      "features": ["原厂 OE/OEM 零件号速查", "车型车系适配矩阵", "耐久与疲劳测试证明"],
+      "recommendedModules": {
+        "products": true,
+        "articles": true,
+        "caseStudies": false,
+        "solutions": false,
+        "faq": true,
+        "resources": false,
+        "about": true,
+        "contact": true
+      }
+    },
+    {
+      "id": "theme-hardware",
+      "name": "五金紧固件与工程建材 (Fasteners & Construction)",
+      "industry": "hardware",
+      "tokens": {
+        "primary": "#334155",
+        "primaryHover": "#1E293B",
+        "accent": "#CA8A04",
+        "bgSurface": "#FFFFFF",
+        "bgDark": "#0F172A",
+        "textMain": "#0F172A",
+        "textMuted": "#64748B",
+        "radius": "4px"
+      },
+      "features": ["公制 / 英制规格对照表", "抗拉强度等级对照", "整柜海运装箱体积计算"],
+      "recommendedModules": {
+        "products": true,
+        "articles": true,
+        "caseStudies": false,
+        "solutions": true,
+        "faq": true,
+        "resources": true,
+        "about": true,
+        "contact": true
+      }
+    },
+    {
+      "id": "theme-packaging",
+      "name": "绿色包装与纸塑印刷 (Eco Packaging & Printing)",
+      "industry": "packaging",
+      "tokens": {
+        "primary": "#15803D",
+        "primaryHover": "#166534",
+        "accent": "#B45309",
+        "bgSurface": "#FDFBF7",
+        "bgDark": "#14532D",
+        "textMain": "#1C1917",
+        "textMuted": "#78716C",
+        "radius": "8px"
+      },
+      "features": ["3D 盒型展开结构图解", "克重与材质环保触感对比", "打样与开模交付时效轴"],
+      "recommendedModules": {
+        "products": true,
+        "articles": true,
+        "caseStudies": true,
+        "solutions": true,
+        "faq": true,
+        "resources": false,
+        "about": true,
+        "contact": true
+      }
+    },
+    {
+      "id": "theme-apparel-b2b",
+      "name": "纺织服装 OEM 与功能性面料 (Apparel & Textile OEM)",
+      "industry": "apparel",
+      "tokens": {
+        "primary": "#18181B",
+        "primaryHover": "#27272A",
+        "accent": "#EA580C",
+        "bgSurface": "#FAFAFA",
+        "bgDark": "#09090B",
+        "textMain": "#09090B",
+        "textMuted": "#71717A",
+        "radius": "6px"
+      },
+      "features": ["面料防水透湿性能雷达图", "潘通色卡库与定制打样", "BSCI/WRAP 验厂验资记录"],
+      "recommendedModules": {
+        "products": true,
+        "articles": true,
+        "caseStudies": true,
+        "solutions": true,
+        "faq": true,
+        "resources": false,
+        "about": true,
+        "contact": true
+      }
+    }
+  ]
+}

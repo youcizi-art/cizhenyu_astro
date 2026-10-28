@@ -1,0 +1,102 @@
+---
+/**
+ * WattNova theme-energy 专属首屏组件 (Smart Solar & Energy Storage Hero)
+ * 沉浸式科技渐变、数据看板式指标徽章、高冲击力光伏与储能场景视效
+ */
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
+interface Props {
+  title?: string;
+  summary?: string;
+  image?: string;
+  eyebrow?: string;
+  actionUrl?: string;
+  actionLabel?: string;
+  discountLabel?: string;
+  discountValue?: string;
+  thumbs?: Array<{ src: string; free?: boolean; alt?: string }>;
+}
+const {
+  title = '',
+  summary = '',
+  image = '',
+  eyebrow = '',
+  actionUrl = '',
+  actionLabel = 'Explore Solutions',
+  thumbs = [],
+} = Astro.props;
+const hasContent = Boolean(title || summary || image);
+---
+{hasContent ? (
+  <section class="energy-hero">
+    <div class="energy-hero-bg"></div>
+    <div class="tm-container energy-hero-inner">
+      <div class="energy-hero-content">
+        {eyebrow ? (
+          <div class="energy-hero-eyebrow">
+            <span class="energy-hero-pulse"></span>
+            <span class="energy-hero-tag">{eyebrow}</span>
+          </div>
+        ) : null}
+
+        {title ? <h1 class="energy-hero-title">{title}</h1> : null}
+        
+        {summary ? <p class="energy-hero-desc">{summary}</p> : null}
+
+        <div class="energy-hero-actions">
+          {actionUrl ? (
+            <a class="energy-btn-primary" href={actionUrl}>
+              <span>{actionLabel}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          ) : null}
+          <a class="energy-btn-ghost" href="#featured-products">
+            <span>Core Products</span>
+          </a>
+        </div>
+
+        {/* 关键性能与信任指标条 */}
+        <div class="energy-hero-stats">
+          <div class="energy-stat-item">
+            <div class="energy-stat-val">98.8%</div>
+            <div class="energy-stat-lbl">Max PV Efficiency</div>
+          </div>
+          <div class="energy-stat-divider"></div>
+          <div class="energy-stat-item">
+            <div class="energy-stat-val">8000+</div>
+            <div class="energy-stat-lbl">LFP Cycles @80% DOD</div>
+          </div>
+          <div class="energy-stat-divider"></div>
+          <div class="energy-stat-item">
+            <div class="energy-stat-val">Tier 1</div>
+            <div class="energy-stat-lbl">BNEF Global Listed</div>
+          </div>
+        </div>
+      </div>
+
+      {image ? (
+        <div class="energy-hero-visual">
+          <div class="energy-hero-img-wrap">
+            <OptimizedImage
+              src={image}
+              alt={title || 'Solar & Energy Storage Solution'}
+              width={640}
+              height={460}
+              priority
+              sizes="(max-width: 900px) 95vw, 640px"
+            />
+            <div class="energy-hero-card-floating">
+              <div class="energy-floating-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div class="energy-floating-text">
+                <span class="energy-floating-title">Grid-Ready Architecture</span>
+                <span class="energy-floating-sub">UL9540A & IEC Certified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  </section>
+) : null}

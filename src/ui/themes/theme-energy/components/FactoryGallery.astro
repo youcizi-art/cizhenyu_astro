@@ -1,0 +1,59 @@
+---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
+interface Item {
+  title: string;
+  imageUrl: string;
+}
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  factoryArea?: string;
+  factoryLabel?: string;
+  items?: Item[];
+}
+const {
+  eyebrow = 'Manufacturing Power',
+  title = 'High-Tech R&D & Manufacturing Center',
+  description = '',
+  factoryArea = '',
+  factoryLabel = 'Production Area',
+  items = [],
+} = Astro.props;
+---
+{items.length > 0 ? (
+  <section class="tm-factory">
+    <div class="tm-container">
+      <div class="tm-factory-head">
+        <div>
+          {eyebrow ? <div class="tm-title-eyebrow tm-title-eyebrow-light">{eyebrow}</div> : null}
+          <h2 class="tm-display tm-factory-title">{title}</h2>
+          {description ? <p>{description}</p> : null}
+        </div>
+        {factoryArea ? (
+          <div class="tm-factory-stat">
+            <strong class="tm-display">{factoryArea}</strong>
+            <span>{factoryLabel}</span>
+          </div>
+        ) : null}
+      </div>
+      <div class="tm-factory-grid">
+        {items.map((item) => (
+          <figure class="tm-factory-card">
+            <OptimizedImage
+              src={item.imageUrl}
+              alt={item.title}
+              width={640}
+              height={480}
+              widths={[320, 640]}
+              sizes="(max-width: 768px) 50vw, 33vw"
+              fill
+            />
+            <figcaption>{item.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+) : null}

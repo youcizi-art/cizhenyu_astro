@@ -1,0 +1,128 @@
+{
+  "collectionSlug": "b2b_faq",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-faq0-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "question": "HP-200 起订量是多少？",
+          "answer": "<p>样品通常 1 台；量产报价通常 3 台起。</p>",
+          "status": "published",
+          "sort_order": 10,
+          "seo_title": "HP-200 起订量是多少？",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "简答：关于「HP-200 起订量是多少？」，请以合同规格与实测验收为准，必要时联系销售确认。"
+        },
+        "zh-TW": {
+          "question": "HP-200 起訂量是多少？",
+          "answer": "<p>樣品通常 1 台；量產報價通常 3 台起。</p>",
+          "status": "published",
+          "sort_order": 10,
+          "seo_title": "HP-200 起訂量是多少？",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "简答：关于「HP-200 起訂量是多少？」，请以合同规格与实测验收为准，必要时联系销售确认。"
+        },
+        "ja": {
+          "question": "HP-200 の最小発注数は？",
+          "answer": "<p>サンプルは通常1台、量産見積は通常3台からです。</p>",
+          "status": "published",
+          "sort_order": 10,
+          "seo_title": "HP-200 の最小発注数は？",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "簡潔な回答：「HP-200 の最小発注数は？」は契約仕様と実測検収に従い、必要なら営業へ確認してください。"
+        },
+        "en-US": {
+          "question": "What is the MOQ for HP-200?",
+          "answer": "<p>Sample MOQ is usually 1 unit; production pricing from 3 units.</p>",
+          "status": "published",
+          "sort_order": 10,
+          "seo_title": "What is the MOQ for HP-200?",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "Short answer: For \"What is the MOQ for HP-200?\", follow contract specs and measured acceptance; contact sales if unsure."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-faq0-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "question": "离心泵交期多久？",
+          "answer": "<p>标准型号 4–6 周，定制密封另计。</p>",
+          "status": "published",
+          "sort_order": 20,
+          "seo_title": "离心泵交期多久？",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "简答：关于「离心泵交期多久？」，请以合同规格与实测验收为准，必要时联系销售确认。"
+        },
+        "zh-TW": {
+          "question": "離心泵交期多久？",
+          "answer": "<p>標準型號 4–6 週，定制密封另計。</p>",
+          "status": "published",
+          "sort_order": 20,
+          "seo_title": "離心泵交期多久？",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "简答：关于「離心泵交期多久？」，请以合同规格与实测验收为准，必要时联系销售确认。"
+        },
+        "ja": {
+          "question": "遠心ポンプの納期は？",
+          "answer": "<p>標準機種は4–6週、特注シールは別途。</p>",
+          "status": "published",
+          "sort_order": 20,
+          "seo_title": "遠心ポンプの納期は？",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "簡潔な回答：「遠心ポンプの納期は？」は契約仕様と実測検収に従い、必要なら営業へ確認してください。"
+        },
+        "en-US": {
+          "question": "Pump lead time?",
+          "answer": "<p>Standard models 4–6 weeks; custom seals extra.</p>",
+          "status": "published",
+          "sort_order": 20,
+          "seo_title": "Pump lead time?",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "Short answer: For \"Pump lead time?\", follow contract specs and measured acceptance; contact sales if unsure."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-faq0-4000-8000-000000000003",
+      "locales": {
+        "zh-CN": {
+          "question": "电压规格有哪些？",
+          "answer": "<p>提供 220/380/440V，50/60Hz 可选。</p>",
+          "status": "published",
+          "sort_order": 30,
+          "seo_title": "电压规格有哪些？",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "简答：关于「电压规格有哪些？」，请以合同规格与实测验收为准，必要时联系销售确认。"
+        },
+        "zh-TW": {
+          "question": "電壓規格有哪些？",
+          "answer": "<p>提供 220/380/440V，50/60Hz 可選。</p>",
+          "status": "published",
+          "sort_order": 30,
+          "seo_title": "電壓規格有哪些？",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "简答：关于「電壓規格有哪些？」，请以合同规格与实测验收为准，必要时联系销售确认。"
+        },
+        "ja": {
+          "question": "電圧仕様は？",
+          "answer": "<p>220/380/440V、50/60Hzに対応。</p>",
+          "status": "published",
+          "sort_order": 30,
+          "seo_title": "電圧仕様は？",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "簡潔な回答：「電圧仕様は？」は契約仕様と実測検収に従い、必要なら営業へ確認してください。"
+        },
+        "en-US": {
+          "question": "Voltage options?",
+          "answer": "<p>220/380/440V, 50/60Hz available.</p>",
+          "status": "published",
+          "sort_order": 30,
+          "seo_title": "Voltage options?",
+          "related_product": "__BY_SLUG__:b2b_product:hydraulic-press-hp-200",
+          "short_answer": "Short answer: For \"Voltage options?\", follow contract specs and measured acceptance; contact sales if unsure."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,520 @@
+{
+  "collectionSlug": "b2b_nav_menu_item",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-nmit-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "首页",
+          "slug": "home",
+          "link_mode": "link",
+          "link_url": "/zh-CN",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "首頁",
+          "slug": "home",
+          "link_mode": "link",
+          "link_url": "/zh-TW",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "ホーム",
+          "slug": "home",
+          "link_mode": "link",
+          "link_url": "/ja",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Home",
+          "slug": "home",
+          "link_mode": "link",
+          "link_url": "/en-US",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-nmit-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "产品",
+          "slug": "products",
+          "link_mode": "reference",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "title": "全部产品",
+            "description": "浏览产品目录"
+          },
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "產品",
+          "slug": "products",
+          "link_mode": "reference",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "title": "全部產品",
+            "description": "瀏覽產品目錄"
+          },
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "製品",
+          "slug": "products",
+          "link_mode": "reference",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "title": "すべての製品",
+            "description": "製品カタログを見る"
+          },
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Products",
+          "slug": "products",
+          "link_mode": "reference",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "title": "All products",
+            "description": "Browse the catalog"
+          },
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-nmit-4000-8000-000000000003",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "解决方案",
+          "slug": "solutions",
+          "link_mode": "reference",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_industry",
+            "title": "全部方案",
+            "description": "按行业浏览"
+          },
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "解決方案",
+          "slug": "solutions",
+          "link_mode": "reference",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_industry",
+            "title": "全部方案",
+            "description": "按行業瀏覽"
+          },
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "ソリューション",
+          "slug": "solutions",
+          "link_mode": "reference",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_industry",
+            "title": "すべてのソリューション",
+            "description": "業界別に見る"
+          },
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Solutions",
+          "slug": "solutions",
+          "link_mode": "reference",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_industry",
+            "title": "All solutions",
+            "description": "Browse by industry"
+          },
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-nmit-4000-8000-000000000004",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "精选案例",
+          "slug": "featured-cases",
+          "link_mode": "reference",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:press-line-upgrade-eu"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:servo-retrofit-jp",
+              "title": "日本伺服改造"
+            }
+          ],
+          "sort_order": 40,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "精選案例",
+          "slug": "featured-cases",
+          "link_mode": "reference",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:press-line-upgrade-eu"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:servo-retrofit-jp",
+              "title": "日本伺服改造"
+            }
+          ],
+          "sort_order": 40,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "注目事例",
+          "slug": "featured-cases",
+          "link_mode": "reference",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:press-line-upgrade-eu"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:servo-retrofit-jp",
+              "title": "日本サーボ改造"
+            }
+          ],
+          "sort_order": 40,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Featured cases",
+          "slug": "featured-cases",
+          "link_mode": "reference",
+          "target_reference": [
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:press-line-upgrade-eu"
+            },
+            {
+              "type": "internal",
+              "refType": "b2b_case_study",
+              "refId": "__BY_SLUG__:servo-retrofit-jp",
+              "title": "Japan servo retrofit"
+            }
+          ],
+          "sort_order": 40,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-nmit-4000-8000-000000000005",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "资讯",
+          "slug": "articles",
+          "link_mode": "link",
+          "link_url": "/zh-CN/articles",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "資訊",
+          "slug": "articles",
+          "link_mode": "link",
+          "link_url": "/zh-TW/articles",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "記事",
+          "slug": "articles",
+          "link_mode": "link",
+          "link_url": "/ja/articles",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Articles",
+          "slug": "articles",
+          "link_mode": "link",
+          "link_url": "/en-US/articles",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-nmit-4000-8000-000000000006",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "关于我们",
+          "slug": "about",
+          "link_mode": "link",
+          "link_url": "/zh-CN/about",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "關於我們",
+          "slug": "about",
+          "link_mode": "link",
+          "link_url": "/zh-TW/about",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "会社概要",
+          "slug": "about",
+          "link_mode": "link",
+          "link_url": "/ja/about",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "About",
+          "slug": "about",
+          "link_mode": "link",
+          "link_url": "/en-US/about",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-nmit-4000-8000-000000000007",
+      "locales": {
+        "zh-CN": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "联系我们",
+          "slug": "contact",
+          "link_mode": "link",
+          "link_url": "/zh-CN/contact",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "zh-TW": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "聯繫我們",
+          "slug": "contact",
+          "link_mode": "link",
+          "link_url": "/zh-TW/contact",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "ja": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "お問い合わせ",
+          "slug": "contact",
+          "link_mode": "link",
+          "link_url": "/ja/contact",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        },
+        "en-US": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Contact",
+          "slug": "contact",
+          "link_mode": "link",
+          "link_url": "/en-US/contact",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published"
+        }
+      }
+    }
+  ]
+}

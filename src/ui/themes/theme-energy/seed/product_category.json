@@ -1,0 +1,152 @@
+{
+  "collectionSlug": "b2b_product_category",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-pcat-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "name": "工商业与地面光伏逆变器",
+          "slug": "pv-inverters",
+          "description": "涵盖大功率组串式与集中式光伏逆变器，最高转换效率达 98.8%，支持智能 IV 曲线扫描与防孤岛保护。",
+          "sort_order": 10,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "工商业光伏并网逆变器 — 0.6-350kW大功率光伏转换系统",
+          "seo_description": "高效组串式工商业光伏逆变器，具备超宽 MPPT 电压范围，适配主流大功率光伏组件。"
+        },
+        "zh-TW": {
+          "name": "工商業與地面光伏逆變器",
+          "slug": "pv-inverters",
+          "description": "涵蓋大功率組串式與集中式光伏逆變器，最高轉換效率達 98.8%。",
+          "sort_order": 10,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "工商業光伏並網逆變器",
+          "seo_description": "高效組串式工商業光伏逆變器。"
+        },
+        "ja": {
+          "name": "産業用太陽光パワーコンディショナ",
+          "slug": "pv-inverters",
+          "description": "高効率ストリング型PVパワコン、最大変換効率98.8%、スマートモニタリング対応。",
+          "sort_order": 10,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "産業用太陽光パワコン",
+          "seo_description": "高効率ストリング型太陽光パワーコンディショナ。"
+        },
+        "en-US": {
+          "name": "Commercial & Utility PV Inverters",
+          "slug": "pv-inverters",
+          "description": "High-efficiency string and central solar inverters ranging from 10kW to 350kW with 98.8% max efficiency and intelligent I-V curve diagnosis.",
+          "sort_order": 10,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "Commercial & Utility-Scale PV Inverters — String & Hybrid Inverter Systems",
+          "seo_description": "Heavy-duty commercial grid-tied PV inverters engineered for high-yield solar farm operations and factory rooftop installations."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-pcat-4000-8000-000000000002",
+      "locales": {
+        "zh-CN": {
+          "name": "工商业储能一体柜 (BESS)",
+          "slug": "energy-storage-cabinets",
+          "description": "全集成高能量密度户外储能柜，融合液冷温控、PACK级消防灭火系统与内置双向 PCS，为工商业削峰填谷、需量控制保驾护航。",
+          "sort_order": 20,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "工商业液冷储能一体柜 — 100kW/215kWh户外集装箱电池储能",
+          "seo_description": "安全、高效、开箱即用的工商业储能一体化机柜系统，循环寿命超 8000 次。"
+        },
+        "zh-TW": {
+          "name": "工商業儲能一體櫃 (BESS)",
+          "slug": "energy-storage-cabinets",
+          "description": "全集成高能量密度戶外儲能櫃，融合液冷溫控與內置雙向 PCS。",
+          "sort_order": 20,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "工商業液冷儲能一體櫃",
+          "seo_description": "安全、高效的工商業儲能一體化機櫃系統。"
+        },
+        "ja": {
+          "name": "産業用蓄電オールインワンキャビネット (BESS)",
+          "slug": "energy-storage-cabinets",
+          "description": "屋外設置対応液冷式蓄電システム、ピークカットやBCP対策に最適な高安全性LFPバッテリー内蔵。",
+          "sort_order": 20,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "産業用液冷蓄電オールインワンシステム",
+          "seo_description": "高密度産業用蓄電キャビネット。"
+        },
+        "en-US": {
+          "name": "C&I All-in-One Storage Cabinets (BESS)",
+          "slug": "energy-storage-cabinets",
+          "description": "Fully integrated outdoor liquid-cooling battery energy storage systems (100kW/215kWh) engineered for peak shaving, demand management, and backup power.",
+          "sort_order": 20,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "Commercial All-in-One BESS Cabinets — Liquid-Cooled Storage Solutions",
+          "seo_description": "Outdoor turnkey commercial energy storage cabinets with integrated fire suppression, PCS, and EMS controls."
+        }
+      }
+    },
+    {
+      "languageGroupKey": "b2b00000-pcat-4000-8000-000000000003",
+      "locales": {
+        "zh-CN": {
+          "name": "智慧能源云平台与EMS控制器",
+          "slug": "smart-ems",
+          "description": "基于 AI 物联网架构的智慧能源管理系统（EMS），实现光伏、储能、充电桩与配电网的秒级调度与健康预警。",
+          "sort_order": 30,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "智慧能源管理平台与EMS微电网系统",
+          "seo_description": "全方位监控、智慧运维与微电网动态调度平台。"
+        },
+        "zh-TW": {
+          "name": "智慧能源雲平台與EMS控制器",
+          "slug": "smart-ems",
+          "description": "基於 AI 物聯網架構的智慧能源管理系統（EMS）。",
+          "sort_order": 30,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "智慧能源管理平台與EMS微電網系統",
+          "seo_description": "全方位監控與微電網動態調度平台。"
+        },
+        "ja": {
+          "name": "スマートエネルギー管理クラウド・EMS",
+          "slug": "smart-ems",
+          "description": "AIとIoTを融合した総合エネルギーマネジメントシステム（EMS）。",
+          "sort_order": 30,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "スマートEMSクラウドプラットフォーム",
+          "seo_description": "太陽光と蓄電を統合制御するエネルギー管理システム。"
+        },
+        "en-US": {
+          "name": "Smart EMS & Cloud Monitoring",
+          "slug": "smart-ems",
+          "description": "Intelligent Energy Management Systems (EMS) and multi-tier IoT cloud platform for real-time telemetry, predictive maintenance, and VPP aggregation.",
+          "sort_order": 30,
+          "status": "published",
+          "robots_directive": "index,follow",
+          "schema_type": "WebPage",
+          "seo_title": "Smart Energy Management Systems (EMS) & Microgrid Controllers",
+          "seo_description": "Cloud-native energy monitoring and industrial microgrid optimization software."
+        }
+      }
+    }
+  ]
+}

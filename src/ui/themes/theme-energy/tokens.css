@@ -1,0 +1,50 @@
+/* 储能系统与光伏光储充 (Solar & Energy Storage) · Design Tokens */
+[data-theme='theme-energy'] {
+  /* 品牌色系统：纯正的新能源科技翠绿 + 智能青电蓝点缀 */
+  --primary: #00A862;
+  --primary-hover: #008f53;
+  --primary-subtle: rgba(0, 168, 98, 0.08);
+  --primary-glow: rgba(0, 168, 98, 0.25);
+  
+  --accent: #00D2B4;
+  --accent-hover: #00B39A;
+  --accent-subtle: rgba(0, 210, 180, 0.1);
+
+  /* 界面中性底色系统：极具现代科技感的明快极简白底，搭配深空蓝黑底色 */
+  --bg-page: #F6F8FA;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-dark: #0A0F1D;
+  --bg-dark-card: #131B2E;
+  --bg-gradient-hero: linear-gradient(135deg, #0A0F1D 0%, #111A30 50%, #082820 100%);
+
+  /* 文本层次系统 */
+  --text-main: #0B132B;
+  --text-muted: #5B6B82;
+  --text-inverse: #FFFFFF;
+  --text-inverse-muted: #94A3B8;
+
+  /* 边框与质感线条 */
+  --border-light: rgba(148, 163, 184, 0.16);
+  --border-focus: rgba(0, 168, 98, 0.4);
+
+  /* 页眉页脚 */
+  --header-bg: rgba(255, 255, 255, 0.94);
+  --header-dark-bg: rgba(10, 15, 29, 0.92);
+  --footer-bg: #0A0F1D;
+  --footer-fg: #94A3B8;
+
+  /* 现代圆角系统与光影阴影 */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --shadow-card: 0 4px 20px -2px rgba(11, 19, 43, 0.05);
+  --shadow-card-hover: 0 12px 30px -4px rgba(0, 168, 98, 0.12);
+  --shadow-dropdown: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+  /* 字体栈 */
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}

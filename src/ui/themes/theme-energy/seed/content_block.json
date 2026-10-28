@@ -1,0 +1,110 @@
+{
+  "collectionSlug": "b2b_content_block",
+  "items": [
+    {
+      "languageGroupKey": "b2b00000-blok-4000-8000-000000000001",
+      "locales": {
+        "zh-CN": {
+          "name": "首页首屏",
+          "slug": "home-hero",
+          "block_type": "hero",
+          "placement": "home_hero",
+          "eyebrow": "WattNova Smart Energy",
+          "title": "驱动零碳未来 · 全场景智慧光储系统方案",
+          "subtitle": "0.6-350kW大功率光伏并网逆变器与高安全工商业液冷储能一体柜",
+          "summary": "搭载新一代碳化硅 (SiC) 拓扑与汽车级 LFP 电芯液冷温控，超 98.8% 最大转换效率与 8000 次充放电循环，赋能全球工厂与电站零碳转型。",
+          "content": "",
+          "link_label": "获取方案与B2B采购报价",
+          "link_url": "/zh-CN/contact",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=1200&h=800&fit=crop"
+          },
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": "__BY_SLUG__:novagrid-125kw-commercial-pv-inverter",
+            "title": "NovaGrid 125kW 工商业逆变器",
+            "description": "查看产品规格与技术参数"
+          },
+          "status": "published",
+          "sort_order": 1
+        },
+        "zh-TW": {
+          "name": "首頁首屏",
+          "slug": "home-hero",
+          "block_type": "hero",
+          "placement": "home_hero",
+          "eyebrow": "WattNova Smart Energy",
+          "title": "驅動零碳未來 · 全場景智慧光儲系統方案",
+          "subtitle": "0.6-350kW大功率光伏並網逆變器與高安全工商業液冷儲能一體櫃",
+          "summary": "搭載新一代碳化矽 (SiC) 拓撲與汽車級 LFP 電芯液冷溫控，超 98.8% 最大轉換效率與 8000 次充放電循環。",
+          "content": "",
+          "link_label": "獲取方案與B2B採購報價",
+          "link_url": "/zh-TW/contact",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=1200&h=800&fit=crop"
+          },
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": "__BY_SLUG__:novagrid-125kw-commercial-pv-inverter",
+            "title": "NovaGrid 125kW 工商業逆變器",
+            "description": "查看產品規格與技術參數"
+          },
+          "status": "published",
+          "sort_order": 1
+        },
+        "ja": {
+          "name": "ホームヒーロー",
+          "slug": "home-hero",
+          "block_type": "hero",
+          "placement": "home_hero",
+          "eyebrow": "WattNova Smart Energy",
+          "title": "ゼロカーボンな未来へ · 産業用スマート太陽光＆蓄電システム",
+          "subtitle": "高効率パワコンと屋外設置対応の液冷式蓄電オールインワンキャビネット",
+          "summary": "最大変換効率98.8%、サイクル寿命8,000回以上の高信頼性セルを採用し、工場の電気代削減とBCP電源確保を支援します。",
+          "content": "",
+          "link_label": "ソリューション・お見積もり依頼",
+          "link_url": "/ja/contact",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=1200&h=800&fit=crop"
+          },
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": "__BY_SLUG__:novagrid-125kw-commercial-pv-inverter",
+            "title": "NovaGrid 125kW 産業用パワコン",
+            "description": "仕様・詳細を見る"
+          },
+          "status": "published",
+          "sort_order": 1
+        },
+        "en-US": {
+          "name": "Home Hero",
+          "slug": "home-hero",
+          "block_type": "hero",
+          "placement": "home_hero",
+          "eyebrow": "WattNova Smart Energy",
+          "title": "Powering a Zero-Carbon Future with Smart Solar & Energy Storage",
+          "subtitle": "Tier-1 Commercial On-Grid Inverters & Turnkey Liquid-Cooled BESS Cabinets",
+          "summary": "Engineered with Silicon Carbide (SiC) topologies and automotive-grade LFP cells. Delivering 98.8% peak conversion efficiency and 8,000+ cycle life for industrial microgrids.",
+          "content": "",
+          "link_label": "Request Architecture & B2B Quote",
+          "link_url": "/en-US/contact",
+          "image": {
+            "url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?w=1200&h=800&fit=crop"
+          },
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": "__BY_SLUG__:novagrid-125kw-commercial-pv-inverter",
+            "title": "NovaGrid 125kW Commercial PV Inverter",
+            "description": "View Technical Specifications"
+          },
+          "status": "published",
+          "sort_order": 1
+        }
+      }
+    }
+  ]
+}

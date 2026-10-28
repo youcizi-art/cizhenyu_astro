@@ -204,7 +204,7 @@ function writeSingleThemeKernel(themesDir, themeId, allThemeIds) {
       `  articles: true, caseStudies: true, solutions: true, faq: true,\n` +
       `};\n\n` +
       `export const THEME_META: Record<ThemeId, ThemeMeta> = {\n` +
-      `  ${themeId}: { id: '${themeId}', shell: 'page-shell', fontHref: '', homeRequirements: ${homeReqCode} },\n` +
+      `  ['${themeId}']: { id: '${themeId}', shell: 'page-shell', fontHref: '', homeRequirements: ${homeReqCode} },\n` +
       `};\n\n` +
       `export function getThemeMeta(theme?: string | null): ThemeMeta {\n` +
       `  return THEME_META[resolveTheme({ theme }).themeId] || { id: '${themeId}', shell: 'page-shell', fontHref: '', homeRequirements: DEFAULT_FULL_HOME_REQUIREMENTS };\n` +
