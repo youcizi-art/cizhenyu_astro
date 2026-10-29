@@ -1,0 +1,17 @@
+---
+interface Props {
+  messages?: string[];
+  tone?: 'error' | 'warn';
+}
+
+const { messages = [], tone = 'error' } = Astro.props;
+const list = messages.map((m) => String(m || '').trim()).filter(Boolean);
+---
+
+{list.length > 0 ? (
+  <div class={`__P__-alert ${tone === 'error' ? '__P__-alert--error' : ''}`} role="status">
+    {list.map((m) => (
+      <p>{m}</p>
+    ))}
+  </div>
+) : null}

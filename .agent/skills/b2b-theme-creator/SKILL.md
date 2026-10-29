@@ -1,189 +1,112 @@
 ---
 name: b2b-theme-creator
-description: 专业 B2B 出海独立站在线主题构建器。涵盖行业调色盘系统、工业级视觉规范、采购信任组件、自包含主题脚手架与 Cloudflare 单主题打包合规校验。用于批量创建或重构高水准出海主题。
+description: 专业 B2B 出海独立站在线主题构建器与设计标准。涵盖工业调色盘、设计令牌体系、排版层级、采购信任组件、自包含脚手架、主题门禁 Linter 及 Cloudflare 独立单主题打包校验。用于供任何 Agent 规范、高效地批量生成高水准独立出海主题。
 ---
 
-# B2B Theme Creator（专业出海在线主题构建器）
+# B2B Theme Creator（工业级在线主题设计体系与构建器）
 
-本规范用于指导 AI Agent 在本项目中构建高质量、工业质感、符合海外采购商心智的专业 B2B 在线主题，严格遵循 [docs/THEME_ARCHITECTURE_SPEC.md](../../docs/THEME_ARCHITECTURE_SPEC.md) 与 [AGENTS.md](../../AGENTS.md) 的隔离铁律。
-
----
-
-## 一、核心原则与铁律
-
-1. **表现层宇宙自包含**：主题目录必须位于 `src/ui/themes/{themeId}/`，自身包含所有 CSS、组件、页面模板和演示种子。**严禁修改公共层 `Active*.astro` 或硬编码品牌商业逻辑**。
-2. **样式严格隔离**：主题所有 CSS 必须带 `[data-theme='{themeId}']` 前缀选择器，严禁污染全局 HTML 标签。
-3. **单页面通过通用路由 `[slug]` 承接**：各主题通过 `pages/SimpleDetailPage.astro` 承接所有单页（隐私政策、条款、注册协议等），严禁在 `src/pages/[locale]/` 下建物理目录。
-4. **单主题交付包验证**：任何主题创建完毕，必须通过 `npm run pack -- {themeId}` 独立裁剪打包并构建通过。
+本规范用于指导并约束所有 AI Agent 在构建、重构独立主题时，统一遵循标准化设计规范、样式管理体系与代码门禁。
 
 ---
 
-## 二、标准主题目录架构
+## 一、核心铁律与隔离红线（Red Lines）
 
-当创建新主题 `{themeId}` 时，必须生成以下标准结构：
+1. **绝对自包含与零公共层侵入**：
+   - 主题必须存放在 `src/ui/themes/{themeId}/`，内部自成体系，包含完整私有组件、页面、样式与演示种子。
+   - 严禁在公共层（如 `src/ui/themes/Active*.astro`、`src/ui/layout/`）硬编码任何特定主题名称或业务逻辑。
+2. **样式严格隔离与零全局污染**：
+   - 所有主题 CSS 必须采用原生 CSS 嵌套结构，顶层选择器强制为 `[data-theme='{themeId}'] { ... }`。
+   - 类名前缀强制统一为小写 3-4 位简称（如 `nrg-*`, `mch-*`, `med-*`），禁止跨主题调用其他主题类名（如 `tm-*`）。
+   - 禁止使用 `!important`（通过重置动效令牌或提升作用域替代）。
+   - 禁止在 `tokens.css` 之外的任何 CSS 文件中硬编码 hex 颜色代码或魔法数字。
+3. **单页面通用承接规则**：
+   - 严禁为隐私条款、条款、注册协议在 `src/pages/` 下手动创建物理目录；所有单页由 `src/pages/[locale]/[slug].astro` 动态承接，主题内由 `pages/SimpleDetailPage.astro` 负责渲染。
+4. **单主题交付包验证机制**：
+   - 任何主题产出后，必须能通过独立裁剪命令 `npm run pack -- {themeId}` 构建出无报错、不含任何其他主题残留的 Cloudflare Pages 可交付包（`bundle.zip`）。
+
+---
+
+## 二、标准化主题目录结构
 
 ```text
 src/ui/themes/{themeId}/
-├── theme.manifest.json       # 主题元数据
-├── tokens.css                # 设计令牌（配色、圆角、阴影、间距、字体栈）
-├── theme.css                 # 核心主题样式（头部、页脚、通用组件、卡片、排版）
-├── PageShell.astro           # 独立页壳（挂载 Header 与 Footer，支持在线客服与分析）
-├── home-copy.ts              # 首页区块标签多语言字典
+├── theme.manifest.json       # 主题元数据（id, classPrefix, fontHref, homeRequirements）
+├── tokens.css                # 唯一允许定义色值的 Design Tokens 文件（包含 chrome 契约与主题令牌）
+├── theme.css                 # 核心基础规范（BEM 基础、容器、栅格、排版、按钮、富文本 prose）
+├── chrome.css                # 页眉 Header、页脚 Footer、导航下拉、移动端抽屉
+├── sections.css              # 首页核心商业展示区块（Hero、TrustStrip、产品网格、工厂实力、场景方案、新闻资讯）
+├── pages.css                 # 内页专用样式（详情栅格、图集联动、Specs 表格、询盘面板）
+├── PageShell.astro           # 独立页壳
+├── home-copy.ts              # 首页 UI 标签与字典（必须导出 getHomeLabels(locale)）
 ├── components/               # 主题私有组件
 │   ├── Header.astro          # 独立顶栏（含品牌 Logo 降级、多语言切换、联系 CTA）
-│   ├── Footer.astro          # 独立底栏（含资质证明、版权、动态单页快捷链接）
-│   ├── PageBanner.astro      # 内页统一面包屑横幅
-│   ├── Alerts.astro          # 状态提示组件
+│   ├── Footer.astro          # 独立底栏（含资质证明、版权、单页快捷链接、新闻邮件订阅）
 │   ├── Hero.astro            # 行业视觉冲击首屏
-│   ├── ProductGrid.astro     # 工业品网格
-│   ├── CtaBanner.astro       # 询盘引导横幅
-│   └── ...                   # 其他特定行业展示组件（认证墙、工厂实景、对比表）
-├── pages/                    # 完整页面模板实现
+│   ├── TrustStrip.astro      # 采购信任背书条（4 项工业核心背书）
+│   ├── PageBanner.astro      # 内页统一面包屑横幅
+│   └── Alerts.astro          # 状态提示组件
+├── pages/                    # 完整 12 个标准页面模板
 │   ├── HomePage.astro        # 首页
 │   ├── ProductListPage.astro # 产品列表页
-│   ├── ProductDetailPage.astro # 产品详情页（含规格参数表 Specs、询盘卡片、图集）
+│   ├── ProductDetailPage.astro # 产品详情页（含参数表 Specs、图集、询盘入口）
 │   ├── ArticleListPage.astro # 文章列表页
 │   ├── ArticleDetailPage.astro # 文章详情页
 │   ├── CaseStudyListPage.astro # 案例列表页
 │   ├── CaseStudyDetailPage.astro # 案例详情页
-│   ├── DownloadListPage.astro # 资源下载页
+│   ├── AboutPage.astro       # 关于我们/工厂制造实力
+│   ├── ContactPage.astro     # 联系我们与采购询盘表单
 │   ├── FaqPage.astro         # 常见问题页
-│   ├── AboutPage.astro       # 关于我们/工厂介绍
-│   ├── ContactPage.astro     # 联系与表单页
 │   ├── SimpleCardListPage.astro # 通用卡片列表模板
 │   └── SimpleDetailPage.astro # 通用动态单页模板（承接 /privacy, /terms 等）
-└── seed/                     # 该行业专有演示数据包（JSON 数据 + build-seed.mjs）
+└── seed/                     # 真实行业演示数据包
 ```
 
 ---
 
-## 三、行业色彩系统与视觉心智库（Color & Typography）
+## 三、行业色彩系统与设计令牌库（Design Tokens）
 
-根据主题所面向的垂直行业，精准匹配对应的色彩与质感：
+通过 `industry-presets.json` 预置多套行业专属调色系统，Agent 在创建新主题时必须精准匹配：
 
-### 1. 行业色板配置速查
-
-| 垂直行业 | 核心主色 (Primary) | 辅助强调色 (Accent) | 背景与基底 (Surface) | 视觉特征与心智 |
+| 行业分类 | 主色 (`--accent`) | 辅助强调 (`--accent-2`) | 深底色 (`--bg-dark`) | 视觉心智与采购诉求 |
 | :--- | :--- | :--- | :--- | :--- |
-| **重工机械 / 锻压机床** | `#D9531E` (工程暖橙) 或 `#D4A373` | `#1A202C` (深碳金钢) | `#0E1217` / `#F8F9FA` | 扎实沉稳、耐重载、高吨位、金属质感 |
-| **精密仪器 / 光学芯片** | `#0066FF` (光学深蓝) | `#00E5FF` (冷青荧光) | `#0B0F19` / `#FFFFFF` | 高精度公差、洁净室、现代化、理智克制 |
-| **新能源 / 储能光伏** | `#059669` (能源翡绿) | `#10B981` (电能翠绿) | `#111827` / `#F3F4F6` | 低碳环保、高转化率、科技感、全天候运行 |
-| **医疗器械 / 实验室设备** | `#0D9488` (无菌深青) | `#06B6D4` (临床亮蓝) | `#F8FAFC` / `#FFFFFF` | 极高合规感（FDA/CE）、清爽无尘、严谨信任 |
-| **化工原料 / 生物医药** | `#2563EB` (试剂深蓝) | `#7C3AED` (高分子紫) | `#F9FAFB` / `#FFFFFF` | 纯度指标、分子级控制、安全运输与合规防护 |
-| **工业传感器 / 物联网** | `#4F46E5` (数字靛蓝) | `#F59E0B` (预警琥珀) | `#0F172A` / `#F8FAFC` | 通信协议兼容、微秒级响应、工业 4.0 |
-| **汽配外贸 / 底盘总成** | `#DC2626` (竞技红) | `#475569` (锻钢冷灰) | `#1E293B` / `#F1F5F9` | 耐磨耐久、原厂级替换（OE/OEM）、硬核抗疲劳 |
-| **五金紧固件 / 建筑建材** | `#334155` (结构钢青) | `#CA8A04` (抗氧化铜金) | `#F8FAFC` / `#FFFFFF` | 国际公英制对照、抗拉强度等级、海运大宗装柜 |
-| **绿色包装 / 纸塑印刷** | `#15803D` (环保深绿) | `#B45309` (牛皮纸原色) | `#FDFBF7` (天然纸感) | 可降解环保标识（FSC）、盒型打样、快速交期 |
-| **纺织服装 / 户外装备** | `#18181B` (极简冷黑) | `#EA580C` (户外炽橙) | `#FAFAFA` / `#FFFFFF` | 面料功能指标（防水透湿透气）、色卡规范、验厂验货 |
-
-### 2. 标准 `tokens.css` 变量模板
-
-```css
-[data-theme='{themeId}'] {
-  /* 品牌色阶 */
-  --primary: #0066ff;
-  --primary-hover: #0052cc;
-  --primary-subtle: rgba(0, 102, 255, 0.08);
-  --accent: #00e5ff;
-
-  /* 中性表面与文本 */
-  --bg-page: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-card: #ffffff;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-light: rgba(148, 163, 184, 0.2);
-  --border-focus: rgba(0, 102, 255, 0.4);
-
-  /* 页头与页脚 */
-  --header-bg: rgba(255, 255, 255, 0.95);
-  --footer-bg: #0b0f19;
-  --footer-fg: #94a3b8;
-  --footer-heading: #ffffff;
-
-  /* 工业质感基底 */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Space Grotesk', var(--font-sans);
-  --radius-sm: 4px;   /* 工业品以硬朗小圆角为主，切忌大弧度呆萌圆角 */
-  --radius-md: 6px;
-  --radius-lg: 10px;
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.03);
-  --shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-}
-```
+| **储能光伏 / 新能源** | `#00A862` (翡翠绿) | `#00D2B4` (电气青) | `#0A0F1D` (科技深蓝) | 低碳环保、高转化率、全天候安全运行 |
+| **重型机械 / 工程液压** | `#D9531E` (工程暖橙) | `#F59E0B` (警示琥珀) | `#0E1217` (深碳素钢) | 扎实沉稳、耐重载、高吨位、金属加工质感 |
+| **数控机床 / 精密模具** | `#0066FF` (光学深蓝) | `#00E5FF` (冷青荧光) | `#0A1128` (超净室深蓝)| 微米级公差、高精度、高速主轴切削、理智克制 |
+| **医疗仪器 / 生化实验** | `#0D9488` (无菌深青) | `#06B6D4` (临床亮蓝) | `#042F2E` (医用深暗) | 极高合规感（FDA/CE/GMP）、清爽无尘、严谨信任 |
+| **精细化工 / 塑料粒子** | `#2563EB` (试剂深蓝) | `#7C3AED` (分子聚合物紫)| `#0F172A` (工业藏青) | 纯度指标、分子级控制、危化品防爆与安全海运 |
+| **工业传感 / 物联网**   | `#4F46E5` (数字靛蓝) | `#F59E0B` (预警琥珀) | `#0B0F19` (智能暗黑) | 通信协议兼容（Modbus/MQTT）、微秒级响应 |
 
 ---
 
-## 四、海外 B2B 采购信任与专业交互规范（Trust & Interactions）
+## 四、海外采购信任与转化组件设计规范（Trust & Conversion）
 
-专业 B2B 站点的核心目的不是纯视觉装潢，而是**消除海外采购商（采购经理、工程总监、外贸分销商）的信任顾虑**。
+海外采购商（采购总监、工程技术负责人、外贸分销商）需要明确的证据链条消除疑虑，首页及内页必须体现：
 
-在构建页面模板时，必须落实以下 5 项专业规范：
-
-### 1. 技术参数与规格表（Specs Matrix）
-- 必须包含清晰的 Key-Value 参数表（如吨位、功率、工作行程、精度公差、电压频率）。
-- 支持支持公制/英制单位对比表达，视觉上排版严谨，带斑马纹或高对比度边框。
-
-### 2. 国际认证与资质墙（Certifications & Standards）
-- 页脚或关于页必须展示行业关键资质：ISO9001/ISO14001、CE、RoHS、UL、FDA、TUV、SGS 检测报告等。
-- 支持点击查看或预览证书细节。
-
-### 3. 工厂实景与产能可视化（Factory & Capacity Showcase）
-- 模块包括：厂房占地面积（50,000+ sqm）、年产能（Annual Capacity）、CNC 加工中心数量、自动化流水线实景图。
-- 严禁放置虚假的“全景卡通插图”，必须呈现真实工业制造与质检（QC）流程。
-
-### 4. OEM / ODM 协同流程轴（Collaborative Timeline）
-- 采购商关心的定制协作 4 步法：
-  - 需求沟通与图纸确认（CAD/STEP/PDF）；
-  - 7 天快速开模与打样确认；
-  - 批量精益生产与出厂质检（FAT 测试）；
-  - 国际海运装柜包装与报关交单。
-
-### 5. 快速询盘 CTA 与上下文参数联动
-- 点击产品页详情 CTA 按钮时，必须自动携带当前产品名称、型号（SKU），以便联动在线客服系统（`CFIMChat.open({ product: { ... } })`）或直接定位到底部询盘表单。
+1. **4项采购信任标尺（Trust Strip）**：紧跟 Hero 首屏之后，直观呈现产品核心承诺（如 Clean & Renewable, Reliable Performance, Smart & Connected, Global Presence）。
+2. **技术参数与规格表（Specs Matrix）**：详情页必须拥有清晰的 Key-Value 双列对比矩阵，支持公制/英制单位，并具备斑马纹区分。
+3. **制造实力与工厂数据（About & Stats）**：包含厂房实景、核心数字（10+ 年经验、100+ 国家与地区、5000+ 合作伙伴、1M+ 项目落地）。
+4. **全场景解决方案矩阵（Solutions Grid）**：针对不同应用端（如 Residential 户用, Commercial 商业, Industrial 工业, Utility 电网地面电站）进行大图沉浸式分类。
 
 ---
 
-## 五、单主题构建与测试执行工作流（Step-by-Step SOP）
+## 五、Agent 常用主题开发与质检指令（Tooling & SOP）
 
-当执行构建新主题任务时，严格按照以下步骤落地：
+当 Agent 负责构建新主题时，严禁使用粗暴复制其他主题的方式，必须走脚手架与自动化校验流：
 
-### 第一步：创建主题目录与文件
-1. 创建 `src/ui/themes/{themeId}/` 文件夹；
-2. 写入 `theme.manifest.json`：
-   ```json
-   {
-     "id": "{themeId}",
-     "origin": "official"
-   }
-   ```
-3. 编写 `tokens.css` 与 `theme.css`（加上 `[data-theme='{themeId}']` 作用域）；
-4. 编写 `home-copy.ts`，配置多语言（`zh-CN`, `zh-TW`, `ja`, `en-US`）首页标题与文案字典。
-
-### 第二步：编写 PageShell 与组件
-1. 编写 `components/Header.astro` 与 `components/Footer.astro`；
-2. 编写 `PageShell.astro` 挂载页壳并注入客服脚本与 Google 标签；
-3. 编写 `components/Hero.astro`, `components/PageBanner.astro` 等核心展现组件。
-
-### 第三步：编写完整 Pages 模板
-必须实现全套 12 个标准页面，重点确保：
-- `ProductDetailPage.astro`：展示参数表与询盘入口；
-- `SimpleDetailPage.astro`：承接动态单页（/privacy, /terms 等）；
-- `HomePage.astro`：排版层次分明，单文件行数严格控制在 600 行以内。
-
-### 第四步：注入演示种子数据（Seed）
-在 `seed/` 目录下生成 `seed.manifest.json` 与各集合 json（包含真实行业背景的产品、文章、FAQ、分类与单页），确保通过 `build-seed.mjs` 重新生成。
-
-### 第五步：验证与独立打包验收
-执行工程化验收流程：
+### 1. 一键生成标准化自包含主题骨架
 ```bash
-# 1. 运行单元测试
-npm test
-
-# 2. 运行 Astro 整体构建
-npm run build
-
-# 3. 运行该主题独立裁剪打包（核心验证！）
-npm run pack -- {themeId}
+# 语法：node .agent/skills/b2b-theme-creator/scripts/scaffold-theme.mjs <themeId> [--prefix=前缀] [--force]
+node .agent/skills/b2b-theme-creator/scripts/scaffold-theme.mjs theme-energy --prefix=nrg --force
 ```
-查看打包输出的 `bundle.zip` 与 `catalog.json`，确保无报错、无其它主题遗留代码。
+
+### 2. 执行自动化质量门禁（Linting）
+```bash
+# 验证代码合规、行数控制、选择器隔离与无污染
+node .agent/skills/b2b-theme-creator/scripts/lint-theme.mjs theme-energy
+```
+
+### 3. 执行单主题独立打包裁剪测试
+```bash
+# 核心构建验证：裁剪其他主题并执行 Cloudflare SSR 生产构建
+npm run pack -- theme-energy
+```

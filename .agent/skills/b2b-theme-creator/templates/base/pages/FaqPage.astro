@@ -1,0 +1,57 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+
+interface Props {
+  title: string;
+  items: Array<{ question: string; answer: string; shortAnswer?: string }>;
+  homeHref: string;
+  homeLabel?: string;
+  shortAnswerLabel?: string;
+  emptyText?: string;
+  error?: string;
+  warnings?: string[];
+}
+
+const {
+  title,
+  items = [],
+  homeHref,
+  homeLabel = 'Home',
+  emptyText = 'No FAQs found.',
+  error,
+  warnings = [],
+} = Astro.props;
+---
+
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+
+<section class="__P__-section">
+  <div class="__P__-container" style="max-width: 860px">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+
+    {items.length ? (
+      <div style="display:flex;flex-direction:column;gap:var(--sp-4)">
+        {items.map((item) => (
+          <details style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-4);cursor:pointer">
+            <summary style="font-size:var(--fs-md);font-weight:700;color:var(--ink-strong);outline:none">
+              {item.question}
+            </summary>
+            <div style="margin-top:var(--sp-3);color:var(--muted);font-size:var(--fs-sm);line-height:1.6">
+              {item.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    ) : (
+      <p style="text-align:center;color:var(--muted);padding:3rem 0">{emptyText}</p>
+    )}
+  </div>
+</section>

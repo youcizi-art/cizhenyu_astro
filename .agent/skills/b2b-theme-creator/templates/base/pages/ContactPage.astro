@@ -1,0 +1,67 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import type { CompanyView } from '@/modules/company';
+
+interface Props {
+  title: string;
+  content?: string;
+  company: CompanyView;
+  homeHref: string;
+  homeLabel?: string;
+  inquiryLabel?: string;
+  mailLabel?: string;
+  error?: string;
+  warnings?: string[];
+}
+
+const {
+  title,
+  content = '',
+  company,
+  homeHref,
+  homeLabel = 'Home',
+  inquiryLabel = 'Send an Inquiry',
+  error,
+  warnings = [],
+} = Astro.props;
+---
+
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+
+<section class="__P__-section">
+  <div class="__P__-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+
+    <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:var(--sp-7)">
+      <div>
+        <h2 class="__P__-title" style="margin-bottom:var(--sp-4)">{company.name}</h2>
+        <div style="display:flex;flex-direction:column;gap:var(--sp-3);color:var(--muted);font-size:var(--fs-sm)">
+          {company.email ? <div><strong>Email:</strong> <a href={`mailto:${company.email}`}>{company.email}</a></div> : null}
+          {company.phone ? <div><strong>Phone:</strong> {company.phone}</div> : null}
+          {company.address ? <div><strong>Address:</strong> {company.address}</div> : null}
+        </div>
+        {content ? <div class="__P__-prose" style="margin-top:var(--sp-6)" set:html={content} /> : null}
+      </div>
+
+      <div class="__P__-inquiry-box" style="margin-top:0">
+        <h3>{inquiryLabel}</h3>
+        <p>Fill out the form below to receive product catalogs, technical parameters, and factory wholesale quotes within 24 hours.</p>
+        <form style="display:flex;flex-direction:column;gap:var(--sp-3)">
+          <input class="__P__-input" type="text" placeholder="Your Name" required aria-label="Name" />
+          <input class="__P__-input" type="email" placeholder="Your Business Email" required aria-label="Email" />
+          <input class="__P__-input" type="text" placeholder="Company Name" aria-label="Company" />
+          <textarea class="__P__-input" rows="4" placeholder="Products interested in, required quantity, or custom specs..." required aria-label="Message"></textarea>
+          <button type="submit" class="__P__-btn __P__-btn--primary" style="margin-top:var(--sp-2)">Submit Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

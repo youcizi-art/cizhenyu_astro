@@ -13,59 +13,44 @@ interface Props {
   homeHref?: string;
   showContactCta?: boolean;
 }
+
 const {
   siteName,
   links,
   localeOptions = [],
   company,
   contactHref = '/contact',
-  contactLabel = 'Contact',
+  contactLabel = 'Contact Us',
   homeHref = '/',
   showContactCta = true,
 } = Astro.props;
 
-const email = String(company?.email || '').trim();
-const phone = String(company?.phone || '').trim();
 const logoUrl = String(company?.logoUrl || '').trim();
 const pathname = Astro.url.pathname;
 const activeLocale = localeOptions.find((l) => l.active);
 ---
-{(email || phone || localeOptions.length > 0) ? (
-  <div class="tm-topbar">
-    <div class="tm-container tm-topbar-inner">
-      <div class="tm-topbar-contacts">
-        {email ? <a href={`mailto:${email}`}>{email}</a> : null}
-        {phone ? <a href={`tel:${phone.replace(/\s+/g, '')}`}>{phone}</a> : null}
-      </div>
-      {localeOptions.length > 0 ? (
-        <div class="tm-lang">
-          <span class="tm-lang-cur">{activeLocale?.code || 'LANG'}</span>
-          <div class="tm-lang-menu">
-            {localeOptions.map((opt) => (
-              <a href={opt.href} class={opt.active ? 'is-active' : undefined}>{opt.name}</a>
-            ))}
-          </div>
-        </div>
-      ) : null}
-    </div>
-  </div>
-) : null}
 
-<header class="tm-header">
-  <div class="tm-container tm-header-inner">
-    <a class="tm-brand" href={homeHref} aria-label={siteName}>
+<header class="nrg-header">
+  <div class="nrg-container nrg-header-inner">
+    <a class="nrg-brand" href={homeHref} aria-label={siteName}>
       {logoUrl ? (
-        <OptimizedImage src={logoUrl} alt={siteName} width={160} height={44} widths={[160, 320]} sizes="160px" priority />
+        <OptimizedImage src={logoUrl} alt={siteName} width={160} height={40} priority />
       ) : (
-        siteName
+        <>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <span>{siteName}</span>
+        </>
       )}
     </a>
 
-    <nav class="tm-nav" aria-label="Primary">
+    <nav class="nrg-nav" aria-label="Primary">
       {links.map((link) => {
-        const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
+        const active = pathname === link.href || (link.href !== '/' && pathname.startsWith(`${link.href}/`));
         return (
-          <div class="tm-nav-item">
+          <div class="nrg-nav-item">
             <a
               href={link.href}
               class={active ? 'is-active' : undefined}
@@ -73,10 +58,10 @@ const activeLocale = localeOptions.find((l) => l.active);
               rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
             >
               {link.label}
-              {link.children?.length ? <span aria-hidden="true">▾</span> : null}
+              {link.children?.length ? <span aria-hidden="true" style="font-size: 0.75em; opacity: 0.7">▾</span> : null}
             </a>
             {link.children?.length ? (
-              <div class="tm-nav-drop">
+              <div class="nrg-nav-drop">
                 <ul>
                   {link.children.map((child) => (
                     <li><a href={child.href}>{child.label}</a></li>
@@ -89,30 +74,55 @@ const activeLocale = localeOptions.find((l) => l.active);
       })}
     </nav>
 
-    {showContactCta ? (
-      <a class="tm-btn tm-btn-md tm-btn-primary tm-header-cta" href={contactHref}>{contactLabel}</a>
-    ) : null}
-    <button type="button" class="tm-menu-toggle" id="tm-menu-toggle" aria-label="Menu">☰</button>
+    <div class="nrg-header-actions">
+      {localeOptions.length > 1 ? (
+        <div class="nrg-nav-item">
+          <a href="#">{activeLocale?.name || 'Language'} ▾</a>
+          <div class="nrg-nav-drop">
+            <ul>
+              {localeOptions.map((opt) => (
+                <li><a href={opt.href}>{opt.name}</a></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : null}
+
+      {showContactCta ? (
+        <a class="nrg-btn nrg-btn--primary nrg-btn--sm" href={contactHref}>
+          {contactLabel}
+        </a>
+      ) : null}
+
+      <button type="button" class="nrg-menu-toggle" id="nrg-menu-toggle" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
   </div>
-  <div class="tm-drawer" id="tm-drawer">
+
+  <div class="nrg-drawer" id="nrg-drawer">
     {links.map((link) => (
       <div>
         <a href={link.href}>{link.label}</a>
         {link.children?.map((child) => (
-          <a href={child.href} style="padding-left:1rem;font-size:0.95rem;color:#55665b">{child.label}</a>
+          <a href={child.href} style="padding-left:1.25rem;font-size:0.9rem;opacity:0.8">{child.label}</a>
         ))}
       </div>
     ))}
     {showContactCta ? (
-      <p style="margin-top:1rem">
-        <a class="tm-btn tm-btn-md tm-btn-primary" href={contactHref} style="width:100%">{contactLabel}</a>
-      </p>
+      <div style="margin-top:1.25rem">
+        <a class="nrg-btn nrg-btn--primary" href={contactHref} style="width:100%">{contactLabel}</a>
+      </div>
     ) : null}
   </div>
 </header>
 
 <script>
-  const toggle = document.getElementById('tm-menu-toggle');
-  const drawer = document.getElementById('tm-drawer');
+  const toggle = document.getElementById('nrg-menu-toggle');
+  const drawer = document.getElementById('nrg-drawer');
   toggle?.addEventListener('click', () => drawer?.classList.toggle('is-open'));
 </script>

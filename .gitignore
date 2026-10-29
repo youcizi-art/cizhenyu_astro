@@ -7,3 +7,4 @@ dist/
 *.log
 npm-install.log
 .DS_Store
+/research

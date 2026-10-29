@@ -2,7 +2,7 @@
 import PageBanner from '../components/PageBanner.astro';
 import Alerts from '../components/Alerts.astro';
 import OptimizedImage from '@/ui/components/OptimizedImage.astro';
-import { articleContentTypeLabel, type ArticleDetail } from '@/modules/article';
+import type { ArticleDetail, ArticleCard } from '@/modules/article';
 
 interface Props {
   article: ArticleDetail | null;
@@ -11,35 +11,26 @@ interface Props {
   homeHref: string;
   homeLabel?: string;
   listLabel?: string;
-  sidebarTitle?: string;
-  sidebarBody?: string;
   contactHref?: string;
   contactLabel?: string;
   relatedTitle?: string;
-  related?: Array<{ title: string; href: string; date?: string }>;
-  locale?: string;
+  related?: ArticleCard[];
   error?: string;
   warnings?: string[];
 }
+
 const {
   article,
   backHref,
-  backLabel = '← Back to Blog List',
+  backLabel = '← Back to News',
   homeHref,
   homeLabel = 'Home',
-  listLabel = 'Blog',
-  sidebarTitle = 'Need a Solution?',
-  sidebarBody = 'We are a certified manufacturer supplying premium products globally.',
-  contactHref = '',
-  contactLabel = 'Contact Us Now',
-  relatedTitle = 'Recommended Insights',
-  related = [],
-  locale = 'en',
+  listLabel = 'News',
   error,
   warnings = [],
 } = Astro.props;
-const typeLabel = article ? articleContentTypeLabel(article.contentType, locale) : '';
 ---
+
 <PageBanner
   title={article?.title || listLabel}
   crumbs={[
@@ -48,60 +39,29 @@ const typeLabel = article ? articleContentTypeLabel(article.contentType, locale)
     { label: article?.title || listLabel },
   ]}
 />
-<section class="tm-section tm-section-white">
-  <div class="tm-container">
+
+<section class="nrg-section">
+  <div class="nrg-container" style="max-width: 860px">
     <Alerts messages={error ? [error] : []} />
     <Alerts messages={warnings} tone="warn" />
+
     {article ? (
-      <div class="tm-article-layout">
-        <article class="tm-article-main">
-          <div class="tm-article-meta">
-            {typeLabel ? <span class="tm-article-type">{typeLabel}</span> : null}
-            {article.author ? <span>{article.author}</span> : null}
+      <article>
+        {article.coverUrl ? (
+          <div style="border-radius:var(--radius);overflow:hidden;margin-bottom:2rem;max-height:460px">
+            <OptimizedImage src={article.coverUrl} alt={article.title} width={1200} height={600} priority />
           </div>
-          <h2 class="tm-display tm-article-headline">{article.title}</h2>
-          {article.coverUrl ? (
-            <div class="tm-article-cover">
-              <OptimizedImage
-                src={article.coverUrl}
-                alt={article.title}
-                width={1200}
-                height={630}
-                widths={[640, 960, 1200]}
-                sizes="(max-width: 900px) 100vw, 720px"
-                priority
-              />
-            </div>
-          ) : null}
-          {article.summary ? <p class="tm-article-lead">{article.summary}</p> : null}
-          {article.content ? <div class="tm-prose tm-prose-article" set:html={article.content} /> : null}
-          <p style="margin-top:2.5rem">
-            <a class="tm-btn tm-btn-md tm-btn-primary-line" href={backHref}>{backLabel}</a>
-          </p>
-        </article>
-        <aside class="tm-article-side">
-          {related.length ? (
-            <div class="tm-panel tm-related-box">
-              <h3 class="tm-display">{relatedTitle}</h3>
-              <ul class="tm-related-list">
-                {related.map((item) => (
-                  <li>
-                    <a href={item.href}>{item.title}</a>
-                    {item.date ? <span>{item.date}</span> : null}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-          <div class="tm-panel tm-side-cta tm-side-cta-dark">
-            <h3 class="tm-display">{sidebarTitle}</h3>
-            <p>{sidebarBody}</p>
-            {contactHref ? (
-              <a class="tm-btn tm-btn-md tm-btn-primary" href={contactHref}>{contactLabel}</a>
-            ) : null}
-          </div>
-        </aside>
-      </div>
+        ) : null}
+
+        <h1 class="nrg-title" style="margin-bottom: 1.5rem">{article.title}</h1>
+        {article.summary ? <p class="nrg-lead" style="margin-bottom: 2rem">{article.summary}</p> : null}
+
+        <div class="nrg-prose" set:html={article.content} />
+
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line)">
+          <a class="nrg-btn nrg-btn--outline" href={backHref}>{backLabel}</a>
+        </div>
+      </article>
     ) : null}
   </div>
 </section>

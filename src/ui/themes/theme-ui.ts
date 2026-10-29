@@ -32,57 +32,21 @@ export type ThemeMeta = {
   homeRequirements?: ThemeHomeRequirements;
 };
 
-/**
- * 新主题在此登记即可，勿在 pages / workflows 里写死主题名。
- * CSS 仍按 data-theme 作用域引入（见 styles.ts）。
- */
-export const THEME_META: Record<ThemeId, ThemeMeta> = {
-  default: {
-    id: 'default',
-    shell: 'page-shell',
-    fontHref: '',
-    homeRequirements: {
-      placements: [
-        'home_hero',
-        'home_pain',
-        'home_architecture',
-        'home_compare',
-        'home_seo_geo',
-        'home_paths',
-        'home_testimonial',
-        'footer_cta',
-      ],
-      resolveReferencesFor: [],
-      articles: true,
-      caseStudies: false,
-      solutions: false,
-      faq: true,
-    },
-  },
-  turmill: {
-    id: 'turmill',
-    shell: 'page-shell',
-    // 站内系统字体栈，避免外链 Google Fonts 拖慢首屏
-    fontHref: '',
-    homeRequirements: {
-      placements: [
-        'home_hero',
-        'home_featured',
-        'footer_cta',
-        'home_advantage',
-        'home_testimonial',
-        'home_factory',
-        'home_comparison',
-        'home_step',
-      ],
-      resolveReferencesFor: ['home_hero', 'home_featured'],
-      articles: true,
-      caseStudies: true,
-      solutions: true,
-      faq: true,
-    },
-  },
+/** theme.manifest.json 中与运行时相关的字段（其余字段仅供工具链使用） */
+type ThemeManifest = {
+  id?: string;
+  fontHref?: string;
+  homeRequirements?: ThemeHomeRequirements;
 };
+
+/**
+ * NOTE: 新主题只需在自己的 theme.manifest.json 声明 fontHref / homeRequirements，
+ * 严禁回到此文件登记主题名。CSS 仍按 data-theme 作用域引入（见 styles.ts）。
+ */
+const manifests = import.meta.glob<ThemeManifest>('./*/theme.manifest.json', {
+  eager: true,
+  import: 'default',
+});
 
 const DEFAULT_FULL_HOME_REQUIREMENTS: ThemeHomeRequirements = {
   placements: [
@@ -109,14 +73,13 @@ export function getThemeHomeRequirements(theme?: string | null): ThemeHomeRequir
 
 export function getThemeMeta(theme?: string | null): ThemeMeta {
   const { themeId } = resolveTheme({ theme });
-  return (
-    THEME_META[themeId] || {
-      id: themeId,
-      shell: 'page-shell',
-      fontHref: '',
-      homeRequirements: DEFAULT_FULL_HOME_REQUIREMENTS,
-    }
-  );
+  const manifest = manifests[`./${themeId}/theme.manifest.json`];
+  return {
+    id: themeId,
+    shell: 'page-shell',
+    fontHref: manifest?.fontHref || '',
+    homeRequirements: manifest?.homeRequirements || DEFAULT_FULL_HOME_REQUIREMENTS,
+  };
 }
 
 export function hasPageShell(theme?: string | null): boolean {

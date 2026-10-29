@@ -1,0 +1,64 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import type { CaseStudyCard } from '@/modules/case-study';
+
+interface Props {
+  title: string;
+  items: CaseStudyCard[];
+  homeHref: string;
+  homeLabel?: string;
+  emptyText?: string;
+  error?: string;
+  warnings?: string[];
+}
+
+const {
+  title,
+  items,
+  homeHref,
+  homeLabel = 'Home',
+  emptyText = 'No case studies found.',
+  error,
+  warnings = [],
+} = Astro.props;
+---
+
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+
+<section class="__P__-section">
+  <div class="__P__-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+
+    {items.length ? (
+      <div class="__P__-grid __P__-grid--3">
+        {items.map((item) => (
+          <a class="__P__-card" href={item.href}>
+            <div class="__P__-card__media">
+              {item.coverUrl ? (
+                <OptimizedImage src={item.coverUrl} alt={item.title} width={480} height={320} />
+              ) : (
+                <div class="__P__-media-empty" />
+              )}
+            </div>
+            <div class="__P__-card__body">
+              {item.industry ? <span class="__P__-card__meta">{item.industry}</span> : null}
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p style="text-align:center;color:var(--muted);padding:3rem 0">{emptyText}</p>
+    )}
+  </div>
+</section>

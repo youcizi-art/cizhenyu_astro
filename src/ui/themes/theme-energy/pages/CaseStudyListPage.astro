@@ -1,38 +1,30 @@
 ---
 import PageBanner from '../components/PageBanner.astro';
-import CaseGrid from '../components/CaseGrid.astro';
 import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
 import type { CaseStudyCard } from '@/modules/case-study';
-import type { PublicPages } from '@/modules/cms';
 
 interface Props {
   title: string;
   items: CaseStudyCard[];
-  pages: PublicPages;
-  basePath: string;
-  emptyText?: string;
   homeHref: string;
   homeLabel?: string;
+  emptyText?: string;
   error?: string;
   warnings?: string[];
 }
+
 const {
   title,
   items,
-  pages,
-  basePath,
-  emptyText = 'No case studies yet.',
   homeHref,
   homeLabel = 'Home',
+  emptyText = 'No case studies found.',
   error,
   warnings = [],
 } = Astro.props;
-
-const totalPages = Math.max(1, pages.totalPages || 1);
-const page = Math.max(1, pages.page || 1);
-const prevHref = page > 1 ? `${basePath}?page=${page - 1}` : '';
-const nextHref = page < totalPages ? `${basePath}?page=${page + 1}` : '';
 ---
+
 <PageBanner
   title={title}
   crumbs={[
@@ -40,24 +32,33 @@ const nextHref = page < totalPages ? `${basePath}?page=${page + 1}` : '';
     { label: title },
   ]}
 />
-<section class="tm-section tm-section-mint">
-  <div class="tm-container">
+
+<section class="nrg-section">
+  <div class="nrg-container">
     <Alerts messages={error ? [error] : []} />
     <Alerts messages={warnings} tone="warn" />
-    {!error && !items.length ? <p class="tm-prose">{emptyText}</p> : null}
+
+    {items.length ? (
+      <div class="nrg-grid nrg-grid--3">
+        {items.map((item) => (
+          <a class="nrg-card" href={item.href}>
+            <div class="nrg-card__media">
+              {item.coverUrl ? (
+                <OptimizedImage src={item.coverUrl} alt={item.title} width={480} height={320} />
+              ) : (
+                <div class="nrg-media-empty" />
+              )}
+            </div>
+            <div class="nrg-card__body">
+              {item.industry ? <span class="nrg-card__meta">{item.industry}</span> : null}
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p style="text-align:center;color:var(--muted);padding:3rem 0">{emptyText}</p>
+    )}
   </div>
-  <CaseGrid title="" cases={items.map((i) => ({
-    title: i.title,
-    href: i.href,
-    summary: i.summary,
-    coverUrl: i.coverUrl,
-    industry: i.industry || i.clientName,
-  }))} />
-  {!error && totalPages > 1 ? (
-    <div class="tm-container tm-pager">
-      {prevHref ? <a class="tm-link-more" href={prevHref}>← Prev</a> : null}
-      <span class="tm-prose" style="margin:0">Page {page} / {totalPages}</span>
-      {nextHref ? <a class="tm-link-more" href={nextHref}>Next →</a> : null}
-    </div>
-  ) : null}
 </section>

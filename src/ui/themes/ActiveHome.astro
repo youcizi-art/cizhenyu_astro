@@ -18,8 +18,12 @@ const homeModules = import.meta.glob<{ default: any }>('./*/pages/HomePage.astro
 const copyModules = import.meta.glob<{ [key: string]: any }>('./*/home-copy.ts', { eager: true });
 
 const activeCopyMod = copyModules[`./${meta.id}/home-copy.ts`];
+const camelId = meta.id.replace(/-([a-z])/g, (_, g) => g.toUpperCase());
 const getLabelsFn = activeCopyMod
-  ? (activeCopyMod[`${meta.id}HomeLabels`] || activeCopyMod.defaultHomeLabels || activeCopyMod.getHomeLabels)
+  ? (activeCopyMod[`${meta.id}HomeLabels`] ||
+     activeCopyMod[`${camelId}HomeLabels`] ||
+     activeCopyMod.getHomeLabels ||
+     activeCopyMod.defaultHomeLabels)
   : null;
 const activeThemeLabels = typeof getLabelsFn === 'function' ? getLabelsFn(data.locale) : {};
 

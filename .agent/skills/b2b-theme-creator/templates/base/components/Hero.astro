@@ -1,0 +1,52 @@
+---
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
+interface Props {
+  title: string;
+  summary?: string;
+  image?: string;
+  eyebrow?: string;
+  actionUrl?: string;
+  actionLabel?: string;
+  secondaryUrl?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  title,
+  summary = '',
+  image = '',
+  eyebrow = '',
+  actionUrl = '/contact',
+  actionLabel = 'Explore Our Products →',
+  secondaryUrl = '#video',
+  secondaryLabel = 'Watch Video',
+} = Astro.props;
+---
+
+<section class="__P__-hero">
+  {image ? (
+    <div class="__P__-hero-bg">
+      <OptimizedImage src={image} alt={title} width={1920} height={800} priority fill />
+    </div>
+  ) : null}
+
+  <div class="__P__-container">
+    <div class="__P__-hero-content">
+      {eyebrow ? <span class="__P__-hero-eyebrow">{eyebrow}</span> : null}
+      <h1 class="__P__-hero-title">{title}</h1>
+      {summary ? <p class="__P__-hero-desc">{summary}</p> : null}
+      <div class="__P__-hero-actions">
+        <a class="__P__-btn __P__-btn--primary" href={actionUrl}>
+          {actionLabel}
+        </a>
+        {secondaryLabel ? (
+          <a class="__P__-btn __P__-btn--ghost" href={secondaryUrl} style="font-weight:600">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:rgb(0 0 0 / 0.08);margin-right:0.35rem">▶</span>
+            {secondaryLabel}
+          </a>
+        ) : null}
+      </div>
+    </div>
+  </div>
+</section>

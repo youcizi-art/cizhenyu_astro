@@ -1,0 +1,244 @@
+/* 储能系统与光伏光储充 (Solar & Energy Storage) · 导航条、抽屉、多语言与页脚样式
+ * 顶层选择器 [data-theme='theme-energy'] 保证严格样式隔离
+ */
+[data-theme='theme-energy'] {
+  /* ── 顶栏 / 悬浮 Header ── */
+  .nrg-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--header-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .nrg-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-h);
+    gap: var(--sp-4);
+  }
+
+  /* ── 品牌 Logo ── */
+  .nrg-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: var(--fs-xl);
+    font-weight: 800;
+    color: var(--ink-strong);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+    & svg {
+      color: var(--accent);
+    }
+  }
+
+  /* ── 导航菜单 ── */
+  .nrg-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-5);
+  }
+  .nrg-nav-item {
+    position: relative;
+    & > a {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: var(--fs-sm);
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 0.5rem 0.25rem;
+      transition: color var(--dur) var(--ease);
+      &:hover,
+      &.is-active {
+        color: var(--accent);
+      }
+    }
+    &:hover .nrg-nav-drop {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+  .nrg-nav-drop {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    padding: var(--sp-2) 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all var(--dur) var(--ease);
+    & ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li a {
+      display: block;
+      padding: 0.5rem 1rem;
+      font-size: var(--fs-sm);
+      color: var(--ink);
+      text-decoration: none;
+      &:hover {
+        background: var(--bg-subtle);
+        color: var(--accent);
+      }
+    }
+  }
+
+  /* ── 头部右侧操作区 ── */
+  .nrg-header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  /* ── 移动端菜单按钮 ── */
+  .nrg-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  /* ── 移动端抽屉 ── */
+  .nrg-drawer {
+    display: none;
+    padding: var(--sp-4);
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    & a {
+      display: block;
+      padding: 0.75rem 0;
+      font-size: var(--fs-md);
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+    }
+    &.is-open {
+      display: block;
+    }
+  }
+
+  /* ── 页脚 ── */
+  .nrg-footer {
+    background: var(--footer-bg);
+    color: var(--footer-fg);
+    padding-top: clamp(3.5rem, 6vw, 5rem);
+    border-top: 1px solid var(--line-on-dark);
+  }
+  .nrg-footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(3, minmax(0, 1fr)) 1.4fr;
+    gap: var(--sp-6);
+    padding-bottom: var(--sp-7);
+  }
+  .nrg-footer-col {
+    & h4 {
+      color: var(--on-dark);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      margin-bottom: var(--sp-4);
+      letter-spacing: 0.05em;
+    }
+    & ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+    & li a {
+      color: var(--footer-muted);
+      text-decoration: none;
+      font-size: var(--fs-sm);
+      transition: color var(--dur) var(--ease);
+      &:hover {
+        color: var(--on-dark);
+      }
+    }
+  }
+  .nrg-footer-newsletter {
+    & p {
+      color: var(--footer-muted);
+      font-size: var(--fs-sm);
+      margin-bottom: var(--sp-3);
+    }
+  }
+  .nrg-newsletter-form {
+    display: flex;
+    gap: var(--sp-2);
+    & input {
+      flex: 1;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--line-on-dark);
+      border-radius: var(--radius-sm);
+      background: rgb(255 255 255 / 0.08);
+      color: var(--on-dark);
+      font-size: var(--fs-sm);
+      &::placeholder {
+        color: var(--footer-muted);
+      }
+    }
+  }
+  .nrg-footer-bottom {
+    border-top: 1px solid var(--line-on-dark);
+    padding: var(--sp-5) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--fs-xs);
+    color: var(--footer-muted);
+    & a {
+      color: var(--footer-muted);
+      text-decoration: none;
+      margin-left: var(--sp-4);
+      &:hover {
+        color: var(--on-dark);
+      }
+    }
+  }
+
+  @media (max-width: 960px) {
+    .nrg-nav {
+      display: none;
+    }
+    .nrg-menu-toggle {
+      display: inline-flex;
+    }
+    .nrg-footer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--sp-5);
+    }
+  }
+  @media (max-width: 600px) {
+    .nrg-footer-grid {
+      grid-template-columns: 1fr;
+    }
+    .nrg-footer-bottom {
+      flex-direction: column;
+      gap: var(--sp-2);
+      text-align: center;
+    }
+  }
+}

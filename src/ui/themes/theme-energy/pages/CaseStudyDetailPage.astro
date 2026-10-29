@@ -19,76 +19,50 @@ interface Props {
   error?: string;
   warnings?: string[];
 }
+
 const {
   item,
   backHref,
-  backLabel = '← Back to list',
+  backLabel = '← Back to Cases',
   homeHref,
   homeLabel = 'Home',
-  listLabel = 'Case Studies',
-  labels = {},
+  listLabel = 'Cases',
   error,
   warnings = [],
 } = Astro.props;
 ---
+
 <PageBanner
   title={item?.title || listLabel}
-  summary={item?.summary}
   crumbs={[
     { label: homeLabel, href: homeHref },
     { label: listLabel, href: backHref },
     { label: item?.title || listLabel },
   ]}
 />
-<section class="tm-section tm-section-white">
-  <div class="tm-container">
+
+<section class="nrg-section">
+  <div class="nrg-container" style="max-width: 860px">
     <Alerts messages={error ? [error] : []} />
     <Alerts messages={warnings} tone="warn" />
+
     {item ? (
-      <div class="tm-case-detail">
-        {(item.clientName || item.industry) ? (
-          <p class="tm-case-meta">{[item.clientName, item.industry].filter(Boolean).join(' · ')}</p>
-        ) : null}
+      <article>
         {item.coverUrl ? (
-          <div class="tm-case-hero-img">
-            <OptimizedImage
-              src={item.coverUrl}
-              alt={item.title}
-              width={1200}
-              height={640}
-              widths={[640, 960, 1200]}
-              sizes="(max-width: 900px) 100vw, 900px"
-              priority
-            />
+          <div style="border-radius:var(--radius);overflow:hidden;margin-bottom:2rem;max-height:460px">
+            <OptimizedImage src={item.coverUrl} alt={item.title} width={1200} height={600} priority />
           </div>
         ) : null}
-        {item.challenge ? (
-          <section class="tm-case-block">
-            <h2 class="tm-display">{labels.challenge || 'Challenge'}</h2>
-            <div class="tm-prose" set:html={item.challenge} />
-          </section>
-        ) : null}
-        {item.solution ? (
-          <section class="tm-case-block">
-            <h2 class="tm-display">{labels.solution || 'Solution'}</h2>
-            <div class="tm-prose" set:html={item.solution} />
-          </section>
-        ) : null}
-        {item.results ? (
-          <section class="tm-case-block">
-            <h2 class="tm-display">{labels.results || 'Results'}</h2>
-            <div class="tm-prose" set:html={item.results} />
-          </section>
-        ) : null}
-        {item.content ? (
-          <section class="tm-case-block">
-            <div class="tm-prose" set:html={item.content} />
-          </section>
-        ) : null}
-        <p style="margin-top:2rem">
-          <a class="tm-btn tm-btn-md tm-btn-primary-line" href={backHref}>{backLabel}</a>
-        </p>
-      </div>
+
+        <h1 class="nrg-title" style="margin-bottom: 1.5rem">{item.title}</h1>
+        {item.summary ? <p class="nrg-lead" style="margin-bottom: 2rem">{item.summary}</p> : null}
+
+        <div class="nrg-prose" set:html={item.content} />
+
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line)">
+          <a class="nrg-btn nrg-btn--outline" href={backHref}>{backLabel}</a>
+        </div>
+      </article>
     ) : null}
   </div>
 </section>

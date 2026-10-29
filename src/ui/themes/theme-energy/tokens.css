@@ -1,50 +1,82 @@
-/* 储能系统与光伏光储充 (Solar & Energy Storage) · Design Tokens */
+/* 储能系统与光伏光储充 (Solar & Energy Storage) · Design Tokens
+ *
+ * 规则：这是唯一允许出现原始色值（#hex）的 CSS 文件；其余样式只能引用这里的变量。
+ * 分三组：
+ *   A. 共享 chrome 契约 —— src/ui/layout/chrome.css 与公共 blocks 依赖，缺一不可（lint 强校验）
+ *   B. 主题设计令牌    —— 本主题所有组件依赖
+ *   C. 组件私有变量    —— 不放这里，就近写在组件样式里
+ */
 [data-theme='theme-energy'] {
-  /* 品牌色系统：纯正的新能源科技翠绿 + 智能青电蓝点缀 */
-  --primary: #00A862;
-  --primary-hover: #008f53;
-  --primary-subtle: rgba(0, 168, 98, 0.08);
-  --primary-glow: rgba(0, 168, 98, 0.25);
-  
-  --accent: #00D2B4;
-  --accent-hover: #00B39A;
-  --accent-subtle: rgba(0, 210, 180, 0.1);
+  color-scheme: light;
 
-  /* 界面中性底色系统：极具现代科技感的明快极简白底，搭配深空蓝黑底色 */
-  --bg-page: #F6F8FA;
-  --bg-surface: #FFFFFF;
-  --bg-card: #FFFFFF;
+  /* ── B1. 品牌色 ───────────────────────────────────────────────
+   * --accent 会被站点 manifest 的 brand.primaryColor 在 <html> 上内联覆盖，
+   * 因此它必须是「品牌主色」，辅助色请用 --accent-2。 */
+  --accent: #00A862;
+  --accent-hover: #008F53;
+  --accent-ink: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
+  --accent-2: #00D2B4;
+
+  /* ── B2. 中性色与表面 ── */
+  --ink: #111827;
+  --ink-strong: #0B0F19;
+  --muted: #4B5563;
+  --line: #E5E7EB;
+  --bg: #ffffff;
+  --bg-subtle: #F9FAFB;
+  --surface: #ffffff;
   --bg-dark: #0A0F1D;
-  --bg-dark-card: #131B2E;
-  --bg-gradient-hero: linear-gradient(135deg, #0A0F1D 0%, #111A30 50%, #082820 100%);
+  --on-dark: #F9FAFB;
+  --on-dark-muted: #9CA3AF;
+  --line-on-dark: rgb(255 255 255 / 0.12);
 
-  /* 文本层次系统 */
-  --text-main: #0B132B;
-  --text-muted: #5B6B82;
-  --text-inverse: #FFFFFF;
-  --text-inverse-muted: #94A3B8;
+  /* ── A. 共享 chrome 契约（chrome.css / 公共 blocks 读取）── */
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei',
+    'Noto Sans SC', sans-serif;
+  --font-display: var(--font-sans);
+  --header-bg: rgb(255 255 255 / 0.92);
+  --topbar-bg: var(--bg-dark);
+  --topbar-fg: var(--on-dark-muted);
+  --footer-bg: var(--bg-dark);
+  --footer-fg: var(--on-dark);
+  --footer-muted: var(--on-dark-muted);
+  --hero-bg: var(--bg-subtle);
+  --hero-border: transparent;
+  --radius: 6px;
+  --wrap-max: 1200px;
+  --shadow-nav: 0 18px 40px -12px rgb(15 23 42 / 0.18);
 
-  /* 边框与质感线条 */
-  --border-light: rgba(148, 163, 184, 0.16);
-  --border-focus: rgba(0, 168, 98, 0.4);
+  /* ── B3. 字号 / 间距 / 圆角 / 阴影 / 动效 ── */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: clamp(1.75rem, 3vw, 2.25rem);
+  --fs-4xl: clamp(2.25rem, 4.4vw, 3.5rem);
 
-  /* 页眉页脚 */
-  --header-bg: rgba(255, 255, 255, 0.94);
-  --header-dark-bg: rgba(10, 15, 29, 0.92);
-  --footer-bg: #0A0F1D;
-  --footer-fg: #94A3B8;
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --section-y: clamp(3.5rem, 7vw, 6rem);
 
-  /* 现代圆角系统与光影阴影 */
-  --radius-xs: 4px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
+  --radius-sm: 8px;
+  --radius-lg: calc(var(--radius) + 8px);
+  --radius-pill: 999px;
 
-  --shadow-card: 0 4px 20px -2px rgba(11, 19, 43, 0.05);
-  --shadow-card-hover: 0 12px 30px -4px rgba(0, 168, 98, 0.12);
-  --shadow-dropdown: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.05);
+  --shadow-md: 0 10px 30px -10px rgb(15 23 42 / 0.12);
+  --shadow-lg: 0 24px 60px -20px rgb(15 23 42 / 0.22);
+  --shadow-accent: 0 10px 24px -8px color-mix(in srgb, var(--accent) 55%, transparent);
 
-  /* 字体栈 */
-  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 220ms;
+  --header-h: 76px;
 }

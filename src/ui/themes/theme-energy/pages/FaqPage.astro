@@ -2,32 +2,28 @@
 import PageBanner from '../components/PageBanner.astro';
 import Alerts from '../components/Alerts.astro';
 
-interface FaqItem {
-  question: string;
-  answer: string;
-  shortAnswer?: string;
-}
 interface Props {
   title: string;
-  items: FaqItem[];
+  items: Array<{ question: string; answer: string; shortAnswer?: string }>;
   homeHref: string;
   homeLabel?: string;
-  emptyText?: string;
   shortAnswerLabel?: string;
+  emptyText?: string;
   error?: string;
   warnings?: string[];
 }
+
 const {
   title,
-  items,
+  items = [],
   homeHref,
   homeLabel = 'Home',
-  emptyText = 'No FAQs yet.',
-  shortAnswerLabel = 'Short answer',
+  emptyText = 'No FAQs found.',
   error,
   warnings = [],
 } = Astro.props;
 ---
+
 <PageBanner
   title={title}
   crumbs={[
@@ -35,21 +31,27 @@ const {
     { label: title },
   ]}
 />
-<section class="tm-section tm-section-white">
-  <div class="tm-container" style="max-width:48rem">
+
+<section class="nrg-section">
+  <div class="nrg-container" style="max-width: 860px">
     <Alerts messages={error ? [error] : []} />
     <Alerts messages={warnings} tone="warn" />
-    {!error && !items.length ? <p class="tm-prose">{emptyText}</p> : null}
-    <div class="tm-faq-list">
-      {items.map((item) => (
-        <details class="tm-faq-item">
-          <summary>{item.question}</summary>
-          {item.shortAnswer ? (
-            <p class="tm-prose"><strong>{shortAnswerLabel}:</strong> {item.shortAnswer}</p>
-          ) : null}
-          <div class="tm-prose" set:html={item.answer} />
-        </details>
-      ))}
-    </div>
+
+    {items.length ? (
+      <div style="display:flex;flex-direction:column;gap:var(--sp-4)">
+        {items.map((item) => (
+          <details style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-4);cursor:pointer">
+            <summary style="font-size:var(--fs-md);font-weight:700;color:var(--ink-strong);outline:none">
+              {item.question}
+            </summary>
+            <div style="margin-top:var(--sp-3);color:var(--muted);font-size:var(--fs-sm);line-height:1.6">
+              {item.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    ) : (
+      <p style="text-align:center;color:var(--muted);padding:3rem 0">{emptyText}</p>
+    )}
   </div>
 </section>

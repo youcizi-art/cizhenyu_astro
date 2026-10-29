@@ -1,0 +1,83 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import type { ArticleCard } from '@/modules/article';
+
+interface Props {
+  title: string;
+  items: ArticleCard[];
+  homeHref: string;
+  homeLabel?: string;
+  emptyText?: string;
+  readMoreText?: string;
+  typeLinks?: Array<{ label: string; href: string; active?: boolean }>;
+  error?: string;
+  warnings?: string[];
+}
+
+const {
+  title,
+  items,
+  homeHref,
+  homeLabel = 'Home',
+  emptyText = 'No articles found.',
+  readMoreText = 'Read Article →',
+  typeLinks = [],
+  error,
+  warnings = [],
+} = Astro.props;
+---
+
+<PageBanner
+  title={title}
+  crumbs={[
+    { label: homeLabel, href: homeHref },
+    { label: title },
+  ]}
+/>
+
+<section class="__P__-section">
+  <div class="__P__-container">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+
+    {typeLinks.length ? (
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem">
+        {typeLinks.map((t) => (
+          <a
+            class={`__P__-btn ${t.active ? '__P__-btn--primary' : '__P__-btn--outline'} __P__-btn--sm`}
+            href={t.href}
+          >
+            {t.label}
+          </a>
+        ))}
+      </div>
+    ) : null}
+
+    {items.length ? (
+      <div class="__P__-grid __P__-grid--3">
+        {items.map((item) => (
+          <a class="__P__-card" href={item.href}>
+            <div class="__P__-card__media">
+              {item.coverUrl ? (
+                <OptimizedImage src={item.coverUrl} alt={item.title} width={480} height={320} />
+              ) : (
+                <div class="__P__-media-empty" />
+              )}
+            </div>
+            <div class="__P__-card__body">
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+              <div style="margin-top:auto;padding-top:1rem">
+                <span class="__P__-link-arrow">{readMoreText}</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p style="text-align:center;color:var(--muted);padding:3rem 0">{emptyText}</p>
+    )}
+  </div>
+</section>

@@ -5,7 +5,6 @@ export {
   hasPageShell,
   buildPageShellProps,
   shellThemeId,
-  THEME_META,
   type ThemeMeta,
   type ThemeShellKind,
   type ThemeHomeRequirements,

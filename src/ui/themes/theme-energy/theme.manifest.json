@@ -1,5 +1,15 @@
 {
   "id": "theme-energy",
   "origin": "official",
-  "name": "储能系统与光伏光储充 (Solar & Energy Storage)"
+  "name": "储能系统与光伏光储充 (Solar & Energy Storage)",
+  "classPrefix": "nrg",
+  "fontHref": "family=Inter:wght@400;500;600;700;800",
+  "homeRequirements": {
+    "placements": ["home_hero", "footer_cta"],
+    "resolveReferencesFor": ["home_hero"],
+    "articles": true,
+    "caseStudies": false,
+    "solutions": true,
+    "faq": false
+  }
 }

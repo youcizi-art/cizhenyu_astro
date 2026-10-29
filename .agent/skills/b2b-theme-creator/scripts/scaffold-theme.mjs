@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '../../../..');
 const themesRoot = path.join(projectRoot, 'src/ui/themes');
-const templateDir = path.join(themesRoot, 'turmill');
+const templateDir = path.resolve(__dirname, '../templates/base');
 
 // 1. 读取行业预设
 const presetsPath = path.resolve(__dirname, '../industry-presets.json');
@@ -16,11 +16,14 @@ const targetThemeId = process.argv[2];
 if (!targetThemeId) {
   console.log('可用行业主题 ID 列表：');
   presets.forEach((p) => console.log(`  - ${p.id} (${p.name})`));
-  console.log('\n用法: node scaffold-theme.mjs <themeId> [--force]');
+  console.log('\n用法: node scaffold-theme.mjs <themeId> [--prefix=xxx] [--force]');
   process.exit(1);
 }
 
 const isForce = process.argv.includes('--force');
+const prefixArg = process.argv.find((a) => a.startsWith('--prefix='));
+const defaultPrefix = targetThemeId.replace(/^theme-/, '').slice(0, 3);
+const classPrefix = prefixArg ? prefixArg.split('=')[1] : defaultPrefix;
 
 const themeConfig = presets.find((p) => p.id === targetThemeId) || {
   id: targetThemeId,
@@ -31,7 +34,7 @@ const themeConfig = presets.find((p) => p.id === targetThemeId) || {
     primaryHover: '#0052CC',
     accent: '#00E5FF',
     bgSurface: '#FFFFFF',
-    bgDark: '#0E1217',
+    bgDark: '#0A0F1D',
     textMain: '#0F172A',
     textMuted: '#64748B',
     radius: '6px',
@@ -45,105 +48,43 @@ if (fs.existsSync(themeDir) && !isForce) {
   process.exit(0);
 }
 
-console.log(`▶ 正在构建自包含生产级主题: [${themeConfig.id}] (${themeConfig.name})...`);
+console.log(`▶ 正在通过模板引擎构建自包含工业级主题: [${themeConfig.id}] (${themeConfig.name})...`);
+console.log(`  类名前缀: ${classPrefix}-*`);
 
-fs.mkdirSync(path.join(themeDir, 'components'), { recursive: true });
-fs.mkdirSync(path.join(themeDir, 'pages'), { recursive: true });
+// 递归复制并替换模板中的占位符
+function copyAndReplace(srcPath, destPath) {
+  const stat = fs.statSync(srcPath);
+  if (stat.isDirectory()) {
+    fs.mkdirSync(destPath, { recursive: true });
+    for (const file of fs.readdirSync(srcPath)) {
+      copyAndReplace(path.join(srcPath, file), path.join(destPath, file));
+    }
+  } else {
+    let content = fs.readFileSync(srcPath, 'utf8');
+    content = content
+      .replaceAll('__ID__', themeConfig.id)
+      .replaceAll('__NAME__', themeConfig.name)
+      .replaceAll('__P__', classPrefix)
+      .replaceAll('__ACCENT__', themeConfig.tokens.primary)
+      .replaceAll('__ACCENT_HOVER__', themeConfig.tokens.primaryHover)
+      .replaceAll('__ACCENT_2__', themeConfig.tokens.accent)
+      .replaceAll('__INK__', themeConfig.tokens.textMain)
+      .replaceAll('__MUTED__', themeConfig.tokens.textMuted)
+      .replaceAll('__BG_DARK__', themeConfig.tokens.bgDark)
+      .replaceAll('__RADIUS__', themeConfig.tokens.radius);
+
+    fs.mkdirSync(path.dirname(destPath), { recursive: true });
+    fs.writeFileSync(destPath, content, 'utf8');
+  }
+}
+
+copyAndReplace(templateDir, themeDir);
+
+// 确保 seed 目录存在
 fs.mkdirSync(path.join(themeDir, 'seed'), { recursive: true });
 
-// 1. 写入 theme.manifest.json
-fs.writeFileSync(
-  path.join(themeDir, 'theme.manifest.json'),
-  JSON.stringify({ id: themeConfig.id, origin: 'official', name: themeConfig.name }, null, 2) + '\n',
-);
-
-// 2. 写入 tokens.css
-const tokensCss = `/* ${themeConfig.name} · Design Tokens */
-[data-theme='${themeConfig.id}'] {
-  --primary: ${themeConfig.tokens.primary};
-  --primary-hover: ${themeConfig.tokens.primaryHover};
-  --primary-subtle: ${themeConfig.tokens.primary}18;
-  --accent: ${themeConfig.tokens.accent};
-  --accent-subtle: ${themeConfig.tokens.accent}18;
-
-  --bg-page: ${themeConfig.tokens.bgSurface === '#FFFFFF' ? '#F8FAFC' : '#0B0F19'};
-  --bg-surface: ${themeConfig.tokens.bgSurface};
-  --bg-card: ${themeConfig.tokens.bgSurface};
-  --bg-dark: ${themeConfig.tokens.bgDark};
-  --text-main: ${themeConfig.tokens.textMain};
-  --text-muted: ${themeConfig.tokens.textMuted};
-  --border-light: rgba(148, 163, 184, 0.2);
-
-  --header-bg: ${themeConfig.tokens.bgSurface}f2;
-  --footer-bg: ${themeConfig.tokens.bgDark};
-  --footer-fg: #94A3B8;
-
-  --radius-sm: ${themeConfig.tokens.radius};
-  --radius-md: calc(${themeConfig.tokens.radius} + 2px);
-  --radius-lg: calc(${themeConfig.tokens.radius} + 6px);
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.03);
-}
-`;
-fs.writeFileSync(path.join(themeDir, 'tokens.css'), tokensCss);
-
-// 3. 从参考模板复制并适配 theme.css
-let templateCss = fs.readFileSync(path.join(templateDir, 'theme.css'), 'utf8');
-// 将 [data-theme='turmill'] 替换为当前主题的数据属性选择器
-let adaptedCss = templateCss.replace(/\[data-theme=['"]?turmill['"]?\]/g, `[data-theme='${themeConfig.id}']`);
-// 将注释更新
-adaptedCss = `/* ${themeConfig.name} · Production B2B Stylesheet */\n` + adaptedCss;
-fs.writeFileSync(path.join(themeDir, 'theme.css'), adaptedCss);
-
-// 4. 写入 home-copy.ts
-const homeCopy = `/**
- * ${themeConfig.name} - 多语言文案字典
- */
-export function ${themeConfig.id.replace(/-/g, '_')}HomeLabels(locale: string) {
-  const zh = locale.startsWith('zh');
-  const ja = locale === 'ja';
-  return {
-    products: zh ? '核心产品与设备' : ja ? '主要製品・設備' : 'Featured Products & Equipment',
-    articles: zh ? '技术文献与行业指南' : ja ? '技術文献・業界情報' : 'Technical Insights & Guides',
-    about: zh ? '制造实力与工厂资质' : ja ? '製造体制・工場認証' : 'Manufacturing & Capabilities',
-    cases: zh ? '全球工程与合作案例' : ja ? 'グローバル導入事例' : 'Global Project Showcase',
-    contact: zh ? '即刻索取技术方案与报价' : ja ? '仕様・お見積もりのご相談' : 'Request Specifications & Quote',
-    readMore: zh ? '了解详情' : ja ? '詳しく見る' : 'Learn More',
-  };
-}
-`;
-fs.writeFileSync(path.join(themeDir, 'home-copy.ts'), homeCopy);
-
-// 5. 复制 PageShell.astro
-fs.copyFileSync(path.join(templateDir, 'PageShell.astro'), path.join(themeDir, 'PageShell.astro'));
-
-// 6. 复制所有 pages/ 页面
-const pages = fs.readdirSync(path.join(templateDir, 'pages'));
-for (const p of pages) {
-  if (p.endsWith('.astro')) {
-    fs.copyFileSync(path.join(templateDir, 'pages', p), path.join(themeDir, 'pages', p));
-  }
-}
-
-// 7. 复制所有 components/ 组件
-const components = fs.readdirSync(path.join(templateDir, 'components'));
-for (const c of components) {
-  if (c.endsWith('.astro')) {
-    fs.copyFileSync(path.join(templateDir, 'components', c), path.join(themeDir, 'components', c));
-  }
-}
-
-// 8. 复制 seed 数据并调整名称与主题映射
-const seedFiles = fs.readdirSync(path.join(templateDir, 'seed'));
-for (const s of seedFiles) {
-  if (s.endsWith('.json')) {
-    let content = fs.readFileSync(path.join(templateDir, 'seed', s), 'utf8');
-    content = content.replace(/"theme":\s*"turmill"/g, `"theme": "${themeConfig.id}"`);
-    fs.writeFileSync(path.join(themeDir, 'seed', s), content);
-  }
-}
-
-console.log(`✓ 恭喜！自包含主题 [${themeConfig.id}] (${themeConfig.name}) 完整脚手架已生成就绪！`);
-console.log(`- 包含 12 个独立 Pages`);
-console.log(`- 包含 14 个工业级 Components`);
-console.log(`- 包含完整的 Design Tokens & Scoped CSS`);
-console.log(`- 包含多语言词典与专属 Seed 数据\n`);
+console.log(`✓ 恭喜！自包含主题 [${themeConfig.id}] 已从纯净基底模板生成就绪！`);
+console.log(`- 包含全套 12 个独立 Pages`);
+console.log(`- 包含 6 个核心原子 Components`);
+console.log(`- 包含 tokens.css / theme.css / sections.css / chrome.css / pages.css 独立样式体系`);
+console.log(`- 严格限定前缀 ${classPrefix}- 与选择器 [data-theme='${themeConfig.id}']，零样式污染\n`);

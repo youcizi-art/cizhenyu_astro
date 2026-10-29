@@ -1,0 +1,25 @@
+---
+interface Props {
+  title: string;
+  crumbs?: Array<{ label: string; href?: string }>;
+  description?: string;
+}
+
+const { title, crumbs = [], description = '' } = Astro.props;
+---
+
+<div class="__P__-banner">
+  <div class="__P__-container">
+    {crumbs.length ? (
+      <ul class="__P__-crumbs" aria-label="Breadcrumb">
+        {crumbs.map((c) => (
+          <li>
+            {c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}
+          </li>
+        ))}
+      </ul>
+    ) : null}
+    <h1>{title}</h1>
+    {description ? <p>{description}</p> : null}
+  </div>
+</div>

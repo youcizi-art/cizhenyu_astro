@@ -1,0 +1,67 @@
+---
+import PageBanner from '../components/PageBanner.astro';
+import Alerts from '../components/Alerts.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+
+interface Props {
+  title: string;
+  summary?: string;
+  content?: string;
+  coverUrl?: string;
+  backHref?: string;
+  backLabel?: string;
+  homeHref: string;
+  homeLabel?: string;
+  listLabel?: string;
+  error?: string;
+  warnings?: string[];
+}
+
+const {
+  title,
+  summary = '',
+  content = '',
+  coverUrl = '',
+  backHref,
+  backLabel = '← Back',
+  homeHref,
+  homeLabel = 'Home',
+  listLabel,
+  error,
+  warnings = [],
+} = Astro.props;
+
+const crumbs = [{ label: homeLabel, href: homeHref }];
+if (listLabel && backHref) {
+  crumbs.push({ label: listLabel, href: backHref });
+}
+crumbs.push({ label: title });
+---
+
+<PageBanner title={title} crumbs={crumbs} />
+
+<section class="__P__-section">
+  <div class="__P__-container" style="max-width: 860px">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+
+    {coverUrl ? (
+      <div style="border-radius:var(--radius);overflow:hidden;margin-bottom:2rem;max-height:460px">
+        <OptimizedImage src={coverUrl} alt={title} width={1200} height={600} priority />
+      </div>
+    ) : null}
+
+    <h1 class="__P__-title" style="margin-bottom: 1.5rem">{title}</h1>
+    {summary ? <p class="__P__-lead" style="margin-bottom: 2rem">{summary}</p> : null}
+
+    {content ? (
+      <div class="__P__-prose" set:html={content} />
+    ) : null}
+
+    {backHref ? (
+      <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line)">
+        <a class="__P__-btn __P__-btn--outline" href={backHref}>{backLabel}</a>
+      </div>
+    ) : null}
+  </div>
+</section>

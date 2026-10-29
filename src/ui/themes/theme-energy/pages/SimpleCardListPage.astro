@@ -2,45 +2,30 @@
 import PageBanner from '../components/PageBanner.astro';
 import Alerts from '../components/Alerts.astro';
 import OptimizedImage from '@/ui/components/OptimizedImage.astro';
-import type { PublicPages } from '@/modules/cms';
 
-interface CardItem {
-  title: string;
-  href: string;
-  summary?: string;
-  coverUrl?: string;
-  meta?: string;
-}
 interface Props {
   title: string;
-  items: CardItem[];
-  pages?: PublicPages;
-  basePath?: string;
-  emptyText?: string;
+  items: Array<{ title: string; href: string; summary?: string; coverUrl?: string; meta?: string }>;
   homeHref: string;
   homeLabel?: string;
+  emptyText?: string;
   readMoreText?: string;
   error?: string;
   warnings?: string[];
 }
+
 const {
   title,
   items,
-  pages,
-  basePath = '',
-  emptyText = 'No items yet.',
   homeHref,
   homeLabel = 'Home',
-  readMoreText = 'Learn More',
+  emptyText = 'No items found.',
+  readMoreText = 'Learn More →',
   error,
   warnings = [],
 } = Astro.props;
-
-const totalPages = Math.max(1, pages?.totalPages || 1);
-const page = Math.max(1, pages?.page || 1);
-const prevHref = pages && page > 1 ? `${basePath}?page=${page - 1}` : '';
-const nextHref = pages && page < totalPages ? `${basePath}?page=${page + 1}` : '';
 ---
+
 <PageBanner
   title={title}
   crumbs={[
@@ -48,44 +33,36 @@ const nextHref = pages && page < totalPages ? `${basePath}?page=${page + 1}` : '
     { label: title },
   ]}
 />
-<section class="tm-section tm-section-white">
-  <div class="tm-container">
+
+<section class="nrg-section">
+  <div class="nrg-container">
     <Alerts messages={error ? [error] : []} />
     <Alerts messages={warnings} tone="warn" />
-    {!error && !items.length ? <p class="tm-prose">{emptyText}</p> : null}
+
     {items.length ? (
-      <div class="tm-grid-3">
+      <div class="nrg-grid nrg-grid--3">
         {items.map((item) => (
-          <article class="tm-product-card tm-card-hover">
-            <a class="tm-product-cover tm-img-cover" href={item.href} aria-label={item.title}>
+          <a class="nrg-card" href={item.href}>
+            <div class="nrg-card__media">
               {item.coverUrl ? (
-                <OptimizedImage
-                  src={item.coverUrl}
-                  alt={item.title}
-                  width={640}
-                  height={400}
-                  widths={[320, 640, 960]}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  fill
-                />
-              ) : null}
-            </a>
-            <div class="tm-product-body">
-              <h3><a href={item.href}>{item.title}</a></h3>
-              {item.meta ? <p style="color:var(--color-primary);font-size:0.85rem;font-weight:600;margin:0">{item.meta}</p> : null}
-              {item.summary ? <p>{item.summary}</p> : null}
-              <a class="tm-link-more" href={item.href}>{readMoreText} <span>→</span></a>
+                <OptimizedImage src={item.coverUrl} alt={item.title} width={480} height={320} />
+              ) : (
+                <div class="nrg-media-empty" />
+              )}
             </div>
-          </article>
+            <div class="nrg-card__body">
+              {item.meta ? <span class="nrg-card__meta">{item.meta}</span> : null}
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+              <div style="margin-top:auto;padding-top:1rem">
+                <span class="nrg-link-arrow">{readMoreText}</span>
+              </div>
+            </div>
+          </a>
         ))}
       </div>
-    ) : null}
-    {pages && totalPages > 1 ? (
-      <div class="tm-pager">
-        {prevHref ? <a class="tm-link-more" href={prevHref}>← Prev</a> : null}
-        <span class="tm-prose" style="margin:0">Page {page} / {totalPages}</span>
-        {nextHref ? <a class="tm-link-more" href={nextHref}>Next →</a> : null}
-      </div>
-    ) : null}
+    ) : (
+      <p style="text-align:center;color:var(--muted);padding:3rem 0">{emptyText}</p>
+    )}
   </div>
 </section>

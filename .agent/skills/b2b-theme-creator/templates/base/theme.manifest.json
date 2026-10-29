@@ -1,0 +1,15 @@
+{
+  "id": "__ID__",
+  "origin": "official",
+  "name": "__NAME__",
+  "classPrefix": "__P__",
+  "fontHref": "",
+  "homeRequirements": {
+    "placements": ["home_hero", "footer_cta"],
+    "resolveReferencesFor": ["home_hero"],
+    "articles": true,
+    "caseStudies": false,
+    "solutions": true,
+    "faq": false
+  }
+}

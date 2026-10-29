@@ -7,23 +7,26 @@ interface Props {
   title: string;
   content?: string;
   company: CompanyView;
-  homeHref?: string;
+  homeHref: string;
   homeLabel?: string;
+  inquiryLabel?: string;
+  mailLabel?: string;
   error?: string;
   warnings?: string[];
-  emptyHint?: string;
 }
+
 const {
   title,
   content = '',
   company,
-  homeHref = '/',
+  homeHref,
   homeLabel = 'Home',
+  inquiryLabel = 'Send an Inquiry',
   error,
   warnings = [],
-  emptyHint = '',
 } = Astro.props;
 ---
+
 <PageBanner
   title={title}
   crumbs={[
@@ -31,32 +34,34 @@ const {
     { label: title },
   ]}
 />
-<section class="tm-section tm-section-white">
-  <div class="tm-container">
+
+<section class="nrg-section">
+  <div class="nrg-container">
     <Alerts messages={error ? [error] : []} />
     <Alerts messages={warnings} tone="warn" />
-    {content ? <div class="tm-prose" set:html={content} /> : null}
-    <div class="tm-panel" style="margin-top:2rem">
-      <h2 style="font-family:var(--font-display);font-size:1.35rem;margin:0 0 1rem">{company.name}</h2>
-      {company.address ? <p class="tm-prose" style="margin:0.35rem 0">{company.address}</p> : null}
-      {company.phone ? (
-        <p class="tm-prose" style="margin:0.35rem 0">
-          <a href={`tel:${company.phone.replace(/\s+/g, '')}`}>{company.phone}</a>
-        </p>
-      ) : null}
-      {company.email ? (
-        <p class="tm-prose" style="margin:0.35rem 0">
-          <a href={`mailto:${company.email}`}>{company.email}</a>
-        </p>
-      ) : null}
-      {company.website ? (
-        <p class="tm-prose" style="margin:0.35rem 0">
-          <a href={company.website}>{company.website}</a>
-        </p>
-      ) : null}
-      {!company.address && !company.phone && !company.email && emptyHint ? (
-        <p class="tm-prose">{emptyHint}</p>
-      ) : null}
+
+    <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:var(--sp-7)">
+      <div>
+        <h2 class="nrg-title" style="margin-bottom:var(--sp-4)">{company.name}</h2>
+        <div style="display:flex;flex-direction:column;gap:var(--sp-3);color:var(--muted);font-size:var(--fs-sm)">
+          {company.email ? <div><strong>Email:</strong> <a href={`mailto:${company.email}`}>{company.email}</a></div> : null}
+          {company.phone ? <div><strong>Phone:</strong> {company.phone}</div> : null}
+          {company.address ? <div><strong>Address:</strong> {company.address}</div> : null}
+        </div>
+        {content ? <div class="nrg-prose" style="margin-top:var(--sp-6)" set:html={content} /> : null}
+      </div>
+
+      <div class="nrg-inquiry-box" style="margin-top:0">
+        <h3>{inquiryLabel}</h3>
+        <p>Fill out the form below to receive product catalogs, technical parameters, and factory wholesale quotes within 24 hours.</p>
+        <form style="display:flex;flex-direction:column;gap:var(--sp-3)">
+          <input class="nrg-input" type="text" placeholder="Your Name" required aria-label="Name" />
+          <input class="nrg-input" type="email" placeholder="Your Business Email" required aria-label="Email" />
+          <input class="nrg-input" type="text" placeholder="Company Name" aria-label="Company" />
+          <textarea class="nrg-input" rows="4" placeholder="Products interested in, required quantity, or custom specs..." required aria-label="Message"></textarea>
+          <button type="submit" class="nrg-btn nrg-btn--primary" style="margin-top:var(--sp-2)">Submit Inquiry</button>
+        </form>
+      </div>
     </div>
   </div>
 </section>

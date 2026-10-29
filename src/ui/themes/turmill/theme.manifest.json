@@ -1,4 +1,22 @@
 {
   "id": "turmill",
-  "origin": "official"
+  "origin": "official",
+  "fontHref": "",
+  "homeRequirements": {
+    "placements": [
+      "home_hero",
+      "home_featured",
+      "footer_cta",
+      "home_advantage",
+      "home_testimonial",
+      "home_factory",
+      "home_comparison",
+      "home_step"
+    ],
+    "resolveReferencesFor": ["home_hero", "home_featured"],
+    "articles": true,
+    "caseStudies": true,
+    "solutions": true,
+    "faq": true
+  }
 }

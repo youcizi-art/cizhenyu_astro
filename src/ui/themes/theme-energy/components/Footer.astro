@@ -6,33 +6,88 @@ interface Props {
   company: CompanyView;
   links?: NavLink[];
   quickLinksLabel?: string;
+  homeHref?: string;
+  contactHref?: string;
 }
-const { company, links = [], quickLinksLabel = 'Quick Links' } = Astro.props;
+
+const {
+  company,
+  links = [],
+  quickLinksLabel = 'Quick Links',
+  homeHref = '/',
+  contactHref = '/contact',
+} = Astro.props;
+
 const year = new Date().getFullYear();
+const privacyHref = `${homeHref.replace(/\/$/, '')}/privacy`;
+const termsHref = `${homeHref.replace(/\/$/, '')}/terms`;
 ---
-<footer class="tm-footer">
-  <div class="tm-container tm-footer-grid">
-    <div class="tm-footer-brand">
-      <div class="tm-brand">{company.name}</div>
-      {company.slogan ? <p>{company.slogan}</p> : null}
-      <div class="tm-footer-meta">
-        {company.email ? <a href={`mailto:${company.email}`}>{company.email}</a> : null}
-        {company.phone ? <a href={`tel:${company.phone.replace(/\s+/g, '')}`}>{company.phone}</a> : null}
-        {company.address ? <span>{company.address}</span> : null}
+
+<footer class="nrg-footer">
+  <div class="nrg-container nrg-footer-grid">
+    <div class="nrg-footer-brand">
+      <div class="nrg-brand" style="color:var(--on-dark);margin-bottom:0.75rem">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        <span>{company.name}</span>
+      </div>
+      {company.slogan ? <p style="color:var(--footer-muted);font-size:var(--fs-sm);margin-bottom:1rem;line-height:1.5">{company.slogan}</p> : null}
+      <div style="font-size:var(--fs-xs);color:var(--footer-muted);display:flex;flex-direction:column;gap:0.35rem">
+        {company.email ? <span>Email: {company.email}</span> : null}
+        {company.phone ? <span>Tel: {company.phone}</span> : null}
+        {company.address ? <span>Addr: {company.address}</span> : null}
       </div>
     </div>
+
     {links.length ? (
-      <div class="tm-footer-links">
+      <div class="nrg-footer-col">
         <h4>{quickLinksLabel}</h4>
         <ul>
-          {links.slice(0, 8).map((link) => (
+          {links.slice(0, 6).map((link) => (
             <li><a href={link.href}>{link.label}</a></li>
           ))}
         </ul>
       </div>
     ) : null}
+
+    <div class="nrg-footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href={contactHref}>Contact Us</a></li>
+        <li><a href={`${homeHref.replace(/\/$/, '')}/download`}>Download Center</a></li>
+        <li><a href={`${homeHref.replace(/\/$/, '')}/faq`}>FAQ</a></li>
+        <li><a href={`${homeHref.replace(/\/$/, '')}/about`}>Technical Service</a></li>
+      </ul>
+    </div>
+
+    <div class="nrg-footer-col">
+      <h4>Follow Us</h4>
+      <div style="display:flex;gap:0.75rem;margin-top:0.5rem">
+        <a href="#" aria-label="LinkedIn" style="color:var(--footer-muted);font-size:1.1rem">in</a>
+        <a href="#" aria-label="YouTube" style="color:var(--footer-muted);font-size:1.1rem">▶</a>
+        <a href="#" aria-label="X" style="color:var(--footer-muted);font-size:1.1rem">𝕏</a>
+        <a href="#" aria-label="Facebook" style="color:var(--footer-muted);font-size:1.1rem">f</a>
+      </div>
+    </div>
+
+    <div class="nrg-footer-newsletter">
+      <h4 style="color:var(--on-dark);font-size:var(--fs-sm);font-weight:700;margin-bottom:0.75rem">Subscribe</h4>
+      <p>Get the latest updates on our products and innovations.</p>
+      <form class="nrg-newsletter-form" action={contactHref} method="get">
+        <input type="hidden" name="intent" value="subscribe" />
+        <input type="email" name="email" placeholder="Your email address" required aria-label="Email Address" />
+        <button type="submit" class="nrg-btn nrg-btn--primary nrg-btn--sm">Subscribe</button>
+      </form>
+    </div>
   </div>
-  <div class="tm-footer-copy">
-    <div class="tm-container">© {year} {company.name}. All rights reserved.</div>
+
+  <div class="nrg-container nrg-footer-bottom">
+    <div>© {year} {company.name}. All rights reserved.</div>
+    <div>
+      <a href={privacyHref}>Privacy Policy</a>
+      <a href={termsHref}>Terms of Service</a>
+    </div>
   </div>
 </footer>

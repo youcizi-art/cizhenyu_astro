@@ -1,19 +1,11 @@
 ---
-import Hero from '../components/Hero.astro';
-import ProductGrid from '../components/ProductGrid.astro';
-import CategoryStrip from '../components/CategoryStrip.astro';
-import AdvantageSection from '../components/AdvantageSection.astro';
-import CaseGrid from '../components/CaseGrid.astro';
-import AboutTeaser from '../components/AboutTeaser.astro';
-import FactoryGallery from '../components/FactoryGallery.astro';
-import TestimonialSection from '../components/TestimonialSection.astro';
-import CtaBanner from '../components/CtaBanner.astro';
-import ArticleGrid from '../components/ArticleGrid.astro';
 import Alerts from '../components/Alerts.astro';
+import Hero from '../components/Hero.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
 import type { ContentBlock } from '@/modules/content-block';
 import type { ProductCard } from '@/modules/product';
 import type { ArticleCard } from '@/modules/article';
-import type { CaseStudyCard } from '@/modules/case-study';
 import type { SolutionCard } from '@/modules/industry';
 import type { CompanyView } from '@/modules/company';
 
@@ -23,7 +15,6 @@ interface Props {
   heroImageUrl?: string;
   tagline?: string;
   products: ProductCard[];
-  caseStudies: CaseStudyCard[];
   articles: ArticleCard[];
   solutions?: SolutionCard[];
   company: CompanyView;
@@ -31,45 +22,32 @@ interface Props {
   companyStats?: Array<{ label: string; value: string }>;
   ctaBanner: ContentBlock | null;
   advantages?: Array<{ title: string; description: string }>;
-  testimonials?: Array<{
-    name: string;
-    role?: string;
-    quote: string;
-    avatarUrl?: string;
-    meta?: string;
-    rating?: number;
-  }>;
-  factoryItems?: Array<{ title: string; imageUrl: string }>;
-  heroThumbs?: Array<{ src: string; free?: boolean; alt?: string }>;
   labels: Record<string, string>;
   paths: {
     about: string;
     contact: string;
     products?: string;
     solutions?: string;
+    news?: string;
   };
   error?: string;
   warnings?: string[];
   showProducts?: boolean;
   showArticles?: boolean;
 }
+
 const {
   siteName,
   hero,
   heroImageUrl = '',
   tagline = '',
-  products,
-  caseStudies,
-  articles,
+  products = [],
+  articles = [],
   solutions = [],
   company,
   companyIntro = '',
   companyStats = [],
-  ctaBanner,
   advantages = [],
-  testimonials = [],
-  factoryItems = [],
-  heroThumbs = [],
   labels,
   paths,
   error,
@@ -78,18 +56,108 @@ const {
   showArticles = true,
 } = Astro.props;
 
-const heroTitle = hero?.title || siteName;
-const heroSummary = hero?.summary || hero?.subtitle || tagline;
+const heroTitle = hero?.title || 'Smarter Energy Solutions for a Sustainable World';
+const heroSummary = hero?.summary || hero?.subtitle || tagline || 'We provide high-performance solar inverters, energy storage systems and smart energy solutions.';
 const heroImage = hero?.imageUrl || heroImageUrl;
-const heroCta = hero?.ctaUrl || paths.contact;
-const heroCtaLabel = hero?.ctaLabel || labels.aboutCta || 'Learn More';
-const heroTips = labels.heroTips || hero?.eyebrow || '';
-const ctaBg =
-  ctaBanner?.backgroundImageUrl ||
-  'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1600&h=600&q=80';
+const heroEyebrow = hero?.eyebrow || 'CLEAN ENERGY · A BRIGHTER FUTURE';
+const heroCta = hero?.ctaUrl || paths.products || paths.contact;
+const heroCtaLabel = hero?.ctaLabel || 'Explore Our Products →';
+
+// 信任清单
+const trustItems = [
+  { title: labels.trust1Title || 'Clean & Renewable', description: labels.trust1Desc || 'Harnessing nature power for a greener tomorrow.' },
+  { title: labels.trust2Title || 'Reliable Performance', description: labels.trust2Desc || 'Engineered for stability, built for the long term.' },
+  { title: labels.trust3Title || 'Smart & Connected', description: labels.trust3Desc || 'Intelligent management for higher efficiency.' },
+  { title: labels.trust4Title || 'Global Presence', description: labels.trust4Desc || 'Serving customers in 100+ countries and regions.' },
+];
+
+// 产品卡片（支持设计稿展示）
+const fallbackProducts = [
+  {
+    title: 'Solar Inverters',
+    summary: 'High efficiency, stable output',
+    href: paths.products || '#',
+    coverUrl: 'https://images.unsplash.com/photo-1509391365360-2e959784a276?w=600&h=600&fit=crop',
+  },
+  {
+    title: 'Energy Storage Systems',
+    summary: 'Store more, use smarter',
+    href: paths.products || '#',
+    coverUrl: 'https://images.unsplash.com/photo-1548337138-e87d889cc369?w=600&h=600&fit=crop',
+  },
+  {
+    title: 'Smart Energy Management',
+    summary: 'Intelligent control, optimal use',
+    href: paths.products || '#',
+    coverUrl: 'https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=600&h=600&fit=crop',
+  },
+];
+const displayProducts = (products.length ? products : fallbackProducts).slice(0, 3);
+
+// 统计数据
+const defaultStats = [
+  { value: labels.stat1Val || '10+', label: labels.stat1Lab || 'Years of Experience' },
+  { value: labels.stat2Val || '100+', label: labels.stat2Lab || 'Countries & Regions' },
+  { value: labels.stat3Val || '5000+', label: labels.stat3Lab || 'Global Partners' },
+  { value: labels.stat4Val || '1M+', label: labels.stat4Lab || 'Clean Energy Projects' },
+];
+const stats = companyStats.length ? companyStats : defaultStats;
+
+// 解决方案 4 个（Residential, Commercial, Industrial, Utility）
+const fallbackSolutions = [
+  {
+    title: 'Residential',
+    summary: 'Clean energy for a better home',
+    href: paths.solutions || '#',
+    coverUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&h=450&fit=crop',
+  },
+  {
+    title: 'Commercial',
+    summary: 'Efficient energy for business growth',
+    href: paths.solutions || '#',
+    coverUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=450&fit=crop',
+  },
+  {
+    title: 'Industrial',
+    summary: 'Reliable power for a stronger industry',
+    href: paths.solutions || '#',
+    coverUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=450&fit=crop',
+  },
+  {
+    title: 'Utility',
+    summary: 'Large-scale solutions for a cleaner planet',
+    href: paths.solutions || '#',
+    coverUrl: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&h=450&fit=crop',
+  },
+];
+const displaySolutions = (solutions.length ? solutions : fallbackSolutions).slice(0, 4);
+
+// 资讯 3 条
+const fallbackArticles = [
+  {
+    title: 'The Future of Solar Energy: Trends and Opportunities',
+    summary: 'Explore the latest trends in solar energy and how they are shaping a more sustainable future.',
+    href: paths.news || '#',
+    coverUrl: 'https://images.unsplash.com/photo-1508873696983-2df57046475a?w=600&h=338&fit=crop',
+  },
+  {
+    title: 'How Energy Storage Systems Enable a Greener Tomorrow',
+    summary: 'Discover how energy storage technology is driving the transition to clean energy worldwide.',
+    href: paths.news || '#',
+    coverUrl: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=338&fit=crop',
+  },
+  {
+    title: 'Global Renewable Energy Market Insights',
+    summary: 'A comprehensive look at the growth opportunities and challenges in the renewable energy market.',
+    href: paths.news || '#',
+    coverUrl: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&h=338&fit=crop',
+  },
+];
+const displayArticles = (articles.length ? articles : fallbackArticles).slice(0, 3);
 ---
+
 {(error || warnings.length) ? (
-  <div class="tm-container" style="padding-top:1rem">
+  <div class="nrg-container" style="padding-top:1rem">
     <Alerts messages={error ? [error] : []} />
     <Alerts messages={warnings} tone="warn" />
   </div>
@@ -100,95 +168,153 @@ const ctaBg =
   title={heroTitle}
   summary={heroSummary}
   image={heroImage}
-  eyebrow={heroTips}
+  eyebrow={heroEyebrow}
   actionUrl={heroCta}
   actionLabel={heroCtaLabel}
-  thumbs={heroThumbs}
+  secondaryLabel="Watch Video"
 />
 
-<!-- 2. Products -->
-{showProducts ? (
-  <ProductGrid
-    title={labels.products}
-    eyebrow={labels.productsEyebrow}
-    subtitle={labels.productsSub}
-    items={products}
-    readMoreText={labels.readMore}
-    variant="home"
-  />
+<!-- 2. Trust Strip -->
+<TrustStrip items={trustItems} />
+
+<!-- 3. Our Products -->
+{showProducts && displayProducts.length > 0 ? (
+  <section class="nrg-product-section">
+    <div class="nrg-container nrg-product-layout">
+      <div class="nrg-product-intro">
+        <span class="nrg-eyebrow">{labels.productsEyebrow || 'OUR PRODUCTS'}</span>
+        <h2 class="nrg-title" style="margin-bottom: var(--sp-3)">{labels.products || 'Complete Energy Solutions'}</h2>
+        <p class="nrg-lead" style="margin: 0 0 var(--sp-5); font-size: var(--fs-sm)">
+          {labels.productsSub || 'From solar inverters to energy storage systems, we offer a full range of products.'}
+        </p>
+        <a class="nrg-btn nrg-btn--primary" href={paths.products || '#'}>
+          {labels.viewAllProducts || 'View All Products →'}
+        </a>
+      </div>
+
+      <div class="nrg-product-cards">
+        {displayProducts.map((p) => (
+          <a class="nrg-p-card" href={p.href}>
+            <div class="nrg-p-img">
+              {p.coverUrl ? (
+                <OptimizedImage src={p.coverUrl} alt={p.title} width={360} height={360} />
+              ) : (
+                <div class="nrg-media-empty" />
+              )}
+            </div>
+            <h3 class="nrg-p-title">{p.title}</h3>
+            <p class="nrg-p-desc">{p.summary}</p>
+            <span class="nrg-p-arrow">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 ) : null}
 
-<!-- 3. Category / solutions strip -->
-<CategoryStrip
-  title={labels.category}
-  subtitle={labels.categorySub}
-  items={solutions.map((s) => ({
-    title: s.title,
-    href: s.href,
-    summary: s.summary,
-    coverUrl: s.coverUrl,
-  }))}
-  ctaHref={paths.solutions || paths.products}
-  ctaLabel={labels.exploreAll}
-/>
+<!-- 4. About & Stats -->
+<section class="nrg-about-section">
+  <div class="nrg-container nrg-about-grid">
+    <div class="nrg-about-media">
+      <OptimizedImage
+        src="https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=1200&q=80"
+        alt={company.name}
+        width={800}
+        height={500}
+      />
+    </div>
 
-<!-- 4. Advantages (dark) -->
-<AdvantageSection
-  title={labels.advantages}
-  subtitle={labels.advantagesSub}
-  items={advantages}
-/>
+    <div class="nrg-about-info">
+      <span class="nrg-eyebrow">{labels.aboutEyebrow || 'ABOUT US'}</span>
+      <h2 class="nrg-title" style="margin-bottom: var(--sp-3)">{labels.aboutTitle || 'Powering a Sustainable Future'}</h2>
+      <p style="color:var(--muted); font-size:var(--fs-sm); line-height:1.6; margin-bottom: var(--sp-2)">
+        {companyIntro || company.summary || labels.aboutDesc}
+      </p>
 
-<!-- 5. Case studies / real stories -->
-<CaseGrid
-  title={labels.cases}
-  subtitle={labels.casesSub}
-  cases={caseStudies.map((item) => ({
-    title: item.title,
-    href: item.href,
-    summary: item.summary,
-    coverUrl: item.coverUrl,
-    industry: item.industry,
-  }))}
-/>
+      <div class="nrg-stats-row">
+        {stats.map((s) => (
+          <div>
+            <div class="nrg-stat-num">{s.value}</div>
+            <div class="nrg-stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
 
-<!-- 6. About -->
-<AboutTeaser
-  companyName={labels.aboutTitle || company.name || siteName}
-  slogan={company.slogan}
-  summary={companyIntro || company.summary}
-  logoUrl={company.logoUrl}
-  aboutHref={paths.about}
-  aboutLabel={labels.about}
-  stats={companyStats}
-/>
+      <div>
+        <a class="nrg-btn nrg-btn--outline" href={paths.about}>
+          {labels.learnMore || 'Learn More →'}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- 7. Factory -->
-<FactoryGallery
-  eyebrow={labels.factoryEyebrow}
-  title={labels.factory}
-  description={company.summary}
-  factoryArea={labels.factoryArea}
-  items={factoryItems}
-/>
+<!-- 5. Solutions (4 Applications) -->
+{displaySolutions.length > 0 ? (
+  <section class="nrg-solutions-section">
+    <div class="nrg-container">
+      <div class="nrg-head nrg-head--split">
+        <div>
+          <span class="nrg-eyebrow">{labels.solutionsEyebrow || 'SOLUTIONS'}</span>
+          <h2 class="nrg-title">{labels.solutions || 'For Every Application'}</h2>
+          <p class="nrg-lead" style="font-size: var(--fs-sm)">{labels.solutionsSub}</p>
+        </div>
+        <a class="nrg-link-arrow" href={paths.solutions || '#'}>
+          {labels.viewAllSolutions || 'View All Solutions'} →
+        </a>
+      </div>
 
-<!-- 8. CTA -->
-<CtaBanner
-  title={ctaBanner?.title || 'Ready to make pet care easier?'}
-  actionLabel={ctaBanner?.ctaLabel || labels.aboutCta}
-  actionHref={ctaBanner?.ctaUrl || paths.contact}
-  backgroundImage={ctaBg}
-/>
+      <div class="nrg-solutions-grid">
+        {displaySolutions.map((sol) => (
+          <a class="nrg-sol-card" href={sol.href}>
+            {sol.coverUrl ? (
+              <OptimizedImage src={sol.coverUrl} alt={sol.title} width={400} height={300} fill />
+            ) : null}
+            <div class="nrg-sol-content">
+              <h3>{sol.title}</h3>
+              <p>{sol.summary}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+) : null}
 
-<!-- 9. Testimonials -->
-<TestimonialSection
-  eyebrow={labels.testimonialsEyebrow}
-  title={labels.testimonials}
-  subtitle={labels.testimonialsSub}
-  items={testimonials}
-/>
+<!-- 6. Latest News -->
+{showArticles && displayArticles.length > 0 ? (
+  <section class="nrg-news-section">
+    <div class="nrg-container">
+      <div class="nrg-head nrg-head--split">
+        <div>
+          <span class="nrg-eyebrow">{labels.newsEyebrow || 'LATEST NEWS'}</span>
+          <h2 class="nrg-title">{labels.news || 'Insights & Updates'}</h2>
+          <p class="nrg-lead" style="font-size: var(--fs-sm)">{labels.newsSub}</p>
+        </div>
+        <a class="nrg-link-arrow" href={paths.news || '#'}>
+          {labels.viewAllNews || 'View All News'} →
+        </a>
+      </div>
 
-<!-- 10. Articles -->
-{showArticles ? (
-  <ArticleGrid title={labels.articles} items={articles} readMoreText={labels.readMore} />
+      <div class="nrg-news-grid">
+        {displayArticles.map((art) => (
+          <a class="nrg-news-card" href={art.href}>
+            <div class="nrg-news-thumb">
+              {art.coverUrl ? (
+                <OptimizedImage src={art.coverUrl} alt={art.title} width={400} height={225} />
+              ) : (
+                <div class="nrg-media-empty" />
+              )}
+            </div>
+            <div class="nrg-news-body">
+              <span class="nrg-news-date">2026-10-30</span>
+              <h3 class="nrg-news-title">{art.title}</h3>
+              <p class="nrg-news-summary">{art.summary}</p>
+              <span style="color:var(--accent); font-size:var(--fs-sm); font-weight:600">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 ) : null}

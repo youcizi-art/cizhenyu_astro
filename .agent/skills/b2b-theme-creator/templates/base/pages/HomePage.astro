@@ -1,0 +1,254 @@
+---
+import Alerts from '../components/Alerts.astro';
+import Hero from '../components/Hero.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import type { ContentBlock } from '@/modules/content-block';
+import type { ProductCard } from '@/modules/product';
+import type { ArticleCard } from '@/modules/article';
+import type { SolutionCard } from '@/modules/industry';
+import type { CompanyView } from '@/modules/company';
+
+interface Props {
+  siteName: string;
+  hero: ContentBlock | null;
+  heroImageUrl?: string;
+  tagline?: string;
+  products: ProductCard[];
+  articles: ArticleCard[];
+  solutions?: SolutionCard[];
+  company: CompanyView;
+  companyIntro?: string;
+  companyStats?: Array<{ label: string; value: string }>;
+  ctaBanner: ContentBlock | null;
+  advantages?: Array<{ title: string; description: string }>;
+  labels: Record<string, string>;
+  paths: {
+    about: string;
+    contact: string;
+    products?: string;
+    solutions?: string;
+    news?: string;
+  };
+  error?: string;
+  warnings?: string[];
+  showProducts?: boolean;
+  showArticles?: boolean;
+}
+
+const {
+  siteName,
+  hero,
+  heroImageUrl = '',
+  tagline = '',
+  products = [],
+  articles = [],
+  solutions = [],
+  company,
+  companyIntro = '',
+  companyStats = [],
+  advantages = [],
+  labels,
+  paths,
+  error,
+  warnings = [],
+  showProducts = true,
+  showArticles = true,
+} = Astro.props;
+
+const heroTitle = hero?.title || 'Smarter Energy Solutions for a Sustainable World';
+const heroSummary = hero?.summary || hero?.subtitle || tagline || 'We provide high-performance solar inverters, energy storage systems and smart energy solutions.';
+const heroImage = hero?.imageUrl || heroImageUrl;
+const heroEyebrow = hero?.eyebrow || 'CLEAN ENERGY · A BRIGHTER FUTURE';
+const heroCta = hero?.ctaUrl || paths.products || paths.contact;
+const heroCtaLabel = hero?.ctaLabel || 'Explore Our Products →';
+
+// 信任清单
+const trustItems = [
+  { title: labels.trust1Title || 'Clean & Renewable', description: labels.trust1Desc || 'Harnessing nature power for a greener tomorrow.' },
+  { title: labels.trust2Title || 'Reliable Performance', description: labels.trust2Desc || 'Engineered for stability, built for the long term.' },
+  { title: labels.trust3Title || 'Smart & Connected', description: labels.trust3Desc || 'Intelligent management for higher efficiency.' },
+  { title: labels.trust4Title || 'Global Presence', description: labels.trust4Desc || 'Serving customers in 100+ countries and regions.' },
+];
+
+// 产品卡片
+const displayProducts = products.slice(0, 3);
+
+// 统计数据
+const defaultStats = [
+  { value: labels.stat1Val || '10+', label: labels.stat1Lab || 'Years of Experience' },
+  { value: labels.stat2Val || '100+', label: labels.stat2Lab || 'Countries & Regions' },
+  { value: labels.stat3Val || '5000+', label: labels.stat3Lab || 'Global Partners' },
+  { value: labels.stat4Val || '1M+', label: labels.stat4Lab || 'Clean Energy Projects' },
+];
+const stats = companyStats.length ? companyStats : defaultStats;
+
+// 解决方案 4 个
+const displaySolutions = solutions.slice(0, 4);
+
+// 资讯 3 条
+const displayArticles = articles.slice(0, 3);
+---
+
+{(error || warnings.length) ? (
+  <div class="__P__-container" style="padding-top:1rem">
+    <Alerts messages={error ? [error] : []} />
+    <Alerts messages={warnings} tone="warn" />
+  </div>
+) : null}
+
+<!-- 1. Hero -->
+<Hero
+  title={heroTitle}
+  summary={heroSummary}
+  image={heroImage}
+  eyebrow={heroEyebrow}
+  actionUrl={heroCta}
+  actionLabel={heroCtaLabel}
+  secondaryLabel="Watch Video"
+/>
+
+<!-- 2. Trust Strip -->
+<TrustStrip items={trustItems} />
+
+<!-- 3. Our Products -->
+{showProducts && displayProducts.length > 0 ? (
+  <section class="__P__-product-section">
+    <div class="__P__-container __P__-product-layout">
+      <div class="__P__-product-intro">
+        <span class="__P__-eyebrow">{labels.productsEyebrow || 'OUR PRODUCTS'}</span>
+        <h2 class="__P__-title" style="margin-bottom: var(--sp-3)">{labels.products || 'Complete Energy Solutions'}</h2>
+        <p class="__P__-lead" style="margin: 0 0 var(--sp-5); font-size: var(--fs-sm)">
+          {labels.productsSub || 'From solar inverters to energy storage systems, we offer a full range of products.'}
+        </p>
+        <a class="__P__-btn __P__-btn--primary" href={paths.products || '#'}>
+          {labels.viewAllProducts || 'View All Products →'}
+        </a>
+      </div>
+
+      <div class="__P__-product-cards">
+        {displayProducts.map((p) => (
+          <a class="__P__-p-card" href={p.href}>
+            <div class="__P__-p-img">
+              {p.coverUrl ? (
+                <OptimizedImage src={p.coverUrl} alt={p.title} width={360} height={360} />
+              ) : (
+                <div class="__P__-media-empty" />
+              )}
+            </div>
+            <h3 class="__P__-p-title">{p.title}</h3>
+            <p class="__P__-p-desc">{p.summary}</p>
+            <span class="__P__-p-arrow">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+) : null}
+
+<!-- 4. About & Stats -->
+<section class="__P__-about-section">
+  <div class="__P__-container __P__-about-grid">
+    <div class="__P__-about-media">
+      <OptimizedImage
+        src="https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=1200&q=80"
+        alt={company.name}
+        width={800}
+        height={500}
+      />
+    </div>
+
+    <div class="__P__-about-info">
+      <span class="__P__-eyebrow">{labels.aboutEyebrow || 'ABOUT US'}</span>
+      <h2 class="__P__-title" style="margin-bottom: var(--sp-3)">{labels.aboutTitle || 'Powering a Sustainable Future'}</h2>
+      <p style="color:var(--muted); font-size:var(--fs-sm); line-height:1.6; margin-bottom: var(--sp-2)">
+        {companyIntro || company.summary || labels.aboutDesc}
+      </p>
+
+      <div class="__P__-stats-row">
+        {stats.map((s) => (
+          <div>
+            <div class="__P__-stat-num">{s.value}</div>
+            <div class="__P__-stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <a class="__P__-btn __P__-btn--outline" href={paths.about}>
+          {labels.learnMore || 'Learn More →'}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Solutions (4 Applications) -->
+{displaySolutions.length > 0 ? (
+  <section class="__P__-solutions-section">
+    <div class="__P__-container">
+      <div class="__P__-head __P__-head--split">
+        <div>
+          <span class="__P__-eyebrow">{labels.solutionsEyebrow || 'SOLUTIONS'}</span>
+          <h2 class="__P__-title">{labels.solutions || 'For Every Application'}</h2>
+          <p class="__P__-lead" style="font-size: var(--fs-sm)">{labels.solutionsSub}</p>
+        </div>
+        <a class="__P__-link-arrow" href={paths.solutions || '#'}>
+          {labels.viewAllSolutions || 'View All Solutions'} →
+        </a>
+      </div>
+
+      <div class="__P__-solutions-grid">
+        {displaySolutions.map((sol) => (
+          <a class="__P__-sol-card" href={sol.href}>
+            {sol.coverUrl ? (
+              <OptimizedImage src={sol.coverUrl} alt={sol.title} width={400} height={300} fill />
+            ) : null}
+            <div class="__P__-sol-content">
+              <h3>{sol.title}</h3>
+              <p>{sol.summary}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+) : null}
+
+<!-- 6. Latest News -->
+{showArticles && displayArticles.length > 0 ? (
+  <section class="__P__-news-section">
+    <div class="__P__-container">
+      <div class="__P__-head __P__-head--split">
+        <div>
+          <span class="__P__-eyebrow">{labels.newsEyebrow || 'LATEST NEWS'}</span>
+          <h2 class="__P__-title">{labels.news || 'Insights & Updates'}</h2>
+          <p class="__P__-lead" style="font-size: var(--fs-sm)">{labels.newsSub}</p>
+        </div>
+        <a class="__P__-link-arrow" href={paths.news || '#'}>
+          {labels.viewAllNews || 'View All News'} →
+        </a>
+      </div>
+
+      <div class="__P__-news-grid">
+        {displayArticles.map((art) => (
+          <a class="__P__-news-card" href={art.href}>
+            <div class="__P__-news-thumb">
+              {art.coverUrl ? (
+                <OptimizedImage src={art.coverUrl} alt={art.title} width={400} height={225} />
+              ) : (
+                <div class="__P__-media-empty" />
+              )}
+            </div>
+            <div class="__P__-news-body">
+              <span class="__P__-news-date">2026-10-30</span>
+              <h3 class="__P__-news-title">{art.title}</h3>
+              <p class="__P__-news-summary">{art.summary}</p>
+              <span style="color:var(--accent); font-size:var(--fs-sm); font-weight:600">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+) : null}

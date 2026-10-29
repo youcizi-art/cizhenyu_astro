@@ -1,0 +1,82 @@
+/* __NAME__ · Design Tokens
+ *
+ * 规则：这是唯一允许出现原始色值（#hex）的 CSS 文件；其余样式只能引用这里的变量。
+ * 分三组：
+ *   A. 共享 chrome 契约 —— src/ui/layout/chrome.css 与公共 blocks 依赖，缺一不可（lint 强校验）
+ *   B. 主题设计令牌    —— 本主题所有组件依赖
+ *   C. 组件私有变量    —— 不放这里，就近写在组件样式里
+ */
+[data-theme='__ID__'] {
+  color-scheme: light;
+
+  /* ── B1. 品牌色 ───────────────────────────────────────────────
+   * --accent 会被站点 manifest 的 brand.primaryColor 在 <html> 上内联覆盖，
+   * 因此它必须是「品牌主色」，辅助色请用 --accent-2。 */
+  --accent: __ACCENT__;
+  --accent-hover: __ACCENT_HOVER__;
+  --accent-ink: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
+  --accent-2: __ACCENT_2__;
+
+  /* ── B2. 中性色与表面 ── */
+  --ink: __INK__;
+  --ink-strong: __INK__;
+  --muted: __MUTED__;
+  --line: #e6ebf1;
+  --bg: #ffffff;
+  --bg-subtle: #f5f8fb;
+  --surface: #ffffff;
+  --bg-dark: __BG_DARK__;
+  --on-dark: #f4f7fb;
+  --on-dark-muted: #9aa8bd;
+  --line-on-dark: rgb(255 255 255 / 0.12);
+
+  /* ── A. 共享 chrome 契约（chrome.css / 公共 blocks 读取）── */
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei',
+    'Noto Sans SC', sans-serif;
+  --font-display: var(--font-sans);
+  --header-bg: rgb(255 255 255 / 0.92);
+  --topbar-bg: var(--bg-dark);
+  --topbar-fg: var(--on-dark-muted);
+  --footer-bg: var(--bg-dark);
+  --footer-fg: var(--on-dark);
+  --footer-muted: var(--on-dark-muted);
+  --hero-bg: var(--bg-subtle);
+  --hero-border: transparent;
+  --radius: __RADIUS__;
+  --wrap-max: 1200px;
+  --shadow-nav: 0 18px 40px -12px rgb(15 23 42 / 0.18);
+
+  /* ── B3. 字号 / 间距 / 圆角 / 阴影 / 动效 ── */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: clamp(1.75rem, 3vw, 2.25rem);
+  --fs-4xl: clamp(2.25rem, 4.4vw, 3.5rem);
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --section-y: clamp(3.5rem, 7vw, 6rem);
+
+  --radius-sm: 8px;
+  --radius-lg: calc(var(--radius) + 8px);
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.05);
+  --shadow-md: 0 10px 30px -10px rgb(15 23 42 / 0.12);
+  --shadow-lg: 0 24px 60px -20px rgb(15 23 42 / 0.22);
+  --shadow-accent: 0 10px 24px -8px color-mix(in srgb, var(--accent) 55%, transparent);
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 220ms;
+  --header-h: 76px;
+}

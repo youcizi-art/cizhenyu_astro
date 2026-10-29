@@ -1,4 +1,22 @@
 {
   "id": "default",
-  "origin": "official"
+  "origin": "official",
+  "fontHref": "",
+  "homeRequirements": {
+    "placements": [
+      "home_hero",
+      "home_pain",
+      "home_architecture",
+      "home_compare",
+      "home_seo_geo",
+      "home_paths",
+      "home_testimonial",
+      "footer_cta"
+    ],
+    "resolveReferencesFor": [],
+    "articles": true,
+    "caseStudies": false,
+    "solutions": false,
+    "faq": true
+  }
 }

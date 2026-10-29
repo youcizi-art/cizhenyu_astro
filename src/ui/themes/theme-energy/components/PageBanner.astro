@@ -1,28 +1,25 @@
 ---
-interface Crumb {
-  label: string;
-  href?: string;
-}
 interface Props {
   title: string;
-  summary?: string;
-  crumbs?: Crumb[];
+  crumbs?: Array<{ label: string; href?: string }>;
+  description?: string;
 }
-const { title, summary = '', crumbs = [] } = Astro.props;
+
+const { title, crumbs = [], description = '' } = Astro.props;
 ---
-<section class="tm-page-banner">
-  <div class="tm-container">
+
+<div class="nrg-banner">
+  <div class="nrg-container">
     {crumbs.length ? (
-      <nav class="tm-breadcrumb" aria-label="Breadcrumb">
-        {crumbs.map((c, i) => (
-          <>
-            {i > 0 ? <span class="tm-breadcrumb-sep">/</span> : null}
+      <ul class="nrg-crumbs" aria-label="Breadcrumb">
+        {crumbs.map((c) => (
+          <li>
             {c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}
-          </>
+          </li>
         ))}
-      </nav>
+      </ul>
     ) : null}
-    <h1 class="tm-display">{title}</h1>
-    {summary ? <p>{summary}</p> : null}
+    <h1>{title}</h1>
+    {description ? <p>{description}</p> : null}
   </div>
-</section>
+</div>

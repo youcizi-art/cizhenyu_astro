@@ -3,9 +3,15 @@ interface Props {
   messages?: string[];
   tone?: 'error' | 'warn';
 }
+
 const { messages = [], tone = 'error' } = Astro.props;
-const cls = tone === 'warn' ? 'tm-alert tm-alert-warn' : 'tm-alert tm-alert-error';
+const list = messages.map((m) => String(m || '').trim()).filter(Boolean);
 ---
-{messages.filter(Boolean).map((msg) => (
-  <div class={cls}>{msg}</div>
-))}
+
+{list.length > 0 ? (
+  <div class={`nrg-alert ${tone === 'error' ? 'nrg-alert--error' : ''}`} role="status">
+    {list.map((m) => (
+      <p>{m}</p>
+    ))}
+  </div>
+) : null}

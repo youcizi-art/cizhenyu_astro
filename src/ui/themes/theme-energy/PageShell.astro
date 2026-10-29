@@ -16,6 +16,7 @@ interface Props {
   showContactCta?: boolean;
   quickLinksLabel?: string;
 }
+
 const {
   siteName,
   links,
@@ -28,6 +29,7 @@ const {
   quickLinksLabel = 'Quick Links',
 } = Astro.props;
 ---
+
 <Header
   siteName={siteName}
   links={links}
@@ -38,7 +40,13 @@ const {
   contactLabel={contactLabel}
   showContactCta={showContactCta}
 />
-<main class="tm-main">
+<main class="nrg-main">
   <slot />
 </main>
-<Footer company={company} links={links} quickLinksLabel={quickLinksLabel} />
+<Footer
+  company={company}
+  links={links}
+  quickLinksLabel={quickLinksLabel}
+  homeHref={homeHref}
+  contactHref={contactHref}
+/>

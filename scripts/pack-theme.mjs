@@ -174,59 +174,8 @@ function writeSingleThemeKernel(themesDir, themeId, allThemeIds) {
   console.log(`  styles.ts 已纳入 ${cssRelPaths.length} 个 CSS:`);
   for (const rel of cssRelPaths) console.log(`    - ${themeId}/${rel}`);
 
-  let homeReqCode = 'undefined';
-  try {
-    const srcThemeUi = fs.readFileSync(path.join(astroRoot, 'src/ui/themes/theme-ui.ts'), 'utf8');
-    const match = srcThemeUi.match(new RegExp(`${themeId}:\\s*\\{[\\s\\S]*?homeRequirements:\\s*(\\{[\\s\\S]*?\\})\\s*\\}`, 'm'));
-    if (match?.[1]) homeReqCode = match[1].replace(/\r?\n\s*/g, ' ');
-  } catch {}
+  // NOTE: theme-ui.ts 直接沿用源码版本：它已改为从 theme.manifest.json 读取元数据，单主题裁剪后 glob 只会命中该主题。
 
-  fs.writeFileSync(
-    path.join(themesDir, 'theme-ui.ts'),
-    `import type { ThemeId } from './load-theme';\n` +
-      `import { resolveTheme } from './load-theme';\n` +
-      `import { localePath } from '@/modules/cms';\n` +
-      `import { t } from '@/modules/i18n';\n` +
-      `import type { PageChrome } from '@/workflows/chrome/load-chrome';\n\n` +
-      `export type ThemeShellKind = 'default' | 'page-shell';\n` +
-      `export type ThemeHomeRequirements = {\n` +
-      `  placements?: string[];\n` +
-      `  resolveReferencesFor?: string[];\n` +
-      `  articles?: boolean;\n` +
-      `  caseStudies?: boolean;\n` +
-      `  solutions?: boolean;\n` +
-      `  faq?: boolean;\n` +
-      `};\n\n` +
-      `export type ThemeMeta = { id: ThemeId; shell: ThemeShellKind; fontHref: string; homeRequirements?: ThemeHomeRequirements };\n\n` +
-      `const DEFAULT_FULL_HOME_REQUIREMENTS: ThemeHomeRequirements = {\n` +
-      `  placements: ['home_hero', 'home_featured', 'footer_cta', 'home_advantage', 'home_testimonial', 'home_factory', 'home_comparison', 'home_step'],\n` +
-      `  resolveReferencesFor: ['home_hero', 'home_featured'],\n` +
-      `  articles: true, caseStudies: true, solutions: true, faq: true,\n` +
-      `};\n\n` +
-      `export const THEME_META: Record<ThemeId, ThemeMeta> = {\n` +
-      `  ['${themeId}']: { id: '${themeId}', shell: 'page-shell', fontHref: '', homeRequirements: ${homeReqCode} },\n` +
-      `};\n\n` +
-      `export function getThemeMeta(theme?: string | null): ThemeMeta {\n` +
-      `  return THEME_META[resolveTheme({ theme }).themeId] || { id: '${themeId}', shell: 'page-shell', fontHref: '', homeRequirements: DEFAULT_FULL_HOME_REQUIREMENTS };\n` +
-      `}\n` +
-      `export function getThemeHomeRequirements(theme?: string | null): ThemeHomeRequirements {\n` +
-      `  return getThemeMeta(theme).homeRequirements || DEFAULT_FULL_HOME_REQUIREMENTS;\n` +
-      `}\n` +
-      `export function hasPageShell(_theme?: string | null): boolean { return true; }\n` +
-      `export function buildPageShellProps(chrome: PageChrome) {\n` +
-      `  const { locale, navLinks, company, localeOptions, siteName } = chrome;\n` +
-      `  return {\n` +
-      `    siteName, links: navLinks, localeOptions, company, locale,\n` +
-      `    homeHref: localePath(locale, '/'),\n` +
-      `    contactHref: localePath(locale, '/contact'),\n` +
-      `    contactLabel: t(locale, 'contact'),\n` +
-      `    quickLinksLabel: locale.startsWith('zh') ? '快速链接' : 'Quick Links',\n` +
-      `  };\n` +
-      `}\n` +
-      `export function shellThemeId(theme?: string | null): ThemeId {\n` +
-      `  return resolveTheme({ theme }).themeId;\n` +
-      `}\n`,
-  );
 
   fs.writeFileSync(
     path.join(themesDir, 'ThemeFrame.astro'),
