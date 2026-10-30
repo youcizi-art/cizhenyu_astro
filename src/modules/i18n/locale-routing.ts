@@ -18,6 +18,9 @@ const PASSTHROUGH_EXACT = new Set([
   '/robots.txt',
   '/favicon.ico',
   '/favicon.svg',
+  '/.well-known/ard.json',
+  '/.well-known/ai-catalog.json',
+  '/llms.txt',
 ]);
 
 async function resolveLocales(): Promise<LocaleCache> {

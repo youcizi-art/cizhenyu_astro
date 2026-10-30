@@ -42,6 +42,20 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (request.method !== 'GET') return next();
   if (url.pathname.startsWith('/api/')) return next();
 
+  // ARD / legacy ai-catalog：未提供清单时必须真 404。
+  // 若落到首页 HTML，Lighthouse 会按「坏 JSON 清单」Fail 扣分；干净 404 → N/A 不计分。
+  if (isAbsentAgentCatalogPath(url.pathname)) {
+    return new Response(null, {
+      status: 404,
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'public, max-age=300',
+        'CDN-Cache-Control': 'public, max-age=300',
+        'X-Agent-Catalog': 'absent',
+      },
+    });
+  }
+
   if (!context.locals.localeRoutingDone) {
     context.locals.localeRoutingDone = true;
     const routed = await applyLocaleRouting(url);
@@ -73,6 +87,14 @@ type MwContext = {
     runtime?: { ctx?: { waitUntil?: (p: Promise<unknown>) => void } };
   };
 };
+
+/** 未发布 ARD 清单时的止损路径（勿返回 HTML） */
+function isAbsentAgentCatalogPath(pathname: string): boolean {
+  return (
+    pathname === '/.well-known/ard.json' ||
+    pathname === '/.well-known/ai-catalog.json'
+  );
+}
 
 function scheduleBackground(context: MwContext, task: Promise<unknown>) {
   const waitUntil = context.locals?.runtime?.ctx?.waitUntil;

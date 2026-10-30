@@ -74,6 +74,8 @@ src/ui/themes/theme-fashion/
 │   ├── ContactPage.astro     # 联系我们
 │   └── ...
 └── seed/                     # 可选：该主题专有的 CMS 初始数据（独立 page.json, product.json 等）
+    ├── seed.manifest.json    # Seed 清单（包含 seedOrder、模块依赖等）
+    └── assets/               # 可选：随主题自包含分发的媒体资源（如产品主图、证书高清图等）
 ```
 
 ### 1. 样式作用域隔离要求
@@ -88,7 +90,15 @@ body { ... }
 header { ... }
 ```
 
-### 2. 单主题独立交付验证
+### 2. Seed 数据与媒体附件规范
+为确保 Seed 数据既能支持本地独立测试，又能作为真实业务数据交付注入：
+1. **本地附件自包含**：允许在 `seed/assets/` 存放产品主图、案例、公司资质等真实图片。JSON 中引用相对路径，如 `"url": "./assets/products/press-hp-200.webp"`。
+2. **部署端自动沉淀**：部署工具（`cizhenyu_deploy`）在执行实体注入前，会自动扫描实体及富文本中的本地相对路径与远程图片 URL：
+   - 自动将图片通过 `POST /api/media/upload` 上传至目标 CMS 的 R2 存储池并在 `media_items` 表建立附件档案；
+   - 采用稳定哈希标识（`seed-{hash16}.{ext}`）进行前缀去重检索，多次注入或多站点部署时自动复用已有附件，不造成存储冗余；
+   - 自动回填转换后的 CMS 媒体正式地址（`/api/media/file/*` 或自定义 CDN 域名），确保管理员在 CMS 后台“媒体中心”中能对主题图片完全可查、可选、可维护。
+
+### 3. 单主题独立交付验证
 任何主题开发完成后，必须执行以下测试与交付打包验证：
 ```bash
 # 1. 跑通单元测试
@@ -97,7 +107,8 @@ npm test
 # 2. 跑通完整工程构建
 npm run build
 
-# 3. 验证单主题裁剪打包链路（生成物理隔离独立 zip 包）
+# 3. 验证单主题裁剪打包链路（生成物理隔离独立 zip 包，自动打包 seed/ 及 seed/assets/）
 npm run pack -- theme-fashion
 ```
 确保在裁剪掉其它所有无关主题后，该主题的 Cloudflare Pages 交付包能够独立成功编译与运行。
+
