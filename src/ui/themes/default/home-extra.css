@@ -55,7 +55,8 @@
   border-radius: 999px;
 }
 [data-theme='default'] .cz-home-seo-tag.is-alt {
-  background: #0ea5e9;
+  /* 加深以保证白字对比度 ≥ WCAG AA */
+  background: #0369a1;
 }
 [data-theme='default'] .cz-home-seo-list {
   list-style: none;

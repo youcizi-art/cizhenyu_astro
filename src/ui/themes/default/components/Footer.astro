@@ -55,7 +55,7 @@ const termsHref = `/${locale}/terms`;
     </div>
     {links.length ? (
       <div class="cz-footer-links">
-        <h4>{quickLinksLabel}</h4>
+        <p class="cz-footer-links-title">{quickLinksLabel}</p>
         <ul>
           {links.slice(0, 10).map((link) => (
             <li><a href={link.href}>{link.label}</a></li>

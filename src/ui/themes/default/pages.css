@@ -30,7 +30,7 @@
   margin: 0.55rem 0 0;
   max-width: 28rem;
 }
-[data-theme='default'] .cz-footer-links h4 {
+[data-theme='default'] .cz-footer-links .cz-footer-links-title {
   margin: 0 0 0.75rem;
   font-size: 0.85rem;
   letter-spacing: 0.04em;
