@@ -41,9 +41,10 @@ const { themeId, primaryColor } = resolveTheme({
 const meta = getThemeMeta(themeId);
 const rootStyle = primaryColor ? `--accent: ${primaryColor}` : undefined;
 const resolvedSiteName = siteName || site.displayName || site.siteKey;
+const htmlDir = lang === 'ar' || String(lang).startsWith('ar') ? 'rtl' : 'ltr';
 ---
 <!doctype html>
-<html lang={lang} data-theme={themeId} data-site={site.siteKey} style={rootStyle}>
+<html lang={lang} dir={htmlDir} data-theme={themeId} data-site={site.siteKey} style={rootStyle}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
