@@ -5,6 +5,9 @@ export function defaultHomeLabels(locale: string) {
   const zhHant = locale === 'zh-TW' || locale === 'zh-HK';
   const zh = locale.startsWith('zh');
   const ja = locale === 'ja';
+  const es = locale === 'es' || locale.startsWith('es');
+  const pt = locale === 'pt' || locale.startsWith('pt');
+  const ar = locale === 'ar' || locale.startsWith('ar');
 
   if (zhHant) {
     return {
@@ -54,6 +57,57 @@ export function defaultHomeLabels(locale: string) {
       testimonialsTitle: 'お客様の声',
       updatesEyebrow: 'ニュース',
       viewDetail: '詳細を見る',
+    };
+  }
+
+  if (es) {
+    return {
+      exploreAll: 'Ver todos los productos',
+      readMore: 'Más información',
+      faqEyebrow: 'Preguntas frecuentes',
+      ctaBtn: 'Contáctenos',
+      productPrefix: 'Sistema de sitios Cloudflare',
+      productPrefixCrm: 'CRM y soporte IA',
+      productPrefixSeo: 'Plan de crecimiento SEO / GEO',
+      compareHighlight: 'Recomendado',
+      testimonialsEyebrow: 'Opiniones de clientes',
+      testimonialsTitle: 'Opiniones de clientes',
+      updatesEyebrow: 'Actualizaciones del sector',
+      viewDetail: 'Ver detalles',
+    };
+  }
+
+  if (pt) {
+    return {
+      exploreAll: 'Ver todos os produtos',
+      readMore: 'Saiba mais',
+      faqEyebrow: 'Perguntas frequentes',
+      ctaBtn: 'Fale conosco',
+      productPrefix: 'Sistema de sites Cloudflare',
+      productPrefixCrm: 'CRM e suporte IA',
+      productPrefixSeo: 'Plano de crescimento SEO / GEO',
+      compareHighlight: 'Recomendado',
+      testimonialsEyebrow: 'Depoimentos',
+      testimonialsTitle: 'Depoimentos',
+      updatesEyebrow: 'Atualizações do setor',
+      viewDetail: 'Ver detalhes',
+    };
+  }
+
+  if (ar) {
+    return {
+      exploreAll: 'عرض كل المنتجات',
+      readMore: 'اعرف المزيد',
+      faqEyebrow: 'الأسئلة الشائعة',
+      ctaBtn: 'تواصل معنا',
+      productPrefix: 'نظام مواقع Cloudflare',
+      productPrefixCrm: 'إدارة العملاء ودعم الذكاء الاصطناعي',
+      productPrefixSeo: 'خطة نمو SEO / GEO',
+      compareHighlight: 'موصى به',
+      testimonialsEyebrow: 'آراء العملاء',
+      testimonialsTitle: 'آراء العملاء',
+      updatesEyebrow: 'تحديثات القطاع',
+      viewDetail: 'عرض التفاصيل',
     };
   }
 

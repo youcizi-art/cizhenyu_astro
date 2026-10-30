@@ -7,6 +7,9 @@ import ZH_CN from './home-content-zh-cn';
 import ZH_TW from './home-content-zh-tw';
 import JA from './home-content-ja';
 import EN from './home-content-en';
+import ES from './home-content-es';
+import PT from './home-content-pt';
+import AR from './home-content-ar';
 
 export type HomeHighlight = { title: string; desc: string };
 export type HomePain = { title: string; desc: string };
@@ -145,6 +148,9 @@ export function defaultHomeContent(locale: string): DefaultHomeContent {
   if (locale === 'zh-TW' || locale === 'zh-HK') return ZH_TW;
   if (locale.startsWith('zh')) return ZH_CN;
   if (locale === 'ja') return JA;
+  if (locale === 'es' || locale.startsWith('es')) return ES;
+  if (locale === 'pt' || locale.startsWith('pt')) return PT;
+  if (locale === 'ar' || locale.startsWith('ar')) return AR;
   return EN;
 }
 

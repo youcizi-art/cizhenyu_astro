@@ -27,6 +27,24 @@
           "slug": "header",
           "menu_type": "header",
           "status": "published"
+        },
+        "es": {
+          "name": "Header",
+          "slug": "header",
+          "menu_type": "header",
+          "status": "published"
+        },
+        "pt": {
+          "name": "Header",
+          "slug": "header",
+          "menu_type": "header",
+          "status": "published"
+        },
+        "ar": {
+          "name": "Header",
+          "slug": "header",
+          "menu_type": "header",
+          "status": "published"
         }
       }
     },
@@ -52,6 +70,24 @@
           "status": "published"
         },
         "en-US": {
+          "name": "Footer",
+          "slug": "footer",
+          "menu_type": "footer",
+          "status": "published"
+        },
+        "es": {
+          "name": "Footer",
+          "slug": "footer",
+          "menu_type": "footer",
+          "status": "published"
+        },
+        "pt": {
+          "name": "Footer",
+          "slug": "footer",
+          "menu_type": "footer",
+          "status": "published"
+        },
+        "ar": {
           "name": "Footer",
           "slug": "footer",
           "menu_type": "footer",

@@ -43,6 +43,36 @@
           "seo_title": "Cizhenyu products",
           "seo_description": "Multi-site generation, AI inquiry, deploy growth.",
           "robots_directive": "index,follow"
+        },
+        "es": {
+          "name": "Cizhenyu products",
+          "slug": "cizhenyu-products",
+          "description": "Multi-site generation, AI inquiry, deploy growth.",
+          "sort_order": 10,
+          "status": "published",
+          "seo_title": "Cizhenyu products",
+          "seo_description": "Multi-site generation, AI inquiry, deploy growth.",
+          "robots_directive": "index,follow"
+        },
+        "pt": {
+          "name": "Cizhenyu products",
+          "slug": "cizhenyu-products",
+          "description": "Multi-site generation, AI inquiry, deploy growth.",
+          "sort_order": 10,
+          "status": "published",
+          "seo_title": "Cizhenyu products",
+          "seo_description": "Multi-site generation, AI inquiry, deploy growth.",
+          "robots_directive": "index,follow"
+        },
+        "ar": {
+          "name": "Cizhenyu products",
+          "slug": "cizhenyu-products",
+          "description": "Multi-site generation, AI inquiry, deploy growth.",
+          "sort_order": 10,
+          "status": "published",
+          "seo_title": "Cizhenyu products",
+          "seo_description": "Multi-site generation, AI inquiry, deploy growth.",
+          "robots_directive": "index,follow"
         }
       }
     }

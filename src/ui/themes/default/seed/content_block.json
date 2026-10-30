@@ -71,6 +71,57 @@
           },
           "status": "published",
           "sort_order": 10
+        },
+        "es": {
+          "name": "Home Hero",
+          "block_type": "hero",
+          "title": "Build the site, manage customers, and help global buyers find you.",
+          "slug": "home-hero",
+          "placement": "home_hero",
+          "eyebrow": "Website · CRM · Search Growth",
+          "subtitle": "Stop wrestling with expensive servers, scattered leads, and long stretches of zero traffic. Build a lightweight, fast, scalable business site on Cloudflare—then pair it with CRM, AI support, and SEO / GEO so the website actually drives growth.",
+          "summary": "Global delivery · Ultra-low ops cost · Long-term SEO / GEO",
+          "link_label": "Choose a website plan",
+          "link_url": "/en-US/contact?intent=sites",
+          "image": {
+            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          },
+          "status": "published",
+          "sort_order": 10
+        },
+        "pt": {
+          "name": "Home Hero",
+          "block_type": "hero",
+          "title": "Build the site, manage customers, and help global buyers find you.",
+          "slug": "home-hero",
+          "placement": "home_hero",
+          "eyebrow": "Website · CRM · Search Growth",
+          "subtitle": "Stop wrestling with expensive servers, scattered leads, and long stretches of zero traffic. Build a lightweight, fast, scalable business site on Cloudflare—then pair it with CRM, AI support, and SEO / GEO so the website actually drives growth.",
+          "summary": "Global delivery · Ultra-low ops cost · Long-term SEO / GEO",
+          "link_label": "Choose a website plan",
+          "link_url": "/en-US/contact?intent=sites",
+          "image": {
+            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          },
+          "status": "published",
+          "sort_order": 10
+        },
+        "ar": {
+          "name": "Home Hero",
+          "block_type": "hero",
+          "title": "Build the site, manage customers, and help global buyers find you.",
+          "slug": "home-hero",
+          "placement": "home_hero",
+          "eyebrow": "Website · CRM · Search Growth",
+          "subtitle": "Stop wrestling with expensive servers, scattered leads, and long stretches of zero traffic. Build a lightweight, fast, scalable business site on Cloudflare—then pair it with CRM, AI support, and SEO / GEO so the website actually drives growth.",
+          "summary": "Global delivery · Ultra-low ops cost · Long-term SEO / GEO",
+          "link_label": "Choose a website plan",
+          "link_url": "/en-US/contact?intent=sites",
+          "image": {
+            "url": "https://placehold.co/960x720/0b1220/38bdf8?text=Hero"
+          },
+          "status": "published",
+          "sort_order": 10
         }
       }
     },
@@ -117,6 +168,45 @@
           "sort_order": 10
         },
         "en-US": {
+          "name": "Footer CTA",
+          "block_type": "cta",
+          "title": "Don’t leave your website stuck in brochure mode.",
+          "slug": "footer-cta",
+          "placement": "footer_cta",
+          "subtitle": "From website building and CRM to search growth, choose products that fit your business—and turn online spend into manageable, lasting operating assets.",
+          "summary": "Website, CRM, and SEO / GEO can be chosen alone or combined.",
+          "link_label": "Talk about the right plan for me",
+          "link_url": "/en-US/contact?intent=consult",
+          "status": "published",
+          "sort_order": 10
+        },
+        "es": {
+          "name": "Footer CTA",
+          "block_type": "cta",
+          "title": "Don’t leave your website stuck in brochure mode.",
+          "slug": "footer-cta",
+          "placement": "footer_cta",
+          "subtitle": "From website building and CRM to search growth, choose products that fit your business—and turn online spend into manageable, lasting operating assets.",
+          "summary": "Website, CRM, and SEO / GEO can be chosen alone or combined.",
+          "link_label": "Talk about the right plan for me",
+          "link_url": "/en-US/contact?intent=consult",
+          "status": "published",
+          "sort_order": 10
+        },
+        "pt": {
+          "name": "Footer CTA",
+          "block_type": "cta",
+          "title": "Don’t leave your website stuck in brochure mode.",
+          "slug": "footer-cta",
+          "placement": "footer_cta",
+          "subtitle": "From website building and CRM to search growth, choose products that fit your business—and turn online spend into manageable, lasting operating assets.",
+          "summary": "Website, CRM, and SEO / GEO can be chosen alone or combined.",
+          "link_label": "Talk about the right plan for me",
+          "link_url": "/en-US/contact?intent=consult",
+          "status": "published",
+          "sort_order": 10
+        },
+        "ar": {
           "name": "Footer CTA",
           "block_type": "cta",
           "title": "Don’t leave your website stuck in brochure mode.",
@@ -177,6 +267,39 @@
           "placement": "home_testimonial",
           "status": "published",
           "sort_order": 10
+        },
+        "es": {
+          "name": "Testimonial - Machinery Export",
+          "block_type": "testimonial",
+          "title": "Mr. Li",
+          "subtitle": "Head of Export, Precision Machinery",
+          "summary": "We used to spend tens of thousands on external agencies, waiting a week just to swap a product photo. With Cizhenyu, everything is lightweight and fast. The embedded chat helped us capture direct inquiries from Middle Eastern buyers.",
+          "slug": "testimonial-1",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 10
+        },
+        "pt": {
+          "name": "Testimonial - Machinery Export",
+          "block_type": "testimonial",
+          "title": "Mr. Li",
+          "subtitle": "Head of Export, Precision Machinery",
+          "summary": "We used to spend tens of thousands on external agencies, waiting a week just to swap a product photo. With Cizhenyu, everything is lightweight and fast. The embedded chat helped us capture direct inquiries from Middle Eastern buyers.",
+          "slug": "testimonial-1",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 10
+        },
+        "ar": {
+          "name": "Testimonial - Machinery Export",
+          "block_type": "testimonial",
+          "title": "Mr. Li",
+          "subtitle": "Head of Export, Precision Machinery",
+          "summary": "We used to spend tens of thousands on external agencies, waiting a week just to swap a product photo. With Cizhenyu, everything is lightweight and fast. The embedded chat helped us capture direct inquiries from Middle Eastern buyers.",
+          "slug": "testimonial-1",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 10
         }
       }
     },
@@ -217,6 +340,39 @@
           "sort_order": 20
         },
         "en-US": {
+          "name": "Testimonial - Cross-border Brand",
+          "block_type": "testimonial",
+          "title": "Sarah Chen",
+          "subtitle": "Founder, Consumer Electronics DTC",
+          "summary": "The Cloudflare stack delivers near-instant global page loads without server crashes or hefty maintenance bills. The AI-assisted SEO workflow continuously drives organic search impressions.",
+          "slug": "testimonial-2",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 20
+        },
+        "es": {
+          "name": "Testimonial - Cross-border Brand",
+          "block_type": "testimonial",
+          "title": "Sarah Chen",
+          "subtitle": "Founder, Consumer Electronics DTC",
+          "summary": "The Cloudflare stack delivers near-instant global page loads without server crashes or hefty maintenance bills. The AI-assisted SEO workflow continuously drives organic search impressions.",
+          "slug": "testimonial-2",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 20
+        },
+        "pt": {
+          "name": "Testimonial - Cross-border Brand",
+          "block_type": "testimonial",
+          "title": "Sarah Chen",
+          "subtitle": "Founder, Consumer Electronics DTC",
+          "summary": "The Cloudflare stack delivers near-instant global page loads without server crashes or hefty maintenance bills. The AI-assisted SEO workflow continuously drives organic search impressions.",
+          "slug": "testimonial-2",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 20
+        },
+        "ar": {
           "name": "Testimonial - Cross-border Brand",
           "block_type": "testimonial",
           "title": "Sarah Chen",
@@ -275,6 +431,39 @@
           "placement": "home_testimonial",
           "status": "published",
           "sort_order": 30
+        },
+        "es": {
+          "name": "Testimonial - Agency Partner",
+          "block_type": "testimonial",
+          "title": "Manager Wang",
+          "subtitle": "Partner, Digital Export Agency",
+          "summary": "The model-driven low-code architecture is remarkably flexible. We can roll out custom business pages and forms effortlessly. It turns rigid brochure sites into real customer acquisition engines.",
+          "slug": "testimonial-3",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 30
+        },
+        "pt": {
+          "name": "Testimonial - Agency Partner",
+          "block_type": "testimonial",
+          "title": "Manager Wang",
+          "subtitle": "Partner, Digital Export Agency",
+          "summary": "The model-driven low-code architecture is remarkably flexible. We can roll out custom business pages and forms effortlessly. It turns rigid brochure sites into real customer acquisition engines.",
+          "slug": "testimonial-3",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 30
+        },
+        "ar": {
+          "name": "Testimonial - Agency Partner",
+          "block_type": "testimonial",
+          "title": "Manager Wang",
+          "subtitle": "Partner, Digital Export Agency",
+          "summary": "The model-driven low-code architecture is remarkably flexible. We can roll out custom business pages and forms effortlessly. It turns rigid brochure sites into real customer acquisition engines.",
+          "slug": "testimonial-3",
+          "placement": "home_testimonial",
+          "status": "published",
+          "sort_order": 30
         }
       }
     },
@@ -315,6 +504,39 @@
           "sort_order": 30
         },
         "en-US": {
+          "name": "Pain 01 - Stagnant Site",
+          "block_type": "feature",
+          "title": "Brochure Site Trap: Slow Edits & Zero Traffic",
+          "slug": "adv-1",
+          "placement": "home_advantage",
+          "summary": "Agency queues take weeks for every catalog change; lack of GEO/SEO structure yields zero organic leads.",
+          "subtitle": "Unified multi-site CMS hub with automated multilingual routing and instant static deployments.",
+          "status": "published",
+          "sort_order": 30
+        },
+        "es": {
+          "name": "Pain 01 - Stagnant Site",
+          "block_type": "feature",
+          "title": "Brochure Site Trap: Slow Edits & Zero Traffic",
+          "slug": "adv-1",
+          "placement": "home_advantage",
+          "summary": "Agency queues take weeks for every catalog change; lack of GEO/SEO structure yields zero organic leads.",
+          "subtitle": "Unified multi-site CMS hub with automated multilingual routing and instant static deployments.",
+          "status": "published",
+          "sort_order": 30
+        },
+        "pt": {
+          "name": "Pain 01 - Stagnant Site",
+          "block_type": "feature",
+          "title": "Brochure Site Trap: Slow Edits & Zero Traffic",
+          "slug": "adv-1",
+          "placement": "home_advantage",
+          "summary": "Agency queues take weeks for every catalog change; lack of GEO/SEO structure yields zero organic leads.",
+          "subtitle": "Unified multi-site CMS hub with automated multilingual routing and instant static deployments.",
+          "status": "published",
+          "sort_order": 30
+        },
+        "ar": {
           "name": "Pain 01 - Stagnant Site",
           "block_type": "feature",
           "title": "Brochure Site Trap: Slow Edits & Zero Traffic",
@@ -373,6 +595,39 @@
           "subtitle": "24/7 knowledge-base AI desk responds instantly and escalates qualified leads to live staff.",
           "status": "published",
           "sort_order": 40
+        },
+        "es": {
+          "name": "Pain 02 - Timezone Loss",
+          "block_type": "feature",
+          "title": "Time-zone Gaps: High-Intent Night Leads Lost",
+          "slug": "adv-2",
+          "placement": "home_advantage",
+          "summary": "Overseas buyers reach out during off-hours with no real-time response; leads go cold or bounce to rivals.",
+          "subtitle": "24/7 knowledge-base AI desk responds instantly and escalates qualified leads to live staff.",
+          "status": "published",
+          "sort_order": 40
+        },
+        "pt": {
+          "name": "Pain 02 - Timezone Loss",
+          "block_type": "feature",
+          "title": "Time-zone Gaps: High-Intent Night Leads Lost",
+          "slug": "adv-2",
+          "placement": "home_advantage",
+          "summary": "Overseas buyers reach out during off-hours with no real-time response; leads go cold or bounce to rivals.",
+          "subtitle": "24/7 knowledge-base AI desk responds instantly and escalates qualified leads to live staff.",
+          "status": "published",
+          "sort_order": 40
+        },
+        "ar": {
+          "name": "Pain 02 - Timezone Loss",
+          "block_type": "feature",
+          "title": "Time-zone Gaps: High-Intent Night Leads Lost",
+          "slug": "adv-2",
+          "placement": "home_advantage",
+          "summary": "Overseas buyers reach out during off-hours with no real-time response; leads go cold or bounce to rivals.",
+          "subtitle": "24/7 knowledge-base AI desk responds instantly and escalates qualified leads to live staff.",
+          "status": "published",
+          "sort_order": 40
         }
       }
     },
@@ -413,6 +668,39 @@
           "sort_order": 50
         },
         "en-US": {
+          "name": "Pain 03 - Vendor Lock-in",
+          "block_type": "feature",
+          "title": "Go-Live Stall & Host Captivity",
+          "slug": "adv-3",
+          "placement": "home_advantage",
+          "summary": "High dev friction leaves sites abandoned; hosted on third-party servers with recurring annual lock-ins.",
+          "subtitle": "Deploy straight to your own Cloudflare account with 100% code, data, and lead ownership.",
+          "status": "published",
+          "sort_order": 50
+        },
+        "es": {
+          "name": "Pain 03 - Vendor Lock-in",
+          "block_type": "feature",
+          "title": "Go-Live Stall & Host Captivity",
+          "slug": "adv-3",
+          "placement": "home_advantage",
+          "summary": "High dev friction leaves sites abandoned; hosted on third-party servers with recurring annual lock-ins.",
+          "subtitle": "Deploy straight to your own Cloudflare account with 100% code, data, and lead ownership.",
+          "status": "published",
+          "sort_order": 50
+        },
+        "pt": {
+          "name": "Pain 03 - Vendor Lock-in",
+          "block_type": "feature",
+          "title": "Go-Live Stall & Host Captivity",
+          "slug": "adv-3",
+          "placement": "home_advantage",
+          "summary": "High dev friction leaves sites abandoned; hosted on third-party servers with recurring annual lock-ins.",
+          "subtitle": "Deploy straight to your own Cloudflare account with 100% code, data, and lead ownership.",
+          "status": "published",
+          "sort_order": 50
+        },
+        "ar": {
           "name": "Pain 03 - Vendor Lock-in",
           "block_type": "feature",
           "title": "Go-Live Stall & Host Captivity",
@@ -465,6 +753,42 @@
           "sort_order": 60
         },
         "en-US": {
+          "name": "Marcus Chen · VP of Marketing",
+          "block_type": "testimonial",
+          "title": "Marcus Chen · VP of Marketing",
+          "eyebrow": "Industrial Machinery Manufacturer",
+          "slug": "rev-1",
+          "placement": "home_testimonial",
+          "summary": "Our previous website had almost zero inquiries. With Cizhenyu AI Sales Desk, we automatically engaged 20+ European buyers off-hours and captured their WhatsApp info. Conversion jumped remarkably!",
+          "link_label": "$12M+ Annual Export",
+          "status": "published",
+          "sort_order": 60
+        },
+        "es": {
+          "name": "Marcus Chen · VP of Marketing",
+          "block_type": "testimonial",
+          "title": "Marcus Chen · VP of Marketing",
+          "eyebrow": "Industrial Machinery Manufacturer",
+          "slug": "rev-1",
+          "placement": "home_testimonial",
+          "summary": "Our previous website had almost zero inquiries. With Cizhenyu AI Sales Desk, we automatically engaged 20+ European buyers off-hours and captured their WhatsApp info. Conversion jumped remarkably!",
+          "link_label": "$12M+ Annual Export",
+          "status": "published",
+          "sort_order": 60
+        },
+        "pt": {
+          "name": "Marcus Chen · VP of Marketing",
+          "block_type": "testimonial",
+          "title": "Marcus Chen · VP of Marketing",
+          "eyebrow": "Industrial Machinery Manufacturer",
+          "slug": "rev-1",
+          "placement": "home_testimonial",
+          "summary": "Our previous website had almost zero inquiries. With Cizhenyu AI Sales Desk, we automatically engaged 20+ European buyers off-hours and captured their WhatsApp info. Conversion jumped remarkably!",
+          "link_label": "$12M+ Annual Export",
+          "status": "published",
+          "sort_order": 60
+        },
+        "ar": {
           "name": "Marcus Chen · VP of Marketing",
           "block_type": "testimonial",
           "title": "Marcus Chen · VP of Marketing",
@@ -528,6 +852,42 @@
           "link_label": "Present in 12 Global Markets",
           "status": "published",
           "sort_order": 70
+        },
+        "es": {
+          "name": "David W. · Founder",
+          "block_type": "testimonial",
+          "title": "David W. · Founder",
+          "eyebrow": "Hardware DTC & B2B Brand",
+          "slug": "rev-2",
+          "placement": "home_testimonial",
+          "summary": "The multi-site generator helped us launch 5 multilingual regional portals in days. Edge caching on Cloudflare loads in milliseconds, delivering incredible user experience and top AI search visibility.",
+          "link_label": "Present in 12 Global Markets",
+          "status": "published",
+          "sort_order": 70
+        },
+        "pt": {
+          "name": "David W. · Founder",
+          "block_type": "testimonial",
+          "title": "David W. · Founder",
+          "eyebrow": "Hardware DTC & B2B Brand",
+          "slug": "rev-2",
+          "placement": "home_testimonial",
+          "summary": "The multi-site generator helped us launch 5 multilingual regional portals in days. Edge caching on Cloudflare loads in milliseconds, delivering incredible user experience and top AI search visibility.",
+          "link_label": "Present in 12 Global Markets",
+          "status": "published",
+          "sort_order": 70
+        },
+        "ar": {
+          "name": "David W. · Founder",
+          "block_type": "testimonial",
+          "title": "David W. · Founder",
+          "eyebrow": "Hardware DTC & B2B Brand",
+          "slug": "rev-2",
+          "placement": "home_testimonial",
+          "summary": "The multi-site generator helped us launch 5 multilingual regional portals in days. Edge caching on Cloudflare loads in milliseconds, delivering incredible user experience and top AI search visibility.",
+          "link_label": "Present in 12 Global Markets",
+          "status": "published",
+          "sort_order": 70
         }
       }
     },
@@ -571,6 +931,42 @@
           "sort_order": 80
         },
         "en-US": {
+          "name": "Grace Lin · Operations Director",
+          "block_type": "testimonial",
+          "title": "Grace Lin · Operations Director",
+          "eyebrow": "Export Agency & Marketing Partner",
+          "slug": "rev-3",
+          "placement": "home_testimonial",
+          "summary": "Packaging delivery with Cizhenyu drastically reduced client turnaround time. Collaborative install to the client’s own cloud ensures data sovereignty and zero ongoing maintenance headaches.",
+          "link_label": "40+ Portals Delivered",
+          "status": "published",
+          "sort_order": 80
+        },
+        "es": {
+          "name": "Grace Lin · Operations Director",
+          "block_type": "testimonial",
+          "title": "Grace Lin · Operations Director",
+          "eyebrow": "Export Agency & Marketing Partner",
+          "slug": "rev-3",
+          "placement": "home_testimonial",
+          "summary": "Packaging delivery with Cizhenyu drastically reduced client turnaround time. Collaborative install to the client’s own cloud ensures data sovereignty and zero ongoing maintenance headaches.",
+          "link_label": "40+ Portals Delivered",
+          "status": "published",
+          "sort_order": 80
+        },
+        "pt": {
+          "name": "Grace Lin · Operations Director",
+          "block_type": "testimonial",
+          "title": "Grace Lin · Operations Director",
+          "eyebrow": "Export Agency & Marketing Partner",
+          "slug": "rev-3",
+          "placement": "home_testimonial",
+          "summary": "Packaging delivery with Cizhenyu drastically reduced client turnaround time. Collaborative install to the client’s own cloud ensures data sovereignty and zero ongoing maintenance headaches.",
+          "link_label": "40+ Portals Delivered",
+          "status": "published",
+          "sort_order": 80
+        },
+        "ar": {
           "name": "Grace Lin · Operations Director",
           "block_type": "testimonial",
           "title": "Grace Lin · Operations Director",
@@ -630,6 +1026,39 @@
           "subtitle": "Single multi-site CMS hub; instant static updates published in seconds",
           "status": "published",
           "sort_order": 90
+        },
+        "es": {
+          "name": "Build Speed & Content Updates",
+          "block_type": "feature",
+          "title": "Build Speed & Content Updates",
+          "slug": "cmp-1",
+          "placement": "home_comparison",
+          "summary": "Queued agency tickets taking weeks; costly revisions and messy translations",
+          "subtitle": "Single multi-site CMS hub; instant static updates published in seconds",
+          "status": "published",
+          "sort_order": 90
+        },
+        "pt": {
+          "name": "Build Speed & Content Updates",
+          "block_type": "feature",
+          "title": "Build Speed & Content Updates",
+          "slug": "cmp-1",
+          "placement": "home_comparison",
+          "summary": "Queued agency tickets taking weeks; costly revisions and messy translations",
+          "subtitle": "Single multi-site CMS hub; instant static updates published in seconds",
+          "status": "published",
+          "sort_order": 90
+        },
+        "ar": {
+          "name": "Build Speed & Content Updates",
+          "block_type": "feature",
+          "title": "Build Speed & Content Updates",
+          "slug": "cmp-1",
+          "placement": "home_comparison",
+          "summary": "Queued agency tickets taking weeks; costly revisions and messy translations",
+          "subtitle": "Single multi-site CMS hub; instant static updates published in seconds",
+          "status": "published",
+          "sort_order": 90
         }
       }
     },
@@ -670,6 +1099,39 @@
           "sort_order": 100
         },
         "en-US": {
+          "name": "Inquiry Capture & Conversion",
+          "block_type": "feature",
+          "title": "Inquiry Capture & Conversion",
+          "slug": "cmp-2",
+          "placement": "home_comparison",
+          "summary": "Static contact forms with email delay; off-hours time zones lose hot leads",
+          "subtitle": "24/7 AI desk with knowledge base answers; instant escalation for qualified leads",
+          "status": "published",
+          "sort_order": 100
+        },
+        "es": {
+          "name": "Inquiry Capture & Conversion",
+          "block_type": "feature",
+          "title": "Inquiry Capture & Conversion",
+          "slug": "cmp-2",
+          "placement": "home_comparison",
+          "summary": "Static contact forms with email delay; off-hours time zones lose hot leads",
+          "subtitle": "24/7 AI desk with knowledge base answers; instant escalation for qualified leads",
+          "status": "published",
+          "sort_order": 100
+        },
+        "pt": {
+          "name": "Inquiry Capture & Conversion",
+          "block_type": "feature",
+          "title": "Inquiry Capture & Conversion",
+          "slug": "cmp-2",
+          "placement": "home_comparison",
+          "summary": "Static contact forms with email delay; off-hours time zones lose hot leads",
+          "subtitle": "24/7 AI desk with knowledge base answers; instant escalation for qualified leads",
+          "status": "published",
+          "sort_order": 100
+        },
+        "ar": {
           "name": "Inquiry Capture & Conversion",
           "block_type": "feature",
           "title": "Inquiry Capture & Conversion",
@@ -728,6 +1190,39 @@
           "subtitle": "Deployed straight to your own Cloudflare account; full code & data ownership",
           "status": "published",
           "sort_order": 110
+        },
+        "es": {
+          "name": "Ownership & Infrastructure",
+          "block_type": "feature",
+          "title": "Ownership & Infrastructure",
+          "slug": "cmp-3",
+          "placement": "home_comparison",
+          "summary": "Locked inside third-party servers with recurring annual host fees",
+          "subtitle": "Deployed straight to your own Cloudflare account; full code & data ownership",
+          "status": "published",
+          "sort_order": 110
+        },
+        "pt": {
+          "name": "Ownership & Infrastructure",
+          "block_type": "feature",
+          "title": "Ownership & Infrastructure",
+          "slug": "cmp-3",
+          "placement": "home_comparison",
+          "summary": "Locked inside third-party servers with recurring annual host fees",
+          "subtitle": "Deployed straight to your own Cloudflare account; full code & data ownership",
+          "status": "published",
+          "sort_order": 110
+        },
+        "ar": {
+          "name": "Ownership & Infrastructure",
+          "block_type": "feature",
+          "title": "Ownership & Infrastructure",
+          "slug": "cmp-3",
+          "placement": "home_comparison",
+          "summary": "Locked inside third-party servers with recurring annual host fees",
+          "subtitle": "Deployed straight to your own Cloudflare account; full code & data ownership",
+          "status": "published",
+          "sort_order": 110
         }
       }
     },
@@ -768,6 +1263,39 @@
           "sort_order": 120
         },
         "en-US": {
+          "name": "GEO / SEO Compounding",
+          "block_type": "feature",
+          "title": "GEO / SEO Compounding",
+          "slug": "cmp-4",
+          "placement": "home_comparison",
+          "summary": "Site abandoned post-launch; zero structured data for modern AI engines",
+          "subtitle": "Built-in GEO schema markup, multilingual routing, and ongoing growth ops",
+          "status": "published",
+          "sort_order": 120
+        },
+        "es": {
+          "name": "GEO / SEO Compounding",
+          "block_type": "feature",
+          "title": "GEO / SEO Compounding",
+          "slug": "cmp-4",
+          "placement": "home_comparison",
+          "summary": "Site abandoned post-launch; zero structured data for modern AI engines",
+          "subtitle": "Built-in GEO schema markup, multilingual routing, and ongoing growth ops",
+          "status": "published",
+          "sort_order": 120
+        },
+        "pt": {
+          "name": "GEO / SEO Compounding",
+          "block_type": "feature",
+          "title": "GEO / SEO Compounding",
+          "slug": "cmp-4",
+          "placement": "home_comparison",
+          "summary": "Site abandoned post-launch; zero structured data for modern AI engines",
+          "subtitle": "Built-in GEO schema markup, multilingual routing, and ongoing growth ops",
+          "status": "published",
+          "sort_order": 120
+        },
+        "ar": {
           "name": "GEO / SEO Compounding",
           "block_type": "feature",
           "title": "GEO / SEO Compounding",
@@ -826,6 +1354,39 @@
           "summary": "Share target countries, product categories, and current lead leakage points.",
           "status": "published",
           "sort_order": 130
+        },
+        "es": {
+          "name": "Step 01",
+          "block_type": "feature",
+          "eyebrow": "01",
+          "title": "Diagnose Market & Bottlenecks",
+          "slug": "step-1",
+          "placement": "home_step",
+          "summary": "Share target countries, product categories, and current lead leakage points.",
+          "status": "published",
+          "sort_order": 130
+        },
+        "pt": {
+          "name": "Step 01",
+          "block_type": "feature",
+          "eyebrow": "01",
+          "title": "Diagnose Market & Bottlenecks",
+          "slug": "step-1",
+          "placement": "home_step",
+          "summary": "Share target countries, product categories, and current lead leakage points.",
+          "status": "published",
+          "sort_order": 130
+        },
+        "ar": {
+          "name": "Step 01",
+          "block_type": "feature",
+          "eyebrow": "01",
+          "title": "Diagnose Market & Bottlenecks",
+          "slug": "step-1",
+          "placement": "home_step",
+          "summary": "Share target countries, product categories, and current lead leakage points.",
+          "status": "published",
+          "sort_order": 130
         }
       }
     },
@@ -875,6 +1436,39 @@
           "summary": "Pick what fits: Multi-site Generator, AI Inquiry Desk, and Deploy Ops.",
           "status": "published",
           "sort_order": 140
+        },
+        "es": {
+          "name": "Step 02",
+          "block_type": "feature",
+          "eyebrow": "02",
+          "title": "Select Product Modules",
+          "slug": "step-2",
+          "placement": "home_step",
+          "summary": "Pick what fits: Multi-site Generator, AI Inquiry Desk, and Deploy Ops.",
+          "status": "published",
+          "sort_order": 140
+        },
+        "pt": {
+          "name": "Step 02",
+          "block_type": "feature",
+          "eyebrow": "02",
+          "title": "Select Product Modules",
+          "slug": "step-2",
+          "placement": "home_step",
+          "summary": "Pick what fits: Multi-site Generator, AI Inquiry Desk, and Deploy Ops.",
+          "status": "published",
+          "sort_order": 140
+        },
+        "ar": {
+          "name": "Step 02",
+          "block_type": "feature",
+          "eyebrow": "02",
+          "title": "Select Product Modules",
+          "slug": "step-2",
+          "placement": "home_step",
+          "summary": "Pick what fits: Multi-site Generator, AI Inquiry Desk, and Deploy Ops.",
+          "status": "published",
+          "sort_order": 140
         }
       }
     },
@@ -915,6 +1509,39 @@
           "sort_order": 150
         },
         "en-US": {
+          "name": "Step 03",
+          "block_type": "feature",
+          "eyebrow": "03",
+          "title": "Download & Collaborative Install",
+          "slug": "step-3",
+          "placement": "home_step",
+          "summary": "Deploy to your cloud account with guided wizard and support onboarding.",
+          "status": "published",
+          "sort_order": 150
+        },
+        "es": {
+          "name": "Step 03",
+          "block_type": "feature",
+          "eyebrow": "03",
+          "title": "Download & Collaborative Install",
+          "slug": "step-3",
+          "placement": "home_step",
+          "summary": "Deploy to your cloud account with guided wizard and support onboarding.",
+          "status": "published",
+          "sort_order": 150
+        },
+        "pt": {
+          "name": "Step 03",
+          "block_type": "feature",
+          "eyebrow": "03",
+          "title": "Download & Collaborative Install",
+          "slug": "step-3",
+          "placement": "home_step",
+          "summary": "Deploy to your cloud account with guided wizard and support onboarding.",
+          "status": "published",
+          "sort_order": 150
+        },
+        "ar": {
           "name": "Step 03",
           "block_type": "feature",
           "eyebrow": "03",

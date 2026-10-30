@@ -9,7 +9,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const LOCALES = ['zh-CN', 'zh-TW', 'ja', 'en-US'];
+const LOCALES = ['zh-CN', 'zh-TW', 'ja', 'en-US', 'es', 'pt', 'ar'];
+const FALLBACK_LOCALE = 'en-US';
 
 const img = (seed, w = 800, h = 600) =>
   `https://placehold.co/${w}x${h}/0b1220/38bdf8?text=${encodeURIComponent(seed)}`;
@@ -18,11 +19,18 @@ function lgk(kind, n) {
   return `def00000-${kind}-4000-8000-${String(n).padStart(12, '0')}`;
 }
 
+/** 缺省语种回退到 en-US，便于增量加入 es/pt/ar 而不必立刻重写全部文案 */
 function L(map) {
   const out = {};
+  const fallback = map[FALLBACK_LOCALE];
   for (const loc of LOCALES) {
-    if (!map[loc]) throw new Error(`missing locale ${loc}`);
-    out[loc] = map[loc];
+    if (map[loc]) {
+      out[loc] = map[loc];
+    } else if (fallback) {
+      out[loc] = structuredClone(fallback);
+    } else {
+      throw new Error(`missing locale ${loc}`);
+    }
   }
   return out;
 }
@@ -77,7 +85,15 @@ function writeJson(name, data) {
   console.log('wrote', name);
 }
 
-const PREFIX = { 'zh-CN': '/zh-CN', 'zh-TW': '/zh-TW', ja: '/ja', 'en-US': '/en-US' };
+const PREFIX = {
+  'zh-CN': '/zh-CN',
+  'zh-TW': '/zh-TW',
+  ja: '/ja',
+  'en-US': '/en-US',
+  es: '/es',
+  pt: '/pt',
+  ar: '/ar',
+};
 
 // —— company（logo 留空，前端闪电图标兜底，可在 CMS 替换）——
 writeJson('company_info.json', {
@@ -831,34 +847,46 @@ function navItem(n, slug, titles, pathSuffix, sort, mode = 'link', refType) {
       'zh-TW': mk('zh-TW', titles.tw),
       ja: mk('ja', titles.ja),
       'en-US': mk('en-US', titles.en),
+      es: mk('es', titles.es || titles.en),
+      pt: mk('pt', titles.pt || titles.en),
+      ar: mk('ar', titles.ar || titles.en),
     }),
   };
 }
 
+function pickNavTitle(item, loc) {
+  if (loc === 'zh-CN') return item.zh;
+  if (loc === 'zh-TW') return item.tw;
+  if (loc === 'ja') return item.ja;
+  if (loc === 'es') return item.es || item.en;
+  if (loc === 'pt') return item.pt || item.en;
+  if (loc === 'ar') return item.ar || item.en;
+  return item.en;
+}
+
 const headerNav = [
-  navItem(1, 'home', { zh: '首页', tw: '首頁', ja: 'ホーム', en: 'Home' }, '', 10),
-  navItem(2, 'products', { zh: '产品', tw: '產品', ja: '製品', en: 'Products' }, '/products', 20, 'reference', 'b2b_product'),
-  navItem(3, 'help', { zh: '帮助', tw: '幫助', ja: 'ヘルプ', en: 'Help' }, '/faq', 30),
-  navItem(4, 'download', { zh: '下载', tw: '下載', ja: 'ダウンロード', en: 'Download' }, '/resources', 40),
-  navItem(5, 'news', { zh: '动态', tw: '動態', ja: 'ニュース', en: 'News' }, '/articles', 50),
-  navItem(6, 'about', { zh: '关于', tw: '關於', ja: '会社概要', en: 'About' }, '/about', 60),
-  navItem(7, 'contact', { zh: '联系', tw: '聯繫', ja: 'お問い合わせ', en: 'Contact' }, '/contact', 70),
+  navItem(1, 'home', { zh: '首页', tw: '首頁', ja: 'ホーム', en: 'Home', es: 'Inicio', pt: 'Início', ar: 'الرئيسية' }, '', 10),
+  navItem(2, 'products', { zh: '产品', tw: '產品', ja: '製品', en: 'Products', es: 'Productos', pt: 'Produtos', ar: 'المنتجات' }, '/products', 20, 'reference', 'b2b_product'),
+  navItem(3, 'help', { zh: '帮助', tw: '幫助', ja: 'ヘルプ', en: 'Help', es: 'Ayuda', pt: 'Ajuda', ar: 'المساعدة' }, '/faq', 30),
+  navItem(4, 'download', { zh: '下载', tw: '下載', ja: 'ダウンロード', en: 'Download', es: 'Descargas', pt: 'Downloads', ar: 'التنزيلات' }, '/resources', 40),
+  navItem(5, 'news', { zh: '动态', tw: '動態', ja: 'ニュース', en: 'News', es: 'Noticias', pt: 'Notícias', ar: 'الأخبار' }, '/articles', 50),
+  navItem(6, 'about', { zh: '关于', tw: '關於', ja: '会社概要', en: 'About', es: 'Nosotros', pt: 'Sobre', ar: 'من نحن' }, '/about', 60),
+  navItem(7, 'contact', { zh: '联系', tw: '聯繫', ja: 'お問い合わせ', en: 'Contact', es: 'Contacto', pt: 'Contato', ar: 'اتصل بنا' }, '/contact', 70),
 ];
 
 const footerNav = [
-  { n: 11, slug: 'f-products', zh: '产品', tw: '產品', ja: '製品', en: 'Products', path: '/products' },
-  { n: 12, slug: 'f-download', zh: '下载', tw: '下載', ja: 'ダウンロード', en: 'Download', path: '/resources' },
-  { n: 13, slug: 'f-help', zh: '帮助', tw: '幫助', ja: 'ヘルプ', en: 'Help', path: '/faq' },
-  { n: 14, slug: 'f-contact', zh: '联系', tw: '聯繫', ja: 'お問い合わせ', en: 'Contact', path: '/contact' },
-  { n: 15, slug: 'f-privacy', zh: '隐私权政策', tw: '隱私權政策', ja: 'プライバシーポリシー', en: 'Privacy Policy', path: '/privacy' },
-  { n: 16, slug: 'f-terms', zh: '服务条款', tw: '服務條款', ja: '利用規約', en: 'Terms of Service', path: '/terms' },
+  { n: 11, slug: 'f-products', zh: '产品', tw: '產品', ja: '製品', en: 'Products', es: 'Productos', pt: 'Produtos', ar: 'المنتجات', path: '/products' },
+  { n: 12, slug: 'f-download', zh: '下载', tw: '下載', ja: 'ダウンロード', en: 'Download', es: 'Descargas', pt: 'Downloads', ar: 'التنزيلات', path: '/resources' },
+  { n: 13, slug: 'f-help', zh: '帮助', tw: '幫助', ja: 'ヘルプ', en: 'Help', es: 'Ayuda', pt: 'Ajuda', ar: 'المساعدة', path: '/faq' },
+  { n: 14, slug: 'f-contact', zh: '联系', tw: '聯繫', ja: 'お問い合わせ', en: 'Contact', es: 'Contacto', pt: 'Contato', ar: 'اتصل بنا', path: '/contact' },
+  { n: 15, slug: 'f-privacy', zh: '隐私权政策', tw: '隱私權政策', ja: 'プライバシーポリシー', en: 'Privacy Policy', es: 'Política de privacidad', pt: 'Política de privacidade', ar: 'سياسة الخصوصية', path: '/privacy' },
+  { n: 16, slug: 'f-terms', zh: '服务条款', tw: '服務條款', ja: '利用規約', en: 'Terms of Service', es: 'Términos de servicio', pt: 'Termos de serviço', ar: 'شروط الخدمة', path: '/terms' },
 ].map((item, idx) => ({
   languageGroupKey: lgk('nmif', item.n),
   locales: L(
     Object.fromEntries(
       LOCALES.map((loc) => {
-        const title =
-          loc === 'zh-CN' ? item.zh : loc === 'zh-TW' ? item.tw : loc === 'ja' ? item.ja : item.en;
+        const title = pickNavTitle(item, loc);
         return [
           loc,
           {
@@ -890,7 +918,7 @@ writeJson('page.json', {
           slug: 'about',
           summary: '把外贸站群、询盘与部署获客，做成可安装的产品',
           content:
-            '<p>磁帧鱼服务外贸业务员、工厂外贸部与服务商。我们交付三款可下载安装的产品：</p><ol><li>全能站群管理系统 + B2B 前端站点生成系统</li><li>智能客服智能询盘系统</li><li>部署运营获客系统</li></ol><p>默认 Logo 为闪电占位，可在 CMS 公司信息中替换。系统提供标准建站（$599）、智能营销（$899）与源码自主（$1,599）交付方案，具体产品按组合交付。</p>',
+            '<p>磁帧鱼服务外贸业务员、工厂外贸部与服务商。我们交付三款可下载安装的产品：</p><ol><li>全能站群管理系统 + B2B 前端站点生成系统</li><li>智能客服智能询盘系统</li><li>部署运营获客系统</li></ol><p>默认 Logo 为闪电占位，可在 CMS 公司信息中替换。系统提供标准建站（$399）、智能营销（$1,099）与源码 Enterprise｜企业定制版（$1,999起，按需求报价）交付方案。</p>',
           target_reference: [
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: '站群 + B2B 生成' },
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-inquiry', title: '智能询盘' },
@@ -908,7 +936,7 @@ writeJson('page.json', {
           slug: 'about',
           summary: '把外貿站群、詢盤與部署獲客，做成可安裝的產品',
           content:
-            '<p>磁幀魚交付三款可下載安裝的產品：站群 + B2B 生成、智慧詢盤、部署運營獲客。Logo 可於 CMS 替換。系統提供標準建站（$599）、智慧行銷（$899）與源碼自主（$1,599）交付方案，具體產品按組合交付。</p>',
+            '<p>磁幀魚交付三款可下載安裝的產品：站群 + B2B 生成、智慧詢盤、部署運營獲客。Logo 可於 CMS 替換。系統提供標準建站（$399）、智慧行銷（$1,099）與源碼 Enterprise｜企業定制版（$1,999起，按需求報價）交付方案。</p>',
           target_reference: [
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: '站群 + B2B 生成' },
           ],
@@ -923,7 +951,7 @@ writeJson('page.json', {
           title: '磁帧鱼について',
           slug: 'about',
           summary: 'サイト群・問い合わせ・導入獲得を、導入可能な製品に',
-          content: '<p>3製品を提供します。ロゴはCMSで差し替え可能。標準（$599）、スマート集客（$899）、ソースコード自主（$1,599）の組み合わせパッケージで納品します。</p>',
+          content: '<p>3製品を提供します。ロゴはCMSで差し替え可能。標準（$399）、スマート集客（$1,099）、ソース Enterprise｜企業カスタム（$1,999〜・要件見積）のパッケージで納品します。</p>',
           target_reference: [
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: 'サイト群' },
           ],
@@ -939,7 +967,7 @@ writeJson('page.json', {
           slug: 'about',
           summary: 'Installable products for multi-site, inquiry, and deploy growth',
           content:
-            '<p>Three products: multi-site + B2B generator, AI inquiry desk, deploy & growth ops. Logo is CMS-replaceable. Available in Standard ($599), Smart Marketing ($899), and Source Ownership ($1,599) delivery packages.</p>',
+            '<p>Three products: multi-site + B2B generator, AI inquiry desk, deploy & growth ops. Logo is CMS-replaceable. Available in Standard ($399), Smart Marketing ($1,099), and Source Enterprise | Custom (from $1,999, quoted by scope) packages.</p>',
           target_reference: [
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: 'Multi-site' },
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-inquiry', title: 'Inquiry' },
@@ -948,6 +976,45 @@ writeJson('page.json', {
           status: 'published',
           seo_title: 'About Cizhenyu',
           seo_description: 'Three Cizhenyu products for export growth.',
+          robots_directive: 'index,follow',
+          schema_type: 'AboutPage',
+          og_image: { url: img('About', 1200, 630) },
+        },
+        es: {
+          title: 'Sobre Cizhenyu',
+          slug: 'about',
+          summary: 'Productos instalables para multi-sitio, consultas y crecimiento',
+          content:
+            '<p>Tres productos: generador multi-sitio + B2B, mesa de consultas IA, y operaciones de despliegue y crecimiento. Logo reemplazable en CMS. Paquetes: Estándar ($399), Marketing Inteligente ($1,099) y Source Enterprise | Personalizado (desde $1,999, cotizado según alcance).</p>',
+          status: 'published',
+          seo_title: 'Sobre Cizhenyu',
+          seo_description: 'Tres productos Cizhenyu para el crecimiento exportador.',
+          robots_directive: 'index,follow',
+          schema_type: 'AboutPage',
+          og_image: { url: img('About', 1200, 630) },
+        },
+        pt: {
+          title: 'Sobre a Cizhenyu',
+          slug: 'about',
+          summary: 'Produtos instaláveis para multi-site, consultas e crescimento',
+          content:
+            '<p>Três produtos: gerador multi-site + B2B, mesa de consultas IA e operações de deploy e crescimento. Logo substituível no CMS. Pacotes: Padrão ($399), Marketing Inteligente ($1,099) e Source Enterprise | Personalizado (desde $1,999, cotado conforme o escopo).</p>',
+          status: 'published',
+          seo_title: 'Sobre a Cizhenyu',
+          seo_description: 'Três produtos Cizhenyu para crescimento em exportação.',
+          robots_directive: 'index,follow',
+          schema_type: 'AboutPage',
+          og_image: { url: img('About', 1200, 630) },
+        },
+        ar: {
+          title: 'عن Cizhenyu',
+          slug: 'about',
+          summary: 'منتجات قابلة للتثبيت للمواقع المتعددة والاستفسارات والنمو',
+          content:
+            '<p>ثلاثة منتجات: مولّد مواقع متعددة + B2B، مكتب استفسارات بالذكاء الاصطناعي، وعمليات النشر والنمو. الشعار قابل للاستبدال عبر CMS. الباقات: قياسي ($399)، التسويق الذكي ($1,099)، وSource Enterprise | مخصص (من $1,999 حسب النطاق).</p>',
+          status: 'published',
+          seo_title: 'عن Cizhenyu',
+          seo_description: 'ثلاثة منتجات Cizhenyu لنمو التصدير.',
           robots_directive: 'index,follow',
           schema_type: 'AboutPage',
           og_image: { url: img('About', 1200, 630) },
@@ -962,7 +1029,7 @@ writeJson('page.json', {
           slug: 'contact',
           summary: '下载安装、产品组合、协作部署——先告诉我们您的现状',
           content:
-            '<p>请留下行业、目标市场、需要的产品组合与交付套餐（标准建站 $599 / 智能营销 $899 / 源码自主 $1,599），以及是否需要客服协作安装。</p><p>邮箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a> · 官网：<a href="https://ycz.me">ycz.me</a></p><p>在线询盘表单即将接入；当前请使用下方「提交询盘」按钮或邮件联系。</p>',
+            '<p>请留下行业、目标市场、需要的产品组合与交付套餐（标准建站 $399 / 智能营销 $1,099 / 源码 Enterprise｜企业定制版 $1,999起），以及是否需要客服协作安装。</p><p>邮箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a> · 官网：<a href="https://ycz.me">ycz.me</a></p><p>在线询盘表单即将接入；当前请使用下方「提交询盘」按钮或邮件联系。</p>',
           status: 'published',
           seo_title: '联系｜磁帧鱼',
           seo_description: '提交询盘，获取产品安装与协作方案。',
@@ -975,7 +1042,7 @@ writeJson('page.json', {
           slug: 'contact',
           summary: '下載安裝、產品組合、協作部署——先告訴我們現狀',
           content:
-            '<p>請留下行業與交付套餐（標準建站 $599 / 智慧行銷 $899 / 源碼自主 $1,599）。郵箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a>。線上表單即將接入。</p>',
+            '<p>請留下行業與交付套餐（標準建站 $399 / 智慧行銷 $1,099 / 源碼 Enterprise｜企業定制版 $1,999起）。郵箱：<a href="mailto:hello@ycz.me">hello@ycz.me</a>。線上表單即將接入。</p>',
           status: 'published',
           seo_title: '聯繫｜磁幀魚',
           seo_description: '提交詢盤，獲取安裝與協作方案。',
@@ -988,7 +1055,7 @@ writeJson('page.json', {
           slug: 'contact',
           summary: 'ダウンロード導入・製品組合せ・同席サポート',
           content:
-            '<p>業界とご希望の導入パッケージ（標準 $599 / スマート集客 $899 / ソースコード自主 $1,599）をお送りください。<a href="mailto:hello@ycz.me">hello@ycz.me</a>。フォームは後日接続予定です。</p>',
+            '<p>業界とご希望の導入パッケージ（標準 $399 / スマート集客 $1,099 / ソース Enterprise｜企業カスタム $1,999〜）をお送りください。<a href="mailto:hello@ycz.me">hello@ycz.me</a>。フォームは後日接続予定です。</p>',
           status: 'published',
           seo_title: 'お問い合わせ｜磁帧鱼',
           seo_description: '導入とサポートのご相談。',
@@ -1001,10 +1068,49 @@ writeJson('page.json', {
           slug: 'contact',
           summary: 'Download install, product mix, collaborative deploy — tell us your status',
           content:
-            '<p>Share industry, markets, and your target package (Standard $599 / Smart Marketing $899 / Source Ownership $1,599). Email <a href="mailto:hello@ycz.me">hello@ycz.me</a>.</p>',
+            '<p>Share industry, markets, and your target package (Standard $399 / Smart Marketing $1,099 / Source Enterprise | Custom from $1,999). Email <a href="mailto:hello@ycz.me">hello@ycz.me</a>.</p>',
           status: 'published',
           seo_title: 'Contact | Cizhenyu',
           seo_description: 'Inquire for install and collaboration.',
+          robots_directive: 'index,follow',
+          schema_type: 'ContactPage',
+          og_image: { url: img('Contact', 1200, 630) },
+        },
+        es: {
+          title: 'Contacto',
+          slug: 'contact',
+          summary: 'Instalación, combinación de productos y despliegue colaborativo',
+          content:
+            '<p>Indique sector, mercados y el paquete deseado (Estándar $399 / Marketing Inteligente $1,099 / Source Enterprise | Personalizado desde $1,999). Correo <a href="mailto:hello@ycz.me">hello@ycz.me</a>.</p>',
+          status: 'published',
+          seo_title: 'Contacto | Cizhenyu',
+          seo_description: 'Consulte instalación y colaboración.',
+          robots_directive: 'index,follow',
+          schema_type: 'ContactPage',
+          og_image: { url: img('Contact', 1200, 630) },
+        },
+        pt: {
+          title: 'Contato',
+          slug: 'contact',
+          summary: 'Instalação, combinação de produtos e deploy colaborativo',
+          content:
+            '<p>Informe setor, mercados e o pacote desejado (Padrão $399 / Marketing Inteligente $1,099 / Source Enterprise | Personalizado desde $1,999). E-mail <a href="mailto:hello@ycz.me">hello@ycz.me</a>.</p>',
+          status: 'published',
+          seo_title: 'Contato | Cizhenyu',
+          seo_description: 'Consulte instalação e colaboração.',
+          robots_directive: 'index,follow',
+          schema_type: 'ContactPage',
+          og_image: { url: img('Contact', 1200, 630) },
+        },
+        ar: {
+          title: 'اتصل بنا',
+          slug: 'contact',
+          summary: 'التثبيت وتركيب المنتجات والنشر التعاوني',
+          content:
+            '<p>شاركنا القطاع والأسواق والباقة المطلوبة (قياسي $399 / التسويق الذكي $1,099 / Source Enterprise | مخصص من $1,999). البريد <a href="mailto:hello@ycz.me">hello@ycz.me</a>.</p>',
+          status: 'published',
+          seo_title: 'اتصل بنا | Cizhenyu',
+          seo_description: 'استفسر عن التثبيت والتعاون.',
           robots_directive: 'index,follow',
           schema_type: 'ContactPage',
           og_image: { url: img('Contact', 1200, 630) },
@@ -1076,7 +1182,7 @@ writeJson('page.json', {
           slug: 'terms',
           summary: '磁帧鱼（Cizhenyu）系统与技术服务条款',
           content:
-            '<h2>服务条款</h2><p>生效日期：2026年1月1日</p><h3>1. 协议接受</h3><p>欢迎使用磁帧鱼 B2B 外贸独立站系统。购买、安装或使用我们的系统与服务，即表示您已阅读并同意接受本服务条款的所有内容。</p><h3>2. 交付与授权范围</h3><p>磁帧鱼提供三种标准化交付方案：标准建站版（$599）、智能营销版（$899）及源码自主版（$1,599）。前两项交付编译后的生产运行版本，源码自主版在约定范围内交付原始工程源码及二次开发授权。所有方案均以最终合同与交付功能清单为准。</p><h3>3. 第三方费用与持续服务边界</h3><p>本系统定价为一次性项目交付费用，不包含持续性第三方费用。包括 Cloudflare 账单、AI 模型 API 调用费用、Google Ads 广告预算及第三方服务订阅费用均由客户自行承担。</p><h3>4. 技术支持与保修</h3><p>根据不同交付方案提供约定维保支持：标准建站版提供交付后 30 天基础保修；智能营销版提供 3 个月技术支持；源码自主版提供 12 个月约定技术支持。系统缺陷按约定范围修复，新增定制需求另行约定。</p><h3>5. 知识产权与适用法律</h3><p>磁帧鱼系统核心架构与自主设计组件受知识产权法保护。源码授权客户在授权许可范围内合法使用。</p>',
+            '<h2>服务条款</h2><p>生效日期：2026年1月1日</p><h3>1. 协议接受</h3><p>欢迎使用磁帧鱼 B2B 外贸独立站系统。购买、安装或使用我们的系统与服务，即表示您已阅读并同意接受本服务条款的所有内容。</p><h3>2. 交付与授权范围</h3><p>磁帧鱼提供三种交付方案：标准建站版（$399）、智能营销版（$1,099）及源码 Enterprise｜企业定制版（$1,999起，按需求报价）。前两项交付编译后的生产运行版本；企业定制版在约定范围内交付原始工程源码、二次开发授权及定制集成。所有方案均以最终合同与交付功能清单为准。</p><h3>3. 第三方费用与持续服务边界</h3><p>本系统定价为一次性项目交付费用，不包含持续性第三方费用。包括 Cloudflare 账单、AI 模型 API 调用费用、Google Ads 广告预算及第三方服务订阅费用均由客户自行承担。</p><h3>4. 技术支持与保修</h3><p>根据不同交付方案提供约定维保支持：标准建站版提供交付后 30 天基础保修；智能营销版提供 3 个月技术支持；企业定制版提供 12 个月约定技术支持。系统缺陷按约定范围修复，新增定制需求另行约定。</p><h3>5. 知识产权与适用法律</h3><p>磁帧鱼系统核心架构与自主设计组件受知识产权法保护。源码授权客户在授权许可范围内合法使用。</p>',
           status: 'published',
           seo_title: '服务条款｜磁帧鱼',
           seo_description: '磁帧鱼系统交付与技术服务条款。',
@@ -1089,7 +1195,7 @@ writeJson('page.json', {
           slug: 'terms',
           summary: '磁幀魚（Cizhenyu）系統與技術服務條款',
           content:
-            '<h2>服務條款</h2><p>生效日期：2026年1月1日</p><h3>1. 協議接受</h3><p>歡迎使用磁幀魚 B2B 外貿獨立站系統。購買、安裝或使用我們的系統與服務，即表示您已閱讀並同意接受本服務條款的所有內容。</p><h3>2. 交付與授權範圍</h3><p>磁幀魚提供三種標準化交付方案：標準建站版（$599）、智慧行銷版（$899）及源碼自主版（$1,599）。所有方案均以最終合約與交付功能清單為準。</p><h3>3. 第三方費用與持續服務邊界</h3><p>本系統定價為一次性專案交付費用，不包含持續性第三方費用（如 Cloudflare 帳單、AI 模型調用費、Google Ads 廣告預算等均由客戶自行承擔）。</p><h3>4. 技術支援與保修</h3><p>標準建站版提供交付後 30 天基礎保修；智慧行銷版提供 3 個月技術支援；源碼自主版提供 12 個月約定技術支援。</p><h3>5. 智慧財產權</h3><p>磁幀魚系統核心架構受智慧財產權法律保護。源碼授權客戶在許可範圍內合法使用。</p>',
+            '<h2>服務條款</h2><p>生效日期：2026年1月1日</p><h3>1. 協議接受</h3><p>歡迎使用磁幀魚 B2B 外貿獨立站系統。購買、安裝或使用我們的系統與服務，即表示您已閱讀並同意接受本服務條款的所有內容。</p><h3>2. 交付與授權範圍</h3><p>磁幀魚提供三種交付方案：標準建站版（$399）、智慧行銷版（$1,099）及源碼 Enterprise｜企業定制版（$1,999起，按需求報價）。所有方案均以最終合約與交付功能清單為準。</p><h3>3. 第三方費用與持續服務邊界</h3><p>本系統定價為一次性專案交付費用，不包含持續性第三方費用（如 Cloudflare 帳單、AI 模型調用費、Google Ads 廣告預算等均由客戶自行承擔）。</p><h3>4. 技術支援與保修</h3><p>標準建站版提供交付後 30 天基礎保修；智慧行銷版提供 3 個月技術支援；企業定制版提供 12 個月約定技術支援。</p><h3>5. 智慧財產權</h3><p>磁幀魚系統核心架構受智慧財產權法律保護。源碼授權客戶在許可範圍內合法使用。</p>',
           status: 'published',
           seo_title: '服務條款｜磁幀魚',
           seo_description: '磁幀魚系統交付與技術服務條款。',
@@ -1102,7 +1208,7 @@ writeJson('page.json', {
           slug: 'terms',
           summary: '磁帧鱼（Cizhenyu）システムおよびサービス利用規約',
           content:
-            '<h2>利用規約</h2><p>発効日：2026年1月1日</p><h3>1. 規約への同意</h3><p>磁帧鱼システムをご利用いただくことで、本規約に同意されたものとみなします。</p><h3>2. 提供パッケージとライセンス</h3><p>標準サイト構築版（$599）、スマート集客版（$899）、ソースコード自主版（$1,599）の3つのティアを提供します。詳細は各契約書に基づきます。</p><h3>3. 第三者費用</h3><p>Cloudflare運用費、AI API利用料、Google Ads広告費などの外部実費はお客様のご負担となります。</p><h3>4. 保証と技術サポート</h3><p>各パッケージに定められた期間（30日〜12ヶ月）の技術サポートと不具合修正を提供します。</p>',
+            '<h2>利用規約</h2><p>発効日：2026年1月1日</p><h3>1. 規約への同意</h3><p>磁帧鱼システムをご利用いただくことで、本規約に同意されたものとみなします。</p><h3>2. 提供パッケージとライセンス</h3><p>標準サイト構築版（$399）、スマート集客版（$1,099）、ソース Enterprise｜企業カスタム版（$1,999〜・要件見積）の3つのティアを提供します。詳細は各契約書に基づきます。</p><h3>3. 第三者費用</h3><p>Cloudflare運用費、AI API利用料、Google Ads広告費などの外部実費はお客様のご負担となります。</p><h3>4. 保証と技術サポート</h3><p>各パッケージに定められた期間（30日〜12ヶ月）の技術サポートと不具合修正を提供します。</p>',
           status: 'published',
           seo_title: '利用規約｜磁帧鱼',
           seo_description: '磁帧鱼システムの利用規約とライセンス条件。',
@@ -1115,10 +1221,49 @@ writeJson('page.json', {
           slug: 'terms',
           summary: 'Cizhenyu System and Technical Services Terms of Service',
           content:
-            '<h2>Terms of Service</h2><p>Effective Date: January 1, 2026</p><h3>1. Acceptance of Terms</h3><p>By purchasing, installing, or using Cizhenyu B2B website systems and services, you agree to be bound by these Terms of Service.</p><h3>2. Delivery Packages & Scope</h3><p>Cizhenyu provides three distinct delivery tiers: Standard Site ($599), Smart Marketing ($899), and Source Ownership ($1,599). Delivery scope follows the signed agreement.</p><h3>3. Third-Party Costs & Boundaries</h3><p>Pricing represents a one-time project delivery fee. External ongoing costs including Cloudflare usage, AI model API tokens, and Google Ads ad spend remain client responsibility.</p><h3>4. Technical Support & Warranty</h3><p>Warranties apply per plan: 30 days for Standard Site, 3 months for Smart Marketing, and 12 months for Source Ownership.</p>',
+            '<h2>Terms of Service</h2><p>Effective Date: January 1, 2026</p><h3>1. Acceptance of Terms</h3><p>By purchasing, installing, or using Cizhenyu B2B website systems and services, you agree to be bound by these Terms of Service.</p><h3>2. Delivery Packages & Scope</h3><p>Cizhenyu provides three delivery tiers: Standard Site ($399), Smart Marketing ($1,099), and Source Enterprise | Custom (from $1,999, quoted by scope). Delivery scope follows the signed agreement.</p><h3>3. Third-Party Costs & Boundaries</h3><p>Pricing represents a one-time project delivery fee. External ongoing costs including Cloudflare usage, AI model API tokens, and Google Ads ad spend remain client responsibility.</p><h3>4. Technical Support & Warranty</h3><p>Warranties apply per plan: 30 days for Standard Site, 3 months for Smart Marketing, and 12 months for Source Enterprise | Custom.</p>',
           status: 'published',
           seo_title: 'Terms of Service | Cizhenyu',
           seo_description: 'Cizhenyu system delivery terms and service license agreement.',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Terms', 1200, 630) },
+        },
+        es: {
+          title: 'Términos de servicio',
+          slug: 'terms',
+          summary: 'Términos de servicio del sistema y soporte técnico de Cizhenyu',
+          content:
+            '<h2>Términos de servicio</h2><p>Fecha de vigencia: 1 de enero de 2026</p><h3>1. Aceptación</h3><p>Al comprar, instalar o usar los sistemas y servicios Cizhenyu, usted acepta estos términos.</p><h3>2. Paquetes y alcance</h3><p>Tres niveles: Sitio Estándar ($399), Marketing Inteligente ($1,099) y Source Enterprise | Personalizado (desde $1,999, cotizado según alcance). El alcance se rige por el contrato firmado.</p><h3>3. Costos de terceros</h3><p>El precio es de entrega única; Cloudflare, APIs de IA y presupuesto de anuncios corren por cuenta del cliente.</p><h3>4. Soporte</h3><p>Garantías: 30 días (Estándar), 3 meses (Marketing Inteligente), 12 meses (Enterprise).</p>',
+          status: 'published',
+          seo_title: 'Términos de servicio | Cizhenyu',
+          seo_description: 'Términos de entrega y licencia del sistema Cizhenyu.',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Terms', 1200, 630) },
+        },
+        pt: {
+          title: 'Termos de serviço',
+          slug: 'terms',
+          summary: 'Termos de serviço do sistema e suporte técnico da Cizhenyu',
+          content:
+            '<h2>Termos de serviço</h2><p>Data de vigência: 1 de janeiro de 2026</p><h3>1. Aceitação</h3><p>Ao comprar, instalar ou usar os sistemas e serviços Cizhenyu, você concorda com estes termos.</p><h3>2. Pacotes e escopo</h3><p>Três níveis: Site Padrão ($399), Marketing Inteligente ($1,099) e Source Enterprise | Personalizado (desde $1,999, cotado conforme o escopo). O escopo segue o contrato assinado.</p><h3>3. Custos de terceiros</h3><p>O preço é de entrega única; Cloudflare, APIs de IA e verba de anúncios ficam a cargo do cliente.</p><h3>4. Suporte</h3><p>Garantias: 30 dias (Padrão), 3 meses (Marketing Inteligente), 12 meses (Enterprise).</p>',
+          status: 'published',
+          seo_title: 'Termos de serviço | Cizhenyu',
+          seo_description: 'Termos de entrega e licença do sistema Cizhenyu.',
+          robots_directive: 'index,follow',
+          schema_type: 'WebPage',
+          og_image: { url: img('Terms', 1200, 630) },
+        },
+        ar: {
+          title: 'شروط الخدمة',
+          slug: 'terms',
+          summary: 'شروط خدمة نظام ودعم Cizhenyu التقني',
+          content:
+            '<h2>شروط الخدمة</h2><p>تاريخ السريان: 1 يناير 2026</p><h3>1. القبول</h3><p>بشراء أو تثبيت أو استخدام أنظمة وخدمات Cizhenyu، فإنك توافق على هذه الشروط.</p><h3>2. الباقات والنطاق</h3><p>ثلاثة مستويات: الموقع القياسي ($399)، التسويق الذكي ($1,099)، وSource Enterprise | مخصص (من $1,999 حسب النطاق). يُحدَّد النطاق بالعقد الموقَّع.</p><h3>3. تكاليف الأطراف الثالثة</h3><p>التسعير لمرة واحدة؛ تبقى تكاليف Cloudflare وواجهات الذكاء الاصطناعي وإعلانات Google Ads على عاتق العميل.</p><h3>4. الدعم</h3><p>الضمان: 30 يوماً (قياسي)، 3 أشهر (التسويق الذكي)، 12 شهراً (Enterprise).</p>',
+          status: 'published',
+          seo_title: 'شروط الخدمة | Cizhenyu',
+          seo_description: 'شروط تسليم وترخيص نظام Cizhenyu.',
           robots_directive: 'index,follow',
           schema_type: 'WebPage',
           og_image: { url: img('Terms', 1200, 630) },
@@ -1838,12 +1983,17 @@ fs.writeFileSync(
   path.join(__dirname, '../MARKETING_COPY.md'),
   `# 磁帧鱼 default 主题营销文案
 
-首页叙事以 \`PRD.md\` 为准，四语文案在：
+首页叙事以 \`PRD.md\` 为准，多语文案在：
 
 - \`home-content-zh-cn.ts\`
 - \`home-content-zh-tw.ts\`
 - \`home-content-ja.ts\`
 - \`home-content-en.ts\`
+- \`home-content-es.ts\`
+- \`home-content-pt.ts\`
+- \`home-content-ar.ts\`
+
+定价三档：标准建站 $399 / 智能营销 $1,099 / 源码 Enterprise｜企业定制 $1,999起。
 
 产品定位：
 

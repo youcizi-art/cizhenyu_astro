@@ -11,23 +11,24 @@ interface Props {
 const { company, links = [], locale = 'zh-CN', quickLinksLabel = '快速链接' } = Astro.props;
 const year = new Date().getFullYear();
 
-const privacyLabel =
-  locale === 'zh-CN'
-    ? '隐私权政策'
-    : locale === 'zh-TW'
-      ? '隱私權政策'
-      : locale === 'ja'
-        ? 'プライバシーポリシー'
-        : 'Privacy Policy';
-
-const termsLabel =
-  locale === 'zh-CN'
-    ? '服务条款'
-    : locale === 'zh-TW'
-      ? '服務條款'
-      : locale === 'ja'
-        ? '利用規約'
-        : 'Terms of Service';
+const privacyByLocale: Record<string, string> = {
+  'zh-CN': '隐私权政策',
+  'zh-TW': '隱私權政策',
+  ja: 'プライバシーポリシー',
+  es: 'Política de privacidad',
+  pt: 'Política de privacidade',
+  ar: 'سياسة الخصوصية',
+};
+const termsByLocale: Record<string, string> = {
+  'zh-CN': '服务条款',
+  'zh-TW': '服務條款',
+  ja: '利用規約',
+  es: 'Términos de servicio',
+  pt: 'Termos de serviço',
+  ar: 'شروط الخدمة',
+};
+const privacyLabel = privacyByLocale[locale] || privacyByLocale[locale.split('-')[0]] || 'Privacy Policy';
+const termsLabel = termsByLocale[locale] || termsByLocale[locale.split('-')[0]] || 'Terms of Service';
 
 const privacyHref = `/${locale}/privacy`;
 const termsHref = `/${locale}/terms`;

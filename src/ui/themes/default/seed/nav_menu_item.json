@@ -59,6 +59,48 @@
           ],
           "status": "published",
           "link_url": "/en-US"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Inicio",
+          "slug": "home",
+          "link_mode": "link",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Início",
+          "slug": "home",
+          "link_mode": "link",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "الرئيسية",
+          "slug": "home",
+          "link_mode": "link",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar"
         }
       }
     },
@@ -136,6 +178,60 @@
             "refType": "b2b_product",
             "refId": ""
           }
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Productos",
+          "slug": "products",
+          "link_mode": "reference",
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": ""
+          }
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Produtos",
+          "slug": "products",
+          "link_mode": "reference",
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": ""
+          }
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "المنتجات",
+          "slug": "products",
+          "link_mode": "reference",
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "target_reference": {
+            "type": "internal",
+            "refType": "b2b_product",
+            "refId": ""
+          }
         }
       }
     },
@@ -197,6 +293,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/faq"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Ayuda",
+          "slug": "help",
+          "link_mode": "link",
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/faq"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Ajuda",
+          "slug": "help",
+          "link_mode": "link",
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/faq"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "المساعدة",
+          "slug": "help",
+          "link_mode": "link",
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/faq"
         }
       }
     },
@@ -258,6 +396,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/resources"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Descargas",
+          "slug": "download",
+          "link_mode": "link",
+          "sort_order": 40,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/resources"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Downloads",
+          "slug": "download",
+          "link_mode": "link",
+          "sort_order": 40,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/resources"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "التنزيلات",
+          "slug": "download",
+          "link_mode": "link",
+          "sort_order": 40,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/resources"
         }
       }
     },
@@ -319,6 +499,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/articles"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Noticias",
+          "slug": "news",
+          "link_mode": "link",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/articles"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Notícias",
+          "slug": "news",
+          "link_mode": "link",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/articles"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "الأخبار",
+          "slug": "news",
+          "link_mode": "link",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/articles"
         }
       }
     },
@@ -380,6 +602,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/about"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Nosotros",
+          "slug": "about",
+          "link_mode": "link",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/about"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Sobre",
+          "slug": "about",
+          "link_mode": "link",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/about"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "من نحن",
+          "slug": "about",
+          "link_mode": "link",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/about"
         }
       }
     },
@@ -441,6 +705,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/contact"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Contacto",
+          "slug": "contact",
+          "link_mode": "link",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/contact"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "Contato",
+          "slug": "contact",
+          "link_mode": "link",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/contact"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:header"
+          ],
+          "title": "اتصل بنا",
+          "slug": "contact",
+          "link_mode": "link",
+          "sort_order": 70,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/contact"
         }
       }
     },
@@ -502,6 +808,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/products"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Productos",
+          "slug": "f-products",
+          "link_mode": "link",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/products"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Produtos",
+          "slug": "f-products",
+          "link_mode": "link",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/products"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "المنتجات",
+          "slug": "f-products",
+          "link_mode": "link",
+          "sort_order": 10,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/products"
         }
       }
     },
@@ -563,6 +911,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/resources"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Descargas",
+          "slug": "f-download",
+          "link_mode": "link",
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/resources"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Downloads",
+          "slug": "f-download",
+          "link_mode": "link",
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/resources"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "التنزيلات",
+          "slug": "f-download",
+          "link_mode": "link",
+          "sort_order": 20,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/resources"
         }
       }
     },
@@ -624,6 +1014,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/faq"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Ayuda",
+          "slug": "f-help",
+          "link_mode": "link",
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/faq"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Ajuda",
+          "slug": "f-help",
+          "link_mode": "link",
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/faq"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "المساعدة",
+          "slug": "f-help",
+          "link_mode": "link",
+          "sort_order": 30,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/faq"
         }
       }
     },
@@ -685,6 +1117,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/contact"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Contacto",
+          "slug": "f-contact",
+          "link_mode": "link",
+          "sort_order": 40,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/contact"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Contato",
+          "slug": "f-contact",
+          "link_mode": "link",
+          "sort_order": 40,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/contact"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "اتصل بنا",
+          "slug": "f-contact",
+          "link_mode": "link",
+          "sort_order": 40,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/contact"
         }
       }
     },
@@ -746,6 +1220,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/privacy"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Política de privacidad",
+          "slug": "f-privacy",
+          "link_mode": "link",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/privacy"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Política de privacidade",
+          "slug": "f-privacy",
+          "link_mode": "link",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/privacy"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "سياسة الخصوصية",
+          "slug": "f-privacy",
+          "link_mode": "link",
+          "sort_order": 50,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/privacy"
         }
       }
     },
@@ -807,6 +1323,48 @@
           ],
           "status": "published",
           "link_url": "/en-US/terms"
+        },
+        "es": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Términos de servicio",
+          "slug": "f-terms",
+          "link_mode": "link",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/es/terms"
+        },
+        "pt": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "Termos de serviço",
+          "slug": "f-terms",
+          "link_mode": "link",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/pt/terms"
+        },
+        "ar": {
+          "nav_menu_ids": [
+            "__BY_SLUG__:b2b_nav_menu:footer"
+          ],
+          "title": "شروط الخدمة",
+          "slug": "f-terms",
+          "link_mode": "link",
+          "sort_order": 60,
+          "open_in_new_tab": [
+            "no"
+          ],
+          "status": "published",
+          "link_url": "/ar/terms"
         }
       }
     }

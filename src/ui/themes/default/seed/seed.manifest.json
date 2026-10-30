@@ -5,7 +5,10 @@
     "zh-CN",
     "zh-TW",
     "ja",
-    "en-US"
+    "en-US",
+    "es",
+    "pt",
+    "ar"
   ],
   "seedOrder": [
     "company_info.json",

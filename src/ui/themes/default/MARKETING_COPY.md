@@ -1,11 +1,16 @@
 # 磁帧鱼 default 主题营销文案
 
-首页叙事以 `PRD.md` 为准，四语文案在：
+首页叙事以 `PRD.md` 为准，多语文案在：
 
 - `home-content-zh-cn.ts`
 - `home-content-zh-tw.ts`
 - `home-content-ja.ts`
 - `home-content-en.ts`
+- `home-content-es.ts`
+- `home-content-pt.ts`
+- `home-content-ar.ts`
+
+定价三档：标准建站 $399 / 智能营销 $1,099 / 源码 Enterprise｜企业定制 $1,999起。
 
 产品定位：
 

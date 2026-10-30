@@ -39,6 +39,33 @@
               "content": "View all products"
             }
           ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.exploreAll",
+              "field_name": "Ver todos los productos",
+              "content": "Ver todos los productos"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.exploreAll",
+              "field_name": "Ver todos os produtos",
+              "content": "Ver todos os produtos"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.exploreAll",
+              "field_name": "عرض كل المنتجات",
+              "content": "عرض كل المنتجات"
+            }
+          ]
         }
       }
     },
@@ -78,6 +105,33 @@
               "field_key": "default.readMore",
               "field_name": "Learn more",
               "content": "Learn more"
+            }
+          ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.readMore",
+              "field_name": "Más información",
+              "content": "Más información"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.readMore",
+              "field_name": "Saiba mais",
+              "content": "Saiba mais"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.readMore",
+              "field_name": "اعرف المزيد",
+              "content": "اعرف المزيد"
             }
           ]
         }
@@ -121,6 +175,33 @@
               "content": "FAQ"
             }
           ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.faqEyebrow",
+              "field_name": "Preguntas frecuentes",
+              "content": "Preguntas frecuentes"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.faqEyebrow",
+              "field_name": "Perguntas frequentes",
+              "content": "Perguntas frequentes"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.faqEyebrow",
+              "field_name": "الأسئلة الشائعة",
+              "content": "الأسئلة الشائعة"
+            }
+          ]
         }
       }
     },
@@ -160,6 +241,33 @@
               "field_key": "default.ctaBtn",
               "field_name": "Contact us",
               "content": "Contact us"
+            }
+          ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.ctaBtn",
+              "field_name": "Contáctenos",
+              "content": "Contáctenos"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.ctaBtn",
+              "field_name": "Fale conosco",
+              "content": "Fale conosco"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.ctaBtn",
+              "field_name": "تواصل معنا",
+              "content": "تواصل معنا"
             }
           ]
         }
@@ -203,6 +311,33 @@
               "content": "Cloudflare site system"
             }
           ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.productPrefix",
+              "field_name": "Sistema de sitios Cloudflare",
+              "content": "Sistema de sitios Cloudflare"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.productPrefix",
+              "field_name": "Sistema de sites Cloudflare",
+              "content": "Sistema de sites Cloudflare"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.productPrefix",
+              "field_name": "نظام مواقع Cloudflare",
+              "content": "نظام مواقع Cloudflare"
+            }
+          ]
         }
       }
     },
@@ -242,6 +377,33 @@
               "field_key": "default.productPrefixCrm",
               "field_name": "CRM & AI support",
               "content": "CRM & AI support"
+            }
+          ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.productPrefixCrm",
+              "field_name": "CRM y soporte IA",
+              "content": "CRM y soporte IA"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.productPrefixCrm",
+              "field_name": "CRM e suporte IA",
+              "content": "CRM e suporte IA"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.productPrefixCrm",
+              "field_name": "إدارة العملاء ودعم الذكاء الاصطناعي",
+              "content": "إدارة العملاء ودعم الذكاء الاصطناعي"
             }
           ]
         }
@@ -285,6 +447,33 @@
               "content": "SEO / GEO growth plan"
             }
           ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.productPrefixSeo",
+              "field_name": "Plan de crecimiento SEO / GEO",
+              "content": "Plan de crecimiento SEO / GEO"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.productPrefixSeo",
+              "field_name": "Plano de crescimento SEO / GEO",
+              "content": "Plano de crescimento SEO / GEO"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.productPrefixSeo",
+              "field_name": "خطة نمو SEO / GEO",
+              "content": "خطة نمو SEO / GEO"
+            }
+          ]
         }
       }
     },
@@ -324,6 +513,33 @@
               "field_key": "default.compareHighlight",
               "field_name": "Recommended",
               "content": "Recommended"
+            }
+          ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.compareHighlight",
+              "field_name": "Recomendado",
+              "content": "Recomendado"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.compareHighlight",
+              "field_name": "Recomendado",
+              "content": "Recomendado"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.compareHighlight",
+              "field_name": "موصى به",
+              "content": "موصى به"
             }
           ]
         }
@@ -367,6 +583,33 @@
               "content": "Customer Feedback"
             }
           ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.testimonialsEyebrow",
+              "field_name": "Opiniones de clientes",
+              "content": "Opiniones de clientes"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.testimonialsEyebrow",
+              "field_name": "Depoimentos",
+              "content": "Depoimentos"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.testimonialsEyebrow",
+              "field_name": "آراء العملاء",
+              "content": "آراء العملاء"
+            }
+          ]
         }
       }
     },
@@ -406,6 +649,33 @@
               "field_key": "default.testimonialsTitle",
               "field_name": "Customer Feedback",
               "content": "Customer Feedback"
+            }
+          ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.testimonialsTitle",
+              "field_name": "Opiniones de clientes",
+              "content": "Opiniones de clientes"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.testimonialsTitle",
+              "field_name": "Depoimentos",
+              "content": "Depoimentos"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.testimonialsTitle",
+              "field_name": "آراء العملاء",
+              "content": "آراء العملاء"
             }
           ]
         }
@@ -449,6 +719,33 @@
               "content": "Industry Updates"
             }
           ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.updatesEyebrow",
+              "field_name": "Actualizaciones del sector",
+              "content": "Actualizaciones del sector"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.updatesEyebrow",
+              "field_name": "Atualizações do setor",
+              "content": "Atualizações do setor"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.updatesEyebrow",
+              "field_name": "تحديثات القطاع",
+              "content": "تحديثات القطاع"
+            }
+          ]
         }
       }
     },
@@ -488,6 +785,33 @@
               "field_key": "default.viewDetail",
               "field_name": "View details",
               "content": "View details"
+            }
+          ]
+        },
+        "es": {
+          "field_list": [
+            {
+              "field_key": "default.viewDetail",
+              "field_name": "Ver detalles",
+              "content": "Ver detalles"
+            }
+          ]
+        },
+        "pt": {
+          "field_list": [
+            {
+              "field_key": "default.viewDetail",
+              "field_name": "Ver detalhes",
+              "content": "Ver detalhes"
+            }
+          ]
+        },
+        "ar": {
+          "field_list": [
+            {
+              "field_key": "default.viewDetail",
+              "field_name": "عرض التفاصيل",
+              "content": "عرض التفاصيل"
             }
           ]
         }

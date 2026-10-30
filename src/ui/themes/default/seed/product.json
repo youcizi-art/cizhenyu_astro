@@ -182,6 +182,138 @@
           "taxonomy_ids": [
             "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
+        },
+        "es": {
+          "title": "Cizhenyu Multi-site CMS + B2B Site Generator",
+          "slug": "cizhenyu-sites",
+          "sku": "CZ-SITES",
+          "brand": "Cizhenyu",
+          "summary": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
+          "description": "<p><strong>Multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>",
+          "images": [
+            {
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
+            }
+          ],
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "module": "CZ-SITES",
+            "install": "download+collaborate"
+          },
+          "seo_title": "Cizhenyu Multi-site CMS + B2B Site Generator | Cizhenyu",
+          "seo_description": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
+          },
+          "tagline": "One hub for many sites — generate deployable B2B export sites",
+          "advantages": [
+            {
+              "title": "Multi-site hub",
+              "description": "Shared content and permissions."
+            },
+            {
+              "title": "B2B IA ready",
+              "description": "Export-site sections built in."
+            },
+            {
+              "title": "Guided install",
+              "description": "Download, then collaborate with support."
+            }
+          ],
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
+          ]
+        },
+        "pt": {
+          "title": "Cizhenyu Multi-site CMS + B2B Site Generator",
+          "slug": "cizhenyu-sites",
+          "sku": "CZ-SITES",
+          "brand": "Cizhenyu",
+          "summary": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
+          "description": "<p><strong>Multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>",
+          "images": [
+            {
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
+            }
+          ],
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "module": "CZ-SITES",
+            "install": "download+collaborate"
+          },
+          "seo_title": "Cizhenyu Multi-site CMS + B2B Site Generator | Cizhenyu",
+          "seo_description": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
+          },
+          "tagline": "One hub for many sites — generate deployable B2B export sites",
+          "advantages": [
+            {
+              "title": "Multi-site hub",
+              "description": "Shared content and permissions."
+            },
+            {
+              "title": "B2B IA ready",
+              "description": "Export-site sections built in."
+            },
+            {
+              "title": "Guided install",
+              "description": "Download, then collaborate with support."
+            }
+          ],
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
+          ]
+        },
+        "ar": {
+          "title": "Cizhenyu Multi-site CMS + B2B Site Generator",
+          "slug": "cizhenyu-sites",
+          "sku": "CZ-SITES",
+          "brand": "Cizhenyu",
+          "summary": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
+          "description": "<p><strong>Multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>",
+          "images": [
+            {
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
+            }
+          ],
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "module": "CZ-SITES",
+            "install": "download+collaborate"
+          },
+          "seo_title": "Cizhenyu Multi-site CMS + B2B Site Generator | Cizhenyu",
+          "seo_description": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
+          },
+          "tagline": "One hub for many sites — generate deployable B2B export sites",
+          "advantages": [
+            {
+              "title": "Multi-site hub",
+              "description": "Shared content and permissions."
+            },
+            {
+              "title": "B2B IA ready",
+              "description": "Export-site sections built in."
+            },
+            {
+              "title": "Guided install",
+              "description": "Download, then collaborate with support."
+            }
+          ],
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
+          ]
         }
       }
     },
@@ -366,6 +498,138 @@
           "taxonomy_ids": [
             "__BY_SLUG__:b2b_product_category:cizhenyu-products"
           ]
+        },
+        "es": {
+          "title": "Cizhenyu AI Desk & Inquiry Hub",
+          "slug": "cizhenyu-inquiry",
+          "sku": "CZ-INQUIRY",
+          "brand": "Cizhenyu",
+          "summary": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
+          "description": "<p><strong>AI desk + inquiry hub</strong> stops scattered leads and night-time gaps. Wire to site CTAs (form hook reserved). Pair with multi-site and deploy products. Collaborative install available.</p>",
+          "images": [
+            {
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
+            }
+          ],
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "module": "CZ-INQUIRY",
+            "install": "download+collaborate"
+          },
+          "seo_title": "Cizhenyu AI Desk & Inquiry Hub | Cizhenyu",
+          "seo_description": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
+          },
+          "tagline": "Catch leads day and night — KB answers, humans on high intent",
+          "advantages": [
+            {
+              "title": "One inbox",
+              "description": "Traceable sources in one view."
+            },
+            {
+              "title": "KB replies",
+              "description": "Auto answers; escalate when needed."
+            },
+            {
+              "title": "CTA-ready",
+              "description": "Inquiry buttons reserved for form wiring."
+            }
+          ],
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
+          ]
+        },
+        "pt": {
+          "title": "Cizhenyu AI Desk & Inquiry Hub",
+          "slug": "cizhenyu-inquiry",
+          "sku": "CZ-INQUIRY",
+          "brand": "Cizhenyu",
+          "summary": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
+          "description": "<p><strong>AI desk + inquiry hub</strong> stops scattered leads and night-time gaps. Wire to site CTAs (form hook reserved). Pair with multi-site and deploy products. Collaborative install available.</p>",
+          "images": [
+            {
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
+            }
+          ],
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "module": "CZ-INQUIRY",
+            "install": "download+collaborate"
+          },
+          "seo_title": "Cizhenyu AI Desk & Inquiry Hub | Cizhenyu",
+          "seo_description": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
+          },
+          "tagline": "Catch leads day and night — KB answers, humans on high intent",
+          "advantages": [
+            {
+              "title": "One inbox",
+              "description": "Traceable sources in one view."
+            },
+            {
+              "title": "KB replies",
+              "description": "Auto answers; escalate when needed."
+            },
+            {
+              "title": "CTA-ready",
+              "description": "Inquiry buttons reserved for form wiring."
+            }
+          ],
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
+          ]
+        },
+        "ar": {
+          "title": "Cizhenyu AI Desk & Inquiry Hub",
+          "slug": "cizhenyu-inquiry",
+          "sku": "CZ-INQUIRY",
+          "brand": "Cizhenyu",
+          "summary": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
+          "description": "<p><strong>AI desk + inquiry hub</strong> stops scattered leads and night-time gaps. Wire to site CTAs (form hook reserved). Pair with multi-site and deploy products. Collaborative install available.</p>",
+          "images": [
+            {
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
+            }
+          ],
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "module": "CZ-INQUIRY",
+            "install": "download+collaborate"
+          },
+          "seo_title": "Cizhenyu AI Desk & Inquiry Hub | Cizhenyu",
+          "seo_description": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
+          },
+          "tagline": "Catch leads day and night — KB answers, humans on high intent",
+          "advantages": [
+            {
+              "title": "One inbox",
+              "description": "Traceable sources in one view."
+            },
+            {
+              "title": "KB replies",
+              "description": "Auto answers; escalate when needed."
+            },
+            {
+              "title": "CTA-ready",
+              "description": "Inquiry buttons reserved for form wiring."
+            }
+          ],
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
+          ]
         }
       }
     },
@@ -508,6 +772,138 @@
           ]
         },
         "en-US": {
+          "title": "Cizhenyu Deploy & Growth Ops",
+          "slug": "cizhenyu-growth",
+          "sku": "CZ-GROWTH",
+          "brand": "Cizhenyu",
+          "summary": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
+          "description": "<p><strong>Deploy + growth ops</strong> connects launch to ongoing acquisition. Assets stay on your account. Pair with multi-site and inquiry products. Collaborative first launch available.</p>",
+          "images": [
+            {
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
+            }
+          ],
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "module": "CZ-GROWTH",
+            "install": "download+collaborate"
+          },
+          "seo_title": "Cizhenyu Deploy & Growth Ops | Cizhenyu",
+          "seo_description": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
+          },
+          "tagline": "Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
+          "advantages": [
+            {
+              "title": "Your account",
+              "description": "Clear ownership on Cloudflare."
+            },
+            {
+              "title": "Wizard deploy",
+              "description": "Less hand-written config."
+            },
+            {
+              "title": "Keep shipping",
+              "description": "Ops cadence after go-live."
+            }
+          ],
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
+          ]
+        },
+        "es": {
+          "title": "Cizhenyu Deploy & Growth Ops",
+          "slug": "cizhenyu-growth",
+          "sku": "CZ-GROWTH",
+          "brand": "Cizhenyu",
+          "summary": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
+          "description": "<p><strong>Deploy + growth ops</strong> connects launch to ongoing acquisition. Assets stay on your account. Pair with multi-site and inquiry products. Collaborative first launch available.</p>",
+          "images": [
+            {
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
+            }
+          ],
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "module": "CZ-GROWTH",
+            "install": "download+collaborate"
+          },
+          "seo_title": "Cizhenyu Deploy & Growth Ops | Cizhenyu",
+          "seo_description": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
+          },
+          "tagline": "Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
+          "advantages": [
+            {
+              "title": "Your account",
+              "description": "Clear ownership on Cloudflare."
+            },
+            {
+              "title": "Wizard deploy",
+              "description": "Less hand-written config."
+            },
+            {
+              "title": "Keep shipping",
+              "description": "Ops cadence after go-live."
+            }
+          ],
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
+          ]
+        },
+        "pt": {
+          "title": "Cizhenyu Deploy & Growth Ops",
+          "slug": "cizhenyu-growth",
+          "sku": "CZ-GROWTH",
+          "brand": "Cizhenyu",
+          "summary": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
+          "description": "<p><strong>Deploy + growth ops</strong> connects launch to ongoing acquisition. Assets stay on your account. Pair with multi-site and inquiry products. Collaborative first launch available.</p>",
+          "images": [
+            {
+              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
+            }
+          ],
+          "availability": "InStock",
+          "status": "published",
+          "spec_data": {
+            "module": "CZ-GROWTH",
+            "install": "download+collaborate"
+          },
+          "seo_title": "Cizhenyu Deploy & Growth Ops | Cizhenyu",
+          "seo_description": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
+          "robots_directive": "index,follow",
+          "schema_type": "Product",
+          "og_image": {
+            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
+          },
+          "tagline": "Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
+          "advantages": [
+            {
+              "title": "Your account",
+              "description": "Clear ownership on Cloudflare."
+            },
+            {
+              "title": "Wizard deploy",
+              "description": "Less hand-written config."
+            },
+            {
+              "title": "Keep shipping",
+              "description": "Ops cadence after go-live."
+            }
+          ],
+          "taxonomy_ids": [
+            "__BY_SLUG__:b2b_product_category:cizhenyu-products"
+          ]
+        },
+        "ar": {
           "title": "Cizhenyu Deploy & Growth Ops",
           "slug": "cizhenyu-growth",
           "sku": "CZ-GROWTH",
