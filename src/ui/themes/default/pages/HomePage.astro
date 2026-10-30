@@ -70,22 +70,15 @@ const contactHref = paths.contact;
 const productsHref = paths.products || contactHref;
 const productBySlug = new Map(products.map((p) => [p.slug, p]));
 
-const PLACEHOLDER = {
-  hero: "https://placehold.co/960x720/0b1220/38bdf8?text=Hero",
-  product: (label: string) =>
-    `https://placehold.co/720x480/0b1220/38bdf8?text=${encodeURIComponent(label)}`,
-};
-
 function productHref(slug: string, intent: string) {
   const card = productBySlug.get(slug);
   if (card?.href) return card.href;
   return `${contactHref}?intent=${intent}`;
 }
 
-function productCover(slug: string, fallbackLabel: string) {
-  return (
-    productBySlug.get(slug)?.coverUrl || PLACEHOLDER.product(fallbackLabel)
-  );
+/** 仅返回 CMS 封面；无图时由 UI 用 SVG/CSS 占位，禁止外链 placehold */
+function productCover(slug: string) {
+  return String(productBySlug.get(slug)?.coverUrl || "").trim();
 }
 
 function productIntent(slug: string) {
@@ -94,7 +87,7 @@ function productIntent(slug: string) {
   return "sites";
 }
 
-const heroMedia = heroImageUrl || PLACEHOLDER.hero;
+const heroMedia = String(heroImageUrl || "").trim();
 const faqs = copy.faq.items;
 const faqSchema = {
   "@context": "https://schema.org",
@@ -214,7 +207,7 @@ const highlightIcons = [
         </div>
         <div class="cz-home-product-stack">
           {copy.products.items.map((item, i) => {
-            const cover = productCover(item.slug, item.tag);
+            const cover = productCover(item.slug);
             const href = productHref(item.slug, productIntent(item.slug));
             return (
               <article
@@ -224,14 +217,25 @@ const highlightIcons = [
                 ]}
               >
                 <div class="cz-home-product-visual">
-                  <OptimizedImage
-                    src={cover}
-                    alt={item.tag}
-                    width={720}
-                    height={480}
-                    widths={[360, 540, 720]}
-                    sizes="(max-width: 900px) 100vw, 420px"
-                  />
+                  {cover ? (
+                    <OptimizedImage
+                      src={cover}
+                      alt={item.tag}
+                      width={720}
+                      height={480}
+                      widths={[360, 540, 720]}
+                      sizes="(max-width: 900px) 100vw, 420px"
+                    />
+                  ) : (
+                    <div class="cz-media-placeholder" aria-hidden="true">
+                      <svg viewBox="0 0 72 72" width="56" height="56" fill="none">
+                        <rect x="10" y="16" width="52" height="40" rx="6" stroke="currentColor" stroke-width="2" opacity="0.35" />
+                        <circle cx="26" cy="30" r="5" stroke="currentColor" stroke-width="2" opacity="0.45" />
+                        <path d="M14 48l14-12 10 8 10-14 10 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45" />
+                      </svg>
+                      <span>{item.tag}</span>
+                    </div>
+                  )}
                   <span class="cz-home-product-chip">{item.tag}</span>
                 </div>
                 <div class="cz-home-product-copy">

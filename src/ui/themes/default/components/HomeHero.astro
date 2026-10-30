@@ -35,6 +35,8 @@ const {
   secondaryProductTitle,
   highlightIcons,
 } = Astro.props;
+
+const hasHeroImage = Boolean(String(heroMedia || '').trim());
 ---
 
 <section class="cz-hero cz-home-hero" data-home-hero>
@@ -105,15 +107,26 @@ const {
     </div>
     <div class="cz-home-hero-media">
       <div class="cz-home-hero-frame">
-        <OptimizedImage
-          src={heroMedia}
-          alt={siteName}
-          width={960}
-          height={720}
-          widths={[480, 720, 960]}
-          sizes="(max-width: 900px) 100vw, 460px"
-          priority
-        />
+        {hasHeroImage ? (
+          <OptimizedImage
+            src={heroMedia}
+            alt={siteName}
+            width={960}
+            height={720}
+            widths={[480, 720, 960]}
+            sizes="(max-width: 900px) 100vw, 460px"
+          />
+        ) : (
+          <div class="cz-media-placeholder cz-media-placeholder-hero" aria-hidden="true">
+            <svg viewBox="0 0 96 96" width="72" height="72" fill="none">
+              <rect x="12" y="20" width="72" height="56" rx="10" stroke="currentColor" stroke-width="2.5" opacity="0.28" />
+              <circle cx="36" cy="42" r="7" stroke="currentColor" stroke-width="2.5" opacity="0.4" />
+              <path d="M18 68l22-18 14 12 14-20 14 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" />
+              <path d="M48 8v8M48 80v8M8 48h8M80 48h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.25" />
+            </svg>
+            <span>{siteName}</span>
+          </div>
+        )}
       </div>
     </div>
   </div>
@@ -127,6 +140,8 @@ const {
       var canvas = root.querySelector(".cz-home-hero-canvas");
       if (!canvas || !canvas.getContext) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      /* 小屏跳过粒子动画，避免与首屏主线程争抢 */
+      if (window.matchMedia("(max-width: 900px)").matches) return;
 
       var ctx = canvas.getContext("2d");
       if (!ctx) return;
@@ -203,12 +218,18 @@ const {
       });
     }
 
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initHeroCanvas, {
-        once: true,
-      });
-    } else {
-      initHeroCanvas();
+    function scheduleHeroCanvas() {
+      var run = function () {
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(function () { initHeroCanvas(); }, { timeout: 2500 });
+        } else {
+          setTimeout(initHeroCanvas, 1);
+        }
+      };
+      if (document.readyState === "complete") run();
+      else window.addEventListener("load", run, { once: true });
     }
+
+    scheduleHeroCanvas();
   })();
 </script>
