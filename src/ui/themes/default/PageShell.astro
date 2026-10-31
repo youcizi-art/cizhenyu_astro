@@ -33,21 +33,59 @@ const {
 
 const resolvedQuickLinks = quickLinksLabel || t(locale, 'quickLinks');
 ---
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18534098548"></script>
+<!-- 第三方脚本：load + idle 后再注入，避免与首屏 LCP 抢带宽（preload scanner 看不到静态 script src） -->
 <script is:inline>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  (function () {
+    var GA_ID = 'AW-18534098548';
+    var WIDGET_HOST = 'https://chat.ycz.me';
+    var WIDGET_SRC = WIDGET_HOST + '/widget.js';
 
-  gtag('config', 'AW-18534098548');
-</script>
+    function injectGtag() {
+      if (window.__czGtagScheduled) return;
+      window.__czGtagScheduled = true;
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = window.gtag || gtag;
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID);
+      document.head.appendChild(s);
+    }
 
-<!-- Cloudflare 在线智能客服挂件代码（专属嵌入代码） -->
-<script is:inline>
-  window.__CF_IM_HOST__ = 'https://chat.ycz.me';
+    function injectWidget() {
+      if (window.__czWidgetScheduled) return;
+      window.__czWidgetScheduled = true;
+      window.__CF_IM_HOST__ = WIDGET_HOST;
+      var s = document.createElement('script');
+      s.src = WIDGET_SRC;
+      s.defer = true;
+      document.body.appendChild(s);
+    }
+    // 用户点击咨询时立即拉挂件（不必等 idle）
+    window.__czLoadChatWidget = injectWidget;
+
+    function afterIdle(fn, timeout) {
+      var ric = window.requestIdleCallback;
+      if (typeof ric === 'function') {
+        ric(fn, { timeout: timeout || 4000 });
+      } else {
+        setTimeout(fn, Math.min(timeout || 4000, 2000));
+      }
+    }
+
+    function bootThirdParty() {
+      afterIdle(injectWidget, 3500);
+      afterIdle(injectGtag, 5000);
+    }
+
+    if (document.readyState === 'complete') bootThirdParty();
+    else window.addEventListener('load', bootThirdParty, { once: true });
+  })();
 </script>
-<script src="https://chat.ycz.me/widget.js" defer></script>
 
 <Header
   siteName={siteName}
@@ -128,12 +166,16 @@ const resolvedQuickLinks = quickLinksLabel || t(locale, 'quickLinks');
         );
       } catch (err) {}
 
+      if (typeof window.__czLoadChatWidget === 'function') {
+        window.__czLoadChatWidget();
+      }
+
       // 若客服挂件已加载完毕则立即打开；否则进行重试轮询
       if (!executeOpen()) {
         var retries = 0;
         var intervalId = setInterval(function () {
           retries++;
-          if (executeOpen() || retries > 25) {
+          if (executeOpen() || retries > 40) {
             clearInterval(intervalId);
           }
         }, 120);

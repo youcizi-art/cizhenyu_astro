@@ -76,7 +76,7 @@ function productHref(slug: string, intent: string) {
   return `${contactHref}?intent=${intent}`;
 }
 
-/** 仅返回 CMS 封面；无图时由 UI 用 SVG/CSS 占位，禁止外链 placehold */
+/** 仅返回可用封面；空或占位外链由 UI 用 SVG/CSS 占位 */
 function productCover(slug: string) {
   return String(productBySlug.get(slug)?.coverUrl || "").trim();
 }

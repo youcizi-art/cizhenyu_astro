@@ -33,10 +33,7 @@
           "seo_title": "关于磁帧鱼",
           "seo_description": "磁帧鱼三款外贸获客产品介绍。",
           "robots_directive": "index,follow",
-          "schema_type": "AboutPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=About"
-          }
+          "schema_type": "AboutPage"
         },
         "zh-TW": {
           "title": "關於磁幀魚",
@@ -55,10 +52,7 @@
           "seo_title": "關於磁幀魚",
           "seo_description": "磁幀魚三款外貿獲客產品介紹。",
           "robots_directive": "index,follow",
-          "schema_type": "AboutPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=About"
-          }
+          "schema_type": "AboutPage"
         },
         "ja": {
           "title": "磁帧鱼について",
@@ -77,10 +71,7 @@
           "seo_title": "磁帧鱼について",
           "seo_description": "磁帧鱼の3製品。",
           "robots_directive": "index,follow",
-          "schema_type": "AboutPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=About"
-          }
+          "schema_type": "AboutPage"
         },
         "en-US": {
           "title": "About Cizhenyu",
@@ -111,10 +102,7 @@
           "seo_title": "About Cizhenyu",
           "seo_description": "Three Cizhenyu products for export growth.",
           "robots_directive": "index,follow",
-          "schema_type": "AboutPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=About"
-          }
+          "schema_type": "AboutPage"
         },
         "es": {
           "title": "Sobre Cizhenyu",
@@ -125,10 +113,7 @@
           "seo_title": "Sobre Cizhenyu",
           "seo_description": "Tres productos Cizhenyu para el crecimiento exportador.",
           "robots_directive": "index,follow",
-          "schema_type": "AboutPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=About"
-          }
+          "schema_type": "AboutPage"
         },
         "pt": {
           "title": "Sobre a Cizhenyu",
@@ -139,10 +124,7 @@
           "seo_title": "Sobre a Cizhenyu",
           "seo_description": "Três produtos Cizhenyu para crescimento em exportação.",
           "robots_directive": "index,follow",
-          "schema_type": "AboutPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=About"
-          }
+          "schema_type": "AboutPage"
         },
         "ar": {
           "title": "عن Cizhenyu",
@@ -153,10 +135,7 @@
           "seo_title": "عن Cizhenyu",
           "seo_description": "ثلاثة منتجات Cizhenyu لنمو التصدير.",
           "robots_directive": "index,follow",
-          "schema_type": "AboutPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=About"
-          }
+          "schema_type": "AboutPage"
         }
       }
     },
@@ -172,10 +151,7 @@
           "seo_title": "联系｜磁帧鱼",
           "seo_description": "提交询盘，获取产品安装与协作方案。",
           "robots_directive": "index,follow",
-          "schema_type": "ContactPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Contact"
-          }
+          "schema_type": "ContactPage"
         },
         "zh-TW": {
           "title": "聯繫我們",
@@ -186,10 +162,7 @@
           "seo_title": "聯繫｜磁幀魚",
           "seo_description": "提交詢盤，獲取安裝與協作方案。",
           "robots_directive": "index,follow",
-          "schema_type": "ContactPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Contact"
-          }
+          "schema_type": "ContactPage"
         },
         "ja": {
           "title": "お問い合わせ",
@@ -200,10 +173,7 @@
           "seo_title": "お問い合わせ｜磁帧鱼",
           "seo_description": "導入とサポートのご相談。",
           "robots_directive": "index,follow",
-          "schema_type": "ContactPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Contact"
-          }
+          "schema_type": "ContactPage"
         },
         "en-US": {
           "title": "Contact",
@@ -214,10 +184,7 @@
           "seo_title": "Contact | Cizhenyu",
           "seo_description": "Inquire for install and collaboration.",
           "robots_directive": "index,follow",
-          "schema_type": "ContactPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Contact"
-          }
+          "schema_type": "ContactPage"
         },
         "es": {
           "title": "Contacto",
@@ -228,10 +195,7 @@
           "seo_title": "Contacto | Cizhenyu",
           "seo_description": "Consulte instalación y colaboración.",
           "robots_directive": "index,follow",
-          "schema_type": "ContactPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Contact"
-          }
+          "schema_type": "ContactPage"
         },
         "pt": {
           "title": "Contato",
@@ -242,10 +206,7 @@
           "seo_title": "Contato | Cizhenyu",
           "seo_description": "Consulte instalação e colaboração.",
           "robots_directive": "index,follow",
-          "schema_type": "ContactPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Contact"
-          }
+          "schema_type": "ContactPage"
         },
         "ar": {
           "title": "اتصل بنا",
@@ -256,10 +217,7 @@
           "seo_title": "اتصل بنا | Cizhenyu",
           "seo_description": "استفسر عن التثبيت والتعاون.",
           "robots_directive": "index,follow",
-          "schema_type": "ContactPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Contact"
-          }
+          "schema_type": "ContactPage"
         }
       }
     },
@@ -275,10 +233,7 @@
           "seo_title": "隐私权政策｜磁帧鱼",
           "seo_description": "磁帧鱼官方隐私权政策与数据保护声明。",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Privacy"
-          }
+          "schema_type": "WebPage"
         },
         "zh-TW": {
           "title": "隱私權政策",
@@ -289,10 +244,7 @@
           "seo_title": "隱私權政策｜磁幀魚",
           "seo_description": "磁幀魚官方隱私權政策與資料保護聲明。",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Privacy"
-          }
+          "schema_type": "WebPage"
         },
         "ja": {
           "title": "プライバシーポリシー",
@@ -303,10 +255,7 @@
           "seo_title": "プライバシーポリシー｜磁帧鱼",
           "seo_description": "磁帧鱼のプライバシーポリシーとデータ保護について。",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Privacy"
-          }
+          "schema_type": "WebPage"
         },
         "en-US": {
           "title": "Privacy Policy",
@@ -317,10 +266,7 @@
           "seo_title": "Privacy Policy | Cizhenyu",
           "seo_description": "Official privacy policy and data governance statement for Cizhenyu.",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Privacy"
-          }
+          "schema_type": "WebPage"
         },
         "es": {
           "title": "Privacy Policy",
@@ -331,10 +277,7 @@
           "seo_title": "Privacy Policy | Cizhenyu",
           "seo_description": "Official privacy policy and data governance statement for Cizhenyu.",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Privacy"
-          }
+          "schema_type": "WebPage"
         },
         "pt": {
           "title": "Privacy Policy",
@@ -345,10 +288,7 @@
           "seo_title": "Privacy Policy | Cizhenyu",
           "seo_description": "Official privacy policy and data governance statement for Cizhenyu.",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Privacy"
-          }
+          "schema_type": "WebPage"
         },
         "ar": {
           "title": "Privacy Policy",
@@ -359,10 +299,7 @@
           "seo_title": "Privacy Policy | Cizhenyu",
           "seo_description": "Official privacy policy and data governance statement for Cizhenyu.",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Privacy"
-          }
+          "schema_type": "WebPage"
         }
       }
     },
@@ -378,10 +315,7 @@
           "seo_title": "服务条款｜磁帧鱼",
           "seo_description": "磁帧鱼系统交付与技术服务条款。",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Terms"
-          }
+          "schema_type": "WebPage"
         },
         "zh-TW": {
           "title": "服務條款",
@@ -392,10 +326,7 @@
           "seo_title": "服務條款｜磁幀魚",
           "seo_description": "磁幀魚系統交付與技術服務條款。",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Terms"
-          }
+          "schema_type": "WebPage"
         },
         "ja": {
           "title": "利用規約",
@@ -406,10 +337,7 @@
           "seo_title": "利用規約｜磁帧鱼",
           "seo_description": "磁帧鱼システムの利用規約とライセンス条件。",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Terms"
-          }
+          "schema_type": "WebPage"
         },
         "en-US": {
           "title": "Terms of Service",
@@ -420,10 +348,7 @@
           "seo_title": "Terms of Service | Cizhenyu",
           "seo_description": "Cizhenyu system delivery terms and service license agreement.",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Terms"
-          }
+          "schema_type": "WebPage"
         },
         "es": {
           "title": "Términos de servicio",
@@ -434,10 +359,7 @@
           "seo_title": "Términos de servicio | Cizhenyu",
           "seo_description": "Términos de entrega y licencia del sistema Cizhenyu.",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Terms"
-          }
+          "schema_type": "WebPage"
         },
         "pt": {
           "title": "Termos de serviço",
@@ -448,10 +370,7 @@
           "seo_title": "Termos de serviço | Cizhenyu",
           "seo_description": "Termos de entrega e licença do sistema Cizhenyu.",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Terms"
-          }
+          "schema_type": "WebPage"
         },
         "ar": {
           "title": "شروط الخدمة",
@@ -462,10 +381,7 @@
           "seo_title": "شروط الخدمة | Cizhenyu",
           "seo_description": "شروط تسليم وترخيص نظام Cizhenyu.",
           "robots_directive": "index,follow",
-          "schema_type": "WebPage",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Terms"
-          }
+          "schema_type": "WebPage"
         }
       }
     }

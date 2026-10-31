@@ -12,8 +12,34 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const LOCALES = ['zh-CN', 'zh-TW', 'ja', 'en-US', 'es', 'pt', 'ar'];
 const FALLBACK_LOCALE = 'en-US';
 
-const img = (seed, w = 800, h = 600) =>
-  `https://placehold.co/${w}x${h}/0b1220/38bdf8?text=${encodeURIComponent(seed)}`;
+/**
+ * default 主题不写入外链占位图。
+ * 无图时由主题页 SVG/CSS 占位；勿再生成 placehold.co 等第三方 URL。
+ */
+const img = (_seed, _w = 800, _h = 600) => '';
+
+/** 去掉空 url 的 media 对象 / 空 images，避免 seed 里残留无用字段 */
+function pruneEmptyMedia(value) {
+  if (Array.isArray(value)) {
+    return value
+      .map(pruneEmptyMedia)
+      .filter((item) => item !== undefined && item !== null && item !== '');
+  }
+  if (value && typeof value === 'object') {
+    if (Object.prototype.hasOwnProperty.call(value, 'url') && !String(value.url || '').trim()) {
+      return undefined;
+    }
+    const out = {};
+    for (const [key, child] of Object.entries(value)) {
+      const next = pruneEmptyMedia(child);
+      if (next === undefined) continue;
+      if (Array.isArray(next) && next.length === 0 && (key === 'images' || key === 'gallery')) continue;
+      out[key] = next;
+    }
+    return out;
+  }
+  return value;
+}
 
 function lgk(kind, n) {
   return `def00000-${kind}-4000-8000-${String(n).padStart(12, '0')}`;
@@ -81,7 +107,8 @@ function tw(s) {
 }
 
 function writeJson(name, data) {
-  fs.writeFileSync(path.join(__dirname, name), JSON.stringify(data, null, 2) + '\n', 'utf8');
+  const cleaned = pruneEmptyMedia(data);
+  fs.writeFileSync(path.join(__dirname, name), JSON.stringify(cleaned, null, 2) + '\n', 'utf8');
   console.log('wrote', name);
 }
 
@@ -1976,7 +2003,7 @@ writeJson('seed.manifest.json', {
     resources: ['resource.json'],
   },
   notes:
-    'Cizhenyu marketing seed: 3 products, nav 首页/产品/帮助/下载/动态/关于/联系. Download CTAs → inquiry. Logo empty for lightning fallback.',
+    'Cizhenyu marketing seed: 3 products, nav 首页/产品/帮助/下载/动态/关于/联系. Download CTAs → inquiry. No remote placeholder images — theme uses SVG/CSS when media empty.',
 });
 
 fs.writeFileSync(

@@ -11,14 +11,6 @@
           "brand": "磁帧鱼",
           "summary": "面向外贸站群与企业站交付：统一内容后台、多语言结构、产品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。",
           "description": "<p><strong>全能站群 + B2B 前端生成</strong>帮您把「多站点内容」和「可交付的企业官网」放在同一套系统里。</p><ul><li>站群统一管理：域名、语言、栏目、内容权限</li><li>B2B 站点结构开箱：产品、帮助、动态、关于、联系</li><li>主题包交付：无需给客户源码环境</li><li>与询盘、部署产品可组合安装</li></ul><p>适合服务商批量交付，也适合工厂/贸易公司自建主站。下载安装可联系客服协作。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
-            },
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites%2BUI"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -29,9 +21,6 @@
           "seo_description": "面向外贸站群与企业站交付：统一内容后台、多语言结构、产品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
-          },
           "tagline": "一套后台管多站，一键生成可上线的 B2B 外贸站",
           "advantages": [
             {
@@ -58,11 +47,6 @@
           "brand": "磁幀魚",
           "summary": "面向外貿站群与企業站交付：统一內容後台、多語言结构、產品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。",
           "description": "<p><strong>全能站群 + B2B 前端生成</strong>帮您把「多站點內容」和「可交付的企業官網」放在同一套系统里。</p><ul><li>站群统一管理：域名、语言、栏目、內容权限</li><li>B2B 站點结构开箱：產品、幫助、動態、關於、聯繫</li><li>主题包交付：无需给客户源码环境</li><li>与詢盤、部署產品可组合安裝</li></ul><p>适合服務商批量交付，也适合工厂/贸易公司自建主站。下載安裝可聯繫客服協作。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -73,9 +57,6 @@
           "seo_description": "面向外貿站群与企業站交付：统一內容後台、多語言结构、產品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
-          },
           "tagline": "一套後台管多站，一鍵生成可上线的 B2B 外貿站",
           "advantages": [
             {
@@ -102,11 +83,6 @@
           "brand": "磁帧鱼",
           "summary": "サイト群のコンテンツ管理と、Cloudflare Pages向けB2Bサイト生成。",
           "description": "<p><strong>サイト群 + B2B生成</strong>で、多サイト運用と企業サイト納品を一本化。問い合わせ・導入製品と組み合わせ可能。インストール同席サポートあり。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -117,9 +93,6 @@
           "seo_description": "サイト群のコンテンツ管理と、Cloudflare Pages向けB2Bサイト生成。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
-          },
           "tagline": "多サイトを一括管理し、納品可能なB2Bサイトを生成",
           "advantages": [
             {
@@ -146,11 +119,6 @@
           "brand": "Cizhenyu",
           "summary": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
           "description": "<p><strong>Multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -161,9 +129,6 @@
           "seo_description": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
-          },
           "tagline": "One hub for many sites — generate deployable B2B export sites",
           "advantages": [
             {
@@ -190,11 +155,6 @@
           "brand": "Cizhenyu",
           "summary": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
           "description": "<p><strong>Multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -205,9 +165,6 @@
           "seo_description": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
-          },
           "tagline": "One hub for many sites — generate deployable B2B export sites",
           "advantages": [
             {
@@ -234,11 +191,6 @@
           "brand": "Cizhenyu",
           "summary": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
           "description": "<p><strong>Multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -249,9 +201,6 @@
           "seo_description": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
-          },
           "tagline": "One hub for many sites — generate deployable B2B export sites",
           "advantages": [
             {
@@ -278,11 +227,6 @@
           "brand": "Cizhenyu",
           "summary": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
           "description": "<p><strong>Multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Sites"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -293,9 +237,6 @@
           "seo_description": "Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Sites"
-          },
           "tagline": "One hub for many sites — generate deployable B2B export sites",
           "advantages": [
             {
@@ -327,14 +268,6 @@
           "brand": "磁帧鱼",
           "summary": "把散落在邮箱、表单、聊天工具里的询盘收进同一中台：智能客服按知识库应答，高意向线索可转人工跟进。",
           "description": "<p><strong>智能客服 · 智能询盘</strong>解决「线索散、夜间空窗、跟进记不住」。</p><ul><li>统一询盘台：来源可追溯</li><li>知识库驱动自动应答，可配置转人工</li><li>与站点表单、下载意向联动（询盘按钮可预留接入）</li><li>适合外贸业务员与团队协作跟进</li></ul><p>可与站群、部署获客产品组合。安装与对接可联系客服协作。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
-            },
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry%2BUI"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -345,9 +278,6 @@
           "seo_description": "把散落在邮箱、表单、聊天工具里的询盘收进同一中台：智能客服按知识库应答，高意向线索可转人工跟进。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
-          },
           "tagline": "白天夜里都能接住询盘——知识库应答，关键线索转人工",
           "advantages": [
             {
@@ -374,11 +304,6 @@
           "brand": "磁幀魚",
           "summary": "把散落在邮箱、表单、聊天工具里的詢盤收进同一中台：智慧客服按知識庫应答，高意向线索可转人工跟进。",
           "description": "<p><strong>智慧客服 · 智慧詢盤</strong>解决「线索散、夜间空窗、跟进记不住」。</p><ul><li>统一詢盤台：来源可追溯</li><li>知識庫驱动自动应答，可配置转人工</li><li>与站點表单、下載意向联动（詢盤按钮可预留接入）</li><li>适合外貿業務員与团队協作跟进</li></ul><p>可与站群、部署獲客產品组合。安裝与对接可聯繫客服協作。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -389,9 +314,6 @@
           "seo_description": "把散落在邮箱、表单、聊天工具里的詢盤收进同一中台：智慧客服按知識庫应答，高意向线索可转人工跟进。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
-          },
           "tagline": "白天夜里都能接住詢盤——知識庫应答，关键线索转人工",
           "advantages": [
             {
@@ -418,11 +340,6 @@
           "brand": "磁帧鱼",
           "summary": "フォームやチャットの問い合わせを一元化。知識ベース応答、高意向は有人。",
           "description": "<p><strong>AI客服・問い合わせ</strong>で漏れと夜間空白を解消。サイトの問い合わせボタンと接続可能（フォームは後日実装可）。他製品と組み合わせ可。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -433,9 +350,6 @@
           "seo_description": "フォームやチャットの問い合わせを一元化。知識ベース応答、高意向は有人。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
-          },
           "tagline": "昼夜問わず問い合わせを受け止め、必要時に有人へ",
           "advantages": [
             {
@@ -462,11 +376,6 @@
           "brand": "Cizhenyu",
           "summary": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
           "description": "<p><strong>AI desk + inquiry hub</strong> stops scattered leads and night-time gaps. Wire to site CTAs (form hook reserved). Pair with multi-site and deploy products. Collaborative install available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -477,9 +386,6 @@
           "seo_description": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
-          },
           "tagline": "Catch leads day and night — KB answers, humans on high intent",
           "advantages": [
             {
@@ -506,11 +412,6 @@
           "brand": "Cizhenyu",
           "summary": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
           "description": "<p><strong>AI desk + inquiry hub</strong> stops scattered leads and night-time gaps. Wire to site CTAs (form hook reserved). Pair with multi-site and deploy products. Collaborative install available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -521,9 +422,6 @@
           "seo_description": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
-          },
           "tagline": "Catch leads day and night — KB answers, humans on high intent",
           "advantages": [
             {
@@ -550,11 +448,6 @@
           "brand": "Cizhenyu",
           "summary": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
           "description": "<p><strong>AI desk + inquiry hub</strong> stops scattered leads and night-time gaps. Wire to site CTAs (form hook reserved). Pair with multi-site and deploy products. Collaborative install available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -565,9 +458,6 @@
           "seo_description": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
-          },
           "tagline": "Catch leads day and night — KB answers, humans on high intent",
           "advantages": [
             {
@@ -594,11 +484,6 @@
           "brand": "Cizhenyu",
           "summary": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
           "description": "<p><strong>AI desk + inquiry hub</strong> stops scattered leads and night-time gaps. Wire to site CTAs (form hook reserved). Pair with multi-site and deploy products. Collaborative install available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Inquiry"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -609,9 +494,6 @@
           "seo_description": "Centralize inquiries from forms and chat. Knowledge-base replies with optional human handoff.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Inquiry"
-          },
           "tagline": "Catch leads day and night — KB answers, humans on high intent",
           "advantages": [
             {
@@ -643,14 +525,6 @@
           "brand": "磁帧鱼",
           "summary": "部署向导把站点交付到您自己的 Cloudflare；运营侧提供可持续的 SEO/GEO 与获客节奏，避免「上线即停更」。",
           "description": "<p><strong>部署 · 运营 · 获客</strong>把上线和日常增长连成一条链。</p><ul><li>向导式部署：域名、Pages、环境变量点选完成</li><li>资产在您账户，不锁死在厂商平台</li><li>运营获客节奏：内容、索引、回访触达可按模块扩展</li><li>可与站群、询盘系统组合交付</li></ul><p>下载安装后可约客服协作首发上线与运营初始化。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
-            },
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth%2BUI"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -661,9 +535,6 @@
           "seo_description": "部署向导把站点交付到您自己的 Cloudflare；运营侧提供可持续的 SEO/GEO 与获客节奏，避免「上线即停更」。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
-          },
           "tagline": "点选部署到自有云账户，再把 SEO/GEO 与日常运营跑起来",
           "advantages": [
             {
@@ -690,11 +561,6 @@
           "brand": "磁幀魚",
           "summary": "部署向导把站點交付到您自己的 Cloudflare；運營侧提供可持续的 SEO/GEO 与獲客节奏，避免「上线即停更」。",
           "description": "<p><strong>部署 · 運營 · 獲客</strong>把上线和日常增长连成一条链。</p><ul><li>向导式部署：域名、Pages、环境变量点选完成</li><li>资产在您帳戶，不锁死在厂商平台</li><li>運營獲客节奏：內容、索引、回访触达可按模組扩展</li><li>可与站群、詢盤系统组合交付</li></ul><p>下載安裝后可约客服協作首发上线与運營初始化。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -705,9 +571,6 @@
           "seo_description": "部署向导把站點交付到您自己的 Cloudflare；運營侧提供可持续的 SEO/GEO 与獲客节奏，避免「上线即停更」。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
-          },
           "tagline": "点选部署到自有云帳戶，再把 SEO/GEO 与日常運營跑起来",
           "advantages": [
             {
@@ -734,11 +597,6 @@
           "brand": "磁帧鱼",
           "summary": "ウィザードで Cloudflare へ導入。公開後も SEO/GEO・獲得リズムを継続。",
           "description": "<p><strong>導入・運用・獲得</strong>で公開と継続成長をつなぎます。資産はお客様アカウント。他製品と組み合わせ可。初回導入の同席サポートあり。</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -749,9 +607,6 @@
           "seo_description": "ウィザードで Cloudflare へ導入。公開後も SEO/GEO・獲得リズムを継続。",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
-          },
           "tagline": "自クラウドアカウントへ導入し、SEO/GEO 運用を回す",
           "advantages": [
             {
@@ -778,11 +633,6 @@
           "brand": "Cizhenyu",
           "summary": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
           "description": "<p><strong>Deploy + growth ops</strong> connects launch to ongoing acquisition. Assets stay on your account. Pair with multi-site and inquiry products. Collaborative first launch available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -793,9 +643,6 @@
           "seo_description": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
-          },
           "tagline": "Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
           "advantages": [
             {
@@ -822,11 +669,6 @@
           "brand": "Cizhenyu",
           "summary": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
           "description": "<p><strong>Deploy + growth ops</strong> connects launch to ongoing acquisition. Assets stay on your account. Pair with multi-site and inquiry products. Collaborative first launch available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -837,9 +679,6 @@
           "seo_description": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
-          },
           "tagline": "Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
           "advantages": [
             {
@@ -866,11 +705,6 @@
           "brand": "Cizhenyu",
           "summary": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
           "description": "<p><strong>Deploy + growth ops</strong> connects launch to ongoing acquisition. Assets stay on your account. Pair with multi-site and inquiry products. Collaborative first launch available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -881,9 +715,6 @@
           "seo_description": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
-          },
           "tagline": "Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
           "advantages": [
             {
@@ -910,11 +741,6 @@
           "brand": "Cizhenyu",
           "summary": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
           "description": "<p><strong>Deploy + growth ops</strong> connects launch to ongoing acquisition. Assets stay on your account. Pair with multi-site and inquiry products. Collaborative first launch available.</p>",
-          "images": [
-            {
-              "url": "https://placehold.co/800x600/0b1220/38bdf8?text=Growth"
-            }
-          ],
           "availability": "InStock",
           "status": "published",
           "spec_data": {
@@ -925,9 +751,6 @@
           "seo_description": "Deploy to your Cloudflare account, then keep SEO/GEO and acquisition cadence moving after go-live.",
           "robots_directive": "index,follow",
           "schema_type": "Product",
-          "og_image": {
-            "url": "https://placehold.co/1200x630/0b1220/38bdf8?text=Growth"
-          },
           "tagline": "Wizard deploy to your cloud — then run SEO/GEO acquisition loops",
           "advantages": [
             {

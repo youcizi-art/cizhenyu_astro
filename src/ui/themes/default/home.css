@@ -102,7 +102,17 @@
   filter: blur(8px);
   z-index: 0;
   pointer-events: none;
-  animation: cz-home-float 8s ease-in-out infinite;
+}
+@media (min-width: 960px) {
+  [data-theme='default'] .cz-home-hero-glow {
+    animation: cz-home-float 8s ease-in-out infinite;
+  }
+}
+@media (max-width: 959px) {
+  [data-theme='default'] .cz-home-hero-glow {
+    filter: none;
+    opacity: 0.55;
+  }
 }
 [data-theme='default'] .cz-home-hero-grid {
   position: relative;
@@ -117,8 +127,9 @@
     gap: 3rem;
   }
 }
+/* 首屏文案不做 opacity:0 入场：否则移动端 LCP 会等淡入结束 */
 [data-theme='default'] .cz-home-hero-copy {
-  animation: cz-home-fade-up 0.7s ease both;
+  animation: none;
 }
 [data-theme='default'] .cz-home-brand {
   margin: 0 0 0.3rem;
@@ -173,11 +184,16 @@
   gap: 0.35rem;
   padding: 1rem 1.05rem;
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(15, 23, 42, 0.08);
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
-  backdrop-filter: blur(8px);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+@media (min-width: 960px) {
+  [data-theme='default'] .cz-home-hl-card {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(8px);
+  }
 }
 [data-theme='default'] .cz-home-hl-card:hover {
   transform: translateY(-4px);
@@ -194,7 +210,7 @@
   line-height: 1.5;
 }
 [data-theme='default'] .cz-home-hero-media {
-  animation: cz-home-fade-up 0.8s ease 0.08s both;
+  animation: none;
 }
 [data-theme='default'] .cz-home-hero-frame {
   position: relative;
