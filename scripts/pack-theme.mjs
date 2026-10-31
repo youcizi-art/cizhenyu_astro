@@ -377,6 +377,17 @@ function main() {
   writeSingleThemeKernel(workThemes, themeId, allThemeIds);
   patchLoadSiteForTheme(work, themeId);
 
+  // 主题自包含 favicon → 交付包根路径 /favicon.ico（浏览器默认探测；多主题仓库勿写全局 public）
+  const themeFavicon = path.join(themeSrc, 'assets', 'favicon.ico');
+  if (fs.existsSync(themeFavicon)) {
+    const publicDir = path.join(work, 'public');
+    ensureDir(publicDir);
+    fs.copyFileSync(themeFavicon, path.join(publicDir, 'favicon.ico'));
+    console.log('▶ 已写入主题 favicon → public/favicon.ico');
+  } else {
+    console.warn(`⚠ 主题 ${themeId} 无 assets/favicon.ico，交付包将不带根路径 favicon`);
+  }
+
   // 依赖：优先 symlink/copy 源 node_modules 加速
   const srcNm = path.join(astroRoot, 'node_modules');
   const workNm = path.join(work, 'node_modules');

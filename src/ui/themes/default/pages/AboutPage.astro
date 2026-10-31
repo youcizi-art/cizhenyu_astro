@@ -2,6 +2,7 @@
 import PageBanner from '../components/PageBanner.astro';
 import Alerts from '../components/Alerts.astro';
 import OptimizedImage from '@/ui/components/OptimizedImage.astro';
+import BrandLogo from '../components/BrandLogo.astro';
 import type { CompanyView } from '@/modules/company';
 import type { ResolvedReferenceCard } from '@/modules/reference';
 
@@ -53,7 +54,9 @@ const {
       <aside class="cz-about-panel">
         {company.logoUrl ? (
           <OptimizedImage src={company.logoUrl} alt={company.name} width={240} height={80} widths={[120, 240]} sizes="240px" />
-        ) : null}
+        ) : (
+          <BrandLogo size={72} />
+        )}
         <strong>{company.name}</strong>
         {company.slogan ? <p style="margin:0.5rem 0 0;color:var(--muted);font-size:0.95rem">{company.slogan}</p> : null}
         <div class="cz-about-meta">

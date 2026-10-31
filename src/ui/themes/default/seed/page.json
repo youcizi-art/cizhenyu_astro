@@ -7,14 +7,14 @@
         "zh-CN": {
           "title": "关于磁帧鱼",
           "slug": "about",
-          "summary": "把外贸站群、询盘与部署获客，做成可安装的产品",
-          "content": "<p>磁帧鱼服务外贸业务员、工厂外贸部与服务商。我们交付三款可下载安装的产品：</p><ol><li>全能站群管理系统 + B2B 前端站点生成系统</li><li>智能客服智能询盘系统</li><li>部署运营获客系统</li></ol><p>默认 Logo 为闪电占位，可在 CMS 公司信息中替换。系统提供标准建站（$399）、智能营销（$1,099）与源码 Enterprise｜企业定制版（$1,999起，按需求报价）交付方案。</p>",
+          "summary": "把外贸多站点、询盘与部署获客，做成可安装的产品",
+          "content": "<p>磁帧鱼服务外贸业务员、工厂外贸部与服务商。我们交付三款可下载安装的产品：</p><ol><li>全能多站点管理系统 + B2B 前端站点生成系统</li><li>智能客服智能询盘系统</li><li>部署运营获客系统</li></ol><p>系统提供标准建站（$399）、智能营销（$1,099）与源码 Enterprise｜企业定制版（$1,999起，按需求报价）交付方案。</p>",
           "target_reference": [
             {
               "type": "internal",
               "refType": "b2b_product",
               "refId": "__BY_SLUG__:cizhenyu-sites",
-              "title": "站群 + B2B 生成"
+              "title": "多站点 + B2B 生成"
             },
             {
               "type": "internal",
@@ -38,14 +38,14 @@
         "zh-TW": {
           "title": "關於磁幀魚",
           "slug": "about",
-          "summary": "把外貿站群、詢盤與部署獲客，做成可安裝的產品",
-          "content": "<p>磁幀魚交付三款可下載安裝的產品：站群 + B2B 生成、智慧詢盤、部署運營獲客。Logo 可於 CMS 替換。系統提供標準建站（$399）、智慧行銷（$1,099）與源碼 Enterprise｜企業定制版（$1,999起，按需求報價）交付方案。</p>",
+          "summary": "把外貿多站點、詢盤與部署獲客，做成可安裝的產品",
+          "content": "<p>磁幀魚交付三款可下載安裝的產品：多站點 + B2B 生成、智慧詢盤、部署運營獲客。Logo 可於 CMS 替換。系統提供標準建站（$399）、智慧行銷（$1,099）與源碼 Enterprise｜企業定制版（$1,999起，按需求報價）交付方案。</p>",
           "target_reference": [
             {
               "type": "internal",
               "refType": "b2b_product",
               "refId": "__BY_SLUG__:cizhenyu-sites",
-              "title": "站群 + B2B 生成"
+              "title": "多站点 + B2B 生成"
             }
           ],
           "status": "published",
@@ -57,14 +57,14 @@
         "ja": {
           "title": "磁帧鱼について",
           "slug": "about",
-          "summary": "サイト群・問い合わせ・導入獲得を、導入可能な製品に",
+          "summary": "マルチサイト・問い合わせ・導入獲得を、導入可能な製品に",
           "content": "<p>3製品を提供します。ロゴはCMSで差し替え可能。標準（$399）、スマート集客（$1,099）、ソース Enterprise｜企業カスタム（$1,999〜・要件見積）のパッケージで納品します。</p>",
           "target_reference": [
             {
               "type": "internal",
               "refType": "b2b_product",
               "refId": "__BY_SLUG__:cizhenyu-sites",
-              "title": "サイト群"
+              "title": "マルチサイト"
             }
           ],
           "status": "published",

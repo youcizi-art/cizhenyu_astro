@@ -2,6 +2,7 @@
 import OptimizedImage from '@/ui/components/OptimizedImage.astro';
 import type { NavLink } from '@/modules/nav';
 import type { CompanyView } from '@/modules/company';
+import BrandLogo from './BrandLogo.astro';
 
 import { t } from '@/modules/i18n';
 
@@ -88,11 +89,7 @@ const drawerLinks = links.filter((link) => {
         <OptimizedImage src={logoUrl} alt={siteName} width={140} height={36} widths={[140, 280]} sizes="140px" priority />
       ) : (
         <>
-          <span class="cz-brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M13 2 4 14h7l-1 8 10-14h-7l0-6z" />
-            </svg>
-          </span>
+          <BrandLogo size={36} />
           <span>{siteName}</span>
         </>
       )}

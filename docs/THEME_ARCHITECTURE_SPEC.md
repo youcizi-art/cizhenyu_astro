@@ -73,10 +73,17 @@ src/ui/themes/theme-fashion/
 │   ├── AboutPage.astro       # 关于我们
 │   ├── ContactPage.astro     # 联系我们
 │   └── ...
+├── assets/                   # 可选：主题运行时静态资源（如 favicon.ico；禁止写入全局 public/）
 └── seed/                     # 可选：该主题专有的 CMS 初始数据（独立 page.json, product.json 等）
     ├── seed.manifest.json    # Seed 清单（包含 seedOrder、模块依赖等）
     └── assets/               # 可选：随主题自包含分发的媒体资源（如产品主图、证书高清图等）
 ```
+
+Favicon 约定：放在 `src/ui/themes/{themeId}/assets/favicon.ico`。
+- `BaseLayout` 按当前主题注入 `<link rel="icon">`（Vite 产物 URL，主题隔离）。
+- 多主题仓库内 `/favicon.ico` 由 `src/pages/favicon.ico.ts` 按站点主题 302 到对应资源。
+- `npm run pack -- {themeId}` 会把该主题 favicon 拷到交付包 `public/favicon.ico`，满足边缘静态命中。
+- **禁止**在仓库根 `public/favicon.ico` 写死全局图标。
 
 ### 1. 样式作用域隔离要求
 主题内所有 CSS 必须添加当前主题的作用域选择器，防止样式溢出：

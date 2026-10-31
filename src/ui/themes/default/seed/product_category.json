@@ -7,31 +7,31 @@
         "zh-CN": {
           "name": "磁帧鱼产品",
           "slug": "cizhenyu-products",
-          "description": "站群生成、智能询盘、部署获客三条产品线。",
+          "description": "多站点生成、智能询盘、部署获客三条产品线。",
           "sort_order": 10,
           "status": "published",
           "seo_title": "磁帧鱼产品",
-          "seo_description": "站群生成、智能询盘、部署获客。",
+          "seo_description": "多站点生成、智能询盘、部署获客。",
           "robots_directive": "index,follow"
         },
         "zh-TW": {
           "name": "磁幀魚產品",
           "slug": "cizhenyu-products",
-          "description": "站群生成、智慧詢盤、部署獲客三條產品線。",
+          "description": "多站點生成、智慧詢盤、部署獲客三條產品線。",
           "sort_order": 10,
           "status": "published",
           "seo_title": "磁幀魚產品",
-          "seo_description": "站群生成、智慧詢盤、部署獲客。",
+          "seo_description": "多站點生成、智慧詢盤、部署獲客。",
           "robots_directive": "index,follow"
         },
         "ja": {
           "name": "磁帧鱼プロダクト",
           "slug": "cizhenyu-products",
-          "description": "サイト群生成・AI問い合わせ・導入獲得。",
+          "description": "マルチサイト生成・AI問い合わせ・導入獲得。",
           "sort_order": 10,
           "status": "published",
           "seo_title": "磁帧鱼プロダクト",
-          "seo_description": "サイト群生成・AI問い合わせ・導入獲得。",
+          "seo_description": "マルチサイト生成・AI問い合わせ・導入獲得。",
           "robots_directive": "index,follow"
         },
         "en-US": {

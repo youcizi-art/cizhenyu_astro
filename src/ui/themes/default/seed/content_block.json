@@ -456,7 +456,7 @@
           "slug": "adv-1",
           "placement": "home_advantage",
           "summary": "外包建站耗时数月，改个产品排期两周；缺乏 SEO/GEO 结构设计，半年收不到一条有效询盘。",
-          "subtitle": "全能站群中台统一管理，多语言自动路由，秒级静态构建极速交付。",
+          "subtitle": "全能多站点中台统一管理，多语言自动路由，秒级静态构建极速交付。",
           "status": "published",
           "sort_order": 30
         },
@@ -467,7 +467,7 @@
           "slug": "adv-1",
           "placement": "home_advantage",
           "summary": "外包建站耗时数月，改个產品排期两周；缺乏 SEO/GEO 结构设计，半年收不到一条有效詢盤。",
-          "subtitle": "全能站群中台统一管理，多語言自动路由，秒级静态构建极速交付。",
+          "subtitle": "全能多站點中台统一管理，多語言自动路由，秒级静态构建极速交付。",
           "status": "published",
           "sort_order": 30
         },
@@ -791,7 +791,7 @@
           "eyebrow": "跨境硬件品牌独立站出海",
           "slug": "rev-2",
           "placement": "home_testimonial",
-          "summary": "站群生成和多语言部署帮我们迅速铺开了 5 个目标语种站点，全静态部署在 Cloudflare 上毫秒级打开，海外客户访问体验非常流畅，AI 搜索推荐量持续上升。",
+          "summary": "多站点生成和多语言部署帮我们迅速铺开了 5 个目标语种站点，全静态部署在 Cloudflare 上毫秒级打开，海外客户访问体验非常流畅，AI 搜索推荐量持续上升。",
           "link_label": "覆盖 12 个海外市场",
           "status": "published",
           "sort_order": 70
@@ -803,7 +803,7 @@
           "eyebrow": "跨境硬件品牌獨立站出海",
           "slug": "rev-2",
           "placement": "home_testimonial",
-          "summary": "站群生成和多語言部署帮我們迅速铺开了 5 个目标语种站點，全静态部署在 Cloudflare 上毫秒级打开，海外客户访问体验非常流畅，AI 搜尋推荐量持续上升。",
+          "summary": "多站點生成和多語言部署帮我們迅速铺开了 5 个目标语种站點，全静态部署在 Cloudflare 上毫秒级打开，海外客户访问体验非常流畅，AI 搜尋推荐量持续上升。",
           "link_label": "覆盖 12 个海外市场",
           "status": "published",
           "sort_order": 70
@@ -969,7 +969,7 @@
           "slug": "cmp-1",
           "placement": "home_comparison",
           "summary": "外包修改排期数周，改版成本高，多语言内容容易错乱覆盖",
-          "subtitle": "站群中台统一维护，一键同步多站，全静态秒级发布更新",
+          "subtitle": "多站点中台统一维护，一键同步多站，全静态秒级发布更新",
           "status": "published",
           "sort_order": 90
         },
@@ -980,7 +980,7 @@
           "slug": "cmp-1",
           "placement": "home_comparison",
           "summary": "外包修改排期数周，改版成本高，多語言內容容易错乱覆盖",
-          "subtitle": "站群中台统一维护，一鍵同步多站，全静态秒级发布更新",
+          "subtitle": "多站點中台统一维护，一鍵同步多站，全静态秒级发布更新",
           "status": "published",
           "sort_order": 90
         },
@@ -1379,7 +1379,7 @@
           "title": "灵活选配所需产品模块",
           "slug": "step-2",
           "placement": "home_step",
-          "summary": "按业务成熟度单选或组合：站群生成系统、智能询盘客服、部署运营中台。",
+          "summary": "按业务成熟度单选或组合：多站点生成系统、智能询盘客服、部署运营中台。",
           "status": "published",
           "sort_order": 140
         },
@@ -1390,7 +1390,7 @@
           "title": "灵活选配所需產品模組",
           "slug": "step-2",
           "placement": "home_step",
-          "summary": "按业务成熟度单选或组合：站群生成系统、智慧詢盤客服、部署運營中台。",
+          "summary": "按业务成熟度单选或组合：多站點生成系统、智慧詢盤客服、部署運營中台。",
           "status": "published",
           "sort_order": 140
         },

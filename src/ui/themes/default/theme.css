@@ -56,23 +56,18 @@
   gap: 0.55rem;
 }
 [data-theme='default'] .cz-brand img {
-  height: 34px;
+  height: 36px;
   width: auto;
 }
-[data-theme='default'] .cz-brand-mark {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(145deg, var(--accent) 0%, var(--accent-2) 100%);
-  color: #fff;
+[data-theme='default'] .cz-brand-logo {
+  display: inline-flex;
   flex-shrink: 0;
-  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.28);
+  line-height: 0;
 }
-[data-theme='default'] .cz-brand-mark svg {
-  width: 18px;
-  height: 18px;
+[data-theme='default'] .cz-brand-logo svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 [data-theme='default'] .cz-nav {
   display: none;

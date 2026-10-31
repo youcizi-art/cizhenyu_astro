@@ -48,6 +48,7 @@ const htmlDir = lang === 'ar' || String(lang).startsWith('ar') ? 'rtl' : 'ltr';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {meta.faviconHref ? <link rel="icon" href={meta.faviconHref} sizes="any" /> : null}
     <title>{title}</title>
     {meta.fontHref ? (
       <>

@@ -28,6 +28,12 @@ export type ThemeMeta = {
   shell: ThemeShellKind;
   /** Google Fonts CSS2 family query；空则不加载品牌字体 */
   fontHref: string;
+  /**
+   * 主题自包含 favicon（Vite 产物 URL）。
+   * 约定路径：`src/ui/themes/{themeId}/assets/favicon.ico`
+   * 勿写入全局 `public/favicon.ico`，否则多主题会互相污染。
+   */
+  faviconHref: string;
   /** 首页数据需求：未配置时按全量模块回退 */
   homeRequirements?: ThemeHomeRequirements;
 };
@@ -42,11 +48,19 @@ type ThemeManifest = {
 /**
  * NOTE: 新主题只需在自己的 theme.manifest.json 声明 fontHref / homeRequirements，
  * 严禁回到此文件登记主题名。CSS 仍按 data-theme 作用域引入（见 styles.ts）。
+ * Favicon 按约定放在各主题 `assets/favicon.ico`，由 glob 自动发现。
  */
 const manifests = import.meta.glob<ThemeManifest>('./*/theme.manifest.json', {
   eager: true,
   import: 'default',
 });
+
+/** 主题级 favicon：`./{themeId}/assets/favicon.ico` → 构建期 URL */
+const faviconUrls = import.meta.glob('./*/assets/favicon.ico', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>;
 
 const DEFAULT_FULL_HOME_REQUIREMENTS: ThemeHomeRequirements = {
   placements: [
@@ -74,10 +88,12 @@ export function getThemeHomeRequirements(theme?: string | null): ThemeHomeRequir
 export function getThemeMeta(theme?: string | null): ThemeMeta {
   const { themeId } = resolveTheme({ theme });
   const manifest = manifests[`./${themeId}/theme.manifest.json`];
+  const faviconHref = faviconUrls[`./${themeId}/assets/favicon.ico`] || '';
   return {
     id: themeId,
     shell: 'page-shell',
     fontHref: manifest?.fontHref || '',
+    faviconHref,
     homeRequirements: manifest?.homeRequirements || DEFAULT_FULL_HOME_REQUIREMENTS,
   };
 }

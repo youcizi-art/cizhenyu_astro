@@ -1,6 +1,7 @@
 ---
 import type { CompanyView } from '@/modules/company';
 import type { NavLink } from '@/modules/nav';
+import BrandLogo from './BrandLogo.astro';
 
 interface Props {
   company: CompanyView;
@@ -9,6 +10,7 @@ interface Props {
   quickLinksLabel?: string;
 }
 const { company, links = [], locale = 'zh-CN', quickLinksLabel = '快速链接' } = Astro.props;
+const logoUrl = String(company.logoUrl || '').trim();
 const year = new Date().getFullYear();
 
 const privacyByLocale: Record<string, string> = {
@@ -37,13 +39,7 @@ const termsHref = `/${locale}/terms`;
   <div class="cz-container cz-footer-grid">
     <div class="cz-footer-brand">
       <strong style="display:inline-flex;align-items:center;gap:0.5rem">
-        {!String(company.logoUrl || '').trim() ? (
-          <span class="cz-brand-mark" aria-hidden="true" style="width:28px;height:28px;border-radius:8px">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true">
-              <path d="M13 2 4 14h7l-1 8 10-14h-7l0-6z" />
-            </svg>
-          </span>
-        ) : null}
+        {logoUrl ? null : <BrandLogo size={28} />}
         {company.name}
       </strong>
       {company.slogan ? <p>{company.slogan}</p> : null}

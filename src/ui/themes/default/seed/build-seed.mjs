@@ -97,6 +97,7 @@ function tw(s) {
     .replace(/帮助/g, '幫助')
     .replace(/下载/g, '下載')
     .replace(/动态/g, '動態')
+    .replace(/多站点/g, '多站點')
     .replace(/站群/g, '站群')
     .replace(/生成/g, '生成')
     .replace(/智能/g, '智慧')
@@ -105,6 +106,23 @@ function tw(s) {
     .replace(/协作/g, '協作')
     .replace(/安装/g, '安裝');
 }
+
+
+const COMPANY_ADDRESS = {
+  'zh-CN': '中国广东省深圳市龙华区佳利科技大厦2层',
+  'zh-TW': '中國廣東省深圳市龍華區佳利科技大廈2層',
+  ja: '中国広東省深圳市龍華区佳利科技ビル2階',
+  'en-US': '2F, Jiali Technology Building, Longhua District, Shenzhen, Guangdong, China',
+  es: 'Piso 2, Edificio Jiali Technology, Distrito Longhua, Shenzhen, Guangdong, China',
+  pt: '2º andar, Edifício Jiali Technology, Distrito Longhua, Shenzhen, Guangdong, China',
+  ar: 'الطابق 2، مبنى جالي للتكنولوجيا، منطقة لونغوا، شنتشن، قوانغدونغ، الصين',
+};
+
+const PRODUCT_IMAGES = {
+  sites: 'https://media.ycz.me/media/1791838379124_5e934b3e_Gemini_Generated_Image_hpqsb6hpqsb6hpqs.jpg',
+  inquiry: 'https://media.ycz.me/media/1791836208468_43d17a1b_pexels-goumbik-577210.jpg',
+  growth: 'https://media.ycz.me/media/1791837532215_a6916feb_Gemini_Generated_Image_tol3b2tol3b2tol3.jpg',
+};
 
 function writeJson(name, data) {
   const cleaned = pruneEmptyMedia(data);
@@ -122,7 +140,7 @@ const PREFIX = {
   ar: '/ar',
 };
 
-// —— company（logo 留空，前端闪电图标兜底，可在 CMS 替换）——
+// —— company（logo 留空：default 主题 Header/Footer 使用内置 SVG Logo）——
 writeJson('company_info.json', {
   collectionSlug: 'b2b_company_info',
   items: [
@@ -135,13 +153,13 @@ writeJson('company_info.json', {
           slogan: '建好网站，管好客户，让全球客户找到你',
           summary:
             '磁帧鱼提供网站建设、CRM 与 AI 客服、SEO / GEO 运营三套可组合产品。基于 Cloudflare 轻量架构，降低运维负担，让网站真正服务业务增长。',
-          address: '中国',
+          address: COMPANY_ADDRESS['zh-CN'],
           phone: '',
           email: 'service@ycz.me',
           website: 'https://ycz.me',
           logo: { url: '' },
           about_content:
-            '<p>磁帧鱼做的不是「又一个模板站」，而是能装到您账户里、能持续改内容、能接住询盘的增长系统。</p><p>三款产品可单独购买、也可组合交付：全能站群 + B2B 前端生成、智能客服询盘、部署运营获客。下载安装可联系客服协作完成；价格与实施方案通过询盘获取。</p>',
+            '<p>磁帧鱼做的不是「又一个模板站」，而是能装到您账户里、能持续改内容、能接住询盘的增长系统。</p><p>三款产品可单独购买、也可组合交付：全能多站点 + B2B 前端生成、智能客服询盘、部署运营获客。下载安装可联系客服协作完成；价格与实施方案通过询盘获取。</p>',
           seo_title: '磁帧鱼｜网站建设 · 客户管理 · 搜索增长',
           seo_description:
             'Cloudflare 轻量建站、CRM 与 AI 客服、SEO / GEO 长期运营。咨询适合你的方案。',
@@ -154,18 +172,18 @@ writeJson('company_info.json', {
         'zh-TW': {
           company_name: '磁幀魚',
           company_type: 'software',
-          slogan: '第一次做外貿站群與詢盤，也能搭出可交付的獲客系統',
+          slogan: '第一次做外貿多站點與詢盤，也能搭出可交付的獲客系統',
           summary:
-            '磁幀魚面向外貿業務員、工廠外貿部與服務商，提供站群與 B2B 站點生成、智慧客服詢盤、部署運營獲客三套可安裝產品。',
-          address: '中國',
+            '磁幀魚面向外貿業務員、工廠外貿部與服務商，提供多站點與 B2B 站點生成、智慧客服詢盤、部署運營獲客三套可安裝產品。',
+          address: COMPANY_ADDRESS['zh-TW'],
           phone: '',
           email: 'service@ycz.me',
           website: 'https://ycz.me',
           logo: { url: '' },
           about_content:
             '<p>磁幀魚提供可裝到您帳戶裡的外貿獲客系統。三款產品可單獨或組合交付；安裝可聯繫客服協作，方案透過詢盤獲取。</p>',
-          seo_title: '磁幀魚｜外貿站群 · 詢盤 · 部署獲客系統',
-          seo_description: '站群與 B2B 站點生成、智慧客服詢盤、部署運營獲客。提交詢盤獲取方案。',
+          seo_title: '磁幀魚｜外貿多站點 · 詢盤 · 部署獲客系統',
+          seo_description: '多站點與 B2B 站點生成、智慧客服詢盤、部署運營獲客。提交詢盤獲取方案。',
           robots_directive: 'index,follow',
           schema_type: 'Organization',
           og_image: { url: img('Cizhenyu', 1200, 630) },
@@ -175,18 +193,18 @@ writeJson('company_info.json', {
         ja: {
           company_name: '磁帧鱼',
           company_type: 'software',
-          slogan: '初めての輸出サイト群・問い合わせでも、届けられる獲得システムを',
+          slogan: '初めての輸出マルチサイト・問い合わせでも、届けられる獲得システムを',
           summary:
-            '磁帧鱼は営業個人・中小メーカー・支援事業者向けに、サイト群/B2B生成・AI問い合わせ・導入運用の3製品を提供します。',
-          address: 'China',
+            '磁帧鱼は営業個人・中小メーカー・支援事業者向けに、マルチサイト/B2B生成・AI問い合わせ・導入運用の3製品を提供します。',
+          address: COMPANY_ADDRESS.ja,
           phone: '',
           email: 'service@ycz.me',
           website: 'https://ycz.me',
           logo: { url: '' },
           about_content:
             '<p>磁帧鱼はテンプレート販売ではなく、お客様アカウントへ導入できる獲得システムです。インストールはサポート同席可能。価格はお問い合わせください。</p>',
-          seo_title: '磁帧鱼｜サイト群・問い合わせ・導入獲得',
-          seo_description: 'サイト群/B2B生成、AI問い合わせ、導入運用。お問い合わせでご提案。',
+          seo_title: '磁帧鱼｜マルチサイト・問い合わせ・導入獲得',
+          seo_description: 'マルチサイト/B2B生成、AI問い合わせ、導入運用。お問い合わせでご提案。',
           robots_directive: 'index,follow',
           schema_type: 'Organization',
           og_image: { url: img('Cizhenyu', 1200, 630) },
@@ -199,7 +217,7 @@ writeJson('company_info.json', {
           slogan: 'Ship a real acquisition stack — even if it’s your first export site',
           summary:
             'Cizhenyu helps export sellers, factory teams, and agencies install three products: multi-site + B2B site generation, AI inquiry desk, and deploy-ops growth. Assets stay on your cloud account.',
-          address: 'China',
+          address: COMPANY_ADDRESS['en-US'],
           phone: '',
           email: 'service@ycz.me',
           website: 'https://ycz.me',
@@ -229,31 +247,31 @@ writeJson('product_category.json', {
         'zh-CN': {
           name: '磁帧鱼产品',
           slug: 'cizhenyu-products',
-          description: '站群生成、智能询盘、部署获客三条产品线。',
+          description: '多站点生成、智能询盘、部署获客三条产品线。',
           sort_order: 10,
           status: 'published',
           seo_title: '磁帧鱼产品',
-          seo_description: '站群生成、智能询盘、部署获客。',
+          seo_description: '多站点生成、智能询盘、部署获客。',
           robots_directive: 'index,follow',
         },
         'zh-TW': {
           name: '磁幀魚產品',
           slug: 'cizhenyu-products',
-          description: '站群生成、智慧詢盤、部署獲客三條產品線。',
+          description: '多站點生成、智慧詢盤、部署獲客三條產品線。',
           sort_order: 10,
           status: 'published',
           seo_title: '磁幀魚產品',
-          seo_description: '站群生成、智慧詢盤、部署獲客。',
+          seo_description: '多站點生成、智慧詢盤、部署獲客。',
           robots_directive: 'index,follow',
         },
         ja: {
           name: '磁帧鱼プロダクト',
           slug: 'cizhenyu-products',
-          description: 'サイト群生成・AI問い合わせ・導入獲得。',
+          description: 'マルチサイト生成・AI問い合わせ・導入獲得。',
           sort_order: 10,
           status: 'published',
           seo_title: '磁帧鱼プロダクト',
-          seo_description: 'サイト群生成・AI問い合わせ・導入獲得。',
+          seo_description: 'マルチサイト生成・AI問い合わせ・導入獲得。',
           robots_directive: 'index,follow',
         },
         'en-US': {
@@ -277,26 +295,27 @@ const products = [
     slug: 'cizhenyu-sites',
     sku: 'CZ-SITES',
     cover: 'Sites',
+    image: PRODUCT_IMAGES.sites,
     zh: {
-      title: '磁帧鱼 全能站群管理系统 + B2B 前端站点生成系统',
+      title: '磁帧鱼 全能多站点管理系统 + B2B 前端站点生成系统',
       tagline: '一套后台管多站，一键生成可上线的 B2B 外贸站',
       summary:
-        '面向外贸站群与企业站交付：统一内容后台、多语言结构、产品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。',
+        '面向外贸多站点与企业站交付：统一内容后台、多语言结构、产品/文章/案例模板，生成可部署到 Cloudflare Pages 的 B2B 前端。',
       description:
-        '<p><strong>全能站群 + B2B 前端生成</strong>帮您把「多站点内容」和「可交付的企业官网」放在同一套系统里。</p><ul><li>站群统一管理：域名、语言、栏目、内容权限</li><li>B2B 站点结构开箱：产品、帮助、动态、关于、联系</li><li>主题包交付：无需给客户源码环境</li><li>与询盘、部署产品可组合安装</li></ul><p>适合服务商批量交付，也适合工厂/贸易公司自建主站。下载安装可联系客服协作。</p>',
+        '<p><strong>全能多站点 + B2B 前端生成</strong>帮您把「多站点内容」和「可交付的企业官网」放在同一套系统里。</p><ul><li>多站点统一管理：域名、语言、栏目、内容权限</li><li>B2B 站点结构开箱：产品、帮助、动态、关于、联系</li><li>主题包交付：无需给客户源码环境</li><li>与询盘、部署产品可组合安装</li></ul><p>适合服务商批量交付，也适合工厂/贸易公司自建主站。下载安装可联系客服协作。</p>',
       advantages: [
-        { title: '站群一体', description: '多站内容与权限统一，减少重复配置。' },
+        { title: '多站点一体', description: '多站内容与权限统一，减少重复配置。' },
         { title: 'B2B 结构就绪', description: '外贸站必备栏目与 SEO 基础已内置。' },
         { title: '可协作安装', description: '下载后可约客服协助部署上线。' },
       ],
     },
     en: {
-      title: 'Cizhenyu Multi-site CMS + B2B Site Generator',
+      title: 'Cizhenyu All-in-One Multi-site CMS + B2B Site Generator',
       tagline: 'One hub for many sites — generate deployable B2B export sites',
       summary:
         'Manage multi-site content and generate Cloudflare Pages–ready B2B sites with products, help, news, about, and contact.',
       description:
-        '<p><strong>Multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>',
+        '<p><strong>All-in-one multi-site + B2B generator</strong> unifies catalogs and shippable corporate sites. Theme packages avoid shipping full source. Pair with inquiry and deploy products. Collaborative install available.</p>',
       advantages: [
         { title: 'Multi-site hub', description: 'Shared content and permissions.' },
         { title: 'B2B IA ready', description: 'Export-site sections built in.' },
@@ -304,11 +323,11 @@ const products = [
       ],
     },
     ja: {
-      title: '磁帧鱼 サイト群CMS + B2Bサイト生成',
+      title: '磁帧鱼 全能マルチサイト管理システム + B2Bフロントサイト生成',
       tagline: '多サイトを一括管理し、納品可能なB2Bサイトを生成',
-      summary: 'サイト群のコンテンツ管理と、Cloudflare Pages向けB2Bサイト生成。',
+      summary: 'マルチサイトのコンテンツ管理と、Cloudflare Pages向けB2Bサイト生成。',
       description:
-        '<p><strong>サイト群 + B2B生成</strong>で、多サイト運用と企業サイト納品を一本化。問い合わせ・導入製品と組み合わせ可能。インストール同席サポートあり。</p>',
+        '<p><strong>全能マルチサイト + B2B生成</strong>で、多サイト運用と企業サイト納品を一本化。問い合わせ・導入製品と組み合わせ可能。インストール同席サポートあり。</p>',
       advantages: [
         { title: '多サイト一元', description: '権限とコンテンツを共有。' },
         { title: 'B2B構成済み', description: '輸出サイトの導線を内蔵。' },
@@ -321,6 +340,7 @@ const products = [
     slug: 'cizhenyu-inquiry',
     sku: 'CZ-INQUIRY',
     cover: 'Inquiry',
+    image: PRODUCT_IMAGES.inquiry,
     zh: {
       title: '磁帧鱼 智能客服智能询盘系统',
       tagline: '白天夜里都能接住询盘——知识库应答，关键线索转人工',
@@ -365,6 +385,7 @@ const products = [
     slug: 'cizhenyu-growth',
     sku: 'CZ-GROWTH',
     cover: 'Growth',
+    image: PRODUCT_IMAGES.growth,
     zh: {
       title: '磁帧鱼 部署运营获客系统',
       tagline: '点选部署到自有云账户，再把 SEO/GEO 与日常运营跑起来',
@@ -418,7 +439,7 @@ writeJson('product.json', {
         brand: '磁帧鱼',
         summary: p.zh.summary,
         description: p.zh.description,
-        images: [{ url: img(p.cover, 800, 600) }, { url: img(`${p.cover}+UI`, 800, 600) }],
+        images: [{ url: p.image }],
         availability: 'InStock',
         status: 'published',
         spec_data: { module: p.sku, install: 'download+collaborate' },
@@ -426,7 +447,7 @@ writeJson('product.json', {
         seo_description: p.zh.summary,
         robots_directive: 'index,follow',
         schema_type: 'Product',
-        og_image: { url: img(p.cover, 1200, 630) },
+        og_image: { url: p.image },
         tagline: p.zh.tagline,
         advantages: p.zh.advantages,
         taxonomy_ids: ['__BY_SLUG__:b2b_product_category:cizhenyu-products'],
@@ -438,7 +459,7 @@ writeJson('product.json', {
         brand: '磁幀魚',
         summary: tw(p.zh.summary),
         description: tw(p.zh.description),
-        images: [{ url: img(p.cover, 800, 600) }],
+        images: [{ url: p.image }],
         availability: 'InStock',
         status: 'published',
         spec_data: { module: p.sku, install: 'download+collaborate' },
@@ -446,7 +467,7 @@ writeJson('product.json', {
         seo_description: tw(p.zh.summary),
         robots_directive: 'index,follow',
         schema_type: 'Product',
-        og_image: { url: img(p.cover, 1200, 630) },
+        og_image: { url: p.image },
         tagline: tw(p.zh.tagline),
         advantages: p.zh.advantages.map((a) => ({ title: tw(a.title), description: tw(a.description) })),
         taxonomy_ids: ['__BY_SLUG__:b2b_product_category:cizhenyu-products'],
@@ -458,7 +479,7 @@ writeJson('product.json', {
         brand: '磁帧鱼',
         summary: p.ja.summary,
         description: p.ja.description,
-        images: [{ url: img(p.cover, 800, 600) }],
+        images: [{ url: p.image }],
         availability: 'InStock',
         status: 'published',
         spec_data: { module: p.sku, install: 'download+collaborate' },
@@ -466,7 +487,7 @@ writeJson('product.json', {
         seo_description: p.ja.summary,
         robots_directive: 'index,follow',
         schema_type: 'Product',
-        og_image: { url: img(p.cover, 1200, 630) },
+        og_image: { url: p.image },
         tagline: p.ja.tagline,
         advantages: p.ja.advantages,
         taxonomy_ids: ['__BY_SLUG__:b2b_product_category:cizhenyu-products'],
@@ -478,7 +499,7 @@ writeJson('product.json', {
         brand: 'Cizhenyu',
         summary: p.en.summary,
         description: p.en.description,
-        images: [{ url: img(p.cover, 800, 600) }],
+        images: [{ url: p.image }],
         availability: 'InStock',
         status: 'published',
         spec_data: { module: p.sku, install: 'download+collaborate' },
@@ -486,7 +507,7 @@ writeJson('product.json', {
         seo_description: p.en.summary,
         robots_directive: 'index,follow',
         schema_type: 'Product',
-        og_image: { url: img(p.cover, 1200, 630) },
+        og_image: { url: p.image },
         tagline: p.en.tagline,
         advantages: p.en.advantages,
         taxonomy_ids: ['__BY_SLUG__:b2b_product_category:cizhenyu-products'],
@@ -747,6 +768,7 @@ const resources = products.map((p, idx) => ({
   n: idx + 1,
   slug: `download-${p.slug}`,
   productSlug: p.slug,
+  image: p.image,
   zh: {
     title: `${p.zh.title} · 安装包`,
     summary: `点击下载将进入询盘，客服可协作完成安装与初始化。${p.zh.tagline}`,
@@ -769,7 +791,7 @@ writeJson('resource.json', {
         description: `<p>${r.zh.summary}</p><p>正式安装包与许可证通过询盘交付；页面下载按钮将跳转联系/询盘。</p>`,
         resource_type: 'installer',
         file_format: '询盘获取',
-        cover: { url: img(`DL${r.n}`, 800, 500) },
+        cover: { url: r.image },
         download_file: { url: '' },
         status: 'published',
         seo_title: r.zh.title,
@@ -784,7 +806,7 @@ writeJson('resource.json', {
         description: `<p>${tw(r.zh.summary)}</p><p>正式安裝包透過詢盤交付。</p>`,
         resource_type: 'installer',
         file_format: '詢盤獲取',
-        cover: { url: img(`DL${r.n}`, 800, 500) },
+        cover: { url: r.image },
         download_file: { url: '' },
         status: 'published',
         seo_title: tw(r.zh.title),
@@ -799,7 +821,7 @@ writeJson('resource.json', {
         description: `<p>${r.en.summary}</p>`,
         resource_type: 'installer',
         file_format: 'inquiry',
-        cover: { url: img(`DL${r.n}`, 800, 500) },
+        cover: { url: r.image },
         download_file: { url: '' },
         status: 'published',
         seo_title: r.en.title,
@@ -814,7 +836,7 @@ writeJson('resource.json', {
         description: `<p>${r.en.summary}</p><p>Installer packages are delivered after inquiry.</p>`,
         resource_type: 'installer',
         file_format: 'via inquiry',
-        cover: { url: img(`DL${r.n}`, 800, 500) },
+        cover: { url: r.image },
         download_file: { url: '' },
         status: 'published',
         seo_title: r.en.title,
@@ -943,11 +965,11 @@ writeJson('page.json', {
         'zh-CN': {
           title: '关于磁帧鱼',
           slug: 'about',
-          summary: '把外贸站群、询盘与部署获客，做成可安装的产品',
+          summary: '把外贸多站点、询盘与部署获客，做成可安装的产品',
           content:
-            '<p>磁帧鱼服务外贸业务员、工厂外贸部与服务商。我们交付三款可下载安装的产品：</p><ol><li>全能站群管理系统 + B2B 前端站点生成系统</li><li>智能客服智能询盘系统</li><li>部署运营获客系统</li></ol><p>默认 Logo 为闪电占位，可在 CMS 公司信息中替换。系统提供标准建站（$399）、智能营销（$1,099）与源码 Enterprise｜企业定制版（$1,999起，按需求报价）交付方案。</p>',
+            '<p>磁帧鱼服务外贸业务员、工厂外贸部与服务商。我们交付三款可下载安装的产品：</p><ol><li>全能多站点管理系统 + B2B 前端站点生成系统</li><li>智能客服智能询盘系统</li><li>部署运营获客系统</li></ol><p>系统提供标准建站（$399）、智能营销（$1,099）与源码 Enterprise｜企业定制版（$1,999起，按需求报价）交付方案。</p>',
           target_reference: [
-            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: '站群 + B2B 生成' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: '多站点 + B2B 生成' },
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-inquiry', title: '智能询盘' },
             { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-growth', title: '部署获客' },
           ],
@@ -961,11 +983,11 @@ writeJson('page.json', {
         'zh-TW': {
           title: '關於磁幀魚',
           slug: 'about',
-          summary: '把外貿站群、詢盤與部署獲客，做成可安裝的產品',
+          summary: '把外貿多站點、詢盤與部署獲客，做成可安裝的產品',
           content:
-            '<p>磁幀魚交付三款可下載安裝的產品：站群 + B2B 生成、智慧詢盤、部署運營獲客。Logo 可於 CMS 替換。系統提供標準建站（$399）、智慧行銷（$1,099）與源碼 Enterprise｜企業定制版（$1,999起，按需求報價）交付方案。</p>',
+            '<p>磁幀魚交付三款可下載安裝的產品：多站點 + B2B 生成、智慧詢盤、部署運營獲客。Logo 可於 CMS 替換。系統提供標準建站（$399）、智慧行銷（$1,099）與源碼 Enterprise｜企業定制版（$1,999起，按需求報價）交付方案。</p>',
           target_reference: [
-            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: '站群 + B2B 生成' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: '多站点 + B2B 生成' },
           ],
           status: 'published',
           seo_title: '關於磁幀魚',
@@ -977,10 +999,10 @@ writeJson('page.json', {
         ja: {
           title: '磁帧鱼について',
           slug: 'about',
-          summary: 'サイト群・問い合わせ・導入獲得を、導入可能な製品に',
+          summary: 'マルチサイト・問い合わせ・導入獲得を、導入可能な製品に',
           content: '<p>3製品を提供します。ロゴはCMSで差し替え可能。標準（$399）、スマート集客（$1,099）、ソース Enterprise｜企業カスタム（$1,999〜・要件見積）のパッケージで納品します。</p>',
           target_reference: [
-            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: 'サイト群' },
+            { type: 'internal', refType: 'b2b_product', refId: '__BY_SLUG__:cizhenyu-sites', title: 'マルチサイト' },
           ],
           status: 'published',
           seo_title: '磁帧鱼について',
@@ -1585,7 +1607,7 @@ writeJson('content_block.json', {
           name: '瓶颈01-名片站死局',
           t: '只有摆设名片站，改动困难且零自然流',
           d: '外包建站耗时数月，改个产品排期两周；缺乏 SEO/GEO 结构设计，半年收不到一条有效询盘。',
-          s: '全能站群中台统一管理，多语言自动路由，秒级静态构建极速交付。',
+          s: '全能多站点中台统一管理，多语言自动路由，秒级静态构建极速交付。',
         },
         en: {
           name: 'Pain 01 - Stagnant Site',
@@ -1699,7 +1721,7 @@ writeJson('content_block.json', {
         zh: {
           name: 'David W. · 创始人',
           role: '跨境硬件品牌独立站出海',
-          quote: '站群生成和多语言部署帮我们迅速铺开了 5 个目标语种站点，全静态部署在 Cloudflare 上毫秒级打开，海外客户访问体验非常流畅，AI 搜索推荐量持续上升。',
+          quote: '多站点生成和多语言部署帮我们迅速铺开了 5 个目标语种站点，全静态部署在 Cloudflare 上毫秒级打开，海外客户访问体验非常流畅，AI 搜索推荐量持续上升。',
           meta: '覆盖 12 个海外市场',
         },
         en: {
@@ -1786,7 +1808,7 @@ writeJson('content_block.json', {
         zh: {
           dim: '建站效率与内容改版',
           old: '外包修改排期数周，改版成本高，多语言内容容易错乱覆盖',
-          neu: '站群中台统一维护，一键同步多站，全静态秒级发布更新',
+          neu: '多站点中台统一维护，一键同步多站，全静态秒级发布更新',
         },
         en: {
           dim: 'Build Speed & Content Updates',
@@ -1906,7 +1928,7 @@ writeJson('content_block.json', {
         slug: 'step-2',
         zh: {
           title: '灵活选配所需产品模块',
-          summary: '按业务成熟度单选或组合：站群生成系统、智能询盘客服、部署运营中台。',
+          summary: '按业务成熟度单选或组合：多站点生成系统、智能询盘客服、部署运营中台。',
         },
         en: {
           title: 'Select Product Modules',
